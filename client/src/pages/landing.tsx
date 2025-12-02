@@ -33,7 +33,7 @@ export default function Landing() {
           
           {/* Line 2: Primary Navigation */}
           <nav className="w-full mx-auto">
-            <ul className="flex justify-center items-center w-full gap-10">
+            <ul className="flex justify-center items-center w-full gap-20">
               {navItems.map((item) => {
                 const isActive = location === item.href;
                 return (
