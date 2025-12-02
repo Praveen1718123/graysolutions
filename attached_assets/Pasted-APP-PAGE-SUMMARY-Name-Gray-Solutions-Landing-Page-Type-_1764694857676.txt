@@ -1,0 +1,119 @@
+APP / PAGE SUMMARY
+- Name: Gray Solutions – Landing Page
+- Type: Web app (desktop-only landing page)
+- Layout: Single screen, no vertical scrolling. Everything must fit within one viewport (100vh).
+- Style: Very minimal, clean, lots of white/gray space, thin separators, precise alignment.
+
+SCREEN: Gray Solutions – Landing (Desktop, No Scroll)
+
+GOAL
+- Show a clean, static landing screen with:
+  - Brand name centered at the top
+  - Primary navigation below it
+  - A large central hero banner area
+  - Case study category filter bar at the bottom
+  - A “Case Studies” label just above the bottom edge
+- No scrolling; this is a single “frame” layout.
+
+LAYOUT (VERTICAL STRUCTURE)
+Divide the screen into 3 vertical zones:
+
+1. Top Header Zone (fixed height)
+   - Background: solid white
+   - Content centered horizontally
+   - Contains:
+     - Line 1: Site title “Gray Solutions” centered
+     - Line 2: Primary navigation (Services, About Us, Blogs, Contact Us) in a row
+   - Bottom of header has a thin horizontal separator line spanning full width.
+
+2. Middle Hero Zone (flexible height, fills most of the screen)
+   - Background: light gray (#EDEDED or similar)
+   - Occupies all space between header and bottom bar.
+   - Contains:
+     - Centered text “HERO Banner” (both vertically and horizontally).
+
+3. Bottom Case Studies Zone (fixed height)
+   - Background: solid white
+   - Top of this zone has a thin horizontal separator line.
+   - Contains:
+     - Row of case study filters: “Magic Trucks”, “Switch Bee”, “TIX”, “AI Receptionist”, “Gray Solutions”, “Show All”
+       - All in a single horizontal line
+       - Even horizontal spacing across the full width
+       - Text centered within each item
+     - Below that row, centered label: “Case Studies”
+   - Bottom can have another thin separator line if needed to visually close the frame.
+
+SPACING & ALIGNMENT (IMPORTANT)
+- Overall canvas:
+  - Width: 1440px (desktop)
+  - Height: 100vh, no vertical scroll (overflow-y: hidden).
+- Header zone:
+  - Total height ~120px–140px.
+  - Top padding above “Gray Solutions” ~24px.
+  - Vertical spacing between “Gray Solutions” and the nav row ~16–24px.
+  - Nav row centered horizontally; each item spaced evenly using `space-evenly` or equal left/right margins.
+- Hero zone:
+  - Fills all remaining vertical space between header bottom line and top line of bottom zone.
+  - “HERO Banner” text perfectly centered using flex: `justify-content: center; align-items: center; text-align: center;`.
+- Bottom zone:
+  - Total height ~100px.
+  - Top padding above the filter row ~16px.
+  - Spacing between the filter row and “Case Studies” label ~16px.
+  - Filter items spread evenly across the width using `space-evenly` or a 6-column grid.
+  - “Case Studies” text centered horizontally in the screen.
+
+TYPOGRAPHY & COLORS
+- Base font: simple sans-serif (e.g., Inter / System UI).
+- “Gray Solutions” (header title):
+  - Font size: ~24–28px
+  - Weight: medium/bold
+  - Color: #000000 or dark gray.
+  - Center aligned.
+- Navigation items (Services, About Us, Blogs, Contact Us):
+  - Font size: ~16–18px
+  - Weight: regular/medium
+  - Color: purple (#7B3FE4 or similar)
+  - No underline by default; underline or color darken on hover.
+- Hero text “HERO Banner”:
+  - Font size: ~28–32px
+  - Weight: regular/medium
+  - Color: dark gray.
+- Bottom filter items (Magic Trucks, Switch Bee, TIX, AI Receptionist, Gray Solutions, Show All):
+  - Font size: ~16px
+  - Color: purple (same as nav)
+  - Even spacing; center alignment per label.
+- “Case Studies” label:
+  - Font size: ~14–16px
+  - Color: dark gray
+  - Center aligned horizontally.
+
+BORDERS & LINES
+- Thin 1px horizontal line separating:
+  - Header zone from hero zone.
+  - Hero zone from bottom case studies zone.
+- Line color: light gray (#D5D5D5).
+
+INTERACTIONS (BASIC)
+- Header nav items:
+  - On click: navigate to respective routes:
+    - Services → /services
+    - About Us → /about
+    - Blogs → /blogs
+    - Contact Us → /contact
+- Case study filter items (for now, stub behavior):
+  - On click: future state to filter “Case Studies” content (content not shown in this wireframe).
+  - Visually, they behave like tabs:
+    - Default: “Show All” can be marked as active.
+    - Active item: same purple color with maybe a subtle underline or bottom border.
+
+RESPONSIVE BEHAVIOR
+- Primary target: desktop ≥ 1280px width.
+- Up to 1024px width:
+  - Keep the same structure, allow items to shrink but still fit without wrapping.
+  - Still no vertical scroll; fonts can slightly scale down if needed.
+
+NOTES FOR BUILDER
+- Implement as a single React page / single view:
+  - Parent container uses flex column layout: `display: flex; flex-direction: column; height: 100vh;`.
+  - Header and bottom zones have fixed heights; hero zone uses `flex: 1`.
+- All text and elements must be precisely centered as described; avoid auto “content spread” that breaks the clean grid.
