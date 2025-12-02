@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 
 export default function Landing() {
   const [activeFilter, setActiveFilter] = useState("Show All");
+  const [location] = useLocation();
 
   const navItems = [
     { label: "Services", href: "/services" },
@@ -31,17 +32,29 @@ export default function Landing() {
           </h1>
           
           {/* Line 2: Primary Navigation */}
-          <nav className="w-full max-w-3xl mx-auto">
-            <ul className="flex justify-evenly items-center w-full px-8">
-              {navItems.map((item) => (
-                <li key={item.label}>
-                  <Link href={item.href}>
-                    <a className="text-[17px] font-medium text-brand-purple hover:text-[#5a2db0] hover:underline transition-colors duration-200 cursor-pointer">
-                      {item.label}
-                    </a>
-                  </Link>
-                </li>
-              ))}
+          <nav className="w-full mx-auto">
+            <ul className="flex justify-center items-center w-full gap-10">
+              {navItems.map((item) => {
+                const isActive = location === item.href;
+                return (
+                  <li key={item.label}>
+                    <Link href={item.href}>
+                      <a 
+                        className={`
+                          text-[17px] tracking-tight transition-colors duration-200 cursor-pointer pb-1 border-b-2
+                          ${isActive 
+                            ? "text-black font-medium border-black" 
+                            : "text-[#8A8A8A] font-normal border-transparent hover:text-[#333333] hover:border-[#CCCCCC]"
+                          }
+                          focus:outline-none focus:ring-1 focus:ring-black/50 focus:rounded-sm
+                        `}
+                      >
+                        {item.label}
+                      </a>
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
         </div>

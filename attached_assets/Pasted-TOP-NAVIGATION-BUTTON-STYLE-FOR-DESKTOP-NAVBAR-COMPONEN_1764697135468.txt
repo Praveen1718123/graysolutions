@@ -1,0 +1,68 @@
+TOP NAVIGATION BUTTON STYLE (FOR DESKTOP NAVBAR)
+
+COMPONENT: Top Navigation Item (text-only button)
+Usage: Main navigation items in the header (e.g., Services, About Us, Blogs, Contact Us).
+
+LAYOUT & TYPOGRAPHY
+- Type: Text button (no border, no background by default).
+- Font: Modern sans-serif (e.g., Inter / SF Pro / System UI).
+- Font size: 16–18px.
+- Font weight: 400–500.
+- Letter spacing: Slightly tight (around -0.01em).
+- Text transform: None (Title case).
+- Horizontal spacing: At least 32px gap between items.
+- Vertical alignment: Centered in the header bar.
+
+DARK BACKGROUND VARIANT (Navbar on black)
+- Navbar background: #000000.
+
+  INACTIVE STATE
+  - Text color: #7A7A7A (soft medium gray).
+  - Opacity: 80–90%.
+  - No underline, no background.
+  
+  HOVER STATE
+  - Text color: #E5E5E5 (light gray, brighter than inactive, slightly dimmer than active).
+  - Transition: color 150–200ms ease-out.
+  - Still no background/underline.
+
+  ACTIVE STATE (current page)
+  - Text color: #FFFFFF (pure white).
+  - Font weight: 500 (slightly bolder than inactive).
+  - Optional: very subtle bottom border 2px, color #FFFFFF, tight to the text.
+  - No background.
+
+  FOCUS (KEYBOARD)
+  - Same as active/hover state depending on context.
+  - Add subtle focus ring (outline: 1px solid #FFFFFF with 50% opacity).
+
+LIGHT BACKGROUND VARIANT (Navbar on white/light gray)
+- Navbar background: #FFFFFF or #F7F7F7.
+
+  INACTIVE STATE
+  - Text color: #8A8A8A (medium gray).
+  - No underline, no background.
+
+  HOVER STATE
+  - Text color: #333333.
+  - Transition: color 150–200ms ease-out.
+  - Optional: very subtle bottom border 1–2px, color #CCCCCC.
+
+  ACTIVE STATE
+  - Text color: #000000 (or very dark gray #111111).
+  - Font weight: 500.
+  - Bottom border: 2px solid #000000 aligned directly under text (tab vibe).
+
+  FOCUS (KEYBOARD)
+  - Same as active/hover, plus a subtle outline: 1px solid #000000 at 40–50% opacity.
+
+INTERACTION RULES
+- Only one nav item can be in ACTIVE state at a time (current route).
+- On click → set clicked item to ACTIVE, others to INACTIVE.
+- Hover does NOT override active: if item is active, keep active color even on hover.
+- Cursor: pointer on all interactive states.
+
+ACCESSIBILITY
+- Ensure color contrast ratio:
+  - Dark navbar: white / light gray on black should meet at least WCAG AA.
+  - Light navbar: dark text on white/light gray must also meet WCAG AA.
