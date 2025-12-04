@@ -67,11 +67,11 @@ export default function Landing() {
               {navItems.map((item) => {
                 const isActive = location === item.href;
                 return (
-                  <li key={item.label}>
+                  <li key={item.label} className="flex items-center">
                     <Link href={item.href}>
                       <span 
                         className={`
-                          text-[17px] tracking-tight transition-colors duration-200 cursor-pointer pb-1 border-b-2 border-transparent inline-block
+                          text-[17px] tracking-tight transition-colors duration-200 cursor-pointer inline-flex items-center h-8
                           ${isActive 
                             ? "text-black dark:text-white font-medium" 
                             : "text-[#8A8A8A] font-normal hover:text-[#333333] dark:hover:text-gray-300"
@@ -91,7 +91,7 @@ export default function Landing() {
       </header>
 
       {/* 2. Middle Hero Zone - Video Only */}
-      <main className="flex-1 w-full bg-black overflow-hidden">
+      <main className="flex-1 w-full bg-white overflow-hidden">
         <video
           autoPlay
           muted
