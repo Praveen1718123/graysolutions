@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 import heroVideo from "@assets/hero-video-horizontal.mp4";
@@ -8,17 +7,6 @@ import heroVideo from "@assets/hero-video-horizontal.mp4";
 export default function Landing() {
   const [activeFilter, setActiveFilter] = useState("Show All");
   const [location] = useLocation();
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [isDark]);
-
-  const toggleTheme = () => setIsDark(!isDark);
 
   const navItems = [
     { label: "Services", href: "/services" },
@@ -39,17 +27,7 @@ export default function Landing() {
   return (
     <div className="h-screen w-full flex flex-col bg-white dark:bg-[#111] overflow-hidden font-sans text-brand-text-dark dark:text-white transition-colors duration-300">
       {/* 1. Top Header Zone */}
-      <header className="h-[160px] flex-none flex flex-col bg-white dark:bg-[#111] relative z-10 transition-colors duration-300">
-        
-        {/* Theme Toggle - Absolute Top Right */}
-        <button 
-          onClick={toggleTheme}
-          className="absolute top-6 right-8 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-gray-600 dark:text-gray-300"
-          aria-label="Toggle theme"
-        >
-          {isDark ? <Sun size={20} /> : <Moon size={20} />}
-        </button>
-
+      <header className="h-[160px] flex-none flex flex-col bg-white relative z-10 transition-colors duration-300">
         <div className="flex-1 flex flex-col justify-center items-center pt-6 pb-6">
           {/* Line 1: Site Logo */}
           <div className="mb-5">
