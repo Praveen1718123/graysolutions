@@ -113,10 +113,10 @@ export default function Landing() {
                 <li key={filter}>
                   <button
                     onClick={() => setActiveFilter(filter)}
-                    className={`text-[16px] transition-all duration-200 cursor-pointer ${
+                    className={`text-[14px] px-5 py-2 rounded-lg transition-all duration-200 cursor-pointer ${
                       activeFilter === filter
-                        ? "text-brand-purple font-semibold border-b-2 border-brand-purple"
-                        : "text-brand-purple font-normal hover:text-[#5a2db0]"
+                        ? "bg-black text-white font-medium"
+                        : "bg-gray-100 text-black font-normal hover:bg-gray-200"
                     }`}
                   >
                     {filter}
