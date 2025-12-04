@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Sun, Moon } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 import heroVideo from "@assets/hero-video-horizontal.mp4";
 
@@ -111,19 +112,17 @@ export default function Landing() {
              <ul className="flex justify-evenly items-center w-full">
               {filterItems.map((filter) => (
                 <li key={filter}>
-                  <button
+                  <Button
+                    variant="outline"
                     onClick={() => setActiveFilter(filter)}
-                    style={{
-                      boxShadow: activeFilter === filter 
-                        ? 'inset 2px 2px 5px rgba(0,0,0,0.1), inset -2px -2px 5px rgba(255,255,255,0.9)'
-                        : '4px 4px 10px rgba(0,0,0,0.1), -4px -4px 10px rgba(255,255,255,0.9)'
-                    }}
-                    className={`text-[14px] px-6 py-3 rounded-2xl transition-all duration-200 cursor-pointer bg-[#f0f0f0] text-black font-normal hover:scale-[0.98] ${
-                      activeFilter === filter ? "font-medium" : ""
+                    className={`text-[14px] ${
+                      activeFilter === filter 
+                        ? "bg-black text-white border-black hover:bg-black/90 hover:text-white" 
+                        : ""
                     }`}
                   >
                     {filter}
-                  </button>
+                  </Button>
                 </li>
               ))}
             </ul>
