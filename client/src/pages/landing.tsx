@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Sun, Moon } from "lucide-react";
-import logoImage from "@assets/Group_25_(3)_1764854027471.png";
+import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 
 export default function Landing() {
   const [activeFilter, setActiveFilter] = useState("Show All");
@@ -51,11 +51,15 @@ export default function Landing() {
         <div className="flex-1 flex flex-col justify-center items-center pt-6 pb-4">
           {/* Line 1: Site Logo */}
           <div className="mb-5">
-            <img 
-              src={logoImage} 
-              alt="Gray Solutions Logo" 
-              className="h-12 w-auto dark:invert" 
-            />
+            <Link href="/">
+              <a className="block cursor-pointer">
+                <img 
+                  src={logoImage} 
+                  alt="Gray Solutions Logo" 
+                  className="h-12 w-auto dark:invert" 
+                />
+              </a>
+            </Link>
           </div>
           
           {/* Line 2: Primary Navigation */}
