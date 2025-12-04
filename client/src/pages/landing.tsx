@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Sun, Moon } from "lucide-react";
+import logoImage from "@assets/Group_25_(3)_1764854027471.png";
 
 export default function Landing() {
   const [activeFilter, setActiveFilter] = useState("Show All");
@@ -48,10 +49,14 @@ export default function Landing() {
         </button>
 
         <div className="flex-1 flex flex-col justify-center items-center pt-6 pb-4">
-          {/* Line 1: Site Title */}
-          <h1 className="text-[26px] font-bold text-black dark:text-white tracking-tight mb-5 transition-colors">
-            Gray Solutions
-          </h1>
+          {/* Line 1: Site Logo */}
+          <div className="mb-5">
+            <img 
+              src={logoImage} 
+              alt="Gray Solutions Logo" 
+              className="h-12 w-auto dark:invert" 
+            />
+          </div>
           
           {/* Line 2: Primary Navigation */}
           <nav className="w-full mx-auto">
