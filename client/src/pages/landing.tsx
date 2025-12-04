@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Sun, Moon } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 import logoImage from "@assets/Group_69_(1)_1764854226570.png";
+
+interface CaseStudy {
+  id: number;
+  title: string;
+  category: string;
+  description: string;
+  imageUrl: string | null;
+}
 
 export default function Landing() {
   const [activeFilter, setActiveFilter] = useState("Show All");
@@ -34,6 +43,16 @@ export default function Landing() {
     "Show All",
   ];
 
+  const { data: caseStudies = [], isLoading } = useQuery<CaseStudy[]>({
+    queryKey: ["/api/case-studies", activeFilter],
+    queryFn: async () => {
+      const params = activeFilter !== "Show All" ? `?category=${encodeURIComponent(activeFilter)}` : "";
+      const response = await fetch(`/api/case-studies${params}`);
+      if (!response.ok) throw new Error("Failed to fetch case studies");
+      return response.json();
+    },
+  });
+
   return (
     <div className="h-screen w-full flex flex-col bg-white dark:bg-[#111] overflow-hidden font-sans text-brand-text-dark dark:text-white transition-colors duration-300">
       {/* 1. Top Header Zone */}
@@ -52,13 +71,11 @@ export default function Landing() {
           {/* Line 1: Site Logo */}
           <div className="mb-5">
             <Link href="/">
-              <a className="block cursor-pointer">
-                <img 
-                  src={logoImage} 
-                  alt="Gray Solutions Logo" 
-                  className="h-12 w-auto dark:invert" 
-                />
-              </a>
+              <img 
+                src={logoImage} 
+                alt="Gray Solutions Logo" 
+                className="h-12 w-auto dark:invert cursor-pointer" 
+              />
             </Link>
           </div>
           
@@ -70,9 +87,9 @@ export default function Landing() {
                 return (
                   <li key={item.label}>
                     <Link href={item.href}>
-                      <a 
+                      <span 
                         className={`
-                          text-[17px] tracking-tight transition-colors duration-200 cursor-pointer pb-1 border-b-2 border-transparent
+                          text-[17px] tracking-tight transition-colors duration-200 cursor-pointer pb-1 border-b-2 border-transparent inline-block
                           ${isActive 
                             ? "text-black dark:text-white font-medium" 
                             : "text-[#8A8A8A] font-normal hover:text-[#333333] dark:hover:text-gray-300"
@@ -81,7 +98,7 @@ export default function Landing() {
                         `}
                       >
                         {item.label}
-                      </a>
+                      </span>
                     </Link>
                   </li>
                 );
@@ -92,10 +109,38 @@ export default function Landing() {
       </header>
 
       {/* 2. Middle Hero Zone */}
-      <main className="flex-1 w-full bg-brand-gray-bg dark:bg-[#1a1a1a] flex items-center justify-center transition-colors duration-300">
-        <h2 className="text-[30px] font-medium text-[#333333] dark:text-gray-200 tracking-wide transition-colors">
-          HERO Banner
-        </h2>
+      <main className="flex-1 w-full bg-brand-gray-bg dark:bg-[#1a1a1a] overflow-y-auto transition-colors duration-300 px-8 py-12">
+        {isLoading ? (
+          <div className="flex items-center justify-center h-full">
+            <p className="text-[20px] font-medium text-[#333333] dark:text-gray-200">Loading case studies...</p>
+          </div>
+        ) : caseStudies.length === 0 ? (
+          <div className="flex items-center justify-center h-full">
+            <p className="text-[20px] font-medium text-[#666] dark:text-gray-400">No case studies found for this category</p>
+          </div>
+        ) : (
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {caseStudies.map((study) => (
+                <div
+                  key={study.id}
+                  className="bg-white dark:bg-[#222] rounded-lg p-6 border border-brand-gray-line dark:border-[#444] hover:border-brand-purple dark:hover:border-brand-purple transition-all duration-200 cursor-pointer"
+                  data-testid={`case-study-${study.id}`}
+                >
+                  <h3 className="text-[18px] font-semibold text-black dark:text-white mb-3 tracking-tight">
+                    {study.title}
+                  </h3>
+                  <p className="text-[14px] text-[#666] dark:text-gray-400 mb-4 leading-relaxed">
+                    {study.description}
+                  </p>
+                  <span className="inline-block px-3 py-1 bg-brand-purple/10 dark:bg-brand-purple/20 text-brand-purple text-[12px] font-medium rounded">
+                    {study.category}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </main>
 
       {/* 3. Bottom Case Studies Zone */}
