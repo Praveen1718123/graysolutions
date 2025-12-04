@@ -37,7 +37,7 @@ export default function Landing() {
   return (
     <div className="h-screen w-full flex flex-col bg-white dark:bg-[#111] overflow-hidden font-sans text-brand-text-dark dark:text-white transition-colors duration-300">
       {/* 1. Top Header Zone */}
-      <header className="h-[180px] flex-none flex flex-col bg-white dark:bg-[#111] border-b border-brand-gray-line dark:border-[#333] relative z-10 transition-colors duration-300">
+      <header className="h-[240px] flex-none flex flex-col bg-white dark:bg-[#111] border-b border-brand-gray-line dark:border-[#333] relative z-10 transition-colors duration-300">
         
         {/* Theme Toggle - Absolute Top Right */}
         <button 
@@ -50,13 +50,13 @@ export default function Landing() {
 
         <div className="flex-1 flex flex-col justify-center items-center pt-8 pb-8">
           {/* Line 1: Site Logo */}
-          <div className="mb-8">
+          <div className="mb-10">
             <Link href="/">
               <a className="block cursor-pointer">
                 <img 
                   src={logoImage} 
                   alt="Gray Solutions Logo" 
-                  className="h-16 w-auto dark:invert" 
+                  className="h-24 w-auto dark:invert" 
                 />
               </a>
             </Link>
