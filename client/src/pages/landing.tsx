@@ -56,7 +56,7 @@ export default function Landing() {
                 <img 
                   src={logoImage} 
                   alt="Gray Solutions Logo" 
-                  className="h-12 w-auto dark:invert" 
+                  className="h-16 w-auto dark:invert" 
                 />
               </a>
             </Link>
