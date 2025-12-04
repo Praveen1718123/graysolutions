@@ -115,11 +115,7 @@ export default function Landing() {
                   <Button
                     variant="outline"
                     onClick={() => setActiveFilter(filter)}
-                    className={`text-[14px] ${
-                      activeFilter === filter 
-                        ? "bg-black text-white border-black hover:bg-black/90 hover:text-white" 
-                        : ""
-                    }`}
+                    className="text-[14px] bg-white text-black border-gray-200 hover:bg-black hover:text-white hover:border-black transition-all duration-200"
                   >
                     {filter}
                   </Button>
