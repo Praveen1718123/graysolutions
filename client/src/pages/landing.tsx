@@ -113,10 +113,13 @@ export default function Landing() {
                 <li key={filter}>
                   <button
                     onClick={() => setActiveFilter(filter)}
-                    className={`text-[14px] px-5 py-2 rounded-lg transition-all duration-200 cursor-pointer ${
-                      activeFilter === filter
-                        ? "bg-black text-white font-medium"
-                        : "bg-gray-100 text-black font-normal hover:bg-gray-200"
+                    style={{
+                      boxShadow: activeFilter === filter 
+                        ? 'inset 2px 2px 5px rgba(0,0,0,0.1), inset -2px -2px 5px rgba(255,255,255,0.9)'
+                        : '4px 4px 10px rgba(0,0,0,0.1), -4px -4px 10px rgba(255,255,255,0.9)'
+                    }}
+                    className={`text-[14px] px-6 py-3 rounded-2xl transition-all duration-200 cursor-pointer bg-[#f0f0f0] text-black font-normal hover:scale-[0.98] ${
+                      activeFilter === filter ? "font-medium" : ""
                     }`}
                   >
                     {filter}
