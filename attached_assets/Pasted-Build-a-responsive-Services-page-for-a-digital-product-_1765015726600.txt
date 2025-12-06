@@ -1,0 +1,145 @@
+Build a responsive **Services** page for a digital product & AI studio called **Gray Solutions**.
+
+### Overall layout
+- Single scrolling page with sections stacked vertically:
+  1. Intro (hero)
+  2. Quick brief about us (4 cards)
+  3. Road Map (process)
+  4. Capabilities (3 columns)
+  5. Client Testimonials
+- Max content width: 1120–1200px, centered with `margin: 0 auto`.
+- Global padding: `padding-inline: 24px` on mobile, `48px` on desktop.
+- Use a 12-column feel: clear, aligned grids and consistent gutters.
+
+### Visual & UI design
+- Style: clean, minimal, similar to Metalab’s “What we do” page.
+- Background: pure white or very light gray (#F7F7F8).
+- Text color: dark gray (#111827 or similar).
+- Accent color: one strong brand color (for now use #FF6801 for primary CTAs and highlights).
+- Typography:
+  - Base font: system UI (`-apple-system, system-ui, sans-serif`).
+  - Hero heading: 48–56px on desktop, 32–36px on mobile, bold.
+  - Section titles: 32px desktop, 24px mobile.
+  - Body text: 16px line-height ~1.6.
+  - Buttons: 14–16px, medium weight.
+- Cards & surfaces:
+  - Use subtle borders `1px solid rgba(15,23,42,0.08)` and soft shadows for hover states only.
+  - Border-radius: 16–20px on cards, 999px on pill buttons.
+- Buttons:
+  - Primary: pill button with solid accent background, white text, subtle shadow.
+  - Secondary: pill outline button (accent border, transparent/very light background).
+  - Hover: slightly brighter background + small `transform: translateY(-1px)` + stronger shadow.
+  - Active: darker background + `transform: translateY(0)` + reduced shadow.
+- Animations:
+  - Use `transition: all 180ms ease-out` on buttons and cards.
+  - Card hover: small lift (`translateY(-4px)`), subtle shadow, border-color accent tint.
+- Responsive:
+  - Mobile breakpoint ~768px.
+  - Stack columns vertically with good spacing.
+  - Ensure padding doesn’t collapse; maintain at least 24px vertical gap between sections.
+
+---
+
+### Section 1: Intro (Hero)
+
+- Large hero at the top with lots of white space.
+- Content centered in a column, left-aligned on desktop.
+- Include:
+  - Heading: **“We design, build & automate the products your customers actually use.”**
+  - Subheading (short paragraph): describe Gray Solutions as a digital product & AI studio that mixes strategy, UX, development and automation.
+  - Two buttons:
+    - Primary: “Book a strategy call”
+    - Secondary: “View recent work”
+- On wider screens place the text on the left and a soft abstract background shape or gradient block on the right (no photos needed, just a subtle pattern).
+
+---
+
+### Section 2: Quick brief about us
+
+- Section title: **“Quick brief about us”**
+- Layout: one row with **4 equal-width cards** on desktop, 2x2 grid on tablet, stacked on mobile.
+- Each card has:
+  - Small label/title (16px, semi-bold).
+  - 2–3 lines of body copy.
+- Card content:
+  1. **AI-first by default**  
+     We design your product and ops with AI baked into the flow, not bolted on at the end.
+  2. **From idea to live build**  
+     Strategy, UX, UI, development and automation in one team for faster launches.
+  3. **Small team, big output**  
+     Direct access to the core builders, weekly sprints and clear updates.
+  4. **Based in Tamil Nadu, building global**  
+     We understand Tier-2/Tier-3 markets and ship to global product standards.
+
+---
+
+### Section 3: Road Map (Process)
+
+- Section title: **“Road Map”**
+- Under it, create a **wide horizontal process card** with a 4-step timeline.
+- Layout:
+  - On desktop: 4 columns with a connecting horizontal line behind or between step icons.
+  - On mobile: vertical stack with a vertical line on the left.
+- Each step has a step number (01–04), title, and short description:
+  1. **Discover** – Deep dive into your product, customers and revenue goals. Turn a messy brief into a clear problem statement.
+  2. **Design** – UX flows, wireframes and high-fidelity UI in Figma so you see everything before we build.
+  3. **Build & Automate** – Ship marketing sites, web apps and automations using modern stacks and AI tools, connected to CRM, WhatsApp and payments.
+  4. **Launch & Grow** – Track performance, iterate quickly and run experiments instead of leaving you with a static project.
+
+---
+
+### Section 4: Capabilities
+
+- Section title: **“Capabilities”**
+- 3-column grid on desktop, stacked on mobile.
+- Each column:
+  - Heading (20–22px, semi-bold).
+  - 5 bullet points (or tight list items).
+- Column 1 – **Product & UX Design**
+  - User research & journey mapping  
+  - Information architecture & flows  
+  - Wireframes and interaction design  
+  - Design systems & UI libraries  
+  - Clickable prototypes for testing
+- Column 2 – **Web & App Development**
+  - High-converting landing pages & sites  
+  - Web apps & dashboards (admin & client)  
+  - CMS setup for blogs & case studies  
+  - Performance, SEO and responsive layouts  
+  - Integrations: payments, auth, subscriptions
+- Column 3 – **Growth & Automation**
+  - Funnels for lead gen & sales  
+  - WhatsApp, email & CRM automation  
+  - AI chatbots / support agents  
+  - Analytics, tracking & reporting  
+  - A/B testing and experiment playbooks
+
+---
+
+### Section 5: Client Testimonials
+
+- Section title: **“Client Testimonials”**
+- 3 testimonial cards with staggered layout:
+  - On desktop, arrange them not in a perfect grid: e.g. card 1 left, card 2 right, card 3 left again with vertical offsets.
+  - On mobile, stack them full-width with spacing.
+- Each card:
+  - Quote text.
+  - Name + role in smaller, muted text.
+- Use placeholder testimonials like:
+  1. “Gray Solutions didn’t just make our site look good. They plugged it into our CRM and WhatsApp so leads come in every day.” — Founder, D2C Clothing Brand
+  2. “We went from zero to a working logistics prototype in weeks. Clean UX and clear communication.” — Co-founder, Logistics Startup
+  3. “They helped us figure out what to build, not just how it should look.” — Director, Construction & Infra Company
+
+---
+
+### Implementation
+
+- Output **one HTML file** containing semantic HTML and modern CSS (no Tailwind, no external frameworks).
+- Use `<section>` tags for each section and meaningful class names.
+- Make sure the page looks polished on:
+  - Desktop (≥1200px)
+  - Tablet (~768–1199px)
+  - Mobile (<768px)
+- Include a simple sticky or static top nav with the Gray Solutions logo text on the left and a “Contact” link on the right.
+
+Generate the full HTML + CSS so I can paste it directly into a Replit project and run it.
