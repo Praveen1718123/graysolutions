@@ -168,76 +168,10 @@ export default function Services() {
         initial="hidden"
         animate="visible"
       >
-        {/* Section 1: Intro (Hero) */}
-        <motion.section 
-          className="py-20 md:py-32"
-          variants={itemVariants}
-        >
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <motion.h1 
-                className="text-3xl md:text-5xl font-bold leading-tight mb-6"
-                style={{ color: '#111827' }}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                data-testid="hero-heading"
-              >
-                We design, build & automate the products your customers actually use.
-              </motion.h1>
-              <motion.p 
-                className="text-lg text-gray-600 mb-8 leading-relaxed"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                data-testid="hero-subheading"
-              >
-                Gray Solutions is a digital product & AI studio that mixes strategy, UX, development and automation to bring your ideas to life.
-              </motion.p>
-              <motion.div 
-                className="flex flex-wrap gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-              >
-                <motion.button 
-                  className="px-6 py-3 rounded-full text-sm font-medium text-white shadow-md"
-                  style={{ backgroundColor: '#FF6801' }}
-                  whileHover={{ y: -2, boxShadow: '0 8px 25px rgba(255, 104, 1, 0.3)' }}
-                  whileTap={{ y: 0 }}
-                  transition={{ duration: 0.18 }}
-                  data-testid="btn-strategy-call"
-                >
-                  Book a strategy call
-                </motion.button>
-                <motion.button 
-                  className="px-6 py-3 rounded-full text-sm font-medium border-2 bg-transparent"
-                  style={{ borderColor: '#FF6801', color: '#FF6801' }}
-                  whileHover={{ y: -2, backgroundColor: 'rgba(255, 104, 1, 0.05)' }}
-                  whileTap={{ y: 0 }}
-                  transition={{ duration: 0.18 }}
-                  data-testid="btn-view-work"
-                >
-                  View recent work
-                </motion.button>
-              </motion.div>
-            </div>
-            <motion.div 
-              className="hidden md:block h-80 rounded-3xl"
-              style={{ 
-                background: 'linear-gradient(135deg, rgba(255,104,1,0.1) 0%, rgba(255,104,1,0.05) 50%, rgba(247,247,248,1) 100%)'
-              }}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            />
-          </div>
-        </motion.section>
-
-        {/* Section 2: Quick brief about us */}
+        {/* Section 1: Quick brief about us */}
         <motion.section 
           id="brief"
-          className="py-16 md:py-24 scroll-mt-20"
+          className="pt-12 pb-16 md:pt-16 md:pb-24 scroll-mt-20"
           variants={itemVariants}
         >
           <motion.h2 
