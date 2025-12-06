@@ -209,7 +209,7 @@ export default function Services() {
               }}
             >
               <motion.h1 
-                className="text-3xl md:text-5xl font-bold leading-tight mb-6"
+                className="text-3xl md:text-5xl font-bold leading-tight"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -217,57 +217,6 @@ export default function Services() {
               >
                 We design, build & automate the products your customers actually use.
               </motion.h1>
-              <motion.p 
-                className="text-base md:text-lg text-gray-600 mb-8 leading-relaxed"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                data-testid="hero-subheading"
-              >
-                Gray Solutions is a digital product & AI studio that mixes strategy, UX, development and automation to bring your ideas to life.
-              </motion.p>
-              <motion.div 
-                className="flex flex-wrap gap-4 justify-center"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-              >
-                <button 
-                  className="px-6 py-3 rounded-full text-sm font-medium text-white shadow-lg hover:shadow-xl active:shadow-md"
-                  style={{ 
-                    backgroundColor: '#FF6801',
-                    transition: 'all 180ms ease-out'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.backgroundColor = '#ff7a1f';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.backgroundColor = '#FF6801';
-                  }}
-                  data-testid="btn-strategy-call"
-                >
-                  Book a strategy call
-                </button>
-                <button 
-                  className="px-6 py-3 rounded-full text-sm font-medium border-2 bg-transparent hover:bg-orange-50 active:bg-orange-100"
-                  style={{ 
-                    borderColor: '#FF6801', 
-                    color: '#FF6801',
-                    transition: 'all 180ms ease-out'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                  }}
-                  data-testid="btn-view-work"
-                >
-                  View recent work
-                </button>
-              </motion.div>
             </div>
 
             {/* Bottom Center: Video Card */}
