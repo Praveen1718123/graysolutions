@@ -1,17 +1,8 @@
 import React from "react";
-import { Link, useLocation } from "wouter";
+import { Link } from "wouter";
 import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 
 export default function Services() {
-  const [location] = useLocation();
-
-  const navItems = [
-    { label: "Services", href: "/services" },
-    { label: "About Us", href: "/about" },
-    { label: "Blogs", href: "/blogs" },
-    { label: "Contact Us", href: "/contact" },
-  ];
-
   const briefItems = [
     { id: 1, title: "Innovation" },
     { id: 2, title: "Strategy" },
@@ -52,46 +43,17 @@ export default function Services() {
 
   return (
     <div className="min-h-screen w-full bg-white font-sans text-brand-text-dark">
-      {/* Header */}
-      <header className="h-[160px] flex-none flex flex-col bg-white relative z-10">
-        <div className="flex-1 flex flex-col justify-center items-center pt-6 pb-6">
-          <div className="mb-5">
-            <Link href="/">
-              <img 
-                src={logoImage} 
-                alt="Gray Solutions Logo" 
-                className="h-16 w-auto cursor-pointer" 
-                data-testid="logo-header"
-              />
-            </Link>
-          </div>
-          
-          <nav className="w-full mx-auto">
-            <ul className="flex justify-center items-center w-full gap-32">
-              {navItems.map((item) => {
-                const isActive = location === item.href;
-                return (
-                  <li key={item.label} className="flex items-center">
-                    <Link href={item.href}>
-                      <span 
-                        className={`
-                          text-[17px] tracking-tight transition-colors duration-200 cursor-pointer inline-flex items-center h-8
-                          ${isActive 
-                            ? "text-black font-medium" 
-                            : "text-[#8A8A8A] font-normal hover:text-[#333333]"
-                          }
-                          focus:outline-none focus:ring-1 focus:ring-black/50 focus:rounded-sm
-                        `}
-                        data-testid={`nav-${item.label.toLowerCase().replace(' ', '-')}`}
-                      >
-                        {item.label}
-                      </span>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
+      {/* Header - Logo Only */}
+      <header className="h-[100px] flex-none flex flex-col bg-white relative z-10">
+        <div className="flex-1 flex flex-col justify-center items-center py-6">
+          <Link href="/">
+            <img 
+              src={logoImage} 
+              alt="Gray Solutions Logo" 
+              className="h-12 w-auto cursor-pointer" 
+              data-testid="logo-header"
+            />
+          </Link>
         </div>
       </header>
 
