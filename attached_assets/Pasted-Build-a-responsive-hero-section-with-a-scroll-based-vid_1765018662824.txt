@@ -1,0 +1,79 @@
+Build a responsive hero section with a scroll-based video expansion effect for the Gray Solutions website.
+
+CONTEXT
+- Existing top nav:
+  - Left: text logo “Gray Solutions”
+  - Right: link “Contact”
+- Keep the nav as-is and add the hero directly under it.
+- Tech: plain HTML + CSS + vanilla JavaScript (no frameworks, no external animation libraries).
+
+UI DESIGN TOKENS
+- Background: #F6F7FA (very light gray).
+- Primary text color: #0F172A (dark navy).
+- Accent color: #FF6801 (for CTAs and highlights).
+- Font: system UI (`-apple-system, system-ui, sans-serif`).
+- Card radius: 32px default, 16px when full-screen.
+- Max content width: 1120px centered with side padding of 24px–40px.
+
+HERO LAYOUT (DEFAULT STATE)
+- Section element: `<section class="hero">`.
+- Inside, a two-column layout on desktop:
+  - LEFT COLUMN: `.hero-content`
+    - H1: “We design, build & automate the products your customers actually use.”
+      - Large, bold, 48–56px on desktop, 32–36px on mobile.
+    - Paragraph describing Gray Solutions in 1–2 lines.
+    - Button row:
+      - Primary pill button: “Book a strategy call”
+        - Background: accent #FF6801, white text.
+      - Secondary pill button: “View recent work”
+        - Transparent or light background, accent border, accent text.
+  - RIGHT COLUMN: `.hero-media`
+    - A rounded rectangle “video card” with 16:9 aspect ratio.
+    - Inside the card, an HTML5 `<video>` element:
+      - Muted, autoplay, loop, plays inline.
+    - Background behind the video can be a soft peach/orange gradient.
+
+SCROLL INTERACTION / ANIMATION
+- Goal: as the user scrolls down, the hero briefly “pins”, the text fades out, and the video card expands to almost full screen.
+- Behavior:
+  1. When the user starts scrolling, keep the hero in view for a short scroll range using either:
+     - `position: sticky` on the hero, OR
+     - JavaScript that toggles a class based on scroll position.
+  2. During this pinned range:
+     - `.hero-content` (text + buttons) should gradually:
+       - Reduce opacity from 1 → 0.
+       - Move slightly up using `transform: translateY(-20px)`.
+     - `.hero-media` (video card) should:
+       - Move towards the center of the viewport.
+       - Scale up smoothly to occupy most of the screen.
+  3. At a chosen scroll threshold (e.g. when the user has scrolled one viewport height):
+     - Apply an “expanded” state class (e.g. `body.video-expanded` or `.hero.video-expanded`).
+     - In this expanded state:
+       - The video wrapper becomes `position: fixed; inset: 0; margin: auto;` so it is centered.
+       - Width ~100vw, height ~100vh minus a small margin.
+       - Border-radius reduced from 32px to 16px.
+       - Text column is hidden or fully transparent and not clickable.
+  4. Once the user scrolls past this range, the hero unpins and the rest of the page (services sections) continues normally.
+
+ANIMATION DETAILS
+- Use CSS transitions:
+  - `transition: transform 500ms ease, opacity 400ms ease, width 500ms ease, height 500ms ease, border-radius 500ms ease;`
+- Use JavaScript scroll listener to:
+  - Calculate progress of scroll within the hero’s range.
+  - Add/remove a class controlling the expanded state.
+- Make sure the video continues playing during the expansion.
+
+RESPONSIVE BEHAVIOR
+- Desktop:
+  - Side-by-side layout as described above.
+  - Full-screen video effect as center-focused card.
+- Mobile (width < 640px):
+  - Stack layout: text on top, video card below.
+  - The scroll effect can be simplified:
+    - As user scrolls, text fades out and video scales to fill most of the viewport height.
+    - Pinning can be shorter or can be skipped if needed; the effect should still feel smooth.
+- Ensure that after the video expansion, scrolling continues into the next sections without glitches.
+
+OUTPUT
+- Provide complete HTML, CSS, and JavaScript in a single file or clearly separated sections.
+- The output should be ready to paste into a Replit project and run without additional setup.

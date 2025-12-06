@@ -1,9 +1,34 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import logoImage from "@assets/Group_69_(1)_1764854226570.png";
+import heroVideo from "@assets/hero-video-horizontal.mp4";
 
 export default function Services() {
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!heroRef.current) return;
+      
+      const heroRect = heroRef.current.getBoundingClientRect();
+      const heroHeight = heroRef.current.offsetHeight;
+      const scrollThreshold = heroHeight * 0.8;
+      
+      // Calculate progress based on how much we've scrolled past the hero top
+      const scrolled = -heroRect.top;
+      const progress = Math.min(Math.max(scrolled / scrollThreshold, 0), 1);
+      
+      setScrollProgress(progress);
+      setIsExpanded(progress > 0.9);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const briefCards = [
     {
       title: "AI-first by default",
@@ -126,12 +151,20 @@ export default function Services() {
     },
   };
 
+  // Calculate dynamic styles based on scroll progress
+  const textOpacity = 1 - scrollProgress * 1.5;
+  const textTranslateY = -scrollProgress * 30;
+  const videoScale = 1 + scrollProgress * 0.3;
+  const videoWidth = isExpanded ? 'calc(100vw - 48px)' : '100%';
+  const videoHeight = isExpanded ? 'calc(100vh - 120px)' : '100%';
+  const videoBorderRadius = 32 - scrollProgress * 16;
+
   return (
     <motion.div 
       className="min-h-screen w-full font-sans"
       style={{ 
-        backgroundColor: '#F7F7F8',
-        color: '#111827',
+        backgroundColor: '#F6F7FA',
+        color: '#0F172A',
         fontFamily: '-apple-system, system-ui, sans-serif'
       }}
       initial={{ opacity: 0 }}
@@ -139,101 +172,155 @@ export default function Services() {
       transition={{ duration: 0.4 }}
     >
       {/* Sticky Navigation */}
-      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-12 h-16 flex items-center justify-between">
+      <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+        <div className="max-w-[1120px] mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
           <Link href="/">
-            <motion.img 
-              src={logoImage} 
-              alt="Gray Solutions" 
-              className="h-8 w-auto cursor-pointer"
-              whileHover={{ scale: 1.02 }}
-              data-testid="logo-nav"
-            />
+            <span className="text-lg font-semibold cursor-pointer hover:opacity-80 transition-opacity" data-testid="logo-nav">
+              Gray Solutions
+            </span>
           </Link>
           <Link href="/contact">
-            <motion.span 
+            <span 
               className="text-sm font-medium text-gray-600 hover:text-[#FF6801] transition-colors cursor-pointer"
-              whileHover={{ y: -1 }}
               data-testid="nav-contact"
             >
               Contact
-            </motion.span>
+            </span>
           </Link>
         </div>
       </nav>
 
+      {/* Hero Section with Scroll-based Video Expansion */}
+      <section 
+        ref={heroRef}
+        className="relative min-h-[200vh]"
+        style={{ backgroundColor: '#F6F7FA' }}
+      >
+        <div className="sticky top-16 h-[calc(100vh-64px)] overflow-hidden">
+          <div className="max-w-[1120px] mx-auto px-6 md:px-10 h-full flex items-center">
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center w-full">
+              {/* Left Column: Text Content */}
+              <div 
+                className="hero-content z-10"
+                style={{
+                  opacity: Math.max(textOpacity, 0),
+                  transform: `translateY(${textTranslateY}px)`,
+                  transition: 'opacity 400ms ease, transform 500ms ease',
+                  pointerEvents: isExpanded ? 'none' : 'auto'
+                }}
+              >
+                <motion.h1 
+                  className="text-3xl md:text-5xl font-bold leading-tight mb-6"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  data-testid="hero-heading"
+                >
+                  We design, build & automate the products your customers actually use.
+                </motion.h1>
+                <motion.p 
+                  className="text-base md:text-lg text-gray-600 mb-8 leading-relaxed"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                  data-testid="hero-subheading"
+                >
+                  Gray Solutions is a digital product & AI studio that mixes strategy, UX, development and automation to bring your ideas to life.
+                </motion.p>
+                <motion.div 
+                  className="flex flex-wrap gap-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.6 }}
+                >
+                  <button 
+                    className="px-6 py-3 rounded-full text-sm font-medium text-white shadow-lg hover:shadow-xl active:shadow-md"
+                    style={{ 
+                      backgroundColor: '#FF6801',
+                      transition: 'all 180ms ease-out'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                      e.currentTarget.style.backgroundColor = '#ff7a1f';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.backgroundColor = '#FF6801';
+                    }}
+                    data-testid="btn-strategy-call"
+                  >
+                    Book a strategy call
+                  </button>
+                  <button 
+                    className="px-6 py-3 rounded-full text-sm font-medium border-2 bg-transparent hover:bg-orange-50 active:bg-orange-100"
+                    style={{ 
+                      borderColor: '#FF6801', 
+                      color: '#FF6801',
+                      transition: 'all 180ms ease-out'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'translateY(0)';
+                    }}
+                    data-testid="btn-view-work"
+                  >
+                    View recent work
+                  </button>
+                </motion.div>
+              </div>
+
+              {/* Right Column: Video Card */}
+              <div 
+                className="hero-media relative"
+                style={{
+                  transform: isExpanded ? 'none' : `scale(${videoScale})`,
+                  transformOrigin: 'center center',
+                  transition: 'transform 500ms ease, width 500ms ease, height 500ms ease',
+                  position: isExpanded ? 'fixed' : 'relative',
+                  top: isExpanded ? '80px' : 'auto',
+                  left: isExpanded ? '24px' : 'auto',
+                  right: isExpanded ? '24px' : 'auto',
+                  width: isExpanded ? 'calc(100vw - 48px)' : '100%',
+                  height: isExpanded ? 'calc(100vh - 120px)' : 'auto',
+                  zIndex: isExpanded ? 40 : 1,
+                }}
+              >
+                <div
+                  className="w-full aspect-video overflow-hidden shadow-2xl"
+                  style={{
+                    borderRadius: `${videoBorderRadius}px`,
+                    background: 'linear-gradient(135deg, #FFF5EB 0%, #FFE4CC 100%)',
+                    transition: 'border-radius 500ms ease',
+                    height: isExpanded ? '100%' : 'auto',
+                  }}
+                >
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-full object-cover"
+                    data-testid="hero-video"
+                  >
+                    <source src={heroVideo} type="video/mp4" />
+                  </video>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Main Content - Other Sections */}
       <motion.main 
-        className="max-w-[1200px] mx-auto px-6 md:px-12"
+        className="max-w-[1120px] mx-auto px-6 md:px-10 relative z-10"
+        style={{ backgroundColor: '#F6F7FA' }}
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        {/* Section 1: Intro (Hero) */}
-        <motion.section 
-          className="py-20 md:py-32"
-          variants={itemVariants}
-        >
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <motion.h1 
-                className="text-3xl md:text-5xl font-bold leading-tight mb-6"
-                style={{ color: '#111827' }}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                data-testid="hero-heading"
-              >
-                We design, build & automate the products your customers actually use.
-              </motion.h1>
-              <motion.p 
-                className="text-lg text-gray-600 mb-8 leading-relaxed"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                data-testid="hero-subheading"
-              >
-                Gray Solutions is a digital product & AI studio that mixes strategy, UX, development and automation to bring your ideas to life.
-              </motion.p>
-              <motion.div 
-                className="flex flex-wrap gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-              >
-                <motion.button 
-                  className="px-6 py-3 rounded-full text-sm font-medium text-white shadow-md"
-                  style={{ backgroundColor: '#FF6801' }}
-                  whileHover={{ y: -2, boxShadow: '0 8px 25px rgba(255, 104, 1, 0.3)' }}
-                  whileTap={{ y: 0 }}
-                  transition={{ duration: 0.18 }}
-                  data-testid="btn-strategy-call"
-                >
-                  Book a strategy call
-                </motion.button>
-                <motion.button 
-                  className="px-6 py-3 rounded-full text-sm font-medium border-2 bg-transparent"
-                  style={{ borderColor: '#FF6801', color: '#FF6801' }}
-                  whileHover={{ y: -2, backgroundColor: 'rgba(255, 104, 1, 0.05)' }}
-                  whileTap={{ y: 0 }}
-                  transition={{ duration: 0.18 }}
-                  data-testid="btn-view-work"
-                >
-                  View recent work
-                </motion.button>
-              </motion.div>
-            </div>
-            <motion.div 
-              className="hidden md:block h-80 rounded-3xl"
-              style={{ 
-                background: 'linear-gradient(135deg, rgba(255,104,1,0.1) 0%, rgba(255,104,1,0.05) 50%, rgba(247,247,248,1) 100%)'
-              }}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            />
-          </div>
-        </motion.section>
-
         {/* Section 2: Quick brief about us */}
         <motion.section 
           className="py-16 md:py-24"
@@ -249,21 +336,23 @@ export default function Services() {
             {briefCards.map((card, index) => (
               <motion.div
                 key={index}
-                className="p-6 rounded-2xl bg-white"
+                className="p-6 rounded-2xl bg-white cursor-pointer"
                 style={{ 
                   border: '1px solid rgba(15,23,42,0.08)',
+                  transition: 'all 180ms ease-out'
                 }}
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ 
                   y: -4, 
                   boxShadow: '0 12px 40px rgba(0,0,0,0.08)',
-                  borderColor: 'rgba(255,104,1,0.2)'
+                  borderColor: 'rgba(255,104,1,0.3)'
                 }}
                 data-testid={`brief-card-${index}`}
               >
-                <h3 className="text-base font-semibold mb-3" style={{ color: '#111827' }}>
+                <h3 className="text-base font-semibold mb-3">
                   {card.title}
                 </h3>
                 <p className="text-sm text-gray-600 leading-relaxed">
@@ -298,8 +387,9 @@ export default function Services() {
                     key={index}
                     className="relative"
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.3 + index * 0.15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.2 + index * 0.15 }}
                     data-testid={`roadmap-step-${index}`}
                   >
                     <div 
@@ -326,8 +416,9 @@ export default function Services() {
                     key={index}
                     className="relative"
                     initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: 0.3 + index * 0.15 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.15 }}
                   >
                     <div 
                       className="absolute -left-8 w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold"
@@ -360,25 +451,23 @@ export default function Services() {
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 + index * 0.15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.15 }}
                 data-testid={`capability-column-${index}`}
               >
-                <h3 className="text-xl font-semibold mb-5" style={{ color: '#111827' }}>
+                <h3 className="text-xl font-semibold mb-5">
                   {cap.heading}
                 </h3>
                 <ul className="space-y-3">
                   {cap.items.map((item, idx) => (
-                    <motion.li 
+                    <li 
                       key={idx}
                       className="text-sm text-gray-600 flex items-start gap-2"
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: 0.5 + index * 0.1 + idx * 0.05 }}
                     >
                       <span style={{ color: '#FF6801' }}>•</span>
                       {item}
-                    </motion.li>
+                    </li>
                   ))}
                 </ul>
               </motion.div>
@@ -401,23 +490,26 @@ export default function Services() {
             {testimonials.map((testimonial, index) => (
               <motion.div
                 key={testimonial.id}
-                className={`bg-white p-6 md:p-8 rounded-2xl md:absolute md:w-[45%] ${
+                className={`bg-white p-6 md:p-8 rounded-2xl md:absolute md:w-[45%] cursor-pointer ${
                   testimonial.position === 'right' ? 'md:right-0' : 'md:left-0'
                 }`}
                 style={{ 
                   border: '1px solid rgba(15,23,42,0.08)',
-                  top: index === 0 ? '0' : index === 1 ? '80px' : '160px'
+                  top: index === 0 ? '0' : index === 1 ? '80px' : '160px',
+                  transition: 'all 180ms ease-out'
                 }}
                 initial={{ opacity: 0, x: testimonial.position === 'right' ? 30 : -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 + index * 0.2 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
                 whileHover={{ 
                   y: -4, 
-                  boxShadow: '0 12px 40px rgba(0,0,0,0.08)'
+                  boxShadow: '0 12px 40px rgba(0,0,0,0.08)',
+                  borderColor: 'rgba(255,104,1,0.3)'
                 }}
                 data-testid={`testimonial-${testimonial.id}`}
               >
-                <p className="text-base leading-relaxed mb-4" style={{ color: '#111827' }}>
+                <p className="text-base leading-relaxed mb-4">
                   "{testimonial.quote}"
                 </p>
                 <p className="text-sm text-gray-500">
