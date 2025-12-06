@@ -154,7 +154,9 @@ export default function Services() {
   // Calculate dynamic styles based on scroll progress
   const textOpacity = 1 - scrollProgress * 1.5;
   const textTranslateY = -scrollProgress * 30;
-  const videoTranslateY = -scrollProgress * 150; // Video scrolls up
+  const videoScale = 1 + scrollProgress * 0.3;
+  const videoWidth = isExpanded ? 'calc(100vw - 48px)' : '100%';
+  const videoHeight = isExpanded ? 'calc(100vh - 120px)' : '100%';
   const videoBorderRadius = 32 - scrollProgress * 16;
 
   return (
@@ -230,18 +232,18 @@ export default function Services() {
                 height: isExpanded ? 'calc(100vh - 104px)' : 'auto',
                 zIndex: isExpanded ? 40 : 1,
                 transition: 'all 500ms ease',
-                transform: isExpanded ? 'none' : `translateY(${videoTranslateY}px)`,
               }}
             >
               <div
-                className="overflow-hidden shadow-2xl"
+                className="w-full max-w-4xl overflow-hidden shadow-2xl"
                 style={{
                   borderRadius: `${videoBorderRadius}px`,
                   background: 'linear-gradient(135deg, #FFF5EB 0%, #FFE4CC 100%)',
                   transition: 'all 500ms ease',
-                  width: isExpanded ? '100%' : '600px',
-                  maxWidth: isExpanded ? '100%' : '600px',
+                  transform: isExpanded ? 'none' : `scale(${videoScale})`,
+                  transformOrigin: 'bottom center',
                   height: isExpanded ? '100%' : 'auto',
+                  maxWidth: isExpanded ? '100%' : '56rem',
                 }}
               >
                 <div className="aspect-video w-full h-full">
