@@ -200,7 +200,7 @@ export default function Services() {
           <div className="max-w-[1120px] mx-auto px-6 md:px-10 h-full flex flex-col">
             {/* Top: Text Content */}
             <div 
-              className="hero-content z-10 pt-12 md:pt-16 text-center max-w-3xl mx-auto"
+              className="hero-content z-10 pt-12 md:pt-16 pb-16 md:pb-24 text-center max-w-3xl mx-auto"
               style={{
                 opacity: Math.max(textOpacity, 0),
                 transform: `translateY(${textTranslateY}px)`,
