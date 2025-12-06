@@ -7,19 +7,19 @@ export default function Services() {
   const briefCards = [
     {
       title: "AI-first by default",
-      description: "We design your product and ops with AI baked into the flow, not bolted on at the end."
+      description: "We design your product and operations with AI baked into the flow, not bolted on at the end."
     },
     {
       title: "From idea to live build",
-      description: "Strategy, UX, UI, development and automation in one team for faster launches."
+      description: "Strategy, UX, UI, development and automation in one team so you launch faster with fewer hand-offs."
     },
     {
       title: "Small team, big output",
-      description: "Direct access to the core builders, weekly sprints and clear updates."
+      description: "Direct access to the core builders, weekly sprints and clear communication instead of agency chaos."
     },
     {
       title: "Based in Tamil Nadu, building global",
-      description: "We understand Tier-2/Tier-3 markets and ship to global product standards."
+      description: "We understand Tier-2 and Tier-3 markets but build to global product and design standards."
     }
   ];
 
@@ -96,7 +96,7 @@ export default function Services() {
     },
     {
       id: 3,
-      quote: "They helped us figure out what to build, not just how it should look.",
+      quote: "They helped us figure out what to build, not just how it should look. The strategy and systems are what we're still using.",
       name: "Director",
       role: "Construction & Infra Company",
       position: "left"
@@ -236,22 +236,32 @@ export default function Services() {
 
         {/* Section 2: Quick brief about us */}
         <motion.section 
-          className="py-16 md:py-24"
+          id="brief"
+          className="py-16 md:py-24 scroll-mt-20"
           variants={itemVariants}
         >
           <motion.h2 
-            className="text-2xl md:text-3xl font-bold mb-10"
+            className="text-2xl md:text-3xl font-bold mb-3"
             data-testid="section-brief"
           >
             Quick brief about us
           </motion.h2>
+          <motion.p 
+            className="text-gray-600 mb-10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            Here's what makes working with us different.
+          </motion.p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {briefCards.map((card, index) => (
               <motion.div
                 key={index}
-                className="p-6 rounded-2xl bg-white"
+                className="p-6 rounded-2xl"
                 style={{ 
                   border: '1px solid rgba(15,23,42,0.08)',
+                  background: 'linear-gradient(135deg, rgba(255,104,1,0.03) 0%, rgba(255,255,255,1) 100%)',
                 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -259,7 +269,7 @@ export default function Services() {
                 whileHover={{ 
                   y: -4, 
                   boxShadow: '0 12px 40px rgba(0,0,0,0.08)',
-                  borderColor: 'rgba(255,104,1,0.2)'
+                  borderColor: 'rgba(255,104,1,0.3)'
                 }}
                 data-testid={`brief-card-${index}`}
               >
@@ -276,7 +286,8 @@ export default function Services() {
 
         {/* Section 3: Road Map */}
         <motion.section 
-          className="py-16 md:py-24"
+          id="roadmap"
+          className="py-16 md:py-24 scroll-mt-20"
           variants={itemVariants}
         >
           <motion.h2 
@@ -346,7 +357,8 @@ export default function Services() {
 
         {/* Section 4: Capabilities */}
         <motion.section 
-          className="py-16 md:py-24"
+          id="capabilities"
+          className="py-16 md:py-24 scroll-mt-20"
           variants={itemVariants}
         >
           <motion.h2 
@@ -355,10 +367,11 @@ export default function Services() {
           >
             Capabilities
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0">
             {capabilities.map((cap, index) => (
               <motion.div
                 key={index}
+                className={`${index < 2 ? 'md:border-r md:border-gray-200' : ''} md:px-8 first:md:pl-0 last:md:pr-0`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 + index * 0.15 }}
@@ -371,12 +384,11 @@ export default function Services() {
                   {cap.items.map((item, idx) => (
                     <motion.li 
                       key={idx}
-                      className="text-sm text-gray-600 flex items-start gap-2"
+                      className="text-sm text-gray-600"
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.4, delay: 0.5 + index * 0.1 + idx * 0.05 }}
                     >
-                      <span style={{ color: '#FF6801' }}>•</span>
                       {item}
                     </motion.li>
                   ))}
@@ -388,7 +400,8 @@ export default function Services() {
 
         {/* Section 5: Client Testimonials */}
         <motion.section 
-          className="py-16 md:py-24 pb-32"
+          id="testimonials"
+          className="py-16 md:py-24 pb-32 scroll-mt-20"
           variants={itemVariants}
         >
           <motion.h2 
