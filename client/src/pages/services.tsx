@@ -197,105 +197,107 @@ export default function Services() {
         style={{ backgroundColor: '#F6F7FA' }}
       >
         <div className="sticky top-16 h-[calc(100vh-64px)] overflow-hidden">
-          <div className="max-w-[1120px] mx-auto px-6 md:px-10 h-full flex items-center">
-            <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center w-full">
-              {/* Left Column: Text Content */}
-              <div 
-                className="hero-content z-10"
-                style={{
-                  opacity: Math.max(textOpacity, 0),
-                  transform: `translateY(${textTranslateY}px)`,
-                  transition: 'opacity 400ms ease, transform 500ms ease',
-                  pointerEvents: isExpanded ? 'none' : 'auto'
-                }}
+          <div className="max-w-[1120px] mx-auto px-6 md:px-10 h-full flex flex-col">
+            {/* Top: Text Content */}
+            <div 
+              className="hero-content z-10 pt-12 md:pt-16 text-center max-w-3xl mx-auto"
+              style={{
+                opacity: Math.max(textOpacity, 0),
+                transform: `translateY(${textTranslateY}px)`,
+                transition: 'opacity 400ms ease, transform 500ms ease',
+                pointerEvents: isExpanded ? 'none' : 'auto'
+              }}
+            >
+              <motion.h1 
+                className="text-3xl md:text-5xl font-bold leading-tight mb-6"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                data-testid="hero-heading"
               >
-                <motion.h1 
-                  className="text-3xl md:text-5xl font-bold leading-tight mb-6"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  data-testid="hero-heading"
-                >
-                  We design, build & automate the products your customers actually use.
-                </motion.h1>
-                <motion.p 
-                  className="text-base md:text-lg text-gray-600 mb-8 leading-relaxed"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                  data-testid="hero-subheading"
-                >
-                  Gray Solutions is a digital product & AI studio that mixes strategy, UX, development and automation to bring your ideas to life.
-                </motion.p>
-                <motion.div 
-                  className="flex flex-wrap gap-4"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.6 }}
-                >
-                  <button 
-                    className="px-6 py-3 rounded-full text-sm font-medium text-white shadow-lg hover:shadow-xl active:shadow-md"
-                    style={{ 
-                      backgroundColor: '#FF6801',
-                      transition: 'all 180ms ease-out'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'translateY(-2px)';
-                      e.currentTarget.style.backgroundColor = '#ff7a1f';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'translateY(0)';
-                      e.currentTarget.style.backgroundColor = '#FF6801';
-                    }}
-                    data-testid="btn-strategy-call"
-                  >
-                    Book a strategy call
-                  </button>
-                  <button 
-                    className="px-6 py-3 rounded-full text-sm font-medium border-2 bg-transparent hover:bg-orange-50 active:bg-orange-100"
-                    style={{ 
-                      borderColor: '#FF6801', 
-                      color: '#FF6801',
-                      transition: 'all 180ms ease-out'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'translateY(-2px)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'translateY(0)';
-                    }}
-                    data-testid="btn-view-work"
-                  >
-                    View recent work
-                  </button>
-                </motion.div>
-              </div>
-
-              {/* Right Column: Video Card */}
-              <div 
-                className="hero-media relative"
-                style={{
-                  transform: isExpanded ? 'none' : `scale(${videoScale})`,
-                  transformOrigin: 'center center',
-                  transition: 'transform 500ms ease, width 500ms ease, height 500ms ease',
-                  position: isExpanded ? 'fixed' : 'relative',
-                  top: isExpanded ? '80px' : 'auto',
-                  left: isExpanded ? '24px' : 'auto',
-                  right: isExpanded ? '24px' : 'auto',
-                  width: isExpanded ? 'calc(100vw - 48px)' : '100%',
-                  height: isExpanded ? 'calc(100vh - 120px)' : 'auto',
-                  zIndex: isExpanded ? 40 : 1,
-                }}
+                We design, build & automate the products your customers actually use.
+              </motion.h1>
+              <motion.p 
+                className="text-base md:text-lg text-gray-600 mb-8 leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                data-testid="hero-subheading"
               >
-                <div
-                  className="w-full aspect-video overflow-hidden shadow-2xl"
-                  style={{
-                    borderRadius: `${videoBorderRadius}px`,
-                    background: 'linear-gradient(135deg, #FFF5EB 0%, #FFE4CC 100%)',
-                    transition: 'border-radius 500ms ease',
-                    height: isExpanded ? '100%' : 'auto',
+                Gray Solutions is a digital product & AI studio that mixes strategy, UX, development and automation to bring your ideas to life.
+              </motion.p>
+              <motion.div 
+                className="flex flex-wrap gap-4 justify-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+              >
+                <button 
+                  className="px-6 py-3 rounded-full text-sm font-medium text-white shadow-lg hover:shadow-xl active:shadow-md"
+                  style={{ 
+                    backgroundColor: '#FF6801',
+                    transition: 'all 180ms ease-out'
                   }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.backgroundColor = '#ff7a1f';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.backgroundColor = '#FF6801';
+                  }}
+                  data-testid="btn-strategy-call"
                 >
+                  Book a strategy call
+                </button>
+                <button 
+                  className="px-6 py-3 rounded-full text-sm font-medium border-2 bg-transparent hover:bg-orange-50 active:bg-orange-100"
+                  style={{ 
+                    borderColor: '#FF6801', 
+                    color: '#FF6801',
+                    transition: 'all 180ms ease-out'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                  }}
+                  data-testid="btn-view-work"
+                >
+                  View recent work
+                </button>
+              </motion.div>
+            </div>
+
+            {/* Bottom Center: Video Card */}
+            <div 
+              className="hero-media flex-1 flex items-end justify-center pb-8"
+              style={{
+                position: isExpanded ? 'fixed' : 'relative',
+                top: isExpanded ? '80px' : 'auto',
+                left: isExpanded ? '24px' : 'auto',
+                right: isExpanded ? '24px' : 'auto',
+                bottom: isExpanded ? '24px' : 'auto',
+                width: isExpanded ? 'calc(100vw - 48px)' : '100%',
+                height: isExpanded ? 'calc(100vh - 104px)' : 'auto',
+                zIndex: isExpanded ? 40 : 1,
+                transition: 'all 500ms ease',
+              }}
+            >
+              <div
+                className="w-full max-w-4xl overflow-hidden shadow-2xl"
+                style={{
+                  borderRadius: `${videoBorderRadius}px`,
+                  background: 'linear-gradient(135deg, #FFF5EB 0%, #FFE4CC 100%)',
+                  transition: 'all 500ms ease',
+                  transform: isExpanded ? 'none' : `scale(${videoScale})`,
+                  transformOrigin: 'bottom center',
+                  height: isExpanded ? '100%' : 'auto',
+                  maxWidth: isExpanded ? '100%' : '56rem',
+                }}
+              >
+                <div className="aspect-video w-full h-full">
                   <video
                     autoPlay
                     muted
