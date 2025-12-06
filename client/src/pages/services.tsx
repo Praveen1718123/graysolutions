@@ -7,19 +7,19 @@ export default function Services() {
   const briefCards = [
     {
       title: "AI-first by default",
-      description: "We design your product and operations with AI baked into the flow, not bolted on at the end."
+      description: "We design your product and ops with AI baked into the flow, not bolted on at the end."
     },
     {
       title: "From idea to live build",
-      description: "Strategy, UX, UI, development and automation in one team so you launch faster with fewer hand-offs."
+      description: "Strategy, UX, UI, development and automation in one team for faster launches."
     },
     {
       title: "Small team, big output",
-      description: "Direct access to the core builders, weekly sprints and clear communication instead of agency chaos."
+      description: "Direct access to the core builders, weekly sprints and clear updates."
     },
     {
       title: "Based in Tamil Nadu, building global",
-      description: "We understand Tier-2 and Tier-3 markets but build to global product and design standards."
+      description: "We understand Tier-2/Tier-3 markets and ship to global product standards."
     }
   ];
 
@@ -96,7 +96,7 @@ export default function Services() {
     },
     {
       id: 3,
-      quote: "They helped us figure out what to build, not just how it should look. The strategy and systems are what we're still using.",
+      quote: "They helped us figure out what to build, not just how it should look.",
       name: "Director",
       role: "Construction & Infra Company",
       position: "left"
@@ -168,34 +168,90 @@ export default function Services() {
         initial="hidden"
         animate="visible"
       >
-        {/* Section 1: Quick brief about us */}
+        {/* Section 1: Intro (Hero) */}
         <motion.section 
-          id="brief"
-          className="pt-12 pb-16 md:pt-16 md:pb-24 scroll-mt-20"
+          className="py-20 md:py-32"
+          variants={itemVariants}
+        >
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <motion.h1 
+                className="text-3xl md:text-5xl font-bold leading-tight mb-6"
+                style={{ color: '#111827' }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                data-testid="hero-heading"
+              >
+                We design, build & automate the products your customers actually use.
+              </motion.h1>
+              <motion.p 
+                className="text-lg text-gray-600 mb-8 leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                data-testid="hero-subheading"
+              >
+                Gray Solutions is a digital product & AI studio that mixes strategy, UX, development and automation to bring your ideas to life.
+              </motion.p>
+              <motion.div 
+                className="flex flex-wrap gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+              >
+                <motion.button 
+                  className="px-6 py-3 rounded-full text-sm font-medium text-white shadow-md"
+                  style={{ backgroundColor: '#FF6801' }}
+                  whileHover={{ y: -2, boxShadow: '0 8px 25px rgba(255, 104, 1, 0.3)' }}
+                  whileTap={{ y: 0 }}
+                  transition={{ duration: 0.18 }}
+                  data-testid="btn-strategy-call"
+                >
+                  Book a strategy call
+                </motion.button>
+                <motion.button 
+                  className="px-6 py-3 rounded-full text-sm font-medium border-2 bg-transparent"
+                  style={{ borderColor: '#FF6801', color: '#FF6801' }}
+                  whileHover={{ y: -2, backgroundColor: 'rgba(255, 104, 1, 0.05)' }}
+                  whileTap={{ y: 0 }}
+                  transition={{ duration: 0.18 }}
+                  data-testid="btn-view-work"
+                >
+                  View recent work
+                </motion.button>
+              </motion.div>
+            </div>
+            <motion.div 
+              className="hidden md:block h-80 rounded-3xl"
+              style={{ 
+                background: 'linear-gradient(135deg, rgba(255,104,1,0.1) 0%, rgba(255,104,1,0.05) 50%, rgba(247,247,248,1) 100%)'
+              }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            />
+          </div>
+        </motion.section>
+
+        {/* Section 2: Quick brief about us */}
+        <motion.section 
+          className="py-16 md:py-24"
           variants={itemVariants}
         >
           <motion.h2 
-            className="text-2xl md:text-3xl font-bold mb-3"
+            className="text-2xl md:text-3xl font-bold mb-10"
             data-testid="section-brief"
           >
             Quick brief about us
           </motion.h2>
-          <motion.p 
-            className="text-gray-600 mb-10"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-          >
-            Here's what makes working with us different.
-          </motion.p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {briefCards.map((card, index) => (
               <motion.div
                 key={index}
-                className="p-6 rounded-2xl"
+                className="p-6 rounded-2xl bg-white"
                 style={{ 
                   border: '1px solid rgba(15,23,42,0.08)',
-                  background: 'linear-gradient(135deg, rgba(255,104,1,0.03) 0%, rgba(255,255,255,1) 100%)',
                 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -203,7 +259,7 @@ export default function Services() {
                 whileHover={{ 
                   y: -4, 
                   boxShadow: '0 12px 40px rgba(0,0,0,0.08)',
-                  borderColor: 'rgba(255,104,1,0.3)'
+                  borderColor: 'rgba(255,104,1,0.2)'
                 }}
                 data-testid={`brief-card-${index}`}
               >
@@ -220,8 +276,7 @@ export default function Services() {
 
         {/* Section 3: Road Map */}
         <motion.section 
-          id="roadmap"
-          className="py-16 md:py-24 scroll-mt-20"
+          className="py-16 md:py-24"
           variants={itemVariants}
         >
           <motion.h2 
@@ -291,8 +346,7 @@ export default function Services() {
 
         {/* Section 4: Capabilities */}
         <motion.section 
-          id="capabilities"
-          className="py-16 md:py-24 scroll-mt-20"
+          className="py-16 md:py-24"
           variants={itemVariants}
         >
           <motion.h2 
@@ -301,11 +355,10 @@ export default function Services() {
           >
             Capabilities
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
             {capabilities.map((cap, index) => (
               <motion.div
                 key={index}
-                className={`${index < 2 ? 'md:border-r md:border-gray-200' : ''} md:px-8 first:md:pl-0 last:md:pr-0`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 + index * 0.15 }}
@@ -318,11 +371,12 @@ export default function Services() {
                   {cap.items.map((item, idx) => (
                     <motion.li 
                       key={idx}
-                      className="text-sm text-gray-600"
+                      className="text-sm text-gray-600 flex items-start gap-2"
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.4, delay: 0.5 + index * 0.1 + idx * 0.05 }}
                     >
+                      <span style={{ color: '#FF6801' }}>•</span>
                       {item}
                     </motion.li>
                   ))}
@@ -334,8 +388,7 @@ export default function Services() {
 
         {/* Section 5: Client Testimonials */}
         <motion.section 
-          id="testimonials"
-          className="py-16 md:py-24 pb-32 scroll-mt-20"
+          className="py-16 md:py-24 pb-32"
           variants={itemVariants}
         >
           <motion.h2 
