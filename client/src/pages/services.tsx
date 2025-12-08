@@ -198,9 +198,9 @@ export default function Services() {
       >
         <div className="sticky top-16 h-[calc(100vh-64px)] overflow-hidden">
           <div className="max-w-[1120px] mx-auto px-6 md:px-10 h-full flex flex-col">
-            {/* Top: Text Content */}
+            {/* Top: Text Content - Left Aligned */}
             <div 
-              className="hero-content z-10 pt-12 md:pt-16 pb-16 md:pb-24 text-center max-w-3xl mx-auto"
+              className="hero-content z-10 pt-12 md:pt-16 pb-8 md:pb-12 text-left max-w-3xl"
               style={{
                 opacity: Math.max(textOpacity, 0),
                 transform: `translateY(${textTranslateY}px)`,
@@ -221,7 +221,7 @@ export default function Services() {
 
             {/* Bottom Center: Video Card */}
             <div 
-              className="hero-media flex-1 flex items-end justify-center pb-8"
+              className="hero-media flex-1 flex items-center justify-center"
               style={{
                 position: isExpanded ? 'fixed' : 'relative',
                 top: isExpanded ? '80px' : 'auto',
@@ -232,27 +232,29 @@ export default function Services() {
                 height: isExpanded ? 'calc(100vh - 104px)' : 'auto',
                 zIndex: isExpanded ? 40 : 1,
                 transition: 'all 500ms ease',
+                transform: `translateY(${-scrollProgress * 50}px)`,
               }}
             >
               <div
-                className="w-full max-w-4xl overflow-hidden shadow-2xl"
+                className="w-full max-w-5xl overflow-hidden shadow-2xl"
                 style={{
                   borderRadius: `${videoBorderRadius}px`,
                   background: 'linear-gradient(135deg, #FFF5EB 0%, #FFE4CC 100%)',
                   transition: 'all 500ms ease',
                   transform: isExpanded ? 'none' : `scale(${videoScale})`,
-                  transformOrigin: 'bottom center',
+                  transformOrigin: 'center center',
                   height: isExpanded ? '100%' : 'auto',
-                  maxWidth: isExpanded ? '100%' : '56rem',
+                  maxWidth: isExpanded ? '100%' : '64rem',
                 }}
               >
-                <div className="aspect-video w-full h-full">
+                <div className="aspect-video w-full">
                   <video
                     autoPlay
                     muted
                     loop
                     playsInline
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
+                    style={{ backgroundColor: '#000' }}
                     data-testid="hero-video"
                   >
                     <source src={heroVideo} type="video/mp4" />
