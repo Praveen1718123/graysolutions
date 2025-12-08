@@ -1,24 +1,23 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 import heroVideo from "@assets/hero-video-horizontal.mp4";
 
 export default function Services() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      // Header scroll state
-      setIsScrolled(window.scrollY > 60);
-      
-      // Video expansion scroll state
       if (!heroRef.current) return;
+      
       const heroRect = heroRef.current.getBoundingClientRect();
       const heroHeight = heroRef.current.offsetHeight;
       const scrollThreshold = heroHeight * 0.8;
+      
+      // Calculate progress based on how much we've scrolled past the hero top
       const scrolled = -heroRect.top;
       const progress = Math.min(Math.max(scrolled / scrollThreshold, 0), 1);
       
@@ -156,10 +155,9 @@ export default function Services() {
   const textOpacity = 1 - scrollProgress * 1.5;
   const textTranslateY = -scrollProgress * 30;
   const videoScale = 1 + scrollProgress * 0.3;
+  const videoWidth = isExpanded ? 'calc(100vw - 48px)' : '100%';
+  const videoHeight = isExpanded ? 'calc(100vh - 120px)' : '100%';
   const videoBorderRadius = 32 - scrollProgress * 16;
-
-  // Header heights
-  const headerHeight = isScrolled ? 64 : 88;
 
   return (
     <motion.div 
@@ -173,109 +171,36 @@ export default function Services() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
     >
-      {/* Fixed Header with Scroll Transform */}
-      <header 
-        className="fixed top-0 left-0 right-0 z-50"
-        style={{
-          backgroundColor: isScrolled ? '#FFFFFF' : 'transparent',
-          boxShadow: isScrolled ? '0 10px 30px rgba(15,23,42,0.08)' : 'none',
-          height: `${headerHeight}px`,
-          transition: 'background-color 200ms ease-out, box-shadow 200ms ease-out, height 200ms ease-out',
-        }}
-      >
-        <div 
-          className="max-w-[1120px] mx-auto px-6 md:px-8 h-full flex items-center justify-between"
-        >
-          {/* Stacked Logo */}
+      {/* Sticky Navigation */}
+      <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+        <div className="max-w-[1120px] mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
           <Link href="/">
-            <div 
-              className="cursor-pointer flex flex-col leading-tight"
-              style={{
-                transform: isScrolled ? 'scale(0.9)' : 'scale(1)',
-                transformOrigin: 'left center',
-                transition: 'transform 200ms ease-out',
-              }}
-              data-testid="logo-nav"
-            >
-              <span 
-                className="font-bold tracking-tight"
-                style={{ 
-                  fontSize: isScrolled ? '20px' : '24px',
-                  color: '#0F172A',
-                  transition: 'font-size 200ms ease-out',
-                }}
-              >
-                Gray
-              </span>
-              <span 
-                className="font-medium tracking-wide"
-                style={{ 
-                  fontSize: isScrolled ? '11px' : '13px',
-                  color: '#64748B',
-                  marginTop: '-2px',
-                  transition: 'font-size 200ms ease-out',
-                }}
-              >
-                Solutions
-              </span>
-            </div>
+            <span className="text-lg font-semibold cursor-pointer hover:opacity-80 transition-opacity" data-testid="logo-nav">
+              Gray Solutions
+            </span>
           </Link>
-
-          {/* Nav Links */}
-          <nav className="flex items-center gap-6">
-            <Link href="/contact">
-              <span 
-                className="font-medium cursor-pointer"
-                style={{ 
-                  fontSize: '14px',
-                  color: '#0F172A',
-                  padding: isScrolled ? '8px 16px' : '0',
-                  border: isScrolled ? '1px solid #FF6801' : 'none',
-                  borderRadius: '999px',
-                  transition: 'all 200ms ease-out',
-                }}
-                onMouseEnter={(e) => {
-                  if (isScrolled) {
-                    e.currentTarget.style.backgroundColor = '#FF6801';
-                    e.currentTarget.style.color = '#FFFFFF';
-                  } else {
-                    e.currentTarget.style.color = '#FF6801';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'transparent';
-                  e.currentTarget.style.color = '#0F172A';
-                }}
-                data-testid="nav-contact"
-              >
-                Contact
-              </span>
-            </Link>
-          </nav>
+          <Link href="/contact">
+            <span 
+              className="text-sm font-medium text-gray-600 hover:text-[#FF6801] transition-colors cursor-pointer"
+              data-testid="nav-contact"
+            >
+              Contact
+            </span>
+          </Link>
         </div>
-      </header>
+      </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section with Scroll-based Video Expansion */}
       <section 
         ref={heroRef}
         className="relative min-h-[200vh]"
-        style={{ 
-          backgroundColor: '#F6F7FA',
-          paddingTop: `${headerHeight}px`,
-        }}
+        style={{ backgroundColor: '#F6F7FA' }}
       >
-        <div 
-          className="sticky overflow-hidden"
-          style={{ 
-            top: `${headerHeight}px`,
-            height: `calc(100vh - ${headerHeight}px)`,
-            transition: 'top 200ms ease-out, height 200ms ease-out',
-          }}
-        >
-          <div className="max-w-[1120px] mx-auto px-6 md:px-8 h-full flex flex-col">
-            {/* Hero Content - Two Column Layout */}
+        <div className="sticky top-16 h-[calc(100vh-64px)] overflow-hidden">
+          <div className="max-w-[1120px] mx-auto px-6 md:px-10 h-full flex flex-col">
+            {/* Top: Text Content - Left Aligned */}
             <div 
-              className="grid md:grid-cols-2 gap-8 md:gap-12 items-start pt-12 md:pt-20"
+              className="hero-content z-10 pt-12 md:pt-16 pb-8 md:pb-12 text-left max-w-3xl"
               style={{
                 opacity: Math.max(textOpacity, 0),
                 transform: `translateY(${textTranslateY}px)`,
@@ -283,109 +208,38 @@ export default function Services() {
                 pointerEvents: isExpanded ? 'none' : 'auto'
               }}
             >
-              {/* Left Column: Text Content */}
-              <div className="flex flex-col">
-                <motion.h1 
-                  className="text-3xl md:text-5xl font-bold leading-tight mb-6"
-                  style={{ color: '#0F172A' }}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  data-testid="hero-heading"
-                >
-                  We design, build & automate the products your customers actually use.
-                </motion.h1>
-                <motion.p 
-                  className="text-base md:text-lg mb-8 leading-relaxed"
-                  style={{ color: '#64748B' }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                  data-testid="hero-subheading"
-                >
-                  Gray Solutions is a digital product & AI studio that mixes strategy, UX, development and automation to bring your ideas to life.
-                </motion.p>
-                <motion.div 
-                  className="flex flex-wrap gap-4"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.6 }}
-                >
-                  <button 
-                    className="px-6 py-3 rounded-full text-sm font-medium text-white shadow-lg"
-                    style={{ 
-                      backgroundColor: '#FF6801',
-                      transition: 'all 180ms ease-out'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'translateY(-2px)';
-                      e.currentTarget.style.boxShadow = '0 12px 24px rgba(255, 104, 1, 0.3)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'translateY(0)';
-                      e.currentTarget.style.boxShadow = '0 4px 12px rgba(255, 104, 1, 0.2)';
-                    }}
-                    data-testid="btn-strategy-call"
-                  >
-                    Book a strategy call
-                  </button>
-                  <button 
-                    className="px-6 py-3 rounded-full text-sm font-medium border-2"
-                    style={{ 
-                      borderColor: '#FF6801', 
-                      color: '#FF6801',
-                      backgroundColor: 'transparent',
-                      transition: 'all 180ms ease-out'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'translateY(-2px)';
-                      e.currentTarget.style.backgroundColor = 'rgba(255, 104, 1, 0.05)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'translateY(0)';
-                      e.currentTarget.style.backgroundColor = 'transparent';
-                    }}
-                    data-testid="btn-view-work"
-                  >
-                    View recent work
-                  </button>
-                </motion.div>
-              </div>
-
-              {/* Right Column: Visual Block */}
-              <motion.div 
-                className="hidden md:block h-64 md:h-80 rounded-3xl"
-                style={{ 
-                  background: 'linear-gradient(135deg, #FFF5EB 0%, #FFE4CC 50%, #FFDAB9 100%)',
-                  borderRadius: '32px',
-                }}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-              />
+              <motion.h1 
+                className="text-3xl md:text-5xl font-bold leading-tight"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                data-testid="hero-heading"
+              >
+                We design, build & automate the products your customers actually use.
+              </motion.h1>
             </div>
 
-            {/* Video Card - Bottom Center */}
+            {/* Bottom Center: Video Card */}
             <div 
-              className="flex-1 flex items-center justify-center mt-8"
+              className="hero-media flex-1 flex items-center justify-center"
               style={{
                 position: isExpanded ? 'fixed' : 'relative',
-                top: isExpanded ? `${headerHeight + 16}px` : 'auto',
+                top: isExpanded ? '80px' : 'auto',
                 left: isExpanded ? '24px' : 'auto',
                 right: isExpanded ? '24px' : 'auto',
                 bottom: isExpanded ? '24px' : 'auto',
                 width: isExpanded ? 'calc(100vw - 48px)' : '100%',
-                height: isExpanded ? `calc(100vh - ${headerHeight + 40}px)` : 'auto',
+                height: isExpanded ? 'calc(100vh - 104px)' : 'auto',
                 zIndex: isExpanded ? 40 : 1,
                 transition: 'all 500ms ease',
-                transform: `translateY(${-scrollProgress * 80}px)`,
+                transform: `translateY(${-scrollProgress * 50}px)`,
               }}
             >
               <div
                 className="w-full max-w-5xl overflow-hidden shadow-2xl"
                 style={{
                   borderRadius: `${videoBorderRadius}px`,
-                  background: '#000',
+                  background: 'linear-gradient(135deg, #FFF5EB 0%, #FFE4CC 100%)',
                   transition: 'all 500ms ease',
                   transform: isExpanded ? 'none' : `scale(${videoScale})`,
                   transformOrigin: 'center center',
@@ -393,13 +247,14 @@ export default function Services() {
                   maxWidth: isExpanded ? '100%' : '64rem',
                 }}
               >
-                <div className="aspect-video w-full h-full">
+                <div className="aspect-video w-full">
                   <video
                     autoPlay
                     muted
                     loop
                     playsInline
                     className="w-full h-full object-contain"
+                    style={{ backgroundColor: '#000' }}
                     data-testid="hero-video"
                   >
                     <source src={heroVideo} type="video/mp4" />
@@ -413,7 +268,7 @@ export default function Services() {
 
       {/* Main Content - Other Sections */}
       <motion.main 
-        className="max-w-[1120px] mx-auto px-6 md:px-8 relative z-10"
+        className="max-w-[1120px] mx-auto px-6 md:px-10 relative z-10"
         style={{ backgroundColor: '#F6F7FA' }}
         variants={containerVariants}
         initial="hidden"
