@@ -1,32 +1,33 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "wouter";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 import heroVideo from "@assets/hero-video-horizontal.mp4";
 
 export default function Services() {
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [isExpanded, setIsExpanded] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
+
+  // Framer Motion scroll tracking for smooth animations
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"]
+  });
+
+  // Smooth spring for video scale
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+
+  // Transform values based on scroll progress
+  const textTranslateY = useTransform(smoothProgress, [0, 0.4], [0, -150]);
+  const textOpacity = useTransform(smoothProgress, [0, 0.3], [1, 0]);
+  const videoScale = useTransform(smoothProgress, [0, 0.6], [0.75, 1.1]);
+  const videoBorderRadius = useTransform(smoothProgress, [0, 0.6], [24, 12]);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      
-      // Header transforms after scrolling 150px (slower trigger)
+      // Header transforms after scrolling 150px
       setIsScrolled(scrollY > 150);
-
-      if (!heroRef.current) return;
-      
-      const heroHeight = heroRef.current.offsetHeight;
-      const scrollThreshold = heroHeight * 0.5;
-      
-      // Calculate progress based on scroll position
-      const progress = Math.min(Math.max(scrollY / scrollThreshold, 0), 1);
-      
-      setScrollProgress(progress);
-      setIsExpanded(progress > 0.85);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -155,14 +156,6 @@ export default function Services() {
     },
   };
 
-  // Calculate dynamic styles based on scroll progress
-  // Heading slides upward and out of view
-  const textTranslateY = -scrollProgress * 200;
-  const textOpacity = scrollProgress > 0.5 ? 0 : 1;
-  
-  // Video scales up from small to large as user scrolls
-  const videoScale = 0.7 + scrollProgress * 0.35;
-  const videoBorderRadius = 24 - scrollProgress * 12;
 
   return (
     <motion.div 
@@ -235,13 +228,11 @@ export default function Services() {
         >
           <div className="max-w-[1120px] mx-auto px-6 md:px-10 h-full flex flex-col pt-8 md:pt-12">
             {/* Top: Text Content - Slides upward on scroll */}
-            <div 
+            <motion.div 
               className="hero-content z-10 pb-8 md:pb-12 text-left max-w-3xl"
               style={{
                 opacity: textOpacity,
-                transform: `translateY(${textTranslateY}px)`,
-                pointerEvents: isExpanded ? 'none' : 'auto',
-                transition: 'opacity 200ms ease-out',
+                y: textTranslateY,
               }}
             >
               <motion.h1 
@@ -253,30 +244,19 @@ export default function Services() {
               >
                 We design, build & automate the products your customers actually use.
               </motion.h1>
-            </div>
+            </motion.div>
 
             {/* Video Card - Scales up with scroll */}
             <div 
               className="hero-media flex items-center justify-center flex-1"
-              style={{
-                position: isExpanded ? 'fixed' : 'relative',
-                top: isExpanded ? '80px' : 'auto',
-                left: isExpanded ? '24px' : 'auto',
-                right: isExpanded ? '24px' : 'auto',
-                bottom: isExpanded ? '24px' : 'auto',
-                width: isExpanded ? 'calc(100vw - 48px)' : '100%',
-                height: isExpanded ? 'calc(100vh - 104px)' : 'auto',
-                zIndex: isExpanded ? 40 : 1,
-              }}
             >
-              <div
+              <motion.div
                 className="w-full overflow-hidden shadow-xl"
                 style={{
-                  borderRadius: `${Math.max(videoBorderRadius, 12)}px`,
                   background: '#000',
-                  height: isExpanded ? '100%' : 'auto',
-                  maxWidth: isExpanded ? '100%' : '900px',
-                  transform: `scale(${videoScale})`,
+                  maxWidth: '900px',
+                  scale: videoScale,
+                  borderRadius: videoBorderRadius,
                   transformOrigin: 'center center',
                 }}
               >
@@ -292,7 +272,7 @@ export default function Services() {
                     <source src={heroVideo} type="video/mp4" />
                   </video>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
