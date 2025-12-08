@@ -12,22 +12,21 @@ export default function Services() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Header scroll detection
       const scrollY = window.scrollY;
-      setIsScrolled(scrollY > 60);
+      
+      // Header transforms after scrolling 150px (slower trigger)
+      setIsScrolled(scrollY > 150);
 
       if (!heroRef.current) return;
       
-      const heroRect = heroRef.current.getBoundingClientRect();
       const heroHeight = heroRef.current.offsetHeight;
-      const scrollThreshold = heroHeight * 0.8;
+      const scrollThreshold = heroHeight * 0.5;
       
-      // Calculate progress based on how much we've scrolled past the hero top
-      const scrolled = -heroRect.top;
-      const progress = Math.min(Math.max(scrolled / scrollThreshold, 0), 1);
+      // Calculate progress based on scroll position
+      const progress = Math.min(Math.max(scrollY / scrollThreshold, 0), 1);
       
       setScrollProgress(progress);
-      setIsExpanded(progress > 0.9);
+      setIsExpanded(progress > 0.85);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -156,11 +155,11 @@ export default function Services() {
     },
   };
 
-  // Calculate dynamic styles based on scroll progress
-  const textOpacity = 1 - scrollProgress * 2;
-  const textScale = 1 - scrollProgress * 0.3;
-  const videoTranslateY = -scrollProgress * 120;
-  const videoScale = 0.85 + scrollProgress * 0.15;
+  // Calculate dynamic styles based on scroll progress (smoother, more gradual)
+  const textOpacity = 1 - scrollProgress * 1.5;
+  const textScale = 1 - scrollProgress * 0.2;
+  const videoTranslateY = -scrollProgress * 80;
+  const videoScale = 0.9 + scrollProgress * 0.1;
   const videoBorderRadius = 20 - scrollProgress * 8;
 
   return (
@@ -182,7 +181,7 @@ export default function Services() {
           height: isScrolled ? '80px' : '100px',
           backgroundColor: 'transparent',
           pointerEvents: 'none',
-          transition: 'height 300ms ease-out',
+          transition: 'height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
         }}
       >
         <div 
@@ -198,7 +197,7 @@ export default function Services() {
             boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.1)' : 'none',
             borderRadius: isScrolled ? '999px' : '0',
             padding: isScrolled ? '0 32px' : '0',
-            transition: 'all 300ms ease-out',
+            transition: 'all 500ms cubic-bezier(0.4, 0, 0.2, 1)',
           }}
         >
           {/* Logo Image */}
@@ -210,7 +209,7 @@ export default function Services() {
               style={{
                 height: isScrolled ? '28px' : '48px',
                 width: 'auto',
-                transition: 'height 300ms ease-out',
+                transition: 'height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
               }}
               data-testid="logo-nav"
             />
@@ -229,7 +228,7 @@ export default function Services() {
           style={{
             top: isScrolled ? '80px' : '100px',
             height: isScrolled ? 'calc(100vh - 80px)' : 'calc(100vh - 100px)',
-            transition: 'top 300ms ease-out, height 300ms ease-out',
+            transition: 'top 500ms cubic-bezier(0.4, 0, 0.2, 1), height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
           }}
         >
           <div className="max-w-[1120px] mx-auto px-6 md:px-10 h-full flex flex-col pt-8 md:pt-12">
@@ -238,9 +237,8 @@ export default function Services() {
               className="hero-content z-10 pb-8 md:pb-12 text-left max-w-3xl"
               style={{
                 opacity: Math.max(textOpacity, 0),
-                transform: `scale(${Math.max(textScale, 0.7)})`,
+                transform: `scale(${Math.max(textScale, 0.8)})`,
                 transformOrigin: 'left bottom',
-                transition: 'opacity 150ms ease-out, transform 150ms ease-out',
                 pointerEvents: isExpanded ? 'none' : 'auto'
               }}
             >
@@ -257,7 +255,7 @@ export default function Services() {
 
             {/* Video Card - Moves up with scroll */}
             <div 
-              className="hero-media flex items-center justify-center"
+              className="hero-media flex items-center justify-center flex-1"
               style={{
                 position: isExpanded ? 'fixed' : 'relative',
                 top: isExpanded ? '80px' : 'auto',
@@ -267,8 +265,8 @@ export default function Services() {
                 width: isExpanded ? 'calc(100vw - 48px)' : '100%',
                 height: isExpanded ? 'calc(100vh - 104px)' : 'auto',
                 zIndex: isExpanded ? 40 : 1,
-                transform: `translateY(${videoTranslateY}px)`,
-                transition: 'transform 80ms ease-out',
+                transform: `translateY(${videoTranslateY}px) scale(${videoScale})`,
+                transformOrigin: 'center top',
               }}
             >
               <div
@@ -276,9 +274,6 @@ export default function Services() {
                 style={{
                   borderRadius: `${Math.max(videoBorderRadius, 12)}px`,
                   background: '#000',
-                  transform: `scale(${videoScale})`,
-                  transformOrigin: 'center center',
-                  transition: 'transform 80ms ease-out, border-radius 80ms ease-out',
                   height: isExpanded ? '100%' : 'auto',
                   maxWidth: isExpanded ? '100%' : '800px',
                 }}
