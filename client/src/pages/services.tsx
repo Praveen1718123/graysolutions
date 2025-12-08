@@ -310,72 +310,86 @@ export default function Services() {
           </motion.h2>
           
           {/* Desktop: Horizontal tiles */}
-          <div className="hidden md:flex gap-4 items-end justify-center">
+          <div className="hidden md:flex gap-3 items-end w-full">
             {servicesTiles.map((service) => {
               const isActive = activeService === service.id;
               return (
-                <motion.div
+                <div
                   key={service.id}
-                  className="cursor-pointer overflow-hidden flex flex-col"
+                  className="cursor-pointer overflow-hidden flex flex-col relative"
                   onClick={() => setActiveService(service.id)}
                   onMouseEnter={() => setActiveService(service.id)}
                   style={{
-                    width: isActive ? '280px' : '140px',
-                    height: isActive ? '400px' : '280px',
+                    flex: isActive ? '2.5' : '1',
+                    height: isActive ? '420px' : '320px',
                     backgroundColor: isActive ? '#FFFFFF' : '#F0F1F4',
                     borderRadius: '24px',
                     boxShadow: isActive ? '0 20px 60px rgba(0,0,0,0.12)' : 'none',
-                    transition: 'all 400ms cubic-bezier(0.4, 0, 0.2, 1)',
+                    transition: 'flex 350ms cubic-bezier(0.25, 0.1, 0.25, 1), height 350ms cubic-bezier(0.25, 0.1, 0.25, 1), background-color 200ms ease, box-shadow 200ms ease',
+                    willChange: 'flex, height',
+                    transform: 'translateZ(0)',
                   }}
                   data-testid={`service-tile-${service.id}`}
                 >
-                  {isActive ? (
-                    <div className="flex flex-col h-full">
-                      {/* Visual placeholder */}
-                      <div 
-                        className="flex-1 m-4 mb-0 rounded-xl flex items-center justify-center"
-                        style={{ 
-                          background: 'linear-gradient(135deg, #FF6801 0%, #FF8534 100%)',
-                          minHeight: '180px'
-                        }}
-                      >
-                        <span className="text-white text-6xl font-bold opacity-30">
-                          {service.number}
-                        </span>
-                      </div>
-                      {/* Content */}
-                      <div className="p-6">
-                        <span 
-                          className="text-sm font-medium mb-2 block"
-                          style={{ color: '#FF6801' }}
-                        >
-                          {service.number}.
-                        </span>
-                        <h3 className="text-lg font-semibold mb-2">
-                          {service.title}
-                        </h3>
-                        <p className="text-sm text-gray-600 leading-relaxed">
-                          {service.description}
-                        </p>
-                      </div>
+                  {/* Active state content */}
+                  <div 
+                    className="flex flex-col h-full absolute inset-0"
+                    style={{
+                      opacity: isActive ? 1 : 0,
+                      transition: 'opacity 250ms ease',
+                      pointerEvents: isActive ? 'auto' : 'none',
+                    }}
+                  >
+                    <div 
+                      className="flex-1 m-4 mb-0 rounded-xl flex items-center justify-center"
+                      style={{ 
+                        background: 'linear-gradient(135deg, #FF6801 0%, #FF8534 100%)',
+                        minHeight: '200px'
+                      }}
+                    >
+                      <span className="text-white text-6xl font-bold opacity-30">
+                        {service.number}
+                      </span>
                     </div>
-                  ) : (
-                    <div className="flex flex-col justify-end h-full p-5">
+                    <div className="p-6">
                       <span 
-                        className="text-sm font-medium mb-1"
-                        style={{ color: 'rgba(15,23,42,0.4)' }}
+                        className="text-sm font-medium mb-2 block"
+                        style={{ color: '#FF6801' }}
                       >
                         {service.number}.
                       </span>
-                      <h3 
-                        className="text-sm font-medium"
-                        style={{ color: 'rgba(15,23,42,0.7)' }}
-                      >
+                      <h3 className="text-lg font-semibold mb-2">
                         {service.title}
                       </h3>
+                      <p className="text-sm text-gray-600 leading-relaxed">
+                        {service.description}
+                      </p>
                     </div>
-                  )}
-                </motion.div>
+                  </div>
+                  
+                  {/* Resting state content */}
+                  <div 
+                    className="flex flex-col justify-end h-full p-5 absolute inset-0"
+                    style={{
+                      opacity: isActive ? 0 : 1,
+                      transition: 'opacity 250ms ease',
+                      pointerEvents: isActive ? 'none' : 'auto',
+                    }}
+                  >
+                    <span 
+                      className="text-sm font-medium mb-1"
+                      style={{ color: 'rgba(15,23,42,0.4)' }}
+                    >
+                      {service.number}.
+                    </span>
+                    <h3 
+                      className="text-sm font-medium"
+                      style={{ color: 'rgba(15,23,42,0.7)' }}
+                    >
+                      {service.title}
+                    </h3>
+                  </div>
+                </div>
               );
             })}
           </div>
