@@ -310,7 +310,7 @@ export default function Services() {
           </motion.h2>
           
           {/* Desktop: Horizontal tiles */}
-          <div className="hidden md:flex gap-2 items-end w-full">
+          <div className="hidden md:flex gap-2 items-stretch w-full">
             {servicesTiles.map((service) => {
               const isActive = activeService === service.id;
               return (
@@ -321,12 +321,12 @@ export default function Services() {
                   onMouseEnter={() => setActiveService(service.id)}
                   style={{
                     flex: isActive ? '2.5' : '1',
-                    height: isActive ? '420px' : '320px',
+                    height: '400px',
                     backgroundColor: isActive ? '#FFFFFF' : '#F0F1F4',
                     borderRadius: '24px',
                     boxShadow: isActive ? '0 20px 60px rgba(0,0,0,0.12)' : 'none',
-                    transition: 'flex 350ms cubic-bezier(0.25, 0.1, 0.25, 1), height 350ms cubic-bezier(0.25, 0.1, 0.25, 1), background-color 200ms ease, box-shadow 200ms ease',
-                    willChange: 'flex, height',
+                    transition: 'flex 350ms cubic-bezier(0.25, 0.1, 0.25, 1), background-color 200ms ease, box-shadow 200ms ease',
+                    willChange: 'flex',
                     transform: 'translateZ(0)',
                   }}
                   data-testid={`service-tile-${service.id}`}
