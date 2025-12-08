@@ -178,25 +178,29 @@ export default function Services() {
     >
       {/* Fixed Header with Scroll Transformation */}
       <header 
-        className={`fixed z-50 ${isScrolled ? 'compact' : ''}`}
+        className="fixed top-0 left-0 right-0 z-50 flex justify-center"
         style={{
-          top: isScrolled ? '16px' : '0',
-          left: isScrolled ? '50%' : '0',
-          right: isScrolled ? 'auto' : '0',
-          transform: isScrolled ? 'translateX(-50%)' : 'none',
-          width: isScrolled ? 'auto' : '100%',
-          backgroundColor: isScrolled ? 'rgba(255,255,255,0.9)' : '#F6F7FA',
-          backdropFilter: isScrolled ? 'blur(12px)' : 'none',
-          WebkitBackdropFilter: isScrolled ? 'blur(12px)' : 'none',
-          boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.1)' : 'none',
-          height: isScrolled ? '48px' : '120px',
-          borderRadius: isScrolled ? '999px' : '0',
-          padding: isScrolled ? '0 32px' : '0',
-          transition: 'all 300ms ease-out',
+          height: isScrolled ? '80px' : '120px',
+          backgroundColor: 'transparent',
+          pointerEvents: 'none',
+          transition: 'height 300ms ease-out',
         }}
       >
         <div 
-          className="h-full flex items-center justify-center"
+          className="flex items-center justify-center"
+          style={{
+            pointerEvents: 'auto',
+            width: isScrolled ? '200px' : '100%',
+            height: isScrolled ? '48px' : '100%',
+            marginTop: isScrolled ? '16px' : '0',
+            backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : '#F6F7FA',
+            backdropFilter: isScrolled ? 'blur(12px)' : 'none',
+            WebkitBackdropFilter: isScrolled ? 'blur(12px)' : 'none',
+            boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.1)' : 'none',
+            borderRadius: isScrolled ? '999px' : '0',
+            padding: isScrolled ? '0 32px' : '0',
+            transition: 'all 300ms ease-out',
+          }}
         >
           {/* Centered Logo */}
           <Link href="/">
