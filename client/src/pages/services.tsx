@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 import heroVideo from "@assets/hero-video-horizontal.mp4";
 
 export default function Services() {
@@ -157,12 +156,11 @@ export default function Services() {
   };
 
   // Calculate dynamic styles based on scroll progress
-  const textOpacity = 1 - scrollProgress * 1.5;
-  const textTranslateY = -scrollProgress * 30;
-  const videoScale = 1 + scrollProgress * 0.3;
-  const videoWidth = isExpanded ? 'calc(100vw - 48px)' : '100%';
-  const videoHeight = isExpanded ? 'calc(100vh - 120px)' : '100%';
-  const videoBorderRadius = 32 - scrollProgress * 16;
+  const textOpacity = 1 - scrollProgress * 2;
+  const textScale = 1 - scrollProgress * 0.3;
+  const videoTranslateY = -scrollProgress * 150;
+  const videoScale = 1 + scrollProgress * 0.15;
+  const videoBorderRadius = 24 - scrollProgress * 12;
 
   return (
     <motion.div 
@@ -190,31 +188,33 @@ export default function Services() {
           className="flex items-center justify-center"
           style={{
             pointerEvents: 'auto',
-            width: isScrolled ? '200px' : '100%',
-            height: isScrolled ? '48px' : '100%',
+            width: isScrolled ? '280px' : '100%',
+            height: isScrolled ? '52px' : '100%',
             marginTop: isScrolled ? '16px' : '0',
             backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : '#F6F7FA',
             backdropFilter: isScrolled ? 'blur(12px)' : 'none',
             WebkitBackdropFilter: isScrolled ? 'blur(12px)' : 'none',
             boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.1)' : 'none',
             borderRadius: isScrolled ? '999px' : '0',
-            padding: isScrolled ? '0 32px' : '0',
+            padding: isScrolled ? '0 40px' : '0',
             transition: 'all 300ms ease-out',
           }}
         >
-          {/* Centered Logo */}
+          {/* Centered Logo as Bold Heading Text */}
           <Link href="/">
-            <img 
-              src={logoImage} 
-              alt="Gray Solutions Logo" 
-              className="cursor-pointer"
+            <span 
+              className="cursor-pointer tracking-tight"
               style={{
-                height: isScrolled ? '24px' : '48px',
-                width: 'auto',
-                transition: 'height 300ms ease-out',
+                fontSize: isScrolled ? '20px' : '42px',
+                fontWeight: 800,
+                color: '#0F172A',
+                letterSpacing: '-0.02em',
+                transition: 'font-size 300ms ease-out',
               }}
               data-testid="logo-nav"
-            />
+            >
+              Gray Solutions
+            </span>
           </Link>
         </div>
       </header>
@@ -233,14 +233,15 @@ export default function Services() {
             transition: 'top 300ms ease-out, height 300ms ease-out',
           }}
         >
-          <div className="max-w-[1120px] mx-auto px-6 md:px-10 h-full flex flex-col">
-            {/* Top: Text Content - Left Aligned */}
+          <div className="max-w-[1120px] mx-auto px-6 md:px-10 h-full flex flex-col justify-center">
+            {/* Top: Text Content - Shrinks from bottom on scroll */}
             <div 
-              className="hero-content z-10 pt-12 md:pt-16 pb-8 md:pb-12 text-left max-w-3xl"
+              className="hero-content z-10 pb-8 md:pb-12 text-left max-w-3xl"
               style={{
                 opacity: Math.max(textOpacity, 0),
-                transform: `translateY(${textTranslateY}px)`,
-                transition: 'opacity 400ms ease, transform 500ms ease',
+                transform: `scale(${Math.max(textScale, 0.7)})`,
+                transformOrigin: 'left bottom',
+                transition: 'opacity 150ms ease-out, transform 150ms ease-out',
                 pointerEvents: isExpanded ? 'none' : 'auto'
               }}
             >
@@ -255,9 +256,9 @@ export default function Services() {
               </motion.h1>
             </div>
 
-            {/* Bottom Center: Video Card */}
+            {/* Video Card - Moves up with scroll */}
             <div 
-              className="hero-media flex-1 flex items-center justify-center"
+              className="hero-media flex items-center justify-center"
               style={{
                 position: isExpanded ? 'fixed' : 'relative',
                 top: isExpanded ? '80px' : 'auto',
@@ -267,18 +268,18 @@ export default function Services() {
                 width: isExpanded ? 'calc(100vw - 48px)' : '100%',
                 height: isExpanded ? 'calc(100vh - 104px)' : 'auto',
                 zIndex: isExpanded ? 40 : 1,
-                transition: 'all 500ms ease',
-                transform: `translateY(${-scrollProgress * 50}px)`,
+                transform: `translateY(${videoTranslateY}px)`,
+                transition: 'transform 100ms ease-out',
               }}
             >
               <div
                 className="w-full max-w-5xl overflow-hidden shadow-2xl"
                 style={{
-                  borderRadius: `${videoBorderRadius}px`,
-                  background: 'linear-gradient(135deg, #FFF5EB 0%, #FFE4CC 100%)',
-                  transition: 'all 500ms ease',
-                  transform: isExpanded ? 'none' : `scale(${videoScale})`,
-                  transformOrigin: 'center center',
+                  borderRadius: `${Math.max(videoBorderRadius, 12)}px`,
+                  background: '#000',
+                  transform: `scale(${videoScale})`,
+                  transformOrigin: 'center top',
+                  transition: 'transform 100ms ease-out, border-radius 100ms ease-out',
                   height: isExpanded ? '100%' : 'auto',
                   maxWidth: isExpanded ? '100%' : '64rem',
                 }}
@@ -289,8 +290,7 @@ export default function Services() {
                     muted
                     loop
                     playsInline
-                    className="w-full h-full object-contain"
-                    style={{ backgroundColor: '#000' }}
+                    className="w-full h-full object-cover"
                     data-testid="hero-video"
                   >
                     <source src={heroVideo} type="video/mp4" />
