@@ -232,7 +232,10 @@ export default function Services() {
             transition: 'top 300ms ease-out, height 300ms ease-out',
           }}
         >
-          <div className="max-w-[1120px] mx-auto px-6 md:px-10 h-full flex flex-col justify-center">
+          <div className="max-w-[1120px] mx-auto px-6 md:px-10 h-full flex flex-col">
+            {/* Spacer for header area */}
+            <div style={{ height: '100px', flexShrink: 0 }} />
+            
             {/* Top: Text Content - Shrinks from bottom on scroll */}
             <div 
               className="hero-content z-10 pb-8 md:pb-12 text-left max-w-3xl"
