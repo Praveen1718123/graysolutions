@@ -10,11 +10,11 @@ export default function Services() {
   const heroRef = useRef<HTMLElement>(null);
 
   const servicesTiles = [
-    { id: 0, number: "01", title: "Strategy & Positioning", description: "Define your market position and create a roadmap for growth." },
-    { id: 1, number: "02", title: "UX, UI & Websites", description: "Beautiful interfaces that convert visitors into customers." },
-    { id: 2, number: "03", title: "Landing Pages & Funnels", description: "High-converting pages designed for lead generation." },
-    { id: 3, number: "04", title: "Marketing Systems", description: "Automated workflows that nurture and convert leads." },
-    { id: 4, number: "05", title: "Content & Performance", description: "Data-driven content that drives measurable results." },
+    { id: 0, number: "01", title: "Strategy & Positioning", description: "Define your market position and create a roadmap for growth.", icon: "⚡" },
+    { id: 1, number: "02", title: "UX, UI & Websites", description: "Beautiful interfaces that convert visitors into customers.", icon: "🎨" },
+    { id: 2, number: "03", title: "Landing Pages & Funnels", description: "High-converting pages designed for lead generation.", icon: "📄" },
+    { id: 3, number: "04", title: "Marketing Systems", description: "Automated workflows that nurture and convert leads.", icon: "⚙️" },
+    { id: 4, number: "05", title: "Content & Performance", description: "Data-driven content that drives measurable results.", icon: "📊" },
   ];
 
   // Framer Motion scroll tracking for smooth animations
@@ -304,9 +304,9 @@ export default function Services() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            data-testid="section-services"
+            data-testid="section-capabilities"
           >
-            Services
+            Capabilities
           </motion.h2>
           
           {/* Desktop: Horizontal tiles */}
@@ -369,25 +369,36 @@ export default function Services() {
                   
                   {/* Resting state content */}
                   <div 
-                    className="flex flex-col justify-end h-full p-5 absolute inset-0"
+                    className="flex flex-col justify-between h-full p-6 absolute inset-0"
                     style={{
                       opacity: isActive ? 0 : 1,
                       transition: 'opacity 250ms ease',
                       pointerEvents: isActive ? 'none' : 'auto',
                     }}
                   >
+                    {/* Big number at top */}
                     <span 
-                      className="text-sm font-medium mb-1"
-                      style={{ color: 'rgba(15,23,42,0.4)' }}
+                      className="text-5xl font-bold"
+                      style={{ color: 'rgba(15,23,42,0.12)' }}
                     >
                       {service.number}.
                     </span>
-                    <h3 
-                      className="text-sm font-medium"
-                      style={{ color: 'rgba(15,23,42,0.7)' }}
-                    >
-                      {service.title}
-                    </h3>
+                    
+                    {/* Icon and title at bottom */}
+                    <div>
+                      <div 
+                        className="w-10 h-10 rounded-lg flex items-center justify-center mb-3"
+                        style={{ backgroundColor: 'rgba(15,23,42,0.06)' }}
+                      >
+                        <span className="text-lg">{service.icon}</span>
+                      </div>
+                      <h3 
+                        className="text-base font-semibold leading-tight"
+                        style={{ color: 'rgba(15,23,42,0.85)' }}
+                      >
+                        {service.title}
+                      </h3>
+                    </div>
                   </div>
                 </div>
               );
