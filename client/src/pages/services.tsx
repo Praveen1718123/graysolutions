@@ -178,22 +178,25 @@ export default function Services() {
     >
       {/* Fixed Header with Scroll Transformation */}
       <header 
-        className={`fixed top-0 left-0 right-0 z-50 ${isScrolled ? 'compact' : ''}`}
+        className={`fixed z-50 ${isScrolled ? 'compact' : ''}`}
         style={{
-          backgroundColor: isScrolled ? '#FFFFFF' : '#F6F7FA',
-          boxShadow: isScrolled ? '0 4px 20px rgba(0,0,0,0.08)' : 'none',
-          height: isScrolled ? '64px' : '120px',
-          transition: 'background-color 300ms ease-out, box-shadow 300ms ease-out, height 300ms ease-out',
+          top: isScrolled ? '16px' : '0',
+          left: isScrolled ? '50%' : '0',
+          right: isScrolled ? 'auto' : '0',
+          transform: isScrolled ? 'translateX(-50%)' : 'none',
+          width: isScrolled ? 'auto' : '100%',
+          backgroundColor: isScrolled ? 'rgba(255,255,255,0.9)' : '#F6F7FA',
+          backdropFilter: isScrolled ? 'blur(12px)' : 'none',
+          WebkitBackdropFilter: isScrolled ? 'blur(12px)' : 'none',
+          boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.1)' : 'none',
+          height: isScrolled ? '48px' : '120px',
+          borderRadius: isScrolled ? '999px' : '0',
+          padding: isScrolled ? '0 32px' : '0',
+          transition: 'all 300ms ease-out',
         }}
       >
         <div 
           className="h-full flex items-center justify-center"
-          style={{
-            maxWidth: isScrolled ? '1120px' : '100%',
-            margin: '0 auto',
-            padding: isScrolled ? '0 24px' : '0',
-            transition: 'max-width 300ms ease-out, padding 300ms ease-out',
-          }}
         >
           {/* Centered Logo */}
           <Link href="/">
@@ -202,9 +205,9 @@ export default function Services() {
               alt="Gray Solutions Logo" 
               className="cursor-pointer"
               style={{
-                height: isScrolled ? '32px' : '48px',
+                height: isScrolled ? '24px' : '48px',
                 width: 'auto',
-                transition: 'height 300ms ease-out, transform 300ms ease-out',
+                transition: 'height 300ms ease-out',
               }}
               data-testid="logo-nav"
             />
@@ -221,8 +224,8 @@ export default function Services() {
         <div 
           className="sticky overflow-hidden"
           style={{
-            top: isScrolled ? '64px' : '120px',
-            height: isScrolled ? 'calc(100vh - 64px)' : 'calc(100vh - 120px)',
+            top: isScrolled ? '80px' : '120px',
+            height: isScrolled ? 'calc(100vh - 80px)' : 'calc(100vh - 120px)',
             transition: 'top 300ms ease-out, height 300ms ease-out',
           }}
         >
