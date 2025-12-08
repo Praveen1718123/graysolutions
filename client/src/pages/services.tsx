@@ -18,14 +18,17 @@ export default function Services() {
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
   // Transform values based on scroll progress
-  // Text slides up and fades out
-  const textTranslateY = useTransform(smoothProgress, [0, 0.3], [0, -120]);
-  const textOpacity = useTransform(smoothProgress, [0, 0.25], [1, 0]);
+  // Text slides up and fades out quickly
+  const textTranslateY = useTransform(smoothProgress, [0, 0.15], [0, -150]);
+  const textOpacity = useTransform(smoothProgress, [0, 0.1], [1, 0]);
   
-  // Video scales up to fill screen and moves up
-  const videoScale = useTransform(smoothProgress, [0, 0.4, 0.7], [0.8, 1.0, 1.35]);
-  const videoTranslateY = useTransform(smoothProgress, [0, 0.4, 0.7], [0, -60, -120]);
-  const videoBorderRadius = useTransform(smoothProgress, [0, 0.5, 0.7], [20, 12, 0]);
+  // Video expands to full screen and stays there
+  // 0-20%: video scales up and moves to center
+  // 20-70%: video stays fullscreen (user continues scrolling but video is fixed)
+  // 70-100%: video stays fullscreen as we scroll past
+  const videoScale = useTransform(smoothProgress, [0, 0.2, 1], [0.75, 1.15, 1.15]);
+  const videoTranslateY = useTransform(smoothProgress, [0, 0.2, 1], [0, -50, -50]);
+  const videoBorderRadius = useTransform(smoothProgress, [0, 0.15, 0.2], [24, 8, 0]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -219,8 +222,8 @@ export default function Services() {
       {/* Hero Section with Scroll-based Video Expansion */}
       <section 
         ref={heroRef}
-        className="relative min-h-[200vh]"
-        style={{ backgroundColor: '#F6F7FA', paddingTop: '100px' }}
+        className="relative"
+        style={{ backgroundColor: '#F6F7FA', paddingTop: '100px', height: '300vh' }}
       >
         <div 
           className="sticky overflow-hidden"
@@ -250,17 +253,18 @@ export default function Services() {
               </motion.h1>
             </motion.div>
 
-            {/* Video Card - Scales up and moves up slightly */}
-            <div className="hero-media flex items-center justify-center">
+            {/* Video Card - Expands to full screen */}
+            <div className="hero-media flex items-center justify-center flex-1">
               <motion.div
-                className="w-full overflow-hidden shadow-xl"
+                className="w-full overflow-hidden"
                 style={{
                   background: '#000',
-                  maxWidth: '900px',
+                  maxWidth: '85vw',
                   scale: videoScale,
                   y: videoTranslateY,
                   borderRadius: videoBorderRadius,
                   transformOrigin: 'center center',
+                  boxShadow: '0 25px 80px rgba(0,0,0,0.15)',
                 }}
               >
                 <div className="aspect-video w-full">
