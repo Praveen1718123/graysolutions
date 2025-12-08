@@ -1,0 +1,90 @@
+Build a responsive HEADER + HERO for the Gray Solutions website with a smooth header transformation on scroll.
+
+CONTEXT
+- Brand name: “Gray Solutions”
+- This is the main site header + hero at the top of the page.
+- Tech: plain HTML + CSS + vanilla JavaScript only.
+
+UI DESIGN TOKENS
+- Background (page): #F6F7FA (very light gray).
+- Header background default: transparent.
+- Header background scrolled: #FFFFFF.
+- Primary text color: #0F172A (dark navy).
+- Accent color: #FF6801 (for CTAs and highlights).
+- Font: `-apple-system, system-ui, sans-serif`.
+- Border radius for buttons: 999px (pill).
+- Transition timing: 180–220ms ease-out.
+
+1) HEADER – DEFAULT STATE (AT TOP)
+- `<header class="site-header">` fixed to the top, full width.
+- Inside, a centered container (max-width ~1120px) with horizontal padding 24–32px.
+- Layout: flex row, space-between.
+  - Left: logo text “Gray” on first line, “Solutions” smaller under it (two-line stacked logo).
+  - Right: nav area with a single link “Contact” (and space for future links).
+- Header in default state:
+  - Background: fully transparent so hero background shows through.
+  - Height: 80–96px.
+  - No box-shadow.
+  - Logo larger (e.g. 22–24px for “Gray”, 12–14px for “Solutions”).
+  - Nav text color: #0F172A (dark navy).
+- Smooth hover state for “Contact” (slight opacity change or underline).
+
+2) HEADER – SCROLLED / COMPACT STATE
+When the user scrolls down past a certain threshold (e.g. 60–80px):
+
+- Add a class to the header like `.scrolled`.
+- In `.scrolled` state:
+  - Background becomes solid white: #FFFFFF.
+  - Add subtle shadow: `0 10px 30px rgba(15,23,42,0.08)`.
+  - Height shrinks to 60–68px.
+  - Vertical padding reduces so the header looks more compact.
+  - Logo scales down (e.g. 18–20px for “Gray”) using `transform: scale(0.9)` and maybe tighter line-height.
+  - “Contact” moves slightly closer to the logo (reduced gap).
+  - Optionally, “Contact” is styled more like a subtle pill button with an outline using the accent color.
+- Use transitions:
+  - `transition: background-color 200ms ease, box-shadow 200ms ease, height 200ms ease, padding 200ms ease, transform 200ms ease;`
+
+3) HERO UNDER THE HEADER
+Immediately under the header, build a hero section:
+
+- `<section class="hero">` with top padding accounting for the fixed header.
+- Two-column layout on desktop:
+  - LEFT: text content
+    - H1: “We design, build & automate the products your customers actually use.”
+    - Paragraph: 1–2 lines describing Gray Solutions as a digital product & AI studio.
+    - Button row:
+      - Primary pill button “Book a strategy call”
+        - Background: #FF6801, white text.
+      - Secondary pill button “View recent work”
+        - Transparent or very light background, accent border, accent text.
+  - RIGHT: visual block
+    - Rounded rectangle with a very soft peach/orange gradient, 32px radius.
+    - This can be a placeholder for future video or illustration.
+- Max-width: ~1120px, same as header container.
+- Plenty of white space above and below headline.
+
+4) SCROLL BEHAVIOR IMPLEMENTATION
+- Use JavaScript:
+
+  - Add a scroll event listener on `window`.
+  - When `window.scrollY` > threshold (e.g. 60), add `.scrolled` class to `.site-header`.
+  - When `window.scrollY` <= threshold, remove `.scrolled`.
+- Only the HEADER transforms; the hero remains static underneath.
+- Ensure the header remains fixed at the top (`position: fixed; top: 0; left: 0; right: 0; z-index` high enough).
+
+5) RESPONSIVENESS
+- Desktop:
+  - Header: logo left, contact right, standard layout.
+  - Hero: two columns.
+- Tablet:
+  - Slightly smaller logo and font sizes, but same layout.
+- Mobile (width < 640px):
+  - Header: logo and contact on a single row, center-aligned or space-between.
+  - Hero: stacked layout (text above, gradient block below).
+  - Header still transforms on scroll (height shrink, background solid, shadow).
+
+OUTPUT
+- Provide complete HTML, CSS and JavaScript in one file or clearly separated sections.
+- The result should be a Gray Solutions page where:
+  - The header starts transparent over the hero.
+  - On scroll, the header smoothly shrinks, gains a white background and shadow, and the logo/nav compact into a smaller sticky bar.
