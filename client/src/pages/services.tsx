@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 import heroVideo from "@assets/hero-video-horizontal.mp4";
 
 export default function Services() {
@@ -177,83 +178,36 @@ export default function Services() {
     >
       {/* Fixed Header with Scroll Transformation */}
       <header 
-        className="fixed top-0 left-0 right-0 z-50"
+        className={`fixed top-0 left-0 right-0 z-50 ${isScrolled ? 'compact' : ''}`}
         style={{
-          backgroundColor: isScrolled ? '#FFFFFF' : 'transparent',
-          boxShadow: isScrolled ? '0 10px 30px rgba(15,23,42,0.08)' : 'none',
-          height: isScrolled ? '64px' : '88px',
-          transition: 'background-color 200ms ease-out, box-shadow 200ms ease-out, height 200ms ease-out',
+          backgroundColor: isScrolled ? '#FFFFFF' : '#F6F7FA',
+          boxShadow: isScrolled ? '0 4px 20px rgba(0,0,0,0.08)' : 'none',
+          height: isScrolled ? '64px' : '120px',
+          transition: 'background-color 300ms ease-out, box-shadow 300ms ease-out, height 300ms ease-out',
         }}
       >
         <div 
-          className="max-w-[1120px] mx-auto px-6 md:px-8 h-full flex items-center justify-between"
+          className="h-full flex items-center justify-center"
           style={{
-            transition: 'padding 200ms ease-out',
+            maxWidth: isScrolled ? '1120px' : '100%',
+            margin: '0 auto',
+            padding: isScrolled ? '0 24px' : '0',
+            transition: 'max-width 300ms ease-out, padding 300ms ease-out',
           }}
         >
-          {/* Two-line Stacked Logo */}
+          {/* Centered Logo */}
           <Link href="/">
-            <div 
-              className="cursor-pointer flex flex-col leading-tight"
+            <img 
+              src={logoImage} 
+              alt="Gray Solutions Logo" 
+              className="cursor-pointer"
               style={{
-                transform: isScrolled ? 'scale(0.9)' : 'scale(1)',
-                transformOrigin: 'left center',
-                transition: 'transform 200ms ease-out',
+                height: isScrolled ? '32px' : '48px',
+                width: 'auto',
+                transition: 'height 300ms ease-out, transform 300ms ease-out',
               }}
               data-testid="logo-nav"
-            >
-              <span 
-                className="font-bold tracking-tight"
-                style={{ 
-                  fontSize: isScrolled ? '20px' : '24px',
-                  color: '#0F172A',
-                  transition: 'font-size 200ms ease-out',
-                }}
-              >
-                Gray
-              </span>
-              <span 
-                className="font-medium tracking-wide"
-                style={{ 
-                  fontSize: isScrolled ? '11px' : '13px',
-                  color: '#0F172A',
-                  opacity: 0.7,
-                  marginTop: '-2px',
-                  transition: 'font-size 200ms ease-out',
-                }}
-              >
-                Solutions
-              </span>
-            </div>
-          </Link>
-
-          {/* Navigation */}
-          <Link href="/contact">
-            <span 
-              className="font-medium cursor-pointer"
-              style={{
-                fontSize: '14px',
-                color: '#0F172A',
-                padding: isScrolled ? '8px 16px' : '0',
-                borderRadius: isScrolled ? '999px' : '0',
-                border: isScrolled ? '1px solid #FF6801' : 'none',
-                transition: 'all 200ms ease-out',
-              }}
-              onMouseEnter={(e) => {
-                if (isScrolled) {
-                  e.currentTarget.style.backgroundColor = 'rgba(255,104,1,0.1)';
-                } else {
-                  e.currentTarget.style.opacity = '0.6';
-                }
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
-                e.currentTarget.style.opacity = '1';
-              }}
-              data-testid="nav-contact"
-            >
-              Contact
-            </span>
+            />
           </Link>
         </div>
       </header>
@@ -262,14 +216,14 @@ export default function Services() {
       <section 
         ref={heroRef}
         className="relative min-h-[200vh]"
-        style={{ backgroundColor: '#F6F7FA', paddingTop: '88px' }}
+        style={{ backgroundColor: '#F6F7FA', paddingTop: '120px' }}
       >
         <div 
           className="sticky overflow-hidden"
           style={{
-            top: isScrolled ? '64px' : '88px',
-            height: isScrolled ? 'calc(100vh - 64px)' : 'calc(100vh - 88px)',
-            transition: 'top 200ms ease-out, height 200ms ease-out',
+            top: isScrolled ? '64px' : '120px',
+            height: isScrolled ? 'calc(100vh - 64px)' : 'calc(100vh - 120px)',
+            transition: 'top 300ms ease-out, height 300ms ease-out',
           }}
         >
           <div className="max-w-[1120px] mx-auto px-6 md:px-10 h-full flex flex-col">
