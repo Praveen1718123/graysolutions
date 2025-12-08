@@ -175,31 +175,30 @@ export default function Services() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
     >
-      {/* Fixed Header - Hidden initially, appears on scroll as floating pill */}
+      {/* Fixed Header - Full width initially, transforms to floating pill on scroll */}
       <header 
         className="fixed top-0 left-0 right-0 z-50 flex justify-center"
         style={{
-          height: '80px',
+          height: isScrolled ? '80px' : '100px',
           backgroundColor: 'transparent',
           pointerEvents: 'none',
-          opacity: isScrolled ? 1 : 0,
-          transform: isScrolled ? 'translateY(0)' : 'translateY(-20px)',
-          transition: 'opacity 300ms ease-out, transform 300ms ease-out',
+          transition: 'height 300ms ease-out',
         }}
       >
         <div 
           className="flex items-center justify-center"
           style={{
-            pointerEvents: isScrolled ? 'auto' : 'none',
-            width: '240px',
-            height: '48px',
-            marginTop: '16px',
-            backgroundColor: 'rgba(255,255,255,0.92)',
-            backdropFilter: 'blur(12px)',
-            WebkitBackdropFilter: 'blur(12px)',
-            boxShadow: '0 4px 24px rgba(0,0,0,0.1)',
-            borderRadius: '999px',
-            padding: '0 32px',
+            pointerEvents: 'auto',
+            width: isScrolled ? '240px' : '100%',
+            height: isScrolled ? '48px' : '100%',
+            marginTop: isScrolled ? '16px' : '0',
+            backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : '#F6F7FA',
+            backdropFilter: isScrolled ? 'blur(12px)' : 'none',
+            WebkitBackdropFilter: isScrolled ? 'blur(12px)' : 'none',
+            boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.1)' : 'none',
+            borderRadius: isScrolled ? '999px' : '0',
+            padding: isScrolled ? '0 32px' : '0',
+            transition: 'all 300ms ease-out',
           }}
         >
           {/* Logo Image */}
@@ -209,8 +208,9 @@ export default function Services() {
               alt="Gray Solutions Logo" 
               className="cursor-pointer"
               style={{
-                height: '28px',
+                height: isScrolled ? '28px' : '48px',
                 width: 'auto',
+                transition: 'height 300ms ease-out',
               }}
               data-testid="logo-nav"
             />
@@ -222,17 +222,17 @@ export default function Services() {
       <section 
         ref={heroRef}
         className="relative min-h-[200vh]"
-        style={{ backgroundColor: '#F6F7FA' }}
+        style={{ backgroundColor: '#F6F7FA', paddingTop: '100px' }}
       >
         <div 
           className="sticky overflow-hidden"
           style={{
-            top: isScrolled ? '80px' : '0',
-            height: isScrolled ? 'calc(100vh - 80px)' : '100vh',
+            top: isScrolled ? '80px' : '100px',
+            height: isScrolled ? 'calc(100vh - 80px)' : 'calc(100vh - 100px)',
             transition: 'top 300ms ease-out, height 300ms ease-out',
           }}
         >
-          <div className="max-w-[1120px] mx-auto px-6 md:px-10 h-full flex flex-col pt-16 md:pt-20">
+          <div className="max-w-[1120px] mx-auto px-6 md:px-10 h-full flex flex-col pt-8 md:pt-12">
             {/* Top: Text Content - Shrinks from bottom on scroll */}
             <div 
               className="hero-content z-10 pb-8 md:pb-12 text-left max-w-3xl"
