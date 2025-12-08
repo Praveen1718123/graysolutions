@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 import heroVideo from "@assets/hero-video-horizontal.mp4";
 
 export default function Services() {
@@ -158,9 +159,9 @@ export default function Services() {
   // Calculate dynamic styles based on scroll progress
   const textOpacity = 1 - scrollProgress * 2;
   const textScale = 1 - scrollProgress * 0.3;
-  const videoTranslateY = -scrollProgress * 150;
-  const videoScale = 1 + scrollProgress * 0.15;
-  const videoBorderRadius = 24 - scrollProgress * 12;
+  const videoTranslateY = -scrollProgress * 120;
+  const videoScale = 0.85 + scrollProgress * 0.15;
+  const videoBorderRadius = 20 - scrollProgress * 8;
 
   return (
     <motion.div 
@@ -174,47 +175,45 @@ export default function Services() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
     >
-      {/* Fixed Header with Scroll Transformation */}
+      {/* Fixed Header - Hidden initially, appears on scroll as floating pill */}
       <header 
         className="fixed top-0 left-0 right-0 z-50 flex justify-center"
         style={{
-          height: isScrolled ? '80px' : '120px',
+          height: '80px',
           backgroundColor: 'transparent',
           pointerEvents: 'none',
-          transition: 'height 300ms ease-out',
+          opacity: isScrolled ? 1 : 0,
+          transform: isScrolled ? 'translateY(0)' : 'translateY(-20px)',
+          transition: 'opacity 300ms ease-out, transform 300ms ease-out',
         }}
       >
         <div 
           className="flex items-center justify-center"
           style={{
-            pointerEvents: 'auto',
-            width: isScrolled ? '280px' : '100%',
-            height: isScrolled ? '52px' : '100%',
-            marginTop: isScrolled ? '16px' : '0',
-            backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : '#F6F7FA',
-            backdropFilter: isScrolled ? 'blur(12px)' : 'none',
-            WebkitBackdropFilter: isScrolled ? 'blur(12px)' : 'none',
-            boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.1)' : 'none',
-            borderRadius: isScrolled ? '999px' : '0',
-            padding: isScrolled ? '0 40px' : '0',
-            transition: 'all 300ms ease-out',
+            pointerEvents: isScrolled ? 'auto' : 'none',
+            width: '240px',
+            height: '48px',
+            marginTop: '16px',
+            backgroundColor: 'rgba(255,255,255,0.92)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            boxShadow: '0 4px 24px rgba(0,0,0,0.1)',
+            borderRadius: '999px',
+            padding: '0 32px',
           }}
         >
-          {/* Centered Logo as Bold Heading Text */}
+          {/* Logo Image */}
           <Link href="/">
-            <span 
-              className="cursor-pointer tracking-tight"
+            <img 
+              src={logoImage} 
+              alt="Gray Solutions Logo" 
+              className="cursor-pointer"
               style={{
-                fontSize: isScrolled ? '20px' : '42px',
-                fontWeight: 800,
-                color: '#0F172A',
-                letterSpacing: '-0.02em',
-                transition: 'font-size 300ms ease-out',
+                height: '28px',
+                width: 'auto',
               }}
               data-testid="logo-nav"
-            >
-              Gray Solutions
-            </span>
+            />
           </Link>
         </div>
       </header>
@@ -223,13 +222,13 @@ export default function Services() {
       <section 
         ref={heroRef}
         className="relative min-h-[200vh]"
-        style={{ backgroundColor: '#F6F7FA', paddingTop: '120px' }}
+        style={{ backgroundColor: '#F6F7FA' }}
       >
         <div 
           className="sticky overflow-hidden"
           style={{
-            top: isScrolled ? '80px' : '120px',
-            height: isScrolled ? 'calc(100vh - 80px)' : 'calc(100vh - 120px)',
+            top: isScrolled ? '80px' : '0',
+            height: isScrolled ? 'calc(100vh - 80px)' : '100vh',
             transition: 'top 300ms ease-out, height 300ms ease-out',
           }}
         >
@@ -269,19 +268,19 @@ export default function Services() {
                 height: isExpanded ? 'calc(100vh - 104px)' : 'auto',
                 zIndex: isExpanded ? 40 : 1,
                 transform: `translateY(${videoTranslateY}px)`,
-                transition: 'transform 100ms ease-out',
+                transition: 'transform 80ms ease-out',
               }}
             >
               <div
-                className="w-full max-w-5xl overflow-hidden shadow-2xl"
+                className="w-full overflow-hidden shadow-xl"
                 style={{
                   borderRadius: `${Math.max(videoBorderRadius, 12)}px`,
                   background: '#000',
                   transform: `scale(${videoScale})`,
-                  transformOrigin: 'center top',
-                  transition: 'transform 100ms ease-out, border-radius 100ms ease-out',
+                  transformOrigin: 'center center',
+                  transition: 'transform 80ms ease-out, border-radius 80ms ease-out',
                   height: isExpanded ? '100%' : 'auto',
-                  maxWidth: isExpanded ? '100%' : '64rem',
+                  maxWidth: isExpanded ? '100%' : '800px',
                 }}
               >
                 <div className="aspect-video w-full">
