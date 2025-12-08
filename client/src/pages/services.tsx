@@ -226,54 +226,58 @@ export default function Services() {
             transition: 'top 500ms cubic-bezier(0.4, 0, 0.2, 1), height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
           }}
         >
-          <div className="max-w-[1120px] mx-auto px-6 md:px-10 h-full flex flex-col pt-8 md:pt-12">
-            {/* Top: Text Content - Slides upward on scroll */}
-            <motion.div 
-              className="hero-content z-10 pb-8 md:pb-12 text-left max-w-3xl"
+          <div className="max-w-[1120px] mx-auto px-6 md:px-10 h-full flex flex-col justify-center">
+            {/* Content wrapper - text and video move together */}
+            <motion.div
               style={{
-                opacity: textOpacity,
                 y: textTranslateY,
               }}
             >
-              <motion.h1 
-                className="text-3xl md:text-5xl font-bold leading-tight"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                data-testid="hero-heading"
-              >
-                We design, build & automate the products your customers actually use.
-              </motion.h1>
-            </motion.div>
-
-            {/* Video Card - Scales up with scroll */}
-            <div 
-              className="hero-media flex items-center justify-center flex-1"
-            >
-              <motion.div
-                className="w-full overflow-hidden shadow-xl"
+              {/* Text Content - Fades out on scroll */}
+              <motion.div 
+                className="hero-content z-10 pb-6 text-left max-w-3xl"
                 style={{
-                  background: '#000',
-                  maxWidth: '900px',
-                  scale: videoScale,
-                  borderRadius: videoBorderRadius,
-                  transformOrigin: 'center center',
+                  opacity: textOpacity,
                 }}
               >
-                <div className="aspect-video w-full">
-                  <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="w-full h-full object-cover"
-                    data-testid="hero-video"
-                  >
-                    <source src={heroVideo} type="video/mp4" />
-                  </video>
-                </div>
+                <motion.h1 
+                  className="text-3xl md:text-5xl font-bold leading-tight"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  data-testid="hero-heading"
+                >
+                  We design, build & automate the products your customers actually use.
+                </motion.h1>
               </motion.div>
-            </div>
+
+              {/* Video Card - Scales up with scroll */}
+              <div className="hero-media flex items-center justify-center">
+                <motion.div
+                  className="w-full overflow-hidden shadow-xl"
+                  style={{
+                    background: '#000',
+                    maxWidth: '900px',
+                    scale: videoScale,
+                    borderRadius: videoBorderRadius,
+                    transformOrigin: 'center top',
+                  }}
+                >
+                  <div className="aspect-video w-full">
+                    <video
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-full object-cover"
+                      data-testid="hero-video"
+                    >
+                      <source src={heroVideo} type="video/mp4" />
+                    </video>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
