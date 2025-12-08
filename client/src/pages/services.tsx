@@ -155,12 +155,14 @@ export default function Services() {
     },
   };
 
-  // Calculate dynamic styles based on scroll progress (smoother, more gradual)
-  const textOpacity = 1 - scrollProgress * 1.5;
-  const textScale = 1 - scrollProgress * 0.2;
-  const videoTranslateY = -scrollProgress * 80;
-  const videoScale = 0.9 + scrollProgress * 0.1;
-  const videoBorderRadius = 20 - scrollProgress * 8;
+  // Calculate dynamic styles based on scroll progress
+  // Heading slides upward and out of view
+  const textTranslateY = -scrollProgress * 200;
+  const textOpacity = scrollProgress > 0.5 ? 0 : 1;
+  
+  // Video scales up from small to large as user scrolls
+  const videoScale = 0.7 + scrollProgress * 0.35;
+  const videoBorderRadius = 24 - scrollProgress * 12;
 
   return (
     <motion.div 
@@ -232,14 +234,14 @@ export default function Services() {
           }}
         >
           <div className="max-w-[1120px] mx-auto px-6 md:px-10 h-full flex flex-col pt-8 md:pt-12">
-            {/* Top: Text Content - Shrinks from bottom on scroll */}
+            {/* Top: Text Content - Slides upward on scroll */}
             <div 
               className="hero-content z-10 pb-8 md:pb-12 text-left max-w-3xl"
               style={{
-                opacity: Math.max(textOpacity, 0),
-                transform: `scale(${Math.max(textScale, 0.8)})`,
-                transformOrigin: 'left bottom',
-                pointerEvents: isExpanded ? 'none' : 'auto'
+                opacity: textOpacity,
+                transform: `translateY(${textTranslateY}px)`,
+                pointerEvents: isExpanded ? 'none' : 'auto',
+                transition: 'opacity 200ms ease-out',
               }}
             >
               <motion.h1 
@@ -253,7 +255,7 @@ export default function Services() {
               </motion.h1>
             </div>
 
-            {/* Video Card - Moves up with scroll */}
+            {/* Video Card - Scales up with scroll */}
             <div 
               className="hero-media flex items-center justify-center flex-1"
               style={{
@@ -265,8 +267,6 @@ export default function Services() {
                 width: isExpanded ? 'calc(100vw - 48px)' : '100%',
                 height: isExpanded ? 'calc(100vh - 104px)' : 'auto',
                 zIndex: isExpanded ? 40 : 1,
-                transform: `translateY(${videoTranslateY}px) scale(${videoScale})`,
-                transformOrigin: 'center top',
               }}
             >
               <div
@@ -275,7 +275,9 @@ export default function Services() {
                   borderRadius: `${Math.max(videoBorderRadius, 12)}px`,
                   background: '#000',
                   height: isExpanded ? '100%' : 'auto',
-                  maxWidth: isExpanded ? '100%' : '800px',
+                  maxWidth: isExpanded ? '100%' : '900px',
+                  transform: `scale(${videoScale})`,
+                  transformOrigin: 'center center',
                 }}
               >
                 <div className="aspect-video w-full">
