@@ -255,10 +255,10 @@ export default function Services() {
             {/* Video Card - Expands to full screen */}
             <div className="hero-media flex items-center justify-center flex-1">
               <motion.div
-                className="w-full overflow-hidden"
+                className="overflow-hidden"
                 style={{
                   background: '#000',
-                  maxWidth: '85vw',
+                  width: '100vw',
                   scale: videoScale,
                   y: videoTranslateY,
                   borderRadius: videoBorderRadius,
