@@ -24,11 +24,10 @@ export default function Services() {
   
   // Video expands to full screen and stays there
   // 0-20%: video scales up and moves to center
-  // 20-70%: video stays fullscreen (user continues scrolling but video is fixed)
-  // 70-100%: video stays fullscreen as we scroll past
-  const videoScale = useTransform(smoothProgress, [0, 0.2, 1], [0.75, 1.15, 1.15]);
-  const videoTranslateY = useTransform(smoothProgress, [0, 0.2, 1], [0, -50, -50]);
-  const videoBorderRadius = useTransform(smoothProgress, [0, 0.15, 0.2], [24, 8, 0]);
+  // 20-100%: video stays fullscreen (user continues scrolling but video is fixed)
+  const videoScale = useTransform(smoothProgress, [0, 0.2, 1], [0.7, 1.4, 1.4]);
+  const videoTranslateY = useTransform(smoothProgress, [0, 0.2, 1], [0, -30, -30]);
+  const videoBorderRadius = useTransform(smoothProgress, [0, 0.15, 0.2], [24, 4, 0]);
 
   useEffect(() => {
     const handleScroll = () => {
