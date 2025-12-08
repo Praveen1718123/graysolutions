@@ -18,10 +18,14 @@ export default function Services() {
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
   // Transform values based on scroll progress
-  const textTranslateY = useTransform(smoothProgress, [0, 0.4], [0, -150]);
-  const textOpacity = useTransform(smoothProgress, [0, 0.3], [1, 0]);
-  const videoScale = useTransform(smoothProgress, [0, 0.6], [0.75, 1.1]);
-  const videoBorderRadius = useTransform(smoothProgress, [0, 0.6], [24, 12]);
+  // Text slides up and fades out
+  const textTranslateY = useTransform(smoothProgress, [0, 0.3], [0, -120]);
+  const textOpacity = useTransform(smoothProgress, [0, 0.25], [1, 0]);
+  
+  // Video scales up and moves up slightly to stay centered
+  const videoScale = useTransform(smoothProgress, [0, 0.5], [0.8, 1.05]);
+  const videoTranslateY = useTransform(smoothProgress, [0, 0.5], [0, -80]);
+  const videoBorderRadius = useTransform(smoothProgress, [0, 0.5], [20, 12]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -227,57 +231,52 @@ export default function Services() {
           }}
         >
           <div className="max-w-[1120px] mx-auto px-6 md:px-10 h-full flex flex-col justify-center">
-            {/* Content wrapper - text and video move together */}
-            <motion.div
+            {/* Text Content - Slides up and fades out */}
+            <motion.div 
+              className="hero-content z-10 pb-6 text-left max-w-3xl"
               style={{
+                opacity: textOpacity,
                 y: textTranslateY,
               }}
             >
-              {/* Text Content - Fades out on scroll */}
-              <motion.div 
-                className="hero-content z-10 pb-6 text-left max-w-3xl"
+              <motion.h1 
+                className="text-3xl md:text-5xl font-bold leading-tight"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                data-testid="hero-heading"
+              >
+                We design, build & automate the products your customers actually use.
+              </motion.h1>
+            </motion.div>
+
+            {/* Video Card - Scales up and moves up slightly */}
+            <div className="hero-media flex items-center justify-center">
+              <motion.div
+                className="w-full overflow-hidden shadow-xl"
                 style={{
-                  opacity: textOpacity,
+                  background: '#000',
+                  maxWidth: '900px',
+                  scale: videoScale,
+                  y: videoTranslateY,
+                  borderRadius: videoBorderRadius,
+                  transformOrigin: 'center center',
                 }}
               >
-                <motion.h1 
-                  className="text-3xl md:text-5xl font-bold leading-tight"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  data-testid="hero-heading"
-                >
-                  We design, build & automate the products your customers actually use.
-                </motion.h1>
+                <div className="aspect-video w-full">
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-full object-cover"
+                    data-testid="hero-video"
+                  >
+                    <source src={heroVideo} type="video/mp4" />
+                  </video>
+                </div>
               </motion.div>
-
-              {/* Video Card - Scales up with scroll */}
-              <div className="hero-media flex items-center justify-center">
-                <motion.div
-                  className="w-full overflow-hidden shadow-xl"
-                  style={{
-                    background: '#000',
-                    maxWidth: '900px',
-                    scale: videoScale,
-                    borderRadius: videoBorderRadius,
-                    transformOrigin: 'center top',
-                  }}
-                >
-                  <div className="aspect-video w-full">
-                    <video
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      className="w-full h-full object-cover"
-                      data-testid="hero-video"
-                    >
-                      <source src={heroVideo} type="video/mp4" />
-                    </video>
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
