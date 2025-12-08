@@ -485,167 +485,199 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Workflow Roadmap Section - Dark with curved path */}
+      {/* Workflow Roadmap Section - Dark with diagonal path */}
       <section 
         ref={roadmapRef}
         className="relative z-10"
-        style={{ height: '300vh' }}
+        style={{ height: '400vh' }}
       >
         <div 
           className="sticky top-0 w-full overflow-hidden"
           style={{ 
             height: '100vh',
-            backgroundColor: '#0F172A',
+            background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%)',
           }}
         >
+          {/* Subtle grid pattern overlay */}
+          <div 
+            className="absolute inset-0 opacity-5"
+            style={{
+              backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)',
+              backgroundSize: '40px 40px',
+            }}
+          />
+
           {/* Section Title */}
-          <div className="absolute top-8 left-0 right-0 z-20 px-6 md:px-12">
+          <div className="absolute top-8 left-0 right-0 z-20 px-8 md:px-16">
             <h2 className="text-2xl md:text-3xl font-bold text-white">
               Our Workflow
             </h2>
           </div>
 
-          {/* SVG Curved Path */}
+          {/* SVG Diagonal Path - Top Left to Bottom Right */}
           <svg 
             className="absolute inset-0 w-full h-full"
-            viewBox="0 0 1200 600"
+            viewBox="0 0 1000 600"
             preserveAspectRatio="xMidYMid slice"
           >
-            {/* Background path (dim) */}
-            <path
-              d="M 0 300 Q 200 150, 400 300 T 800 300 T 1200 300"
-              fill="none"
-              stroke="rgba(255,255,255,0.1)"
-              strokeWidth="3"
-              strokeLinecap="round"
-            />
-            {/* Animated path (glowing) */}
-            <motion.path
-              d="M 0 300 Q 200 150, 400 300 T 800 300 T 1200 300"
-              fill="none"
-              stroke="url(#gradient)"
-              strokeWidth="4"
-              strokeLinecap="round"
-              style={{
-                pathLength: smoothRoadmapProgress,
-              }}
-            />
-            {/* Gradient definition */}
             <defs>
-              <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#FF6801" />
-                <stop offset="100%" stopColor="#FF8534" />
+                <stop offset="50%" stopColor="#FF8534" />
+                <stop offset="100%" stopColor="#FFB366" />
               </linearGradient>
-              <filter id="glow">
-                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+              <filter id="glowFilter">
+                <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
                 <feMerge>
                   <feMergeNode in="coloredBlur"/>
                   <feMergeNode in="SourceGraphic"/>
                 </feMerge>
               </filter>
+              <filter id="softGlow">
+                <feGaussianBlur stdDeviation="3" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
             </defs>
-            {/* Glowing orb */}
-            <motion.circle
-              r="12"
-              fill="#FF6801"
-              filter="url(#glow)"
+
+            {/* Background path (dim) - Diagonal S-curve */}
+            <path
+              d="M 50 80 C 200 80, 250 180, 300 200 C 400 240, 450 320, 550 340 C 650 360, 700 420, 800 450 C 850 470, 900 520, 950 540"
+              fill="none"
+              stroke="rgba(255,255,255,0.08)"
+              strokeWidth="3"
+              strokeLinecap="round"
+            />
+            
+            {/* Animated glowing path */}
+            <motion.path
+              d="M 50 80 C 200 80, 250 180, 300 200 C 400 240, 450 320, 550 340 C 650 360, 700 420, 800 450 C 850 470, 900 520, 950 540"
+              fill="none"
+              stroke="url(#pathGradient)"
+              strokeWidth="4"
+              strokeLinecap="round"
+              filter="url(#softGlow)"
               style={{
-                offsetPath: "path('M 0 300 Q 200 150, 400 300 T 800 300 T 1200 300')",
+                pathLength: smoothRoadmapProgress,
+              }}
+            />
+
+            {/* Glowing orb that follows the path */}
+            <motion.circle
+              r="14"
+              fill="#FF6801"
+              filter="url(#glowFilter)"
+              style={{
+                offsetPath: "path('M 50 80 C 200 80, 250 180, 300 200 C 400 240, 450 320, 550 340 C 650 360, 700 420, 800 450 C 850 470, 900 520, 950 540')",
                 offsetDistance: useTransform(smoothRoadmapProgress, [0, 1], ["0%", "100%"]),
               }}
             />
-            {/* Checkpoint markers */}
-            {[0, 0.2, 0.4, 0.6, 0.8].map((pos, i) => {
-              const x = 60 + (i * 270);
-              const y = i % 2 === 0 ? 300 : (i === 1 || i === 3 ? 225 : 300);
-              return (
-                <g key={i}>
-                  <circle
-                    cx={x}
-                    cy={y}
-                    r="8"
-                    fill={currentStep >= i ? '#FF6801' : 'rgba(255,255,255,0.2)'}
-                    style={{ transition: 'fill 300ms ease' }}
-                  />
-                  <circle
-                    cx={x}
-                    cy={y}
-                    r="16"
-                    fill="none"
-                    stroke={currentStep >= i ? '#FF6801' : 'rgba(255,255,255,0.1)'}
-                    strokeWidth="2"
-                    style={{ transition: 'stroke 300ms ease' }}
-                  />
-                </g>
-              );
-            })}
+
+            {/* Checkpoint markers at each step */}
+            {[
+              { x: 50, y: 80 },
+              { x: 300, y: 200 },
+              { x: 550, y: 340 },
+              { x: 800, y: 450 },
+              { x: 950, y: 540 },
+            ].map((pos, i) => (
+              <g key={i}>
+                <circle
+                  cx={pos.x}
+                  cy={pos.y}
+                  r="6"
+                  fill={currentStep >= i ? '#FF6801' : 'rgba(255,255,255,0.15)'}
+                  style={{ transition: 'fill 400ms ease' }}
+                />
+                <circle
+                  cx={pos.x}
+                  cy={pos.y}
+                  r="12"
+                  fill="none"
+                  stroke={currentStep >= i ? 'rgba(255,104,1,0.5)' : 'rgba(255,255,255,0.08)'}
+                  strokeWidth="2"
+                  style={{ transition: 'stroke 400ms ease' }}
+                />
+              </g>
+            ))}
           </svg>
 
-          {/* Step Cards */}
-          <div className="absolute inset-0 flex items-center justify-center px-6 md:px-12">
-            <div className="w-full max-w-5xl relative h-[400px]">
-              {workflowSteps.map((step, index) => {
-                const isVisible = currentStep >= index;
-                const positions = [
-                  { left: '0%', top: '20%' },
-                  { left: '20%', top: '60%' },
-                  { left: '40%', top: '25%' },
-                  { left: '60%', top: '55%' },
-                  { left: '80%', top: '30%' },
-                ];
-                return (
-                  <motion.div
-                    key={step.id}
-                    className="absolute"
+          {/* Step Cards - Positioned along diagonal */}
+          <div className="absolute inset-0 px-8 md:px-16 py-24">
+            {workflowSteps.map((step, index) => {
+              const isVisible = currentStep >= index;
+              const isCurrent = currentStep === index;
+              const cardPositions = [
+                { left: '2%', top: '8%' },
+                { left: '22%', top: '25%' },
+                { left: '42%', top: '42%' },
+                { left: '62%', top: '58%' },
+                { left: '78%', top: '72%' },
+              ];
+              return (
+                <div
+                  key={step.id}
+                  className="absolute"
+                  style={{
+                    left: cardPositions[index].left,
+                    top: cardPositions[index].top,
+                    opacity: isVisible ? 1 : 0.2,
+                    transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(10px) scale(0.95)',
+                    transition: 'all 500ms cubic-bezier(0.4, 0, 0.2, 1)',
+                    zIndex: isCurrent ? 10 : 5,
+                  }}
+                  data-testid={`workflow-step-${index}`}
+                >
+                  <div 
+                    className="p-5 rounded-2xl backdrop-blur-lg"
                     style={{
-                      left: positions[index].left,
-                      top: positions[index].top,
-                      opacity: isVisible ? 1 : 0,
-                      transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-                      transition: 'opacity 400ms ease, transform 400ms ease',
+                      backgroundColor: isCurrent ? 'rgba(255,104,1,0.15)' : 'rgba(255,255,255,0.06)',
+                      border: isCurrent ? '1px solid rgba(255,104,1,0.4)' : '1px solid rgba(255,255,255,0.1)',
+                      boxShadow: isCurrent ? '0 20px 40px rgba(255,104,1,0.15)' : 'none',
+                      minWidth: '200px',
+                      maxWidth: '240px',
+                      transition: 'all 400ms ease',
                     }}
                   >
-                    <div 
-                      className="p-5 rounded-2xl backdrop-blur-md"
-                      style={{
-                        backgroundColor: 'rgba(255,255,255,0.08)',
-                        border: '1px solid rgba(255,255,255,0.12)',
-                        minWidth: '180px',
-                      }}
+                    <span 
+                      className="text-xs font-bold tracking-wider block mb-2"
+                      style={{ color: isCurrent ? '#FF6801' : 'rgba(255,104,1,0.6)' }}
                     >
-                      <span 
-                        className="text-sm font-medium block mb-1"
-                        style={{ color: '#FF6801' }}
-                      >
-                        {step.number}
-                      </span>
-                      <h3 className="text-lg font-semibold text-white mb-1">
-                        {step.title}
-                      </h3>
-                      <p className="text-sm text-gray-400 leading-relaxed">
-                        {step.description}
-                      </p>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
+                      {step.number}
+                    </span>
+                    <h3 
+                      className="text-lg font-semibold mb-2"
+                      style={{ color: isCurrent ? '#FFFFFF' : 'rgba(255,255,255,0.8)' }}
+                    >
+                      {step.title}
+                    </h3>
+                    <p 
+                      className="text-sm leading-relaxed"
+                      style={{ color: isCurrent ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.4)' }}
+                    >
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
-          {/* Scroll indicator */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2">
-            <span className="text-sm text-gray-500">Scroll to explore</span>
-            <motion.div
-              className="w-6 h-10 rounded-full border-2 border-gray-600 flex justify-center pt-2"
-              animate={{ opacity: [0.5, 1, 0.5] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              <motion.div
-                className="w-1.5 h-3 bg-gray-500 rounded-full"
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
+          {/* Progress indicator */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex items-center gap-3">
+            {workflowSteps.map((_, i) => (
+              <div
+                key={i}
+                className="rounded-full transition-all duration-300"
+                style={{
+                  width: currentStep === i ? '24px' : '8px',
+                  height: '8px',
+                  backgroundColor: currentStep >= i ? '#FF6801' : 'rgba(255,255,255,0.2)',
+                }}
               />
-            </motion.div>
+            ))}
           </div>
         </div>
       </section>
