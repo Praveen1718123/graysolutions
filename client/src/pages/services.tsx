@@ -298,9 +298,9 @@ export default function Services() {
         className="relative z-10 py-16 md:py-24"
         style={{ backgroundColor: '#F6F7FA' }}
       >
-        <div className="max-w-[1120px] mx-auto px-6 md:px-10">
+        <div className="mx-auto" style={{ padding: '0 12px' }}>
           <motion.h2 
-            className="text-2xl md:text-3xl font-bold mb-10"
+            className="text-2xl md:text-3xl font-bold mb-10 px-3"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -310,7 +310,7 @@ export default function Services() {
           </motion.h2>
           
           {/* Desktop: Horizontal tiles */}
-          <div className="hidden md:flex gap-3 items-end w-full">
+          <div className="hidden md:flex gap-2 items-end w-full">
             {servicesTiles.map((service) => {
               const isActive = activeService === service.id;
               return (
@@ -395,7 +395,7 @@ export default function Services() {
           </div>
 
           {/* Mobile: Horizontal scroll slider */}
-          <div className="md:hidden overflow-x-auto pb-4 -mx-6 px-6 scrollbar-hide">
+          <div className="md:hidden overflow-x-auto pb-4 scrollbar-hide">
             <div className="flex gap-4" style={{ width: 'max-content' }}>
               {servicesTiles.map((service) => (
                 <motion.div
