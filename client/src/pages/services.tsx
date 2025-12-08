@@ -233,17 +233,17 @@ export default function Services() {
             transition: 'top 500ms cubic-bezier(0.4, 0, 0.2, 1), height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
           }}
         >
-          <div className="max-w-[1120px] mx-auto px-6 md:px-10 h-full flex flex-col justify-center">
+          <div className="max-w-[1120px] mx-auto px-6 md:px-10 h-full flex flex-col pt-8">
             {/* Text Content - Slides up and fades out */}
             <motion.div 
-              className="hero-content z-10 pb-6 text-left max-w-3xl"
+              className="hero-content z-10 pb-8 text-left max-w-3xl"
               style={{
                 opacity: textOpacity,
                 y: textTranslateY,
               }}
             >
               <motion.h1 
-                className="text-3xl md:text-5xl font-bold leading-tight"
+                className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
