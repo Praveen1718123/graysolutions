@@ -17,6 +17,29 @@ export default function Services() {
     { id: 4, number: "05", title: "Content & Performance", description: "Data-driven content that drives measurable results.", icon: "📊" },
   ];
 
+  const workflowSteps = [
+    { id: 0, number: "01", title: "Brainstorm", description: "Explore ideas and understand your vision and goals." },
+    { id: 1, number: "02", title: "Define", description: "Clarify scope, requirements, and success metrics." },
+    { id: 2, number: "03", title: "Design", description: "Create wireframes, prototypes, and visual designs." },
+    { id: 3, number: "04", title: "Build", description: "Develop and test with agile sprints and iterations." },
+    { id: 4, number: "05", title: "Launch & Optimize", description: "Deploy, monitor, and continuously improve." },
+  ];
+
+  const roadmapRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: roadmapProgress } = useScroll({
+    target: roadmapRef,
+    offset: ["start start", "end end"]
+  });
+  const smoothRoadmapProgress = useSpring(roadmapProgress, { stiffness: 80, damping: 25 });
+  const [currentStep, setCurrentStep] = useState(0);
+
+  useEffect(() => {
+    return smoothRoadmapProgress.on("change", (v) => {
+      const step = Math.min(4, Math.floor(v * 5));
+      setCurrentStep(step);
+    });
+  }, [smoothRoadmapProgress]);
+
   // Framer Motion scroll tracking for smooth animations
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -347,17 +370,9 @@ export default function Services() {
                         minHeight: '200px'
                       }}
                     >
-                      <span className="text-white text-6xl font-bold opacity-30">
-                        {service.number}
-                      </span>
+                      <span className="text-white text-4xl">{service.icon}</span>
                     </div>
                     <div className="p-6">
-                      <span 
-                        className="text-sm font-medium mb-2 block"
-                        style={{ color: '#FF6801' }}
-                      >
-                        {service.number}.
-                      </span>
                       <h3 className="text-lg font-semibold mb-2">
                         {service.title}
                       </h3>
@@ -466,6 +481,171 @@ export default function Services() {
                 </motion.div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Workflow Roadmap Section - Dark with curved path */}
+      <section 
+        ref={roadmapRef}
+        className="relative z-10"
+        style={{ height: '300vh' }}
+      >
+        <div 
+          className="sticky top-0 w-full overflow-hidden"
+          style={{ 
+            height: '100vh',
+            backgroundColor: '#0F172A',
+          }}
+        >
+          {/* Section Title */}
+          <div className="absolute top-8 left-0 right-0 z-20 px-6 md:px-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-white">
+              Our Workflow
+            </h2>
+          </div>
+
+          {/* SVG Curved Path */}
+          <svg 
+            className="absolute inset-0 w-full h-full"
+            viewBox="0 0 1200 600"
+            preserveAspectRatio="xMidYMid slice"
+          >
+            {/* Background path (dim) */}
+            <path
+              d="M 0 300 Q 200 150, 400 300 T 800 300 T 1200 300"
+              fill="none"
+              stroke="rgba(255,255,255,0.1)"
+              strokeWidth="3"
+              strokeLinecap="round"
+            />
+            {/* Animated path (glowing) */}
+            <motion.path
+              d="M 0 300 Q 200 150, 400 300 T 800 300 T 1200 300"
+              fill="none"
+              stroke="url(#gradient)"
+              strokeWidth="4"
+              strokeLinecap="round"
+              style={{
+                pathLength: smoothRoadmapProgress,
+              }}
+            />
+            {/* Gradient definition */}
+            <defs>
+              <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#FF6801" />
+                <stop offset="100%" stopColor="#FF8534" />
+              </linearGradient>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+            {/* Glowing orb */}
+            <motion.circle
+              r="12"
+              fill="#FF6801"
+              filter="url(#glow)"
+              style={{
+                offsetPath: "path('M 0 300 Q 200 150, 400 300 T 800 300 T 1200 300')",
+                offsetDistance: useTransform(smoothRoadmapProgress, [0, 1], ["0%", "100%"]),
+              }}
+            />
+            {/* Checkpoint markers */}
+            {[0, 0.2, 0.4, 0.6, 0.8].map((pos, i) => {
+              const x = 60 + (i * 270);
+              const y = i % 2 === 0 ? 300 : (i === 1 || i === 3 ? 225 : 300);
+              return (
+                <g key={i}>
+                  <circle
+                    cx={x}
+                    cy={y}
+                    r="8"
+                    fill={currentStep >= i ? '#FF6801' : 'rgba(255,255,255,0.2)'}
+                    style={{ transition: 'fill 300ms ease' }}
+                  />
+                  <circle
+                    cx={x}
+                    cy={y}
+                    r="16"
+                    fill="none"
+                    stroke={currentStep >= i ? '#FF6801' : 'rgba(255,255,255,0.1)'}
+                    strokeWidth="2"
+                    style={{ transition: 'stroke 300ms ease' }}
+                  />
+                </g>
+              );
+            })}
+          </svg>
+
+          {/* Step Cards */}
+          <div className="absolute inset-0 flex items-center justify-center px-6 md:px-12">
+            <div className="w-full max-w-5xl relative h-[400px]">
+              {workflowSteps.map((step, index) => {
+                const isVisible = currentStep >= index;
+                const positions = [
+                  { left: '0%', top: '20%' },
+                  { left: '20%', top: '60%' },
+                  { left: '40%', top: '25%' },
+                  { left: '60%', top: '55%' },
+                  { left: '80%', top: '30%' },
+                ];
+                return (
+                  <motion.div
+                    key={step.id}
+                    className="absolute"
+                    style={{
+                      left: positions[index].left,
+                      top: positions[index].top,
+                      opacity: isVisible ? 1 : 0,
+                      transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+                      transition: 'opacity 400ms ease, transform 400ms ease',
+                    }}
+                  >
+                    <div 
+                      className="p-5 rounded-2xl backdrop-blur-md"
+                      style={{
+                        backgroundColor: 'rgba(255,255,255,0.08)',
+                        border: '1px solid rgba(255,255,255,0.12)',
+                        minWidth: '180px',
+                      }}
+                    >
+                      <span 
+                        className="text-sm font-medium block mb-1"
+                        style={{ color: '#FF6801' }}
+                      >
+                        {step.number}
+                      </span>
+                      <h3 className="text-lg font-semibold text-white mb-1">
+                        {step.title}
+                      </h3>
+                      <p className="text-sm text-gray-400 leading-relaxed">
+                        {step.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Scroll indicator */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2">
+            <span className="text-sm text-gray-500">Scroll to explore</span>
+            <motion.div
+              className="w-6 h-10 rounded-full border-2 border-gray-600 flex justify-center pt-2"
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <motion.div
+                className="w-1.5 h-3 bg-gray-500 rounded-full"
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              />
+            </motion.div>
           </div>
         </div>
       </section>
