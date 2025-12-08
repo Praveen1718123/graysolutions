@@ -6,7 +6,16 @@ import heroVideo from "@assets/hero-video-horizontal.mp4";
 
 export default function Services() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeService, setActiveService] = useState(1);
   const heroRef = useRef<HTMLElement>(null);
+
+  const servicesTiles = [
+    { id: 0, number: "01", title: "Strategy & Positioning", description: "Define your market position and create a roadmap for growth." },
+    { id: 1, number: "02", title: "UX, UI & Websites", description: "Beautiful interfaces that convert visitors into customers." },
+    { id: 2, number: "03", title: "Landing Pages & Funnels", description: "High-converting pages designed for lead generation." },
+    { id: 3, number: "04", title: "Marketing Systems", description: "Automated workflows that nurture and convert leads." },
+    { id: 4, number: "05", title: "Content & Performance", description: "Data-driven content that drives measurable results." },
+  ];
 
   // Framer Motion scroll tracking for smooth animations
   const { scrollYProgress } = useScroll({
@@ -279,6 +288,158 @@ export default function Services() {
                   </video>
                 </div>
               </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section - Horizontal Tiles */}
+      <section 
+        className="relative z-10 py-16 md:py-24"
+        style={{ backgroundColor: '#F6F7FA' }}
+      >
+        <div className="max-w-[1120px] mx-auto px-6 md:px-10">
+          <motion.h2 
+            className="text-2xl md:text-3xl font-bold mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            data-testid="section-services"
+          >
+            Services
+          </motion.h2>
+          
+          {/* Desktop: Horizontal tiles */}
+          <div className="hidden md:flex gap-4 items-end justify-center">
+            {servicesTiles.map((service) => {
+              const isActive = activeService === service.id;
+              return (
+                <motion.div
+                  key={service.id}
+                  className="cursor-pointer overflow-hidden flex flex-col"
+                  onClick={() => setActiveService(service.id)}
+                  onMouseEnter={() => setActiveService(service.id)}
+                  style={{
+                    width: isActive ? '280px' : '140px',
+                    height: isActive ? '400px' : '280px',
+                    backgroundColor: isActive ? '#FFFFFF' : '#F0F1F4',
+                    borderRadius: '24px',
+                    boxShadow: isActive ? '0 20px 60px rgba(0,0,0,0.12)' : 'none',
+                    transition: 'all 400ms cubic-bezier(0.4, 0, 0.2, 1)',
+                  }}
+                  data-testid={`service-tile-${service.id}`}
+                >
+                  {isActive ? (
+                    <div className="flex flex-col h-full">
+                      {/* Visual placeholder */}
+                      <div 
+                        className="flex-1 m-4 mb-0 rounded-xl flex items-center justify-center"
+                        style={{ 
+                          background: 'linear-gradient(135deg, #FF6801 0%, #FF8534 100%)',
+                          minHeight: '180px'
+                        }}
+                      >
+                        <span className="text-white text-6xl font-bold opacity-30">
+                          {service.number}
+                        </span>
+                      </div>
+                      {/* Content */}
+                      <div className="p-6">
+                        <span 
+                          className="text-sm font-medium mb-2 block"
+                          style={{ color: '#FF6801' }}
+                        >
+                          {service.number}.
+                        </span>
+                        <h3 className="text-lg font-semibold mb-2">
+                          {service.title}
+                        </h3>
+                        <p className="text-sm text-gray-600 leading-relaxed">
+                          {service.description}
+                        </p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col justify-end h-full p-5">
+                      <span 
+                        className="text-sm font-medium mb-1"
+                        style={{ color: 'rgba(15,23,42,0.4)' }}
+                      >
+                        {service.number}.
+                      </span>
+                      <h3 
+                        className="text-sm font-medium"
+                        style={{ color: 'rgba(15,23,42,0.7)' }}
+                      >
+                        {service.title}
+                      </h3>
+                    </div>
+                  )}
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Mobile: Horizontal scroll slider */}
+          <div className="md:hidden overflow-x-auto pb-4 -mx-6 px-6 scrollbar-hide">
+            <div className="flex gap-4" style={{ width: 'max-content' }}>
+              {servicesTiles.map((service) => (
+                <motion.div
+                  key={service.id}
+                  className="cursor-pointer overflow-hidden flex flex-col"
+                  onClick={() => setActiveService(service.id)}
+                  style={{
+                    width: '260px',
+                    height: '360px',
+                    backgroundColor: activeService === service.id ? '#FFFFFF' : '#F0F1F4',
+                    borderRadius: '24px',
+                    boxShadow: activeService === service.id ? '0 20px 60px rgba(0,0,0,0.12)' : 'none',
+                    transition: 'all 300ms ease-out',
+                    flexShrink: 0,
+                  }}
+                  data-testid={`service-tile-mobile-${service.id}`}
+                >
+                  <div className="flex flex-col h-full">
+                    {/* Visual placeholder */}
+                    <div 
+                      className="flex-1 m-4 mb-0 rounded-xl flex items-center justify-center"
+                      style={{ 
+                        background: activeService === service.id 
+                          ? 'linear-gradient(135deg, #FF6801 0%, #FF8534 100%)'
+                          : 'rgba(15,23,42,0.06)',
+                        minHeight: '160px'
+                      }}
+                    >
+                      <span 
+                        className="text-5xl font-bold"
+                        style={{ 
+                          color: activeService === service.id ? 'rgba(255,255,255,0.3)' : 'rgba(15,23,42,0.15)'
+                        }}
+                      >
+                        {service.number}
+                      </span>
+                    </div>
+                    {/* Content */}
+                    <div className="p-5">
+                      <span 
+                        className="text-sm font-medium mb-1 block"
+                        style={{ color: activeService === service.id ? '#FF6801' : 'rgba(15,23,42,0.4)' }}
+                      >
+                        {service.number}.
+                      </span>
+                      <h3 className="text-base font-semibold mb-2">
+                        {service.title}
+                      </h3>
+                      <p 
+                        className="text-sm leading-relaxed"
+                        style={{ color: activeService === service.id ? 'rgba(15,23,42,0.7)' : 'rgba(15,23,42,0.5)' }}
+                      >
+                        {service.description}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
