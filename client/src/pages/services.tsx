@@ -22,10 +22,10 @@ export default function Services() {
   const textTranslateY = useTransform(smoothProgress, [0, 0.3], [0, -120]);
   const textOpacity = useTransform(smoothProgress, [0, 0.25], [1, 0]);
   
-  // Video scales up and moves up slightly to stay centered
-  const videoScale = useTransform(smoothProgress, [0, 0.5], [0.8, 1.05]);
-  const videoTranslateY = useTransform(smoothProgress, [0, 0.5], [0, -80]);
-  const videoBorderRadius = useTransform(smoothProgress, [0, 0.5], [20, 12]);
+  // Video scales up to fill screen and moves up
+  const videoScale = useTransform(smoothProgress, [0, 0.4, 0.7], [0.8, 1.0, 1.35]);
+  const videoTranslateY = useTransform(smoothProgress, [0, 0.4, 0.7], [0, -60, -120]);
+  const videoBorderRadius = useTransform(smoothProgress, [0, 0.5, 0.7], [20, 12, 0]);
 
   useEffect(() => {
     const handleScroll = () => {
