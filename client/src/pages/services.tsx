@@ -10,11 +10,26 @@ export default function Services() {
   const heroRef = useRef<HTMLElement>(null);
 
   const servicesTiles = [
-    { id: 0, number: "01", title: "Strategy & Positioning", description: "Define your market position and create a roadmap for growth.", icon: "⚡" },
-    { id: 1, number: "02", title: "UX, UI & Websites", description: "Beautiful interfaces that convert visitors into customers.", icon: "🎨" },
-    { id: 2, number: "03", title: "Landing Pages & Funnels", description: "High-converting pages designed for lead generation.", icon: "📄" },
-    { id: 3, number: "04", title: "Marketing Systems", description: "Automated workflows that nurture and convert leads.", icon: "⚙️" },
-    { id: 4, number: "05", title: "Content & Performance", description: "Data-driven content that drives measurable results.", icon: "📊" },
+    { 
+      id: 0, number: "01", title: "Strategy & Positioning", icon: "⚡",
+      details: ["Offer & package design", "ICP & buyer persona clarity", "Brand positioning & messaging", "Customer journey & funnel mapping"]
+    },
+    { 
+      id: 1, number: "02", title: "Product & UX Design", icon: "🎨",
+      details: ["UX / UI design for web & apps", "User flows, wireframes & prototypes", "Design systems & component libraries", "Usability reviews & iteration"]
+    },
+    { 
+      id: 2, number: "03", title: "Websites & Experience", icon: "📄",
+      details: ["Marketing sites & service websites", "Conversion-focused landing pages", "Sales pages for launches & campaigns", "CMS setup (blogs, case studies, resources)"]
+    },
+    { 
+      id: 3, number: "04", title: "Funnels & Systems", icon: "⚙️",
+      details: ["Lead capture → nurture → booking flows", "CRM setup & pipeline structure", "Form, payment & booking integrations", "Analytics, tracking & dashboards"]
+    },
+    { 
+      id: 4, number: "05", title: "Content & Performance", icon: "📊",
+      details: ["Content & social media strategy", "Website & landing page copywriting", "Email / WhatsApp campaigns", "Performance review & optimisation"]
+    },
   ];
 
   const workflowSteps = [
@@ -356,30 +371,38 @@ export default function Services() {
                 >
                   {/* Active state content */}
                   <div 
-                    className="flex flex-col h-full absolute inset-0"
+                    className="flex flex-col h-full absolute inset-0 p-5"
                     style={{
                       opacity: isActive ? 1 : 0,
                       transition: 'opacity 250ms ease',
                       pointerEvents: isActive ? 'auto' : 'none',
                     }}
                   >
-                    <div 
-                      className="flex-1 m-4 mb-0 rounded-xl flex items-center justify-center"
-                      style={{ 
-                        background: 'linear-gradient(135deg, #FF6801 0%, #FF8534 100%)',
-                        minHeight: '200px'
-                      }}
-                    >
-                      <span className="text-white text-4xl">{service.icon}</span>
-                    </div>
-                    <div className="p-6">
-                      <h3 className="text-lg font-semibold mb-2">
+                    {/* Header with icon */}
+                    <div className="flex items-center gap-3 mb-4">
+                      <div 
+                        className="w-10 h-10 rounded-xl flex items-center justify-center"
+                        style={{ background: 'linear-gradient(135deg, #FF6801 0%, #FF8534 100%)' }}
+                      >
+                        <span className="text-white text-lg">{service.icon}</span>
+                      </div>
+                      <h3 className="text-lg font-semibold">
                         {service.title}
                       </h3>
-                      <p className="text-sm text-gray-600 leading-relaxed">
-                        {service.description}
-                      </p>
                     </div>
+                    
+                    {/* Details list */}
+                    <ul className="space-y-2 flex-1">
+                      {service.details.map((detail, idx) => (
+                        <li 
+                          key={idx}
+                          className="text-sm text-gray-600 flex items-start gap-2"
+                        >
+                          <span style={{ color: '#FF6801', marginTop: '2px' }}>•</span>
+                          {detail}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                   
                   {/* Resting state content */}
