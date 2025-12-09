@@ -47,7 +47,38 @@ export default function Services() {
               r={8}
               fill="#1a1a1a"
               style={animate ? {
-                animation: `pulse 1.5s ease-in-out ${i * 0.15}s infinite`,
+                animation: `dotPulse 1.5s ease-in-out ${i * 0.15}s infinite`,
+              } : {}}
+            />
+          );
+        })}
+      </g>
+    </svg>
+  );
+
+  const LoadingSpinner = ({ animate = false }: { animate?: boolean }) => (
+    <svg 
+      width="100%" 
+      height="100%" 
+      viewBox="0 0 100 100" 
+      fill="none"
+      style={animate ? { animation: 'spinSlow 8s linear infinite' } : {}}
+    >
+      <g>
+        {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => {
+          const angle = (i * 45 - 90) * (Math.PI / 180);
+          const cx = 50 + 35 * Math.cos(angle);
+          const cy = 50 + 35 * Math.sin(angle);
+          return (
+            <circle
+              key={i}
+              cx={cx}
+              cy={cy}
+              r={8}
+              fill="#1a1a1a"
+              style={animate ? {
+                transformOrigin: `${cx}px ${cy}px`,
+                animation: `waveScale 2s ease-in-out ${i * 0.25}s infinite`,
               } : {}}
             />
           );
@@ -428,7 +459,11 @@ export default function Services() {
                         {service.number}
                       </span>
                       <div style={{ width: '100px', height: '100px' }}>
-                        <CircleDots animate={isActive} />
+                        {service.id === 4 ? (
+                          <LoadingSpinner animate={isActive} />
+                        ) : (
+                          <CircleDots animate={isActive} />
+                        )}
                       </div>
                     </div>
                   </div>
@@ -461,7 +496,11 @@ export default function Services() {
                     {/* Static dots at bottom */}
                     <div className="flex justify-center" style={{ width: '100%', height: '100px' }}>
                       <div style={{ width: '100px', height: '100px' }}>
-                        <CircleDots animate={false} />
+                        {service.id === 4 ? (
+                          <LoadingSpinner animate={false} />
+                        ) : (
+                          <CircleDots animate={false} />
+                        )}
                       </div>
                     </div>
                   </div>
