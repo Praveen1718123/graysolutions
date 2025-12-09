@@ -426,77 +426,39 @@ export default function Services() {
                       pointerEvents: isActive ? 'auto' : 'none',
                     }}
                   >
-                    {/* Geometric grid pattern - bottom, black/white/gray */}
+                    {/* Abstract background pattern - bottom right */}
                     <div
                       className="absolute pointer-events-none"
                       style={{
-                        left: '50%',
-                        bottom: '-30%',
-                        width: '120%',
-                        height: '80%',
-                        transform: isActive ? 'translateX(-50%) scale(1) translateY(0)' : 'translateX(-50%) scale(0.9) translateY(30px)',
-                        opacity: isActive ? 0.4 : 0,
-                        transition: 'transform 600ms cubic-bezier(0.4, 0, 0.2, 1), opacity 500ms ease',
+                        right: '-20%',
+                        bottom: '-20%',
+                        width: '70%',
+                        height: '70%',
+                        background: 'radial-gradient(circle at center, rgba(255,104,1,0.15) 0%, rgba(255,104,1,0.05) 40%, transparent 70%)',
+                        borderRadius: '50%',
+                        filter: 'blur(30px)',
+                        transform: isActive ? 'scale(1) translate(0, 0)' : 'scale(0.8) translate(20px, 20px)',
+                        opacity: isActive ? 1 : 0,
+                        transition: 'transform 500ms cubic-bezier(0.4, 0, 0.2, 1), opacity 400ms ease',
                       }}
-                    >
-                      <svg width="100%" height="100%" viewBox="0 0 200 160" preserveAspectRatio="xMidYMax slice">
-                        {/* Isometric cube grid pattern */}
-                        <defs>
-                          <linearGradient id={`cubeGrad-${service.id}`} x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="#E5E5E5"/>
-                            <stop offset="100%" stopColor="#F5F5F5"/>
-                          </linearGradient>
-                        </defs>
-                        {/* Grid of isometric cubes */}
-                        {[0, 1, 2, 3, 4].map((row) =>
-                          [0, 1, 2, 3, 4, 5].map((col) => {
-                            const x = 20 + col * 28 + (row % 2) * 14;
-                            const y = 20 + row * 24;
-                            const opacity = 0.3 + Math.random() * 0.4;
-                            return (
-                              <g key={`${row}-${col}`} opacity={opacity}>
-                                {/* Top face */}
-                                <path
-                                  d={`M${x},${y} L${x + 14},${y - 8} L${x + 28},${y} L${x + 14},${y + 8} Z`}
-                                  fill="#F0F0F0"
-                                  stroke="#D0D0D0"
-                                  strokeWidth="0.5"
-                                />
-                                {/* Left face */}
-                                <path
-                                  d={`M${x},${y} L${x + 14},${y + 8} L${x + 14},${y + 24} L${x},${y + 16} Z`}
-                                  fill="#E0E0E0"
-                                  stroke="#C0C0C0"
-                                  strokeWidth="0.5"
-                                />
-                                {/* Right face */}
-                                <path
-                                  d={`M${x + 14},${y + 8} L${x + 28},${y} L${x + 28},${y + 16} L${x + 14},${y + 24} Z`}
-                                  fill="#D0D0D0"
-                                  stroke="#B0B0B0"
-                                  strokeWidth="0.5"
-                                />
-                              </g>
-                            );
-                          })
-                        )}
-                        {/* Accent lines */}
-                        <path
-                          d="M60,60 L100,40 L140,60"
-                          fill="none"
-                          stroke="#1A1A1A"
-                          strokeWidth="1.5"
-                          opacity="0.6"
-                        />
-                        <path
-                          d="M80,80 L100,68 L120,80"
-                          fill="none"
-                          stroke="#1A1A1A"
-                          strokeWidth="1"
-                          opacity="0.4"
-                        />
-                      </svg>
-                    </div>
+                    />
+                    {/* Secondary smaller accent blob */}
+                    <div
+                      className="absolute pointer-events-none"
+                      style={{
+                        right: '10%',
+                        bottom: '30%',
+                        width: '40%',
+                        height: '40%',
+                        background: 'radial-gradient(circle at center, rgba(255,133,52,0.12) 0%, transparent 60%)',
+                        borderRadius: '50%',
+                        filter: 'blur(20px)',
+                        transform: isActive ? 'scale(1) translate(0, 0)' : 'scale(0.6) translate(30px, 30px)',
+                        opacity: isActive ? 0.8 : 0,
+                        transition: 'transform 600ms cubic-bezier(0.4, 0, 0.2, 1), opacity 500ms ease',
+                        transitionDelay: '50ms',
+                      }}
+                    />
                     
                     {/* Header with icon */}
                     <div className="flex items-center gap-3 mb-4 relative z-10">
