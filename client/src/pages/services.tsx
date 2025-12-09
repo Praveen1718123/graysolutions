@@ -13,68 +13,119 @@ export default function Services() {
     { 
       id: 0, number: "01", title: "Strategy & Positioning",
       details: ["Offer & package design", "ICP & buyer persona clarity", "Brand positioning & messaging", "Customer journey & funnel mapping"],
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <circle cx="16" cy="16" r="4" stroke="currentColor" strokeWidth="2"/>
-          <line x1="16" y1="8" x2="16" y2="4" stroke="currentColor" strokeWidth="2"/>
-          <line x1="22" y1="10" x2="25" y2="7" stroke="currentColor" strokeWidth="2"/>
-          <line x1="10" y1="22" x2="7" y2="25" stroke="currentColor" strokeWidth="2"/>
-          <line x1="24" y1="16" x2="28" y2="16" stroke="#FF6801" strokeWidth="2"/>
-          <rect x="26" y="14" width="4" height="4" fill="#FF6801"/>
+      illustration: (
+        <svg width="100%" height="100%" viewBox="0 0 200 160" fill="none" style={{ opacity: 0.9 }}>
+          {/* Isometric bar chart - multiple pillars */}
+          <g stroke="#1a1a1a" strokeWidth="1" fill="none">
+            {/* Pillar 1 */}
+            <path d="M40 120 L40 80 L50 75 L60 80 L60 120 L50 125 L40 120" />
+            <path d="M40 80 L50 75 L60 80" />
+            {/* Pillar 2 */}
+            <path d="M55 120 L55 60 L65 55 L75 60 L75 120 L65 125 L55 120" />
+            <path d="M55 60 L65 55 L75 60" />
+            {/* Pillar 3 */}
+            <path d="M70 120 L70 90 L80 85 L90 90 L90 120 L80 125 L70 120" />
+            <path d="M70 90 L80 85 L90 90" />
+            {/* Pillar 4 - tallest */}
+            <path d="M85 120 L85 45 L95 40 L105 45 L105 120 L95 125 L85 120" />
+            <path d="M85 45 L95 40 L105 45" />
+            {/* Pillar 5 */}
+            <path d="M100 120 L100 70 L110 65 L120 70 L120 120 L110 125 L100 120" />
+            <path d="M100 70 L110 65 L120 70" />
+            {/* Pillar 6 */}
+            <path d="M115 120 L115 55 L125 50 L135 55 L135 120 L125 125 L115 120" />
+            <path d="M115 55 L125 50 L135 55" />
+          </g>
         </svg>
       )
     },
     { 
       id: 1, number: "02", title: "Product & UX Design",
       details: ["UX / UI design for web & apps", "User flows, wireframes & prototypes", "Design systems & component libraries", "Usability reviews & iteration"],
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <path d="M4 24 C10 24, 10 8, 16 8 C22 8, 22 24, 28 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"/>
-          <path d="M12 12 C14 12, 14 16, 18 16" stroke="#FF6801" strokeWidth="3" fill="none" strokeLinecap="round"/>
+      illustration: (
+        <svg width="100%" height="100%" viewBox="0 0 200 160" fill="none" style={{ opacity: 0.9 }}>
+          {/* Concentric rings with sphere */}
+          <g stroke="#1a1a1a" strokeWidth="1" fill="none">
+            <ellipse cx="100" cy="100" rx="60" ry="25" />
+            <ellipse cx="100" cy="100" rx="48" ry="20" />
+            <ellipse cx="100" cy="100" rx="36" ry="15" />
+            <ellipse cx="100" cy="100" rx="24" ry="10" />
+            <ellipse cx="100" cy="100" rx="12" ry="5" />
+            {/* Sphere on top */}
+            <circle cx="100" cy="55" r="12" />
+            <ellipse cx="100" cy="55" rx="12" ry="4" />
+          </g>
         </svg>
       )
     },
     { 
       id: 2, number: "03", title: "Websites & Experience",
       details: ["Marketing sites & service websites", "Conversion-focused landing pages", "Sales pages for launches & campaigns", "CMS setup (blogs, case studies, resources)"],
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <rect x="4" y="4" width="6" height="8" stroke="currentColor" strokeWidth="2" fill="none"/>
-          <rect x="13" y="10" width="6" height="8" stroke="currentColor" strokeWidth="2" fill="none"/>
-          <rect x="22" y="16" width="6" height="8" stroke="currentColor" strokeWidth="2" fill="none"/>
-          <line x1="25" y1="24" x2="25" y2="28" stroke="#FF6801" strokeWidth="2"/>
-          <rect x="23" y="26" width="4" height="4" fill="#FF6801"/>
+      illustration: (
+        <svg width="100%" height="100%" viewBox="0 0 200 160" fill="none" style={{ opacity: 0.9 }}>
+          {/* Isometric cube with layers */}
+          <g stroke="#1a1a1a" strokeWidth="1" fill="none">
+            {/* Main cube outline */}
+            <path d="M100 30 L160 65 L160 115 L100 150 L40 115 L40 65 Z" />
+            <path d="M100 30 L100 80 L160 115" />
+            <path d="M100 80 L40 115" />
+            {/* Inner layers */}
+            <path d="M100 50 L140 75 L140 105 L100 130 L60 105 L60 75 Z" />
+            <path d="M100 70 L120 85 L120 100 L100 115 L80 100 L80 85 Z" />
+            {/* Cross lines */}
+            <path d="M70 55 L70 95" />
+            <path d="M130 55 L130 95" />
+          </g>
         </svg>
       )
     },
     { 
       id: 3, number: "04", title: "Funnels & Systems",
       details: ["Lead capture → nurture → booking flows", "CRM setup & pipeline structure", "Form, payment & booking integrations", "Analytics, tracking & dashboards"],
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <circle cx="16" cy="6" r="3" stroke="currentColor" strokeWidth="2" fill="none"/>
-          <circle cx="26" cy="12" r="3" stroke="currentColor" strokeWidth="2" fill="none"/>
-          <circle cx="26" cy="24" r="3" stroke="currentColor" strokeWidth="2" fill="none"/>
-          <circle cx="16" cy="28" r="3" stroke="currentColor" strokeWidth="2" fill="none"/>
-          <circle cx="6" cy="24" r="3" stroke="currentColor" strokeWidth="2" fill="none"/>
-          <circle cx="6" cy="12" r="3" stroke="currentColor" strokeWidth="2" fill="none"/>
-          <path d="M16 9 L16 25 M19 7 L23 11 M23 23 L19 27 M13 27 L9 23 M9 11 L13 7 M23 14 L23 22" stroke="currentColor" strokeWidth="1.5"/>
-          <line x1="8" y1="14" x2="24" y2="22" stroke="#FF6801" strokeWidth="2"/>
+      illustration: (
+        <svg width="100%" height="100%" viewBox="0 0 200 160" fill="none" style={{ opacity: 0.9 }}>
+          {/* Stacked rings / discs */}
+          <g stroke="#1a1a1a" strokeWidth="1" fill="none">
+            {/* Top ring */}
+            <ellipse cx="100" cy="50" rx="50" ry="18" />
+            <path d="M50 50 L50 60" />
+            <path d="M150 50 L150 60" />
+            <ellipse cx="100" cy="60" rx="50" ry="18" />
+            {/* Middle ring */}
+            <ellipse cx="100" cy="85" rx="40" ry="14" />
+            <path d="M60 85 L60 95" />
+            <path d="M140 85 L140 95" />
+            <ellipse cx="100" cy="95" rx="40" ry="14" />
+            {/* Bottom ring */}
+            <ellipse cx="100" cy="120" rx="30" ry="10" />
+            <path d="M70 120 L70 130" />
+            <path d="M130 120 L130 130" />
+            <ellipse cx="100" cy="130" rx="30" ry="10" />
+          </g>
         </svg>
       )
     },
     { 
       id: 4, number: "05", title: "Content & Performance",
       details: ["Content & social media strategy", "Website & landing page copywriting", "Email / WhatsApp campaigns", "Performance review & optimisation"],
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <rect x="13" y="13" width="6" height="6" stroke="currentColor" strokeWidth="2" fill="none"/>
-          <line x1="16" y1="10" x2="16" y2="4" stroke="currentColor" strokeWidth="2"/>
-          <circle cx="16" cy="3" r="2" stroke="currentColor" strokeWidth="1.5" fill="none"/>
-          <line x1="22" y1="16" x2="28" y2="16" stroke="currentColor" strokeWidth="2"/>
-          <circle cx="29" cy="16" r="2" stroke="currentColor" strokeWidth="1.5" fill="none"/>
-          <line x1="10" y1="16" x2="4" y2="16" stroke="#FF6801" strokeWidth="2"/>
-          <circle cx="3" cy="16" r="2" stroke="#FF6801" strokeWidth="1.5" fill="none"/>
+      illustration: (
+        <svg width="100%" height="100%" viewBox="0 0 200 160" fill="none" style={{ opacity: 0.9 }}>
+          {/* Perspective lines / radiating pattern */}
+          <g stroke="#1a1a1a" strokeWidth="1" fill="none">
+            {/* Vertical lines with perspective */}
+            <line x1="60" y1="40" x2="40" y2="140" />
+            <line x1="75" y1="40" x2="60" y2="140" />
+            <line x1="90" y1="40" x2="80" y2="140" />
+            <line x1="105" y1="40" x2="100" y2="140" />
+            <line x1="120" y1="40" x2="120" y2="140" />
+            <line x1="135" y1="40" x2="140" y2="140" />
+            <line x1="150" y1="40" x2="160" y2="140" />
+            {/* Horizontal connecting lines */}
+            <path d="M60 40 Q100 35, 150 40" />
+            <path d="M50 70 Q100 60, 155 70" />
+            <path d="M45 100 Q100 85, 160 100" />
+            <path d="M40 140 Q100 120, 165 140" />
+          </g>
         </svg>
       )
     },
@@ -426,41 +477,15 @@ export default function Services() {
                       pointerEvents: isActive ? 'auto' : 'none',
                     }}
                   >
-                    {/* Large pattern background - bottom area */}
-                    <div
-                      className="absolute pointer-events-none flex items-center justify-center"
-                      style={{
-                        right: '-5%',
-                        bottom: '-10%',
-                        width: '85%',
-                        height: '65%',
-                        opacity: isActive ? 0.08 : 0,
-                        transform: isActive ? 'scale(1) translateY(0)' : 'scale(0.9) translateY(20px)',
-                        transition: 'transform 500ms cubic-bezier(0.4, 0, 0.2, 1), opacity 400ms ease',
-                      }}
-                    >
-                      {React.cloneElement(service.icon as React.ReactElement, {
-                        width: '100%',
-                        height: '100%',
-                        style: { color: '#000000' }
-                      })}
-                    </div>
-                    
-                    {/* Header with small icon */}
-                    <div className="flex items-center gap-3 mb-4 relative z-10">
-                      <div 
-                        className="w-10 h-10 rounded-lg flex items-center justify-center text-gray-700"
-                        style={{ backgroundColor: 'rgba(255,104,1,0.1)' }}
-                      >
-                        {service.icon}
-                      </div>
+                    {/* Header */}
+                    <div className="mb-3 relative z-10">
                       <h3 className="text-base font-semibold">
                         {service.title}
                       </h3>
                     </div>
                     
                     {/* Details list */}
-                    <ul className="space-y-2 flex-1 relative z-10">
+                    <ul className="space-y-1.5 relative z-10 mb-4">
                       {service.details.map((detail, idx) => (
                         <li 
                           key={idx}
@@ -471,6 +496,18 @@ export default function Services() {
                         </li>
                       ))}
                     </ul>
+                    
+                    {/* Large illustration at bottom */}
+                    <div
+                      className="flex-1 flex items-end justify-center pointer-events-none"
+                      style={{
+                        minHeight: '120px',
+                        transform: isActive ? 'scale(1) translateY(0)' : 'scale(0.95) translateY(10px)',
+                        transition: 'transform 400ms cubic-bezier(0.4, 0, 0.2, 1)',
+                      }}
+                    >
+                      {service.illustration}
+                    </div>
                   </div>
                   
                   {/* Resting state content */}
@@ -490,14 +527,8 @@ export default function Services() {
                       {service.number}.
                     </span>
                     
-                    {/* Icon and title at bottom */}
+                    {/* Title at bottom */}
                     <div>
-                      <div 
-                        className="w-12 h-12 rounded-xl flex items-center justify-center mb-3 text-gray-500"
-                        style={{ backgroundColor: 'rgba(15,23,42,0.04)' }}
-                      >
-                        {service.icon}
-                      </div>
                       <h3 
                         className="text-base font-semibold leading-tight"
                         style={{ color: 'rgba(15,23,42,0.85)' }}
