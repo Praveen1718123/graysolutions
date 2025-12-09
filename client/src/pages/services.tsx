@@ -11,24 +11,72 @@ export default function Services() {
 
   const servicesTiles = [
     { 
-      id: 0, number: "01", title: "Strategy & Positioning", icon: "⚡",
-      details: ["Offer & package design", "ICP & buyer persona clarity", "Brand positioning & messaging", "Customer journey & funnel mapping"]
+      id: 0, number: "01", title: "Strategy & Positioning",
+      details: ["Offer & package design", "ICP & buyer persona clarity", "Brand positioning & messaging", "Customer journey & funnel mapping"],
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="4" stroke="currentColor" strokeWidth="2"/>
+          <line x1="16" y1="8" x2="16" y2="4" stroke="currentColor" strokeWidth="2"/>
+          <line x1="22" y1="10" x2="25" y2="7" stroke="currentColor" strokeWidth="2"/>
+          <line x1="10" y1="22" x2="7" y2="25" stroke="currentColor" strokeWidth="2"/>
+          <line x1="24" y1="16" x2="28" y2="16" stroke="#FF6801" strokeWidth="2"/>
+          <rect x="26" y="14" width="4" height="4" fill="#FF6801"/>
+        </svg>
+      )
     },
     { 
-      id: 1, number: "02", title: "Product & UX Design", icon: "🎨",
-      details: ["UX / UI design for web & apps", "User flows, wireframes & prototypes", "Design systems & component libraries", "Usability reviews & iteration"]
+      id: 1, number: "02", title: "Product & UX Design",
+      details: ["UX / UI design for web & apps", "User flows, wireframes & prototypes", "Design systems & component libraries", "Usability reviews & iteration"],
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <path d="M4 24 C10 24, 10 8, 16 8 C22 8, 22 24, 28 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"/>
+          <path d="M12 12 C14 12, 14 16, 18 16" stroke="#FF6801" strokeWidth="3" fill="none" strokeLinecap="round"/>
+        </svg>
+      )
     },
     { 
-      id: 2, number: "03", title: "Websites & Experience", icon: "📄",
-      details: ["Marketing sites & service websites", "Conversion-focused landing pages", "Sales pages for launches & campaigns", "CMS setup (blogs, case studies, resources)"]
+      id: 2, number: "03", title: "Websites & Experience",
+      details: ["Marketing sites & service websites", "Conversion-focused landing pages", "Sales pages for launches & campaigns", "CMS setup (blogs, case studies, resources)"],
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect x="4" y="4" width="6" height="8" stroke="currentColor" strokeWidth="2" fill="none"/>
+          <rect x="13" y="10" width="6" height="8" stroke="currentColor" strokeWidth="2" fill="none"/>
+          <rect x="22" y="16" width="6" height="8" stroke="currentColor" strokeWidth="2" fill="none"/>
+          <line x1="25" y1="24" x2="25" y2="28" stroke="#FF6801" strokeWidth="2"/>
+          <rect x="23" y="26" width="4" height="4" fill="#FF6801"/>
+        </svg>
+      )
     },
     { 
-      id: 3, number: "04", title: "Funnels & Systems", icon: "⚙️",
-      details: ["Lead capture → nurture → booking flows", "CRM setup & pipeline structure", "Form, payment & booking integrations", "Analytics, tracking & dashboards"]
+      id: 3, number: "04", title: "Funnels & Systems",
+      details: ["Lead capture → nurture → booking flows", "CRM setup & pipeline structure", "Form, payment & booking integrations", "Analytics, tracking & dashboards"],
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="6" r="3" stroke="currentColor" strokeWidth="2" fill="none"/>
+          <circle cx="26" cy="12" r="3" stroke="currentColor" strokeWidth="2" fill="none"/>
+          <circle cx="26" cy="24" r="3" stroke="currentColor" strokeWidth="2" fill="none"/>
+          <circle cx="16" cy="28" r="3" stroke="currentColor" strokeWidth="2" fill="none"/>
+          <circle cx="6" cy="24" r="3" stroke="currentColor" strokeWidth="2" fill="none"/>
+          <circle cx="6" cy="12" r="3" stroke="currentColor" strokeWidth="2" fill="none"/>
+          <path d="M16 9 L16 25 M19 7 L23 11 M23 23 L19 27 M13 27 L9 23 M9 11 L13 7 M23 14 L23 22" stroke="currentColor" strokeWidth="1.5"/>
+          <line x1="8" y1="14" x2="24" y2="22" stroke="#FF6801" strokeWidth="2"/>
+        </svg>
+      )
     },
     { 
-      id: 4, number: "05", title: "Content & Performance", icon: "📊",
-      details: ["Content & social media strategy", "Website & landing page copywriting", "Email / WhatsApp campaigns", "Performance review & optimisation"]
+      id: 4, number: "05", title: "Content & Performance",
+      details: ["Content & social media strategy", "Website & landing page copywriting", "Email / WhatsApp campaigns", "Performance review & optimisation"],
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect x="13" y="13" width="6" height="6" stroke="currentColor" strokeWidth="2" fill="none"/>
+          <line x1="16" y1="10" x2="16" y2="4" stroke="currentColor" strokeWidth="2"/>
+          <circle cx="16" cy="3" r="2" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+          <line x1="22" y1="16" x2="28" y2="16" stroke="currentColor" strokeWidth="2"/>
+          <circle cx="29" cy="16" r="2" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+          <line x1="10" y1="16" x2="4" y2="16" stroke="#FF6801" strokeWidth="2"/>
+          <circle cx="3" cy="16" r="2" stroke="#FF6801" strokeWidth="1.5" fill="none"/>
+        </svg>
+      )
     },
   ];
 
@@ -381,10 +429,10 @@ export default function Services() {
                     {/* Header with icon */}
                     <div className="flex items-center gap-3 mb-4">
                       <div 
-                        className="w-10 h-10 rounded-xl flex items-center justify-center"
-                        style={{ background: 'linear-gradient(135deg, #FF6801 0%, #FF8534 100%)' }}
+                        className="w-12 h-12 rounded-xl flex items-center justify-center text-gray-700"
+                        style={{ backgroundColor: 'rgba(255,104,1,0.1)' }}
                       >
-                        <span className="text-white text-lg">{service.icon}</span>
+                        {service.icon}
                       </div>
                       <h3 className="text-lg font-semibold">
                         {service.title}
@@ -425,10 +473,10 @@ export default function Services() {
                     {/* Icon and title at bottom */}
                     <div>
                       <div 
-                        className="w-10 h-10 rounded-lg flex items-center justify-center mb-3"
-                        style={{ backgroundColor: 'rgba(15,23,42,0.06)' }}
+                        className="w-12 h-12 rounded-xl flex items-center justify-center mb-3 text-gray-500"
+                        style={{ backgroundColor: 'rgba(15,23,42,0.04)' }}
                       >
-                        <span className="text-lg">{service.icon}</span>
+                        {service.icon}
                       </div>
                       <h3 
                         className="text-base font-semibold leading-tight"
