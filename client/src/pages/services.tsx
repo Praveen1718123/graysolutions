@@ -426,49 +426,35 @@ export default function Services() {
                       pointerEvents: isActive ? 'auto' : 'none',
                     }}
                   >
-                    {/* Abstract background pattern - bottom right */}
+                    {/* Large pattern background - bottom area */}
                     <div
-                      className="absolute pointer-events-none"
+                      className="absolute pointer-events-none flex items-center justify-center"
                       style={{
-                        right: '-20%',
-                        bottom: '-20%',
-                        width: '70%',
-                        height: '70%',
-                        background: 'radial-gradient(circle at center, rgba(255,104,1,0.15) 0%, rgba(255,104,1,0.05) 40%, transparent 70%)',
-                        borderRadius: '50%',
-                        filter: 'blur(30px)',
-                        transform: isActive ? 'scale(1) translate(0, 0)' : 'scale(0.8) translate(20px, 20px)',
-                        opacity: isActive ? 1 : 0,
+                        right: '-5%',
+                        bottom: '-10%',
+                        width: '85%',
+                        height: '65%',
+                        opacity: isActive ? 0.08 : 0,
+                        transform: isActive ? 'scale(1) translateY(0)' : 'scale(0.9) translateY(20px)',
                         transition: 'transform 500ms cubic-bezier(0.4, 0, 0.2, 1), opacity 400ms ease',
                       }}
-                    />
-                    {/* Secondary smaller accent blob */}
-                    <div
-                      className="absolute pointer-events-none"
-                      style={{
-                        right: '10%',
-                        bottom: '30%',
-                        width: '40%',
-                        height: '40%',
-                        background: 'radial-gradient(circle at center, rgba(255,133,52,0.12) 0%, transparent 60%)',
-                        borderRadius: '50%',
-                        filter: 'blur(20px)',
-                        transform: isActive ? 'scale(1) translate(0, 0)' : 'scale(0.6) translate(30px, 30px)',
-                        opacity: isActive ? 0.8 : 0,
-                        transition: 'transform 600ms cubic-bezier(0.4, 0, 0.2, 1), opacity 500ms ease',
-                        transitionDelay: '50ms',
-                      }}
-                    />
+                    >
+                      {React.cloneElement(service.icon as React.ReactElement, {
+                        width: '100%',
+                        height: '100%',
+                        style: { color: '#000000' }
+                      })}
+                    </div>
                     
-                    {/* Header with icon */}
+                    {/* Header with small icon */}
                     <div className="flex items-center gap-3 mb-4 relative z-10">
                       <div 
-                        className="w-12 h-12 rounded-xl flex items-center justify-center text-gray-700"
+                        className="w-10 h-10 rounded-lg flex items-center justify-center text-gray-700"
                         style={{ backgroundColor: 'rgba(255,104,1,0.1)' }}
                       >
                         {service.icon}
                       </div>
-                      <h3 className="text-lg font-semibold">
+                      <h3 className="text-base font-semibold">
                         {service.title}
                       </h3>
                     </div>
