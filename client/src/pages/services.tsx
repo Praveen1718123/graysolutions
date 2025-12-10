@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 import heroVideo from "@assets/hero-video-horizontal.mp4";
+import shapeVideo from "@assets/AZsH87KtLoJfGOPlR-k16A-AZsH87Ktl1Pfbfo7ysMdMA_1765365085405.mp4";
 
 export default function Services() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -40,9 +41,8 @@ export default function Services() {
       playsInline
       className="w-full h-full object-cover"
       style={{ backgroundColor: '#E5E7EB' }}
-    >
-      <source src="/attached_assets/AZsH87KtLoJfGOPlR-k16A-AZsH87Ktl1Pfbfo7ysMdMA_1765365085405.mp4" type="video/mp4" />
-    </video>
+      src={shapeVideo}
+    />
   );
 
   const workflowSteps = [
