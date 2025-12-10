@@ -32,60 +32,22 @@ export default function Services() {
     },
   ];
 
-  const CircleDots = ({ animate = false }: { animate?: boolean }) => (
-    <svg width="100%" height="100%" viewBox="0 0 100 100" fill="none">
-      <g>
-        {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => {
-          const angle = (i * 45 - 90) * (Math.PI / 180);
-          const cx = 50 + 35 * Math.cos(angle);
-          const cy = 50 + 35 * Math.sin(angle);
-          return (
-            <circle
-              key={i}
-              cx={cx}
-              cy={cy}
-              r={8}
-              fill="#1a1a1a"
-              style={animate ? {
-                animation: `dotPulse 1.5s ease-in-out ${i * 0.15}s infinite`,
-              } : {}}
-            />
-          );
-        })}
-      </g>
-    </svg>
-  );
-
-  const LoadingSpinner = ({ animate = false }: { animate?: boolean }) => (
-    <svg 
-      width="100%" 
-      height="100%" 
-      viewBox="0 0 100 100" 
-      fill="none"
-      style={animate ? { animation: 'spinSlow 8s linear infinite' } : {}}
-    >
-      <g>
-        {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => {
-          const angle = (i * 45 - 90) * (Math.PI / 180);
-          const cx = 50 + 35 * Math.cos(angle);
-          const cy = 50 + 35 * Math.sin(angle);
-          return (
-            <circle
-              key={i}
-              cx={cx}
-              cy={cy}
-              r={8}
-              fill="#1a1a1a"
-              style={animate ? {
-                transformOrigin: `${cx}px ${cy}px`,
-                animation: `waveScale 2s ease-in-out ${i * 0.25}s infinite`,
-              } : {}}
-            />
-          );
-        })}
-      </g>
-    </svg>
-  );
+  const ShapePlaceholder = ({ id }: { id: number }) => {
+    const colors = ['#3B82F6', '#8B5CF6', '#10B981', '#F59E0B', '#6366F1'];
+    return (
+      <div 
+        className="w-full h-full flex items-center justify-center"
+        style={{ 
+          background: `linear-gradient(135deg, ${colors[id]} 0%, ${colors[(id + 1) % 5]} 100%)`,
+          borderRadius: '8px',
+        }}
+      >
+        <span className="text-white text-4xl font-bold opacity-30">
+          0{id + 1}
+        </span>
+      </div>
+    );
+  };
 
   const workflowSteps = [
     { id: 0, number: "01", title: "Brainstorm", description: "Explore ideas and understand your vision and goals." },
@@ -426,7 +388,7 @@ export default function Services() {
                 >
                   {/* Active/Hover state content */}
                   <div 
-                    className="flex flex-col h-full absolute inset-0 p-6 overflow-hidden"
+                    className="flex flex-col h-full absolute inset-0 p-5 overflow-hidden"
                     style={{
                       opacity: isActive ? 1 : 0,
                       transition: 'opacity 250ms ease',
@@ -434,12 +396,12 @@ export default function Services() {
                     }}
                   >
                     {/* Title at top */}
-                    <h3 className="text-lg font-bold mb-4 relative z-10">
+                    <h3 className="text-base font-bold mb-3 relative z-10">
                       {service.title}
                     </h3>
                     
                     {/* Details list */}
-                    <ul className="space-y-2 relative z-10 flex-1">
+                    <ul className="space-y-1.5 relative z-10">
                       {service.details.map((detail, idx) => (
                         <li 
                           key={idx}
@@ -450,27 +412,30 @@ export default function Services() {
                       ))}
                     </ul>
                     
-                    {/* Bottom row: Number left, animated dots right */}
-                    <div className="flex items-end justify-between mt-4">
+                    {/* Bottom row: Number left, shape right */}
+                    <div className="flex items-end justify-between mt-auto pt-4">
                       <span 
-                        className="text-6xl font-bold"
+                        className="text-5xl font-bold"
                         style={{ color: 'rgba(15,23,42,0.08)' }}
                       >
                         {service.number}
                       </span>
-                      <div style={{ width: '100px', height: '100px' }}>
-                        {service.id === 4 ? (
-                          <LoadingSpinner animate={isActive} />
-                        ) : (
-                          <CircleDots animate={isActive} />
-                        )}
+                      <div 
+                        className="rounded-lg overflow-hidden"
+                        style={{ 
+                          width: '120px', 
+                          height: '120px',
+                          backgroundColor: '#E5E7EB',
+                        }}
+                      >
+                        <ShapePlaceholder id={service.id} />
                       </div>
                     </div>
                   </div>
                   
                   {/* Normal/Resting state content */}
                   <div 
-                    className="flex flex-col h-full p-6 absolute inset-0"
+                    className="flex flex-col h-full p-5 absolute inset-0"
                     style={{
                       opacity: isActive ? 0 : 1,
                       transition: 'opacity 250ms ease',
@@ -479,7 +444,7 @@ export default function Services() {
                   >
                     {/* Number at top */}
                     <span 
-                      className="text-6xl font-bold mb-4"
+                      className="text-5xl font-bold mb-3"
                       style={{ color: 'rgba(15,23,42,0.15)' }}
                     >
                       {service.number}
@@ -487,21 +452,22 @@ export default function Services() {
                     
                     {/* Title below number */}
                     <h3 
-                      className="text-lg font-bold leading-tight mb-auto"
+                      className="text-base font-bold leading-tight"
                       style={{ color: 'rgba(15,23,42,0.9)' }}
                     >
                       {service.title}
                     </h3>
                     
-                    {/* Static dots at bottom */}
-                    <div className="flex justify-center" style={{ width: '100%', height: '100px' }}>
-                      <div style={{ width: '100px', height: '100px' }}>
-                        {service.id === 4 ? (
-                          <LoadingSpinner animate={false} />
-                        ) : (
-                          <CircleDots animate={false} />
-                        )}
-                      </div>
+                    {/* Shape in gray container at bottom */}
+                    <div 
+                      className="mt-auto rounded-lg overflow-hidden"
+                      style={{ 
+                        width: '100%', 
+                        height: '140px',
+                        backgroundColor: '#E5E7EB',
+                      }}
+                    >
+                      <ShapePlaceholder id={service.id} />
                     </div>
                   </div>
                 </div>
