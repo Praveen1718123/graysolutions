@@ -579,14 +579,13 @@ export default function Services() {
           />
 
           {/* Main content container */}
-          <div className="relative h-full flex items-center justify-center px-8 md:px-16 py-20">
+          <div className="relative h-full flex items-center justify-center px-4 md:px-16 py-8 md:py-12 overflow-y-auto">
             <div 
-              className="relative w-full max-w-4xl flex flex-col justify-between"
-              style={{ height: '60vh' }}
+              className="relative w-full max-w-4xl flex flex-col gap-6 md:gap-12"
             >
-              {/* Vertical timeline line */}
+              {/* Vertical timeline line - hidden on mobile */}
               <div 
-                className="absolute left-1/2 transform -translate-x-1/2 top-2 bottom-2"
+                className="hidden md:block absolute left-1/2 transform -translate-x-1/2 top-2 bottom-2"
                 style={{
                   width: '2px',
                   backgroundColor: 'rgba(255,255,255,0.15)',
@@ -610,12 +609,44 @@ export default function Services() {
                 return (
                   <div
                     key={step.id}
-                    className="relative flex items-center"
+                    className="relative flex flex-col md:flex-row md:items-center"
                     data-testid={`workflow-step-${index}`}
                   >
-                    {/* Left side - Title */}
+                    {/* Mobile: Dot + Title row */}
+                    <div className="flex items-center gap-3 md:hidden mb-2">
+                      <div 
+                        className="w-3 h-3 rounded-full flex-shrink-0"
+                        style={{
+                          backgroundColor: isVisible ? '#22C55E' : 'rgba(255,255,255,0.3)',
+                          boxShadow: isVisible ? '0 0 12px rgba(34,197,94,0.5)' : 'none',
+                          transition: 'all 400ms ease',
+                        }}
+                      />
+                      <h3 
+                        className="text-xl font-semibold"
+                        style={{ 
+                          color: isVisible ? '#22C55E' : 'rgba(255,255,255,0.4)',
+                          transition: 'color 400ms ease',
+                        }}
+                      >
+                        {step.title}
+                      </h3>
+                    </div>
+                    
+                    {/* Mobile: Description */}
+                    <p 
+                      className="md:hidden text-sm leading-relaxed pl-6"
+                      style={{ 
+                        color: isVisible ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.3)',
+                        transition: 'color 400ms ease',
+                      }}
+                    >
+                      {step.description}
+                    </p>
+
+                    {/* Desktop: Left side - Title */}
                     <div 
-                      className="flex-1 text-right pr-8 md:pr-12"
+                      className="hidden md:block flex-1 text-right pr-12"
                       style={{
                         opacity: isVisible ? 1 : 0.3,
                         transform: isVisible ? 'translateX(0)' : 'translateX(-20px)',
@@ -623,16 +654,16 @@ export default function Services() {
                       }}
                     >
                       <h3 
-                        className="text-2xl md:text-3xl font-semibold"
+                        className="text-3xl font-semibold"
                         style={{ color: isVisible ? '#22C55E' : 'rgba(255,255,255,0.4)' }}
                       >
                         {step.title}
                       </h3>
                     </div>
 
-                    {/* Center - Dot */}
+                    {/* Desktop: Center - Dot */}
                     <div 
-                      className="relative z-10 flex-shrink-0"
+                      className="hidden md:block relative z-10 flex-shrink-0"
                       style={{
                         width: '16px',
                         height: '16px',
@@ -648,9 +679,9 @@ export default function Services() {
                       />
                     </div>
 
-                    {/* Right side - Description */}
+                    {/* Desktop: Right side - Description */}
                     <div 
-                      className="flex-1 pl-8 md:pl-12"
+                      className="hidden md:block flex-1 pl-12"
                       style={{
                         opacity: isVisible ? 1 : 0.3,
                         transform: isVisible ? 'translateX(0)' : 'translateX(20px)',
@@ -658,7 +689,7 @@ export default function Services() {
                       }}
                     >
                       <p 
-                        className="text-sm md:text-base leading-relaxed max-w-md"
+                        className="text-base leading-relaxed max-w-md"
                         style={{ color: isVisible ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.3)' }}
                       >
                         {step.description}
