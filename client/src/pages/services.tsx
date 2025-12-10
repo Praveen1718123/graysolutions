@@ -416,10 +416,10 @@ export default function Services() {
                         {service.number}
                       </span>
                       <div 
-                        className="rounded-lg overflow-hidden"
+                        className="overflow-hidden"
                         style={{ 
-                          width: '160px', 
-                          height: '160px',
+                          width: '200px', 
+                          height: '200px',
                         }}
                       >
                         <ShapeVideo />
@@ -454,10 +454,10 @@ export default function Services() {
                     
                     {/* Shape in container at bottom */}
                     <div 
-                      className="mt-auto rounded-lg overflow-hidden"
+                      className="mt-auto overflow-hidden flex justify-center"
                       style={{ 
                         width: '100%', 
-                        height: '140px',
+                        height: '120px',
                       }}
                     >
                       <ShapeVideo />
