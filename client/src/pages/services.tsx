@@ -46,11 +46,26 @@ export default function Services() {
   );
 
   const workflowSteps = [
-    { id: 0, number: "01", title: "Brainstorm", description: "Explore ideas and understand your vision and goals." },
-    { id: 1, number: "02", title: "Define", description: "Clarify scope, requirements, and success metrics." },
-    { id: 2, number: "03", title: "Design", description: "Create wireframes, prototypes, and visual designs." },
-    { id: 3, number: "04", title: "Build", description: "Develop and test with agile sprints and iterations." },
-    { id: 4, number: "05", title: "Launch & Optimize", description: "Deploy, monitor, and continuously improve." },
+    { 
+      id: 0, 
+      title: "Research", 
+      description: "Together, we'll gain a comprehensive understanding of your brand's strengths, weaknesses, and opportunities. I'll take a deep dive into your brand, competitors, and target audience using market analysis, consumer research, and competitive benchmarking. This strategic approach will help inform the creative decisions throughout the design process." 
+    },
+    { 
+      id: 1, 
+      title: "Design", 
+      description: "I'll use the insights gained during the research phase to synthesize ideas and create a visually powerful language using Figma. We'll quickly iterate and refine the concept using mockups and wireframes. From typography to color palettes, I'll ensure that every element of the design aligns with your brand's identity and goals." 
+    },
+    { 
+      id: 2, 
+      title: "Build", 
+      description: "With the design finalized, we move into development. Using modern technologies and best practices, I'll build a robust, scalable solution that brings your vision to life. Every feature is carefully crafted and tested to ensure a seamless user experience." 
+    },
+    { 
+      id: 3, 
+      title: "Launch", 
+      description: "Once everything is polished and tested, we'll launch your project to the world. I'll handle the deployment, set up analytics, and ensure everything runs smoothly. Post-launch, I'll monitor performance and make any necessary optimizations." 
+    },
   ];
 
   const roadmapRef = useRef<HTMLElement>(null);
@@ -63,7 +78,7 @@ export default function Services() {
 
   useEffect(() => {
     return smoothRoadmapProgress.on("change", (v) => {
-      const step = Math.min(4, Math.floor(v * 5));
+      const step = Math.min(3, Math.floor(v * 4));
       setCurrentStep(step);
     });
   }, [smoothRoadmapProgress]);
@@ -536,199 +551,132 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Workflow Roadmap Section - Dark with diagonal path */}
+      {/* Workflow Roadmap Section - Vertical Timeline */}
       <section 
         ref={roadmapRef}
         className="relative z-10"
-        style={{ height: '400vh' }}
+        style={{ height: '500vh' }}
       >
         <div 
           className="sticky top-0 w-full overflow-hidden"
           style={{ 
             height: '100vh',
-            background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%)',
+            background: '#0A0A0A',
           }}
         >
-          {/* Subtle grid pattern overlay */}
+          {/* Green gradient overlays */}
           <div 
-            className="absolute inset-0 opacity-5"
+            className="absolute inset-0"
             style={{
-              backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)',
-              backgroundSize: '40px 40px',
+              background: 'radial-gradient(ellipse at 0% 0%, rgba(34,197,94,0.15) 0%, transparent 50%)',
+            }}
+          />
+          <div 
+            className="absolute inset-0"
+            style={{
+              background: 'radial-gradient(ellipse at 100% 100%, rgba(34,197,94,0.15) 0%, transparent 50%)',
             }}
           />
 
-          {/* Section Title */}
-          <div className="absolute top-8 left-0 right-0 z-20 px-8 md:px-16">
-            <h2 className="text-2xl md:text-3xl font-bold text-white">
-              Our Workflow
-            </h2>
-          </div>
-
-          {/* SVG Diagonal Path - Top Left to Bottom Right */}
-          <svg 
-            className="absolute inset-0 w-full h-full"
-            viewBox="0 0 1000 600"
-            preserveAspectRatio="xMidYMid slice"
-          >
-            <defs>
-              <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#FF6801" />
-                <stop offset="50%" stopColor="#FF8534" />
-                <stop offset="100%" stopColor="#FFB366" />
-              </linearGradient>
-              <filter id="glowFilter">
-                <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
-                <feMerge>
-                  <feMergeNode in="coloredBlur"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-              <filter id="softGlow">
-                <feGaussianBlur stdDeviation="3" result="blur"/>
-                <feMerge>
-                  <feMergeNode in="blur"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-            </defs>
-
-            {/* Background path (dim) - Diagonal S-curve */}
-            <path
-              d="M 50 80 C 200 80, 250 180, 300 200 C 400 240, 450 320, 550 340 C 650 360, 700 420, 800 450 C 850 470, 900 520, 950 540"
-              fill="none"
-              stroke="rgba(255,255,255,0.08)"
-              strokeWidth="3"
-              strokeLinecap="round"
-            />
-            
-            {/* Animated glowing path */}
-            <motion.path
-              d="M 50 80 C 200 80, 250 180, 300 200 C 400 240, 450 320, 550 340 C 650 360, 700 420, 800 450 C 850 470, 900 520, 950 540"
-              fill="none"
-              stroke="url(#pathGradient)"
-              strokeWidth="4"
-              strokeLinecap="round"
-              filter="url(#softGlow)"
-              style={{
-                pathLength: smoothRoadmapProgress,
-              }}
-            />
-
-            {/* Glowing orb that follows the path */}
-            <motion.circle
-              r="14"
-              fill="#FF6801"
-              filter="url(#glowFilter)"
-              style={{
-                offsetPath: "path('M 50 80 C 200 80, 250 180, 300 200 C 400 240, 450 320, 550 340 C 650 360, 700 420, 800 450 C 850 470, 900 520, 950 540')",
-                offsetDistance: useTransform(smoothRoadmapProgress, [0, 1], ["0%", "100%"]),
-              }}
-            />
-
-            {/* Checkpoint markers at each step */}
-            {[
-              { x: 50, y: 80 },
-              { x: 300, y: 200 },
-              { x: 550, y: 340 },
-              { x: 800, y: 450 },
-              { x: 950, y: 540 },
-            ].map((pos, i) => (
-              <g key={i}>
-                <circle
-                  cx={pos.x}
-                  cy={pos.y}
-                  r="6"
-                  fill={currentStep >= i ? '#FF6801' : 'rgba(255,255,255,0.15)'}
-                  style={{ transition: 'fill 400ms ease' }}
-                />
-                <circle
-                  cx={pos.x}
-                  cy={pos.y}
-                  r="12"
-                  fill="none"
-                  stroke={currentStep >= i ? 'rgba(255,104,1,0.5)' : 'rgba(255,255,255,0.08)'}
-                  strokeWidth="2"
-                  style={{ transition: 'stroke 400ms ease' }}
-                />
-              </g>
-            ))}
-          </svg>
-
-          {/* Step Cards - Positioned along diagonal */}
-          <div className="absolute inset-0 px-8 md:px-16 py-24">
-            {workflowSteps.map((step, index) => {
-              const isVisible = currentStep >= index;
-              const isCurrent = currentStep === index;
-              const cardPositions = [
-                { left: '2%', top: '8%' },
-                { left: '22%', top: '25%' },
-                { left: '42%', top: '42%' },
-                { left: '62%', top: '58%' },
-                { left: '78%', top: '72%' },
-              ];
-              return (
-                <div
-                  key={step.id}
-                  className="absolute"
-                  style={{
-                    left: cardPositions[index].left,
-                    top: cardPositions[index].top,
-                    opacity: isVisible ? 1 : 0.2,
-                    transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(10px) scale(0.95)',
-                    transition: 'all 500ms cubic-bezier(0.4, 0, 0.2, 1)',
-                    zIndex: isCurrent ? 10 : 5,
-                  }}
-                  data-testid={`workflow-step-${index}`}
-                >
-                  <div 
-                    className="p-5 rounded-2xl backdrop-blur-lg"
-                    style={{
-                      backgroundColor: isCurrent ? 'rgba(255,104,1,0.15)' : 'rgba(255,255,255,0.06)',
-                      border: isCurrent ? '1px solid rgba(255,104,1,0.4)' : '1px solid rgba(255,255,255,0.1)',
-                      boxShadow: isCurrent ? '0 20px 40px rgba(255,104,1,0.15)' : 'none',
-                      minWidth: '200px',
-                      maxWidth: '240px',
-                      transition: 'all 400ms ease',
-                    }}
-                  >
-                    <span 
-                      className="text-xs font-bold tracking-wider block mb-2"
-                      style={{ color: isCurrent ? '#FF6801' : 'rgba(255,104,1,0.6)' }}
-                    >
-                      {step.number}
-                    </span>
-                    <h3 
-                      className="text-lg font-semibold mb-2"
-                      style={{ color: isCurrent ? '#FFFFFF' : 'rgba(255,255,255,0.8)' }}
-                    >
-                      {step.title}
-                    </h3>
-                    <p 
-                      className="text-sm leading-relaxed"
-                      style={{ color: isCurrent ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.4)' }}
-                    >
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Progress indicator */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex items-center gap-3">
-            {workflowSteps.map((_, i) => (
-              <div
-                key={i}
-                className="rounded-full transition-all duration-300"
+          {/* Main content container */}
+          <div className="relative h-full flex items-center justify-center px-8 md:px-16 py-20">
+            <div 
+              className="relative w-full max-w-4xl flex flex-col justify-between"
+              style={{ height: '60vh' }}
+            >
+              {/* Vertical timeline line */}
+              <div 
+                className="absolute left-1/2 transform -translate-x-1/2 top-2 bottom-2"
                 style={{
-                  width: currentStep === i ? '24px' : '8px',
-                  height: '8px',
-                  backgroundColor: currentStep >= i ? '#FF6801' : 'rgba(255,255,255,0.2)',
+                  width: '2px',
+                  backgroundColor: 'rgba(255,255,255,0.15)',
                 }}
-              />
-            ))}
+              >
+                {/* Animated progress line */}
+                <motion.div
+                  className="absolute top-0 left-0 w-full origin-top"
+                  style={{
+                    backgroundColor: '#22C55E',
+                    scaleY: smoothRoadmapProgress,
+                    height: '100%',
+                  }}
+                />
+              </div>
+
+              {/* Timeline steps */}
+              {workflowSteps.map((step, index) => {
+                const isVisible = currentStep >= index;
+                
+                return (
+                  <div
+                    key={step.id}
+                    className="relative flex items-center"
+                    data-testid={`workflow-step-${index}`}
+                  >
+                    {/* Left side - Title */}
+                    <div 
+                      className="flex-1 text-right pr-8 md:pr-12"
+                      style={{
+                        opacity: isVisible ? 1 : 0.3,
+                        transform: isVisible ? 'translateX(0)' : 'translateX(-20px)',
+                        transition: 'all 600ms cubic-bezier(0.4, 0, 0.2, 1)',
+                      }}
+                    >
+                      <h3 
+                        className="text-2xl md:text-3xl font-semibold"
+                        style={{ color: isVisible ? '#22C55E' : 'rgba(255,255,255,0.4)' }}
+                      >
+                        {step.title}
+                      </h3>
+                    </div>
+
+                    {/* Center - Dot */}
+                    <div 
+                      className="relative z-10 flex-shrink-0"
+                      style={{
+                        width: '16px',
+                        height: '16px',
+                      }}
+                    >
+                      <div 
+                        className="w-full h-full rounded-full"
+                        style={{
+                          backgroundColor: isVisible ? '#22C55E' : 'rgba(255,255,255,0.3)',
+                          boxShadow: isVisible ? '0 0 20px rgba(34,197,94,0.5)' : 'none',
+                          transition: 'all 400ms ease',
+                        }}
+                      />
+                    </div>
+
+                    {/* Right side - Description */}
+                    <div 
+                      className="flex-1 pl-8 md:pl-12"
+                      style={{
+                        opacity: isVisible ? 1 : 0.3,
+                        transform: isVisible ? 'translateX(0)' : 'translateX(20px)',
+                        transition: 'all 600ms cubic-bezier(0.4, 0, 0.2, 1) 100ms',
+                      }}
+                    >
+                      <p 
+                        className="text-sm md:text-base leading-relaxed max-w-md"
+                        style={{ color: isVisible ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.3)' }}
+                      >
+                        {step.description}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Scroll indicator */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2">
+            <span className="text-xs text-white/40 tracking-wider uppercase">Scroll</span>
+            <div 
+              className="w-px h-8"
+              style={{ backgroundColor: 'rgba(255,255,255,0.2)' }}
+            />
           </div>
         </div>
       </section>
