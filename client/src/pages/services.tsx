@@ -40,6 +40,7 @@ export default function Services() {
       muted
       playsInline
       className="w-full h-full object-contain"
+      style={{ mixBlendMode: 'multiply' }}
       src={shapeVideo}
     />
   );
