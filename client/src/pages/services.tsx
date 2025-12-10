@@ -39,8 +39,7 @@ export default function Services() {
       loop
       muted
       playsInline
-      className="w-full h-full object-cover"
-      style={{ backgroundColor: '#E5E7EB' }}
+      className="w-full h-full object-contain"
       src={shapeVideo}
     />
   );
@@ -419,9 +418,8 @@ export default function Services() {
                       <div 
                         className="rounded-lg overflow-hidden"
                         style={{ 
-                          width: '120px', 
-                          height: '120px',
-                          backgroundColor: '#E5E7EB',
+                          width: '160px', 
+                          height: '160px',
                         }}
                       >
                         <ShapeVideo />
@@ -454,13 +452,12 @@ export default function Services() {
                       {service.title}
                     </h3>
                     
-                    {/* Shape in gray container at bottom */}
+                    {/* Shape in container at bottom */}
                     <div 
                       className="mt-auto rounded-lg overflow-hidden"
                       style={{ 
                         width: '100%', 
                         height: '140px',
-                        backgroundColor: '#E5E7EB',
                       }}
                     >
                       <ShapeVideo />
