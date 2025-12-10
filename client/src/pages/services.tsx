@@ -32,22 +32,18 @@ export default function Services() {
     },
   ];
 
-  const ShapePlaceholder = ({ id }: { id: number }) => {
-    const colors = ['#3B82F6', '#8B5CF6', '#10B981', '#F59E0B', '#6366F1'];
-    return (
-      <div 
-        className="w-full h-full flex items-center justify-center"
-        style={{ 
-          background: `linear-gradient(135deg, ${colors[id]} 0%, ${colors[(id + 1) % 5]} 100%)`,
-          borderRadius: '8px',
-        }}
-      >
-        <span className="text-white text-4xl font-bold opacity-30">
-          0{id + 1}
-        </span>
-      </div>
-    );
-  };
+  const ShapeVideo = () => (
+    <video
+      autoPlay
+      loop
+      muted
+      playsInline
+      className="w-full h-full object-cover"
+      style={{ backgroundColor: '#E5E7EB' }}
+    >
+      <source src="/attached_assets/AZsH87KtLoJfGOPlR-k16A-AZsH87Ktl1Pfbfo7ysMdMA_1765365085405.mp4" type="video/mp4" />
+    </video>
+  );
 
   const workflowSteps = [
     { id: 0, number: "01", title: "Brainstorm", description: "Explore ideas and understand your vision and goals." },
@@ -428,7 +424,7 @@ export default function Services() {
                           backgroundColor: '#E5E7EB',
                         }}
                       >
-                        <ShapePlaceholder id={service.id} />
+                        <ShapeVideo />
                       </div>
                     </div>
                   </div>
@@ -467,7 +463,7 @@ export default function Services() {
                         backgroundColor: '#E5E7EB',
                       }}
                     >
-                      <ShapePlaceholder id={service.id} />
+                      <ShapeVideo />
                     </div>
                   </div>
                 </div>
