@@ -521,12 +521,14 @@ export default function Services() {
                       <h3 className="text-base font-semibold mb-2">
                         {service.title}
                       </h3>
-                      <p 
-                        className="text-sm leading-relaxed"
+                      <ul 
+                        className="text-sm leading-relaxed space-y-1"
                         style={{ color: activeService === service.id ? 'rgba(15,23,42,0.7)' : 'rgba(15,23,42,0.5)' }}
                       >
-                        {service.description}
-                      </p>
+                        {service.details.slice(0, 2).map((detail, idx) => (
+                          <li key={idx}>{detail}</li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
                 </motion.div>
