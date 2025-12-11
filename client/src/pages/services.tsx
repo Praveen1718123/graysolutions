@@ -583,129 +583,106 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Workflow Roadmap Section - Horizontal Scroll */}
+      {/* Workflow Roadmap Section - Horizontal Timeline */}
       <section 
         ref={roadmapRef}
         className="relative z-10"
         style={{ height: '300vh' }}
       >
         <div 
-          className="sticky top-0 w-full"
+          className="sticky top-0 w-full flex items-center"
           style={{ 
             height: '100vh',
             backgroundColor: '#FFFFFF',
           }}
         >
-          {/* Main content container */}
-          <div className="h-full flex flex-col justify-center px-8 md:px-16 py-16">
-            {/* Section heading */}
-            <div className="mb-12 md:mb-16">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
-                How We Work
-              </h2>
+          {/* Main content container - centered vertically */}
+          <div className="w-full px-8 md:px-16 lg:px-24">
+            {/* Workflow cards grid */}
+            <div className="grid grid-cols-4 gap-8 md:gap-12 lg:gap-16 mb-16">
+              {workflowSteps.map((step, index) => {
+                const isVisible = currentStep >= index;
+                
+                return (
+                  <div
+                    key={step.id}
+                    style={{ 
+                      opacity: isVisible ? 1 : 0.3,
+                      transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
+                      transition: 'all 600ms cubic-bezier(0.4, 0, 0.2, 1)',
+                      transitionDelay: `${index * 100}ms`,
+                    }}
+                    data-testid={`workflow-step-${index}`}
+                  >
+                    {/* Icon */}
+                    <div className="mb-6 text-gray-900">
+                      <WorkflowIcon step={index} />
+                    </div>
+
+                    {/* Title */}
+                    <h3 
+                      className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4"
+                      style={{ color: '#1A1A1A' }}
+                    >
+                      {step.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p 
+                      className="text-sm md:text-base leading-relaxed"
+                      style={{ color: 'rgba(26,26,26,0.6)' }}
+                    >
+                      {step.description}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
 
-            {/* Horizontal scrolling workflow cards */}
-            <div className="relative">
-              <motion.div 
-                className="flex gap-8 md:gap-12"
-                style={{
-                  x: useTransform(smoothRoadmapProgress, [0, 1], ['0%', '-50%']),
-                }}
-              >
-                {workflowSteps.map((step, index) => {
-                  const isVisible = currentStep >= index;
-                  
-                  return (
-                    <div
-                      key={step.id}
-                      className="flex-shrink-0"
-                      style={{ 
-                        width: '280px',
-                        opacity: isVisible ? 1 : 0.4,
-                        transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-                        transition: 'all 500ms cubic-bezier(0.4, 0, 0.2, 1)',
-                      }}
-                      data-testid={`workflow-step-${index}`}
-                    >
-                      {/* Icon */}
-                      <div 
-                        className="mb-6 text-gray-900"
-                        style={{
-                          opacity: isVisible ? 1 : 0.3,
-                          transition: 'opacity 400ms ease',
-                        }}
-                      >
-                        <WorkflowIcon step={index} />
-                      </div>
-
-                      {/* Title */}
-                      <h3 
-                        className="text-2xl md:text-3xl font-bold mb-4"
-                        style={{ color: '#1A1A1A' }}
-                      >
-                        {step.title}
-                      </h3>
-
-                      {/* Description */}
-                      <p 
-                        className="text-sm md:text-base leading-relaxed"
-                        style={{ color: 'rgba(26,26,26,0.6)' }}
-                      >
-                        {step.description}
-                      </p>
-                    </div>
-                  );
-                })}
-              </motion.div>
-
-              {/* Horizontal timeline line */}
+            {/* Horizontal timeline line */}
+            <div 
+              className="relative"
+              style={{ height: '2px' }}
+            >
+              {/* Background line */}
               <div 
-                className="mt-12 relative"
-                style={{ height: '2px' }}
-              >
-                {/* Background line */}
-                <div 
-                  className="absolute inset-0"
-                  style={{ backgroundColor: 'rgba(26,26,26,0.15)' }}
-                />
-                
-                {/* Progress line */}
-                <motion.div
-                  className="absolute top-0 left-0 h-full origin-left"
-                  style={{
-                    backgroundColor: '#1A1A1A',
-                    scaleX: smoothRoadmapProgress,
-                    width: '100%',
-                  }}
-                />
+                className="absolute inset-0"
+                style={{ backgroundColor: '#1A1A1A' }}
+              />
+              
+              {/* Progress line overlay */}
+              <motion.div
+                className="absolute top-0 left-0 h-full origin-left"
+                style={{
+                  backgroundColor: '#1A1A1A',
+                  scaleX: smoothRoadmapProgress,
+                  width: '100%',
+                }}
+              />
 
-                {/* Dots */}
-                <div className="absolute inset-0 flex justify-between items-center">
-                  {workflowSteps.map((_, index) => {
-                    const isVisible = currentStep >= index;
-                    const dotPosition = (index / (workflowSteps.length - 1)) * 100;
-                    return (
-                      <div
-                        key={index}
-                        className="absolute"
-                        style={{ 
-                          left: `${dotPosition}%`,
-                          transform: 'translateX(-50%)',
-                        }}
-                      >
-                        <div 
-                          className="w-3 h-3 rounded-full"
-                          style={{
-                            backgroundColor: isVisible ? '#1A1A1A' : 'rgba(26,26,26,0.3)',
-                            transition: 'all 300ms ease',
-                          }}
-                        />
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
+              {/* Dots positioned at each step */}
+              {workflowSteps.map((_, index) => {
+                const isVisible = currentStep >= index;
+                const dotPosition = (index / (workflowSteps.length - 1)) * 100;
+                return (
+                  <div
+                    key={index}
+                    className="absolute top-1/2 -translate-y-1/2"
+                    style={{ 
+                      left: `${dotPosition}%`,
+                      transform: 'translate(-50%, -50%)',
+                    }}
+                  >
+                    <div 
+                      className="w-4 h-4 rounded-full"
+                      style={{
+                        backgroundColor: '#1A1A1A',
+                        transition: 'all 300ms ease',
+                      }}
+                    />
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
