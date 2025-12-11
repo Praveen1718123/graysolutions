@@ -48,25 +48,57 @@ export default function Services() {
   const workflowSteps = [
     { 
       id: 0, 
-      title: "Research", 
-      description: "Together, we'll gain a comprehensive understanding of your brand's strengths, weaknesses, and opportunities. I'll take a deep dive into your brand, competitors, and target audience using market analysis, consumer research, and competitive benchmarking. This strategic approach will help inform the creative decisions throughout the design process." 
+      title: "Discover", 
+      description: "Deep dive into your product, customers and revenue goals. Turn a messy brief into a clear problem statement." 
     },
     { 
       id: 1, 
       title: "Design", 
-      description: "I'll use the insights gained during the research phase to synthesize ideas and create a visually powerful language using Figma. We'll quickly iterate and refine the concept using mockups and wireframes. From typography to color palettes, I'll ensure that every element of the design aligns with your brand's identity and goals." 
+      description: "UX flows, wireframes and high-fidelity UI in Figma so you see everything before we build." 
     },
     { 
       id: 2, 
       title: "Build", 
-      description: "With the design finalized, we move into development. Using modern technologies and best practices, I'll build a robust, scalable solution that brings your vision to life. Every feature is carefully crafted and tested to ensure a seamless user experience." 
+      description: "Ship marketing sites, web apps and automations using modern stacks and AI tools, connected to CRM, WhatsApp and payments." 
     },
     { 
       id: 3, 
       title: "Launch", 
-      description: "Once everything is polished and tested, we'll launch your project to the world. I'll handle the deployment, set up analytics, and ensure everything runs smoothly. Post-launch, I'll monitor performance and make any necessary optimizations." 
+      description: "Track performance, iterate quickly and run experiments instead of leaving you with a static project." 
     },
   ];
+
+  const WorkflowIcon = ({ step }: { step: number }) => {
+    const icons = [
+      // Discover - square with diagonal lines
+      <svg key={0} width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <rect x="8" y="8" width="32" height="32" />
+        <line x1="8" y1="8" x2="40" y2="40" />
+        <line x1="8" y1="20" x2="28" y2="40" strokeDasharray="2 2" />
+        <line x1="20" y1="8" x2="40" y2="28" strokeDasharray="2 2" />
+      </svg>,
+      // Design - paper plane folded
+      <svg key={1} width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M24 8 L40 40 L24 32 L8 40 Z" />
+        <line x1="24" y1="8" x2="24" y2="32" />
+        <line x1="24" y1="20" x2="8" y2="40" strokeDasharray="2 2" />
+      </svg>,
+      // Build - 3D paper plane
+      <svg key={2} width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M8 20 L24 8 L40 20 L24 32 Z" />
+        <path d="M24 32 L24 44 L8 32 L8 20" />
+        <path d="M24 32 L24 44 L40 32 L40 20" />
+        <line x1="24" y1="8" x2="24" y2="32" strokeDasharray="2 2" />
+      </svg>,
+      // Launch - paper airplane flying
+      <svg key={3} width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M8 40 L40 8 L32 24 L20 28 Z" />
+        <path d="M20 28 L24 40 L32 24" />
+        <line x1="8" y1="40" x2="20" y2="28" />
+      </svg>,
+    ];
+    return icons[step];
+  };
 
   const roadmapRef = useRef<HTMLElement>(null);
   const { scrollYProgress: roadmapProgress } = useScroll({
@@ -551,163 +583,130 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Workflow Roadmap Section - Vertical Timeline */}
+      {/* Workflow Roadmap Section - Horizontal Scroll */}
       <section 
         ref={roadmapRef}
         className="relative z-10"
-        style={{ height: '500vh' }}
+        style={{ height: '300vh' }}
       >
         <div 
-          className="sticky top-0 w-full overflow-hidden"
+          className="sticky top-0 w-full"
           style={{ 
             height: '100vh',
-            background: '#0A0A0A',
+            backgroundColor: '#FFFFFF',
           }}
         >
-          {/* Green gradient overlays */}
-          <div 
-            className="absolute inset-0"
-            style={{
-              background: 'radial-gradient(ellipse at 0% 0%, rgba(34,197,94,0.15) 0%, transparent 50%)',
-            }}
-          />
-          <div 
-            className="absolute inset-0"
-            style={{
-              background: 'radial-gradient(ellipse at 100% 100%, rgba(34,197,94,0.15) 0%, transparent 50%)',
-            }}
-          />
-
           {/* Main content container */}
-          <div className="relative h-full flex items-center justify-center px-4 md:px-16 py-8 md:py-12 overflow-y-auto">
-            <div 
-              className="relative w-full max-w-4xl flex flex-col gap-6 md:gap-12"
-            >
-              {/* Vertical timeline line - hidden on mobile */}
-              <div 
-                className="hidden md:block absolute left-1/2 transform -translate-x-1/2 top-2 bottom-2"
+          <div className="h-full flex flex-col justify-center px-8 md:px-16 py-16">
+            {/* Section heading */}
+            <div className="mb-12 md:mb-16">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+                How We Work
+              </h2>
+            </div>
+
+            {/* Horizontal scrolling workflow cards */}
+            <div className="relative">
+              <motion.div 
+                className="flex gap-8 md:gap-12"
                 style={{
-                  width: '2px',
-                  backgroundColor: 'rgba(255,255,255,0.15)',
+                  x: useTransform(smoothRoadmapProgress, [0, 1], ['0%', '-50%']),
                 }}
               >
-                {/* Animated progress line */}
-                <motion.div
-                  className="absolute top-0 left-0 w-full origin-top"
-                  style={{
-                    backgroundColor: '#22C55E',
-                    scaleY: smoothRoadmapProgress,
-                    height: '100%',
-                  }}
-                />
-              </div>
-
-              {/* Timeline steps */}
-              {workflowSteps.map((step, index) => {
-                const isVisible = currentStep >= index;
-                
-                return (
-                  <div
-                    key={step.id}
-                    className="relative flex flex-col md:flex-row md:items-center"
-                    data-testid={`workflow-step-${index}`}
-                  >
-                    {/* Mobile: Dot + Title row */}
-                    <div className="flex items-center gap-3 md:hidden mb-2">
-                      <div 
-                        className="w-3 h-3 rounded-full flex-shrink-0"
-                        style={{
-                          backgroundColor: isVisible ? '#22C55E' : 'rgba(255,255,255,0.3)',
-                          boxShadow: isVisible ? '0 0 12px rgba(34,197,94,0.5)' : 'none',
-                          transition: 'all 400ms ease',
-                        }}
-                      />
-                      <h3 
-                        className="text-xl font-semibold"
-                        style={{ 
-                          color: isVisible ? '#22C55E' : 'rgba(255,255,255,0.4)',
-                          transition: 'color 400ms ease',
-                        }}
-                      >
-                        {step.title}
-                      </h3>
-                    </div>
-                    
-                    {/* Mobile: Description */}
-                    <p 
-                      className="md:hidden text-sm leading-relaxed pl-6"
+                {workflowSteps.map((step, index) => {
+                  const isVisible = currentStep >= index;
+                  
+                  return (
+                    <div
+                      key={step.id}
+                      className="flex-shrink-0"
                       style={{ 
-                        color: isVisible ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.3)',
-                        transition: 'color 400ms ease',
+                        width: '280px',
+                        opacity: isVisible ? 1 : 0.4,
+                        transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+                        transition: 'all 500ms cubic-bezier(0.4, 0, 0.2, 1)',
                       }}
+                      data-testid={`workflow-step-${index}`}
                     >
-                      {step.description}
-                    </p>
+                      {/* Icon */}
+                      <div 
+                        className="mb-6 text-gray-900"
+                        style={{
+                          opacity: isVisible ? 1 : 0.3,
+                          transition: 'opacity 400ms ease',
+                        }}
+                      >
+                        <WorkflowIcon step={index} />
+                      </div>
 
-                    {/* Desktop: Left side - Title */}
-                    <div 
-                      className="hidden md:block flex-1 text-right pr-12"
-                      style={{
-                        opacity: isVisible ? 1 : 0.3,
-                        transform: isVisible ? 'translateX(0)' : 'translateX(-20px)',
-                        transition: 'all 600ms cubic-bezier(0.4, 0, 0.2, 1)',
-                      }}
-                    >
+                      {/* Title */}
                       <h3 
-                        className="text-3xl font-semibold"
-                        style={{ color: isVisible ? '#22C55E' : 'rgba(255,255,255,0.4)' }}
+                        className="text-2xl md:text-3xl font-bold mb-4"
+                        style={{ color: '#1A1A1A' }}
                       >
                         {step.title}
                       </h3>
-                    </div>
 
-                    {/* Desktop: Center - Dot */}
-                    <div 
-                      className="hidden md:block relative z-10 flex-shrink-0"
-                      style={{
-                        width: '16px',
-                        height: '16px',
-                      }}
-                    >
-                      <div 
-                        className="w-full h-full rounded-full"
-                        style={{
-                          backgroundColor: isVisible ? '#22C55E' : 'rgba(255,255,255,0.3)',
-                          boxShadow: isVisible ? '0 0 20px rgba(34,197,94,0.5)' : 'none',
-                          transition: 'all 400ms ease',
-                        }}
-                      />
-                    </div>
-
-                    {/* Desktop: Right side - Description */}
-                    <div 
-                      className="hidden md:block flex-1 pl-12"
-                      style={{
-                        opacity: isVisible ? 1 : 0.3,
-                        transform: isVisible ? 'translateX(0)' : 'translateX(20px)',
-                        transition: 'all 600ms cubic-bezier(0.4, 0, 0.2, 1) 100ms',
-                      }}
-                    >
+                      {/* Description */}
                       <p 
-                        className="text-base leading-relaxed max-w-md"
-                        style={{ color: isVisible ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.3)' }}
+                        className="text-sm md:text-base leading-relaxed"
+                        style={{ color: 'rgba(26,26,26,0.6)' }}
                       >
                         {step.description}
                       </p>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+                  );
+                })}
+              </motion.div>
 
-          {/* Scroll indicator */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2">
-            <span className="text-xs text-white/40 tracking-wider uppercase">Scroll</span>
-            <div 
-              className="w-px h-8"
-              style={{ backgroundColor: 'rgba(255,255,255,0.2)' }}
-            />
+              {/* Horizontal timeline line */}
+              <div 
+                className="mt-12 relative"
+                style={{ height: '2px' }}
+              >
+                {/* Background line */}
+                <div 
+                  className="absolute inset-0"
+                  style={{ backgroundColor: 'rgba(26,26,26,0.15)' }}
+                />
+                
+                {/* Progress line */}
+                <motion.div
+                  className="absolute top-0 left-0 h-full origin-left"
+                  style={{
+                    backgroundColor: '#1A1A1A',
+                    scaleX: smoothRoadmapProgress,
+                    width: '100%',
+                  }}
+                />
+
+                {/* Dots */}
+                <div className="absolute inset-0 flex justify-between items-center">
+                  {workflowSteps.map((_, index) => {
+                    const isVisible = currentStep >= index;
+                    const dotPosition = (index / (workflowSteps.length - 1)) * 100;
+                    return (
+                      <div
+                        key={index}
+                        className="absolute"
+                        style={{ 
+                          left: `${dotPosition}%`,
+                          transform: 'translateX(-50%)',
+                        }}
+                      >
+                        <div 
+                          className="w-3 h-3 rounded-full"
+                          style={{
+                            backgroundColor: isVisible ? '#1A1A1A' : 'rgba(26,26,26,0.3)',
+                            transition: 'all 300ms ease',
+                          }}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
