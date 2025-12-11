@@ -583,34 +583,41 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Workflow Roadmap Section - Horizontal Timeline */}
+      {/* Workflow Roadmap Section - Horizontal Scroll */}
       <section 
         ref={roadmapRef}
         className="relative z-10"
         style={{ height: '300vh' }}
       >
         <div 
-          className="sticky top-0 w-full flex items-center"
+          className="sticky top-0 w-full flex items-center overflow-hidden"
           style={{ 
             height: '100vh',
             backgroundColor: '#FFFFFF',
           }}
         >
-          {/* Main content container - centered vertically */}
-          <div className="w-full px-8 md:px-16 lg:px-24">
-            {/* Workflow cards grid */}
-            <div className="grid grid-cols-4 gap-8 md:gap-12 lg:gap-16 mb-16">
+          {/* Scrolling container */}
+          <motion.div 
+            className="flex items-start pl-8 md:pl-16 lg:pl-24 pr-[50vw]"
+            style={{
+              x: useTransform(smoothRoadmapProgress, [0, 1], ['0px', '-600px']),
+            }}
+          >
+            {/* Workflow cards - wide cards for horizontal scroll effect */}
+            <div className="flex gap-16 md:gap-20 lg:gap-24">
               {workflowSteps.map((step, index) => {
                 const isVisible = currentStep >= index;
                 
                 return (
                   <div
                     key={step.id}
+                    className="flex-shrink-0"
                     style={{ 
-                      opacity: isVisible ? 1 : 0.3,
-                      transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-                      transition: 'all 600ms cubic-bezier(0.4, 0, 0.2, 1)',
-                      transitionDelay: `${index * 100}ms`,
+                      width: '340px',
+                      opacity: isVisible ? 1 : 0.4,
+                      transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+                      transition: 'all 500ms cubic-bezier(0.4, 0, 0.2, 1)',
+                      transitionDelay: `${index * 80}ms`,
                     }}
                     data-testid={`workflow-step-${index}`}
                   >
@@ -621,7 +628,7 @@ export default function Services() {
 
                     {/* Title */}
                     <h3 
-                      className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4"
+                      className="text-3xl md:text-4xl font-bold mb-4"
                       style={{ color: '#1A1A1A' }}
                     >
                       {step.title}
@@ -638,52 +645,50 @@ export default function Services() {
                 );
               })}
             </div>
+          </motion.div>
 
-            {/* Horizontal timeline line */}
+          {/* Horizontal timeline line - fixed at bottom */}
+          <div 
+            className="absolute bottom-24 left-8 right-8 md:left-16 md:right-16 lg:left-24 lg:right-24"
+            style={{ height: '2px' }}
+          >
+            {/* Background line */}
             <div 
-              className="relative"
-              style={{ height: '2px' }}
-            >
-              {/* Background line */}
-              <div 
-                className="absolute inset-0"
-                style={{ backgroundColor: '#1A1A1A' }}
-              />
-              
-              {/* Progress line overlay */}
-              <motion.div
-                className="absolute top-0 left-0 h-full origin-left"
-                style={{
-                  backgroundColor: '#1A1A1A',
-                  scaleX: smoothRoadmapProgress,
-                  width: '100%',
-                }}
-              />
+              className="absolute inset-0"
+              style={{ backgroundColor: '#1A1A1A' }}
+            />
+            
+            {/* Progress line overlay */}
+            <motion.div
+              className="absolute top-0 left-0 h-full origin-left"
+              style={{
+                backgroundColor: '#1A1A1A',
+                scaleX: smoothRoadmapProgress,
+                width: '100%',
+              }}
+            />
 
-              {/* Dots positioned at each step */}
-              {workflowSteps.map((_, index) => {
-                const isVisible = currentStep >= index;
-                const dotPosition = (index / (workflowSteps.length - 1)) * 100;
-                return (
-                  <div
-                    key={index}
-                    className="absolute top-1/2 -translate-y-1/2"
-                    style={{ 
-                      left: `${dotPosition}%`,
-                      transform: 'translate(-50%, -50%)',
+            {/* Dots positioned at each step */}
+            {workflowSteps.map((_, index) => {
+              const dotPosition = (index / (workflowSteps.length - 1)) * 100;
+              return (
+                <div
+                  key={index}
+                  className="absolute top-1/2"
+                  style={{ 
+                    left: `${dotPosition}%`,
+                    transform: 'translate(-50%, -50%)',
+                  }}
+                >
+                  <div 
+                    className="w-4 h-4 rounded-full"
+                    style={{
+                      backgroundColor: '#1A1A1A',
                     }}
-                  >
-                    <div 
-                      className="w-4 h-4 rounded-full"
-                      style={{
-                        backgroundColor: '#1A1A1A',
-                        transition: 'all 300ms ease',
-                      }}
-                    />
-                  </div>
-                );
-              })}
-            </div>
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
