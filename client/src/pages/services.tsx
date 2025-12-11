@@ -652,24 +652,25 @@ export default function Services() {
             className="absolute bottom-24 left-8 right-8 md:left-16 md:right-16 lg:left-24 lg:right-24"
             style={{ height: '2px' }}
           >
-            {/* Background line */}
+            {/* Background line (gray) */}
             <div 
               className="absolute inset-0"
-              style={{ backgroundColor: '#1A1A1A' }}
+              style={{ backgroundColor: 'rgba(26,26,26,0.2)' }}
             />
             
-            {/* Progress line overlay */}
-            <motion.div
+            {/* Progress line overlay (synced with currentStep) */}
+            <div
               className="absolute top-0 left-0 h-full origin-left"
               style={{
                 backgroundColor: '#1A1A1A',
-                scaleX: smoothRoadmapProgress,
-                width: '100%',
+                width: `${(currentStep / (workflowSteps.length - 1)) * 100}%`,
+                transition: 'width 400ms ease-out',
               }}
             />
 
-            {/* Dots positioned at each step */}
+            {/* Dots positioned at each step - synced with visibility */}
             {workflowSteps.map((_, index) => {
+              const isActive = currentStep >= index;
               const dotPosition = (index / (workflowSteps.length - 1)) * 100;
               return (
                 <div
@@ -683,7 +684,8 @@ export default function Services() {
                   <div 
                     className="w-4 h-4 rounded-full"
                     style={{
-                      backgroundColor: '#1A1A1A',
+                      backgroundColor: isActive ? '#1A1A1A' : 'rgba(26,26,26,0.3)',
+                      transition: 'all 300ms ease',
                     }}
                   />
                 </div>
