@@ -596,15 +596,15 @@ export default function Services() {
             backgroundColor: '#FFFFFF',
           }}
         >
-          {/* Scrolling container */}
+          {/* Scrolling container - sized so 2.5 cards fit initially */}
           <motion.div 
-            className="flex items-start pl-8 md:pl-16 lg:pl-24 pr-[50vw]"
+            className="flex items-start pl-8 md:pl-16 lg:pl-24"
             style={{
-              x: useTransform(smoothRoadmapProgress, [0, 1], ['0px', '-600px']),
+              x: useTransform(smoothRoadmapProgress, [0, 1], ['0%', '-40%']),
             }}
           >
-            {/* Workflow cards - wide cards for horizontal scroll effect */}
-            <div className="flex gap-16 md:gap-20 lg:gap-24">
+            {/* Workflow cards - Discover/Design visible, Build peeking, Launch hidden */}
+            <div className="flex gap-[6vw]">
               {workflowSteps.map((step, index) => {
                 const isVisible = currentStep >= index;
                 
@@ -613,7 +613,9 @@ export default function Services() {
                     key={step.id}
                     className="flex-shrink-0"
                     style={{ 
-                      width: '340px',
+                      width: 'calc(32vw - 24px)',
+                      minWidth: '280px',
+                      maxWidth: '420px',
                       opacity: isVisible ? 1 : 0.4,
                       transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
                       transition: 'all 500ms cubic-bezier(0.4, 0, 0.2, 1)',
