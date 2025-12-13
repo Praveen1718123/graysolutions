@@ -590,12 +590,23 @@ export default function Services() {
         style={{ height: '300vh' }}
       >
         <div 
-          className="sticky top-0 w-full flex items-center overflow-hidden"
+          className="sticky top-0 w-full flex flex-col justify-center overflow-hidden"
           style={{ 
             height: '100vh',
             backgroundColor: '#FFFFFF',
           }}
         >
+          {/* Section Title */}
+          <div className="pl-8 md:pl-16 lg:pl-24 mb-12">
+            <h2 
+              className="text-2xl md:text-3xl font-bold"
+              style={{ color: '#1A1A1A' }}
+              data-testid="workflow-section-title"
+            >
+              Roadmap of our workflow
+            </h2>
+          </div>
+
           {/* Scrolling container - sized so 2.5 cards fit initially */}
           <motion.div 
             className="flex items-start pl-8 md:pl-16 lg:pl-24"
@@ -624,13 +635,13 @@ export default function Services() {
                     data-testid={`workflow-step-${index}`}
                   >
                     {/* Icon */}
-                    <div className="mb-6 text-gray-900">
+                    <div className="mb-4 text-gray-900">
                       <WorkflowIcon step={index} />
                     </div>
 
                     {/* Title */}
                     <h3 
-                      className="text-3xl md:text-4xl font-bold mb-4"
+                      className="text-2xl md:text-3xl font-bold mb-3"
                       style={{ color: '#1A1A1A' }}
                     >
                       {step.title}
@@ -638,8 +649,8 @@ export default function Services() {
 
                     {/* Description */}
                     <p 
-                      className="text-sm md:text-base leading-relaxed"
-                      style={{ color: 'rgba(26,26,26,0.6)' }}
+                      className="text-sm leading-relaxed"
+                      style={{ color: 'rgba(26,26,26,0.5)' }}
                     >
                       {step.description}
                     </p>
@@ -649,9 +660,9 @@ export default function Services() {
             </div>
           </motion.div>
 
-          {/* Horizontal timeline line - fixed at bottom */}
+          {/* Horizontal timeline line - positioned below content */}
           <div 
-            className="absolute bottom-24 left-8 right-8 md:left-16 md:right-16 lg:left-24 lg:right-24"
+            className="mt-16 mx-8 md:mx-16 lg:mx-24 relative"
             style={{ height: '2px' }}
           >
             {/* Background line (gray) */}
