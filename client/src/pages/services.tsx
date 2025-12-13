@@ -590,14 +590,14 @@ export default function Services() {
         style={{ height: '300vh' }}
       >
         <div 
-          className="sticky top-0 w-full flex flex-col justify-center overflow-hidden"
+          className="sticky top-0 w-full flex flex-col justify-start pt-24 md:pt-32 overflow-hidden"
           style={{ 
             height: '100vh',
             backgroundColor: '#FFFFFF',
           }}
         >
           {/* Section Title */}
-          <div className="pl-8 md:pl-16 lg:pl-24 mb-12">
+          <div className="pl-8 md:pl-16 lg:pl-24 mb-10">
             <h2 
               className="text-2xl md:text-3xl font-bold"
               style={{ color: '#1A1A1A' }}
