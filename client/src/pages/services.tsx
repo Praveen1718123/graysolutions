@@ -746,13 +746,12 @@ export default function Services() {
                             </li>
                           ))}
                         </ul>
-                        <a 
-                          href="#" 
-                          className="text-sm font-medium inline-flex items-center gap-1"
+                        <span 
+                          className="text-sm font-medium inline-flex items-center gap-1 cursor-pointer"
                           style={{ color: '#1A1A1A' }}
                         >
                           {item.link}
-                        </a>
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -813,23 +812,17 @@ export default function Services() {
             </div>
 
             {/* Right Column - Flows naturally with page scroll */}
-            <div className="relative">
-              {/* Subtle divider line between columns */}
-              <div 
-                className="absolute left-0 top-0 bottom-0 w-px hidden lg:block"
-                style={{ backgroundColor: 'rgba(26,26,26,0.08)', transform: 'translateX(-40px)' }}
-              />
-              
+            <div>
               <div className="space-y-3">
                 {[
                   { id: 0, title: "Brand Design", description: "Positioning, identity, and systems that make you instantly recognizable — and consistent everywhere.", bullets: ["Brand strategy + messaging", "Visual identity + guidelines", "Templates + creative direction"], link: "Explore Brand Design →" },
-                  { id: 1, title: "Product & Experience Design", description: "From idea to flow to UI — we design interfaces that feel premium and work in the real world.", bullets: ["Product strategy + UX flows", "UI screens + design systems", "Prototypes + dev-ready handoff"], link: "Explore Product Design →", defaultOpen: true },
+                  { id: 1, title: "Product & Experience Design", description: "From idea to flow to UI — we design interfaces that feel premium and work in the real world.", bullets: ["Product strategy + UX flows", "UI screens + design systems", "Prototypes + dev-ready handoff"], link: "Explore Product Design →" },
                   { id: 2, title: "Web & Platform Solutions", description: "Fast, responsive websites and web apps built to scale cleanly — without tech debt mess.", bullets: ["Marketing sites + landing pages", "Portals + dashboards", "Integrations + performance"], link: "Explore Web Solutions →" },
                   { id: 3, title: "Commerce & Shopify", description: "Conversion-first storefronts and Shopify builds that look premium and sell better.", bullets: ["Shopify setup + theme customization", "Product page + checkout optimization", "Tracking + basic retention automations"], link: "Explore Commerce →" },
                   { id: 4, title: "Content & Performance Marketing", description: "Creative + distribution as a system — built for demand, not vanity metrics.", bullets: ["Reels, ads, carousels, brand assets", "Meta/Google ad testing loops", "Landing page conversion improvements"], link: "Explore Marketing →" },
                   { id: 5, title: "AI Agents & Automation", description: "AI that reduces workload and speeds up operations — built around your actual workflows.", bullets: ["Lead-response + support agents", "RAG knowledge bots", "Automation pipelines + integrations"], link: "Explore AI Agents →" },
                 ].map((item) => {
-                  const isExpanded = expandedCapability === item.id || (expandedCapability === null && item.defaultOpen);
+                  const isExpanded = expandedCapability === item.id;
                   return (
                     <div 
                       key={item.id}
@@ -882,13 +875,12 @@ export default function Services() {
                               </li>
                             ))}
                           </ul>
-                          <a 
-                            href="#" 
-                            className="text-sm font-medium inline-flex items-center gap-1 hover:gap-2 transition-all"
+                          <span 
+                            className="text-sm font-medium inline-flex items-center gap-1 cursor-pointer hover:gap-2 transition-all"
                             style={{ color: '#1A1A1A' }}
                           >
                             {item.link}
-                          </a>
+                          </span>
                         </div>
                       </div>
                     </div>
