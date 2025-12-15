@@ -3,47 +3,40 @@ import { Link } from "wouter";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 import heroVideo from "@assets/hero-video-horizontal.mp4";
-import shapeVideo from "@assets/AZsH87KtLoJfGOPlR-k16A-AZsH87Ktl1Pfbfo7ysMdMA_1765365085405.mp4";
+import compassImage from "@assets/Screenshot_2025-12-15_at_4.20.13_PM_1765795819277.png";
+import engineImage from "@assets/ChatGPT_Image_Dec_15,_2025,_03_52_30_PM_1765795987686.png";
 
 export default function Services() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeService, setActiveService] = useState(1);
+  const [activeService, setActiveService] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
 
-  const servicesTiles = [
+  const whatWeDoTiles = [
     { 
-      id: 0, number: "01", title: "Strategy & Positioning",
-      details: ["Offer & package design", "ICP & buyer persona clarity", "Brand positioning & messaging", "Customer journey & funnel mapping"],
+      id: 0, 
+      headline: "When a clear direction is required before work begins",
+      image: compassImage,
+      gradient: "linear-gradient(180deg, #E0F4FF 0%, #B8E6FF 100%)",
     },
     { 
-      id: 1, number: "02", title: "Product & UX Design",
-      details: ["UX / UI design for web & apps", "User flows, wireframes & prototypes", "Design systems & component libraries", "Usability reviews & iteration"],
+      id: 1, 
+      headline: "When an interface needs to be designed with clarity and precision",
+      image: engineImage,
+      gradient: "linear-gradient(180deg, #E8E8E8 0%, #C8C8C8 100%)",
     },
     { 
-      id: 2, number: "03", title: "Websites & Experience",
-      details: ["Marketing sites & service websites", "Conversion-focused landing pages", "Sales pages for launches & campaigns", "CMS setup (blogs, case studies, resources)"],
+      id: 2, 
+      headline: "When a digital product or system needs to be built and made operational",
+      image: null,
+      gradient: "linear-gradient(180deg, #FFE8D6 0%, #FFD4B8 100%)",
     },
     { 
-      id: 3, number: "04", title: "Funnels & Systems",
-      details: ["Lead capture → nurture → booking flows", "CRM setup & pipeline structure", "Form, payment & booking integrations", "Analytics, tracking & dashboards"],
-    },
-    { 
-      id: 4, number: "05", title: "Content & Performance",
-      details: ["Content & social media strategy", "Website & landing page copywriting", "Email / WhatsApp campaigns", "Performance review & optimisation"],
+      id: 3, 
+      headline: "When an existing experience needs improvement or performance correction",
+      image: null,
+      gradient: "linear-gradient(180deg, #E6FFE6 0%, #C8F0C8 100%)",
     },
   ];
-
-  const ShapeVideo = () => (
-    <video
-      autoPlay
-      loop
-      muted
-      playsInline
-      className="w-full h-full object-contain"
-      style={{ mixBlendMode: 'multiply' }}
-      src={shapeVideo}
-    />
-  );
 
   const workflowSteps = [
     { 
@@ -391,194 +384,65 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Services Section - Horizontal Tiles */}
+      {/* What We Do Section - 4 Tiles */}
       <section 
         className="relative z-10 py-16 md:py-24"
         style={{ backgroundColor: '#F6F7FA' }}
       >
-        <div className="mx-auto" style={{ padding: '0 12px' }}>
+        <div className="max-w-[1120px] mx-auto px-6 md:px-10">
           <motion.h2 
-            className="text-2xl md:text-3xl font-bold mb-10 px-3"
+            className="text-2xl md:text-3xl font-bold mb-10"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            data-testid="section-capabilities"
+            data-testid="section-what-we-do"
           >
-            Capabilities
+            What we do
           </motion.h2>
           
-          {/* Desktop: Horizontal tiles */}
-          <div className="hidden md:flex gap-2 items-stretch w-full">
-            {servicesTiles.map((service) => {
-              const isActive = activeService === service.id;
-              return (
-                <div
-                  key={service.id}
-                  className="cursor-pointer overflow-hidden flex flex-col relative"
-                  onClick={() => setActiveService(service.id)}
-                  onMouseEnter={() => setActiveService(service.id)}
-                  style={{
-                    flex: isActive ? '2.5' : '1',
-                    height: '400px',
-                    backgroundColor: isActive ? '#FFFFFF' : '#F0F1F4',
-                    borderRadius: '24px',
-                    boxShadow: isActive ? '0 20px 60px rgba(0,0,0,0.12)' : 'none',
-                    transition: 'flex 350ms cubic-bezier(0.25, 0.1, 0.25, 1), background-color 200ms ease, box-shadow 200ms ease',
-                    willChange: 'flex',
-                    transform: 'translateZ(0)',
-                  }}
-                  data-testid={`service-tile-${service.id}`}
-                >
-                  {/* Active/Hover state content */}
-                  <div 
-                    className="flex flex-col h-full absolute inset-0 p-5 overflow-hidden"
-                    style={{
-                      opacity: isActive ? 1 : 0,
-                      transition: 'opacity 250ms ease',
-                      pointerEvents: isActive ? 'auto' : 'none',
-                    }}
+          {/* 4 Tiles Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {whatWeDoTiles.map((tile) => (
+              <motion.div
+                key={tile.id}
+                className="rounded-3xl overflow-hidden flex flex-col"
+                style={{
+                  background: tile.gradient,
+                  height: '420px',
+                }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: tile.id * 0.1 }}
+                data-testid={`what-we-do-tile-${tile.id}`}
+              >
+                {/* Headline at top */}
+                <div className="p-6 pb-4">
+                  <h3 
+                    className="text-lg md:text-xl font-semibold leading-snug"
+                    style={{ color: '#1A1A1A' }}
                   >
-                    {/* Title at top */}
-                    <h3 className="text-base font-bold mb-3 relative z-10">
-                      {service.title}
-                    </h3>
-                    
-                    {/* Details list */}
-                    <ul className="space-y-1.5 relative z-10">
-                      {service.details.map((detail, idx) => (
-                        <li 
-                          key={idx}
-                          className="text-sm text-gray-600"
-                        >
-                          {detail}
-                        </li>
-                      ))}
-                    </ul>
-                    
-                    {/* Bottom row: Number left, shape right */}
-                    <div className="flex items-end justify-between mt-auto pt-4">
-                      <span 
-                        className="text-5xl font-bold"
-                        style={{ color: 'rgba(15,23,42,0.08)' }}
-                      >
-                        {service.number}
-                      </span>
-                      <div 
-                        className="overflow-hidden"
-                        style={{ 
-                          width: '200px', 
-                          height: '200px',
-                        }}
-                      >
-                        <ShapeVideo />
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Normal/Resting state content */}
-                  <div 
-                    className="flex flex-col h-full p-5 absolute inset-0"
-                    style={{
-                      opacity: isActive ? 0 : 1,
-                      transition: 'opacity 250ms ease',
-                      pointerEvents: isActive ? 'none' : 'auto',
-                    }}
-                  >
-                    {/* Number at top */}
-                    <span 
-                      className="text-5xl font-bold mb-3"
-                      style={{ color: 'rgba(15,23,42,0.15)' }}
-                    >
-                      {service.number}
-                    </span>
-                    
-                    {/* Title below number */}
-                    <h3 
-                      className="text-base font-bold leading-tight"
-                      style={{ color: 'rgba(15,23,42,0.9)' }}
-                    >
-                      {service.title}
-                    </h3>
-                    
-                    {/* Shape in container at bottom */}
-                    <div 
-                      className="mt-auto overflow-hidden flex justify-center"
-                      style={{ 
-                        width: '100%', 
-                        height: '120px',
-                      }}
-                    >
-                      <ShapeVideo />
-                    </div>
-                  </div>
+                    {tile.headline}
+                  </h3>
                 </div>
-              );
-            })}
-          </div>
-
-          {/* Mobile: Horizontal scroll slider */}
-          <div className="md:hidden overflow-x-auto pb-4 scrollbar-hide">
-            <div className="flex gap-4" style={{ width: 'max-content' }}>
-              {servicesTiles.map((service) => (
-                <motion.div
-                  key={service.id}
-                  className="cursor-pointer overflow-hidden flex flex-col"
-                  onClick={() => setActiveService(service.id)}
-                  style={{
-                    width: '260px',
-                    height: '360px',
-                    backgroundColor: activeService === service.id ? '#FFFFFF' : '#F0F1F4',
-                    borderRadius: '24px',
-                    boxShadow: activeService === service.id ? '0 20px 60px rgba(0,0,0,0.12)' : 'none',
-                    transition: 'all 300ms ease-out',
-                    flexShrink: 0,
-                  }}
-                  data-testid={`service-tile-mobile-${service.id}`}
-                >
-                  <div className="flex flex-col h-full">
-                    {/* Visual placeholder */}
+                
+                {/* Image at bottom */}
+                <div className="flex-1 flex items-end justify-center px-6 pb-6">
+                  {tile.image ? (
+                    <img 
+                      src={tile.image} 
+                      alt="" 
+                      className="max-w-full max-h-[240px] object-contain"
+                    />
+                  ) : (
                     <div 
-                      className="flex-1 m-4 mb-0 rounded-xl flex items-center justify-center"
-                      style={{ 
-                        background: activeService === service.id 
-                          ? 'linear-gradient(135deg, #FF6801 0%, #FF8534 100%)'
-                          : 'rgba(15,23,42,0.06)',
-                        minHeight: '160px'
-                      }}
-                    >
-                      <span 
-                        className="text-5xl font-bold"
-                        style={{ 
-                          color: activeService === service.id ? 'rgba(255,255,255,0.3)' : 'rgba(15,23,42,0.15)'
-                        }}
-                      >
-                        {service.number}
-                      </span>
-                    </div>
-                    {/* Content */}
-                    <div className="p-5">
-                      <span 
-                        className="text-sm font-medium mb-1 block"
-                        style={{ color: activeService === service.id ? '#FF6801' : 'rgba(15,23,42,0.4)' }}
-                      >
-                        {service.number}.
-                      </span>
-                      <h3 className="text-base font-semibold mb-2">
-                        {service.title}
-                      </h3>
-                      <ul 
-                        className="text-sm leading-relaxed space-y-1"
-                        style={{ color: activeService === service.id ? 'rgba(15,23,42,0.7)' : 'rgba(15,23,42,0.5)' }}
-                      >
-                        {service.details.slice(0, 2).map((detail, idx) => (
-                          <li key={idx}>{detail}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+                      className="w-32 h-32 rounded-full"
+                      style={{ backgroundColor: 'rgba(26,26,26,0.1)' }}
+                    />
+                  )}
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
