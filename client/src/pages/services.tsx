@@ -15,25 +15,33 @@ export default function Services() {
     { 
       id: 0, 
       headline: "When a clear direction is required before work begins",
+      subtext: "We help define strategy, positioning, and clarity before diving into execution.",
       image: compassImage,
+      video: null,
       gradient: "linear-gradient(180deg, #E0F4FF 0%, #B8E6FF 100%)",
     },
     { 
       id: 1, 
       headline: "When an interface needs to be designed with clarity and precision",
+      subtext: "We craft intuitive UX flows, wireframes, and high-fidelity designs that users love.",
       image: engineImage,
+      video: null,
       gradient: "linear-gradient(180deg, #E8E8E8 0%, #C8C8C8 100%)",
     },
     { 
       id: 2, 
       headline: "When a digital product or system needs to be built and made operational",
+      subtext: "We develop websites, apps, and automations using modern technology stacks.",
       image: null,
+      video: null,
       gradient: "linear-gradient(180deg, #FFE8D6 0%, #FFD4B8 100%)",
     },
     { 
       id: 3, 
       headline: "When an existing experience needs improvement or performance correction",
+      subtext: "We optimize and iterate on existing products to improve performance and user satisfaction.",
       image: null,
+      video: null,
       gradient: "linear-gradient(180deg, #E6FFE6 0%, #C8F0C8 100%)",
     },
   ];
@@ -384,14 +392,14 @@ export default function Services() {
         </div>
       </section>
 
-      {/* What We Do Section - 4 Tiles */}
+      {/* What We Do Section - 4 Tiles with Hover Expand */}
       <section 
         className="relative z-10 py-16 md:py-24"
         style={{ backgroundColor: '#F6F7FA' }}
       >
-        <div className="max-w-[1120px] mx-auto px-6 md:px-10">
+        <div className="mx-auto px-3 md:px-6">
           <motion.h2 
-            className="text-2xl md:text-3xl font-bold mb-10"
+            className="text-2xl md:text-3xl font-bold mb-10 px-3"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -400,49 +408,157 @@ export default function Services() {
             What we do
           </motion.h2>
           
-          {/* 4 Tiles Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {whatWeDoTiles.map((tile) => (
-              <motion.div
-                key={tile.id}
-                className="rounded-3xl overflow-hidden flex flex-col"
-                style={{
-                  background: tile.gradient,
-                  height: '420px',
-                }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: tile.id * 0.1 }}
-                data-testid={`what-we-do-tile-${tile.id}`}
-              >
-                {/* Headline at top */}
-                <div className="p-6 pb-4">
-                  <h3 
-                    className="text-lg md:text-xl font-semibold leading-snug"
-                    style={{ color: '#1A1A1A' }}
+          {/* Desktop: Horizontal tiles with hover expand */}
+          <div className="hidden md:flex gap-2 items-stretch w-full">
+            {whatWeDoTiles.map((tile) => {
+              const isActive = activeService === tile.id;
+              return (
+                <div
+                  key={tile.id}
+                  className="cursor-pointer overflow-hidden flex flex-col relative"
+                  onClick={() => setActiveService(tile.id)}
+                  onMouseEnter={() => setActiveService(tile.id)}
+                  style={{
+                    flex: isActive ? '2.5' : '1',
+                    height: '420px',
+                    background: tile.gradient,
+                    borderRadius: '24px',
+                    boxShadow: isActive ? '0 20px 60px rgba(0,0,0,0.12)' : 'none',
+                    transition: 'flex 350ms cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 200ms ease',
+                    willChange: 'flex',
+                    transform: 'translateZ(0)',
+                  }}
+                  data-testid={`what-we-do-tile-${tile.id}`}
+                >
+                  {/* Active/Hover state - shows video + subtext */}
+                  <div 
+                    className="flex flex-col h-full absolute inset-0 p-6 overflow-hidden"
+                    style={{
+                      opacity: isActive ? 1 : 0,
+                      transition: 'opacity 250ms ease',
+                      pointerEvents: isActive ? 'auto' : 'none',
+                    }}
                   >
-                    {tile.headline}
-                  </h3>
+                    {/* Headline at top */}
+                    <h3 
+                      className="text-xl font-semibold leading-snug mb-3"
+                      style={{ color: '#1A1A1A' }}
+                    >
+                      {tile.headline}
+                    </h3>
+                    
+                    {/* Subtext - shown on hover */}
+                    <p 
+                      className="text-sm leading-relaxed mb-4"
+                      style={{ color: 'rgba(26,26,26,0.6)' }}
+                    >
+                      {tile.subtext || 'Additional details will appear here on hover.'}
+                    </p>
+                    
+                    {/* Video/Image at bottom */}
+                    <div className="flex-1 flex items-end justify-center">
+                      {tile.video ? (
+                        <video
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          className="max-w-full max-h-[200px] object-contain"
+                          src={tile.video}
+                        />
+                      ) : tile.image ? (
+                        <img 
+                          src={tile.image} 
+                          alt="" 
+                          className="max-w-full max-h-[200px] object-contain"
+                        />
+                      ) : (
+                        <div 
+                          className="w-28 h-28 rounded-full"
+                          style={{ backgroundColor: 'rgba(26,26,26,0.1)' }}
+                        />
+                      )}
+                    </div>
+                  </div>
+                  
+                  {/* Default/Resting state */}
+                  <div 
+                    className="flex flex-col h-full p-6 absolute inset-0"
+                    style={{
+                      opacity: isActive ? 0 : 1,
+                      transition: 'opacity 250ms ease',
+                      pointerEvents: isActive ? 'none' : 'auto',
+                    }}
+                  >
+                    {/* Headline */}
+                    <h3 
+                      className="text-base font-semibold leading-snug"
+                      style={{ color: '#1A1A1A' }}
+                    >
+                      {tile.headline}
+                    </h3>
+                    
+                    {/* Image at bottom */}
+                    <div className="flex-1 flex items-end justify-center">
+                      {tile.image ? (
+                        <img 
+                          src={tile.image} 
+                          alt="" 
+                          className="max-w-full max-h-[180px] object-contain"
+                        />
+                      ) : (
+                        <div 
+                          className="w-24 h-24 rounded-full"
+                          style={{ backgroundColor: 'rgba(26,26,26,0.1)' }}
+                        />
+                      )}
+                    </div>
+                  </div>
                 </div>
-                
-                {/* Image at bottom */}
-                <div className="flex-1 flex items-end justify-center px-6 pb-6">
-                  {tile.image ? (
-                    <img 
-                      src={tile.image} 
-                      alt="" 
-                      className="max-w-full max-h-[240px] object-contain"
-                    />
-                  ) : (
-                    <div 
-                      className="w-32 h-32 rounded-full"
-                      style={{ backgroundColor: 'rgba(26,26,26,0.1)' }}
-                    />
-                  )}
-                </div>
-              </motion.div>
-            ))}
+              );
+            })}
+          </div>
+
+          {/* Mobile: Horizontal scroll */}
+          <div className="md:hidden overflow-x-auto pb-4 scrollbar-hide">
+            <div className="flex gap-4" style={{ width: 'max-content' }}>
+              {whatWeDoTiles.map((tile) => (
+                <motion.div
+                  key={tile.id}
+                  className="rounded-3xl overflow-hidden flex flex-col"
+                  style={{
+                    width: '280px',
+                    height: '380px',
+                    background: tile.gradient,
+                    flexShrink: 0,
+                  }}
+                  data-testid={`what-we-do-tile-mobile-${tile.id}`}
+                >
+                  <div className="p-5">
+                    <h3 
+                      className="text-lg font-semibold leading-snug"
+                      style={{ color: '#1A1A1A' }}
+                    >
+                      {tile.headline}
+                    </h3>
+                  </div>
+                  <div className="flex-1 flex items-end justify-center px-5 pb-5">
+                    {tile.image ? (
+                      <img 
+                        src={tile.image} 
+                        alt="" 
+                        className="max-w-full max-h-[200px] object-contain"
+                      />
+                    ) : (
+                      <div 
+                        className="w-24 h-24 rounded-full"
+                        style={{ backgroundColor: 'rgba(26,26,26,0.1)' }}
+                      />
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
