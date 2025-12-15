@@ -703,55 +703,49 @@ export default function Services() {
             {/* Accordion on mobile */}
             <div className="space-y-3">
               {[
-                { id: 0, title: "Brand Design", description: "Positioning, identity, and systems that make you instantly recognizable — and consistent everywhere.", bullets: ["Brand strategy + messaging", "Visual identity + guidelines", "Templates + creative direction"], link: "Explore Brand Design →" },
-                { id: 1, title: "Product & Experience Design", description: "From idea to flow to UI — we design interfaces that feel premium and work in the real world.", bullets: ["Product strategy + UX flows", "UI screens + design systems", "Prototypes + dev-ready handoff"], link: "Explore Product Design →", defaultOpen: true },
-                { id: 2, title: "Web & Platform Solutions", description: "Fast, responsive websites and web apps built to scale cleanly — without tech debt mess.", bullets: ["Marketing sites + landing pages", "Portals + dashboards", "Integrations + performance"], link: "Explore Web Solutions →" },
-                { id: 3, title: "Commerce & Shopify", description: "Conversion-first storefronts and Shopify builds that look premium and sell better.", bullets: ["Shopify setup + theme customization", "Product page + checkout optimization", "Tracking + basic retention automations"], link: "Explore Commerce →" },
-                { id: 4, title: "Content & Performance Marketing", description: "Creative + distribution as a system — built for demand, not vanity metrics.", bullets: ["Reels, ads, carousels, brand assets", "Meta/Google ad testing loops", "Landing page conversion improvements"], link: "Explore Marketing →" },
-                { id: 5, title: "AI Agents & Automation", description: "AI that reduces workload and speeds up operations — built around your actual workflows.", bullets: ["Lead-response + support agents", "RAG knowledge bots", "Automation pipelines + integrations"], link: "Explore AI Agents →" },
+                { id: 0, title: "Brand Design", description: "Positioning, identity, and systems that make you instantly recognizable — and consistent everywhere.", bullets: ["Brand strategy + messaging", "Visual identity + guidelines", "Templates + creative direction"] },
+                { id: 1, title: "Product & Experience Design", description: "From idea to flow to UI — we design interfaces that feel premium and work in the real world.", bullets: ["Product strategy + UX flows", "UI screens + design systems", "Prototypes + dev-ready handoff"] },
+                { id: 2, title: "Web & Platform Solutions", description: "Fast, responsive websites and web apps built to scale cleanly — without tech debt mess.", bullets: ["Marketing sites + landing pages", "Portals + dashboards", "Integrations + performance"] },
+                { id: 3, title: "Commerce & Shopify", description: "Conversion-first storefronts and Shopify builds that look premium and sell better.", bullets: ["Shopify setup + theme customization", "Product page + checkout optimization", "Tracking + basic retention automations"] },
+                { id: 4, title: "Content & Performance Marketing", description: "Creative + distribution as a system — built for demand, not vanity metrics.", bullets: ["Reels, ads, carousels, brand assets", "Meta/Google ad testing loops", "Landing page conversion improvements"] },
+                { id: 5, title: "AI Agents & Automation", description: "AI that reduces workload and speeds up operations — built around your actual workflows.", bullets: ["Lead-response + support agents", "RAG knowledge bots", "Automation pipelines + integrations"] },
               ].map((item) => {
                 const isExpanded = expandedCapability === item.id;
                 return (
                   <div 
                     key={item.id}
                     className="rounded-2xl overflow-hidden"
-                    style={{ backgroundColor: '#F6F7FA', border: '1px solid rgba(26,26,26,0.06)' }}
+                    style={{ backgroundColor: '#F6F7FA' }}
                     data-testid={`capability-mobile-${item.id}`}
                   >
                     <button
-                      className="w-full px-5 py-4 flex items-center justify-between text-left"
+                      className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
                       onClick={() => setExpandedCapability(isExpanded ? null : item.id)}
                       aria-expanded={isExpanded}
                     >
-                      <span className="text-base font-semibold" style={{ color: '#1A1A1A' }}>
+                      <span className="text-lg font-semibold" style={{ color: '#1A1A1A' }}>
                         {item.title}
                       </span>
-                      <span style={{ color: '#1A1A1A' }}>
+                      <span className="text-xl" style={{ color: '#1A1A1A' }}>
                         {isExpanded ? '−' : '+'}
                       </span>
                     </button>
                     <div 
                       className="overflow-hidden transition-all duration-300 ease-out"
-                      style={{ maxHeight: isExpanded ? '400px' : '0', opacity: isExpanded ? 1 : 0 }}
+                      style={{ maxHeight: isExpanded ? '500px' : '0', opacity: isExpanded ? 1 : 0 }}
                     >
-                      <div className="px-5 pb-5">
-                        <p className="text-sm leading-relaxed mb-4" style={{ color: 'rgba(26,26,26,0.6)' }}>
+                      <div className="px-6 pb-6">
+                        <p className="text-base leading-relaxed mb-5" style={{ color: 'rgba(26,26,26,0.6)' }}>
                           {item.description}
                         </p>
-                        <ul className="space-y-2 mb-4">
+                        <ul className="space-y-3">
                           {item.bullets.map((bullet, idx) => (
-                            <li key={idx} className="text-sm flex items-start gap-2" style={{ color: 'rgba(26,26,26,0.7)' }}>
-                              <span style={{ color: '#1A1A1A' }}>•</span>
+                            <li key={idx} className="text-base flex items-start gap-3" style={{ color: 'rgba(26,26,26,0.7)' }}>
+                              <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#1A1A1A' }} />
                               {bullet}
                             </li>
                           ))}
                         </ul>
-                        <span 
-                          className="text-sm font-medium inline-flex items-center gap-1 cursor-pointer"
-                          style={{ color: '#1A1A1A' }}
-                        >
-                          {item.link}
-                        </span>
                       </div>
                     </div>
                   </div>
@@ -829,21 +823,20 @@ export default function Services() {
                       className="rounded-2xl overflow-hidden transition-shadow duration-200"
                       style={{ 
                         backgroundColor: '#F6F7FA', 
-                        border: '1px solid rgba(26,26,26,0.06)',
-                        boxShadow: isExpanded ? '0 4px 20px rgba(0,0,0,0.06)' : 'none'
+                        border: 'none',
                       }}
                       data-testid={`capability-${item.id}`}
                     >
                       <button
-                        className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 rounded-2xl"
+                        className="w-full px-8 py-6 flex items-center justify-between text-left focus:outline-none"
                         onClick={() => setExpandedCapability(isExpanded ? null : item.id)}
                         aria-expanded={isExpanded}
                       >
-                        <span className="text-lg font-semibold" style={{ color: '#1A1A1A' }}>
+                        <span className="text-xl font-semibold" style={{ color: '#1A1A1A' }}>
                           {item.title}
                         </span>
                         <span 
-                          className="text-xl font-light w-6 h-6 flex items-center justify-center"
+                          className="text-2xl font-light w-8 h-8 flex items-center justify-center"
                           style={{ color: '#1A1A1A' }}
                         >
                           {isExpanded ? '−' : '+'}
@@ -852,35 +845,29 @@ export default function Services() {
                       <div 
                         className="overflow-hidden transition-all duration-300 ease-out"
                         style={{ 
-                          maxHeight: isExpanded ? '500px' : '0', 
+                          maxHeight: isExpanded ? '600px' : '0', 
                           opacity: isExpanded ? 1 : 0,
                         }}
                       >
-                        <div className="px-6 pb-6">
+                        <div className="px-8 pb-8">
                           <p 
-                            className="text-base leading-relaxed mb-5" 
+                            className="text-lg leading-relaxed mb-6" 
                             style={{ color: 'rgba(26,26,26,0.6)' }}
                           >
                             {item.description}
                           </p>
-                          <ul className="space-y-2.5 mb-5">
+                          <ul className="space-y-3">
                             {item.bullets.map((bullet, idx) => (
                               <li 
                                 key={idx} 
-                                className="text-sm flex items-start gap-2.5" 
+                                className="text-base flex items-start gap-3" 
                                 style={{ color: 'rgba(26,26,26,0.7)' }}
                               >
-                                <span className="mt-1.5 w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: '#1A1A1A' }} />
+                                <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#1A1A1A' }} />
                                 {bullet}
                               </li>
                             ))}
                           </ul>
-                          <span 
-                            className="text-sm font-medium inline-flex items-center gap-1 cursor-pointer hover:gap-2 transition-all"
-                            style={{ color: '#1A1A1A' }}
-                          >
-                            {item.link}
-                          </span>
                         </div>
                       </div>
                     </div>
