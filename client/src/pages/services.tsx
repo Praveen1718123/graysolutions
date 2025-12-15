@@ -647,91 +647,277 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Capabilities Section - Accordion */}
+      {/* Capabilities Section - 2 Column Layout */}
       <section 
-        className="relative z-10 py-16 md:py-24"
-        style={{ backgroundColor: '#FFFFFF' }}
+        className="relative z-10"
+        style={{ backgroundColor: '#FFFFFF', minHeight: '80vh' }}
+        data-testid="section-capabilities"
       >
-        <div className="w-full px-6 md:px-16 lg:px-24">
-          <motion.h2 
-            className="text-2xl md:text-3xl font-bold mb-10"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            data-testid="section-capabilities"
-          >
-            Capabilities
-          </motion.h2>
-          
-          {/* Accordion Items */}
-          <div className="divide-y" style={{ borderColor: 'rgba(26,26,26,0.1)' }}>
-            {capabilitiesData.map((capability) => {
-              const isExpanded = expandedCapability === capability.id;
-              return (
-                <div key={capability.id} data-testid={`capability-${capability.id}`}>
-                  {/* Accordion Header */}
-                  <button
-                    className="w-full py-6 flex items-center justify-between text-left"
-                    onClick={() => setExpandedCapability(isExpanded ? null : capability.id)}
-                  >
-                    <h3 
-                      className="text-xl md:text-2xl font-semibold"
-                      style={{ color: '#1A1A1A' }}
-                    >
-                      {capability.title}
-                    </h3>
-                    <span 
-                      className="text-2xl transition-transform duration-300"
-                      style={{ 
-                        transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
-                        color: '#1A1A1A'
-                      }}
-                    >
-                      ↓
-                    </span>
-                  </button>
-                  
-                  {/* Accordion Content */}
+        <div className="w-full px-6 md:px-16 lg:px-24 py-16 md:py-24">
+          {/* Mobile: Single Column */}
+          <div className="md:hidden">
+            {/* Left content as header on mobile */}
+            <div className="mb-10">
+              <span 
+                className="text-sm font-medium tracking-wide mb-3 block"
+                style={{ color: 'rgba(26,26,26,0.5)' }}
+              >
+                Capabilities
+              </span>
+              <h2 
+                className="text-3xl font-bold mb-4"
+                style={{ color: '#1A1A1A' }}
+              >
+                Build. Launch. Scale.
+              </h2>
+              <p 
+                className="text-base leading-relaxed mb-6"
+                style={{ color: 'rgba(26,26,26,0.6)' }}
+              >
+                Gray Solutions designs brands, digital products, and AI-powered systems that actually move the business.
+              </p>
+              <div className="flex gap-3 mb-4">
+                <button 
+                  className="px-6 py-3 rounded-full font-medium text-sm"
+                  style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}
+                  data-testid="cta-book-call-mobile"
+                >
+                  Book a Call
+                </button>
+                <button 
+                  className="px-6 py-3 rounded-full font-medium text-sm"
+                  style={{ backgroundColor: 'transparent', color: '#1A1A1A', border: '1px solid rgba(26,26,26,0.2)' }}
+                  data-testid="cta-see-work-mobile"
+                >
+                  See Work
+                </button>
+              </div>
+              <span 
+                className="text-xs"
+                style={{ color: 'rgba(26,26,26,0.4)' }}
+              >
+                Based in India. Working globally.
+              </span>
+            </div>
+
+            {/* Accordion on mobile */}
+            <div className="space-y-3">
+              {[
+                { id: 0, title: "Brand Design", description: "Positioning, identity, and systems that make you instantly recognizable — and consistent everywhere.", bullets: ["Brand strategy + messaging", "Visual identity + guidelines", "Templates + creative direction"], link: "Explore Brand Design →" },
+                { id: 1, title: "Product & Experience Design", description: "From idea to flow to UI — we design interfaces that feel premium and work in the real world.", bullets: ["Product strategy + UX flows", "UI screens + design systems", "Prototypes + dev-ready handoff"], link: "Explore Product Design →", defaultOpen: true },
+                { id: 2, title: "Web & Platform Solutions", description: "Fast, responsive websites and web apps built to scale cleanly — without tech debt mess.", bullets: ["Marketing sites + landing pages", "Portals + dashboards", "Integrations + performance"], link: "Explore Web Solutions →" },
+                { id: 3, title: "Commerce & Shopify", description: "Conversion-first storefronts and Shopify builds that look premium and sell better.", bullets: ["Shopify setup + theme customization", "Product page + checkout optimization", "Tracking + basic retention automations"], link: "Explore Commerce →" },
+                { id: 4, title: "Content & Performance Marketing", description: "Creative + distribution as a system — built for demand, not vanity metrics.", bullets: ["Reels, ads, carousels, brand assets", "Meta/Google ad testing loops", "Landing page conversion improvements"], link: "Explore Marketing →" },
+                { id: 5, title: "AI Agents & Automation", description: "AI that reduces workload and speeds up operations — built around your actual workflows.", bullets: ["Lead-response + support agents", "RAG knowledge bots", "Automation pipelines + integrations"], link: "Explore AI Agents →" },
+              ].map((item) => {
+                const isExpanded = expandedCapability === item.id;
+                return (
                   <div 
-                    className="overflow-hidden transition-all duration-300"
-                    style={{
-                      maxHeight: isExpanded ? '1000px' : '0',
-                      opacity: isExpanded ? 1 : 0,
-                    }}
+                    key={item.id}
+                    className="rounded-2xl overflow-hidden"
+                    style={{ backgroundColor: '#F6F7FA', border: '1px solid rgba(26,26,26,0.06)' }}
+                    data-testid={`capability-mobile-${item.id}`}
                   >
-                    <div className="pb-8">
-                      {/* Description */}
-                      <p 
-                        className="text-base md:text-lg leading-relaxed mb-8"
-                        style={{ color: 'rgba(26,26,26,0.7)' }}
-                      >
-                        {capability.description}
-                      </p>
-                      
-                      {/* Items Grid */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
-                        {capability.items.map((item, idx) => (
-                          <div key={idx}>
-                            <h4 
-                              className="text-xs font-bold tracking-wide mb-2"
-                              style={{ color: '#1A1A1A' }}
-                            >
-                              {item.title}
-                            </h4>
-                            <p 
-                              className="text-sm leading-relaxed"
-                              style={{ color: 'rgba(26,26,26,0.6)' }}
-                            >
-                              {item.desc}
-                            </p>
-                          </div>
-                        ))}
+                    <button
+                      className="w-full px-5 py-4 flex items-center justify-between text-left"
+                      onClick={() => setExpandedCapability(isExpanded ? null : item.id)}
+                      aria-expanded={isExpanded}
+                    >
+                      <span className="text-base font-semibold" style={{ color: '#1A1A1A' }}>
+                        {item.title}
+                      </span>
+                      <span style={{ color: '#1A1A1A' }}>
+                        {isExpanded ? '−' : '+'}
+                      </span>
+                    </button>
+                    <div 
+                      className="overflow-hidden transition-all duration-300 ease-out"
+                      style={{ maxHeight: isExpanded ? '400px' : '0', opacity: isExpanded ? 1 : 0 }}
+                    >
+                      <div className="px-5 pb-5">
+                        <p className="text-sm leading-relaxed mb-4" style={{ color: 'rgba(26,26,26,0.6)' }}>
+                          {item.description}
+                        </p>
+                        <ul className="space-y-2 mb-4">
+                          {item.bullets.map((bullet, idx) => (
+                            <li key={idx} className="text-sm flex items-start gap-2" style={{ color: 'rgba(26,26,26,0.7)' }}>
+                              <span style={{ color: '#1A1A1A' }}>•</span>
+                              {bullet}
+                            </li>
+                          ))}
+                        </ul>
+                        <a 
+                          href="#" 
+                          className="text-sm font-medium inline-flex items-center gap-1"
+                          style={{ color: '#1A1A1A' }}
+                        >
+                          {item.link}
+                        </a>
                       </div>
                     </div>
                   </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Desktop: 2-Column Layout */}
+          <div className="hidden md:grid md:grid-cols-2 gap-12 lg:gap-20" style={{ minHeight: 'calc(80vh - 192px)' }}>
+            {/* Left Column - Sticky */}
+            <div className="relative">
+              <div 
+                className="sticky"
+                style={{ top: '120px' }}
+              >
+                <span 
+                  className="text-sm font-medium tracking-wide mb-4 block"
+                  style={{ color: 'rgba(26,26,26,0.5)' }}
+                >
+                  Capabilities
+                </span>
+                <h2 
+                  className="text-4xl lg:text-5xl font-bold mb-5 leading-tight"
+                  style={{ color: '#1A1A1A' }}
+                >
+                  Build. Launch. Scale.
+                </h2>
+                <p 
+                  className="text-lg leading-relaxed mb-8"
+                  style={{ color: 'rgba(26,26,26,0.6)', maxWidth: '400px' }}
+                >
+                  Gray Solutions designs brands, digital products, and AI-powered systems that actually move the business.
+                </p>
+                <div className="flex gap-3 mb-5">
+                  <button 
+                    className="px-7 py-3.5 rounded-full font-medium text-sm hover:opacity-90 transition-opacity"
+                    style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}
+                    data-testid="cta-book-call"
+                  >
+                    Book a Call
+                  </button>
+                  <button 
+                    className="px-7 py-3.5 rounded-full font-medium text-sm hover:bg-gray-50 transition-colors"
+                    style={{ backgroundColor: 'transparent', color: '#1A1A1A', border: '1px solid rgba(26,26,26,0.2)' }}
+                    data-testid="cta-see-work"
+                  >
+                    See Work
+                  </button>
                 </div>
-              );
-            })}
+                <span 
+                  className="text-xs"
+                  style={{ color: 'rgba(26,26,26,0.4)' }}
+                >
+                  Based in India. Working globally.
+                </span>
+              </div>
+            </div>
+
+            {/* Right Column - Scrollable Accordion */}
+            <div 
+              className="relative"
+              style={{ 
+                maxHeight: 'calc(80vh - 96px)',
+                overflowY: 'auto',
+              }}
+            >
+              {/* Thin scrollbar styling */}
+              <style>{`
+                .capabilities-scroll::-webkit-scrollbar {
+                  width: 4px;
+                }
+                .capabilities-scroll::-webkit-scrollbar-track {
+                  background: transparent;
+                }
+                .capabilities-scroll::-webkit-scrollbar-thumb {
+                  background: rgba(26,26,26,0.15);
+                  border-radius: 4px;
+                }
+                .capabilities-scroll::-webkit-scrollbar-thumb:hover {
+                  background: rgba(26,26,26,0.25);
+                }
+              `}</style>
+              <div className="capabilities-scroll space-y-3 pr-2" style={{ maxHeight: 'calc(80vh - 96px)', overflowY: 'auto' }}>
+                {[
+                  { id: 0, title: "Brand Design", description: "Positioning, identity, and systems that make you instantly recognizable — and consistent everywhere.", bullets: ["Brand strategy + messaging", "Visual identity + guidelines", "Templates + creative direction"], link: "Explore Brand Design →" },
+                  { id: 1, title: "Product & Experience Design", description: "From idea to flow to UI — we design interfaces that feel premium and work in the real world.", bullets: ["Product strategy + UX flows", "UI screens + design systems", "Prototypes + dev-ready handoff"], link: "Explore Product Design →", defaultOpen: true },
+                  { id: 2, title: "Web & Platform Solutions", description: "Fast, responsive websites and web apps built to scale cleanly — without tech debt mess.", bullets: ["Marketing sites + landing pages", "Portals + dashboards", "Integrations + performance"], link: "Explore Web Solutions →" },
+                  { id: 3, title: "Commerce & Shopify", description: "Conversion-first storefronts and Shopify builds that look premium and sell better.", bullets: ["Shopify setup + theme customization", "Product page + checkout optimization", "Tracking + basic retention automations"], link: "Explore Commerce →" },
+                  { id: 4, title: "Content & Performance Marketing", description: "Creative + distribution as a system — built for demand, not vanity metrics.", bullets: ["Reels, ads, carousels, brand assets", "Meta/Google ad testing loops", "Landing page conversion improvements"], link: "Explore Marketing →" },
+                  { id: 5, title: "AI Agents & Automation", description: "AI that reduces workload and speeds up operations — built around your actual workflows.", bullets: ["Lead-response + support agents", "RAG knowledge bots", "Automation pipelines + integrations"], link: "Explore AI Agents →" },
+                ].map((item) => {
+                  const isExpanded = expandedCapability === item.id || (expandedCapability === null && item.defaultOpen);
+                  return (
+                    <div 
+                      key={item.id}
+                      className="rounded-2xl overflow-hidden transition-shadow duration-200"
+                      style={{ 
+                        backgroundColor: '#F6F7FA', 
+                        border: '1px solid rgba(26,26,26,0.06)',
+                        boxShadow: isExpanded ? '0 4px 20px rgba(0,0,0,0.06)' : 'none'
+                      }}
+                      data-testid={`capability-${item.id}`}
+                    >
+                      <button
+                        className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 rounded-2xl"
+                        onClick={() => setExpandedCapability(isExpanded ? null : item.id)}
+                        aria-expanded={isExpanded}
+                      >
+                        <span className="text-lg font-semibold" style={{ color: '#1A1A1A' }}>
+                          {item.title}
+                        </span>
+                        <span 
+                          className="text-xl font-light w-6 h-6 flex items-center justify-center"
+                          style={{ color: '#1A1A1A' }}
+                        >
+                          {isExpanded ? '−' : '+'}
+                        </span>
+                      </button>
+                      <div 
+                        className="overflow-hidden transition-all duration-300 ease-out"
+                        style={{ 
+                          maxHeight: isExpanded ? '500px' : '0', 
+                          opacity: isExpanded ? 1 : 0,
+                        }}
+                      >
+                        <div className="px-6 pb-6">
+                          <p 
+                            className="text-base leading-relaxed mb-5" 
+                            style={{ color: 'rgba(26,26,26,0.6)' }}
+                          >
+                            {item.description}
+                          </p>
+                          <ul className="space-y-2.5 mb-5">
+                            {item.bullets.map((bullet, idx) => (
+                              <li 
+                                key={idx} 
+                                className="text-sm flex items-start gap-2.5" 
+                                style={{ color: 'rgba(26,26,26,0.7)' }}
+                              >
+                                <span className="mt-1.5 w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: '#1A1A1A' }} />
+                                {bullet}
+                              </li>
+                            ))}
+                          </ul>
+                          <a 
+                            href="#" 
+                            className="text-sm font-medium inline-flex items-center gap-1 hover:gap-2 transition-all"
+                            style={{ color: '#1A1A1A' }}
+                          >
+                            {item.link}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Subtle divider line between columns */}
+              <div 
+                className="absolute left-0 top-0 bottom-0 w-px hidden lg:block"
+                style={{ backgroundColor: 'rgba(26,26,26,0.08)', transform: 'translateX(-40px)' }}
+              />
+            </div>
           </div>
         </div>
       </section>

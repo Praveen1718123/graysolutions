@@ -1,0 +1,148 @@
+(Capabilities Section — Left Fixed, Right Scroll)
+
+Build a responsive Capabilities section for the Gray Solutions website with a 2-column layout:
+
+1) Layout + Behavior
+
+Desktop layout: Left column fixed/sticky, Right column scrollable.
+
+Left column stays visible while the user scrolls through the right column content.
+
+Right column contains a stacked accordion list (collapsible items).
+
+Only one accordion item open at a time (opening one closes the others).
+
+The right column must be internally scrollable (not page scroll) with a visible but minimal scrollbar (thin).
+
+Section height should feel like a “panel” (e.g., min-height: 80vh on desktop).
+
+2) Styling (Minimal, Premium)
+
+Clean white/light background (match overall site theme).
+
+Typography: modern sans (use system font stack if no font configured).
+
+Spacing: generous padding, aligned grid, no clutter.
+
+Accordion cards: full-width rows with rounded corners, subtle border, hover state, and smooth expand/collapse animation.
+
+Right side items should look like large pill/tiles:
+
+Closed state: title left, plus icon right.
+
+Open state: title left, minus icon right + body content revealed below.
+
+Body content area: short paragraph + 3 bullets + “Explore →” link.
+
+Make it accessible: buttons with aria-expanded, keyboard navigation, proper focus rings.
+
+3) Responsive Rules
+
+Mobile (<768px): switch to single column.
+
+Left column becomes top header block (not sticky).
+
+Accordion list below, normal page scroll (no internal scroll).
+
+Tablet: sticky can remain, but reduce padding and font sizes slightly.
+
+4) Content (use exactly this copy)
+
+Left column:
+
+Eyebrow: “Capabilities”
+
+Heading: “Build. Launch. Scale.”
+
+Subtext: “Gray Solutions designs brands, digital products, and AI-powered systems that actually move the business.”
+
+Primary CTA button: “Book a Call”
+
+Secondary CTA button: “See Work”
+
+Optional microline below CTAs: “Based in India. Working globally.”
+
+Right column accordion items (6):
+
+Title: “Brand Design”
+Description: “Positioning, identity, and systems that make you instantly recognizable — and consistent everywhere.”
+Bullets:
+
+“Brand strategy + messaging”
+
+“Visual identity + guidelines”
+
+“Templates + creative direction”
+Link text: “Explore Brand Design →”
+
+Title: “Product & Experience Design”
+Description: “From idea to flow to UI — we design interfaces that feel premium and work in the real world.”
+Bullets:
+
+“Product strategy + UX flows”
+
+“UI screens + design systems”
+
+“Prototypes + dev-ready handoff”
+Link text: “Explore Product Design →”
+Default open: TRUE
+
+Title: “Web & Platform Solutions”
+Description: “Fast, responsive websites and web apps built to scale cleanly — without tech debt mess.”
+Bullets:
+
+“Marketing sites + landing pages”
+
+“Portals + dashboards”
+
+“Integrations + performance”
+Link text: “Explore Web Solutions →”
+
+Title: “Commerce & Shopify”
+Description: “Conversion-first storefronts and Shopify builds that look premium and sell better.”
+Bullets:
+
+“Shopify setup + theme customization”
+
+“Product page + checkout optimization”
+
+“Tracking + basic retention automations”
+Link text: “Explore Commerce →”
+
+Title: “Content & Performance Marketing”
+Description: “Creative + distribution as a system — built for demand, not vanity metrics.”
+Bullets:
+
+“Reels, ads, carousels, brand assets”
+
+“Meta/Google ad testing loops”
+
+“Landing page conversion improvements”
+Link text: “Explore Marketing →”
+
+Title: “AI Agents & Automation”
+Description: “AI that reduces workload and speeds up operations — built around your actual workflows.”
+Bullets:
+
+“Lead-response + support agents”
+
+“RAG knowledge bots”
+
+“Automation pipelines + integrations”
+Link text: “Explore AI Agents →”
+
+5) Implementation Requirements
+
+Use React + TypeScript (if project supports) or React JS.
+
+Use TailwindCSS for styling.
+
+Use lucide-react icons for plus/minus (or inline SVG if not available).
+
+Accordion must be smooth animated (height transition).
+
+Sticky left column: position: sticky; top: 96px; (adjust for navbar height).
+
+Right column: max-height: calc(80vh - something) and overflow-y: auto.
+
+Add subtle divider line between columns only on desktop.
