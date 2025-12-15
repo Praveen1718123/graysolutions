@@ -3,8 +3,9 @@ import { Link } from "wouter";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 import heroVideo from "@assets/hero-video-horizontal.mp4";
-import compassImage from "@assets/Screenshot_2025-12-15_at_4.20.13_PM_1765795819277.png";
+import compassImage from "@assets/c53171da-9385-4eea-af3f-e82d8076d9aa_1765809639059.png";
 import engineImage from "@assets/ChatGPT_Image_Dec_15,_2025,_03_52_30_PM_1765795987686.png";
+import designVideo from "@assets/From_KlickPin_CF_Pushing_the_Boundaries_of_Visual_Storytelling_1765809580084.mp4";
 
 export default function Services() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -24,15 +25,15 @@ export default function Services() {
       id: 1, 
       headline: "When an interface needs to be designed with clarity and precision",
       subtext: "We craft intuitive UX flows, wireframes, and high-fidelity designs that users love.",
-      image: engineImage,
-      video: null,
+      image: null,
+      video: designVideo,
       gradient: "linear-gradient(180deg, #E8E8E8 0%, #C8C8C8 100%)",
     },
     { 
       id: 2, 
       headline: "When a digital product or system needs to be built and made operational",
       subtext: "We develop websites, apps, and automations using modern technology stacks.",
-      image: null,
+      image: engineImage,
       video: null,
       gradient: "linear-gradient(180deg, #FFE8D6 0%, #FFD4B8 100%)",
     },
