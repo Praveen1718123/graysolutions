@@ -1,0 +1,131 @@
+Brand Design
+
+Building brands that look premium, sound clear, and stay consistent everywhere — from first impression to repeat purchase.
+
+BRAND STRATEGY & POSITIONING
+Defining your category, audience, and “why us” so your brand isn’t just another option.
+
+NAMING & MESSAGING SYSTEMS
+Naming, tone of voice, taglines, and message hierarchy that sells without sounding salesy.
+
+VISUAL IDENTITY SYSTEMS
+Logo direction, typography, color, layouts, and guidelines that scale across teams and platforms.
+
+BRAND DESIGN KITS
+Reusable templates for social, decks, proposals, and internal docs — consistent by default.
+
+PACKAGING & PRODUCT PRESENTATION
+Packaging, labels, and product visuals designed to look trustable on shelf and online.
+
+CREATIVE DIRECTION
+A clear visual lane for shoots, reels, ads, and web — so everything feels like one brand.
+
+Product & Experience Design
+
+Reimagining how people interact with your brand through digital products and experiences that drive business and human impact.
+
+SOLUTIONS DESIGN & CONSULTING
+Defining technology strategies to operationalize new solutions and capabilities.
+
+PRODUCT STRATEGY & VISION
+Identifying product opportunities, prioritizing the right bets, and shaping the roadmap.
+
+EXPERIENCE DESIGN & DEVELOPMENT
+Designing and validating flows fast — from wireframes to high-fidelity UI.
+
+AI PRODUCT STRATEGY & DEVELOPMENT
+LLM integrations, agent workflows, and AI features designed like real product—not demos.
+
+COMMERCE EXPERIENCE DESIGN
+Conversion-first shopping experiences across web, mobile, and marketplaces.
+
+DESIGN SYSTEMS & COMPONENTS
+A scalable UI kit that keeps your product consistent and speeds up development.
+
+Web & Platform Solutions
+
+Modern websites and platforms built to load fast, scale clean, and convert without chaos.
+
+WEBSITES & LANDING PAGES
+High-end marketing sites that are performance-first and conversion-ready.
+
+WEB APPLICATIONS & DASHBOARDS
+Admin panels, portals, and internal tools built for clarity and speed.
+
+MVP BUILDS
+Ship the first version fast with the right architecture to evolve later.
+
+INTEGRATIONS & WORKFLOWS
+Payments, CRM, WhatsApp, email, forms, analytics — connected end-to-end.
+
+PERFORMANCE & SEO FOUNDATION
+Technical SEO, structure, speed, and accessibility baked in from day one.
+
+MAINTENANCE & ITERATION
+Ongoing improvements, new pages/features, fixes, and optimization cycles.
+
+Commerce Design & Shopify
+
+Storefronts that feel premium and convert — with a backend setup that won’t break later.
+
+SHOPIFY SETUP & STRUCTURE
+Collections, navigation, policies, shipping, taxes, and clean store architecture.
+
+THEME CUSTOMIZATION
+High-quality UI polish on a reliable theme (no bloated hacks).
+
+PRODUCT PAGE OPTIMIZATION
+Better PDP layout, trust elements, sizing logic, upsells, and clarity.
+
+CHECKOUT & FUNNEL IMPROVEMENTS
+Reduce drop-offs with smarter flows, offers, and friction removal.
+
+AUTOMATIONS & RETENTION
+Abandoned cart, post-purchase flows, basic segmentation, and lifecycle journeys.
+
+ANALYTICS & TRACKING
+Pixel setup + clean measurement so your ads/decisions aren’t guessing.
+
+Content & Performance Marketing
+
+Creative + distribution as a system — built to generate demand, not just “posts”.
+
+CONTENT STRATEGY & CALENDAR
+What to post, why it matters, and how it maps to business outcomes.
+
+CREATIVE PRODUCTION
+Reels, carousels, ad creatives, brand videos — designed to stop scroll.
+
+PERFORMANCE ADS (META/GOOGLE)
+Testing frameworks, targeting, creative iterations, and funnel alignment.
+
+LANDING PAGE CONVERSION
+Ad → landing → conversion improvements that move numbers.
+
+PERSONAL BRANDING CONTENT
+Founder-led content that builds trust, authority, and inbound leads.
+
+REPORTING & OPTIMIZATION
+Simple insights, real next steps, and continuous iteration cycles.
+
+AI Agents & Automation
+
+AI that reduces work, speeds up ops, and feels native to your business.
+
+LEAD RESPONSE AGENTS
+Instant replies, qualification, and routing across WhatsApp/web/email.
+
+SUPPORT & FAQ BOTS
+Knowledge-based support that actually answers and escalates cleanly.
+
+INTERNAL ASSISTANTS
+Ops, sales, HR, and finance helpers that summarize, draft, and execute workflows.
+
+RAG + KNOWLEDGE SYSTEMS
+Your docs, SOPs, and databases turned into a searchable “company brain”.
+
+AUTOMATION PIPELINES
+Zapier/Make/custom workflows to remove repetitive tasks end-to-end.
+
+AI PRODUCTIZATION
+Turn your workflows into a sellable AI feature or standalone product.

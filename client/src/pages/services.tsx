@@ -12,6 +12,89 @@ export default function Services() {
   const [activeService, setActiveService] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
 
+  const [expandedCapability, setExpandedCapability] = useState<number | null>(null);
+
+  const capabilitiesData = [
+    {
+      id: 0,
+      title: "Brand Design",
+      description: "Building brands that look premium, sound clear, and stay consistent everywhere — from first impression to repeat purchase.",
+      items: [
+        { title: "BRAND STRATEGY & POSITIONING", desc: "Defining your category, audience, and 'why us' so your brand isn't just another option." },
+        { title: "NAMING & MESSAGING SYSTEMS", desc: "Naming, tone of voice, taglines, and message hierarchy that sells without sounding salesy." },
+        { title: "VISUAL IDENTITY SYSTEMS", desc: "Logo direction, typography, color, layouts, and guidelines that scale across teams and platforms." },
+        { title: "BRAND DESIGN KITS", desc: "Reusable templates for social, decks, proposals, and internal docs — consistent by default." },
+        { title: "PACKAGING & PRODUCT PRESENTATION", desc: "Packaging, labels, and product visuals designed to look trustable on shelf and online." },
+        { title: "CREATIVE DIRECTION", desc: "A clear visual lane for shoots, reels, ads, and web — so everything feels like one brand." },
+      ]
+    },
+    {
+      id: 1,
+      title: "Product & Experience Design",
+      description: "Reimagining how people interact with your brand through digital products and experiences that drive business and human impact.",
+      items: [
+        { title: "SOLUTIONS DESIGN & CONSULTING", desc: "Defining technology strategies to operationalize new solutions and capabilities." },
+        { title: "PRODUCT STRATEGY & VISION", desc: "Identifying product opportunities, prioritizing the right bets, and shaping the roadmap." },
+        { title: "EXPERIENCE DESIGN & DEVELOPMENT", desc: "Designing and validating flows fast — from wireframes to high-fidelity UI." },
+        { title: "AI PRODUCT STRATEGY & DEVELOPMENT", desc: "LLM integrations, agent workflows, and AI features designed like real product—not demos." },
+        { title: "COMMERCE EXPERIENCE DESIGN", desc: "Conversion-first shopping experiences across web, mobile, and marketplaces." },
+        { title: "DESIGN SYSTEMS & COMPONENTS", desc: "A scalable UI kit that keeps your product consistent and speeds up development." },
+      ]
+    },
+    {
+      id: 2,
+      title: "Web & Platform Solutions",
+      description: "Modern websites and platforms built to load fast, scale clean, and convert without chaos.",
+      items: [
+        { title: "WEBSITES & LANDING PAGES", desc: "High-end marketing sites that are performance-first and conversion-ready." },
+        { title: "WEB APPLICATIONS & DASHBOARDS", desc: "Admin panels, portals, and internal tools built for clarity and speed." },
+        { title: "MVP BUILDS", desc: "Ship the first version fast with the right architecture to evolve later." },
+        { title: "INTEGRATIONS & WORKFLOWS", desc: "Payments, CRM, WhatsApp, email, forms, analytics — connected end-to-end." },
+        { title: "PERFORMANCE & SEO FOUNDATION", desc: "Technical SEO, structure, speed, and accessibility baked in from day one." },
+        { title: "MAINTENANCE & ITERATION", desc: "Ongoing improvements, new pages/features, fixes, and optimization cycles." },
+      ]
+    },
+    {
+      id: 3,
+      title: "Commerce Design & Shopify",
+      description: "Storefronts that feel premium and convert — with a backend setup that won't break later.",
+      items: [
+        { title: "SHOPIFY SETUP & STRUCTURE", desc: "Collections, navigation, policies, shipping, taxes, and clean store architecture." },
+        { title: "THEME CUSTOMIZATION", desc: "High-quality UI polish on a reliable theme (no bloated hacks)." },
+        { title: "PRODUCT PAGE OPTIMIZATION", desc: "Better PDP layout, trust elements, sizing logic, upsells, and clarity." },
+        { title: "CHECKOUT & FUNNEL IMPROVEMENTS", desc: "Reduce drop-offs with smarter flows, offers, and friction removal." },
+        { title: "AUTOMATIONS & RETENTION", desc: "Abandoned cart, post-purchase flows, basic segmentation, and lifecycle journeys." },
+        { title: "ANALYTICS & TRACKING", desc: "Pixel setup + clean measurement so your ads/decisions aren't guessing." },
+      ]
+    },
+    {
+      id: 4,
+      title: "Content & Performance Marketing",
+      description: "Creative + distribution as a system — built to generate demand, not just 'posts'.",
+      items: [
+        { title: "CONTENT STRATEGY & CALENDAR", desc: "What to post, why it matters, and how it maps to business outcomes." },
+        { title: "CREATIVE PRODUCTION", desc: "Reels, carousels, ad creatives, brand videos — designed to stop scroll." },
+        { title: "PERFORMANCE ADS (META/GOOGLE)", desc: "Testing frameworks, targeting, creative iterations, and funnel alignment." },
+        { title: "LANDING PAGE CONVERSION", desc: "Ad → landing → conversion improvements that move numbers." },
+        { title: "PERSONAL BRANDING CONTENT", desc: "Founder-led content that builds trust, authority, and inbound leads." },
+        { title: "REPORTING & OPTIMIZATION", desc: "Simple insights, real next steps, and continuous iteration cycles." },
+      ]
+    },
+    {
+      id: 5,
+      title: "AI Agents & Automation",
+      description: "AI that reduces work, speeds up ops, and feels native to your business.",
+      items: [
+        { title: "LEAD RESPONSE AGENTS", desc: "Instant replies, qualification, and routing across WhatsApp/web/email." },
+        { title: "SUPPORT & FAQ BOTS", desc: "Knowledge-based support that actually answers and escalates cleanly." },
+        { title: "INTERNAL ASSISTANTS", desc: "Ops, sales, HR, and finance helpers that summarize, draft, and execute workflows." },
+        { title: "RAG + KNOWLEDGE SYSTEMS", desc: "Your docs, SOPs, and databases turned into a searchable 'company brain'." },
+        { title: "AUTOMATION PIPELINES", desc: "Zapier/Make/custom workflows to remove repetitive tasks end-to-end." },
+        { title: "AI PRODUCTIZATION", desc: "Turn your workflows into a sellable AI feature or standalone product." },
+      ]
+    },
+  ];
+
   const whatWeDoTiles = [
     { 
       id: 0, 
@@ -560,6 +643,95 @@ export default function Services() {
                 </motion.div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Capabilities Section - Accordion */}
+      <section 
+        className="relative z-10 py-16 md:py-24"
+        style={{ backgroundColor: '#FFFFFF' }}
+      >
+        <div className="max-w-[1120px] mx-auto px-6 md:px-10">
+          <motion.h2 
+            className="text-2xl md:text-3xl font-bold mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            data-testid="section-capabilities"
+          >
+            Capabilities
+          </motion.h2>
+          
+          {/* Accordion Items */}
+          <div className="divide-y" style={{ borderColor: 'rgba(26,26,26,0.1)' }}>
+            {capabilitiesData.map((capability) => {
+              const isExpanded = expandedCapability === capability.id;
+              return (
+                <div key={capability.id} data-testid={`capability-${capability.id}`}>
+                  {/* Accordion Header */}
+                  <button
+                    className="w-full py-6 flex items-center justify-between text-left"
+                    onClick={() => setExpandedCapability(isExpanded ? null : capability.id)}
+                  >
+                    <h3 
+                      className="text-xl md:text-2xl font-semibold"
+                      style={{ color: '#1A1A1A' }}
+                    >
+                      {capability.title}
+                    </h3>
+                    <span 
+                      className="text-2xl transition-transform duration-300"
+                      style={{ 
+                        transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
+                        color: '#1A1A1A'
+                      }}
+                    >
+                      ↓
+                    </span>
+                  </button>
+                  
+                  {/* Accordion Content */}
+                  <div 
+                    className="overflow-hidden transition-all duration-300"
+                    style={{
+                      maxHeight: isExpanded ? '1000px' : '0',
+                      opacity: isExpanded ? 1 : 0,
+                    }}
+                  >
+                    <div className="pb-8">
+                      {/* Description */}
+                      <p 
+                        className="text-base md:text-lg leading-relaxed mb-8"
+                        style={{ color: 'rgba(26,26,26,0.7)' }}
+                      >
+                        {capability.description}
+                      </p>
+                      
+                      {/* Items Grid */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+                        {capability.items.map((item, idx) => (
+                          <div key={idx}>
+                            <h4 
+                              className="text-xs font-bold tracking-wide mb-2"
+                              style={{ color: '#1A1A1A' }}
+                            >
+                              {item.title}
+                            </h4>
+                            <p 
+                              className="text-sm leading-relaxed"
+                              style={{ color: 'rgba(26,26,26,0.6)' }}
+                            >
+                              {item.desc}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
