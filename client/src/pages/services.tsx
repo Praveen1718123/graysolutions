@@ -761,8 +761,8 @@ export default function Services() {
             </div>
           </div>
 
-          {/* Desktop: 2-Column Layout */}
-          <div className="hidden md:grid md:grid-cols-2 gap-12 lg:gap-20" style={{ minHeight: 'calc(80vh - 192px)' }}>
+          {/* Desktop: 2-Column Layout - Normal page scroll with sticky left */}
+          <div className="hidden md:grid md:grid-cols-2 gap-12 lg:gap-20">
             {/* Left Column - Sticky */}
             <div className="relative">
               <div 
@@ -812,31 +812,15 @@ export default function Services() {
               </div>
             </div>
 
-            {/* Right Column - Scrollable Accordion */}
-            <div 
-              className="relative"
-              style={{ 
-                maxHeight: 'calc(80vh - 96px)',
-                overflowY: 'auto',
-              }}
-            >
-              {/* Thin scrollbar styling */}
-              <style>{`
-                .capabilities-scroll::-webkit-scrollbar {
-                  width: 4px;
-                }
-                .capabilities-scroll::-webkit-scrollbar-track {
-                  background: transparent;
-                }
-                .capabilities-scroll::-webkit-scrollbar-thumb {
-                  background: rgba(26,26,26,0.15);
-                  border-radius: 4px;
-                }
-                .capabilities-scroll::-webkit-scrollbar-thumb:hover {
-                  background: rgba(26,26,26,0.25);
-                }
-              `}</style>
-              <div className="capabilities-scroll space-y-3 pr-2" style={{ maxHeight: 'calc(80vh - 96px)', overflowY: 'auto' }}>
+            {/* Right Column - Flows naturally with page scroll */}
+            <div className="relative">
+              {/* Subtle divider line between columns */}
+              <div 
+                className="absolute left-0 top-0 bottom-0 w-px hidden lg:block"
+                style={{ backgroundColor: 'rgba(26,26,26,0.08)', transform: 'translateX(-40px)' }}
+              />
+              
+              <div className="space-y-3">
                 {[
                   { id: 0, title: "Brand Design", description: "Positioning, identity, and systems that make you instantly recognizable — and consistent everywhere.", bullets: ["Brand strategy + messaging", "Visual identity + guidelines", "Templates + creative direction"], link: "Explore Brand Design →" },
                   { id: 1, title: "Product & Experience Design", description: "From idea to flow to UI — we design interfaces that feel premium and work in the real world.", bullets: ["Product strategy + UX flows", "UI screens + design systems", "Prototypes + dev-ready handoff"], link: "Explore Product Design →", defaultOpen: true },
@@ -911,12 +895,6 @@ export default function Services() {
                   );
                 })}
               </div>
-
-              {/* Subtle divider line between columns */}
-              <div 
-                className="absolute left-0 top-0 bottom-0 w-px hidden lg:block"
-                style={{ backgroundColor: 'rgba(26,26,26,0.08)', transform: 'translateX(-40px)' }}
-              />
             </div>
           </div>
         </div>
