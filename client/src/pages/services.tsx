@@ -17,80 +17,80 @@ export default function Services() {
   const capabilitiesData = [
     {
       id: 0,
-      title: "Brand Design",
+      title: "Brand design",
       description: "Building brands that look premium, sound clear, and stay consistent everywhere — from first impression to repeat purchase.",
       items: [
-        { title: "BRAND STRATEGY & POSITIONING", desc: "Defining your category, audience, and 'why us' so your brand isn't just another option." },
-        { title: "NAMING & MESSAGING SYSTEMS", desc: "Naming, tone of voice, taglines, and message hierarchy that sells without sounding salesy." },
-        { title: "VISUAL IDENTITY SYSTEMS", desc: "Logo direction, typography, color, layouts, and guidelines that scale across teams and platforms." },
-        { title: "BRAND DESIGN KITS", desc: "Reusable templates for social, decks, proposals, and internal docs — consistent by default." },
-        { title: "PACKAGING & PRODUCT PRESENTATION", desc: "Packaging, labels, and product visuals designed to look trustable on shelf and online." },
-        { title: "CREATIVE DIRECTION", desc: "A clear visual lane for shoots, reels, ads, and web — so everything feels like one brand." },
+        { title: "Brand strategy & positioning", desc: "Defining your category, audience, and 'why us' so your brand isn't just another option." },
+        { title: "Naming & messaging systems", desc: "Naming, tone of voice, taglines, and message hierarchy that sells without sounding salesy." },
+        { title: "Visual identity systems", desc: "Logo direction, typography, color, layouts, and guidelines that scale across teams and platforms." },
+        { title: "Brand design kits", desc: "Reusable templates for social, decks, proposals, and internal docs — consistent by default." },
+        { title: "Packaging & product presentation", desc: "Packaging, labels, and product visuals designed to look trustable on shelf and online." },
+        { title: "Creative direction", desc: "A clear visual lane for shoots, reels, ads, and web — so everything feels like one brand." },
       ]
     },
     {
       id: 1,
-      title: "Product & Experience Design",
+      title: "Product & experience design",
       description: "Reimagining how people interact with your brand through digital products and experiences that drive business and human impact.",
       items: [
-        { title: "SOLUTIONS DESIGN & CONSULTING", desc: "Defining technology strategies to operationalize new solutions and capabilities." },
-        { title: "PRODUCT STRATEGY & VISION", desc: "Identifying product opportunities, prioritizing the right bets, and shaping the roadmap." },
-        { title: "EXPERIENCE DESIGN & DEVELOPMENT", desc: "Designing and validating flows fast — from wireframes to high-fidelity UI." },
-        { title: "AI PRODUCT STRATEGY & DEVELOPMENT", desc: "LLM integrations, agent workflows, and AI features designed like real product—not demos." },
-        { title: "COMMERCE EXPERIENCE DESIGN", desc: "Conversion-first shopping experiences across web, mobile, and marketplaces." },
-        { title: "DESIGN SYSTEMS & COMPONENTS", desc: "A scalable UI kit that keeps your product consistent and speeds up development." },
+        { title: "Solutions design & consulting", desc: "Defining technology strategies to operationalize new solutions and capabilities." },
+        { title: "Product strategy & vision", desc: "Identifying product opportunities, prioritizing the right bets, and shaping the roadmap." },
+        { title: "Experience design & development", desc: "Designing and validating flows fast — from wireframes to high-fidelity UI." },
+        { title: "AI product strategy & development", desc: "LLM integrations, agent workflows, and AI features designed like real product—not demos." },
+        { title: "Commerce experience design", desc: "Conversion-first shopping experiences across web, mobile, and marketplaces." },
+        { title: "Design systems & components", desc: "A scalable UI kit that keeps your product consistent and speeds up development." },
       ]
     },
     {
       id: 2,
-      title: "Web & Platform Solutions",
+      title: "Web & platform solutions",
       description: "Modern websites and platforms built to load fast, scale clean, and convert without chaos.",
       items: [
-        { title: "WEBSITES & LANDING PAGES", desc: "High-end marketing sites that are performance-first and conversion-ready." },
-        { title: "WEB APPLICATIONS & DASHBOARDS", desc: "Admin panels, portals, and internal tools built for clarity and speed." },
-        { title: "MVP BUILDS", desc: "Ship the first version fast with the right architecture to evolve later." },
-        { title: "INTEGRATIONS & WORKFLOWS", desc: "Payments, CRM, WhatsApp, email, forms, analytics — connected end-to-end." },
-        { title: "PERFORMANCE & SEO FOUNDATION", desc: "Technical SEO, structure, speed, and accessibility baked in from day one." },
-        { title: "MAINTENANCE & ITERATION", desc: "Ongoing improvements, new pages/features, fixes, and optimization cycles." },
+        { title: "Websites & landing pages", desc: "High-end marketing sites that are performance-first and conversion-ready." },
+        { title: "Web applications & dashboards", desc: "Admin panels, portals, and internal tools built for clarity and speed." },
+        { title: "MVP builds", desc: "Ship the first version fast with the right architecture to evolve later." },
+        { title: "Integrations & workflows", desc: "Payments, CRM, WhatsApp, email, forms, analytics — connected end-to-end." },
+        { title: "Performance & SEO foundation", desc: "Technical SEO, structure, speed, and accessibility baked in from day one." },
+        { title: "Maintenance & iteration", desc: "Ongoing improvements, new pages/features, fixes, and optimization cycles." },
       ]
     },
     {
       id: 3,
-      title: "Commerce Design & Shopify",
+      title: "Commerce design & Shopify",
       description: "Storefronts that feel premium and convert — with a backend setup that won't break later.",
       items: [
-        { title: "SHOPIFY SETUP & STRUCTURE", desc: "Collections, navigation, policies, shipping, taxes, and clean store architecture." },
-        { title: "THEME CUSTOMIZATION", desc: "High-quality UI polish on a reliable theme (no bloated hacks)." },
-        { title: "PRODUCT PAGE OPTIMIZATION", desc: "Better PDP layout, trust elements, sizing logic, upsells, and clarity." },
-        { title: "CHECKOUT & FUNNEL IMPROVEMENTS", desc: "Reduce drop-offs with smarter flows, offers, and friction removal." },
-        { title: "AUTOMATIONS & RETENTION", desc: "Abandoned cart, post-purchase flows, basic segmentation, and lifecycle journeys." },
-        { title: "ANALYTICS & TRACKING", desc: "Pixel setup + clean measurement so your ads/decisions aren't guessing." },
+        { title: "Shopify setup & structure", desc: "Collections, navigation, policies, shipping, taxes, and clean store architecture." },
+        { title: "Theme customization", desc: "High-quality UI polish on a reliable theme (no bloated hacks)." },
+        { title: "Product page optimization", desc: "Better PDP layout, trust elements, sizing logic, upsells, and clarity." },
+        { title: "Checkout & funnel improvements", desc: "Reduce drop-offs with smarter flows, offers, and friction removal." },
+        { title: "Automations & retention", desc: "Abandoned cart, post-purchase flows, basic segmentation, and lifecycle journeys." },
+        { title: "Analytics & tracking", desc: "Pixel setup + clean measurement so your ads/decisions aren't guessing." },
       ]
     },
     {
       id: 4,
-      title: "Content & Performance Marketing",
+      title: "Content & performance marketing",
       description: "Creative + distribution as a system — built to generate demand, not just 'posts'.",
       items: [
-        { title: "CONTENT STRATEGY & CALENDAR", desc: "What to post, why it matters, and how it maps to business outcomes." },
-        { title: "CREATIVE PRODUCTION", desc: "Reels, carousels, ad creatives, brand videos — designed to stop scroll." },
-        { title: "PERFORMANCE ADS (META/GOOGLE)", desc: "Testing frameworks, targeting, creative iterations, and funnel alignment." },
-        { title: "LANDING PAGE CONVERSION", desc: "Ad → landing → conversion improvements that move numbers." },
-        { title: "PERSONAL BRANDING CONTENT", desc: "Founder-led content that builds trust, authority, and inbound leads." },
-        { title: "REPORTING & OPTIMIZATION", desc: "Simple insights, real next steps, and continuous iteration cycles." },
+        { title: "Content strategy & calendar", desc: "What to post, why it matters, and how it maps to business outcomes." },
+        { title: "Creative production", desc: "Reels, carousels, ad creatives, brand videos — designed to stop scroll." },
+        { title: "Performance ads (Meta/Google)", desc: "Testing frameworks, targeting, creative iterations, and funnel alignment." },
+        { title: "Landing page conversion", desc: "Ad → landing → conversion improvements that move numbers." },
+        { title: "Personal branding content", desc: "Founder-led content that builds trust, authority, and inbound leads." },
+        { title: "Reporting & optimization", desc: "Simple insights, real next steps, and continuous iteration cycles." },
       ]
     },
     {
       id: 5,
-      title: "AI Agents & Automation",
+      title: "AI agents & automation",
       description: "AI that reduces work, speeds up ops, and feels native to your business.",
       items: [
-        { title: "LEAD RESPONSE AGENTS", desc: "Instant replies, qualification, and routing across WhatsApp/web/email." },
-        { title: "SUPPORT & FAQ BOTS", desc: "Knowledge-based support that actually answers and escalates cleanly." },
-        { title: "INTERNAL ASSISTANTS", desc: "Ops, sales, HR, and finance helpers that summarize, draft, and execute workflows." },
-        { title: "RAG + KNOWLEDGE SYSTEMS", desc: "Your docs, SOPs, and databases turned into a searchable 'company brain'." },
-        { title: "AUTOMATION PIPELINES", desc: "Zapier/Make/custom workflows to remove repetitive tasks end-to-end." },
-        { title: "AI PRODUCTIZATION", desc: "Turn your workflows into a sellable AI feature or standalone product." },
+        { title: "Lead response agents", desc: "Instant replies, qualification, and routing across WhatsApp/web/email." },
+        { title: "Support & FAQ bots", desc: "Knowledge-based support that actually answers and escalates cleanly." },
+        { title: "Internal assistants", desc: "Ops, sales, HR, and finance helpers that summarize, draft, and execute workflows." },
+        { title: "RAG + knowledge systems", desc: "Your docs, SOPs, and databases turned into a searchable 'company brain'." },
+        { title: "Automation pipelines", desc: "Zapier/Make/custom workflows to remove repetitive tasks end-to-end." },
+        { title: "AI productization", desc: "Turn your workflows into a sellable AI feature or standalone product." },
       ]
     },
   ];
@@ -652,7 +652,7 @@ export default function Services() {
         className="relative z-10 py-16 md:py-24"
         style={{ backgroundColor: '#FFFFFF' }}
       >
-        <div className="max-w-[1120px] mx-auto px-6 md:px-10">
+        <div className="w-full px-6 md:px-16 lg:px-24">
           <motion.h2 
             className="text-2xl md:text-3xl font-bold mb-10"
             initial={{ opacity: 0, y: 20 }}
