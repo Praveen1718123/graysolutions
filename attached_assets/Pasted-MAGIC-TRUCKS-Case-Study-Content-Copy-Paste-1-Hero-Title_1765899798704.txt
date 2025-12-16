@@ -1,0 +1,194 @@
+MAGIC TRUCKS — Case Study Content (Copy-Paste)
+1) Hero
+
+Title:
+Magic Trucks — Transporting in India. Made Simple.
+
+Subtitle (1–2 lines):
+A logistics platform concept built to reduce coordination chaos and make shipments feel predictable — for shippers, ops teams, and drivers.
+
+Primary CTA: View Screens
+Secondary CTA: Talk to Gray Solutions
+
+Quick stats (optional chips):
+B2B • FTL + Heavy Haul • India-first workflows • Desktop + Mobile
+
+2) Quick Brief
+
+Ambition
+Make freight booking + tracking feel simple, trustworthy, and repeatable — without forcing teams to change their habits overnight.
+
+Reality Check
+Indian logistics runs on fast coordination: calls, WhatsApp updates, manual docs, and constant follow-ups. Most tools fail because they add friction instead of removing uncertainty.
+
+What We Shipped
+A structured shipment lifecycle concept + consistent product/brand system across desktop, mobile, and real-world identity — designed for trust and adoption.
+
+3) Insights
+
+1) People don’t buy “features.” They buy certainty.
+If a user can’t see current status, ETA, and next step instantly, they fall back to calling someone.
+
+2) Logistics is a trust business before it’s a tech business.
+The product has to look and feel dependable — because decisions involve money, risk, and time.
+
+3) Adoption needs to match real behavior, not ideal behavior.
+Teams won’t “learn software.” They’ll use what reduces effort today and gradually adopt structure.
+
+4) Every shipment needs one version of truth.
+When status and proof are scattered, disputes happen. A single source of truth reduces chaos.
+
+4) Idea (Overall)
+
+The Big Bet
+Build a logistics system that becomes the single source of truth for every shipment — while staying practical for India’s real-world operations.
+
+The Strategy
+
+Win with clarity, not complexity: make “what’s happening” obvious, not hidden in workflows.
+
+Standardize the shipment lifecycle: Quote → Book → Dispatch → In Transit → Proof → Closure → History.
+
+Reduce follow-ups by design: fewer calls, fewer “where is it” messages, fewer misunderstandings.
+
+Build trust beyond the app: brand + consistency makes businesses feel safe choosing you.
+
+Optimize for repeat usage: the goal isn’t one booking — it’s predictable operations that bring customers back.
+
+What this enables
+Faster decisions • fewer disputes • cleaner execution • higher retention • scalable ops.
+
+5) Impact
+Impact delivered (now)
+
+A clear, structured shipment lifecycle that reduces confusion
+
+A unified product + brand identity that signals reliability
+
+A concept designed to scale from small teams to enterprise ops
+
+Impact to measure (later — keep as placeholders)
+
+↓ Average time to book a shipment
+
+↑ Tracking engagement / link opens
+
+↓ Support queries about shipment status
+
+↑ Repeat shippers (retention)
+
+Testimonial placeholder
+“Now we don’t chase updates — we just check the shipment and move.”
+
+6) Gallery
+
+Section title: Proof of Work
+Section subtitle: Screens, flows, and brand applications that make the system feel real.
+
+Gallery categories (tabs):
+All • Desktop • Mobile • Brand • Real World
+
+Captions (use under each image):
+
+Desktop: “Operations dashboard + shipment history + tracking overview.”
+
+Mobile: “Tracking, timeline updates, driver details, documents.”
+
+Brand: “App icon, brochure, and brand surfaces built for trust.”
+
+Real World: “Truck livery visuals showing identity outside the app.”
+
+7) Closing CTA
+
+Headline: Want your product to feel world-standard and still India-real?
+Body: We design systems that don’t just look good — they reduce friction, build trust, and drive adoption.
+Button: Book a Call
+
+Image Specification + Placement Map (Use Your Files)
+A) Hero Image (Top of page)
+
+Use: mokcup 1.png
+Best for: Hero right side (big visual)
+
+Spec:
+
+Aspect ratio: 16:9 or 3:2 crop
+
+Recommended display width: 1200–1600px
+
+Keep safe area: don’t crop the phone screen on right
+
+Alt text: “Magic Trucks platform shown on laptop and mobile.”
+
+B) “Product Suite” / Overview Section Image (Optional under Quick Brief or before Gallery)
+
+Use: 54066314_updlaptop_screerns0008.png
+Spec:
+
+Aspect ratio: 16:9
+
+Works as: full-width section banner or large card
+
+Alt text: “Desktop product screens collage for shipment management.”
+
+C) Mobile Proof (Realistic Trust Shot)
+
+Use: magic 23.jpg
+Spec:
+
+Aspect ratio: 4:3 or 3:4 (depends on your layout)
+
+Keep phone screen fully visible
+
+Slight background blur is already good — don’t over-edit
+
+Alt text: “Mobile tracking screen shown in-hand.”
+
+D) Mobile UI Grid (Premium showcase)
+
+Use: magic trucks neww-01.png
+Spec:
+
+Aspect ratio: 16:9
+
+Best used inside Gallery → Mobile tab as a “feature image”
+
+Alt text: “Multiple mobile app screens showing tracking and verification.”
+
+E) App Icon (Product legitimacy)
+
+Use: 3D App Icon Mockup [Qorecraft]2.jpg
+Spec:
+
+Aspect ratio: 1:1
+
+Use as a small “Brand” tile or next to “What We Shipped”
+
+Alt text: “Magic Trucks 3D app icon mockup.”
+
+F) Real World Brand — Truck Visuals (Credibility outside the app)
+
+Use one or both:
+
+Generated Image October 07, 2025 - 12_10PM.png (highway)
+
+Generated Image October 07, 2025 - 12_15PM.png (roadside / market)
+
+Spec:
+
+Aspect ratio: 21:9 (cinematic) OR 16:9
+
+Best used as: Gallery → Real World tab OR a full-width divider section
+
+Alt text: “Magic Trucks branded trailer on Indian roads.”
+
+G) Brochure / Sales enablement (Brand proof)
+
+Use: Two Magazines on Table Mockup2.jpg
+Spec:
+
+Aspect ratio: 4:3
+
+Best used: Gallery → Brand tab or “Trust surfaces”
+
+Alt text: “Magic Trucks brochure mockup on table.”
