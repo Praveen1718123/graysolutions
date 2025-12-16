@@ -88,17 +88,36 @@ export default function Landing() {
           {/* Row 1: Filters */}
           <div className="w-full px-4 mb-4">
              <ul className="flex justify-evenly items-center w-full">
-              {filterItems.map((filter) => (
-                <li key={filter}>
-                  <Button
-                    variant="outline"
-                    onClick={() => setActiveFilter(filter)}
-                    className="text-[14px] bg-white text-black border-gray-200 hover:bg-black hover:text-white hover:border-black transition-all duration-200"
-                  >
-                    {filter}
-                  </Button>
-                </li>
-              ))}
+              {filterItems.map((filter) => {
+                const caseStudyLink = filter === "Magic Trucks" ? "/case-study/magic-trucks" : null;
+                
+                if (caseStudyLink) {
+                  return (
+                    <li key={filter}>
+                      <Link href={caseStudyLink}>
+                        <Button
+                          variant="outline"
+                          className="text-[14px] bg-white text-black border-gray-200 hover:bg-black hover:text-white hover:border-black transition-all duration-200"
+                        >
+                          {filter}
+                        </Button>
+                      </Link>
+                    </li>
+                  );
+                }
+                
+                return (
+                  <li key={filter}>
+                    <Button
+                      variant="outline"
+                      onClick={() => setActiveFilter(filter)}
+                      className="text-[14px] bg-white text-black border-gray-200 hover:bg-black hover:text-white hover:border-black transition-all duration-200"
+                    >
+                      {filter}
+                    </Button>
+                  </li>
+                );
+              })}
             </ul>
           </div>
           
