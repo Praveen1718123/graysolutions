@@ -434,13 +434,18 @@ export default function Services() {
               }}
             >
               <motion.h1 
-                className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+                className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight italic"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 data-testid="hero-heading"
               >
-                We design, build & automate the products your customers actually use.
+                We design & build digital experiences that are aesthetically{' '}
+                <span className="font-black not-italic" style={{ WebkitTextStroke: '2px #0F172A', WebkitTextFillColor: 'transparent' }}>coherent,</span>{' '}
+                operationally{' '}
+                <span className="font-black not-italic" style={{ WebkitTextStroke: '2px #0F172A', WebkitTextFillColor: 'transparent' }}>reliable,</span>{' '}
+                & aligned with clear business{' '}
+                <span className="font-black not-italic" style={{ WebkitTextStroke: '2px #0F172A', WebkitTextFillColor: 'transparent' }}>objectives.</span>
               </motion.h1>
             </motion.div>
 
