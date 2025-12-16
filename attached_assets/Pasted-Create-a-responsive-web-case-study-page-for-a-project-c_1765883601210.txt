@@ -1,0 +1,51 @@
+Create a responsive web case‑study page for a project called **Magic Trucks**. The design should mirror the refined editorial feel of the Bulletproof “Ice Chalet” case study:
+
+1. **Hero section (full viewport height)**  
+   - Large hero image or video background (placeholder) showing trucks in action at night or on city streets.  
+   - Left‑aligned text overlay:  
+     - Small uppercase label: “MAGIC TRUCKS”  
+     - Large serif headline: “Reinventing logistics on wheels”  
+   - Discreet site nav (logo on the left, “Work” and “About” on the right).  
+   - Ensure the hero is immersive, with a smooth scroll cue to the next section.
+
+2. **Project overview section**  
+   - Two‑column layout.  
+     - **Left:** Headline like “Taking logistics where it’s never been”. Paragraph explaining the brief: we helped Magic Trucks redefine freight delivery through cutting‑edge tech, branding, and user experience.  
+     - **Right:** Project details list (client name, project name, services provided such as “Branding, UX/UI design, Web development, Strategy, Motion”). Style this as a neat list with uppercase labels and light dividing lines.  
+
+3. **Narrative section (“Rewriting the rulebook”)**  
+   - Light background.  
+   - Left column: headline “Rewriting the rulebook” with a short paragraph about how the case challenged the norms of trucking (e.g. moving from plain utility to a cohesive brand experience, appealing to a new generation of drivers and logistics managers). Below, place a medium image placeholder (e.g. portrait of a driver or a clean truck).  
+   - Right column: large product close‑up placeholder image (e.g. a detail of the new truck design, branding on the side, or dashboard UI).  
+
+4. **Feature highlight (“The first connected trucking platform” – replace with your feature)**  
+   - Two columns again.  
+   - **Left:** Headline like “The first connected trucking platform.” Explain how Magic Trucks introduced a connected app, dashboards, or modular container system. Mention collaborations or innovations (optional).  
+   - **Right:** Photo/visual of the feature – placeholder for an app interface on a tablet or the modular container.  
+
+5. **Collage grid**  
+   - A masonry‑style grid with 3–5 image placeholders of different sizes: show trucks on the road, close‑ups, team members, or hardware. Keep gaps consistent and balance large with small images.  
+
+6. **Lifestyle / Outcome section (“Claiming the future of logistics”)**  
+   - Two columns; dark‑on‑light style for contrast.  
+   - **Left:** Large serif headline “Claiming the future of logistics”. A paragraph explaining how this wasn’t just a tech upgrade but a lifestyle shift for drivers and operators, positioning Magic Trucks as both efficient and aspirational.  
+   - **Right:** Photo or video still placeholder of drivers interacting with the product in a lifestyle context (e.g. a sleek truck interior, well‑designed uniforms).  
+
+7. **Campaign or narrative section (“Owning the Road” – adjust name)**  
+   - Another two‑column block.  
+   - **Left:** Headline and paragraph describing the launch campaign or rollout (e.g. “Owning the Road” – an advertising campaign using twilight shots and dynamic motion). Mention any media partners or ambassadors.  
+   - **Right:** Video or photo placeholder showing a cinematic shot (e.g. truck driving at dusk, light trails).  
+
+8. **Behind‑the‑Scenes carousel**  
+   - Heading: “Behind the scenes” followed by a subhead like “We literally moved mountains” (adjust wording).  
+   - A horizontal image slider with arrows to view 5–6 behind‑the‑scenes photos. Use equal‑sized frames with thin borders on a neutral background.  
+
+9. **Results / Metrics section**  
+   - Dark background panel with three columns:  
+     - **Growth:** Big number (placeholder like “500+”) and caption (e.g. “Managed loads delivered, 12 new markets opened in 3 months”).  
+     - **Standout:** Big number (e.g. “10M”) with caption summarizing campaign reach or KPIs.  
+     - **Fandom / Impact:** Big number (e.g. “200+%”) and caption about increased efficiency, reduced carbon footprint, funding raised, or customer adoption.  
+   - Include subtle award icons if applicable, using thin outlines.  
+
+10. **Next case teaser**  
+    - Section titled “Next Up…” with a card linking to the next case study (placeholder image plus project name). Keep it visually consistent with the current page and ensure it invites exploration.  
