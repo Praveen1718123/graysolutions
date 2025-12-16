@@ -1,0 +1,214 @@
+EAGLE — Case Study Content (Copy-Paste)
+1) Hero
+
+Title:
+Eagle — Brand Built for Reliability in High-Risk Operations
+
+Subtitle (1–2 lines):
+A full brand identity system designed to make Eagle look consistent, credible, and “enterprise-ready” across print, safety gear, equipment, and industrial environments.
+
+Primary CTA: View Brand System
+Secondary CTA: Talk to Gray Solutions
+
+Quick tags (chips):
+Brand Identity • Guidelines • Print + Physical Assets • Industrial / Port Ops
+
+2) Quick Brief
+
+Ambition
+Create a brand that feels serious, dependable, and instantly recognizable—the kind of identity clients trust when operations are high-risk and time-sensitive.
+
+Reality Check
+Industrial businesses often look inconsistent across assets: brochure says one thing, equipment looks different, and staff uniform has another style. That inconsistency silently kills trust.
+
+What We Shipped
+A complete brand identity + usage system covering: logo rules, typography, color system, templates, and real-world applications (brochure, container, PPE, equipment branding, and wallpapers).
+
+3) Insights
+
+1) In industrial categories, trust is visual first.
+Before anyone reads your pitch, they judge your credibility by how consistent you look across environments.
+
+2) A brand isn’t a logo — it’s a repeatable system.
+The goal is not “a nice design,” it’s a system teams can apply without breaking it.
+
+3) Real-world surfaces matter more than social posts.
+When your identity lives on equipment, containers, helmets, and documents, it becomes “real” to customers.
+
+4) Guidelines are the difference between brand and decoration.
+Without rules, teams improvise—and the brand slowly becomes noise.
+
+4) Idea (Overall)
+
+The Big Bet
+Make Eagle feel like a company that runs clean operations—by designing an identity that stays consistent under real-world pressure.
+
+The Strategy
+
+Build a recognizable core: a strong mark + bold identity that reads instantly at distance.
+
+Design for environments, not just screens: assets that work in sunlight, dust, warehouses, ports, and print.
+
+Create strict rules for consistency: so teams can roll it out across vendors without quality dropping.
+
+Extend into physical touchpoints: brochure, equipment, containers, PPE, and brand wallpapers.
+
+Make it scalable: templates + guidelines so future assets look like Eagle without re-designing every time.
+
+What this enables
+More trust • stronger recall • faster sales enablement • cleaner vendor execution • consistent presence across every site.
+
+5) Impact
+Impact delivered (now)
+
+A brand system that looks enterprise-grade and operationally credible
+
+Consistent identity across print + physical assets
+
+Clear guidelines to prevent “brand drift” over time
+
+Impact to measure (placeholders)
+
+↑ Brand recall in client meetings
+
+↑ Proposal acceptance rate
+
+↓ Time to create marketing collateral
+
+↓ Rework from vendors / printers
+
+Testimonial placeholder
+“Now our assets finally look like one company — not five vendors.”
+
+6) Gallery
+
+Section title: Brand in the Real World
+Section subtitle: Identity guidelines + proof of application across surfaces and environments.
+
+Gallery categories (tabs):
+All • Guidelines • Print • PPE • Equipment • Industrial Scenes
+
+7) Closing CTA
+
+Headline: Want a brand that looks credible in the real world—not just online?
+Body: We build identity systems that teams can actually execute across vendors, assets, and environments.
+Button: Book a Call
+
+Image Specification + Placement Map (Use Your Files)
+A) Hero Image (Top of page)
+
+Best option: Eagle Web 3.jpg (brochure in hand, premium + real)
+Alt option: Eagle Wallpaper-03.png (red port wallpaper, bold hero background)
+
+Spec:
+
+Hero main image: 16:9 crop works best
+
+Recommended: 1600–2200px width
+
+Keep “safe area” around title text (don’t crop headline zone)
+
+Alt text: “Eagle brand brochure shown in-hand.”
+
+B) Quick Brief / “What We Shipped” Visual
+
+Use: Eagle web elements-04.png (brand guideline overview board)
+
+Spec:
+
+Aspect ratio: 16:9
+
+Works as: full-width section banner OR large card
+
+Alt text: “Eagle brand identity guideline preview grid.”
+
+C) Guidelines Deep Proof (Gallery → Guidelines tab)
+
+Use: Camera Angle 02.png (open brochure spread)
+Plus: Eagle Web 2.png (hardhat / person in PPE)
+
+Spec:
+
+Brochure spread: 16:9 or 3:2
+
+PPE portrait: 16:9 (keep face centered)
+
+Alt text:
+
+Brochure: “Eagle print brochure layout spread.”
+
+PPE: “Eagle hardhat branding in industrial context.”
+
+D) Equipment Branding (Gallery → Equipment tab)
+
+Use:
+
+Eagle 2.png (real equipment shot with Eagle branding)
+
+Eagle 3.png (forklift / vehicle branding)
+
+Spec:
+
+Keep aspect ratio close to original (don’t over-crop)
+
+Recommended display: 1200–1600px width
+
+Avoid heavy filters; these images sell authenticity
+
+Alt text:
+
+“Eagle branding applied on industrial equipment.”
+
+“Eagle identity applied on forklift body.”
+
+E) Industrial Asset Mockups (Gallery → Industrial Scenes tab)
+
+Use:
+
+Eagle Container.png (container branding mock)
+
+Eagle Wallpaper-02.png (ship scene with logo overlay)
+
+Eagle Wallpaper-03.png (red port wallpaper)
+
+Spec:
+
+Container: 16:9 or 3:2
+
+Wallpapers: 21:9 (cinematic) OR 16:9
+
+Use wallpapers as section dividers / background layers (low opacity)
+
+Alt text:
+
+“Eagle container branding concept.”
+
+“Eagle identity shown on maritime shipping scene.”
+
+“Eagle brand wallpaper in port context.”
+
+F) Merchandise / Brand Touchpoint (Gallery → Print or Brand tab)
+
+Use: Eagle Tote Bag.png
+
+Spec:
+
+Aspect ratio: 3:4 or 4:5 (works great as tall card)
+
+Recommended: 1200px height+
+
+Alt text: “Eagle branded tote bag mockup.”
+
+Web Image Optimization (do this once and you’re set)
+
+For Replit/site performance:
+
+Convert to WEBP where possible
+
+Target size: 150–350 KB per image
+
+Keep hero max: 500–800 KB
+
+Use lazy-loading in Gallery
+
+Provide alt text for every image (already listed above)

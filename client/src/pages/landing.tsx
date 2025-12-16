@@ -17,7 +17,7 @@ export default function Landing() {
 
   const filterItems = [
     "Magic Trucks",
-    "Switch Bee",
+    "Eagle",
     "TIX",
     "AI Receptionist",
     "Gray Solutions",
@@ -89,7 +89,11 @@ export default function Landing() {
           <div className="w-full px-4 mb-4">
              <ul className="flex justify-evenly items-center w-full">
               {filterItems.map((filter) => {
-                const caseStudyLink = filter === "Magic Trucks" ? "/case-study/magic-trucks" : null;
+                const caseStudyLinks: Record<string, string> = {
+                  "Magic Trucks": "/case-study/magic-trucks",
+                  "Eagle": "/case-study/eagle",
+                };
+                const caseStudyLink = caseStudyLinks[filter] || null;
                 
                 if (caseStudyLink) {
                   return (
