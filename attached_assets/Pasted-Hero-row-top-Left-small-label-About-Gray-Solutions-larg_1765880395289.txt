@@ -1,0 +1,59 @@
+Hero row (top)
+
+Left: small label “About Gray Solutions”, large heading:
+“A product studio built on clarity, precision, and outcomes.”
+
+Subtext under heading (2–3 lines, max 70ch width):
+“Gray Solutions is a product, design, and technology studio focused on building digital experiences that are aesthetically refined, operationally reliable, and aligned with clear business objectives.”
+
+Optional primary CTA button: “Talk to us” (ghost style, subtle).
+
+“What we stand for” section
+
+Two-column layout.
+
+Left column title: “How we think” with short paragraph:
+“We operate at the intersection of design, engineering, and business. Our work is guided by three principles: aesthetic clarity, functional precision, and measurable impact.”
+
+Right column: three stacked bullets with short labels + one-line descriptions:
+
+Aesthetic clarity — “Interfaces that feel intentional, minimal, and easy to read.”
+
+Functional precision — “Systems that behave predictably and scale without friction.”
+
+Business impact — “Decisions tied to revenue, efficiency, and long-term value.”
+
+Metrics strip (“By the numbers”)
+
+Full-width horizontal stats row with 3–4 metric blocks, equal width, centered text.
+
+Each block: big number on top, small label below.
+
+Content:
+
+20+ — “client engagements across products, brands, and platforms.”
+
+8+ years — “hands-on experience in digital product and UX.”
+
+Funding — “products we’ve supported have gone on to raise seed and Series A capital.”
+
+Revenue impact — “improved funnels, flows, and experiences that increased conversions and retention.”
+
+“How we work” section
+
+Title: “How we work with teams”
+
+4-step horizontal or vertical list with concise, professional copy:
+
+1. Understand the context — “Clarify objectives, constraints, and current realities before proposing solutions.”
+
+2. Design with intent — “Structure flows, interactions, and visuals for clarity and ease of use.”
+
+3. Build for reliability — “Implement stable, maintainable systems ready for real users.”
+
+4. Refine with data — “Review performance, correct friction points, and iterate with purpose.”
+
+Closing statement
+
+Centered text block near bottom:
+“We’re not a full-service agency. We focus on building products and the systems behind them — for founders, operators, and teams that need to move with confidence.”
