@@ -53,32 +53,45 @@ export default function MagicTrucks() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
     >
-      {/* Fixed Header */}
+      {/* Fixed Header - Pill transformation on scroll */}
       <header 
-        className="fixed top-0 left-0 right-0 z-50"
+        className="fixed top-0 left-0 right-0 z-50 flex justify-center"
         style={{
-          backgroundColor: isScrolled ? 'rgba(255,255,255,0.95)' : 'transparent',
-          backdropFilter: isScrolled ? 'blur(12px)' : 'none',
-          transition: 'all 400ms ease',
+          height: isScrolled ? '80px' : '100px',
+          backgroundColor: 'transparent',
+          pointerEvents: 'none',
+          transition: 'height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
         }}
       >
-        <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-5 flex justify-between items-center">
+        <div 
+          className="flex items-center justify-center"
+          style={{
+            pointerEvents: 'auto',
+            width: isScrolled ? '240px' : '100%',
+            height: isScrolled ? '48px' : '100%',
+            marginTop: isScrolled ? '16px' : '0',
+            backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : '#F6F7FA',
+            backdropFilter: isScrolled ? 'blur(12px)' : 'none',
+            WebkitBackdropFilter: isScrolled ? 'blur(12px)' : 'none',
+            boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.1)' : 'none',
+            borderRadius: isScrolled ? '999px' : '0',
+            padding: isScrolled ? '0 32px' : '0',
+            transition: 'all 500ms cubic-bezier(0.4, 0, 0.2, 1)',
+          }}
+        >
           <Link href="/">
             <img 
               src={logoImage} 
-              alt="Gray Solutions" 
-              className="h-8 cursor-pointer"
+              alt="Gray Solutions Logo" 
+              className="cursor-pointer"
+              style={{
+                height: isScrolled ? '28px' : '48px',
+                width: 'auto',
+                transition: 'height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
+              }}
               data-testid="logo-nav"
             />
           </Link>
-          <nav className="flex gap-8">
-            <Link href="/services" className="text-sm font-medium hover:opacity-70 transition-opacity" style={{ color: '#1A1A1A' }}>
-              Work
-            </Link>
-            <Link href="/about" className="text-sm font-medium hover:opacity-70 transition-opacity" style={{ color: '#1A1A1A' }}>
-              About
-            </Link>
-          </nav>
         </div>
       </header>
 
