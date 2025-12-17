@@ -55,9 +55,9 @@ export default function MagicTrucks() {
     >
       {/* Fixed Header - Pill transformation on scroll */}
       <header 
-        className="fixed top-0 left-0 right-0 z-50 flex justify-center"
+        className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 md:px-0"
         style={{
-          height: isScrolled ? '80px' : '100px',
+          height: isScrolled ? '70px' : '80px',
           backgroundColor: 'transparent',
           pointerEvents: 'none',
           transition: 'height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
@@ -67,15 +67,15 @@ export default function MagicTrucks() {
           className="flex items-center justify-center"
           style={{
             pointerEvents: 'auto',
-            width: isScrolled ? '240px' : '100%',
-            height: isScrolled ? '48px' : '100%',
-            marginTop: isScrolled ? '16px' : '0',
+            width: isScrolled ? '180px' : '100%',
+            height: isScrolled ? '44px' : '100%',
+            marginTop: isScrolled ? '12px' : '0',
             backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : '#F6F7FA',
             backdropFilter: isScrolled ? 'blur(12px)' : 'none',
             WebkitBackdropFilter: isScrolled ? 'blur(12px)' : 'none',
             boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.1)' : 'none',
             borderRadius: isScrolled ? '999px' : '0',
-            padding: isScrolled ? '0 32px' : '0',
+            padding: isScrolled ? '0 24px' : '0',
             transition: 'all 500ms cubic-bezier(0.4, 0, 0.2, 1)',
           }}
         >
@@ -85,7 +85,7 @@ export default function MagicTrucks() {
               alt="Gray Solutions Logo" 
               className="cursor-pointer"
               style={{
-                height: isScrolled ? '28px' : '48px',
+                height: isScrolled ? '24px' : '36px',
                 width: 'auto',
                 transition: 'height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
               }}
@@ -96,8 +96,8 @@ export default function MagicTrucks() {
       </header>
 
       {/* Hero Section */}
-      <section className="pt-32 md:pt-40 pb-16 md:pb-24" style={{ backgroundColor: '#F6F7FA' }}>
-        <div className="max-w-[1400px] mx-auto px-6 md:px-10">
+      <section className="pt-24 md:pt-32 pb-12 md:pb-24" style={{ backgroundColor: '#F6F7FA' }}>
+        <div className="max-w-[1400px] mx-auto px-4 md:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left - Content */}
             <motion.div
@@ -166,8 +166,8 @@ export default function MagicTrucks() {
       </section>
 
       {/* Quick Brief Section */}
-      <section className="py-20 md:py-28" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+      <section className="py-12 md:py-28" style={{ backgroundColor: '#FFFFFF' }}>
+        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
           <motion.h2 
             className="text-2xl md:text-3xl font-bold mb-12"
             style={{ color: '#1A1A1A' }}
@@ -204,8 +204,8 @@ export default function MagicTrucks() {
       </section>
 
       {/* Product Suite Banner */}
-      <section className="py-12" style={{ backgroundColor: '#F6F7FA' }}>
-        <div className="max-w-[1400px] mx-auto px-6 md:px-10">
+      <section className="py-8 md:py-12" style={{ backgroundColor: '#F6F7FA' }}>
+        <div className="max-w-[1400px] mx-auto px-4 md:px-10">
           <motion.img 
             src={laptopScreens}
             alt="Desktop product screens collage for shipment management"
@@ -219,8 +219,8 @@ export default function MagicTrucks() {
       </section>
 
       {/* Insights Section */}
-      <section className="py-20 md:py-28" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+      <section className="py-12 md:py-28" style={{ backgroundColor: '#FFFFFF' }}>
+        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
           <motion.h2 
             className="text-2xl md:text-3xl font-bold mb-12"
             style={{ color: '#1A1A1A' }}
@@ -266,8 +266,8 @@ export default function MagicTrucks() {
       </section>
 
       {/* The Big Bet Section */}
-      <section className="py-20 md:py-28" style={{ backgroundColor: '#F6F7FA' }}>
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+      <section className="py-12 md:py-28" style={{ backgroundColor: '#F6F7FA' }}>
+        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -316,8 +316,8 @@ export default function MagicTrucks() {
       </section>
 
       {/* Impact Section */}
-      <section className="py-20 md:py-28" style={{ backgroundColor: '#1A1A1A' }}>
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+      <section className="py-12 md:py-28" style={{ backgroundColor: '#1A1A1A' }}>
+        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
           <motion.h2 
             className="text-2xl md:text-3xl font-bold mb-12"
             style={{ color: '#FFFFFF' }}
@@ -382,8 +382,8 @@ export default function MagicTrucks() {
       </section>
 
       {/* Gallery Section */}
-      <section className="py-20 md:py-28" style={{ backgroundColor: '#F6F7FA' }}>
-        <div className="max-w-[1400px] mx-auto px-6 md:px-10">
+      <section className="py-12 md:py-28" style={{ backgroundColor: '#F6F7FA' }}>
+        <div className="max-w-[1400px] mx-auto px-4 md:px-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -456,8 +456,8 @@ export default function MagicTrucks() {
       </section>
 
       {/* Closing CTA Section */}
-      <section className="py-20 md:py-28" style={{ backgroundColor: '#F6F7FA' }}>
-        <div className="max-w-[800px] mx-auto px-6 md:px-10 text-center">
+      <section className="py-12 md:py-28" style={{ backgroundColor: '#F6F7FA' }}>
+        <div className="max-w-[800px] mx-auto px-4 md:px-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -483,8 +483,8 @@ export default function MagicTrucks() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12" style={{ backgroundColor: '#1A1A1A' }}>
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+      <footer className="py-8 md:py-12" style={{ backgroundColor: '#1A1A1A' }}>
+        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <img 
               src={logoImage} 

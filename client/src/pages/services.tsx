@@ -369,9 +369,9 @@ export default function Services() {
     >
       {/* Fixed Header - Full width initially, transforms to floating pill on scroll */}
       <header 
-        className="fixed top-0 left-0 right-0 z-50 flex justify-center"
+        className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 md:px-0"
         style={{
-          height: isScrolled ? '80px' : '100px',
+          height: isScrolled ? '70px' : '80px',
           backgroundColor: 'transparent',
           pointerEvents: 'none',
           transition: 'height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
@@ -381,15 +381,15 @@ export default function Services() {
           className="flex items-center justify-center"
           style={{
             pointerEvents: 'auto',
-            width: isScrolled ? '240px' : '100%',
-            height: isScrolled ? '48px' : '100%',
-            marginTop: isScrolled ? '16px' : '0',
+            width: isScrolled ? '180px' : '100%',
+            height: isScrolled ? '44px' : '100%',
+            marginTop: isScrolled ? '12px' : '0',
             backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : '#F6F7FA',
             backdropFilter: isScrolled ? 'blur(12px)' : 'none',
             WebkitBackdropFilter: isScrolled ? 'blur(12px)' : 'none',
             boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.1)' : 'none',
             borderRadius: isScrolled ? '999px' : '0',
-            padding: isScrolled ? '0 32px' : '0',
+            padding: isScrolled ? '0 24px' : '0',
             transition: 'all 500ms cubic-bezier(0.4, 0, 0.2, 1)',
           }}
         >
@@ -400,7 +400,7 @@ export default function Services() {
               alt="Gray Solutions Logo" 
               className="cursor-pointer"
               style={{
-                height: isScrolled ? '28px' : '48px',
+                height: isScrolled ? '24px' : '36px',
                 width: 'auto',
                 transition: 'height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
               }}
@@ -414,17 +414,17 @@ export default function Services() {
       <section 
         ref={heroRef}
         className="relative"
-        style={{ backgroundColor: '#F6F7FA', paddingTop: '100px', height: '300vh' }}
+        style={{ backgroundColor: '#F6F7FA', paddingTop: '80px', height: '300vh' }}
       >
         <div 
           className="sticky overflow-hidden"
           style={{
-            top: isScrolled ? '80px' : '100px',
-            height: isScrolled ? 'calc(100vh - 80px)' : 'calc(100vh - 100px)',
+            top: isScrolled ? '70px' : '80px',
+            height: isScrolled ? 'calc(100vh - 70px)' : 'calc(100vh - 80px)',
             transition: 'top 500ms cubic-bezier(0.4, 0, 0.2, 1), height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
           }}
         >
-          <div className="max-w-[1120px] mx-auto px-6 md:px-10 h-full flex flex-col pt-8">
+          <div className="max-w-[1120px] mx-auto px-4 md:px-10 h-full flex flex-col pt-4 md:pt-8">
             {/* Text Content - Slides up and fades out */}
             <motion.div 
               className="hero-content z-10 pb-8 text-left max-w-3xl"
