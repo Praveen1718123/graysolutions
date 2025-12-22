@@ -1,0 +1,39 @@
+Build a responsive “About Us” page for Gray Solutions, a product, design, tech, and consulting studio. Use modern React + Tailwind-style layout (or equivalent) with clean, premium visual language like Metalab / Clay / Work&Co.
+
+Do NOT invent marketing text. I will paste the final copy myself. Focus only on:
+
+1) LAYOUT & HIERARCHY
+- Full-screen hero section with:
+  - Small eyebrow label (e.g. “About Gray Solutions”)
+  - Large main heading (2–3 lines max)
+  - Short subtext paragraph
+  - Optional subtle ghost button (“Talk to us”)
+- Hero layout: text left, right side shows an abstract 3D-style or geometric placeholder (think minimal digital system, not cheesy illustration). Use a soft gradient or subtle motion background.
+- Directly under hero, a narrow single-line “What we do” strip centered or full-width.
+- Then a 2-column section for “How We Think”:
+  - Left: intro paragraph
+  - Right: the 3 principles as stacked cards or bullets (Aesthetic clarity, Functional precision, Business alignment).
+- Next section: “Consumer-Centred by Design” in a single-column wide text block with comfortable line length and more generous padding.
+- Then “By the Numbers”: a full-width stats strip with 4 equal columns. Each stat as big number on top, short label below. Looks like a premium dashboard card row.
+- “How We Work” as a 4-step horizontal timeline on desktop (1–4), stacking vertically on mobile. Each step = small label, title, 2–3 line text.
+- Closing section “Our Position” as a centered block with slightly smaller width and optional divider line above.
+
+2) VISUAL STYLE
+- Color palette: neutral (white / off-white background, dark gray text, one accent color that feels serious and tech/product).
+- Typography: one clean sans-serif. Large hero heading, clear hierarchy for h2/h3, comfortable line height.
+- Use cards, soft shadows, and subtle borders to separate sections (not heavy boxes).
+
+3) MOTION & INTERACTIONS
+- Hero: slight parallax or slow gradient shift in the abstract visual area; keep it subtle.
+- Section entrance animations on scroll: fade + slight upward movement for each primary block (hero text appears on load, then each section animates as it enters viewport).
+- “By the Numbers” stats: count-up animation when the stats row scrolls into view.
+- “How We Work” steps: on hover, step card slightly lifts and highlights border; on mobile, tap effect only.
+- Smooth scrolling for in-page anchor links (if any).
+- All animations should be lightweight (CSS or simple JS) and not feel gimmicky.
+
+4) RESPONSIVE BEHAVIOUR
+- On mobile, stack hero: graphic on top, text below.
+- All 2-column sections collapse into single-column with clear spacing between blocks.
+- Stats row becomes 2x2 grid or 4 stacked blocks.
+
+Output a single page layout wired for my content, with clear placeholders like: [HERO_TITLE], [HERO_SUBTEXT], [HOW_WE_THINK_INTRO], [PRINCIPLE_1_TITLE], etc. Do not write any lorem ipsum; just structural placeholders.
