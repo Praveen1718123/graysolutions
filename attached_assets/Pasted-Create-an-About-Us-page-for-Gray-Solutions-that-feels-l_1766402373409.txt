@@ -1,0 +1,33 @@
+Create an About Us page for “Gray Solutions” that feels like a modern design agency site rather than a basic corporate page. The site should be immersive, visually appealing and interactive, while loading quickly.
+
+Overall style: minimal and elegant with generous white space and a light default theme; include a toggle to switch between light and dark modes. Use clean typography and a palette of blues and subtle accent colours, with subtle animated gradients in backgrounds. All images and icons should be scalable SVGs or vector illustrations to maintain sharpness and speed.
+
+Structure and copy:
+
+– **Hero section:** Full‑height opening with the tagline “We design and build digital systems that people understand — and businesses rely on.” in very large, bold type. Below it, a succinct description: “Gray Solutions is a product, design, and technology studio focused on creating digital experiences that are aesthetically clear, operationally reliable, and aligned with measurable business objectives. We work with teams who need structured thinking, careful execution, and products that perform in real conditions.” Place this text centrally over a soft animated background (e.g. swirling gradient or subtle particle effect). Use kinetic typography or a fade‑up animation on the headline when the page loads.
+
+– **What We Do:** A section explaining your capabilities across “Product Strategy”, “UX & Interface Design”, “Brand & Identity Systems”, “Engineering”, and “Digital Consulting/Optimisation.” Present each capability as a card with an icon (simple line‑art or abstract illustrations) and a short description. Lay them out in a responsive grid. As users scroll to this section, the cards should fade in or slide up sequentially.
+
+– **How We Think:** Explain that every product is a system that must serve both users and business. Highlight three guiding principles: **Aesthetic clarity** (interfaces that are intentional, minimal, and easy to read — no visual noise), **Functional precision** (systems that behave predictably, scale cleanly, and do not surprise operators or end users), and **Business alignment** (decisions tied to revenue, cost, risk, and long‑term value — not decoration or trends). Display each principle in its own card with a small icon and a one‑sentence description. Use micro‑animations to bring each card into view as the user scrolls.
+
+– **Consumer‑Centred by Design:** Emphasize your experience designing for both end consumers and business users. Include these paragraphs: “We have experience designing for both end consumers and business users.” “Our decisions are informed by how people actually behave — how they scan, hesitate, decide, and drop off. These patterns shape everything from information hierarchy to interaction details.” “Whether the audience is a customer, an internal operator, or a partner, our approach is the same: design with intent, build with reasoning, and refine based on real behaviour.” Use a clean text layout; animate each paragraph with a subtle fade‑in.
+
+– **By the Numbers:** Showcase your track record with four stats and animated count‑up effects. Present them in a responsive grid. The stats: “100+ product and design engagements across consumer apps, B2B platforms, internal tools, and experience redesigns.” “8+ years in digital product and systems design with hands‑on involvement from early strategy to delivery.” “0→1 launches and platform‑scale rebuilds defining, building, and shipping products that work in live environments.” “Experience across 10+ domains including consumer products, logistics, retail, SaaS, and internal operational systems.” As users scroll to this section, each number should count up from zero to its final value.
+
+– **How We Work:** Describe a four‑step process with clear headings and brief descriptions. Steps: “Understand the context” – define objectives, constraints, stakeholders, and how the product is used today. “Design with intent” – structure flows, states, and interfaces for clarity, predictability, and day‑to‑day use. “Build for reliability” – implement solutions that are stable, maintainable, and ready for real users — not just demos. “Refine with purpose” – review performance, identify friction, and adjust based on evidence, not guesswork. Display these steps along a vertical timeline with a coloured line and circular markers or icons. Each step should animate into view as the user scrolls.
+
+– **Our Position:** Conclude with three concise statements centred on the page: “We are not a full‑service agency.” “We specialise in products and the systems behind them, working as an extension of the teams we support.” “Our focus is simple: clear design, reliable execution, and outcomes that hold up over time.” Give this section a minimalist design, perhaps with a slightly different background tone, and use a gentle fade‑in animation.
+
+Features and interactions:
+
+1. **Smooth scroll‑triggered reveals:** Use the Intersection Observer API or similar to animate sections and individual elements (cards, paragraphs, stats) into view as the user scrolls. Movements should be subtle (fade/slide).
+
+2. **Animated metrics:** For the numbers in “By the Numbers”, implement a count‑up effect that starts when the section enters the viewport.
+
+3. **Light/Dark theme toggle:** Include a floating button (e.g., bottom‑right) that allows users to toggle between light and dark themes. Use CSS variables for colours, and remember the user’s choice in local storage.
+
+4. **Responsive design:** The page must look great on desktop and mobile. Use a flexible grid layout that adapts to different screen sizes.
+
+5. **Accessible and performant:** Ensure high contrast for text, provide alt descriptions for icons, and respect reduced‑motion preferences. Use SVGs and CSS for all graphics to keep the site lightweight.
+
+Generate the website code according to this specification, filling all text content exactly as provided. Include all necessary HTML, CSS and JavaScript in a single Replit project so I can copy it directly into Replit and run it.
