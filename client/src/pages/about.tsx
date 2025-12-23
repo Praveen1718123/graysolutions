@@ -4,6 +4,7 @@ import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 import heroVideo from "@assets/From_KlickPin_CF_Red_and_White_Abstract_Wall_ArtJiayuan_Liang__1766475001318.mp4";
 import benefitsVideo from "@assets/From_KlickPin_CF_by_Meloq_Arai_—_a_3D_Motion_Designer_@meloqar_1766508779038.mp4";
+import numbersVideo from "@assets/From_KlickPin_CF_light_hero___abstract_flare_[Video]___Editing_1766512132613.mp4";
 
 function useCountUp(end: number, duration: number = 2000, inView: boolean) {
   const [count, setCount] = useState(0);
@@ -783,10 +784,28 @@ export default function About() {
       {/* By the Numbers - Full Width Stats Strip */}
       <section 
         ref={metricsRef}
-        className="py-16 md:py-24"
+        className="py-16 md:py-24 relative overflow-hidden"
         style={{ backgroundColor: '#1A1A1A' }}
       >
-        <div className="max-w-[1280px] mx-auto px-4 md:px-10">
+        {/* Video Background */}
+        <video
+          src={numbersVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{
+            filter: 'grayscale(100%) brightness(0.4) contrast(1.2)',
+            opacity: 0.6,
+          }}
+        />
+        {/* Dark overlay for better text readability */}
+        <div 
+          className="absolute inset-0"
+          style={{ backgroundColor: 'rgba(26, 26, 26, 0.7)' }}
+        />
+        <div className="relative z-10 max-w-[1280px] mx-auto px-4 md:px-10">
           <motion.div
             className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
