@@ -450,7 +450,7 @@ export default function About() {
           </div>
 
           {/* Desktop Layout - 2 Column with Sticky Left */}
-          <div className="hidden lg:grid lg:grid-cols-2 gap-12 lg:gap-20">
+          <div className="hidden lg:grid lg:grid-cols-2 gap-12 lg:gap-20" style={{ alignItems: 'start' }}>
             {/* Left Column - Sticky */}
             <div className="relative">
               <div 
@@ -481,22 +481,23 @@ export default function About() {
 
             {/* Right Column - Cards scroll naturally */}
             <div>
-              <div className="space-y-5">
+              <div className="space-y-6">
                 {principles.map((principle, index) => (
                   <motion.div
                     key={index}
-                    className="p-6 rounded-xl flex gap-4"
+                    className="p-8 rounded-2xl flex gap-5"
                     style={{ 
                       opacity: cardOpacities[index],
                       y: cardYs[index],
                       backgroundColor: '#FFFFFF',
                       boxShadow: '0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03)',
                       border: '1px solid rgba(0,0,0,0.04)',
+                      minHeight: '180px',
                     }}
                     data-testid={`principle-${index}`}
                   >
                     <motion.div 
-                      className="flex-shrink-0 mt-0.5"
+                      className="flex-shrink-0 mt-1"
                       style={{ 
                         color: '#1A1A1A',
                         opacity: cardOpacities[index],
@@ -505,10 +506,10 @@ export default function About() {
                       {principle.icon}
                     </motion.div>
                     <div>
-                      <h3 className="text-base font-semibold mb-2" style={{ color: '#1A1A1A' }}>
+                      <h3 className="text-lg font-semibold mb-3" style={{ color: '#1A1A1A' }}>
                         {principle.title}
                       </h3>
-                      <p className="text-sm leading-relaxed" style={{ color: '#666666' }}>
+                      <p className="text-base leading-relaxed" style={{ color: '#666666' }}>
                         {principle.description}
                       </p>
                     </div>
