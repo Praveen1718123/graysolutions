@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 import heroVideo from "@assets/From_KlickPin_CF_Red_and_White_Abstract_Wall_ArtJiayuan_Liang__1766475001318.mp4";
+import benefitsVideo from "@assets/From_KlickPin_CF_by_Meloq_Arai_—_a_3D_Motion_Designer_@meloqar_1766508779038.mp4";
 
 function useCountUp(end: number, duration: number = 2000, inView: boolean) {
   const [count, setCount] = useState(0);
@@ -687,7 +688,7 @@ export default function About() {
                   }}
                 >
                   <video
-                    src="/attached_assets/From_KlickPin_CF_by_Meloq_Arai_—_a_3D_Motion_Designer_@meloqar_1766508779038.mp4"
+                    src={benefitsVideo}
                     autoPlay
                     loop
                     muted
