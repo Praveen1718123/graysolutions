@@ -868,7 +868,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* How We Work - 4-Step Timeline */}
+      {/* How We Work - 4-Box Bento Grid */}
       <section 
         className="py-20 md:py-28"
         style={{ backgroundColor: '#FAFAFA' }}
@@ -895,18 +895,12 @@ export default function About() {
             </p>
           </motion.div>
           
-          {/* Desktop: Horizontal Timeline */}
-          <div className="hidden md:grid md:grid-cols-4 gap-6 relative">
-            {/* Connecting line */}
-            <div 
-              className="absolute top-8 left-[12.5%] right-[12.5%] h-px"
-              style={{ backgroundColor: 'rgba(0,0,0,0.1)' }}
-            />
-            
+          {/* 2x2 Bento Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {howWeWork.map((item, index) => (
               <motion.div
                 key={index}
-                className="relative p-6 rounded-xl transition-all duration-300 hover:-translate-y-1 cursor-default"
+                className="rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 cursor-default"
                 style={{ 
                   backgroundColor: '#FFFFFF',
                   boxShadow: '0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03)',
@@ -915,70 +909,86 @@ export default function About() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.12 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ 
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-                  borderColor: 'rgba(0,0,0,0.12)',
+                  boxShadow: '0 8px 30px rgba(0,0,0,0.08)',
+                  borderColor: 'rgba(0,0,0,0.08)',
                 }}
                 data-testid={`how-we-work-step-${index}`}
               >
+                {/* Visual Placeholder - 50% */}
                 <div 
-                  className="text-xs font-semibold tracking-widest uppercase mb-4"
-                  style={{ color: '#888888' }}
+                  className="w-full relative overflow-hidden"
+                  style={{ 
+                    height: '200px',
+                    background: index === 0 
+                      ? 'linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 50%, #f0f0f0 100%)'
+                      : index === 1
+                      ? 'linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 50%, #e0e0e0 100%)'
+                      : index === 2
+                      ? 'linear-gradient(135deg, #f0f0f0 0%, #e5e5e5 50%, #f5f5f5 100%)'
+                      : 'linear-gradient(135deg, #e5e5e5 0%, #f0f0f0 50%, #e8e8e8 100%)',
+                  }}
                 >
-                  Step {item.step}
+                  {/* Animated shimmer */}
+                  <motion.div
+                    className="absolute inset-0"
+                    style={{
+                      background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 50%, transparent 100%)',
+                    }}
+                    animate={{
+                      x: ['-100%', '100%'],
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: 'linear',
+                      delay: index * 0.5,
+                    }}
+                  />
+                  {/* Step indicator */}
+                  <div className="absolute top-4 left-4">
+                    <div 
+                      className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold"
+                      style={{ 
+                        backgroundColor: 'rgba(255,255,255,0.9)',
+                        color: '#1A1A1A',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+                      }}
+                    >
+                      {item.step}
+                    </div>
+                  </div>
+                  {/* Placeholder icon */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div 
+                      className="w-16 h-16 rounded-xl flex items-center justify-center"
+                      style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
+                    >
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#888888" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <polyline points="21 15 16 10 5 21" />
+                      </svg>
+                    </div>
+                  </div>
                 </div>
-                <h3 
-                  className="text-base font-semibold mb-3"
-                  style={{ color: '#1A1A1A' }}
-                >
-                  {item.title}
-                </h3>
-                <p 
-                  className="text-sm leading-relaxed"
-                  style={{ color: '#666666' }}
-                >
-                  {item.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Mobile: Vertical Stack */}
-          <div className="md:hidden space-y-4">
-            {howWeWork.map((item, index) => (
-              <motion.div
-                key={index}
-                className="p-5 rounded-xl"
-                style={{ 
-                  backgroundColor: '#FFFFFF',
-                  boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
-                  border: '1px solid rgba(0,0,0,0.04)',
-                }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.08 }}
-                data-testid={`how-we-work-step-mobile-${index}`}
-              >
-                <div 
-                  className="text-xs font-semibold tracking-widest uppercase mb-2"
-                  style={{ color: '#888888' }}
-                >
-                  Step {item.step}
+                
+                {/* Text Content - 50% */}
+                <div className="p-6" style={{ minHeight: '160px' }}>
+                  <h3 
+                    className="text-lg font-semibold mb-3"
+                    style={{ color: '#1A1A1A' }}
+                  >
+                    {item.title}
+                  </h3>
+                  <p 
+                    className="text-sm leading-relaxed"
+                    style={{ color: '#666666' }}
+                  >
+                    {item.description}
+                  </p>
                 </div>
-                <h3 
-                  className="text-base font-semibold mb-2"
-                  style={{ color: '#1A1A1A' }}
-                >
-                  {item.title}
-                </h3>
-                <p 
-                  className="text-sm leading-relaxed"
-                  style={{ color: '#666666' }}
-                >
-                  {item.description}
-                </p>
               </motion.div>
             ))}
           </div>
