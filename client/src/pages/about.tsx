@@ -432,18 +432,18 @@ export default function About() {
 
             {/* Right Column - Cards scroll naturally */}
             <div>
-              <div className="space-y-6">
+              <div className="space-y-8">
                 {principles.map((principle, index) => (
                   <motion.div
                     key={index}
-                    className="p-8 rounded-2xl flex gap-5"
+                    className="p-10 rounded-2xl flex gap-5"
                     style={{ 
                       opacity: cardOpacities[index],
                       y: cardYs[index],
                       backgroundColor: '#FFFFFF',
                       boxShadow: '0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03)',
                       border: '1px solid rgba(0,0,0,0.04)',
-                      minHeight: '180px',
+                      minHeight: '220px',
                     }}
                     data-testid={`principle-${index}`}
                   >
@@ -467,6 +467,8 @@ export default function About() {
                   </motion.div>
                 ))}
               </div>
+              {/* Extra space to enable sticky scroll effect */}
+              <div style={{ height: '150px' }} />
             </div>
           </div>
         </div>
