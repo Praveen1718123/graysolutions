@@ -7,6 +7,7 @@ import benefitsVideo from "@assets/From_KlickPin_CF_by_Meloq_Arai_—_a_3D_Motio
 import numbersVideo from "@assets/From_KlickPin_CF_light_hero___abstract_flare_[Video]___Editing_1766512132613.mp4";
 import contextGif from "@assets/From_KlickPin_CF_Kaldea_Visual_Identity_&_Website_Design_on_Be_1766516930656.gif";
 import reliabilityGif from "@assets/From_KlickPin_CF_Kaldea_Visual_Identity_&_Website_Design_Behan_1766517492447.gif";
+import refineGif from "@assets/From_KlickPin_CF_Kaldea_Visual_Identity_&_Website_Design_Behan_1766517702605.gif";
 
 function useCountUp(end: number, duration: number = 2000, inView: boolean) {
   const [count, setCount] = useState(0);
@@ -1007,37 +1008,20 @@ export default function About() {
                     </div>
                   )}
                   
-                  {/* Card 4: 3D Flower/Loop - Iteration/Refinement */}
+                  {/* Card 4: GIF Animation - Refine with Purpose */}
                   {index === 3 && (
-                    <div className="relative z-10">
-                      <svg width="180" height="180" viewBox="0 0 180 180" fill="none" style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))' }}>
-                        <defs>
-                          <linearGradient id="flower-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="#b8b8b8" />
-                            <stop offset="50%" stopColor="#989898" />
-                            <stop offset="100%" stopColor="#787878" />
-                          </linearGradient>
-                          <linearGradient id="flower-grad-2" x1="50%" y1="0%" x2="50%" y2="100%">
-                            <stop offset="0%" stopColor="#d0d0d0" />
-                            <stop offset="100%" stopColor="#a0a0a0" />
-                          </linearGradient>
-                        </defs>
-                        {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
-                          <ellipse
-                            key={i}
-                            cx="90"
-                            cy="55"
-                            rx="18"
-                            ry="35"
-                            fill={i % 2 === 0 ? "url(#flower-grad-1)" : "url(#flower-grad-2)"}
-                            transform={`rotate(${angle} 90 90)`}
-                          />
-                        ))}
-                        <circle cx="90" cy="90" r="20" fill="#888" />
-                        <circle cx="90" cy="90" r="12" fill="#aaa" />
-                        <ellipse cx="80" cy="82" rx="4" ry="3" fill="#ccc" opacity="0.7" />
-                        <ellipse cx="90" cy="170" rx="45" ry="6" fill="rgba(0,0,0,0.1)" />
-                      </svg>
+                    <div 
+                      className="absolute inset-0 flex items-center justify-center overflow-hidden"
+                      style={{ background: '#FFFFFF' }}
+                    >
+                      <img 
+                        src={refineGif}
+                        alt="Refine animation"
+                        className="w-full h-full object-cover"
+                        style={{ 
+                          filter: 'grayscale(100%) contrast(1.2) brightness(0.9)',
+                        }}
+                      />
                     </div>
                   )}
                 </div>
