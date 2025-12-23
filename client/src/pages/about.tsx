@@ -1126,38 +1126,14 @@ export default function About() {
                 <img 
                   src={positionGif}
                   alt="Abstract motion animation"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full"
                   style={{ 
                     filter: 'hue-rotate(180deg) saturate(0)',
+                    objectFit: 'cover',
+                    objectPosition: 'center 60%',
                   }}
                 />
               </div>
-              
-              {/* Floating Card */}
-              <motion.div
-                className="absolute -bottom-4 -right-4 md:bottom-6 md:right-[-20px] bg-white rounded-xl px-5 py-3 flex items-center gap-3"
-                style={{ 
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-                  border: '1px solid rgba(0,0,0,0.05)'
-                }}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-              >
-                {/* Gradient Ring Icon */}
-                <div 
-                  className="w-6 h-6 rounded-full flex items-center justify-center"
-                  style={{ 
-                    background: 'conic-gradient(from 0deg, #888888, #cccccc, #888888)',
-                  }}
-                >
-                  <div className="w-4 h-4 rounded-full bg-white" />
-                </div>
-                <span className="text-sm font-medium" style={{ color: '#1A1A1A' }}>
-                  Project Complete
-                </span>
-              </motion.div>
             </motion.div>
           </div>
         </div>
