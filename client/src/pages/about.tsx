@@ -9,6 +9,7 @@ import contextGif from "@assets/From_KlickPin_CF_Kaldea_Visual_Identity_&_Websit
 import reliabilityGif from "@assets/From_KlickPin_CF_Kaldea_Visual_Identity_&_Website_Design_Behan_1766517492447.gif";
 import refineGif from "@assets/From_KlickPin_CF_Kaldea_Visual_Identity_&_Website_Design_Behan_1766517702605.gif";
 import designVideo from "@assets/From_KlickPin_CF_Abstract_gradient_geometric_shape_animation_[_1766517982162.mp4";
+import positionGif from "@assets/From_KlickPin_CF_Motion_Abstract_-_V1___Motion_graphics_design_1766518454195.gif";
 
 function useCountUp(end: number, duration: number = 2000, inView: boolean) {
   const [count, setCount] = useState(0);
@@ -1119,24 +1120,17 @@ export default function About() {
                 className="relative rounded-2xl overflow-hidden"
                 style={{ 
                   aspectRatio: '4/3',
-                  backgroundColor: '#e0e0e0'
+                  backgroundColor: '#000000'
                 }}
               >
-                {/* Placeholder abstract visual */}
-                <svg 
-                  className="w-full h-full" 
-                  viewBox="0 0 400 300" 
-                  fill="none"
-                  style={{ filter: 'grayscale(100%)' }}
-                >
-                  <rect width="400" height="300" fill="#e8e8e8" />
-                  <circle cx="200" cy="120" r="60" fill="#d0d0d0" />
-                  <circle cx="200" cy="120" r="40" fill="#c0c0c0" />
-                  <rect x="120" y="180" width="160" height="80" rx="8" fill="#d5d5d5" />
-                  <rect x="140" y="200" width="80" height="8" rx="2" fill="#b0b0b0" />
-                  <rect x="140" y="220" width="120" height="6" rx="2" fill="#c0c0c0" />
-                  <rect x="140" y="236" width="60" height="6" rx="2" fill="#c8c8c8" />
-                </svg>
+                <img 
+                  src={positionGif}
+                  alt="Abstract motion animation"
+                  className="w-full h-full object-cover"
+                  style={{ 
+                    filter: 'hue-rotate(180deg) saturate(0)',
+                  }}
+                />
               </div>
               
               {/* Floating Card */}
