@@ -900,10 +900,7 @@ export default function About() {
             {howWeWork.map((item, index) => (
               <motion.div
                 key={index}
-                className="rounded-3xl overflow-hidden cursor-default"
-                style={{ 
-                  background: 'linear-gradient(145deg, #f0f4f8 0%, #e4eaf0 50%, #dce4ec 100%)',
-                }}
+                className="rounded-3xl overflow-hidden cursor-default bg-white"
                 initial={{ opacity: 0.4, y: 8 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -914,275 +911,263 @@ export default function About() {
                 }}
                 data-testid={`how-we-work-step-${index}`}
               >
-                {/* Visual Area - Large */}
+                {/* Visual Area with Gradient BG */}
                 <div 
-                  className="w-full relative overflow-hidden flex items-center justify-center p-6"
-                  style={{ height: '280px' }}
+                  className="w-full relative overflow-hidden flex items-center justify-center"
+                  style={{ 
+                    height: '300px',
+                    background: index === 0 
+                      ? 'linear-gradient(135deg, #e8f4f8 0%, #d4e8f0 30%, #c9dce8 60%, #bdd0e0 100%)'
+                      : index === 1
+                      ? 'linear-gradient(135deg, #f0e8f8 0%, #e4d4f0 30%, #dac9e8 60%, #d0bde0 100%)'
+                      : index === 2
+                      ? 'linear-gradient(135deg, #e8f0e8 0%, #d8e8d4 30%, #cce0c9 60%, #c0d8bd 100%)'
+                      : 'linear-gradient(135deg, #f8f0e8 0%, #f0e4d4 30%, #e8dac9 60%, #e0d0bd 100%)',
+                  }}
                 >
-                  {/* Card 1: Context - Dashboard with search and list */}
+                  {/* Background decorative elements */}
+                  <div 
+                    className="absolute right-[-40px] top-[-20px] w-[180px] h-[220px] rounded-3xl opacity-30"
+                    style={{ 
+                      background: 'rgba(255,255,255,0.5)',
+                      transform: 'rotate(12deg)',
+                    }}
+                  />
+                  <div 
+                    className="absolute left-[-30px] bottom-[-40px] w-[140px] h-[160px] rounded-3xl opacity-20"
+                    style={{ 
+                      background: 'rgba(255,255,255,0.6)',
+                      transform: 'rotate(-8deg)',
+                    }}
+                  />
+                  
+                  {/* Card 1: Understand Context */}
                   {index === 0 && (
-                    <div className="relative w-full h-full flex items-center justify-center">
+                    <div className="relative z-10">
+                      {/* Background card */}
+                      <div 
+                        className="absolute right-[-60px] top-[-10px] w-[120px] h-[160px] rounded-2xl opacity-60"
+                        style={{ 
+                          background: 'rgba(255,255,255,0.7)',
+                          border: '1px solid rgba(255,255,255,0.8)',
+                        }}
+                      />
                       {/* Main card */}
                       <div 
-                        className="absolute left-4 top-8 bg-white rounded-xl p-4 w-[200px]"
-                        style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}
+                        className="relative bg-white rounded-2xl p-5 w-[220px]"
+                        style={{ 
+                          boxShadow: '0 20px 60px rgba(0,0,0,0.1)',
+                          border: '1px solid rgba(255,255,255,0.9)',
+                        }}
                       >
-                        {/* Search bar */}
-                        <div className="flex items-center gap-2 bg-gray-50 rounded-lg px-3 py-2 mb-4">
-                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                            <circle cx="6" cy="6" r="4" stroke="#999" strokeWidth="1.5" />
-                            <path d="M9 9L12 12" stroke="#999" strokeWidth="1.5" strokeLinecap="round" />
-                          </svg>
-                          <span className="text-[10px] text-gray-400">Analyze inputs</span>
+                        {/* Window dots */}
+                        <div className="flex gap-1.5 mb-4">
+                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
                         </div>
-                        {/* Header */}
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                              <rect x="2" y="2" width="5" height="5" rx="1" fill="#888" />
-                              <rect x="9" y="2" width="5" height="5" rx="1" fill="#aaa" />
-                              <rect x="2" y="9" width="5" height="5" rx="1" fill="#aaa" />
-                              <rect x="9" y="9" width="5" height="5" rx="1" fill="#888" />
+                        {/* Title */}
+                        <div className="text-sm font-semibold text-gray-800 mb-4">Context Analysis</div>
+                        {/* Checklist */}
+                        <div className="space-y-3 mb-5">
+                          <div className="flex items-center gap-3">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                              <path d="M4 9L7.5 12.5L14 6" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
+                            <div className="h-2.5 bg-gray-200 rounded-full flex-1" />
                           </div>
-                          <div>
-                            <div className="text-[11px] font-semibold text-gray-800">Context Analysis</div>
-                            <div className="text-[9px] text-gray-400">Real-time insights</div>
+                          <div className="flex items-center gap-3">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                              <path d="M4 9L7.5 12.5L14 6" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                            <div className="h-2.5 bg-gray-200 rounded-full w-3/4" />
                           </div>
-                        </div>
-                        {/* List items */}
-                        <div className="space-y-2">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                              <div className="w-4 h-4 rounded bg-gray-100" />
-                              <span className="text-[10px] text-gray-600">User Research</span>
-                            </div>
-                            <span className="text-[9px] text-gray-400">Done</span>
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                              <div className="w-4 h-4 rounded bg-gray-100" />
-                              <span className="text-[10px] text-gray-600">Market Analysis</span>
-                            </div>
-                            <span className="text-[9px] text-gray-400">Done</span>
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                              <div className="w-4 h-4 rounded bg-gray-100" />
-                              <span className="text-[10px] text-gray-600">Tech Constraints</span>
-                            </div>
-                            <span className="text-[9px] text-gray-400">Done</span>
+                          <div className="flex items-center gap-3">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                              <path d="M4 9L7.5 12.5L14 6" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                            <div className="h-2.5 bg-gray-200 rounded-full w-4/5" />
                           </div>
                         </div>
-                      </div>
-                      {/* Floating stat cards */}
-                      <div 
-                        className="absolute right-6 top-6 bg-white rounded-xl px-4 py-3"
-                        style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}
-                      >
-                        <div className="text-[9px] text-gray-400 mb-1">Insights Found</div>
-                        <div className="text-lg font-bold text-gray-800">24</div>
-                      </div>
-                      <div 
-                        className="absolute right-4 bottom-10 bg-white rounded-xl px-4 py-3"
-                        style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}
-                      >
-                        <div className="text-[9px] text-gray-400 mb-1">Clarity Score</div>
-                        <div className="text-lg font-bold text-gray-800">92%</div>
+                        {/* Button */}
+                        <div 
+                          className="w-full py-2.5 rounded-full text-center text-sm font-medium text-white"
+                          style={{ background: 'linear-gradient(135deg, #444 0%, #222 100%)' }}
+                        >
+                          Analyze
+                        </div>
                       </div>
                     </div>
                   )}
                   
-                  {/* Card 2: Design - Gauge/progress with stats */}
+                  {/* Card 2: Design with Intent */}
                   {index === 1 && (
-                    <div className="relative w-full h-full flex items-center justify-center">
-                      {/* Top stat cards */}
+                    <div className="relative z-10">
+                      {/* Background card */}
                       <div 
-                        className="absolute left-4 top-4 bg-white rounded-xl px-4 py-2.5 flex items-center gap-3"
-                        style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}
-                      >
-                        <div>
-                          <div className="text-[9px] text-gray-400">Design System</div>
-                          <div className="text-sm font-bold text-gray-800">v2.4</div>
-                        </div>
-                        <div className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center">
-                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                            <path d="M6 2v8M2 6h8" stroke="#666" strokeWidth="1.5" strokeLinecap="round" />
-                          </svg>
-                        </div>
-                      </div>
+                        className="absolute right-[-50px] top-[0px] w-[100px] h-[180px] rounded-2xl opacity-50"
+                        style={{ 
+                          background: 'rgba(255,255,255,0.6)',
+                          border: '1px solid rgba(255,255,255,0.7)',
+                        }}
+                      />
+                      {/* Main card */}
                       <div 
-                        className="absolute right-4 top-4 bg-white rounded-xl px-4 py-2.5 flex items-center gap-3"
-                        style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}
+                        className="relative bg-white rounded-2xl p-5 w-[220px]"
+                        style={{ 
+                          boxShadow: '0 20px 60px rgba(0,0,0,0.1)',
+                          border: '1px solid rgba(255,255,255,0.9)',
+                        }}
                       >
-                        <div>
-                          <div className="text-[9px] text-gray-400">Components</div>
-                          <div className="text-sm font-bold text-gray-800">48</div>
+                        {/* Window dots */}
+                        <div className="flex gap-1.5 mb-4">
+                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
                         </div>
-                        <div className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center">
-                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                            <path d="M2 8l3-3 2 2 3-3" stroke="#666" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
+                        {/* Title */}
+                        <div className="text-sm font-semibold text-gray-800 mb-4">Design System</div>
+                        {/* Grid layout preview */}
+                        <div className="grid grid-cols-2 gap-2 mb-5">
+                          <div className="h-12 bg-gray-100 rounded-lg" />
+                          <div className="h-12 bg-gray-200 rounded-lg" />
+                          <div className="h-8 bg-gray-200 rounded-lg" />
+                          <div className="h-8 bg-gray-100 rounded-lg" />
                         </div>
-                      </div>
-                      {/* Central gauge */}
-                      <div 
-                        className="bg-white rounded-2xl p-5"
-                        style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.1)' }}
-                      >
-                        <div className="relative w-28 h-28">
-                          <svg width="112" height="112" viewBox="0 0 112 112">
-                            <circle cx="56" cy="56" r="48" fill="none" stroke="#e8e8e8" strokeWidth="8" />
-                            <circle 
-                              cx="56" cy="56" r="48" 
-                              fill="none" 
-                              stroke="#888888" 
-                              strokeWidth="8" 
-                              strokeLinecap="round"
-                              strokeDasharray="280"
-                              strokeDashoffset="56"
-                              transform="rotate(-90 56 56)"
-                            />
-                          </svg>
-                          <div className="absolute inset-0 flex flex-col items-center justify-center">
-                            <span className="text-2xl font-bold text-gray-800">80%</span>
-                            <span className="text-[9px] text-green-500 flex items-center gap-0.5">
-                              <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                              Complete
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      {/* Bottom buttons */}
-                      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-                        <div className="bg-white rounded-full px-3 py-1.5 text-[10px] text-gray-500 border border-gray-200">
-                          Review Draft
-                        </div>
-                        <div className="bg-gray-800 rounded-full px-3 py-1.5 text-[10px] text-white">
-                          Approve Design
+                        {/* Button */}
+                        <div 
+                          className="w-full py-2.5 rounded-full text-center text-sm font-medium text-white"
+                          style={{ background: 'linear-gradient(135deg, #444 0%, #222 100%)' }}
+                        >
+                          Create
                         </div>
                       </div>
                     </div>
                   )}
                   
-                  {/* Card 3: Build - Stacked cards with chart */}
+                  {/* Card 3: Build for Reliability */}
                   {index === 2 && (
-                    <div className="relative w-full h-full flex items-center justify-center">
-                      {/* Left floating panel */}
+                    <div className="relative z-10">
+                      {/* Background card */}
                       <div 
-                        className="absolute left-2 top-10 bg-white rounded-xl p-3 w-[90px]"
-                        style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)', transform: 'rotate(-5deg)' }}
-                      >
-                        <div className="w-full h-20 bg-gray-50 rounded-lg flex items-end justify-center gap-1 pb-2">
-                          <div className="w-3 h-8 bg-gray-300 rounded-sm" />
-                          <div className="w-3 h-12 bg-gray-400 rounded-sm" />
-                          <div className="w-3 h-6 bg-gray-300 rounded-sm" />
-                          <div className="w-3 h-10 bg-gray-400 rounded-sm" />
-                        </div>
-                      </div>
-                      {/* Center main card */}
+                        className="absolute left-[-50px] top-[10px] w-[100px] h-[160px] rounded-2xl opacity-50"
+                        style={{ 
+                          background: 'rgba(255,255,255,0.6)',
+                          border: '1px solid rgba(255,255,255,0.7)',
+                        }}
+                      />
+                      {/* Main card */}
                       <div 
-                        className="bg-white rounded-xl p-4 w-[160px] z-10"
-                        style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.1)' }}
+                        className="relative bg-white rounded-2xl p-5 w-[220px]"
+                        style={{ 
+                          boxShadow: '0 20px 60px rgba(0,0,0,0.1)',
+                          border: '1px solid rgba(255,255,255,0.9)',
+                        }}
                       >
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="w-6 h-6 rounded-lg bg-gray-100 flex items-center justify-center">
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                              <rect x="1" y="5" width="3" height="6" rx="0.5" fill="#888" />
-                              <rect x="5" y="3" width="3" height="8" rx="0.5" fill="#666" />
-                              <rect x="9" y="1" width="3" height="10" rx="0.5" fill="#888" />
-                            </svg>
-                          </div>
-                          <span className="text-[10px] font-semibold text-gray-700">Build Progress</span>
+                        {/* Window dots */}
+                        <div className="flex gap-1.5 mb-4">
+                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
                         </div>
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-2">
-                            <div className="w-4 h-4 rounded bg-green-100 flex items-center justify-center">
-                              <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3 5.5L6.5 2" stroke="#22c55e" strokeWidth="1.2" strokeLinecap="round"/></svg>
+                        {/* Title */}
+                        <div className="text-sm font-semibold text-gray-800 mb-4">Build Status</div>
+                        {/* Progress items */}
+                        <div className="space-y-3 mb-5">
+                          <div className="flex items-center gap-3">
+                            <div className="w-5 h-5 rounded bg-green-100 flex items-center justify-center">
+                              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                <path d="M2.5 6L5 8.5L9.5 4" stroke="#22c55e" strokeWidth="1.5" strokeLinecap="round"/>
+                              </svg>
                             </div>
-                            <span className="text-[10px] text-gray-600">Frontend Ready</span>
+                            <div className="h-2.5 bg-gray-200 rounded-full flex-1" />
                           </div>
-                          <div className="flex items-center gap-2">
-                            <div className="w-4 h-4 rounded bg-green-100 flex items-center justify-center">
-                              <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3 5.5L6.5 2" stroke="#22c55e" strokeWidth="1.2" strokeLinecap="round"/></svg>
+                          <div className="flex items-center gap-3">
+                            <div className="w-5 h-5 rounded bg-green-100 flex items-center justify-center">
+                              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                <path d="M2.5 6L5 8.5L9.5 4" stroke="#22c55e" strokeWidth="1.5" strokeLinecap="round"/>
+                              </svg>
                             </div>
-                            <span className="text-[10px] text-gray-600">API Integrated</span>
+                            <div className="h-2.5 bg-gray-200 rounded-full w-4/5" />
                           </div>
-                          <div className="flex items-center gap-2">
-                            <div className="w-4 h-4 rounded bg-yellow-100 flex items-center justify-center">
+                          <div className="flex items-center gap-3">
+                            <div className="w-5 h-5 rounded bg-yellow-100 flex items-center justify-center">
                               <div className="w-2 h-2 rounded-full bg-yellow-400" />
                             </div>
-                            <span className="text-[10px] text-gray-600">Testing Phase</span>
+                            <div className="h-2.5 bg-gray-200 rounded-full w-3/5" />
                           </div>
                         </div>
-                      </div>
-                      {/* Right floating card */}
-                      <div 
-                        className="absolute right-2 bottom-8 bg-white rounded-xl px-4 py-3"
-                        style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)', transform: 'rotate(3deg)' }}
-                      >
-                        <div className="text-[9px] text-gray-400 mb-1">Reliability</div>
-                        <div className="text-lg font-bold text-gray-800">99.9%</div>
+                        {/* Button */}
+                        <div 
+                          className="w-full py-2.5 rounded-full text-center text-sm font-medium text-white"
+                          style={{ background: 'linear-gradient(135deg, #444 0%, #222 100%)' }}
+                        >
+                          Deploy
+                        </div>
                       </div>
                     </div>
                   )}
                   
-                  {/* Card 4: Refine - Match/verification visual */}
+                  {/* Card 4: Refine with Purpose */}
                   {index === 3 && (
-                    <div className="relative w-full h-full flex items-center justify-center">
-                      {/* Left card */}
+                    <div className="relative z-10">
+                      {/* Background card */}
                       <div 
-                        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white rounded-xl px-4 py-3 text-center"
-                        style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}
-                      >
-                        <div className="w-8 h-8 mx-auto mb-2 rounded-lg bg-gray-100 flex items-center justify-center">
-                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <rect x="2" y="2" width="12" height="3" rx="1" fill="#888" />
-                            <rect x="2" y="7" width="12" height="3" rx="1" fill="#aaa" />
-                            <rect x="2" y="12" width="8" height="2" rx="0.5" fill="#ccc" />
-                          </svg>
-                        </div>
-                        <div className="text-[10px] font-medium text-gray-700">Current</div>
-                        <div className="text-[9px] text-gray-400">v1.2</div>
-                      </div>
-                      {/* Center check */}
+                        className="absolute right-[-40px] bottom-[0px] w-[110px] h-[140px] rounded-2xl opacity-50"
+                        style={{ 
+                          background: 'rgba(255,255,255,0.6)',
+                          border: '1px solid rgba(255,255,255,0.7)',
+                        }}
+                      />
+                      {/* Main card */}
                       <div 
-                        className="bg-white rounded-full p-4 z-10"
-                        style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.1)' }}
+                        className="relative bg-white rounded-2xl p-5 w-[220px]"
+                        style={{ 
+                          boxShadow: '0 20px 60px rgba(0,0,0,0.1)',
+                          border: '1px solid rgba(255,255,255,0.9)',
+                        }}
                       >
-                        <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center">
-                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M5 12l5 5L19 7" stroke="#555" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                        {/* Window dots */}
+                        <div className="flex gap-1.5 mb-4">
+                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
+                        </div>
+                        {/* Title */}
+                        <div className="text-sm font-semibold text-gray-800 mb-4">Iteration Cycle</div>
+                        {/* Cycle visualization */}
+                        <div className="flex items-center justify-center gap-2 mb-5">
+                          <div className="text-center">
+                            <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mb-1">
+                              <span className="text-xs font-medium text-gray-600">1</span>
+                            </div>
+                            <span className="text-[9px] text-gray-400">Test</span>
+                          </div>
+                          <svg width="20" height="12" viewBox="0 0 20 12" fill="none">
+                            <path d="M0 6h16M12 2l4 4-4 4" stroke="#ccc" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                           </svg>
-                        </div>
-                      </div>
-                      {/* Right card */}
-                      <div 
-                        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white rounded-xl px-4 py-3 text-center"
-                        style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}
-                      >
-                        <div className="w-8 h-8 mx-auto mb-2 rounded-lg bg-gray-100 flex items-center justify-center">
-                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <rect x="2" y="2" width="12" height="3" rx="1" fill="#666" />
-                            <rect x="2" y="7" width="12" height="3" rx="1" fill="#888" />
-                            <rect x="2" y="12" width="12" height="2" rx="0.5" fill="#aaa" />
+                          <div className="text-center">
+                            <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mb-1">
+                              <span className="text-xs font-medium text-gray-600">2</span>
+                            </div>
+                            <span className="text-[9px] text-gray-400">Refine</span>
+                          </div>
+                          <svg width="20" height="12" viewBox="0 0 20 12" fill="none">
+                            <path d="M0 6h16M12 2l4 4-4 4" stroke="#ccc" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                           </svg>
+                          <div className="text-center">
+                            <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center mb-1">
+                              <span className="text-xs font-medium text-white">3</span>
+                            </div>
+                            <span className="text-[9px] text-gray-400">Ship</span>
+                          </div>
                         </div>
-                        <div className="text-[10px] font-medium text-gray-700">Refined</div>
-                        <div className="text-[9px] text-gray-400">v1.3</div>
-                      </div>
-                      {/* Bottom stat */}
-                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center">
-                        <div className="text-xl font-bold text-gray-800">94%</div>
-                        <div className="text-[10px] text-gray-400">Improvement Score</div>
-                      </div>
-                      {/* Action buttons */}
-                      <div className="absolute bottom-4 right-4 flex gap-2">
-                        <div className="bg-white rounded-full px-2.5 py-1 text-[9px] text-gray-500 border border-gray-200">
-                          Review
-                        </div>
-                        <div className="bg-gray-800 rounded-full px-2.5 py-1 text-[9px] text-white">
-                          Deploy
+                        {/* Button */}
+                        <div 
+                          className="w-full py-2.5 rounded-full text-center text-sm font-medium text-white"
+                          style={{ background: 'linear-gradient(135deg, #444 0%, #222 100%)' }}
+                        >
+                          Optimize
                         </div>
                       </div>
                     </div>
@@ -1190,7 +1175,7 @@ export default function About() {
                 </div>
                 
                 {/* Text Content */}
-                <div className="p-6 pt-0">
+                <div className="p-6">
                   <h3 
                     className="text-xl font-bold mb-2"
                     style={{ color: '#1A1A1A' }}
