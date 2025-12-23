@@ -7,72 +7,64 @@ interface BlogPost {
   id: number;
   slug: string;
   category: string;
+  categoryColor: string;
   title: string;
-  excerpt?: string;
-  imageUrl?: string;
-  gradient: string;
-  readTime?: string;
-  featured?: boolean;
+  bgColor: string;
 }
 
-const placeholderPosts: BlogPost[] = [
+const blogPosts: BlogPost[] = [
   {
     id: 1,
-    slug: "placeholder-1",
-    category: "PRODUCT",
-    title: "[Blog Title Placeholder]",
-    excerpt: "[Brief excerpt or description will go here]",
-    gradient: "linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%)",
-    readTime: "5 min read",
-    featured: true,
+    slug: "aligning-teams-efficiency",
+    category: "Plan Smart",
+    categoryColor: "#3B82F6",
+    title: "The Key to Aligning Teams and Boosting Efficiency",
+    bgColor: "#EEF4FF",
   },
   {
     id: 2,
-    slug: "placeholder-2",
-    category: "DESIGN",
-    title: "[Blog Title Placeholder]",
-    gradient: "linear-gradient(135deg, #1A237E 0%, #283593 100%)",
-    readTime: "4 min read",
+    slug: "dynamic-workflows",
+    category: "Stay Ahead",
+    categoryColor: "#3B82F6",
+    title: "How Dynamic Workflows Keep Teams Moving Forward",
+    bgColor: "#E8F4F8",
   },
   {
     id: 3,
-    slug: "placeholder-3",
-    category: "STRATEGY",
-    title: "[Blog Title Placeholder]",
-    gradient: "linear-gradient(135deg, #EFEBE9 0%, #D7CCC8 100%)",
-    readTime: "6 min read",
+    slug: "task-prioritization",
+    category: "Smart Priorities",
+    categoryColor: "#DC2626",
+    title: "Mastering Task Prioritization in Fast-Paced Teams",
+    bgColor: "#FEF2F2",
   },
   {
     id: 4,
-    slug: "placeholder-4",
-    category: "TECHNOLOGY",
-    title: "[Blog Title Placeholder]",
-    gradient: "linear-gradient(135deg, #FCE4EC 0%, #F8BBD9 100%)",
-    readTime: "3 min read",
+    slug: "progress-insights",
+    category: "Data Driven",
+    categoryColor: "#059669",
+    title: "Advanced Progress Insights for Modern Teams",
+    bgColor: "#ECFDF5",
   },
   {
     id: 5,
-    slug: "placeholder-5",
-    category: "BRANDING",
-    title: "[Blog Title Placeholder]",
-    gradient: "linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%)",
-    readTime: "7 min read",
+    slug: "project-sprint-overview",
+    category: "Sprint Planning",
+    categoryColor: "#7C3AED",
+    title: "Project Sprint Overview: A Complete Guide",
+    bgColor: "#F5F3FF",
   },
   {
     id: 6,
-    slug: "placeholder-6",
-    category: "INSIGHTS",
-    title: "[Blog Title Placeholder]",
-    gradient: "linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%)",
-    readTime: "5 min read",
+    slug: "user-activity-tracking",
+    category: "User Analytics",
+    categoryColor: "#DC2626",
+    title: "Advanced User Activity Overview",
+    bgColor: "#FEF2F2",
   },
 ];
 
-const categories = ["All", "Product", "Design", "Strategy", "Technology", "Branding", "Insights"];
-
 export default function Blogs() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeCategory, setActiveCategory] = useState("All");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -82,22 +74,11 @@ export default function Blogs() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const filteredPosts = activeCategory === "All" 
-    ? placeholderPosts 
-    : placeholderPosts.filter(post => post.category.toLowerCase() === activeCategory.toLowerCase());
-
-  const featuredPost = filteredPosts.find(p => p.featured) || filteredPosts[0];
-  const otherPosts = filteredPosts.filter(p => p.id !== featuredPost?.id);
-
-  const isDarkCard = (gradient: string) => {
-    return gradient.includes('#1A') || gradient.includes('#28') || gradient.includes('#0D');
-  };
-
   return (
     <motion.div 
       className="min-h-screen w-full font-sans overflow-x-hidden"
       style={{ 
-        backgroundColor: '#F8FAFC',
+        backgroundColor: '#FAFAFA',
         color: '#1A1A1A',
         fontFamily: '-apple-system, system-ui, sans-serif',
       }}
@@ -122,7 +103,7 @@ export default function Blogs() {
             width: isScrolled ? '180px' : '100%',
             height: isScrolled ? '44px' : '100%',
             marginTop: isScrolled ? '12px' : '0',
-            backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : '#F8FAFC',
+            backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : '#FAFAFA',
             backdropFilter: isScrolled ? 'blur(12px)' : 'none',
             WebkitBackdropFilter: isScrolled ? 'blur(12px)' : 'none',
             boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.08)' : 'none',
@@ -148,202 +129,107 @@ export default function Blogs() {
       </header>
 
       {/* Main Content */}
-      <main className="pt-24 md:pt-28 pb-20">
+      <main className="pt-28 md:pt-32 pb-20">
         <div className="max-w-[1200px] mx-auto px-4 md:px-8">
           
-          {/* Category Tabs */}
+          {/* Hero Section */}
           <motion.div 
-            className="flex items-center gap-2 md:gap-6 mb-8 overflow-x-auto pb-2 scrollbar-hide"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-          >
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                className="whitespace-nowrap px-1 py-2 text-sm font-medium transition-all"
-                style={{
-                  color: activeCategory === category ? '#1A1A1A' : '#888888',
-                  borderBottom: activeCategory === category ? '2px solid #1A1A1A' : '2px solid transparent',
-                }}
-                data-testid={`category-tab-${category.toLowerCase()}`}
-              >
-                {category}
-              </button>
-            ))}
-          </motion.div>
-
-          {/* Page Title */}
-          <motion.div 
-            className="mb-10"
+            className="text-center mb-16"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.5 }}
           >
+            {/* Pill Badge */}
+            <div 
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
+              style={{ 
+                backgroundColor: '#FFFFFF',
+                border: '1px solid #E5E5E5',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#666666' }}>
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                <line x1="3" y1="9" x2="21" y2="9"/>
+                <line x1="9" y1="21" x2="9" y2="9"/>
+              </svg>
+              <span className="text-sm font-medium" style={{ color: '#444444' }}>
+                Our Blog
+              </span>
+            </div>
+            
             <h1 
-              className="text-4xl md:text-5xl font-bold mb-3"
+              className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4"
               style={{ color: '#1A1A1A' }}
               data-testid="blogs-page-title"
             >
-              Insights.
+              Blog
             </h1>
+            
             <p 
-              className="text-base md:text-lg"
-              style={{ color: '#666666', maxWidth: '400px' }}
+              className="text-base md:text-lg max-w-2xl mx-auto"
+              style={{ color: '#666666' }}
             >
-              [Subtitle placeholder — brief description of your blog section will go here]
+              Explore expert analyses, trends, and innovations shaping the decentralized future.
             </p>
           </motion.div>
 
-          {/* Masonry Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            
-            {/* Featured Post - Large Card */}
-            {featuredPost && (
-              <motion.article
-                className="md:col-span-1 lg:col-span-1 md:row-span-2 rounded-2xl overflow-hidden cursor-pointer group"
-                style={{
-                  background: featuredPost.gradient,
-                  minHeight: '400px',
-                }}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.15 }}
-                whileHover={{ scale: 1.02, y: -4 }}
-                data-testid={`blog-card-${featuredPost.id}`}
-              >
-                <div className="p-6 md:p-8 h-full flex flex-col justify-between">
-                  <div>
-                    <span 
-                      className="text-xs font-semibold tracking-widest uppercase"
-                      style={{ color: isDarkCard(featuredPost.gradient) ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.5)' }}
-                    >
-                      {featuredPost.category}
-                    </span>
-                    <h2 
-                      className="text-2xl md:text-3xl font-bold mt-3 leading-tight"
-                      style={{ color: isDarkCard(featuredPost.gradient) ? '#FFFFFF' : '#1A1A1A' }}
-                    >
-                      {featuredPost.title}
-                    </h2>
-                    {featuredPost.excerpt && (
-                      <p 
-                        className="mt-3 text-sm leading-relaxed"
-                        style={{ color: isDarkCard(featuredPost.gradient) ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.6)' }}
-                      >
-                        {featuredPost.excerpt}
-                      </p>
-                    )}
-                  </div>
-                  
-                  {/* Image placeholder area */}
-                  <div 
-                    className="mt-6 flex-1 min-h-[120px] rounded-xl flex items-center justify-center"
-                    style={{ 
-                      backgroundColor: isDarkCard(featuredPost.gradient) ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)',
-                      border: `1px dashed ${isDarkCard(featuredPost.gradient) ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)'}`,
-                    }}
-                  >
-                    <span 
-                      className="text-xs"
-                      style={{ color: isDarkCard(featuredPost.gradient) ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.3)' }}
-                    >
-                      [Image placeholder]
-                    </span>
-                  </div>
-
-                  <button 
-                    className="mt-6 px-5 py-2.5 rounded-full text-sm font-medium self-start transition-all group-hover:translate-x-1"
-                    style={{
-                      backgroundColor: isDarkCard(featuredPost.gradient) ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.08)',
-                      color: isDarkCard(featuredPost.gradient) ? '#FFFFFF' : '#1A1A1A',
-                    }}
-                    data-testid={`blog-read-${featuredPost.id}`}
-                  >
-                    {featuredPost.readTime || 'Read'}
-                  </button>
-                </div>
-              </motion.article>
-            )}
-
-            {/* Other Posts */}
-            {otherPosts.map((post, index) => (
+          {/* Blog Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {blogPosts.map((post, index) => (
               <motion.article
                 key={post.id}
                 className="rounded-2xl overflow-hidden cursor-pointer group"
                 style={{
-                  background: post.gradient,
-                  minHeight: index === 4 ? '320px' : '200px',
+                  backgroundColor: '#FFFFFF',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
+                  border: '1px solid rgba(0,0,0,0.04)',
                 }}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 + index * 0.08 }}
-                whileHover={{ scale: 1.02, y: -4 }}
+                transition={{ duration: 0.5, delay: 0.1 + index * 0.08 }}
+                whileHover={{ y: -4, boxShadow: '0 12px 40px rgba(0,0,0,0.08)' }}
                 data-testid={`blog-card-${post.id}`}
               >
-                <div className="p-5 md:p-6 h-full flex flex-col">
+                {/* Image Area */}
+                <div 
+                  className="aspect-[4/3] flex items-center justify-center p-6 overflow-hidden"
+                  style={{ backgroundColor: post.bgColor }}
+                >
+                  {/* Placeholder UI mockup */}
+                  <div className="w-full h-full rounded-xl bg-white/60 flex items-center justify-center" style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
+                    <div className="text-center">
+                      <div className="w-16 h-16 mx-auto mb-3 rounded-xl" style={{ backgroundColor: post.categoryColor + '20' }}>
+                        <div className="w-full h-full flex items-center justify-center">
+                          <div className="w-8 h-8 rounded-lg" style={{ backgroundColor: post.categoryColor + '40' }} />
+                        </div>
+                      </div>
+                      <div className="space-y-1.5">
+                        <div className="h-2 w-24 mx-auto rounded-full" style={{ backgroundColor: 'rgba(0,0,0,0.1)' }} />
+                        <div className="h-2 w-16 mx-auto rounded-full" style={{ backgroundColor: 'rgba(0,0,0,0.06)' }} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Content */}
+                <div className="p-5">
                   <span 
-                    className="text-xs font-semibold tracking-widest uppercase"
-                    style={{ color: isDarkCard(post.gradient) ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.5)' }}
+                    className="text-sm font-medium"
+                    style={{ color: post.categoryColor }}
                   >
                     {post.category}
                   </span>
                   <h3 
-                    className="text-lg md:text-xl font-bold mt-2 leading-tight flex-1"
-                    style={{ color: isDarkCard(post.gradient) ? '#FFFFFF' : '#1A1A1A' }}
+                    className="text-lg font-bold mt-2 leading-snug group-hover:text-gray-600 transition-colors"
+                    style={{ color: '#1A1A1A' }}
                   >
                     {post.title}
                   </h3>
-                  
-                  {/* Small image placeholder */}
-                  {index < 2 && (
-                    <div 
-                      className="mt-4 h-16 rounded-lg flex items-center justify-center"
-                      style={{ 
-                        backgroundColor: isDarkCard(post.gradient) ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)',
-                        border: `1px dashed ${isDarkCard(post.gradient) ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)'}`,
-                      }}
-                    >
-                      <span 
-                        className="text-xs"
-                        style={{ color: isDarkCard(post.gradient) ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.3)' }}
-                      >
-                        [Image]
-                      </span>
-                    </div>
-                  )}
-
-                  <button 
-                    className="mt-4 px-4 py-2 rounded-full text-xs font-medium self-start transition-all group-hover:translate-x-1"
-                    style={{
-                      backgroundColor: isDarkCard(post.gradient) ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.08)',
-                      color: isDarkCard(post.gradient) ? '#FFFFFF' : '#1A1A1A',
-                    }}
-                    data-testid={`blog-read-${post.id}`}
-                  >
-                    {post.readTime || 'Read'}
-                  </button>
                 </div>
               </motion.article>
             ))}
           </div>
-
-          {/* Empty State / Placeholder Notice */}
-          <motion.div 
-            className="mt-16 text-center py-12 rounded-2xl"
-            style={{ 
-              backgroundColor: '#FFFFFF',
-              border: '1px dashed rgba(0,0,0,0.1)',
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-          >
-            <p className="text-sm" style={{ color: '#888888' }}>
-              Content placeholders shown above. Replace with your actual blog posts.
-            </p>
-          </motion.div>
 
         </div>
       </main>
