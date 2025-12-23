@@ -253,12 +253,20 @@ export default function About() {
 
           {/* Right - Video Animation */}
           <motion.div 
-            className="order-1 lg:order-2 flex justify-center lg:justify-end"
+            className="order-1 lg:order-2 flex justify-center lg:justify-end items-center"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
+            style={{ overflow: 'visible' }}
           >
-            <div className="relative w-full max-w-[800px] lg:max-w-none">
+            <div 
+              className="relative"
+              style={{ 
+                width: '140%',
+                maxWidth: '900px',
+                marginRight: '-20%',
+              }}
+            >
               <video
                 src={heroVideo}
                 autoPlay
@@ -268,6 +276,8 @@ export default function About() {
                 className="w-full h-auto"
                 style={{
                   filter: 'grayscale(100%) contrast(1.1)',
+                  transform: 'scale(1.3)',
+                  transformOrigin: 'center center',
                 }}
               />
             </div>
