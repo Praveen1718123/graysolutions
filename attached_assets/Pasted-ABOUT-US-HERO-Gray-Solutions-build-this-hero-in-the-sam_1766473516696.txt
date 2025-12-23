@@ -1,0 +1,47 @@
+ABOUT US HERO (Gray Solutions) — build this hero in the same UI style as the reference (soft gradient sky background + big left-aligned headline + CTA row), but with Gray Solutions content.
+
+LAYOUT
+- Full-width hero section, min-height: 85–95vh, generous padding (top ~96px, sides ~80px desktop, 24px mobile).
+- Left column (max width ~720px): badge → headline → subtext → CTA row.
+- Right side: optional subtle “floating 3D glass cube / prism” accent near bottom-right (can be an image placeholder). Keep it secondary.
+- Add a soft divider line at the bottom of the hero to transition into the next section.
+
+BACKGROUND (match reference vibe)
+- Background is a premium pastel gradient “sky” with very soft clouds:
+  - base: light lavender + blush pink + warm peach
+  - add faint cloudy noise + subtle vignette
+  - add slow animated gradient drift (very subtle, 20–40s loop), no harsh motion.
+- Add a light grain overlay (2–4% opacity) to avoid flatness.
+
+BADGE (top-left pill)
+- Rounded pill with slight blur / glass effect.
+- Text: “ABOUT GRAY SOLUTIONS”
+- Small icon dot/star optional, keep minimal.
+
+HEADLINE (big, 2 lines, strong)
+- “We design and build digital systems,
+  brands, and communication frameworks.”
+
+(Keep typography large like reference: ~64–84px desktop, ~40–48px mobile, tight line-height ~1.0–1.05)
+
+SUBTEXT (2 short lines, calm + professional)
+- “Gray Solutions is a product, design, technology, and consulting studio focused on creating digital experiences that are aesthetically clear, operationally reliable, and aligned with measurable business objectives.”
+- “We work with teams who need structured thinking, careful execution, and outcomes that hold up in real conditions.”
+
+CTA ROW (buttons like reference)
+- Primary button (filled, dark): “Talk to us”
+- Secondary button (outline/ghost): “View our work”
+- Button style: large radius, subtle shadow, hover = slight lift + background shift.
+
+MOTION / MICRO-INTERACTIONS
+- On load: badge fades in → headline slides up slightly → subtext fades → buttons appear (staggered).
+- Background gradient slowly shifts.
+- Optional cube/prism: slow float (tiny vertical drift) + gentle light shimmer.
+
+RESPONSIVE
+- Mobile: center-align text OR keep left-align with reduced padding; CTA buttons stack (full width).
+- Right-side cube/prism hides or becomes smaller and moves behind content (opacity low).
+
+IMPORTANT
+- No “AI-powered” language.
+- Keep overall look premium, minimal, and modern. No heavy shadows, no neon, no busy shapes.

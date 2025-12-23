@@ -127,54 +127,113 @@ export default function About() {
         </div>
       </header>
 
-      {/* Hero Section - Full Screen */}
+      {/* Hero Section - Premium Pastel Gradient Sky */}
       <section 
-        className="min-h-screen flex items-center relative overflow-hidden"
-        style={{ backgroundColor: '#FAFAFA' }}
+        className="relative overflow-hidden"
+        style={{ 
+          minHeight: '90vh',
+          background: 'linear-gradient(165deg, #E8E0F0 0%, #F5E6E8 25%, #FCE8DC 50%, #FDF4EE 75%, #FEFCFA 100%)',
+        }}
       >
-        <div className="max-w-[1280px] w-full mx-auto px-4 md:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left - Text Content */}
-            <motion.div
-              className="order-2 lg:order-1"
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-            >
-              <motion.span 
-                className="text-sm font-medium tracking-widest uppercase mb-6 block"
-                style={{ color: '#666666' }}
-                initial={{ opacity: 0, y: 20 }}
+        {/* Animated gradient overlay */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse 80% 60% at 20% 30%, rgba(200, 180, 220, 0.4) 0%, transparent 50%), radial-gradient(ellipse 70% 50% at 80% 60%, rgba(255, 200, 180, 0.3) 0%, transparent 50%)',
+            animation: 'gradientDrift 30s ease-in-out infinite alternate',
+          }}
+        />
+
+        {/* Soft cloudy noise overlay */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+            opacity: 0.03,
+            mixBlendMode: 'overlay',
+          }}
+        />
+
+        {/* Vignette */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.03) 100%)',
+          }}
+        />
+
+        {/* Main content */}
+        <div 
+          className="relative z-10 max-w-[1280px] mx-auto flex items-center"
+          style={{ 
+            minHeight: '90vh',
+            paddingTop: '96px',
+            paddingBottom: '48px',
+            paddingLeft: 'clamp(24px, 5vw, 80px)',
+            paddingRight: 'clamp(24px, 5vw, 80px)',
+          }}
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center w-full">
+            {/* Left content - spans 7 columns */}
+            <div className="lg:col-span-7">
+              {/* Glass pill badge */}
+              <motion.div 
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.6)',
+                  backdropFilter: 'blur(12px)',
+                  WebkitBackdropFilter: 'blur(12px)',
+                  border: '1px solid rgba(255, 255, 255, 0.8)',
+                  boxShadow: '0 2px 16px rgba(0, 0, 0, 0.04)',
+                }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
-                About Gray Solutions
-              </motion.span>
-              
+                <span 
+                  className="w-1.5 h-1.5 rounded-full"
+                  style={{ backgroundColor: '#7B3FE4' }}
+                />
+                <span 
+                  className="text-xs font-semibold tracking-widest uppercase"
+                  style={{ color: '#4A4A4A' }}
+                >
+                  About Gray Solutions
+                </span>
+              </motion.div>
+
+              {/* Large headline */}
               <motion.h1 
-                className="text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.15] mb-6"
-                style={{ color: '#1A1A1A' }}
+                className="font-bold mb-8"
+                style={{ 
+                  fontSize: 'clamp(40px, 6vw, 72px)',
+                  lineHeight: '1.02',
+                  color: '#1A1A1A',
+                  letterSpacing: '-0.02em',
+                  maxWidth: '720px',
+                }}
                 data-testid="about-hero-heading"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                We design and build digital systems, brands, and communication frameworks that people understand — and businesses rely on.
+                We design and build digital systems, brands, and communication frameworks.
               </motion.h1>
-              
+
+              {/* Subtext paragraphs */}
               <motion.p 
                 className="text-base md:text-lg leading-relaxed mb-4"
-                style={{ color: '#555555', maxWidth: '560px' }}
+                style={{ color: '#4A4A4A', maxWidth: '600px' }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.35 }}
               >
-                Gray Solutions is a product, design, technology, and consulting studio focused on creating digital experiences that are aesthetically clear, operationally reliable, commercially grounded, and aligned with measurable business objectives.
+                Gray Solutions is a product, design, technology, and consulting studio focused on creating digital experiences that are aesthetically clear, operationally reliable, and aligned with measurable business objectives.
               </motion.p>
-              
+
               <motion.p 
-                className="text-base md:text-lg leading-relaxed mb-8"
-                style={{ color: '#555555', maxWidth: '560px' }}
+                className="text-base md:text-lg leading-relaxed mb-10"
+                style={{ color: '#4A4A4A', maxWidth: '600px' }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.45 }}
@@ -182,123 +241,168 @@ export default function About() {
                 We work with teams who need structured thinking, careful execution, and outcomes that hold up in real conditions.
               </motion.p>
 
-              <motion.div
+              {/* CTA row */}
+              <motion.div 
+                className="flex flex-col sm:flex-row gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.55 }}
               >
                 <button 
-                  className="px-7 py-3.5 rounded-full font-medium text-sm transition-all hover:bg-gray-100"
+                  className="px-8 py-4 rounded-full font-medium text-base transition-all"
                   style={{ 
-                    backgroundColor: 'transparent', 
-                    color: '#1A1A1A',
-                    border: '1px solid rgba(26,26,26,0.2)',
+                    backgroundColor: '#1A1A1A', 
+                    color: '#FFFFFF',
+                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 8px 30px rgba(0, 0, 0, 0.2)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
                   }}
                   data-testid="cta-talk-to-us"
                 >
                   Talk to us
                 </button>
+                <button 
+                  className="px-8 py-4 rounded-full font-medium text-base transition-all"
+                  style={{ 
+                    backgroundColor: 'transparent', 
+                    color: '#1A1A1A',
+                    border: '1.5px solid rgba(26, 26, 26, 0.2)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
+                    e.currentTarget.style.borderColor = 'rgba(26, 26, 26, 0.3)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                    e.currentTarget.style.borderColor = 'rgba(26, 26, 26, 0.2)';
+                  }}
+                  data-testid="cta-view-work"
+                >
+                  View our work
+                </button>
               </motion.div>
-            </motion.div>
+            </div>
 
-            {/* Right - Abstract 3D Geometric Visual */}
-            <motion.div
-              className="order-1 lg:order-2 flex items-center justify-center"
-              initial={{ opacity: 0, scale: 0.95 }}
+            {/* Right - Floating 3D Glass Cube/Prism */}
+            <motion.div 
+              className="lg:col-span-5 hidden lg:flex items-end justify-end"
+              style={{ minHeight: '400px' }}
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <div 
-                className="relative w-full max-w-[480px] aspect-square"
+              <motion.div
+                className="relative"
                 style={{
-                  background: 'linear-gradient(135deg, #F0F0F0 0%, #E8E8E8 50%, #F5F5F5 100%)',
-                  borderRadius: '24px',
+                  width: '200px',
+                  height: '200px',
+                }}
+                animate={{ 
+                  y: [0, -12, 0],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
                 }}
               >
-                {/* Animated gradient overlay */}
-                <div 
-                  className="absolute inset-0 rounded-3xl"
-                  style={{
-                    background: 'radial-gradient(circle at 30% 40%, rgba(59,130,246,0.08) 0%, transparent 50%), radial-gradient(circle at 70% 60%, rgba(139,92,246,0.06) 0%, transparent 50%)',
-                    animation: 'subtleShift 12s ease-in-out infinite alternate',
-                  }}
-                />
-                
-                {/* Abstract geometric shapes */}
+                {/* Glass cube/prism SVG */}
                 <svg 
-                  viewBox="0 0 400 400" 
-                  className="absolute inset-0 w-full h-full p-8"
-                  style={{ opacity: 0.9 }}
+                  viewBox="0 0 200 200" 
+                  className="w-full h-full"
+                  style={{ filter: 'drop-shadow(0 20px 40px rgba(0, 0, 0, 0.08))' }}
                 >
-                  {/* Main hexagonal structure */}
-                  <motion.path 
-                    d="M200 50 L340 125 L340 275 L200 350 L60 275 L60 125 Z"
-                    fill="none"
-                    stroke="#1A1A1A"
+                  <defs>
+                    <linearGradient id="glassFace1" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="rgba(255,255,255,0.9)" />
+                      <stop offset="100%" stopColor="rgba(255,255,255,0.4)" />
+                    </linearGradient>
+                    <linearGradient id="glassFace2" x1="100%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stopColor="rgba(200,180,220,0.4)" />
+                      <stop offset="100%" stopColor="rgba(255,200,180,0.3)" />
+                    </linearGradient>
+                    <linearGradient id="glassFace3" x1="0%" y1="100%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="rgba(180,200,220,0.3)" />
+                      <stop offset="100%" stopColor="rgba(255,255,255,0.5)" />
+                    </linearGradient>
+                  </defs>
+                  
+                  {/* Cube faces */}
+                  <motion.polygon 
+                    points="100,20 180,60 180,140 100,180 20,140 20,60"
+                    fill="url(#glassFace1)"
+                    stroke="rgba(255,255,255,0.8)"
                     strokeWidth="1"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    animate={{ pathLength: 1, opacity: 0.2 }}
-                    transition={{ duration: 2, delay: 0.5 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.6 }}
+                  />
+                  <motion.polygon 
+                    points="100,20 180,60 100,100 20,60"
+                    fill="url(#glassFace2)"
+                    stroke="rgba(255,255,255,0.6)"
+                    strokeWidth="0.5"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.7 }}
+                  />
+                  <motion.polygon 
+                    points="100,100 180,60 180,140 100,180"
+                    fill="url(#glassFace3)"
+                    stroke="rgba(255,255,255,0.4)"
+                    strokeWidth="0.5"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.8 }}
                   />
                   
-                  {/* Inner hexagon */}
-                  <motion.path 
-                    d="M200 100 L290 150 L290 250 L200 300 L110 250 L110 150 Z"
-                    fill="none"
-                    stroke="#1A1A1A"
-                    strokeWidth="1.5"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    animate={{ pathLength: 1, opacity: 0.35 }}
-                    transition={{ duration: 1.8, delay: 0.8 }}
+                  {/* Light shimmer */}
+                  <motion.ellipse 
+                    cx="120" 
+                    cy="50" 
+                    rx="15" 
+                    ry="8"
+                    fill="rgba(255,255,255,0.6)"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: [0.3, 0.7, 0.3] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                   />
-                  
-                  {/* Central shape */}
-                  <motion.path 
-                    d="M200 150 L240 175 L240 225 L200 250 L160 225 L160 175 Z"
-                    fill="#1A1A1A"
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 0.15 }}
-                    transition={{ duration: 0.8, delay: 1.2 }}
-                    style={{ transformOrigin: '200px 200px' }}
-                  />
-                  
-                  {/* Connecting lines */}
-                  <motion.line x1="200" y1="50" x2="200" y2="150" stroke="#1A1A1A" strokeWidth="1"
-                    initial={{ pathLength: 0 }} animate={{ pathLength: 1, opacity: 0.2 }} transition={{ duration: 0.6, delay: 1.5 }} />
-                  <motion.line x1="340" y1="125" x2="240" y2="175" stroke="#1A1A1A" strokeWidth="1"
-                    initial={{ pathLength: 0 }} animate={{ pathLength: 1, opacity: 0.2 }} transition={{ duration: 0.6, delay: 1.6 }} />
-                  <motion.line x1="340" y1="275" x2="240" y2="225" stroke="#1A1A1A" strokeWidth="1"
-                    initial={{ pathLength: 0 }} animate={{ pathLength: 1, opacity: 0.2 }} transition={{ duration: 0.6, delay: 1.7 }} />
-                  <motion.line x1="200" y1="350" x2="200" y2="250" stroke="#1A1A1A" strokeWidth="1"
-                    initial={{ pathLength: 0 }} animate={{ pathLength: 1, opacity: 0.2 }} transition={{ duration: 0.6, delay: 1.8 }} />
-                  <motion.line x1="60" y1="275" x2="160" y2="225" stroke="#1A1A1A" strokeWidth="1"
-                    initial={{ pathLength: 0 }} animate={{ pathLength: 1, opacity: 0.2 }} transition={{ duration: 0.6, delay: 1.9 }} />
-                  <motion.line x1="60" y1="125" x2="160" y2="175" stroke="#1A1A1A" strokeWidth="1"
-                    initial={{ pathLength: 0 }} animate={{ pathLength: 1, opacity: 0.2 }} transition={{ duration: 0.6, delay: 2.0 }} />
-                  
-                  {/* Floating dots */}
-                  <motion.circle cx="200" cy="50" r="4" fill="#1A1A1A"
-                    initial={{ opacity: 0 }} animate={{ opacity: 0.4 }} transition={{ delay: 2.2 }} />
-                  <motion.circle cx="340" cy="125" r="4" fill="#1A1A1A"
-                    initial={{ opacity: 0 }} animate={{ opacity: 0.4 }} transition={{ delay: 2.3 }} />
-                  <motion.circle cx="340" cy="275" r="4" fill="#1A1A1A"
-                    initial={{ opacity: 0 }} animate={{ opacity: 0.4 }} transition={{ delay: 2.4 }} />
-                  <motion.circle cx="200" cy="350" r="4" fill="#1A1A1A"
-                    initial={{ opacity: 0 }} animate={{ opacity: 0.4 }} transition={{ delay: 2.5 }} />
-                  <motion.circle cx="60" cy="275" r="4" fill="#1A1A1A"
-                    initial={{ opacity: 0 }} animate={{ opacity: 0.4 }} transition={{ delay: 2.6 }} />
-                  <motion.circle cx="60" cy="125" r="4" fill="#1A1A1A"
-                    initial={{ opacity: 0 }} animate={{ opacity: 0.4 }} transition={{ delay: 2.7 }} />
                 </svg>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
 
+        {/* Bottom divider line */}
+        <div 
+          className="absolute bottom-0 left-0 right-0 h-px"
+          style={{ 
+            background: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.08) 20%, rgba(0,0,0,0.08) 80%, transparent 100%)',
+          }}
+        />
+
         <style>{`
-          @keyframes subtleShift {
-            0% { transform: scale(1) rotate(0deg); }
-            100% { transform: scale(1.05) rotate(2deg); }
+          @keyframes gradientDrift {
+            0% { 
+              transform: scale(1) translate(0, 0);
+              opacity: 1;
+            }
+            50% {
+              transform: scale(1.05) translate(2%, 1%);
+              opacity: 0.9;
+            }
+            100% { 
+              transform: scale(1.02) translate(-1%, 2%);
+              opacity: 1;
+            }
           }
         `}</style>
       </section>
