@@ -581,7 +581,7 @@ export default function About() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              Every interface, flow, and system we build is informed by how people actually behave — not just what they say they want.
+              Every interface, flow, and system we build is informed by how people actually behave.
             </motion.p>
           </div>
           
