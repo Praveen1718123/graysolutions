@@ -525,14 +525,14 @@ export default function About() {
       <section 
         className="py-20 md:py-28 relative overflow-hidden"
         style={{ 
-          background: 'linear-gradient(135deg, #fef7f7 0%, #fdf4f9 25%, #f8f4fd 50%, #f4f7fd 75%, #fff9f5 100%)',
+          background: 'linear-gradient(135deg, #fafafa 0%, #f5f5f5 25%, #ffffff 50%, #f8f8f8 75%, #fafafa 100%)',
         }}
       >
         {/* Subtle animated gradient overlay */}
         <div 
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse 60% 40% at 20% 30%, rgba(255,200,220,0.15) 0%, transparent 50%), radial-gradient(ellipse 50% 30% at 80% 70%, rgba(220,200,255,0.12) 0%, transparent 50%)',
+            background: 'radial-gradient(ellipse 60% 40% at 20% 30%, rgba(0,0,0,0.02) 0%, transparent 50%), radial-gradient(ellipse 50% 30% at 80% 70%, rgba(0,0,0,0.015) 0%, transparent 50%)',
           }}
         />
         
@@ -656,7 +656,7 @@ export default function About() {
                 <div 
                   className="w-full h-full min-h-[280px] rounded-2xl relative overflow-hidden"
                   style={{
-                    background: 'linear-gradient(135deg, #f8f4fd 0%, #fdf4f9 50%, #fff9f5 100%)',
+                    background: 'linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 50%, #f5f5f5 100%)',
                   }}
                 >
                   {/* Animated shimmer effect */}
