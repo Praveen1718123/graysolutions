@@ -258,7 +258,7 @@ export default function About() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <div className="relative w-full max-w-[650px]">
+            <div className="relative w-full max-w-[800px] lg:max-w-none">
               <video
                 src={heroVideo}
                 autoPlay
