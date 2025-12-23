@@ -7,6 +7,7 @@ import NotFound from "@/pages/not-found";
 import Landing from "@/pages/landing";
 import Services from "@/pages/services";
 import About from "@/pages/about";
+import Blogs from "@/pages/blogs";
 import MagicTrucks from "@/pages/magic-trucks";
 import Eagle from "@/pages/eagle";
 
@@ -18,7 +19,7 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/case-study/magic-trucks" component={MagicTrucks} />
       <Route path="/case-study/eagle" component={Eagle} />
-      <Route path="/blogs" component={Landing} />
+      <Route path="/blogs" component={Blogs} />
       <Route path="/contact" component={Landing} />
       <Route component={NotFound} />
     </Switch>
