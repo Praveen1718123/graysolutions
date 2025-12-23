@@ -900,17 +900,19 @@ export default function About() {
             {howWeWork.map((item, index) => (
               <motion.div
                 key={index}
-                className="rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-1 cursor-default"
+                className="rounded-3xl overflow-hidden cursor-default"
                 style={{ 
                   backgroundColor: '#FFFFFF',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.04)',
                 }}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0.4, y: 8 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, delay: index * 0.1, ease: 'easeOut' }}
                 whileHover={{ 
-                  boxShadow: '0 8px 30px rgba(0,0,0,0.08)',
+                  y: -4,
+                  boxShadow: '0 12px 40px rgba(0,0,0,0.1)',
+                  transition: { duration: 0.2 }
                 }}
                 data-testid={`how-we-work-step-${index}`}
               >
@@ -934,73 +936,45 @@ export default function About() {
                   
                   {/* Custom Abstract Graphics */}
                   {index === 0 && (
-                    <svg width="180" height="140" viewBox="0 0 180 140" fill="none">
-                      <defs>
-                        <filter id="blur1" x="-50%" y="-50%" width="200%" height="200%">
-                          <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
-                        </filter>
-                        <linearGradient id="lineGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#d0d0d0" />
-                          <stop offset="100%" stopColor="#a0a0a0" />
-                        </linearGradient>
-                      </defs>
-                      <line x1="20" y1="30" x2="90" y2="70" stroke="#c5c5c5" strokeWidth="2" filter="url(#blur1)" />
-                      <line x1="30" y1="110" x2="90" y2="70" stroke="#c5c5c5" strokeWidth="2" filter="url(#blur1)" />
-                      <line x1="160" y1="25" x2="90" y2="70" stroke="#c5c5c5" strokeWidth="2" filter="url(#blur1)" />
-                      <line x1="155" y1="115" x2="90" y2="70" stroke="#c5c5c5" strokeWidth="2" filter="url(#blur1)" />
-                      <line x1="90" y1="10" x2="90" y2="70" stroke="#b0b0b0" strokeWidth="2.5" />
-                      <line x1="90" y1="130" x2="90" y2="70" stroke="#b0b0b0" strokeWidth="2.5" />
-                      <circle cx="90" cy="70" r="12" fill="white" style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.1))' }} />
-                      <circle cx="90" cy="70" r="6" fill="#888888" />
+                    <svg width="200" height="150" viewBox="0 0 200 150" fill="none">
+                      <line x1="30" y1="25" x2="100" y2="75" stroke="#d8d8d8" strokeWidth="1.5" />
+                      <line x1="25" y1="75" x2="100" y2="75" stroke="#d0d0d0" strokeWidth="1.5" />
+                      <line x1="35" y1="125" x2="100" y2="75" stroke="#d8d8d8" strokeWidth="1.5" />
+                      <line x1="175" y1="30" x2="100" y2="75" stroke="#d8d8d8" strokeWidth="1.5" />
+                      <line x1="175" y1="75" x2="100" y2="75" stroke="#d0d0d0" strokeWidth="1.5" />
+                      <line x1="170" y1="120" x2="100" y2="75" stroke="#d8d8d8" strokeWidth="1.5" />
+                      <circle cx="100" cy="75" r="14" fill="white" />
+                      <circle cx="100" cy="75" r="14" fill="none" stroke="#e0e0e0" strokeWidth="1" />
+                      <circle cx="100" cy="75" r="5" fill="#666666" />
                     </svg>
                   )}
                   
                   {index === 1 && (
-                    <svg width="180" height="140" viewBox="0 0 180 140" fill="none">
-                      <defs>
-                        <filter id="shadow2" x="-20%" y="-20%" width="140%" height="140%">
-                          <feDropShadow dx="0" dy="2" stdDeviation="4" floodOpacity="0.08" />
-                        </filter>
-                      </defs>
-                      <rect x="25" y="35" width="50" height="35" rx="4" fill="white" filter="url(#shadow2)" />
-                      <rect x="85" y="35" width="50" height="35" rx="4" fill="#f0f0f0" filter="url(#shadow2)" />
-                      <rect x="25" y="80" width="50" height="35" rx="4" fill="#f0f0f0" filter="url(#shadow2)" />
-                      <rect x="85" y="80" width="50" height="35" rx="4" fill="white" filter="url(#shadow2)" />
-                      <rect x="145" y="50" width="25" height="55" rx="4" fill="#e8e8e8" filter="url(#shadow2)" />
-                      <line x1="80" y1="35" x2="80" y2="115" stroke="#e0e0e0" strokeWidth="1" strokeDasharray="4 4" />
-                      <line x1="25" y1="75" x2="145" y2="75" stroke="#e0e0e0" strokeWidth="1" strokeDasharray="4 4" />
+                    <svg width="200" height="150" viewBox="0 0 200 150" fill="none">
+                      <rect x="30" y="30" width="55" height="40" rx="6" fill="#f5f5f5" />
+                      <rect x="95" y="30" width="55" height="40" rx="6" fill="white" stroke="#e8e8e8" strokeWidth="1" />
+                      <rect x="30" y="80" width="55" height="40" rx="6" fill="white" stroke="#e8e8e8" strokeWidth="1" />
+                      <rect x="95" y="80" width="55" height="40" rx="6" fill="#f5f5f5" />
+                      <rect x="160" y="45" width="25" height="60" rx="5" fill="#ebebeb" />
                     </svg>
                   )}
                   
                   {index === 2 && (
-                    <svg width="180" height="140" viewBox="0 0 180 140" fill="none">
-                      <defs>
-                        <filter id="shadow3" x="-20%" y="-20%" width="140%" height="140%">
-                          <feDropShadow dx="0" dy="3" stdDeviation="5" floodOpacity="0.1" />
-                        </filter>
-                      </defs>
-                      <rect x="50" y="50" width="40" height="40" rx="6" fill="white" filter="url(#shadow3)" />
-                      <rect x="70" y="35" width="40" height="40" rx="6" fill="#f5f5f5" filter="url(#shadow3)" />
-                      <rect x="90" y="50" width="40" height="40" rx="6" fill="white" filter="url(#shadow3)" />
-                      <rect x="70" y="65" width="40" height="40" rx="6" fill="#ebebeb" filter="url(#shadow3)" />
-                      <circle cx="90" cy="70" r="8" fill="white" stroke="#d0d0d0" strokeWidth="2" />
-                      <circle cx="90" cy="70" r="3" fill="#888888" />
+                    <svg width="200" height="150" viewBox="0 0 200 150" fill="none">
+                      <rect x="55" y="65" width="45" height="45" rx="6" fill="#f0f0f0" />
+                      <rect x="65" y="55" width="45" height="45" rx="6" fill="#f8f8f8" />
+                      <rect x="75" y="45" width="50" height="50" rx="6" fill="white" stroke="#e5e5e5" strokeWidth="1" />
+                      <rect x="100" y="60" width="45" height="45" rx="6" fill="#f5f5f5" />
+                      <rect x="90" y="70" width="20" height="20" rx="4" fill="#666666" />
                     </svg>
                   )}
                   
                   {index === 3 && (
-                    <svg width="180" height="140" viewBox="0 0 180 140" fill="none">
-                      <defs>
-                        <linearGradient id="loopGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#e0e0e0" />
-                          <stop offset="100%" stopColor="#c0c0c0" />
-                        </linearGradient>
-                      </defs>
-                      <ellipse cx="90" cy="70" rx="55" ry="35" fill="none" stroke="#e0e0e0" strokeWidth="8" />
-                      <path d="M 35 70 A 55 35 0 0 1 90 35" fill="none" stroke="#888888" strokeWidth="8" strokeLinecap="round" />
-                      <circle cx="90" cy="35" r="6" fill="white" style={{ filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.15))' }} />
-                      <circle cx="90" cy="35" r="3" fill="#666666" />
-                      <path d="M 130 55 L 140 70 L 130 85" fill="none" stroke="#c0c0c0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <svg width="200" height="150" viewBox="0 0 200 150" fill="none">
+                      <ellipse cx="100" cy="75" rx="60" ry="38" fill="none" stroke="#e5e5e5" strokeWidth="6" />
+                      <path d="M 40 75 A 60 38 0 0 1 100 37" fill="none" stroke="#666666" strokeWidth="6" strokeLinecap="round" />
+                      <circle cx="100" cy="37" r="8" fill="white" stroke="#e0e0e0" strokeWidth="1" />
+                      <circle cx="100" cy="37" r="3" fill="#666666" />
                     </svg>
                   )}
                 </div>
