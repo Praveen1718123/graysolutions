@@ -332,56 +332,6 @@ export default function About() {
         />
       </section>
 
-      {/* What We Do - Full Width Dark Section */}
-      <section 
-        ref={whatWeDoRef}
-        className="relative py-16 md:py-20 overflow-hidden"
-        style={{ 
-          background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 25%, #1a1a1a 50%, #333333 75%, #1a1a1a 100%)',
-        }}
-      >
-        {/* Animated gradient overlay */}
-        <div 
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: 'radial-gradient(ellipse 80% 60% at 80% 50%, rgba(255,255,255,0.08) 0%, transparent 50%), radial-gradient(ellipse 60% 40% at 20% 80%, rgba(255,255,255,0.05) 0%, transparent 50%)',
-          }}
-        />
-        
-        <div className="relative z-10 max-w-[1200px] mx-auto px-6 md:px-10">
-          <motion.div style={{ opacity: whatWeDoOpacity }}>
-            {/* Badge */}
-            <div 
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6"
-              style={{
-                background: 'rgba(255, 255, 255, 0.1)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-              }}
-            >
-              <span 
-                className="text-xs font-medium tracking-widest uppercase"
-                style={{ color: 'rgba(255, 255, 255, 0.8)' }}
-              >
-                WHAT WE DO
-              </span>
-            </div>
-
-            {/* Large text */}
-            <h2 
-              className="font-bold leading-tight"
-              style={{ 
-                fontSize: 'clamp(28px, 4.5vw, 48px)',
-                maxWidth: '900px',
-                color: '#FFFFFF',
-              }}
-              data-testid="section-what-we-do"
-            >
-              We partner with businesses to build reliable products and systems.
-            </h2>
-          </motion.div>
-        </div>
-      </section>
-
       {/* How We Think - 2 Column Section with Sticky Left */}
       <section 
         ref={howWeThinkRef}
@@ -518,6 +468,56 @@ export default function About() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* What We Do - Full Width Dark Section */}
+      <section 
+        ref={whatWeDoRef}
+        className="relative py-16 md:py-20 overflow-hidden"
+        style={{ 
+          background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 25%, #1a1a1a 50%, #333333 75%, #1a1a1a 100%)',
+        }}
+      >
+        {/* Animated gradient overlay */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse 80% 60% at 80% 50%, rgba(255,255,255,0.08) 0%, transparent 50%), radial-gradient(ellipse 60% 40% at 20% 80%, rgba(255,255,255,0.05) 0%, transparent 50%)',
+          }}
+        />
+        
+        <div className="relative z-10 max-w-[1200px] mx-auto px-6 md:px-10">
+          <motion.div style={{ opacity: whatWeDoOpacity }}>
+            {/* Badge */}
+            <div 
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6"
+              style={{
+                background: 'rgba(255, 255, 255, 0.1)',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+              }}
+            >
+              <span 
+                className="text-xs font-medium tracking-widest uppercase"
+                style={{ color: 'rgba(255, 255, 255, 0.8)' }}
+              >
+                WHAT WE DO
+              </span>
+            </div>
+
+            {/* Large text */}
+            <h2 
+              className="font-bold leading-tight"
+              style={{ 
+                fontSize: 'clamp(28px, 4.5vw, 48px)',
+                maxWidth: '900px',
+                color: '#FFFFFF',
+              }}
+              data-testid="section-what-we-do"
+            >
+              We partner with businesses to build reliable products and systems.
+            </h2>
+          </motion.div>
         </div>
       </section>
 
