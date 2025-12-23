@@ -8,6 +8,7 @@ import numbersVideo from "@assets/From_KlickPin_CF_light_hero___abstract_flare_[
 import contextGif from "@assets/From_KlickPin_CF_Kaldea_Visual_Identity_&_Website_Design_on_Be_1766516930656.gif";
 import reliabilityGif from "@assets/From_KlickPin_CF_Kaldea_Visual_Identity_&_Website_Design_Behan_1766517492447.gif";
 import refineGif from "@assets/From_KlickPin_CF_Kaldea_Visual_Identity_&_Website_Design_Behan_1766517702605.gif";
+import designVideo from "@assets/From_KlickPin_CF_Abstract_gradient_geometric_shape_animation_[_1766517982162.mp4";
 
 function useCountUp(end: number, duration: number = 2000, inView: boolean) {
   const [count, setCount] = useState(0);
@@ -961,33 +962,23 @@ export default function About() {
                     </div>
                   )}
                   
-                  {/* Card 2: 3D Cube Frame - Structure/Design */}
+                  {/* Card 2: Video Animation - Design & Communicate */}
                   {index === 1 && (
-                    <div className="relative z-10">
-                      <svg width="180" height="180" viewBox="0 0 180 180" fill="none" style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))' }}>
-                        <defs>
-                          <linearGradient id="cube-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="#b0b0b0" />
-                            <stop offset="50%" stopColor="#909090" />
-                            <stop offset="100%" stopColor="#707070" />
-                          </linearGradient>
-                          <linearGradient id="cube-grad-2" x1="100%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stopColor="#989898" />
-                            <stop offset="100%" stopColor="#686868" />
-                          </linearGradient>
-                          <linearGradient id="cube-highlight" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="#d8d8d8" />
-                            <stop offset="100%" stopColor="#b0b0b0" />
-                          </linearGradient>
-                        </defs>
-                        <path d="M90 20 L150 55 L150 125 L90 160 L30 125 L30 55 Z" fill="url(#cube-grad-1)" />
-                        <path d="M90 20 L150 55 L90 90 L30 55 Z" fill="url(#cube-highlight)" />
-                        <path d="M90 90 L150 55 L150 125 L90 160 Z" fill="url(#cube-grad-2)" />
-                        <ellipse cx="90" cy="90" rx="25" ry="15" fill="none" stroke="#555" strokeWidth="8" />
-                        <circle cx="55" cy="70" r="12" fill="none" stroke="#666" strokeWidth="6" />
-                        <circle cx="125" cy="100" r="10" fill="none" stroke="#777" strokeWidth="5" />
-                        <ellipse cx="90" cy="170" rx="45" ry="6" fill="rgba(0,0,0,0.1)" />
-                      </svg>
+                    <div 
+                      className="absolute inset-0 flex items-center justify-center overflow-hidden"
+                      style={{ background: '#FFFFFF' }}
+                    >
+                      <video
+                        src={designVideo}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="w-full h-full object-cover"
+                        style={{ 
+                          filter: 'grayscale(100%) contrast(1.2) brightness(0.9)',
+                        }}
+                      />
                     </div>
                   )}
                   
