@@ -258,19 +258,14 @@ export default function About() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <div 
-              className="relative w-full max-w-[500px] aspect-square rounded-2xl overflow-hidden"
-              style={{
-                boxShadow: '0 20px 60px rgba(0, 0, 0, 0.08)',
-              }}
-            >
+            <div className="relative w-full max-w-[650px]">
               <video
                 src={heroVideo}
                 autoPlay
                 loop
                 muted
                 playsInline
-                className="w-full h-full object-cover"
+                className="w-full h-auto"
                 style={{
                   filter: 'grayscale(100%) contrast(1.1)',
                 }}
