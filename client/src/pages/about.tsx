@@ -521,46 +521,222 @@ export default function About() {
         </div>
       </section>
 
-      {/* Consumer-Centred by Design - Single Column Wide */}
+      {/* Key Benefits Section */}
       <section 
-        className="py-20 md:py-28"
-        style={{ backgroundColor: '#FFFFFF' }}
+        className="py-20 md:py-28 relative overflow-hidden"
+        style={{ 
+          background: 'linear-gradient(135deg, #fef7f7 0%, #fdf4f9 25%, #f8f4fd 50%, #f4f7fd 75%, #fff9f5 100%)',
+        }}
       >
-        <div className="max-w-[800px] mx-auto px-4 md:px-10">
+        {/* Subtle animated gradient overlay */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse 60% 40% at 20% 30%, rgba(255,200,220,0.15) 0%, transparent 50%), radial-gradient(ellipse 50% 30% at 80% 70%, rgba(220,200,255,0.12) 0%, transparent 50%)',
+          }}
+        />
+        
+        <div className="relative z-10 max-w-[1200px] mx-auto px-4 md:px-10">
+          {/* Section Header */}
+          <div className="text-center mb-12 md:mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <div 
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
+                style={{
+                  background: 'rgba(123, 63, 228, 0.08)',
+                  border: '1px solid rgba(123, 63, 228, 0.15)',
+                }}
+              >
+                <span 
+                  className="text-xs font-semibold tracking-widest uppercase"
+                  style={{ color: '#7B3FE4' }}
+                >
+                  KEY BENEFITS
+                </span>
+              </div>
+            </motion.div>
+            
+            <motion.h2 
+              className="text-3xl md:text-4xl lg:text-5xl font-bold mb-5"
+              style={{ color: '#1A1A1A' }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              data-testid="section-key-benefits"
+            >
+              Designed around real user behaviour
+            </motion.h2>
+            
+            <motion.p 
+              className="text-base md:text-lg max-w-xl mx-auto"
+              style={{ color: '#666666' }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              Every interface, flow, and system we build is informed by how people actually behave — not just what they say they want.
+            </motion.p>
+          </div>
+          
+          {/* Main Benefits Card */}
           <motion.div
+            className="rounded-3xl p-8 md:p-12"
+            style={{
+              backgroundColor: '#FFFFFF',
+              boxShadow: '0 4px 24px rgba(0,0,0,0.06), 0 12px 48px rgba(0,0,0,0.04)',
+            }}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <h2 
-              className="text-2xl md:text-3xl font-bold mb-8"
-              style={{ color: '#1A1A1A' }}
-              data-testid="section-consumer-centred"
-            >
-              Consumer-centred by design
-            </h2>
-            
-            <p 
-              className="text-lg md:text-xl leading-relaxed mb-6"
-              style={{ color: '#1A1A1A' }}
-            >
-              We design for both end consumers and business users.
-            </p>
-            
-            <p 
-              className="text-base md:text-lg leading-relaxed mb-6"
-              style={{ color: '#555555' }}
-            >
-              Our work is informed by how people actually behave — how they scan, hesitate, compare, decide, and drop off. These behaviour patterns shape everything from brand positioning and communication to product architecture and interaction details.
-            </p>
-            
-            <p 
-              className="text-base md:text-lg leading-relaxed"
-              style={{ color: '#555555' }}
-            >
-              Whether the audience is a customer, operator, or decision-maker, our approach remains consistent: design with intent, communicate with clarity, build with reasoning, and refine based on real behaviour.
-            </p>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6">
+              {/* Left Benefits */}
+              <div className="space-y-6">
+                {[
+                  { title: "Clear Decision Paths", description: "Reduce hesitation and confusion with predictable layouts." },
+                  { title: "Reduced Friction", description: "Remove unnecessary steps and ambiguity in flows." },
+                  { title: "Faster Adoption", description: "Familiar patterns that users understand quickly." },
+                ].map((benefit, index) => (
+                  <motion.div
+                    key={index}
+                    className="flex gap-4 p-4 rounded-xl transition-all duration-200 cursor-default"
+                    style={{ backgroundColor: 'transparent' }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
+                    whileHover={{ 
+                      y: -2, 
+                      backgroundColor: 'rgba(123, 63, 228, 0.03)',
+                      boxShadow: '0 4px 12px rgba(0,0,0,0.04)',
+                    }}
+                    data-testid={`benefit-left-${index}`}
+                  >
+                    <motion.div 
+                      className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center"
+                      style={{ 
+                        backgroundColor: 'rgba(123, 63, 228, 0.08)',
+                      }}
+                      whileHover={{ 
+                        backgroundColor: 'rgba(123, 63, 228, 0.15)',
+                      }}
+                    >
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7B3FE4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    </motion.div>
+                    <div>
+                      <h4 className="font-semibold text-base mb-1" style={{ color: '#1A1A1A' }}>
+                        {benefit.title}
+                      </h4>
+                      <p className="text-sm" style={{ color: '#666666' }}>
+                        {benefit.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+              
+              {/* Center Visual */}
+              <motion.div 
+                className="hidden lg:flex items-center justify-center"
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+              >
+                <div 
+                  className="w-full h-full min-h-[280px] rounded-2xl relative overflow-hidden"
+                  style={{
+                    background: 'linear-gradient(135deg, #f8f4fd 0%, #fdf4f9 50%, #fff9f5 100%)',
+                  }}
+                >
+                  {/* Animated shimmer effect */}
+                  <motion.div
+                    className="absolute inset-0"
+                    style={{
+                      background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.6) 50%, transparent 100%)',
+                    }}
+                    animate={{
+                      x: ['-100%', '100%'],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: 'linear',
+                    }}
+                  />
+                  {/* Placeholder content */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div 
+                      className="w-16 h-16 rounded-full flex items-center justify-center"
+                      style={{ backgroundColor: 'rgba(123, 63, 228, 0.1)' }}
+                    >
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7B3FE4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <polyline points="21 15 16 10 5 21" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+              
+              {/* Right Benefits */}
+              <div className="space-y-6">
+                {[
+                  { title: "Consistent Experience", description: "Align brand, UI, and messaging across touchpoints." },
+                  { title: "Operational Readiness", description: "Works for both users and operators in real conditions." },
+                  { title: "Measurable Impact", description: "Improve engagement, efficiency, and conversion outcomes." },
+                ].map((benefit, index) => (
+                  <motion.div
+                    key={index}
+                    className="flex gap-4 p-4 rounded-xl transition-all duration-200 cursor-default"
+                    style={{ backgroundColor: 'transparent' }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
+                    whileHover={{ 
+                      y: -2, 
+                      backgroundColor: 'rgba(123, 63, 228, 0.03)',
+                      boxShadow: '0 4px 12px rgba(0,0,0,0.04)',
+                    }}
+                    data-testid={`benefit-right-${index}`}
+                  >
+                    <motion.div 
+                      className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center"
+                      style={{ 
+                        backgroundColor: 'rgba(123, 63, 228, 0.08)',
+                      }}
+                      whileHover={{ 
+                        backgroundColor: 'rgba(123, 63, 228, 0.15)',
+                      }}
+                    >
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7B3FE4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    </motion.div>
+                    <div>
+                      <h4 className="font-semibold text-base mb-1" style={{ color: '#1A1A1A' }}>
+                        {benefit.title}
+                      </h4>
+                      <p className="text-sm" style={{ color: '#666666' }}>
+                        {benefit.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
