@@ -336,7 +336,7 @@ export default function About() {
       {/* How We Think - 2 Column Section with Sticky Left */}
       <section 
         ref={howWeThinkRef}
-        className="py-20 md:py-28"
+        className="py-20 md:py-28 relative"
         style={{ backgroundColor: '#FAFAFA' }}
       >
         <div className="max-w-[1120px] mx-auto px-4 md:px-10">
@@ -403,10 +403,9 @@ export default function About() {
           {/* Desktop Layout - 2 Column with Sticky Left */}
           <div className="hidden lg:grid lg:grid-cols-2 gap-12 lg:gap-20" style={{ alignItems: 'start' }}>
             {/* Left Column - Sticky */}
-            <div className="relative">
+            <div className="relative h-fit">
               <div 
-                className="sticky"
-                style={{ top: '120px' }}
+                className="sticky top-[120px]"
               >
                 <span 
                   className="text-sm font-medium tracking-wide mb-4 block"
