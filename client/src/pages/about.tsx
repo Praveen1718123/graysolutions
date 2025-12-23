@@ -794,16 +794,14 @@ export default function About() {
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full"
           style={{
-            filter: 'grayscale(100%) brightness(0.4) contrast(1.2)',
-            opacity: 0.6,
+            filter: 'grayscale(100%) contrast(1.1)',
+            objectFit: 'cover',
+            objectPosition: 'center center',
+            minWidth: '100%',
+            minHeight: '100%',
           }}
-        />
-        {/* Dark overlay for better text readability */}
-        <div 
-          className="absolute inset-0"
-          style={{ backgroundColor: 'rgba(26, 26, 26, 0.7)' }}
         />
         <div className="relative z-10 max-w-[1280px] mx-auto px-4 md:px-10">
           <motion.div
