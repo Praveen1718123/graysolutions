@@ -900,11 +900,10 @@ export default function About() {
             {howWeWork.map((item, index) => (
               <motion.div
                 key={index}
-                className="rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 cursor-default"
+                className="rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-1 cursor-default"
                 style={{ 
                   backgroundColor: '#FFFFFF',
-                  boxShadow: '0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03)',
-                  border: '1px solid rgba(0,0,0,0.04)',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.04)',
                 }}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -912,72 +911,104 @@ export default function About() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ 
                   boxShadow: '0 8px 30px rgba(0,0,0,0.08)',
-                  borderColor: 'rgba(0,0,0,0.08)',
                 }}
                 data-testid={`how-we-work-step-${index}`}
               >
-                {/* Visual Placeholder - 50% */}
+                {/* Visual Area - 60% */}
                 <div 
-                  className="w-full relative overflow-hidden"
+                  className="w-full relative overflow-hidden flex items-center justify-center"
                   style={{ 
-                    height: '200px',
-                    background: index === 0 
-                      ? 'linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 50%, #f0f0f0 100%)'
-                      : index === 1
-                      ? 'linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 50%, #e0e0e0 100%)'
-                      : index === 2
-                      ? 'linear-gradient(135deg, #f0f0f0 0%, #e5e5e5 50%, #f5f5f5 100%)'
-                      : 'linear-gradient(135deg, #e5e5e5 0%, #f0f0f0 50%, #e8e8e8 100%)',
+                    height: '220px',
+                    background: 'linear-gradient(180deg, #f8f8f8 0%, #f0f0f0 100%)',
                   }}
                 >
-                  {/* Animated shimmer */}
-                  <motion.div
-                    className="absolute inset-0"
-                    style={{
-                      background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 50%, transparent 100%)',
-                    }}
-                    animate={{
-                      x: ['-100%', '100%'],
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: 'linear',
-                      delay: index * 0.5,
-                    }}
-                  />
                   {/* Step indicator */}
-                  <div className="absolute top-4 left-4">
-                    <div 
-                      className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold"
-                      style={{ 
-                        backgroundColor: 'rgba(255,255,255,0.9)',
-                        color: '#1A1A1A',
-                        boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-                      }}
+                  <div className="absolute top-5 left-5">
+                    <span 
+                      className="text-xs font-semibold tracking-widest"
+                      style={{ color: '#999999' }}
                     >
-                      {item.step}
-                    </div>
+                      0{item.step}
+                    </span>
                   </div>
-                  {/* Placeholder icon */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div 
-                      className="w-16 h-16 rounded-xl flex items-center justify-center"
-                      style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
-                    >
-                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#888888" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                        <circle cx="8.5" cy="8.5" r="1.5" />
-                        <polyline points="21 15 16 10 5 21" />
-                      </svg>
-                    </div>
-                  </div>
+                  
+                  {/* Custom Abstract Graphics */}
+                  {index === 0 && (
+                    <svg width="180" height="140" viewBox="0 0 180 140" fill="none">
+                      <defs>
+                        <filter id="blur1" x="-50%" y="-50%" width="200%" height="200%">
+                          <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+                        </filter>
+                        <linearGradient id="lineGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#d0d0d0" />
+                          <stop offset="100%" stopColor="#a0a0a0" />
+                        </linearGradient>
+                      </defs>
+                      <line x1="20" y1="30" x2="90" y2="70" stroke="#c5c5c5" strokeWidth="2" filter="url(#blur1)" />
+                      <line x1="30" y1="110" x2="90" y2="70" stroke="#c5c5c5" strokeWidth="2" filter="url(#blur1)" />
+                      <line x1="160" y1="25" x2="90" y2="70" stroke="#c5c5c5" strokeWidth="2" filter="url(#blur1)" />
+                      <line x1="155" y1="115" x2="90" y2="70" stroke="#c5c5c5" strokeWidth="2" filter="url(#blur1)" />
+                      <line x1="90" y1="10" x2="90" y2="70" stroke="#b0b0b0" strokeWidth="2.5" />
+                      <line x1="90" y1="130" x2="90" y2="70" stroke="#b0b0b0" strokeWidth="2.5" />
+                      <circle cx="90" cy="70" r="12" fill="white" style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.1))' }} />
+                      <circle cx="90" cy="70" r="6" fill="#888888" />
+                    </svg>
+                  )}
+                  
+                  {index === 1 && (
+                    <svg width="180" height="140" viewBox="0 0 180 140" fill="none">
+                      <defs>
+                        <filter id="shadow2" x="-20%" y="-20%" width="140%" height="140%">
+                          <feDropShadow dx="0" dy="2" stdDeviation="4" floodOpacity="0.08" />
+                        </filter>
+                      </defs>
+                      <rect x="25" y="35" width="50" height="35" rx="4" fill="white" filter="url(#shadow2)" />
+                      <rect x="85" y="35" width="50" height="35" rx="4" fill="#f0f0f0" filter="url(#shadow2)" />
+                      <rect x="25" y="80" width="50" height="35" rx="4" fill="#f0f0f0" filter="url(#shadow2)" />
+                      <rect x="85" y="80" width="50" height="35" rx="4" fill="white" filter="url(#shadow2)" />
+                      <rect x="145" y="50" width="25" height="55" rx="4" fill="#e8e8e8" filter="url(#shadow2)" />
+                      <line x1="80" y1="35" x2="80" y2="115" stroke="#e0e0e0" strokeWidth="1" strokeDasharray="4 4" />
+                      <line x1="25" y1="75" x2="145" y2="75" stroke="#e0e0e0" strokeWidth="1" strokeDasharray="4 4" />
+                    </svg>
+                  )}
+                  
+                  {index === 2 && (
+                    <svg width="180" height="140" viewBox="0 0 180 140" fill="none">
+                      <defs>
+                        <filter id="shadow3" x="-20%" y="-20%" width="140%" height="140%">
+                          <feDropShadow dx="0" dy="3" stdDeviation="5" floodOpacity="0.1" />
+                        </filter>
+                      </defs>
+                      <rect x="50" y="50" width="40" height="40" rx="6" fill="white" filter="url(#shadow3)" />
+                      <rect x="70" y="35" width="40" height="40" rx="6" fill="#f5f5f5" filter="url(#shadow3)" />
+                      <rect x="90" y="50" width="40" height="40" rx="6" fill="white" filter="url(#shadow3)" />
+                      <rect x="70" y="65" width="40" height="40" rx="6" fill="#ebebeb" filter="url(#shadow3)" />
+                      <circle cx="90" cy="70" r="8" fill="white" stroke="#d0d0d0" strokeWidth="2" />
+                      <circle cx="90" cy="70" r="3" fill="#888888" />
+                    </svg>
+                  )}
+                  
+                  {index === 3 && (
+                    <svg width="180" height="140" viewBox="0 0 180 140" fill="none">
+                      <defs>
+                        <linearGradient id="loopGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#e0e0e0" />
+                          <stop offset="100%" stopColor="#c0c0c0" />
+                        </linearGradient>
+                      </defs>
+                      <ellipse cx="90" cy="70" rx="55" ry="35" fill="none" stroke="#e0e0e0" strokeWidth="8" />
+                      <path d="M 35 70 A 55 35 0 0 1 90 35" fill="none" stroke="#888888" strokeWidth="8" strokeLinecap="round" />
+                      <circle cx="90" cy="35" r="6" fill="white" style={{ filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.15))' }} />
+                      <circle cx="90" cy="35" r="3" fill="#666666" />
+                      <path d="M 130 55 L 140 70 L 130 85" fill="none" stroke="#c0c0c0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  )}
                 </div>
                 
-                {/* Text Content - 50% */}
-                <div className="p-6" style={{ minHeight: '160px' }}>
+                {/* Text Content - 40% */}
+                <div className="p-6">
                   <h3 
-                    className="text-lg font-semibold mb-3"
+                    className="text-lg font-semibold mb-2"
                     style={{ color: '#1A1A1A' }}
                   >
                     {item.title}
