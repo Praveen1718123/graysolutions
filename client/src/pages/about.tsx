@@ -6,6 +6,7 @@ import heroVideo from "@assets/From_KlickPin_CF_Red_and_White_Abstract_Wall_ArtJ
 import benefitsVideo from "@assets/From_KlickPin_CF_by_Meloq_Arai_—_a_3D_Motion_Designer_@meloqar_1766508779038.mp4";
 import numbersVideo from "@assets/From_KlickPin_CF_light_hero___abstract_flare_[Video]___Editing_1766512132613.mp4";
 import contextGif from "@assets/From_KlickPin_CF_Kaldea_Visual_Identity_&_Website_Design_on_Be_1766516930656.gif";
+import reliabilityGif from "@assets/From_KlickPin_CF_Kaldea_Visual_Identity_&_Website_Design_Behan_1766517492447.gif";
 
 function useCountUp(end: number, duration: number = 2000, inView: boolean) {
   const [count, setCount] = useState(0);
@@ -989,31 +990,20 @@ export default function About() {
                     </div>
                   )}
                   
-                  {/* Card 3: 3D Knot - Reliability/Integration */}
+                  {/* Card 3: GIF Animation - Build for Reliability */}
                   {index === 2 && (
-                    <div className="relative z-10">
-                      <svg width="180" height="180" viewBox="0 0 180 180" fill="none" style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))' }}>
-                        <defs>
-                          <linearGradient id="knot-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="#c0c0c0" />
-                            <stop offset="40%" stopColor="#a0a0a0" />
-                            <stop offset="100%" stopColor="#707070" />
-                          </linearGradient>
-                          <linearGradient id="knot-grad-2" x1="100%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stopColor="#b8b8b8" />
-                            <stop offset="100%" stopColor="#888888" />
-                          </linearGradient>
-                        </defs>
-                        <path d="M90 30 C50 30 30 60 40 90 C50 120 80 130 90 100 C100 70 70 50 50 70 C30 90 50 130 90 130 C130 130 150 90 130 70 C110 50 80 70 90 100 C100 130 130 120 140 90 C150 60 130 30 90 30 Z" 
-                          fill="url(#knot-grad-1)" 
-                          strokeWidth="18"
-                          stroke="url(#knot-grad-2)"
-                          strokeLinecap="round"
-                        />
-                        <path d="M60 50 Q70 40 85 45" fill="none" stroke="#d5d5d5" strokeWidth="6" strokeLinecap="round" opacity="0.7" />
-                        <path d="M100 55 Q115 50 125 60" fill="none" stroke="#d0d0d0" strokeWidth="5" strokeLinecap="round" opacity="0.6" />
-                        <ellipse cx="90" cy="165" rx="50" ry="8" fill="rgba(0,0,0,0.1)" />
-                      </svg>
+                    <div 
+                      className="absolute inset-0 flex items-center justify-center overflow-hidden"
+                      style={{ background: '#FFFFFF' }}
+                    >
+                      <img 
+                        src={reliabilityGif}
+                        alt="Reliability animation"
+                        className="w-full h-full object-cover"
+                        style={{ 
+                          filter: 'grayscale(100%) contrast(1.2) brightness(0.9)',
+                        }}
+                      />
                     </div>
                   )}
                   
