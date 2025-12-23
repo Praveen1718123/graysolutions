@@ -900,11 +900,9 @@ export default function About() {
             {howWeWork.map((item, index) => (
               <motion.div
                 key={index}
-                className="rounded-2xl overflow-hidden cursor-default p-6"
+                className="rounded-3xl overflow-hidden cursor-default"
                 style={{ 
-                  backgroundColor: '#FFFFFF',
-                  boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
-                  border: '1px solid rgba(0,0,0,0.06)',
+                  background: 'linear-gradient(145deg, #f0f4f8 0%, #e4eaf0 50%, #dce4ec 100%)',
                 }}
                 initial={{ opacity: 0.4, y: 8 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -912,190 +910,300 @@ export default function About() {
                 transition={{ duration: 0.5, delay: index * 0.1, ease: 'easeOut' }}
                 whileHover={{ 
                   y: -4,
-                  boxShadow: '0 12px 40px rgba(0,0,0,0.08)',
                   transition: { duration: 0.2 }
                 }}
                 data-testid={`how-we-work-step-${index}`}
               >
-                {/* Header: Number Badge + Title */}
-                <div className="flex items-center gap-3 mb-4">
-                  <div 
-                    className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold"
-                    style={{ backgroundColor: '#f0f0f0', color: '#1A1A1A' }}
-                  >
-                    {item.step}
-                  </div>
+                {/* Visual Area - Large */}
+                <div 
+                  className="w-full relative overflow-hidden flex items-center justify-center p-6"
+                  style={{ height: '280px' }}
+                >
+                  {/* Card 1: Context - Dashboard with search and list */}
+                  {index === 0 && (
+                    <div className="relative w-full h-full flex items-center justify-center">
+                      {/* Main card */}
+                      <div 
+                        className="absolute left-4 top-8 bg-white rounded-xl p-4 w-[200px]"
+                        style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}
+                      >
+                        {/* Search bar */}
+                        <div className="flex items-center gap-2 bg-gray-50 rounded-lg px-3 py-2 mb-4">
+                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <circle cx="6" cy="6" r="4" stroke="#999" strokeWidth="1.5" />
+                            <path d="M9 9L12 12" stroke="#999" strokeWidth="1.5" strokeLinecap="round" />
+                          </svg>
+                          <span className="text-[10px] text-gray-400">Analyze inputs</span>
+                        </div>
+                        {/* Header */}
+                        <div className="flex items-center gap-2 mb-3">
+                          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                              <rect x="2" y="2" width="5" height="5" rx="1" fill="#888" />
+                              <rect x="9" y="2" width="5" height="5" rx="1" fill="#aaa" />
+                              <rect x="2" y="9" width="5" height="5" rx="1" fill="#aaa" />
+                              <rect x="9" y="9" width="5" height="5" rx="1" fill="#888" />
+                            </svg>
+                          </div>
+                          <div>
+                            <div className="text-[11px] font-semibold text-gray-800">Context Analysis</div>
+                            <div className="text-[9px] text-gray-400">Real-time insights</div>
+                          </div>
+                        </div>
+                        {/* List items */}
+                        <div className="space-y-2">
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                              <div className="w-4 h-4 rounded bg-gray-100" />
+                              <span className="text-[10px] text-gray-600">User Research</span>
+                            </div>
+                            <span className="text-[9px] text-gray-400">Done</span>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                              <div className="w-4 h-4 rounded bg-gray-100" />
+                              <span className="text-[10px] text-gray-600">Market Analysis</span>
+                            </div>
+                            <span className="text-[9px] text-gray-400">Done</span>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                              <div className="w-4 h-4 rounded bg-gray-100" />
+                              <span className="text-[10px] text-gray-600">Tech Constraints</span>
+                            </div>
+                            <span className="text-[9px] text-gray-400">Done</span>
+                          </div>
+                        </div>
+                      </div>
+                      {/* Floating stat cards */}
+                      <div 
+                        className="absolute right-6 top-6 bg-white rounded-xl px-4 py-3"
+                        style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}
+                      >
+                        <div className="text-[9px] text-gray-400 mb-1">Insights Found</div>
+                        <div className="text-lg font-bold text-gray-800">24</div>
+                      </div>
+                      <div 
+                        className="absolute right-4 bottom-10 bg-white rounded-xl px-4 py-3"
+                        style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}
+                      >
+                        <div className="text-[9px] text-gray-400 mb-1">Clarity Score</div>
+                        <div className="text-lg font-bold text-gray-800">92%</div>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Card 2: Design - Gauge/progress with stats */}
+                  {index === 1 && (
+                    <div className="relative w-full h-full flex items-center justify-center">
+                      {/* Top stat cards */}
+                      <div 
+                        className="absolute left-4 top-4 bg-white rounded-xl px-4 py-2.5 flex items-center gap-3"
+                        style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}
+                      >
+                        <div>
+                          <div className="text-[9px] text-gray-400">Design System</div>
+                          <div className="text-sm font-bold text-gray-800">v2.4</div>
+                        </div>
+                        <div className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center">
+                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <path d="M6 2v8M2 6h8" stroke="#666" strokeWidth="1.5" strokeLinecap="round" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div 
+                        className="absolute right-4 top-4 bg-white rounded-xl px-4 py-2.5 flex items-center gap-3"
+                        style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}
+                      >
+                        <div>
+                          <div className="text-[9px] text-gray-400">Components</div>
+                          <div className="text-sm font-bold text-gray-800">48</div>
+                        </div>
+                        <div className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center">
+                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <path d="M2 8l3-3 2 2 3-3" stroke="#666" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </div>
+                      </div>
+                      {/* Central gauge */}
+                      <div 
+                        className="bg-white rounded-2xl p-5"
+                        style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.1)' }}
+                      >
+                        <div className="relative w-28 h-28">
+                          <svg width="112" height="112" viewBox="0 0 112 112">
+                            <circle cx="56" cy="56" r="48" fill="none" stroke="#e8e8e8" strokeWidth="8" />
+                            <circle 
+                              cx="56" cy="56" r="48" 
+                              fill="none" 
+                              stroke="#888888" 
+                              strokeWidth="8" 
+                              strokeLinecap="round"
+                              strokeDasharray="280"
+                              strokeDashoffset="56"
+                              transform="rotate(-90 56 56)"
+                            />
+                          </svg>
+                          <div className="absolute inset-0 flex flex-col items-center justify-center">
+                            <span className="text-2xl font-bold text-gray-800">80%</span>
+                            <span className="text-[9px] text-green-500 flex items-center gap-0.5">
+                              <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                              Complete
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      {/* Bottom buttons */}
+                      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+                        <div className="bg-white rounded-full px-3 py-1.5 text-[10px] text-gray-500 border border-gray-200">
+                          Review Draft
+                        </div>
+                        <div className="bg-gray-800 rounded-full px-3 py-1.5 text-[10px] text-white">
+                          Approve Design
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Card 3: Build - Stacked cards with chart */}
+                  {index === 2 && (
+                    <div className="relative w-full h-full flex items-center justify-center">
+                      {/* Left floating panel */}
+                      <div 
+                        className="absolute left-2 top-10 bg-white rounded-xl p-3 w-[90px]"
+                        style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)', transform: 'rotate(-5deg)' }}
+                      >
+                        <div className="w-full h-20 bg-gray-50 rounded-lg flex items-end justify-center gap-1 pb-2">
+                          <div className="w-3 h-8 bg-gray-300 rounded-sm" />
+                          <div className="w-3 h-12 bg-gray-400 rounded-sm" />
+                          <div className="w-3 h-6 bg-gray-300 rounded-sm" />
+                          <div className="w-3 h-10 bg-gray-400 rounded-sm" />
+                        </div>
+                      </div>
+                      {/* Center main card */}
+                      <div 
+                        className="bg-white rounded-xl p-4 w-[160px] z-10"
+                        style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.1)' }}
+                      >
+                        <div className="flex items-center gap-2 mb-3">
+                          <div className="w-6 h-6 rounded-lg bg-gray-100 flex items-center justify-center">
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                              <rect x="1" y="5" width="3" height="6" rx="0.5" fill="#888" />
+                              <rect x="5" y="3" width="3" height="8" rx="0.5" fill="#666" />
+                              <rect x="9" y="1" width="3" height="10" rx="0.5" fill="#888" />
+                            </svg>
+                          </div>
+                          <span className="text-[10px] font-semibold text-gray-700">Build Progress</span>
+                        </div>
+                        <div className="space-y-2">
+                          <div className="flex items-center gap-2">
+                            <div className="w-4 h-4 rounded bg-green-100 flex items-center justify-center">
+                              <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3 5.5L6.5 2" stroke="#22c55e" strokeWidth="1.2" strokeLinecap="round"/></svg>
+                            </div>
+                            <span className="text-[10px] text-gray-600">Frontend Ready</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div className="w-4 h-4 rounded bg-green-100 flex items-center justify-center">
+                              <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3 5.5L6.5 2" stroke="#22c55e" strokeWidth="1.2" strokeLinecap="round"/></svg>
+                            </div>
+                            <span className="text-[10px] text-gray-600">API Integrated</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div className="w-4 h-4 rounded bg-yellow-100 flex items-center justify-center">
+                              <div className="w-2 h-2 rounded-full bg-yellow-400" />
+                            </div>
+                            <span className="text-[10px] text-gray-600">Testing Phase</span>
+                          </div>
+                        </div>
+                      </div>
+                      {/* Right floating card */}
+                      <div 
+                        className="absolute right-2 bottom-8 bg-white rounded-xl px-4 py-3"
+                        style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)', transform: 'rotate(3deg)' }}
+                      >
+                        <div className="text-[9px] text-gray-400 mb-1">Reliability</div>
+                        <div className="text-lg font-bold text-gray-800">99.9%</div>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Card 4: Refine - Match/verification visual */}
+                  {index === 3 && (
+                    <div className="relative w-full h-full flex items-center justify-center">
+                      {/* Left card */}
+                      <div 
+                        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white rounded-xl px-4 py-3 text-center"
+                        style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}
+                      >
+                        <div className="w-8 h-8 mx-auto mb-2 rounded-lg bg-gray-100 flex items-center justify-center">
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <rect x="2" y="2" width="12" height="3" rx="1" fill="#888" />
+                            <rect x="2" y="7" width="12" height="3" rx="1" fill="#aaa" />
+                            <rect x="2" y="12" width="8" height="2" rx="0.5" fill="#ccc" />
+                          </svg>
+                        </div>
+                        <div className="text-[10px] font-medium text-gray-700">Current</div>
+                        <div className="text-[9px] text-gray-400">v1.2</div>
+                      </div>
+                      {/* Center check */}
+                      <div 
+                        className="bg-white rounded-full p-4 z-10"
+                        style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.1)' }}
+                      >
+                        <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M5 12l5 5L19 7" stroke="#555" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </div>
+                      </div>
+                      {/* Right card */}
+                      <div 
+                        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white rounded-xl px-4 py-3 text-center"
+                        style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}
+                      >
+                        <div className="w-8 h-8 mx-auto mb-2 rounded-lg bg-gray-100 flex items-center justify-center">
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <rect x="2" y="2" width="12" height="3" rx="1" fill="#666" />
+                            <rect x="2" y="7" width="12" height="3" rx="1" fill="#888" />
+                            <rect x="2" y="12" width="12" height="2" rx="0.5" fill="#aaa" />
+                          </svg>
+                        </div>
+                        <div className="text-[10px] font-medium text-gray-700">Refined</div>
+                        <div className="text-[9px] text-gray-400">v1.3</div>
+                      </div>
+                      {/* Bottom stat */}
+                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center">
+                        <div className="text-xl font-bold text-gray-800">94%</div>
+                        <div className="text-[10px] text-gray-400">Improvement Score</div>
+                      </div>
+                      {/* Action buttons */}
+                      <div className="absolute bottom-4 right-4 flex gap-2">
+                        <div className="bg-white rounded-full px-2.5 py-1 text-[9px] text-gray-500 border border-gray-200">
+                          Review
+                        </div>
+                        <div className="bg-gray-800 rounded-full px-2.5 py-1 text-[9px] text-white">
+                          Deploy
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                
+                {/* Text Content */}
+                <div className="p-6 pt-0">
                   <h3 
-                    className="text-xl font-semibold"
+                    className="text-xl font-bold mb-2"
                     style={{ color: '#1A1A1A' }}
                   >
                     {item.title}
                   </h3>
+                  <p 
+                    className="text-sm leading-relaxed"
+                    style={{ color: '#555555' }}
+                  >
+                    {item.description}
+                  </p>
                 </div>
-                
-                {/* Visual Area */}
-                <div 
-                  className="w-full relative overflow-hidden flex items-center justify-center mb-5"
-                  style={{ 
-                    height: '200px',
-                    background: 'linear-gradient(135deg, #f8f9fa 0%, #f0f2f5 50%, #e8eaed 100%)',
-                    borderRadius: '12px',
-                  }}
-                >
-                  {/* Card 1: Clipboard with floating labels */}
-                  {index === 0 && (
-                    <div className="relative w-full h-full">
-                      {/* Clipboard icon top right */}
-                      <div className="absolute top-4 right-6">
-                        <svg width="50" height="60" viewBox="0 0 50 60" fill="none">
-                          <rect x="5" y="8" width="40" height="48" rx="4" fill="white" stroke="#e0e0e0" strokeWidth="1.5" />
-                          <rect x="15" y="2" width="20" height="12" rx="3" fill="#d0d0d0" />
-                          <rect x="20" y="0" width="10" height="6" rx="2" fill="#b0b0b0" />
-                          <rect x="12" y="22" width="26" height="3" rx="1" fill="#e5e5e5" />
-                          <rect x="12" y="30" width="20" height="3" rx="1" fill="#ebebeb" />
-                          <rect x="12" y="38" width="24" height="3" rx="1" fill="#e5e5e5" />
-                        </svg>
-                      </div>
-                      {/* Floating labels */}
-                      <div className="absolute top-8 left-4 bg-white rounded-full px-3 py-1.5 flex items-center gap-2 shadow-sm border border-gray-100">
-                        <div className="w-4 h-4 rounded-full bg-gray-200 flex items-center justify-center">
-                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="#666" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                        </div>
-                        <span className="text-xs text-gray-600">Identify constraints</span>
-                      </div>
-                      <div className="absolute top-20 left-12 bg-white rounded-full px-3 py-1.5 flex items-center gap-2 shadow-sm border border-gray-100">
-                        <div className="w-4 h-4 rounded-full bg-gray-200 flex items-center justify-center">
-                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="#666" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                        </div>
-                        <span className="text-xs text-gray-600">Assess requirements</span>
-                      </div>
-                      <div className="absolute bottom-10 left-6 bg-white rounded-full px-3 py-1.5 flex items-center gap-2 shadow-sm border border-gray-100">
-                        <div className="w-4 h-4 rounded-full bg-gray-200 flex items-center justify-center">
-                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="#666" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                        </div>
-                        <span className="text-xs text-gray-600">Define scope</span>
-                      </div>
-                    </div>
-                  )}
-                  
-                  {/* Card 2: Week columns with task cards */}
-                  {index === 1 && (
-                    <div className="relative w-full h-full px-4 py-3">
-                      {/* Week headers */}
-                      <div className="flex justify-around mb-3">
-                        <span className="text-xs font-medium text-gray-400">Week 1</span>
-                        <span className="text-xs font-medium text-gray-400">Week 2</span>
-                      </div>
-                      {/* Task cards */}
-                      <div className="absolute top-12 left-6 bg-white rounded-lg px-3 py-2 shadow-sm border border-gray-100 flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-gray-300" />
-                        <span className="text-xs text-gray-600">Define structure</span>
-                      </div>
-                      <div className="absolute top-20 right-8 bg-white rounded-lg px-3 py-2 shadow-sm border border-gray-100 flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-gray-300" />
-                        <span className="text-xs text-gray-600">Create components</span>
-                      </div>
-                      <div className="absolute bottom-14 left-10 bg-white rounded-lg px-3 py-2 shadow-sm border border-gray-100 flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-gray-300" />
-                        <span className="text-xs text-gray-600">Build layout</span>
-                      </div>
-                    </div>
-                  )}
-                  
-                  {/* Card 3: Gear/cog with week labels */}
-                  {index === 2 && (
-                    <div className="relative w-full h-full flex items-center justify-center">
-                      {/* Gear shape */}
-                      <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
-                        <circle cx="50" cy="50" r="35" fill="#e5e5e5" />
-                        <circle cx="50" cy="50" r="25" fill="#d5d5d5" />
-                        <circle cx="50" cy="50" r="12" fill="#c0c0c0" />
-                        {/* Gear teeth */}
-                        {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
-                          <rect
-                            key={i}
-                            x="46"
-                            y="10"
-                            width="8"
-                            height="12"
-                            rx="2"
-                            fill="#d0d0d0"
-                            transform={`rotate(${angle} 50 50)`}
-                          />
-                        ))}
-                      </svg>
-                      {/* Week labels around gear */}
-                      <div className="absolute top-3 left-6 bg-white rounded-full px-2.5 py-1 shadow-sm border border-gray-100 flex items-center gap-1.5">
-                        <div className="w-3 h-3 rounded bg-gray-200 flex items-center justify-center">
-                          <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3 5.5L6.5 2" stroke="#666" strokeWidth="1" strokeLinecap="round"/></svg>
-                        </div>
-                        <span className="text-[10px] text-gray-600">Sprint 1</span>
-                      </div>
-                      <div className="absolute top-10 right-4 bg-white rounded-full px-2.5 py-1 shadow-sm border border-gray-100 flex items-center gap-1.5">
-                        <div className="w-3 h-3 rounded bg-gray-200 flex items-center justify-center">
-                          <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3 5.5L6.5 2" stroke="#666" strokeWidth="1" strokeLinecap="round"/></svg>
-                        </div>
-                        <span className="text-[10px] text-gray-600">Sprint 2</span>
-                      </div>
-                      <div className="absolute bottom-10 right-8 bg-white rounded-full px-2.5 py-1 shadow-sm border border-gray-100 flex items-center gap-1.5">
-                        <div className="w-3 h-3 rounded bg-gray-200 flex items-center justify-center">
-                          <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3 5.5L6.5 2" stroke="#666" strokeWidth="1" strokeLinecap="round"/></svg>
-                        </div>
-                        <span className="text-[10px] text-gray-600">Sprint 3</span>
-                      </div>
-                      <div className="absolute bottom-6 left-4 bg-white rounded-full px-2.5 py-1 shadow-sm border border-gray-100 flex items-center gap-1.5">
-                        <div className="w-3 h-3 rounded bg-gray-200 flex items-center justify-center">
-                          <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3 5.5L6.5 2" stroke="#666" strokeWidth="1" strokeLinecap="round"/></svg>
-                        </div>
-                        <span className="text-[10px] text-gray-600">Sprint 4</span>
-                      </div>
-                    </div>
-                  )}
-                  
-                  {/* Card 4: Infinity loop with labels */}
-                  {index === 3 && (
-                    <div className="relative w-full h-full flex items-center justify-center">
-                      {/* Infinity/loop shape */}
-                      <svg width="180" height="80" viewBox="0 0 180 80" fill="none">
-                        <path 
-                          d="M 45 40 C 45 20, 75 20, 90 40 C 105 60, 135 60, 135 40 C 135 20, 105 20, 90 40 C 75 60, 45 60, 45 40" 
-                          fill="none" 
-                          stroke="#d5d5d5" 
-                          strokeWidth="12"
-                          strokeLinecap="round"
-                        />
-                        <path 
-                          d="M 45 40 C 45 20, 75 20, 90 40" 
-                          fill="none" 
-                          stroke="#a0a0a0" 
-                          strokeWidth="12"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                      {/* Labels */}
-                      <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-white rounded-full px-3 py-1 shadow-sm border border-gray-100 flex items-center gap-1.5">
-                        <div className="w-3 h-3 rounded-full bg-gray-200" />
-                        <span className="text-[10px] text-gray-600">Test</span>
-                      </div>
-                      <div className="absolute bottom-4 left-8 bg-white rounded-full px-3 py-1 shadow-sm border border-gray-100 flex items-center gap-1.5">
-                        <div className="w-3 h-3 rounded-full bg-gray-200" />
-                        <span className="text-[10px] text-gray-600">Refine</span>
-                      </div>
-                      <div className="absolute bottom-4 right-8 bg-white rounded-full px-3 py-1 shadow-sm border border-gray-100 flex items-center gap-1.5">
-                        <div className="w-3 h-3 rounded-full bg-gray-200" />
-                        <span className="text-[10px] text-gray-600">Analyze</span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-                
-                {/* Description */}
-                <p 
-                  className="text-sm leading-relaxed"
-                  style={{ color: '#555555' }}
-                >
-                  {item.description}
-                </p>
               </motion.div>
             ))}
           </div>
