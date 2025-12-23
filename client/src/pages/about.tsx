@@ -548,13 +548,13 @@ export default function About() {
               <div 
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
                 style={{
-                  background: 'rgba(123, 63, 228, 0.08)',
-                  border: '1px solid rgba(123, 63, 228, 0.15)',
+                  background: 'rgba(0, 0, 0, 0.04)',
+                  border: '1px solid rgba(0, 0, 0, 0.08)',
                 }}
               >
                 <span 
                   className="text-xs font-semibold tracking-widest uppercase"
-                  style={{ color: '#7B3FE4' }}
+                  style={{ color: '#1A1A1A' }}
                 >
                   KEY BENEFITS
                 </span>
@@ -601,9 +601,38 @@ export default function About() {
               {/* Left Benefits */}
               <div className="space-y-6">
                 {[
-                  { title: "Clear Decision Paths", description: "Reduce hesitation and confusion with predictable layouts." },
-                  { title: "Reduced Friction", description: "Remove unnecessary steps and ambiguity in flows." },
-                  { title: "Faster Adoption", description: "Familiar patterns that users understand quickly." },
+                  { 
+                    title: "Clear Decision Paths", 
+                    description: "Reduce hesitation and confusion with predictable layouts.",
+                    icon: (
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="18" cy="18" r="3" />
+                        <circle cx="6" cy="6" r="3" />
+                        <path d="M6 21V9a9 9 0 0 0 9 9" />
+                      </svg>
+                    )
+                  },
+                  { 
+                    title: "Reduced Friction", 
+                    description: "Remove unnecessary steps and ambiguity in flows.",
+                    icon: (
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                        <path d="M2 17l10 5 10-5" />
+                        <path d="M6 12l-4 2" />
+                        <path d="M18 12l4 2" />
+                      </svg>
+                    )
+                  },
+                  { 
+                    title: "Faster Adoption", 
+                    description: "Familiar patterns that users understand quickly.",
+                    icon: (
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                      </svg>
+                    )
+                  },
                 ].map((benefit, index) => (
                   <motion.div
                     key={index}
@@ -615,7 +644,7 @@ export default function About() {
                     transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
                     whileHover={{ 
                       y: -2, 
-                      backgroundColor: 'rgba(123, 63, 228, 0.03)',
+                      backgroundColor: 'rgba(0, 0, 0, 0.02)',
                       boxShadow: '0 4px 12px rgba(0,0,0,0.04)',
                     }}
                     data-testid={`benefit-left-${index}`}
@@ -623,15 +652,13 @@ export default function About() {
                     <motion.div 
                       className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center"
                       style={{ 
-                        backgroundColor: 'rgba(123, 63, 228, 0.08)',
+                        backgroundColor: 'rgba(0, 0, 0, 0.04)',
                       }}
                       whileHover={{ 
-                        backgroundColor: 'rgba(123, 63, 228, 0.15)',
+                        backgroundColor: 'rgba(0, 0, 0, 0.08)',
                       }}
                     >
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7B3FE4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="20 6 9 17 4 12" />
-                      </svg>
+                      {benefit.icon}
                     </motion.div>
                     <div>
                       <h4 className="font-semibold text-base mb-1" style={{ color: '#1A1A1A' }}>
@@ -678,9 +705,9 @@ export default function About() {
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div 
                       className="w-16 h-16 rounded-full flex items-center justify-center"
-                      style={{ backgroundColor: 'rgba(123, 63, 228, 0.1)' }}
+                      style={{ backgroundColor: 'rgba(0, 0, 0, 0.06)' }}
                     >
-                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7B3FE4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#666666" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                         <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
                         <circle cx="8.5" cy="8.5" r="1.5" />
                         <polyline points="21 15 16 10 5 21" />
@@ -693,9 +720,38 @@ export default function About() {
               {/* Right Benefits */}
               <div className="space-y-6">
                 {[
-                  { title: "Consistent Experience", description: "Align brand, UI, and messaging across touchpoints." },
-                  { title: "Operational Readiness", description: "Works for both users and operators in real conditions." },
-                  { title: "Measurable Impact", description: "Improve engagement, efficiency, and conversion outcomes." },
+                  { 
+                    title: "Consistent Experience", 
+                    description: "Align brand, UI, and messaging across touchpoints.",
+                    icon: (
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="3" y="3" width="7" height="7" />
+                        <rect x="14" y="3" width="7" height="7" />
+                        <rect x="14" y="14" width="7" height="7" />
+                        <rect x="3" y="14" width="7" height="7" />
+                      </svg>
+                    )
+                  },
+                  { 
+                    title: "Operational Readiness", 
+                    description: "Works for both users and operators in real conditions.",
+                    icon: (
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        <path d="M9 12l2 2 4-4" />
+                      </svg>
+                    )
+                  },
+                  { 
+                    title: "Measurable Impact", 
+                    description: "Improve engagement, efficiency, and conversion outcomes.",
+                    icon: (
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                        <polyline points="17 6 23 6 23 12" />
+                      </svg>
+                    )
+                  },
                 ].map((benefit, index) => (
                   <motion.div
                     key={index}
@@ -707,7 +763,7 @@ export default function About() {
                     transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
                     whileHover={{ 
                       y: -2, 
-                      backgroundColor: 'rgba(123, 63, 228, 0.03)',
+                      backgroundColor: 'rgba(0, 0, 0, 0.02)',
                       boxShadow: '0 4px 12px rgba(0,0,0,0.04)',
                     }}
                     data-testid={`benefit-right-${index}`}
@@ -715,15 +771,13 @@ export default function About() {
                     <motion.div 
                       className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center"
                       style={{ 
-                        backgroundColor: 'rgba(123, 63, 228, 0.08)',
+                        backgroundColor: 'rgba(0, 0, 0, 0.04)',
                       }}
                       whileHover={{ 
-                        backgroundColor: 'rgba(123, 63, 228, 0.15)',
+                        backgroundColor: 'rgba(0, 0, 0, 0.08)',
                       }}
                     >
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7B3FE4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="20 6 9 17 4 12" />
-                      </svg>
+                      {benefit.icon}
                     </motion.div>
                     <div>
                       <h4 className="font-semibold text-base mb-1" style={{ color: '#1A1A1A' }}>
