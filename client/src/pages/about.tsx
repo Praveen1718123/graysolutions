@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "wouter";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 import heroVideo from "@assets/From_KlickPin_CF_Red_and_White_Abstract_Wall_ArtJiayuan_Liang__1766475001318.mp4";
 
@@ -36,6 +36,13 @@ export default function About() {
   const [isScrolled, setIsScrolled] = useState(false);
   const metricsRef = useRef(null);
   const metricsInView = useInView(metricsRef, { once: true, margin: "-100px" });
+  
+  const whatWeDoRef = useRef(null);
+  const { scrollYProgress: whatWeDoProgress } = useScroll({
+    target: whatWeDoRef,
+    offset: ["start end", "center center"]
+  });
+  const whatWeDoOpacity = useTransform(whatWeDoProgress, [0, 0.5, 1], [0.15, 0.5, 1]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -295,6 +302,7 @@ export default function About() {
 
       {/* What We Do - Full Width Dark Section */}
       <section 
+        ref={whatWeDoRef}
         className="relative py-16 md:py-20 overflow-hidden"
         style={{ 
           background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 25%, #1a1a1a 50%, #333333 75%, #1a1a1a 100%)',
@@ -309,23 +317,14 @@ export default function About() {
         />
         
         <div className="relative z-10 max-w-[1200px] mx-auto px-6 md:px-10">
-          <motion.div
-            initial={{ opacity: 0.2 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: false, amount: 0.5 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-          >
+          <motion.div style={{ opacity: whatWeDoOpacity }}>
             {/* Badge */}
-            <motion.div 
+            <div 
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6"
               style={{
                 background: 'rgba(255, 255, 255, 0.1)',
                 border: '1px solid rgba(255, 255, 255, 0.15)',
               }}
-              initial={{ opacity: 0.2 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: false, amount: 0.5 }}
-              transition={{ duration: 1, ease: "easeOut" }}
             >
               <span 
                 className="text-xs font-medium tracking-widest uppercase"
@@ -333,10 +332,10 @@ export default function About() {
               >
                 WHAT WE DO
               </span>
-            </motion.div>
+            </div>
 
             {/* Large text */}
-            <motion.h2 
+            <h2 
               className="font-bold leading-tight"
               style={{ 
                 fontSize: 'clamp(28px, 4.5vw, 48px)',
@@ -344,13 +343,9 @@ export default function About() {
                 color: '#FFFFFF',
               }}
               data-testid="section-what-we-do"
-              initial={{ opacity: 0.15 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: false, amount: 0.5 }}
-              transition={{ duration: 1.2, ease: "easeOut", delay: 0.1 }}
             >
               We partner with businesses to build reliable products and systems.
-            </motion.h2>
+            </h2>
           </motion.div>
         </div>
       </section>
