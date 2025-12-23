@@ -941,32 +941,48 @@ export default function About() {
                     }}
                   />
                   
-                  {/* Card 1: 3D Puzzle Shape - Understanding/Synthesis */}
+                  {/* Card 1: Animated Black Ball */}
                   {index === 0 && (
-                    <div className="relative z-10">
-                      <svg width="180" height="180" viewBox="0 0 180 180" fill="none" style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))' }}>
-                        <defs>
-                          <linearGradient id="puzzle-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="#a8a8a8" />
-                            <stop offset="50%" stopColor="#888888" />
-                            <stop offset="100%" stopColor="#686868" />
-                          </linearGradient>
-                          <linearGradient id="puzzle-highlight" x1="0%" y1="0%" x2="50%" y2="50%">
-                            <stop offset="0%" stopColor="#d0d0d0" />
-                            <stop offset="100%" stopColor="#a0a0a0" />
-                          </linearGradient>
-                        </defs>
-                        <path d="M60 40 L60 60 C60 55 50 55 50 60 C50 65 60 65 60 60 L60 80 L80 80 C75 80 75 90 80 90 C85 90 85 80 80 80 L100 80 L100 60 C100 65 110 65 110 60 C110 55 100 55 100 60 L100 40 L80 40 C85 40 85 30 80 30 C75 30 75 40 80 40 L60 40 Z" 
-                          fill="url(#puzzle-grad-1)" 
-                          transform="translate(20, 30) scale(1.3)"
+                    <div 
+                      className="absolute inset-0 flex items-center justify-center"
+                      style={{ background: '#FFFFFF' }}
+                    >
+                      <motion.div
+                        className="relative"
+                        animate={{
+                          y: [0, -30, 0],
+                        }}
+                        transition={{
+                          duration: 1.5,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                      >
+                        <div 
+                          className="w-20 h-20 rounded-full"
+                          style={{
+                            background: 'radial-gradient(circle at 30% 30%, #555555, #000000)',
+                            boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+                          }}
                         />
-                        <path d="M60 40 L60 55 C60 52 55 52 55 55 L60 55 L60 40 L75 40 C78 40 78 35 75 35 L60 40 Z" 
-                          fill="url(#puzzle-highlight)" 
-                          transform="translate(20, 30) scale(1.3)"
-                          opacity="0.6"
+                      </motion.div>
+                      <motion.div
+                        className="absolute bottom-16"
+                        animate={{
+                          scaleX: [1, 1.3, 1],
+                          opacity: [0.3, 0.15, 0.3],
+                        }}
+                        transition={{
+                          duration: 1.5,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                      >
+                        <div 
+                          className="w-16 h-3 rounded-full"
+                          style={{ background: 'rgba(0,0,0,0.2)', filter: 'blur(4px)' }}
                         />
-                        <ellipse cx="90" cy="165" rx="50" ry="8" fill="rgba(0,0,0,0.1)" />
-                      </svg>
+                      </motion.div>
                     </div>
                   )}
                   
