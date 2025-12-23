@@ -900,10 +900,11 @@ export default function About() {
             {howWeWork.map((item, index) => (
               <motion.div
                 key={index}
-                className="rounded-3xl overflow-hidden cursor-default"
+                className="rounded-2xl overflow-hidden cursor-default p-6"
                 style={{ 
                   backgroundColor: '#FFFFFF',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.04)',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+                  border: '1px solid rgba(0,0,0,0.06)',
                 }}
                 initial={{ opacity: 0.4, y: 8 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -911,153 +912,190 @@ export default function About() {
                 transition={{ duration: 0.5, delay: index * 0.1, ease: 'easeOut' }}
                 whileHover={{ 
                   y: -4,
-                  boxShadow: '0 12px 40px rgba(0,0,0,0.1)',
+                  boxShadow: '0 12px 40px rgba(0,0,0,0.08)',
                   transition: { duration: 0.2 }
                 }}
                 data-testid={`how-we-work-step-${index}`}
               >
-                {/* Visual Area - 60% */}
-                <div 
-                  className="w-full relative overflow-hidden flex items-center justify-center"
-                  style={{ 
-                    height: '220px',
-                    background: 'linear-gradient(180deg, #f8f8f8 0%, #f0f0f0 100%)',
-                  }}
-                >
-                  {/* Step indicator */}
-                  <div className="absolute top-5 left-5">
-                    <span 
-                      className="text-xs font-semibold tracking-widest"
-                      style={{ color: '#999999' }}
-                    >
-                      0{item.step}
-                    </span>
+                {/* Header: Number Badge + Title */}
+                <div className="flex items-center gap-3 mb-4">
+                  <div 
+                    className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold"
+                    style={{ backgroundColor: '#f0f0f0', color: '#1A1A1A' }}
+                  >
+                    {item.step}
                   </div>
-                  
-                  {/* Multi-layered Visual Systems */}
-                  {index === 0 && (
-                    <svg width="240" height="180" viewBox="0 0 240 180" fill="none">
-                      {/* Background: Faint circular grid */}
-                      <circle cx="120" cy="90" r="70" fill="none" stroke="#f0f0f0" strokeWidth="1" />
-                      <circle cx="120" cy="90" r="50" fill="none" stroke="#ebebeb" strokeWidth="1" />
-                      <circle cx="120" cy="90" r="30" fill="none" stroke="#e5e5e5" strokeWidth="1" />
-                      <line x1="50" y1="90" x2="190" y2="90" stroke="#f5f5f5" strokeWidth="1" />
-                      <line x1="120" y1="20" x2="120" y2="160" stroke="#f5f5f5" strokeWidth="1" />
-                      
-                      {/* Mid-ground: Converging lines */}
-                      <line x1="35" y1="35" x2="120" y2="90" stroke="#d8d8d8" strokeWidth="1.5" />
-                      <line x1="25" y1="90" x2="120" y2="90" stroke="#d5d5d5" strokeWidth="1.5" />
-                      <line x1="40" y1="145" x2="120" y2="90" stroke="#d8d8d8" strokeWidth="1.5" />
-                      <line x1="205" y1="40" x2="120" y2="90" stroke="#d8d8d8" strokeWidth="1.5" />
-                      <line x1="215" y1="90" x2="120" y2="90" stroke="#d5d5d5" strokeWidth="1.5" />
-                      <line x1="200" y1="140" x2="120" y2="90" stroke="#d8d8d8" strokeWidth="1.5" />
-                      <line x1="120" y1="20" x2="120" y2="90" stroke="#d0d0d0" strokeWidth="1.5" />
-                      <line x1="120" y1="160" x2="120" y2="90" stroke="#d0d0d0" strokeWidth="1.5" />
-                      
-                      {/* Small nodes at line ends */}
-                      <circle cx="35" cy="35" r="3" fill="#e0e0e0" />
-                      <circle cx="205" cy="40" r="3" fill="#e0e0e0" />
-                      <circle cx="40" cy="145" r="3" fill="#e0e0e0" />
-                      <circle cx="200" cy="140" r="3" fill="#e0e0e0" />
-                      
-                      {/* Foreground: Central focal node */}
-                      <circle cx="120" cy="90" r="18" fill="white" />
-                      <circle cx="120" cy="90" r="18" fill="none" stroke="#e0e0e0" strokeWidth="1.5" />
-                      <circle cx="120" cy="90" r="7" fill="#555555" />
-                    </svg>
-                  )}
-                  
-                  {index === 1 && (
-                    <svg width="240" height="180" viewBox="0 0 240 180" fill="none">
-                      {/* Background: Faint grid columns */}
-                      <line x1="60" y1="20" x2="60" y2="160" stroke="#f5f5f5" strokeWidth="1" />
-                      <line x1="100" y1="20" x2="100" y2="160" stroke="#f5f5f5" strokeWidth="1" />
-                      <line x1="140" y1="20" x2="140" y2="160" stroke="#f5f5f5" strokeWidth="1" />
-                      <line x1="180" y1="20" x2="180" y2="160" stroke="#f5f5f5" strokeWidth="1" />
-                      <line x1="30" y1="50" x2="210" y2="50" stroke="#f5f5f5" strokeWidth="1" />
-                      <line x1="30" y1="90" x2="210" y2="90" stroke="#f5f5f5" strokeWidth="1" />
-                      <line x1="30" y1="130" x2="210" y2="130" stroke="#f5f5f5" strokeWidth="1" />
-                      
-                      {/* Mid-ground: Semi-transparent misaligned blocks */}
-                      <rect x="45" y="35" width="50" height="35" rx="6" fill="#f0f0f0" />
-                      <rect x="110" y="42" width="55" height="38" rx="6" fill="#ebebeb" />
-                      <rect x="55" y="95" width="48" height="40" rx="6" fill="#ebebeb" />
-                      <rect x="175" y="55" width="30" height="70" rx="5" fill="#f0f0f0" />
-                      
-                      {/* Foreground: Aligned clean structure */}
-                      <rect x="40" y="75" width="60" height="45" rx="6" fill="white" stroke="#e0e0e0" strokeWidth="1.5" />
-                      <rect x="110" y="75" width="60" height="45" rx="6" fill="white" stroke="#e0e0e0" strokeWidth="1.5" />
-                      <rect x="65" y="88" width="30" height="6" rx="2" fill="#888888" />
-                      <rect x="65" y="100" width="20" height="6" rx="2" fill="#aaaaaa" />
-                      <rect x="135" y="88" width="25" height="6" rx="2" fill="#888888" />
-                      <rect x="135" y="100" width="15" height="6" rx="2" fill="#aaaaaa" />
-                    </svg>
-                  )}
-                  
-                  {index === 2 && (
-                    <svg width="240" height="180" viewBox="0 0 240 180" fill="none">
-                      {/* Background: Large soft base shape */}
-                      <rect x="60" y="100" width="120" height="50" rx="8" fill="#f5f5f5" />
-                      <ellipse cx="120" cy="100" rx="80" ry="20" fill="#f8f8f8" />
-                      
-                      {/* Mid-ground: Stacked plates/modules */}
-                      <rect x="70" y="85" width="100" height="20" rx="4" fill="#ebebeb" />
-                      <rect x="75" y="70" width="90" height="18" rx="4" fill="#f0f0f0" />
-                      <rect x="80" y="55" width="80" height="18" rx="4" fill="#f5f5f5" />
-                      
-                      {/* Side modules */}
-                      <rect x="45" y="65" width="25" height="50" rx="5" fill="#ebebeb" />
-                      <rect x="170" y="65" width="25" height="50" rx="5" fill="#ebebeb" />
-                      
-                      {/* Foreground: Locked central block */}
-                      <rect x="95" y="40" width="50" height="55" rx="6" fill="white" stroke="#d5d5d5" strokeWidth="1.5" />
-                      <rect x="105" y="50" width="30" height="12" rx="3" fill="#666666" />
-                      <rect x="105" y="68" width="30" height="8" rx="2" fill="#999999" />
-                      <rect x="105" y="80" width="20" height="6" rx="2" fill="#bbbbbb" />
-                    </svg>
-                  )}
-                  
-                  {index === 3 && (
-                    <svg width="240" height="180" viewBox="0 0 240 180" fill="none">
-                      {/* Background: Faded circular path */}
-                      <ellipse cx="120" cy="90" rx="75" ry="50" fill="none" stroke="#f0f0f0" strokeWidth="12" />
-                      
-                      {/* Mid-ground: Repeated loop segments */}
-                      <ellipse cx="120" cy="90" rx="75" ry="50" fill="none" stroke="#e5e5e5" strokeWidth="8" />
-                      <path d="M 45 90 A 75 50 0 0 1 120 40" fill="none" stroke="#d5d5d5" strokeWidth="8" strokeLinecap="round" />
-                      <path d="M 195 90 A 75 50 0 0 1 120 140" fill="none" stroke="#d5d5d5" strokeWidth="8" strokeLinecap="round" />
-                      
-                      {/* Small markers on loop */}
-                      <circle cx="55" cy="65" r="4" fill="#e0e0e0" />
-                      <circle cx="185" cy="115" r="4" fill="#e0e0e0" />
-                      <circle cx="120" cy="140" r="4" fill="#e0e0e0" />
-                      
-                      {/* Foreground: Highlighted segment with progress marker */}
-                      <path d="M 120 40 A 75 50 0 0 1 195 90" fill="none" stroke="#555555" strokeWidth="8" strokeLinecap="round" />
-                      <circle cx="195" cy="90" r="10" fill="white" stroke="#d0d0d0" strokeWidth="1.5" />
-                      <circle cx="195" cy="90" r="4" fill="#555555" />
-                      
-                      {/* Direction arrow */}
-                      <path d="M 175 55 L 185 48 L 182 62" fill="none" stroke="#888888" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  )}
-                </div>
-                
-                {/* Text Content - 40% */}
-                <div className="p-6">
                   <h3 
-                    className="text-lg font-semibold mb-2"
+                    className="text-xl font-semibold"
                     style={{ color: '#1A1A1A' }}
                   >
                     {item.title}
                   </h3>
-                  <p 
-                    className="text-sm leading-relaxed"
-                    style={{ color: '#666666' }}
-                  >
-                    {item.description}
-                  </p>
                 </div>
+                
+                {/* Visual Area */}
+                <div 
+                  className="w-full relative overflow-hidden flex items-center justify-center mb-5"
+                  style={{ 
+                    height: '200px',
+                    background: 'linear-gradient(135deg, #f8f9fa 0%, #f0f2f5 50%, #e8eaed 100%)',
+                    borderRadius: '12px',
+                  }}
+                >
+                  {/* Card 1: Clipboard with floating labels */}
+                  {index === 0 && (
+                    <div className="relative w-full h-full">
+                      {/* Clipboard icon top right */}
+                      <div className="absolute top-4 right-6">
+                        <svg width="50" height="60" viewBox="0 0 50 60" fill="none">
+                          <rect x="5" y="8" width="40" height="48" rx="4" fill="white" stroke="#e0e0e0" strokeWidth="1.5" />
+                          <rect x="15" y="2" width="20" height="12" rx="3" fill="#d0d0d0" />
+                          <rect x="20" y="0" width="10" height="6" rx="2" fill="#b0b0b0" />
+                          <rect x="12" y="22" width="26" height="3" rx="1" fill="#e5e5e5" />
+                          <rect x="12" y="30" width="20" height="3" rx="1" fill="#ebebeb" />
+                          <rect x="12" y="38" width="24" height="3" rx="1" fill="#e5e5e5" />
+                        </svg>
+                      </div>
+                      {/* Floating labels */}
+                      <div className="absolute top-8 left-4 bg-white rounded-full px-3 py-1.5 flex items-center gap-2 shadow-sm border border-gray-100">
+                        <div className="w-4 h-4 rounded-full bg-gray-200 flex items-center justify-center">
+                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="#666" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                        </div>
+                        <span className="text-xs text-gray-600">Identify constraints</span>
+                      </div>
+                      <div className="absolute top-20 left-12 bg-white rounded-full px-3 py-1.5 flex items-center gap-2 shadow-sm border border-gray-100">
+                        <div className="w-4 h-4 rounded-full bg-gray-200 flex items-center justify-center">
+                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="#666" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                        </div>
+                        <span className="text-xs text-gray-600">Assess requirements</span>
+                      </div>
+                      <div className="absolute bottom-10 left-6 bg-white rounded-full px-3 py-1.5 flex items-center gap-2 shadow-sm border border-gray-100">
+                        <div className="w-4 h-4 rounded-full bg-gray-200 flex items-center justify-center">
+                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="#666" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                        </div>
+                        <span className="text-xs text-gray-600">Define scope</span>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Card 2: Week columns with task cards */}
+                  {index === 1 && (
+                    <div className="relative w-full h-full px-4 py-3">
+                      {/* Week headers */}
+                      <div className="flex justify-around mb-3">
+                        <span className="text-xs font-medium text-gray-400">Week 1</span>
+                        <span className="text-xs font-medium text-gray-400">Week 2</span>
+                      </div>
+                      {/* Task cards */}
+                      <div className="absolute top-12 left-6 bg-white rounded-lg px-3 py-2 shadow-sm border border-gray-100 flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-gray-300" />
+                        <span className="text-xs text-gray-600">Define structure</span>
+                      </div>
+                      <div className="absolute top-20 right-8 bg-white rounded-lg px-3 py-2 shadow-sm border border-gray-100 flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-gray-300" />
+                        <span className="text-xs text-gray-600">Create components</span>
+                      </div>
+                      <div className="absolute bottom-14 left-10 bg-white rounded-lg px-3 py-2 shadow-sm border border-gray-100 flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-gray-300" />
+                        <span className="text-xs text-gray-600">Build layout</span>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Card 3: Gear/cog with week labels */}
+                  {index === 2 && (
+                    <div className="relative w-full h-full flex items-center justify-center">
+                      {/* Gear shape */}
+                      <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+                        <circle cx="50" cy="50" r="35" fill="#e5e5e5" />
+                        <circle cx="50" cy="50" r="25" fill="#d5d5d5" />
+                        <circle cx="50" cy="50" r="12" fill="#c0c0c0" />
+                        {/* Gear teeth */}
+                        {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
+                          <rect
+                            key={i}
+                            x="46"
+                            y="10"
+                            width="8"
+                            height="12"
+                            rx="2"
+                            fill="#d0d0d0"
+                            transform={`rotate(${angle} 50 50)`}
+                          />
+                        ))}
+                      </svg>
+                      {/* Week labels around gear */}
+                      <div className="absolute top-3 left-6 bg-white rounded-full px-2.5 py-1 shadow-sm border border-gray-100 flex items-center gap-1.5">
+                        <div className="w-3 h-3 rounded bg-gray-200 flex items-center justify-center">
+                          <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3 5.5L6.5 2" stroke="#666" strokeWidth="1" strokeLinecap="round"/></svg>
+                        </div>
+                        <span className="text-[10px] text-gray-600">Sprint 1</span>
+                      </div>
+                      <div className="absolute top-10 right-4 bg-white rounded-full px-2.5 py-1 shadow-sm border border-gray-100 flex items-center gap-1.5">
+                        <div className="w-3 h-3 rounded bg-gray-200 flex items-center justify-center">
+                          <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3 5.5L6.5 2" stroke="#666" strokeWidth="1" strokeLinecap="round"/></svg>
+                        </div>
+                        <span className="text-[10px] text-gray-600">Sprint 2</span>
+                      </div>
+                      <div className="absolute bottom-10 right-8 bg-white rounded-full px-2.5 py-1 shadow-sm border border-gray-100 flex items-center gap-1.5">
+                        <div className="w-3 h-3 rounded bg-gray-200 flex items-center justify-center">
+                          <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3 5.5L6.5 2" stroke="#666" strokeWidth="1" strokeLinecap="round"/></svg>
+                        </div>
+                        <span className="text-[10px] text-gray-600">Sprint 3</span>
+                      </div>
+                      <div className="absolute bottom-6 left-4 bg-white rounded-full px-2.5 py-1 shadow-sm border border-gray-100 flex items-center gap-1.5">
+                        <div className="w-3 h-3 rounded bg-gray-200 flex items-center justify-center">
+                          <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3 5.5L6.5 2" stroke="#666" strokeWidth="1" strokeLinecap="round"/></svg>
+                        </div>
+                        <span className="text-[10px] text-gray-600">Sprint 4</span>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Card 4: Infinity loop with labels */}
+                  {index === 3 && (
+                    <div className="relative w-full h-full flex items-center justify-center">
+                      {/* Infinity/loop shape */}
+                      <svg width="180" height="80" viewBox="0 0 180 80" fill="none">
+                        <path 
+                          d="M 45 40 C 45 20, 75 20, 90 40 C 105 60, 135 60, 135 40 C 135 20, 105 20, 90 40 C 75 60, 45 60, 45 40" 
+                          fill="none" 
+                          stroke="#d5d5d5" 
+                          strokeWidth="12"
+                          strokeLinecap="round"
+                        />
+                        <path 
+                          d="M 45 40 C 45 20, 75 20, 90 40" 
+                          fill="none" 
+                          stroke="#a0a0a0" 
+                          strokeWidth="12"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                      {/* Labels */}
+                      <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-white rounded-full px-3 py-1 shadow-sm border border-gray-100 flex items-center gap-1.5">
+                        <div className="w-3 h-3 rounded-full bg-gray-200" />
+                        <span className="text-[10px] text-gray-600">Test</span>
+                      </div>
+                      <div className="absolute bottom-4 left-8 bg-white rounded-full px-3 py-1 shadow-sm border border-gray-100 flex items-center gap-1.5">
+                        <div className="w-3 h-3 rounded-full bg-gray-200" />
+                        <span className="text-[10px] text-gray-600">Refine</span>
+                      </div>
+                      <div className="absolute bottom-4 right-8 bg-white rounded-full px-3 py-1 shadow-sm border border-gray-100 flex items-center gap-1.5">
+                        <div className="w-3 h-3 rounded-full bg-gray-200" />
+                        <span className="text-[10px] text-gray-600">Analyze</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                
+                {/* Description */}
+                <p 
+                  className="text-sm leading-relaxed"
+                  style={{ color: '#555555' }}
+                >
+                  {item.description}
+                </p>
               </motion.div>
             ))}
           </div>
