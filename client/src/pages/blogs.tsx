@@ -177,57 +177,58 @@ export default function Blogs() {
           {/* Blog Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {blogPosts.map((post, index) => (
-              <motion.article
-                key={post.id}
-                className="rounded-2xl overflow-hidden cursor-pointer group"
-                style={{
-                  backgroundColor: '#FFFFFF',
-                  boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
-                  border: '1px solid rgba(0,0,0,0.04)',
-                }}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 + index * 0.08 }}
-                whileHover={{ y: -4, boxShadow: '0 12px 40px rgba(0,0,0,0.08)' }}
-                data-testid={`blog-card-${post.id}`}
-              >
-                {/* Image Area */}
-                <div 
-                  className="aspect-[4/3] flex items-center justify-center p-6 overflow-hidden"
-                  style={{ backgroundColor: post.bgColor }}
+              <Link key={post.id} href={`/blog/${post.slug}`}>
+                <motion.article
+                  className="rounded-2xl overflow-hidden cursor-pointer group"
+                  style={{
+                    backgroundColor: '#FFFFFF',
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
+                    border: '1px solid rgba(0,0,0,0.04)',
+                  }}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 + index * 0.08 }}
+                  whileHover={{ y: -4, boxShadow: '0 12px 40px rgba(0,0,0,0.08)' }}
+                  data-testid={`blog-card-${post.id}`}
                 >
-                  {/* Placeholder UI mockup */}
-                  <div className="w-full h-full rounded-xl bg-white/60 flex items-center justify-center" style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
-                    <div className="text-center">
-                      <div className="w-16 h-16 mx-auto mb-3 rounded-xl" style={{ backgroundColor: post.categoryColor + '20' }}>
-                        <div className="w-full h-full flex items-center justify-center">
-                          <div className="w-8 h-8 rounded-lg" style={{ backgroundColor: post.categoryColor + '40' }} />
+                  {/* Image Area */}
+                  <div 
+                    className="aspect-[4/3] flex items-center justify-center p-6 overflow-hidden"
+                    style={{ backgroundColor: post.bgColor }}
+                  >
+                    {/* Placeholder UI mockup */}
+                    <div className="w-full h-full rounded-xl bg-white/60 flex items-center justify-center" style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
+                      <div className="text-center">
+                        <div className="w-16 h-16 mx-auto mb-3 rounded-xl" style={{ backgroundColor: post.categoryColor + '20' }}>
+                          <div className="w-full h-full flex items-center justify-center">
+                            <div className="w-8 h-8 rounded-lg" style={{ backgroundColor: post.categoryColor + '40' }} />
+                          </div>
                         </div>
-                      </div>
-                      <div className="space-y-1.5">
-                        <div className="h-2 w-24 mx-auto rounded-full" style={{ backgroundColor: 'rgba(0,0,0,0.1)' }} />
-                        <div className="h-2 w-16 mx-auto rounded-full" style={{ backgroundColor: 'rgba(0,0,0,0.06)' }} />
+                        <div className="space-y-1.5">
+                          <div className="h-2 w-24 mx-auto rounded-full" style={{ backgroundColor: 'rgba(0,0,0,0.1)' }} />
+                          <div className="h-2 w-16 mx-auto rounded-full" style={{ backgroundColor: 'rgba(0,0,0,0.06)' }} />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                
-                {/* Content */}
-                <div className="p-5">
-                  <span 
-                    className="text-sm font-medium"
-                    style={{ color: post.categoryColor }}
-                  >
-                    {post.category}
-                  </span>
-                  <h3 
-                    className="text-lg font-bold mt-2 leading-snug group-hover:text-gray-600 transition-colors"
-                    style={{ color: '#1A1A1A' }}
-                  >
-                    {post.title}
-                  </h3>
-                </div>
-              </motion.article>
+                  
+                  {/* Content */}
+                  <div className="p-5">
+                    <span 
+                      className="text-sm font-medium"
+                      style={{ color: post.categoryColor }}
+                    >
+                      {post.category}
+                    </span>
+                    <h3 
+                      className="text-lg font-bold mt-2 leading-snug group-hover:text-gray-600 transition-colors"
+                      style={{ color: '#1A1A1A' }}
+                    >
+                      {post.title}
+                    </h3>
+                  </div>
+                </motion.article>
+              </Link>
             ))}
           </div>
 

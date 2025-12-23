@@ -8,6 +8,7 @@ import Landing from "@/pages/landing";
 import Services from "@/pages/services";
 import About from "@/pages/about";
 import Blogs from "@/pages/blogs";
+import BlogDetail from "@/pages/blog-detail";
 import MagicTrucks from "@/pages/magic-trucks";
 import Eagle from "@/pages/eagle";
 
@@ -20,6 +21,7 @@ function Router() {
       <Route path="/case-study/magic-trucks" component={MagicTrucks} />
       <Route path="/case-study/eagle" component={Eagle} />
       <Route path="/blogs" component={Blogs} />
+      <Route path="/blog/:slug" component={BlogDetail} />
       <Route path="/contact" component={Landing} />
       <Route component={NotFound} />
     </Switch>
