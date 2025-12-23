@@ -683,37 +683,20 @@ export default function About() {
                 <div 
                   className="w-full h-full min-h-[280px] rounded-2xl relative overflow-hidden"
                   style={{
-                    background: 'linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 50%, #f5f5f5 100%)',
+                    background: '#f5f5f5',
                   }}
                 >
-                  {/* Animated shimmer effect */}
-                  <motion.div
-                    className="absolute inset-0"
+                  <video
+                    src="/attached_assets/From_KlickPin_CF_by_Meloq_Arai_—_a_3D_Motion_Designer_@meloqar_1766508779038.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover absolute inset-0"
                     style={{
-                      background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.6) 50%, transparent 100%)',
-                    }}
-                    animate={{
-                      x: ['-100%', '100%'],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: 'linear',
+                      filter: 'grayscale(100%) contrast(1.1)',
                     }}
                   />
-                  {/* Placeholder content */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div 
-                      className="w-16 h-16 rounded-full flex items-center justify-center"
-                      style={{ backgroundColor: 'rgba(0, 0, 0, 0.06)' }}
-                    >
-                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#666666" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                        <circle cx="8.5" cy="8.5" r="1.5" />
-                        <polyline points="21 15 16 10 5 21" />
-                      </svg>
-                    </div>
-                  </div>
                 </div>
               </motion.div>
               
