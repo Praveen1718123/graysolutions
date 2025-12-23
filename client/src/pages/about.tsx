@@ -43,6 +43,20 @@ export default function About() {
     offset: ["start end", "center center"]
   });
   const whatWeDoOpacity = useTransform(whatWeDoProgress, [0, 0.5, 1], [0.15, 0.5, 1]);
+  
+  const howWeThinkRef = useRef(null);
+  const { scrollYProgress: howWeThinkProgress } = useScroll({
+    target: howWeThinkRef,
+    offset: ["start end", "end start"]
+  });
+  const card1Opacity = useTransform(howWeThinkProgress, [0.1, 0.25, 0.4], [0.3, 1, 1]);
+  const card2Opacity = useTransform(howWeThinkProgress, [0.2, 0.35, 0.5], [0.3, 1, 1]);
+  const card3Opacity = useTransform(howWeThinkProgress, [0.3, 0.45, 0.6], [0.3, 1, 1]);
+  const card1Y = useTransform(howWeThinkProgress, [0.1, 0.25], [20, 0]);
+  const card2Y = useTransform(howWeThinkProgress, [0.2, 0.35], [20, 0]);
+  const card3Y = useTransform(howWeThinkProgress, [0.3, 0.45], [20, 0]);
+  const cardOpacities = [card1Opacity, card2Opacity, card3Opacity];
+  const cardYs = [card1Y, card2Y, card3Y];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,14 +70,32 @@ export default function About() {
     { 
       title: "Aesthetic clarity", 
       description: "Visual and verbal systems that are intentional, minimal, and easy to understand — across both product and brand.",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 6v6l4 2"/>
+        </svg>
+      ),
     },
     { 
       title: "Functional precision", 
       description: "Digital products, flows, and communication systems that behave predictably, scale cleanly, and reduce friction for both users and operators.",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+      ),
     },
     { 
       title: "Business alignment", 
       description: "Strategic decisions tied to revenue, cost, risk, growth, and long-term value — not decoration, trends, or unnecessary complexity.",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+        </svg>
+      ),
     },
   ];
 
@@ -352,6 +384,7 @@ export default function About() {
 
       {/* How We Think - 2 Column Section */}
       <section 
+        ref={howWeThinkRef}
         className="py-20 md:py-28"
         style={{ backgroundColor: '#FAFAFA' }}
       >
@@ -361,8 +394,8 @@ export default function About() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
             >
               <h2 
                 className="text-2xl md:text-3xl font-bold mb-6"
@@ -384,30 +417,42 @@ export default function About() {
               {principles.map((principle, index) => (
                 <motion.div
                   key={index}
-                  className="p-6 rounded-xl"
+                  className="p-6 rounded-xl flex gap-4"
                   style={{ 
+                    opacity: cardOpacities[index],
+                    y: cardYs[index],
                     backgroundColor: '#FFFFFF',
                     boxShadow: '0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03)',
                     border: '1px solid rgba(0,0,0,0.04)',
                   }}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
                   data-testid={`principle-${index}`}
                 >
-                  <h3 
-                    className="text-base font-semibold mb-2"
-                    style={{ color: '#1A1A1A' }}
+                  {/* Icon */}
+                  <motion.div 
+                    className="flex-shrink-0 mt-0.5"
+                    style={{ 
+                      color: '#1A1A1A',
+                      opacity: cardOpacities[index],
+                    }}
                   >
-                    {principle.title}
-                  </h3>
-                  <p 
-                    className="text-sm leading-relaxed"
-                    style={{ color: '#666666' }}
-                  >
-                    {principle.description}
-                  </p>
+                    {principle.icon}
+                  </motion.div>
+                  
+                  {/* Content */}
+                  <div>
+                    <h3 
+                      className="text-base font-semibold mb-2"
+                      style={{ color: '#1A1A1A' }}
+                    >
+                      {principle.title}
+                    </h3>
+                    <p 
+                      className="text-sm leading-relaxed"
+                      style={{ color: '#666666' }}
+                    >
+                      {principle.description}
+                    </p>
+                  </div>
                 </motion.div>
               ))}
             </div>
