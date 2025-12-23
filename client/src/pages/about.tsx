@@ -295,7 +295,7 @@ export default function About() {
 
       {/* What We Do - Full Width Dark Section */}
       <section 
-        className="relative py-24 md:py-32 overflow-hidden"
+        className="relative py-16 md:py-20 overflow-hidden"
         style={{ 
           background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 25%, #1a1a1a 50%, #333333 75%, #1a1a1a 100%)',
         }}
@@ -310,22 +310,22 @@ export default function About() {
         
         <div className="relative z-10 max-w-[1200px] mx-auto px-6 md:px-10">
           <motion.div
-            initial={{ opacity: 0.3 }}
+            initial={{ opacity: 0.2 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.8 }}
+            viewport={{ once: false, amount: 0.5 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
           >
             {/* Badge */}
             <motion.div 
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-8"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6"
               style={{
                 background: 'rgba(255, 255, 255, 0.1)',
                 border: '1px solid rgba(255, 255, 255, 0.15)',
               }}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              initial={{ opacity: 0.2 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: false, amount: 0.5 }}
+              transition={{ duration: 1, ease: "easeOut" }}
             >
               <span 
                 className="text-xs font-medium tracking-widest uppercase"
@@ -335,25 +335,21 @@ export default function About() {
               </span>
             </motion.div>
 
-            {/* Large text with gradient fade */}
+            {/* Large text */}
             <motion.h2 
               className="font-bold leading-tight"
               style={{ 
-                fontSize: 'clamp(32px, 5vw, 56px)',
-                maxWidth: '1000px',
+                fontSize: 'clamp(28px, 4.5vw, 48px)',
+                maxWidth: '900px',
+                color: '#FFFFFF',
               }}
               data-testid="section-what-we-do"
-              initial={{ opacity: 0.3, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
+              initial={{ opacity: 0.15 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: false, amount: 0.5 }}
+              transition={{ duration: 1.2, ease: "easeOut", delay: 0.1 }}
             >
-              <span style={{ color: '#FFFFFF' }}>
-                We work across product strategy, UX and interface design, brand and identity systems, advertising and marketing communication,
-              </span>
-              <span style={{ color: 'rgba(255, 255, 255, 0.4)' }}>
-                {' '}engineering, product development, business consultation, and digital optimisation.
-              </span>
+              We partner with businesses to build reliable products and systems.
             </motion.h2>
           </motion.div>
         </div>
