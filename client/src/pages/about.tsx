@@ -382,7 +382,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* How We Think - 2 Column Section */}
+      {/* How We Think - 2 Column Section with Sticky Left */}
       <section 
         ref={howWeThinkRef}
         className="py-20 md:py-28"
@@ -390,27 +390,37 @@ export default function About() {
       >
         <div className="max-w-[1120px] mx-auto px-4 md:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-            {/* Left - Intro */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.5 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-            >
-              <h2 
-                className="text-2xl md:text-3xl font-bold mb-6"
-                style={{ color: '#1A1A1A' }}
-                data-testid="section-how-we-think"
+            {/* Left - Intro (Sticky on desktop) */}
+            <div className="relative">
+              <motion.div
+                className="lg:sticky"
+                style={{ top: '120px' }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
               >
-                How we think
-              </h2>
-              <p 
-                className="text-base md:text-lg leading-relaxed"
-                style={{ color: '#555555' }}
-              >
-                We see every product, brand, and system as part of a broader operational and commercial environment. Three principles guide our work:
-              </p>
-            </motion.div>
+                <span 
+                  className="text-sm font-medium tracking-wide mb-4 block"
+                  style={{ color: 'rgba(26,26,26,0.5)' }}
+                >
+                  Our Approach
+                </span>
+                <h2 
+                  className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6"
+                  style={{ color: '#1A1A1A' }}
+                  data-testid="section-how-we-think"
+                >
+                  How we think
+                </h2>
+                <p 
+                  className="text-base md:text-lg leading-relaxed"
+                  style={{ color: '#555555', maxWidth: '400px' }}
+                >
+                  We see every product, brand, and system as part of a broader operational and commercial environment. Three principles guide our work:
+                </p>
+              </motion.div>
+            </div>
 
             {/* Right - Principles as Stacked Cards */}
             <div className="space-y-5">
