@@ -920,7 +920,7 @@ export default function About() {
                 <div 
                   className="w-full relative overflow-hidden"
                   style={{ 
-                    height: '140px',
+                    height: '200px',
                     background: index === 0 
                       ? 'linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 50%, #f0f0f0 100%)'
                       : index === 1
@@ -975,7 +975,7 @@ export default function About() {
                 </div>
                 
                 {/* Text Content - 50% */}
-                <div className="p-5" style={{ minHeight: '120px' }}>
+                <div className="p-6" style={{ minHeight: '160px' }}>
                   <h3 
                     className="text-lg font-semibold mb-3"
                     style={{ color: '#1A1A1A' }}
