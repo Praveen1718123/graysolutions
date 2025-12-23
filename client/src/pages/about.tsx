@@ -941,235 +941,124 @@ export default function About() {
                     }}
                   />
                   
-                  {/* Card 1: Understand Context */}
+                  {/* Card 1: 3D Puzzle Shape - Understanding/Synthesis */}
                   {index === 0 && (
                     <div className="relative z-10">
-                      {/* Background card */}
-                      <div 
-                        className="absolute right-[-60px] top-[-10px] w-[120px] h-[160px] rounded-2xl opacity-60"
-                        style={{ 
-                          background: 'rgba(255,255,255,0.7)',
-                          border: '1px solid rgba(255,255,255,0.8)',
-                        }}
-                      />
-                      {/* Main card */}
-                      <div 
-                        className="relative bg-white rounded-2xl p-5 w-[220px]"
-                        style={{ 
-                          boxShadow: '0 20px 60px rgba(0,0,0,0.1)',
-                          border: '1px solid rgba(255,255,255,0.9)',
-                        }}
-                      >
-                        {/* Window dots */}
-                        <div className="flex gap-1.5 mb-4">
-                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
-                        </div>
-                        {/* Title */}
-                        <div className="text-sm font-semibold text-gray-800 mb-4">Context Analysis</div>
-                        {/* Checklist */}
-                        <div className="space-y-3 mb-5">
-                          <div className="flex items-center gap-3">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                              <path d="M4 9L7.5 12.5L14 6" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
-                            <div className="h-2.5 bg-gray-200 rounded-full flex-1" />
-                          </div>
-                          <div className="flex items-center gap-3">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                              <path d="M4 9L7.5 12.5L14 6" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
-                            <div className="h-2.5 bg-gray-200 rounded-full w-3/4" />
-                          </div>
-                          <div className="flex items-center gap-3">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                              <path d="M4 9L7.5 12.5L14 6" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
-                            <div className="h-2.5 bg-gray-200 rounded-full w-4/5" />
-                          </div>
-                        </div>
-                        {/* Button */}
-                        <div 
-                          className="w-full py-2.5 rounded-full text-center text-sm font-medium text-white"
-                          style={{ background: 'linear-gradient(135deg, #444 0%, #222 100%)' }}
-                        >
-                          Analyze
-                        </div>
-                      </div>
+                      <svg width="180" height="180" viewBox="0 0 180 180" fill="none" style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))' }}>
+                        <defs>
+                          <linearGradient id="puzzle-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#a8a8a8" />
+                            <stop offset="50%" stopColor="#888888" />
+                            <stop offset="100%" stopColor="#686868" />
+                          </linearGradient>
+                          <linearGradient id="puzzle-highlight" x1="0%" y1="0%" x2="50%" y2="50%">
+                            <stop offset="0%" stopColor="#d0d0d0" />
+                            <stop offset="100%" stopColor="#a0a0a0" />
+                          </linearGradient>
+                        </defs>
+                        <path d="M60 40 L60 60 C60 55 50 55 50 60 C50 65 60 65 60 60 L60 80 L80 80 C75 80 75 90 80 90 C85 90 85 80 80 80 L100 80 L100 60 C100 65 110 65 110 60 C110 55 100 55 100 60 L100 40 L80 40 C85 40 85 30 80 30 C75 30 75 40 80 40 L60 40 Z" 
+                          fill="url(#puzzle-grad-1)" 
+                          transform="translate(20, 30) scale(1.3)"
+                        />
+                        <path d="M60 40 L60 55 C60 52 55 52 55 55 L60 55 L60 40 L75 40 C78 40 78 35 75 35 L60 40 Z" 
+                          fill="url(#puzzle-highlight)" 
+                          transform="translate(20, 30) scale(1.3)"
+                          opacity="0.6"
+                        />
+                        <ellipse cx="90" cy="165" rx="50" ry="8" fill="rgba(0,0,0,0.1)" />
+                      </svg>
                     </div>
                   )}
                   
-                  {/* Card 2: Design with Intent */}
+                  {/* Card 2: 3D Cube Frame - Structure/Design */}
                   {index === 1 && (
                     <div className="relative z-10">
-                      {/* Background card */}
-                      <div 
-                        className="absolute right-[-50px] top-[0px] w-[100px] h-[180px] rounded-2xl opacity-50"
-                        style={{ 
-                          background: 'rgba(255,255,255,0.6)',
-                          border: '1px solid rgba(255,255,255,0.7)',
-                        }}
-                      />
-                      {/* Main card */}
-                      <div 
-                        className="relative bg-white rounded-2xl p-5 w-[220px]"
-                        style={{ 
-                          boxShadow: '0 20px 60px rgba(0,0,0,0.1)',
-                          border: '1px solid rgba(255,255,255,0.9)',
-                        }}
-                      >
-                        {/* Window dots */}
-                        <div className="flex gap-1.5 mb-4">
-                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
-                        </div>
-                        {/* Title */}
-                        <div className="text-sm font-semibold text-gray-800 mb-4">Design System</div>
-                        {/* Grid layout preview */}
-                        <div className="grid grid-cols-2 gap-2 mb-5">
-                          <div className="h-12 bg-gray-100 rounded-lg" />
-                          <div className="h-12 bg-gray-200 rounded-lg" />
-                          <div className="h-8 bg-gray-200 rounded-lg" />
-                          <div className="h-8 bg-gray-100 rounded-lg" />
-                        </div>
-                        {/* Button */}
-                        <div 
-                          className="w-full py-2.5 rounded-full text-center text-sm font-medium text-white"
-                          style={{ background: 'linear-gradient(135deg, #444 0%, #222 100%)' }}
-                        >
-                          Create
-                        </div>
-                      </div>
+                      <svg width="180" height="180" viewBox="0 0 180 180" fill="none" style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))' }}>
+                        <defs>
+                          <linearGradient id="cube-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#b0b0b0" />
+                            <stop offset="50%" stopColor="#909090" />
+                            <stop offset="100%" stopColor="#707070" />
+                          </linearGradient>
+                          <linearGradient id="cube-grad-2" x1="100%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#989898" />
+                            <stop offset="100%" stopColor="#686868" />
+                          </linearGradient>
+                          <linearGradient id="cube-highlight" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#d8d8d8" />
+                            <stop offset="100%" stopColor="#b0b0b0" />
+                          </linearGradient>
+                        </defs>
+                        <path d="M90 20 L150 55 L150 125 L90 160 L30 125 L30 55 Z" fill="url(#cube-grad-1)" />
+                        <path d="M90 20 L150 55 L90 90 L30 55 Z" fill="url(#cube-highlight)" />
+                        <path d="M90 90 L150 55 L150 125 L90 160 Z" fill="url(#cube-grad-2)" />
+                        <ellipse cx="90" cy="90" rx="25" ry="15" fill="none" stroke="#555" strokeWidth="8" />
+                        <circle cx="55" cy="70" r="12" fill="none" stroke="#666" strokeWidth="6" />
+                        <circle cx="125" cy="100" r="10" fill="none" stroke="#777" strokeWidth="5" />
+                        <ellipse cx="90" cy="170" rx="45" ry="6" fill="rgba(0,0,0,0.1)" />
+                      </svg>
                     </div>
                   )}
                   
-                  {/* Card 3: Build for Reliability */}
+                  {/* Card 3: 3D Knot - Reliability/Integration */}
                   {index === 2 && (
                     <div className="relative z-10">
-                      {/* Background card */}
-                      <div 
-                        className="absolute left-[-50px] top-[10px] w-[100px] h-[160px] rounded-2xl opacity-50"
-                        style={{ 
-                          background: 'rgba(255,255,255,0.6)',
-                          border: '1px solid rgba(255,255,255,0.7)',
-                        }}
-                      />
-                      {/* Main card */}
-                      <div 
-                        className="relative bg-white rounded-2xl p-5 w-[220px]"
-                        style={{ 
-                          boxShadow: '0 20px 60px rgba(0,0,0,0.1)',
-                          border: '1px solid rgba(255,255,255,0.9)',
-                        }}
-                      >
-                        {/* Window dots */}
-                        <div className="flex gap-1.5 mb-4">
-                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
-                        </div>
-                        {/* Title */}
-                        <div className="text-sm font-semibold text-gray-800 mb-4">Build Status</div>
-                        {/* Progress items */}
-                        <div className="space-y-3 mb-5">
-                          <div className="flex items-center gap-3">
-                            <div className="w-5 h-5 rounded bg-green-100 flex items-center justify-center">
-                              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                <path d="M2.5 6L5 8.5L9.5 4" stroke="#22c55e" strokeWidth="1.5" strokeLinecap="round"/>
-                              </svg>
-                            </div>
-                            <div className="h-2.5 bg-gray-200 rounded-full flex-1" />
-                          </div>
-                          <div className="flex items-center gap-3">
-                            <div className="w-5 h-5 rounded bg-green-100 flex items-center justify-center">
-                              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                <path d="M2.5 6L5 8.5L9.5 4" stroke="#22c55e" strokeWidth="1.5" strokeLinecap="round"/>
-                              </svg>
-                            </div>
-                            <div className="h-2.5 bg-gray-200 rounded-full w-4/5" />
-                          </div>
-                          <div className="flex items-center gap-3">
-                            <div className="w-5 h-5 rounded bg-yellow-100 flex items-center justify-center">
-                              <div className="w-2 h-2 rounded-full bg-yellow-400" />
-                            </div>
-                            <div className="h-2.5 bg-gray-200 rounded-full w-3/5" />
-                          </div>
-                        </div>
-                        {/* Button */}
-                        <div 
-                          className="w-full py-2.5 rounded-full text-center text-sm font-medium text-white"
-                          style={{ background: 'linear-gradient(135deg, #444 0%, #222 100%)' }}
-                        >
-                          Deploy
-                        </div>
-                      </div>
+                      <svg width="180" height="180" viewBox="0 0 180 180" fill="none" style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))' }}>
+                        <defs>
+                          <linearGradient id="knot-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#c0c0c0" />
+                            <stop offset="40%" stopColor="#a0a0a0" />
+                            <stop offset="100%" stopColor="#707070" />
+                          </linearGradient>
+                          <linearGradient id="knot-grad-2" x1="100%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#b8b8b8" />
+                            <stop offset="100%" stopColor="#888888" />
+                          </linearGradient>
+                        </defs>
+                        <path d="M90 30 C50 30 30 60 40 90 C50 120 80 130 90 100 C100 70 70 50 50 70 C30 90 50 130 90 130 C130 130 150 90 130 70 C110 50 80 70 90 100 C100 130 130 120 140 90 C150 60 130 30 90 30 Z" 
+                          fill="url(#knot-grad-1)" 
+                          strokeWidth="18"
+                          stroke="url(#knot-grad-2)"
+                          strokeLinecap="round"
+                        />
+                        <path d="M60 50 Q70 40 85 45" fill="none" stroke="#d5d5d5" strokeWidth="6" strokeLinecap="round" opacity="0.7" />
+                        <path d="M100 55 Q115 50 125 60" fill="none" stroke="#d0d0d0" strokeWidth="5" strokeLinecap="round" opacity="0.6" />
+                        <ellipse cx="90" cy="165" rx="50" ry="8" fill="rgba(0,0,0,0.1)" />
+                      </svg>
                     </div>
                   )}
                   
-                  {/* Card 4: Refine with Purpose */}
+                  {/* Card 4: 3D Flower/Loop - Iteration/Refinement */}
                   {index === 3 && (
                     <div className="relative z-10">
-                      {/* Background card */}
-                      <div 
-                        className="absolute right-[-40px] bottom-[0px] w-[110px] h-[140px] rounded-2xl opacity-50"
-                        style={{ 
-                          background: 'rgba(255,255,255,0.6)',
-                          border: '1px solid rgba(255,255,255,0.7)',
-                        }}
-                      />
-                      {/* Main card */}
-                      <div 
-                        className="relative bg-white rounded-2xl p-5 w-[220px]"
-                        style={{ 
-                          boxShadow: '0 20px 60px rgba(0,0,0,0.1)',
-                          border: '1px solid rgba(255,255,255,0.9)',
-                        }}
-                      >
-                        {/* Window dots */}
-                        <div className="flex gap-1.5 mb-4">
-                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
-                        </div>
-                        {/* Title */}
-                        <div className="text-sm font-semibold text-gray-800 mb-4">Iteration Cycle</div>
-                        {/* Cycle visualization */}
-                        <div className="flex items-center justify-center gap-2 mb-5">
-                          <div className="text-center">
-                            <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mb-1">
-                              <span className="text-xs font-medium text-gray-600">1</span>
-                            </div>
-                            <span className="text-[9px] text-gray-400">Test</span>
-                          </div>
-                          <svg width="20" height="12" viewBox="0 0 20 12" fill="none">
-                            <path d="M0 6h16M12 2l4 4-4 4" stroke="#ccc" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
-                          <div className="text-center">
-                            <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mb-1">
-                              <span className="text-xs font-medium text-gray-600">2</span>
-                            </div>
-                            <span className="text-[9px] text-gray-400">Refine</span>
-                          </div>
-                          <svg width="20" height="12" viewBox="0 0 20 12" fill="none">
-                            <path d="M0 6h16M12 2l4 4-4 4" stroke="#ccc" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
-                          <div className="text-center">
-                            <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center mb-1">
-                              <span className="text-xs font-medium text-white">3</span>
-                            </div>
-                            <span className="text-[9px] text-gray-400">Ship</span>
-                          </div>
-                        </div>
-                        {/* Button */}
-                        <div 
-                          className="w-full py-2.5 rounded-full text-center text-sm font-medium text-white"
-                          style={{ background: 'linear-gradient(135deg, #444 0%, #222 100%)' }}
-                        >
-                          Optimize
-                        </div>
-                      </div>
+                      <svg width="180" height="180" viewBox="0 0 180 180" fill="none" style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))' }}>
+                        <defs>
+                          <linearGradient id="flower-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#b8b8b8" />
+                            <stop offset="50%" stopColor="#989898" />
+                            <stop offset="100%" stopColor="#787878" />
+                          </linearGradient>
+                          <linearGradient id="flower-grad-2" x1="50%" y1="0%" x2="50%" y2="100%">
+                            <stop offset="0%" stopColor="#d0d0d0" />
+                            <stop offset="100%" stopColor="#a0a0a0" />
+                          </linearGradient>
+                        </defs>
+                        {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
+                          <ellipse
+                            key={i}
+                            cx="90"
+                            cy="55"
+                            rx="18"
+                            ry="35"
+                            fill={i % 2 === 0 ? "url(#flower-grad-1)" : "url(#flower-grad-2)"}
+                            transform={`rotate(${angle} 90 90)`}
+                          />
+                        ))}
+                        <circle cx="90" cy="90" r="20" fill="#888" />
+                        <circle cx="90" cy="90" r="12" fill="#aaa" />
+                        <ellipse cx="80" cy="82" rx="4" ry="3" fill="#ccc" opacity="0.7" />
+                        <ellipse cx="90" cy="170" rx="45" ry="6" fill="rgba(0,0,0,0.1)" />
+                      </svg>
                     </div>
                   )}
                 </div>
