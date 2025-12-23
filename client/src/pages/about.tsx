@@ -1064,64 +1064,134 @@ export default function About() {
         </div>
       </section>
 
-      {/* Our Position - Centered Closing */}
+      {/* Our Position - Two Column CTA */}
       <section 
         className="py-20 md:py-28"
-        style={{ backgroundColor: '#FFFFFF' }}
+        style={{ backgroundColor: '#f5f5f5' }}
       >
-        <div className="max-w-[700px] mx-auto px-4 md:px-10 text-center">
-          {/* Divider */}
-          <motion.div
-            className="w-16 h-px mx-auto mb-12"
-            style={{ backgroundColor: 'rgba(0,0,0,0.15)' }}
-            initial={{ width: 0, opacity: 0 }}
-            whileInView={{ width: 64, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          />
-          
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 
-              className="text-2xl md:text-3xl font-bold mb-8"
-              style={{ color: '#1A1A1A' }}
-              data-testid="section-our-position"
+        <div className="max-w-[1120px] mx-auto px-4 md:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left: Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
             >
-              Our position
-            </h2>
+              {/* Pill Label */}
+              <div 
+                className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase mb-6"
+                style={{ backgroundColor: '#e8e8e8', color: '#555555' }}
+              >
+                Our Position
+              </div>
+              
+              <h2 
+                className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight"
+                style={{ color: '#1A1A1A' }}
+                data-testid="section-our-position"
+              >
+                We're Not a
+                <br />
+                Traditional Agency
+              </h2>
+              
+              <p 
+                className="text-base md:text-lg leading-relaxed mb-8"
+                style={{ color: '#555555' }}
+              >
+                We align design, engineering, and business thinking under one roof to build products, brands, and communication systems that deliver clear outcomes.
+              </p>
+              
+              {/* Buttons */}
+              <div className="flex flex-wrap gap-4">
+                <a
+                  href="#contact"
+                  className="inline-flex items-center justify-center px-6 py-3 rounded-full text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5"
+                  style={{ 
+                    backgroundColor: '#1A1A1A', 
+                    color: '#FFFFFF',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
+                  }}
+                  data-testid="button-get-started"
+                >
+                  Get Started
+                </a>
+                <a
+                  href="#work"
+                  className="inline-flex items-center justify-center px-6 py-3 rounded-full text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5"
+                  style={{ 
+                    backgroundColor: 'transparent', 
+                    color: '#1A1A1A',
+                    border: '1.5px solid #d0d0d0'
+                  }}
+                  data-testid="button-view-work"
+                >
+                  View Our Work
+                </a>
+              </div>
+            </motion.div>
             
-            <p 
-              className="text-lg md:text-xl font-medium mb-4"
-              style={{ color: '#1A1A1A' }}
+            {/* Right: Image with Floating Card */}
+            <motion.div
+              className="relative"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
             >
-              We are not a traditional agency.
-            </p>
-            
-            <p 
-              className="text-base md:text-lg leading-relaxed mb-6"
-              style={{ color: '#555555' }}
-            >
-              We are a product, brand, and communication studio that aligns design, engineering, and business thinking under one roof.
-            </p>
-            
-            <p 
-              className="text-base md:text-lg leading-relaxed mb-6"
-              style={{ color: '#555555' }}
-            >
-              We specialise in building products, designing brands, crafting communication systems, and supporting business decisions with clarity and structure.
-            </p>
-            
-            <p 
-              className="text-base md:text-lg leading-relaxed font-medium"
-              style={{ color: '#1A1A1A' }}
-            >
-              Our focus is simple: clear design, reliable execution, and outcomes that hold up over time.
-            </p>
-          </motion.div>
+              {/* Main Image Container */}
+              <div 
+                className="relative rounded-2xl overflow-hidden"
+                style={{ 
+                  aspectRatio: '4/3',
+                  backgroundColor: '#e0e0e0'
+                }}
+              >
+                {/* Placeholder abstract visual */}
+                <svg 
+                  className="w-full h-full" 
+                  viewBox="0 0 400 300" 
+                  fill="none"
+                  style={{ filter: 'grayscale(100%)' }}
+                >
+                  <rect width="400" height="300" fill="#e8e8e8" />
+                  <circle cx="200" cy="120" r="60" fill="#d0d0d0" />
+                  <circle cx="200" cy="120" r="40" fill="#c0c0c0" />
+                  <rect x="120" y="180" width="160" height="80" rx="8" fill="#d5d5d5" />
+                  <rect x="140" y="200" width="80" height="8" rx="2" fill="#b0b0b0" />
+                  <rect x="140" y="220" width="120" height="6" rx="2" fill="#c0c0c0" />
+                  <rect x="140" y="236" width="60" height="6" rx="2" fill="#c8c8c8" />
+                </svg>
+              </div>
+              
+              {/* Floating Card */}
+              <motion.div
+                className="absolute -bottom-4 -right-4 md:bottom-6 md:right-[-20px] bg-white rounded-xl px-5 py-3 flex items-center gap-3"
+                style={{ 
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+                  border: '1px solid rgba(0,0,0,0.05)'
+                }}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+              >
+                {/* Gradient Ring Icon */}
+                <div 
+                  className="w-6 h-6 rounded-full flex items-center justify-center"
+                  style={{ 
+                    background: 'conic-gradient(from 0deg, #888888, #cccccc, #888888)',
+                  }}
+                >
+                  <div className="w-4 h-4 rounded-full bg-white" />
+                </div>
+                <span className="text-sm font-medium" style={{ color: '#1A1A1A' }}>
+                  Project Complete
+                </span>
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
