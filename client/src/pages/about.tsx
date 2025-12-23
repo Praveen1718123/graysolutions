@@ -389,51 +389,73 @@ export default function About() {
         style={{ backgroundColor: '#FAFAFA' }}
       >
         <div className="max-w-[1120px] mx-auto px-4 md:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-            {/* Left - Intro (Sticky on desktop) */}
-            <div className="hidden lg:block">
-              <div className="relative">
-                <div 
-                  className="sticky"
-                  style={{ top: '120px' }}
-                >
-                  <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.5 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                  >
-                    <span 
-                      className="text-sm font-medium tracking-wide mb-4 block"
-                      style={{ color: 'rgba(26,26,26,0.5)' }}
-                    >
-                      Our Approach
-                    </span>
-                    <h2 
-                      className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6"
-                      style={{ color: '#1A1A1A' }}
-                      data-testid="section-how-we-think"
-                    >
-                      How we think
-                    </h2>
-                    <p 
-                      className="text-base md:text-lg leading-relaxed"
-                      style={{ color: '#555555', maxWidth: '400px' }}
-                    >
-                      We see every product, brand, and system as part of a broader operational and commercial environment. Three principles guide our work:
-                    </p>
-                  </motion.div>
-                </div>
-              </div>
-            </div>
+          {/* Mobile Layout */}
+          <div className="lg:hidden space-y-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
+              <span 
+                className="text-sm font-medium tracking-wide mb-4 block"
+                style={{ color: 'rgba(26,26,26,0.5)' }}
+              >
+                Our Approach
+              </span>
+              <h2 
+                className="text-2xl md:text-3xl font-bold mb-6"
+                style={{ color: '#1A1A1A' }}
+              >
+                How we think
+              </h2>
+              <p 
+                className="text-base md:text-lg leading-relaxed"
+                style={{ color: '#555555' }}
+              >
+                We see every product, brand, and system as part of a broader operational and commercial environment. Three principles guide our work:
+              </p>
+            </motion.div>
             
-            {/* Mobile Left - Not sticky */}
-            <div className="lg:hidden">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
+            <div className="space-y-5">
+              {principles.map((principle, index) => (
+                <motion.div
+                  key={index}
+                  className="p-6 rounded-xl flex gap-4"
+                  style={{ 
+                    backgroundColor: '#FFFFFF',
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03)',
+                    border: '1px solid rgba(0,0,0,0.04)',
+                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  data-testid={`principle-mobile-${index}`}
+                >
+                  <div className="flex-shrink-0 mt-0.5" style={{ color: '#1A1A1A' }}>
+                    {principle.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-base font-semibold mb-2" style={{ color: '#1A1A1A' }}>
+                      {principle.title}
+                    </h3>
+                    <p className="text-sm leading-relaxed" style={{ color: '#666666' }}>
+                      {principle.description}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop Layout - 2 Column with Sticky Left */}
+          <div className="hidden lg:grid lg:grid-cols-2 gap-12 lg:gap-20">
+            {/* Left Column - Sticky */}
+            <div className="relative">
+              <div 
+                className="sticky"
+                style={{ top: '120px' }}
               >
                 <span 
                   className="text-sm font-medium tracking-wide mb-4 block"
@@ -442,63 +464,57 @@ export default function About() {
                   Our Approach
                 </span>
                 <h2 
-                  className="text-2xl md:text-3xl font-bold mb-6"
+                  className="text-3xl lg:text-4xl font-bold mb-6"
                   style={{ color: '#1A1A1A' }}
+                  data-testid="section-how-we-think"
                 >
                   How we think
                 </h2>
                 <p 
                   className="text-base md:text-lg leading-relaxed"
-                  style={{ color: '#555555' }}
+                  style={{ color: '#555555', maxWidth: '400px' }}
                 >
                   We see every product, brand, and system as part of a broader operational and commercial environment. Three principles guide our work:
                 </p>
-              </motion.div>
+              </div>
             </div>
 
-            {/* Right - Principles as Stacked Cards */}
-            <div className="space-y-5">
-              {principles.map((principle, index) => (
-                <motion.div
-                  key={index}
-                  className="p-6 rounded-xl flex gap-4"
-                  style={{ 
-                    opacity: cardOpacities[index],
-                    y: cardYs[index],
-                    backgroundColor: '#FFFFFF',
-                    boxShadow: '0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03)',
-                    border: '1px solid rgba(0,0,0,0.04)',
-                  }}
-                  data-testid={`principle-${index}`}
-                >
-                  {/* Icon */}
-                  <motion.div 
-                    className="flex-shrink-0 mt-0.5"
+            {/* Right Column - Cards scroll naturally */}
+            <div>
+              <div className="space-y-5">
+                {principles.map((principle, index) => (
+                  <motion.div
+                    key={index}
+                    className="p-6 rounded-xl flex gap-4"
                     style={{ 
-                      color: '#1A1A1A',
                       opacity: cardOpacities[index],
+                      y: cardYs[index],
+                      backgroundColor: '#FFFFFF',
+                      boxShadow: '0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03)',
+                      border: '1px solid rgba(0,0,0,0.04)',
                     }}
+                    data-testid={`principle-${index}`}
                   >
-                    {principle.icon}
+                    <motion.div 
+                      className="flex-shrink-0 mt-0.5"
+                      style={{ 
+                        color: '#1A1A1A',
+                        opacity: cardOpacities[index],
+                      }}
+                    >
+                      {principle.icon}
+                    </motion.div>
+                    <div>
+                      <h3 className="text-base font-semibold mb-2" style={{ color: '#1A1A1A' }}>
+                        {principle.title}
+                      </h3>
+                      <p className="text-sm leading-relaxed" style={{ color: '#666666' }}>
+                        {principle.description}
+                      </p>
+                    </div>
                   </motion.div>
-                  
-                  {/* Content */}
-                  <div>
-                    <h3 
-                      className="text-base font-semibold mb-2"
-                      style={{ color: '#1A1A1A' }}
-                    >
-                      {principle.title}
-                    </h3>
-                    <p 
-                      className="text-sm leading-relaxed"
-                      style={{ color: '#666666' }}
-                    >
-                      {principle.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
