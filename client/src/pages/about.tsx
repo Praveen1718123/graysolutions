@@ -934,47 +934,111 @@ export default function About() {
                     </span>
                   </div>
                   
-                  {/* Custom Abstract Graphics */}
+                  {/* Multi-layered Visual Systems */}
                   {index === 0 && (
-                    <svg width="200" height="150" viewBox="0 0 200 150" fill="none">
-                      <line x1="30" y1="25" x2="100" y2="75" stroke="#d8d8d8" strokeWidth="1.5" />
-                      <line x1="25" y1="75" x2="100" y2="75" stroke="#d0d0d0" strokeWidth="1.5" />
-                      <line x1="35" y1="125" x2="100" y2="75" stroke="#d8d8d8" strokeWidth="1.5" />
-                      <line x1="175" y1="30" x2="100" y2="75" stroke="#d8d8d8" strokeWidth="1.5" />
-                      <line x1="175" y1="75" x2="100" y2="75" stroke="#d0d0d0" strokeWidth="1.5" />
-                      <line x1="170" y1="120" x2="100" y2="75" stroke="#d8d8d8" strokeWidth="1.5" />
-                      <circle cx="100" cy="75" r="14" fill="white" />
-                      <circle cx="100" cy="75" r="14" fill="none" stroke="#e0e0e0" strokeWidth="1" />
-                      <circle cx="100" cy="75" r="5" fill="#666666" />
+                    <svg width="240" height="180" viewBox="0 0 240 180" fill="none">
+                      {/* Background: Faint circular grid */}
+                      <circle cx="120" cy="90" r="70" fill="none" stroke="#f0f0f0" strokeWidth="1" />
+                      <circle cx="120" cy="90" r="50" fill="none" stroke="#ebebeb" strokeWidth="1" />
+                      <circle cx="120" cy="90" r="30" fill="none" stroke="#e5e5e5" strokeWidth="1" />
+                      <line x1="50" y1="90" x2="190" y2="90" stroke="#f5f5f5" strokeWidth="1" />
+                      <line x1="120" y1="20" x2="120" y2="160" stroke="#f5f5f5" strokeWidth="1" />
+                      
+                      {/* Mid-ground: Converging lines */}
+                      <line x1="35" y1="35" x2="120" y2="90" stroke="#d8d8d8" strokeWidth="1.5" />
+                      <line x1="25" y1="90" x2="120" y2="90" stroke="#d5d5d5" strokeWidth="1.5" />
+                      <line x1="40" y1="145" x2="120" y2="90" stroke="#d8d8d8" strokeWidth="1.5" />
+                      <line x1="205" y1="40" x2="120" y2="90" stroke="#d8d8d8" strokeWidth="1.5" />
+                      <line x1="215" y1="90" x2="120" y2="90" stroke="#d5d5d5" strokeWidth="1.5" />
+                      <line x1="200" y1="140" x2="120" y2="90" stroke="#d8d8d8" strokeWidth="1.5" />
+                      <line x1="120" y1="20" x2="120" y2="90" stroke="#d0d0d0" strokeWidth="1.5" />
+                      <line x1="120" y1="160" x2="120" y2="90" stroke="#d0d0d0" strokeWidth="1.5" />
+                      
+                      {/* Small nodes at line ends */}
+                      <circle cx="35" cy="35" r="3" fill="#e0e0e0" />
+                      <circle cx="205" cy="40" r="3" fill="#e0e0e0" />
+                      <circle cx="40" cy="145" r="3" fill="#e0e0e0" />
+                      <circle cx="200" cy="140" r="3" fill="#e0e0e0" />
+                      
+                      {/* Foreground: Central focal node */}
+                      <circle cx="120" cy="90" r="18" fill="white" />
+                      <circle cx="120" cy="90" r="18" fill="none" stroke="#e0e0e0" strokeWidth="1.5" />
+                      <circle cx="120" cy="90" r="7" fill="#555555" />
                     </svg>
                   )}
                   
                   {index === 1 && (
-                    <svg width="200" height="150" viewBox="0 0 200 150" fill="none">
-                      <rect x="30" y="30" width="55" height="40" rx="6" fill="#f5f5f5" />
-                      <rect x="95" y="30" width="55" height="40" rx="6" fill="white" stroke="#e8e8e8" strokeWidth="1" />
-                      <rect x="30" y="80" width="55" height="40" rx="6" fill="white" stroke="#e8e8e8" strokeWidth="1" />
-                      <rect x="95" y="80" width="55" height="40" rx="6" fill="#f5f5f5" />
-                      <rect x="160" y="45" width="25" height="60" rx="5" fill="#ebebeb" />
+                    <svg width="240" height="180" viewBox="0 0 240 180" fill="none">
+                      {/* Background: Faint grid columns */}
+                      <line x1="60" y1="20" x2="60" y2="160" stroke="#f5f5f5" strokeWidth="1" />
+                      <line x1="100" y1="20" x2="100" y2="160" stroke="#f5f5f5" strokeWidth="1" />
+                      <line x1="140" y1="20" x2="140" y2="160" stroke="#f5f5f5" strokeWidth="1" />
+                      <line x1="180" y1="20" x2="180" y2="160" stroke="#f5f5f5" strokeWidth="1" />
+                      <line x1="30" y1="50" x2="210" y2="50" stroke="#f5f5f5" strokeWidth="1" />
+                      <line x1="30" y1="90" x2="210" y2="90" stroke="#f5f5f5" strokeWidth="1" />
+                      <line x1="30" y1="130" x2="210" y2="130" stroke="#f5f5f5" strokeWidth="1" />
+                      
+                      {/* Mid-ground: Semi-transparent misaligned blocks */}
+                      <rect x="45" y="35" width="50" height="35" rx="6" fill="#f0f0f0" />
+                      <rect x="110" y="42" width="55" height="38" rx="6" fill="#ebebeb" />
+                      <rect x="55" y="95" width="48" height="40" rx="6" fill="#ebebeb" />
+                      <rect x="175" y="55" width="30" height="70" rx="5" fill="#f0f0f0" />
+                      
+                      {/* Foreground: Aligned clean structure */}
+                      <rect x="40" y="75" width="60" height="45" rx="6" fill="white" stroke="#e0e0e0" strokeWidth="1.5" />
+                      <rect x="110" y="75" width="60" height="45" rx="6" fill="white" stroke="#e0e0e0" strokeWidth="1.5" />
+                      <rect x="65" y="88" width="30" height="6" rx="2" fill="#888888" />
+                      <rect x="65" y="100" width="20" height="6" rx="2" fill="#aaaaaa" />
+                      <rect x="135" y="88" width="25" height="6" rx="2" fill="#888888" />
+                      <rect x="135" y="100" width="15" height="6" rx="2" fill="#aaaaaa" />
                     </svg>
                   )}
                   
                   {index === 2 && (
-                    <svg width="200" height="150" viewBox="0 0 200 150" fill="none">
-                      <rect x="55" y="65" width="45" height="45" rx="6" fill="#f0f0f0" />
-                      <rect x="65" y="55" width="45" height="45" rx="6" fill="#f8f8f8" />
-                      <rect x="75" y="45" width="50" height="50" rx="6" fill="white" stroke="#e5e5e5" strokeWidth="1" />
-                      <rect x="100" y="60" width="45" height="45" rx="6" fill="#f5f5f5" />
-                      <rect x="90" y="70" width="20" height="20" rx="4" fill="#666666" />
+                    <svg width="240" height="180" viewBox="0 0 240 180" fill="none">
+                      {/* Background: Large soft base shape */}
+                      <rect x="60" y="100" width="120" height="50" rx="8" fill="#f5f5f5" />
+                      <ellipse cx="120" cy="100" rx="80" ry="20" fill="#f8f8f8" />
+                      
+                      {/* Mid-ground: Stacked plates/modules */}
+                      <rect x="70" y="85" width="100" height="20" rx="4" fill="#ebebeb" />
+                      <rect x="75" y="70" width="90" height="18" rx="4" fill="#f0f0f0" />
+                      <rect x="80" y="55" width="80" height="18" rx="4" fill="#f5f5f5" />
+                      
+                      {/* Side modules */}
+                      <rect x="45" y="65" width="25" height="50" rx="5" fill="#ebebeb" />
+                      <rect x="170" y="65" width="25" height="50" rx="5" fill="#ebebeb" />
+                      
+                      {/* Foreground: Locked central block */}
+                      <rect x="95" y="40" width="50" height="55" rx="6" fill="white" stroke="#d5d5d5" strokeWidth="1.5" />
+                      <rect x="105" y="50" width="30" height="12" rx="3" fill="#666666" />
+                      <rect x="105" y="68" width="30" height="8" rx="2" fill="#999999" />
+                      <rect x="105" y="80" width="20" height="6" rx="2" fill="#bbbbbb" />
                     </svg>
                   )}
                   
                   {index === 3 && (
-                    <svg width="200" height="150" viewBox="0 0 200 150" fill="none">
-                      <ellipse cx="100" cy="75" rx="60" ry="38" fill="none" stroke="#e5e5e5" strokeWidth="6" />
-                      <path d="M 40 75 A 60 38 0 0 1 100 37" fill="none" stroke="#666666" strokeWidth="6" strokeLinecap="round" />
-                      <circle cx="100" cy="37" r="8" fill="white" stroke="#e0e0e0" strokeWidth="1" />
-                      <circle cx="100" cy="37" r="3" fill="#666666" />
+                    <svg width="240" height="180" viewBox="0 0 240 180" fill="none">
+                      {/* Background: Faded circular path */}
+                      <ellipse cx="120" cy="90" rx="75" ry="50" fill="none" stroke="#f0f0f0" strokeWidth="12" />
+                      
+                      {/* Mid-ground: Repeated loop segments */}
+                      <ellipse cx="120" cy="90" rx="75" ry="50" fill="none" stroke="#e5e5e5" strokeWidth="8" />
+                      <path d="M 45 90 A 75 50 0 0 1 120 40" fill="none" stroke="#d5d5d5" strokeWidth="8" strokeLinecap="round" />
+                      <path d="M 195 90 A 75 50 0 0 1 120 140" fill="none" stroke="#d5d5d5" strokeWidth="8" strokeLinecap="round" />
+                      
+                      {/* Small markers on loop */}
+                      <circle cx="55" cy="65" r="4" fill="#e0e0e0" />
+                      <circle cx="185" cy="115" r="4" fill="#e0e0e0" />
+                      <circle cx="120" cy="140" r="4" fill="#e0e0e0" />
+                      
+                      {/* Foreground: Highlighted segment with progress marker */}
+                      <path d="M 120 40 A 75 50 0 0 1 195 90" fill="none" stroke="#555555" strokeWidth="8" strokeLinecap="round" />
+                      <circle cx="195" cy="90" r="10" fill="white" stroke="#d0d0d0" strokeWidth="1.5" />
+                      <circle cx="195" cy="90" r="4" fill="#555555" />
+                      
+                      {/* Direction arrow */}
+                      <path d="M 175 55 L 185 48 L 182 62" fill="none" stroke="#888888" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   )}
                 </div>
