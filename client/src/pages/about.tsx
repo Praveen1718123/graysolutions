@@ -5,6 +5,7 @@ import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 import heroVideo from "@assets/From_KlickPin_CF_Red_and_White_Abstract_Wall_ArtJiayuan_Liang__1766475001318.mp4";
 import benefitsVideo from "@assets/From_KlickPin_CF_by_Meloq_Arai_—_a_3D_Motion_Designer_@meloqar_1766508779038.mp4";
 import numbersVideo from "@assets/From_KlickPin_CF_light_hero___abstract_flare_[Video]___Editing_1766512132613.mp4";
+import contextGif from "@assets/From_KlickPin_CF_Kaldea_Visual_Identity_&_Website_Design_on_Be_1766516930656.gif";
 
 function useCountUp(end: number, duration: number = 2000, inView: boolean) {
   const [count, setCount] = useState(0);
@@ -941,48 +942,20 @@ export default function About() {
                     }}
                   />
                   
-                  {/* Card 1: Animated Black Ball */}
+                  {/* Card 1: GIF Animation with Black Ball */}
                   {index === 0 && (
                     <div 
-                      className="absolute inset-0 flex items-center justify-center"
+                      className="absolute inset-0 flex items-center justify-center overflow-hidden"
                       style={{ background: '#FFFFFF' }}
                     >
-                      <motion.div
-                        className="relative"
-                        animate={{
-                          y: [0, -30, 0],
+                      <img 
+                        src={contextGif}
+                        alt="Context animation"
+                        className="w-full h-full object-cover"
+                        style={{ 
+                          filter: 'grayscale(100%) contrast(1.2) brightness(0.9)',
                         }}
-                        transition={{
-                          duration: 1.5,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                        }}
-                      >
-                        <div 
-                          className="w-20 h-20 rounded-full"
-                          style={{
-                            background: 'radial-gradient(circle at 30% 30%, #555555, #000000)',
-                            boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
-                          }}
-                        />
-                      </motion.div>
-                      <motion.div
-                        className="absolute bottom-16"
-                        animate={{
-                          scaleX: [1, 1.3, 1],
-                          opacity: [0.3, 0.15, 0.3],
-                        }}
-                        transition={{
-                          duration: 1.5,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                        }}
-                      >
-                        <div 
-                          className="w-16 h-3 rounded-full"
-                          style={{ background: 'rgba(0,0,0,0.2)', filter: 'blur(4px)' }}
-                        />
-                      </motion.div>
+                      />
                     </div>
                   )}
                   
