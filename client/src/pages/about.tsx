@@ -1130,7 +1130,7 @@ export default function About() {
                   style={{ 
                     filter: 'hue-rotate(180deg) saturate(0)',
                     objectFit: 'cover',
-                    objectPosition: 'center 80%',
+                    objectPosition: 'center 30%',
                   }}
                 />
               </div>
