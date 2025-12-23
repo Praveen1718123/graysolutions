@@ -293,32 +293,68 @@ export default function About() {
         />
       </section>
 
-      {/* What We Do - Narrow Strip */}
+      {/* What We Do - Full Width Dark Section */}
       <section 
-        className="py-10 md:py-14"
-        style={{ backgroundColor: '#FFFFFF', borderTop: '1px solid rgba(0,0,0,0.06)', borderBottom: '1px solid rgba(0,0,0,0.06)' }}
+        className="relative py-24 md:py-32 overflow-hidden"
+        style={{ 
+          background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 25%, #1a1a1a 50%, #333333 75%, #1a1a1a 100%)',
+        }}
       >
-        <div className="max-w-[1120px] mx-auto px-4 md:px-10">
+        {/* Animated gradient overlay */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse 80% 60% at 80% 50%, rgba(255,255,255,0.08) 0%, transparent 50%), radial-gradient(ellipse 60% 40% at 20% 80%, rgba(255,255,255,0.05) 0%, transparent 50%)',
+          }}
+        />
+        
+        <div className="relative z-10 max-w-[1200px] mx-auto px-6 md:px-10">
           <motion.div
-            className="text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0.3 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.8 }}
           >
-            <h2 
-              className="text-sm font-semibold tracking-widest uppercase mb-4"
-              style={{ color: '#888888' }}
+            {/* Badge */}
+            <motion.div 
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-8"
+              style={{
+                background: 'rgba(255, 255, 255, 0.1)',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+              }}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <span 
+                className="text-xs font-medium tracking-widest uppercase"
+                style={{ color: 'rgba(255, 255, 255, 0.8)' }}
+              >
+                WHAT WE DO
+              </span>
+            </motion.div>
+
+            {/* Large text with gradient fade */}
+            <motion.h2 
+              className="font-bold leading-tight"
+              style={{ 
+                fontSize: 'clamp(32px, 5vw, 56px)',
+                maxWidth: '1000px',
+              }}
               data-testid="section-what-we-do"
+              initial={{ opacity: 0.3, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
             >
-              What we do
-            </h2>
-            <p 
-              className="text-base md:text-lg leading-relaxed max-w-[900px] mx-auto"
-              style={{ color: '#444444' }}
-            >
-              We work across product strategy, UX and interface design, brand and identity systems, advertising and marketing communication, engineering, product development, business consultation, and digital optimisation.
-            </p>
+              <span style={{ color: '#FFFFFF' }}>
+                We work across product strategy, UX and interface design, brand and identity systems, advertising and marketing communication,
+              </span>
+              <span style={{ color: 'rgba(255, 255, 255, 0.4)' }}>
+                {' '}engineering, product development, business consultation, and digital optimisation.
+              </span>
+            </motion.h2>
           </motion.div>
         </div>
       </section>
