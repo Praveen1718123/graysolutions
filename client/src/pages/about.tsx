@@ -200,54 +200,50 @@ export default function About() {
               A product, design, technology, and consulting studio focused on clarity, reliability, and measurable outcomes.
             </motion.p>
 
-            {/* CTA row */}
+            {/* CTA row - Glassy buttons */}
             <motion.div 
-              className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-5"
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
-              <button 
-                className="px-6 py-3 rounded-full font-medium text-sm transition-all"
+              <motion.button 
+                className="glassy-btn px-7 py-3.5 rounded-full font-medium text-sm"
                 style={{ 
-                  backgroundColor: '#1A1A1A', 
+                  background: 'linear-gradient(180deg, rgb(40, 40, 40) 0%, rgb(20, 20, 20) 50%, rgb(50, 50, 50) 100%)',
                   color: '#FFFFFF',
-                  boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
+                  boxShadow: '0 1px 2px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.07), 0 4px 8px rgba(0,0,0,0.07), 0 8px 16px rgba(0,0,0,0.07), 0 16px 32px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.1)',
+                  border: '1px solid rgba(255,255,255,0.1)',
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.15)';
+                whileHover={{ 
+                  scale: 1.02,
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.1), 0 8px 16px rgba(0,0,0,0.1), 0 16px 32px rgba(0,0,0,0.1), 0 32px 64px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.15)',
                 }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 2px 12px rgba(0, 0, 0, 0.1)';
-                }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 data-testid="cta-talk-to-us"
               >
                 Talk to us
-              </button>
+              </motion.button>
               
-              <span className="hidden sm:block text-gray-300">·</span>
-              
-              <button 
-                className="px-6 py-3 rounded-full font-medium text-sm transition-all"
+              <motion.button 
+                className="glassy-btn px-7 py-3.5 rounded-full font-medium text-sm"
                 style={{ 
-                  backgroundColor: 'transparent', 
+                  background: 'linear-gradient(180deg, rgb(255, 255, 255) 0%, rgb(235, 235, 235) 9%, rgb(220, 220, 220) 32%, rgb(200, 200, 200) 73%, rgb(245, 245, 245) 100%)',
                   color: '#1A1A1A',
-                  border: '1px solid #E0E0E0',
+                  boxShadow: '0 1px 2px rgba(0,0,0,0.04), 0 2px 4px rgba(0,0,0,0.04), 0 4px 8px rgba(0,0,0,0.04), 0 8px 16px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.8), inset 0 -1px 0 rgba(0,0,0,0.05)',
+                  border: '1px solid rgba(0,0,0,0.08)',
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.backgroundColor = '#F5F5F5';
+                whileHover={{ 
+                  scale: 1.02,
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.06), 0 4px 8px rgba(0,0,0,0.06), 0 8px 16px rgba(0,0,0,0.06), 0 16px 32px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.9), inset 0 -1px 0 rgba(0,0,0,0.05)',
                 }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.backgroundColor = 'transparent';
-                }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 data-testid="cta-view-work"
               >
                 View our work
-              </button>
+              </motion.button>
             </motion.div>
           </div>
 
