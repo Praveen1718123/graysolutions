@@ -10,24 +10,28 @@ export default function Contact() {
 
   const faqItems = [
     {
-      question: "What industries does Gray Solutions serve?",
-      answer: "We work across various industries including logistics, manufacturing, healthcare, fintech, and B2B SaaS. Our focus is on businesses that need digital products, brand systems, or AI-powered solutions."
+      question: "What does Gray Solutions do?",
+      answer: "We help businesses grow through clear strategy, premium design, and performance-led execution. That includes brand positioning, website and landing page systems, social-first content, ad creatives, and conversion-focused funnels—built to be consistent, measurable, and scalable."
     },
     {
-      question: "How do I know which service is right for my business?",
-      answer: "We start every engagement with a discovery call to understand your goals, challenges, and timeline. From there, we recommend the right approach — whether that's a full product build, brand refresh, or targeted AI integration."
+      question: "What does a typical timeline look like?",
+      answer: "Most projects run in 2–6 weeks, depending on scope. Week 1: Discovery + goals + audit + direction. Week 2–3: Strategy + copy structure + design system. Week 3–5: Production (website, creatives, content, ads, automation). Week 5–6: QA + launch + tracking + optimisation plan. If you need something faster, we can run a sprint-based delivery."
     },
     {
-      question: "Do you offer customized solutions or standard frameworks?",
-      answer: "Everything we build is custom. We don't believe in one-size-fits-all solutions. Each project is tailored to your specific business context, users, and growth objectives."
+      question: "What do you need from us to start?",
+      answer: "To move fast and avoid rework, we usually need: Your business goal (leads, conversions, awareness, hiring, etc.), offer + pricing, access to existing assets (logo, brand files, website, social handles), any past performance data, and one decision-maker for approvals to keep timelines clean."
     },
     {
-      question: "How do you measure success with clients?",
-      answer: "We define success metrics upfront with every client — whether that's user adoption, conversion rates, operational efficiency, or brand recognition. We track and report on these throughout our engagement."
+      question: "How is pricing structured?",
+      answer: "Pricing is based on scope + complexity + speed, not \"hours burned.\" We work in 3 models: Project-based (fixed scope, fixed price — best for websites, launches), Monthly retainer (ongoing content/ads/optimisation — best for growth), and Sprint packages (short, high-output cycles — best for fast turnaround). After discovery, you'll get a clear breakdown of deliverables and cost."
     },
     {
-      question: "How can I get started with Gray Solutions?",
-      answer: "Simply reach out via our contact form or email us at hello@graysolutions.in. We'll schedule a free discovery call to discuss your project and see if we're a good fit."
+      question: "What causes timelines or budgets to change?",
+      answer: "Usually one of these: Scope expands after kickoff (new pages, extra creatives, new features), feedback loops take longer than planned (delayed approvals), new requirements appear mid-way, or missing inputs (assets, logins, product details, past data). We'll always flag changes early and document them before moving forward."
+    },
+    {
+      question: "What makes your approach different from a typical agency?",
+      answer: "Most agencies sell activity. We sell clarity + execution + outcomes. We build systems, not random creatives. We focus on conversion and performance, not vanity metrics. We keep things minimal, premium, and functional—no clutter. We work with a tight senior team, not a layered outsourcing chain. Every decision ties back to business goals and measurable impact."
     },
   ];
 
