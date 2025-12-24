@@ -339,11 +339,11 @@ export default function About() {
       <section 
         ref={howWeThinkRef}
         className="py-20 md:py-28 relative"
-        style={{ backgroundColor: '#FAFAFA' }}
+        style={{ backgroundColor: '#FAFAFA', minHeight: '100vh' }}
       >
         <div className="max-w-[1120px] mx-auto px-4 md:px-10">
           {/* Mobile Layout */}
-          <div className="lg:hidden space-y-8">
+          <div className="md:hidden space-y-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -403,7 +403,7 @@ export default function About() {
           </div>
 
           {/* Desktop Layout - 2 Column with Sticky Left */}
-          <div className="hidden lg:grid lg:grid-cols-2 gap-12 lg:gap-20">
+          <div className="hidden md:grid md:grid-cols-2 gap-12 lg:gap-20">
             {/* Left Column - Sticky */}
             <div className="relative">
               <div 
