@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 import heroVideo from "@assets/hero-video-horizontal.mp4";
+import iconAnimationVideo from "@assets/Screen_Recording_2025-12-24_at_4.40.56_PM_1766574684352.mov";
 
 export default function Services() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -596,11 +597,8 @@ export default function Services() {
               {
                 title: "Straight talk, zero fluff",
                 description: "We're honest about what works and what doesn't. If your idea is bad, we'll tell you – then help you make it better. No jargon, no sugar-coating.",
-                icon: (
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                  </svg>
-                ),
+                icon: null,
+                videoIcon: iconAnimationVideo,
               },
               {
                 title: "Built for humans, powered by tech",
@@ -642,7 +640,7 @@ export default function Services() {
                   </svg>
                 ),
               },
-            ].map((item, index) => (
+            ].map((item: { title: string; description: string; icon: React.ReactNode; videoIcon?: string }, index) => (
               <div
                 key={index}
                 className="p-8 rounded-2xl"
@@ -653,10 +651,25 @@ export default function Services() {
                 data-testid={`why-choose-us-${index}`}
               >
                 <div 
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 overflow-hidden"
                   style={{ backgroundColor: '#F6F7FA' }}
                 >
-                  {item.icon}
+                  {item.videoIcon ? (
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover"
+                      style={{ 
+                        filter: 'grayscale(100%) contrast(1.2) brightness(0.9)',
+                      }}
+                    >
+                      <source src={item.videoIcon} type="video/mp4" />
+                    </video>
+                  ) : (
+                    item.icon
+                  )}
                 </div>
                 <h3 
                   className="text-xl font-semibold mb-3"
