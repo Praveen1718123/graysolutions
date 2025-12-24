@@ -140,10 +140,10 @@ export default function About() {
         }}
       >
         <div 
-          className="flex items-center justify-between max-w-[1120px] mx-auto w-full"
+          className="flex items-center justify-center"
           style={{
             pointerEvents: 'auto',
-            width: isScrolled ? '420px' : '100%',
+            width: isScrolled ? '180px' : '100%',
             height: isScrolled ? '44px' : '100%',
             marginTop: isScrolled ? '12px' : '0',
             backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : '#FFFFFF',
@@ -151,7 +151,7 @@ export default function About() {
             WebkitBackdropFilter: isScrolled ? 'blur(12px)' : 'none',
             boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.08)' : 'none',
             borderRadius: isScrolled ? '999px' : '0',
-            padding: isScrolled ? '0 24px' : '0 40px',
+            padding: isScrolled ? '0 24px' : '0',
             transition: 'all 500ms cubic-bezier(0.4, 0, 0.2, 1)',
           }}
         >
@@ -161,39 +161,13 @@ export default function About() {
               alt="Gray Solutions Logo" 
               className="cursor-pointer"
               style={{
-                height: isScrolled ? '24px' : '28px',
+                height: isScrolled ? '24px' : '36px',
                 width: 'auto',
                 transition: 'height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
               }}
               data-testid="logo-nav"
             />
           </Link>
-
-          {/* Navigation Links */}
-          <nav 
-            className="hidden md:flex items-center gap-8"
-            style={{
-              opacity: isScrolled ? 0 : 1,
-              pointerEvents: isScrolled ? 'none' : 'auto',
-              transition: 'opacity 300ms ease',
-            }}
-          >
-            <Link href="/services">
-              <span className="text-sm font-medium cursor-pointer hover:opacity-70 transition-opacity" style={{ color: '#1A1A1A' }} data-testid="nav-services">Services</span>
-            </Link>
-            <Link href="/about">
-              <span className="text-sm font-medium cursor-pointer hover:opacity-70 transition-opacity" style={{ color: '#1A1A1A' }} data-testid="nav-about">About Us</span>
-            </Link>
-            <Link href="/case-study/magic-trucks">
-              <span className="text-sm font-medium cursor-pointer hover:opacity-70 transition-opacity" style={{ color: '#1A1A1A' }} data-testid="nav-case-studies">Case Studies</span>
-            </Link>
-            <Link href="/blogs">
-              <span className="text-sm font-medium cursor-pointer hover:opacity-70 transition-opacity" style={{ color: '#1A1A1A' }} data-testid="nav-blogs">Blogs</span>
-            </Link>
-            <Link href="/contact">
-              <span className="text-sm font-medium cursor-pointer hover:opacity-70 transition-opacity" style={{ color: '#1A1A1A' }} data-testid="nav-contact">Contact Us</span>
-            </Link>
-          </nav>
         </div>
       </header>
 
