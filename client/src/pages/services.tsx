@@ -577,6 +577,115 @@ export default function Services() {
         </div>
       </section>
 
+      {/* Why Choose Us Section */}
+      <section 
+        className="py-16 md:py-24 relative z-10"
+        style={{ backgroundColor: '#F6F7FA' }}
+      >
+        <div className="max-w-[1120px] mx-auto px-6 md:px-10">
+          <h2 
+            className="text-2xl md:text-3xl font-bold mb-12"
+            style={{ color: '#1A1A1A' }}
+            data-testid="section-why-choose-us"
+          >
+            Why choose us?
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                title: "Straight talk, zero fluff",
+                description: "We're honest about what works and what doesn't. If your idea is bad, we'll tell you – then help you make it better. No jargon, no sugar-coating.",
+                icon: (
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                  </svg>
+                ),
+              },
+              {
+                title: "Built for humans, powered by tech",
+                description: "Yes, we love AI and automation, but we start with empathy. We design experiences that feel natural and inclusive, using technology as a tool – not a gimmick.",
+                icon: (
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                  </svg>
+                ),
+              },
+              {
+                title: "ROI or GTFO",
+                description: "We don't chase likes. We measure success in real business terms: increased conversions, lower churn, faster workflows. You'll see dashboards that track the metrics that actually matter.",
+                icon: (
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="12" y1="1" x2="12" y2="23" />
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                  </svg>
+                ),
+              },
+              {
+                title: "Future-ready mindset",
+                description: "While others are still buzzing about Industry 4.0, we're already testing what's next – from generative AI to immersive experiences. We help you stay ahead without chasing every fad.",
+                icon: (
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                ),
+              },
+              {
+                title: "Small team, big impact",
+                description: "You get the agility and personal attention of a boutique studio with the capabilities of a larger network. We scale when needed but never make you feel like a number.",
+                icon: (
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                ),
+              },
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="p-8 rounded-2xl"
+                style={{ 
+                  backgroundColor: '#FFFFFF',
+                  border: '1px solid rgba(0,0,0,0.05)',
+                }}
+                data-testid={`why-choose-us-${index}`}
+              >
+                <div 
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
+                  style={{ backgroundColor: '#F6F7FA' }}
+                >
+                  {item.icon}
+                </div>
+                <h3 
+                  className="text-xl font-semibold mb-3"
+                  style={{ color: '#1A1A1A' }}
+                >
+                  {item.title}
+                </h3>
+                <p 
+                  className="text-base leading-relaxed mb-6"
+                  style={{ color: 'rgba(26,26,26,0.6)' }}
+                >
+                  {item.description}
+                </p>
+                <button 
+                  className="flex items-center gap-2 text-sm font-medium"
+                  style={{ color: '#1A1A1A' }}
+                >
+                  Read More
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Main Content - Other Sections */}
       <motion.main 
         className="max-w-[1120px] mx-auto px-6 md:px-10 relative z-10"
