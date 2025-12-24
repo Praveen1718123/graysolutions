@@ -121,7 +121,7 @@ export default function Contact() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Office <span style={{ fontStyle: 'italic', fontWeight: 400 }}>Location</span>
+            Office Location
           </motion.h1>
 
           {/* Subtext */}
@@ -209,7 +209,7 @@ export default function Contact() {
                   letterSpacing: '-0.02em',
                 }}
               >
-                Drop Us a <span style={{ fontStyle: 'italic', fontWeight: 400 }}>Message</span>
+                Drop Us a Message
               </h2>
 
               {/* Description */}
