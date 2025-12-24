@@ -11,6 +11,7 @@ import Blogs from "@/pages/blogs";
 import BlogDetail from "@/pages/blog-detail";
 import MagicTrucks from "@/pages/magic-trucks";
 import Eagle from "@/pages/eagle";
+import Contact from "@/pages/contact";
 
 function Router() {
   return (
@@ -22,7 +23,7 @@ function Router() {
       <Route path="/case-study/eagle" component={Eagle} />
       <Route path="/blogs" component={Blogs} />
       <Route path="/blog/:slug" component={BlogDetail} />
-      <Route path="/contact" component={Landing} />
+      <Route path="/contact" component={Contact} />
       <Route component={NotFound} />
     </Switch>
   );
