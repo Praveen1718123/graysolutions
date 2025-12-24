@@ -132,6 +132,7 @@ export default function Landing() {
                   "Magic Trucks": "/case-study/magic-trucks",
                   "Eagle": "/case-study/eagle",
                   "TIX": "/case-study/tix",
+                  "Gray Solutions": "/case-study/gray-solutions",
                 };
                 const caseStudyLink = caseStudyLinks[filter] || null;
                 
