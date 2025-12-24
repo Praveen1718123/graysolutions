@@ -439,28 +439,23 @@ export default function About() {
             <div>
               <div className="space-y-8">
                 {principles.map((principle, index) => (
-                  <motion.div
+                  <div
                     key={index}
                     className="p-10 rounded-2xl flex gap-5"
                     style={{ 
-                      opacity: cardOpacities[index],
-                      y: cardYs[index],
                       backgroundColor: '#FFFFFF',
                       boxShadow: '0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03)',
                       border: '1px solid rgba(0,0,0,0.04)',
-                      minHeight: '220px',
+                      minHeight: '280px',
                     }}
                     data-testid={`principle-${index}`}
                   >
-                    <motion.div 
+                    <div 
                       className="flex-shrink-0 mt-1"
-                      style={{ 
-                        color: '#1A1A1A',
-                        opacity: cardOpacities[index],
-                      }}
+                      style={{ color: '#1A1A1A' }}
                     >
                       {principle.icon}
-                    </motion.div>
+                    </div>
                     <div>
                       <h3 className="text-lg font-semibold mb-3" style={{ color: '#1A1A1A' }}>
                         {principle.title}
@@ -469,11 +464,11 @@ export default function About() {
                         {principle.description}
                       </p>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
               {/* Extra space to enable sticky scroll effect */}
-              <div style={{ height: '150px' }} />
+              <div style={{ height: '300px' }} />
             </div>
           </div>
         </div>
