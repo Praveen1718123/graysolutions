@@ -650,11 +650,8 @@ export default function Services() {
                 }}
                 data-testid={`why-choose-us-${index}`}
               >
-                <div 
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 overflow-hidden"
-                  style={{ backgroundColor: '#F6F7FA' }}
-                >
                   {item.videoIcon ? (
+                  <div className="w-20 h-20 mb-5 overflow-hidden">
                     <video
                       autoPlay
                       loop
@@ -667,10 +664,15 @@ export default function Services() {
                     >
                       <source src={item.videoIcon} type="video/mp4" />
                     </video>
-                  ) : (
-                    item.icon
-                  )}
-                </div>
+                  </div>
+                ) : (
+                  <div 
+                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
+                    style={{ backgroundColor: '#F6F7FA' }}
+                  >
+                    {item.icon}
+                  </div>
+                )}
                 <h3 
                   className="text-xl font-semibold mb-3"
                   style={{ color: '#1A1A1A' }}
