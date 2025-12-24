@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import logoImage from "@assets/Group_69_(1)_1764854226570.png";
+import ctaImage from "@assets/stock_images/two_professionals_co_f8f9803a.jpg";
 
 export default function Contact() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -553,6 +554,104 @@ export default function Contact() {
                   );
                 })}
               </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section 
+        className="py-16 md:py-24 relative z-10"
+        style={{ backgroundColor: '#1A1A1A' }}
+      >
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left - Content */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              {/* Badge */}
+              <span 
+                className="text-sm font-medium mb-6 block"
+                style={{ color: '#FFFFFF' }}
+              >
+                [CTA]
+              </span>
+
+              {/* Heading */}
+              <h2 
+                className="font-bold mb-8"
+                style={{ 
+                  fontSize: 'clamp(32px, 4.5vw, 52px)',
+                  lineHeight: '1.1',
+                  color: '#FFFFFF',
+                  letterSpacing: '-0.02em',
+                }}
+              >
+                Work with Experts to<br />
+                Grow Faster & Run<br />
+                <span style={{ fontStyle: 'italic', fontWeight: 400 }}>Smarter</span>
+              </h2>
+
+              {/* CTA Button */}
+              <a 
+                href="#contact-form"
+                className="inline-flex items-center gap-3 px-6 py-3 rounded-full text-sm font-medium transition-all hover:shadow-lg mb-10"
+                style={{ 
+                  backgroundColor: '#FFFFFF',
+                  color: '#1A1A1A',
+                }}
+                data-testid="button-get-started"
+              >
+                Get Started
+                <span 
+                  className="w-8 h-8 rounded-full flex items-center justify-center"
+                  style={{ backgroundColor: '#1A1A1A' }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2">
+                    <path d="M7 17L17 7M17 7H7M17 7V17" />
+                  </svg>
+                </span>
+              </a>
+
+              {/* Bullet Points */}
+              <ul className="space-y-3">
+                {[
+                  "Schedule a Free Consultation",
+                  "Discover Custom Solutions",
+                  "Start Building Your Competitive Advantage"
+                ].map((item, idx) => (
+                  <li 
+                    key={idx}
+                    className="flex items-center gap-3 text-base"
+                    style={{ color: '#FFFFFF' }}
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="10" fill="#FFFFFF" fillOpacity="0.2" />
+                      <path d="M8 12l3 3 5-6" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* Right - Image */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="relative"
+            >
+              <img 
+                src={ctaImage}
+                alt="Team collaborating on laptop"
+                className="w-full rounded-2xl object-cover"
+                style={{ maxHeight: '450px' }}
+              />
             </motion.div>
           </div>
         </div>
