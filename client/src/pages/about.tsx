@@ -314,7 +314,7 @@ export default function About() {
               }}
             >
               <video
-                src={heroVideo}
+                src={benefitsVideo}
                 autoPlay
                 loop
                 muted
@@ -695,7 +695,7 @@ export default function About() {
                   }}
                 >
                   <video
-                    src={benefitsVideo}
+                    src={heroVideo}
                     autoPlay
                     loop
                     muted
