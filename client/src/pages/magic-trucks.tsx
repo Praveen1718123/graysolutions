@@ -42,16 +42,13 @@ export default function MagicTrucks() {
     : galleryImages.filter(img => img.category === activeGalleryTab);
 
   return (
-    <motion.div 
-      className="min-h-screen w-full"
+    <div 
+      className="min-h-screen w-full font-sans overflow-x-hidden"
       style={{ 
-        backgroundColor: '#F6F7FA',
+        backgroundColor: '#FAFAFA',
         color: '#1A1A1A',
         fontFamily: '-apple-system, system-ui, sans-serif'
       }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.4 }}
     >
       {/* Fixed Header - Pill transformation on scroll */}
       <header 
@@ -70,7 +67,7 @@ export default function MagicTrucks() {
             width: isScrolled ? '180px' : '100%',
             height: isScrolled ? '44px' : '100%',
             marginTop: isScrolled ? '12px' : '0',
-            backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : '#F6F7FA',
+            backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : '#FFFFFF',
             backdropFilter: isScrolled ? 'blur(12px)' : 'none',
             WebkitBackdropFilter: isScrolled ? 'blur(12px)' : 'none',
             boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.1)' : 'none',
@@ -96,7 +93,7 @@ export default function MagicTrucks() {
       </header>
 
       {/* Hero Section */}
-      <section className="pt-24 md:pt-32 pb-12 md:pb-24" style={{ backgroundColor: '#F6F7FA' }}>
+      <section className="pt-24 md:pt-32 pb-12 md:pb-24" style={{ backgroundColor: '#FAFAFA' }}>
         <div className="max-w-[1400px] mx-auto px-4 md:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left - Content */}
@@ -106,15 +103,20 @@ export default function MagicTrucks() {
               transition={{ duration: 0.6 }}
             >
               <h1 
-                className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6"
-                style={{ color: '#1A1A1A' }}
+                className="font-bold mb-6"
+                style={{ 
+                  fontSize: 'clamp(32px, 4.5vw, 52px)',
+                  lineHeight: '1.1',
+                  color: '#1A1A1A',
+                  letterSpacing: '-0.02em',
+                }}
                 data-testid="hero-headline"
               >
                 Magic Trucks — Transporting in India. Made Simple.
               </h1>
               <p 
-                className="text-lg md:text-xl leading-relaxed mb-8"
-                style={{ color: 'rgba(26,26,26,0.6)' }}
+                className="text-base md:text-lg leading-relaxed mb-8"
+                style={{ color: '#666666' }}
               >
                 A logistics platform concept built to reduce coordination chaos and make shipments feel predictable — for shippers, ops teams, and drivers.
               </p>
@@ -129,7 +131,7 @@ export default function MagicTrucks() {
                 </button>
                 <button 
                   className="px-7 py-3.5 rounded-full font-medium text-sm transition-all hover:bg-gray-100"
-                  style={{ backgroundColor: 'transparent', color: '#1A1A1A', border: '1px solid rgba(26,26,26,0.2)' }}
+                  style={{ backgroundColor: 'transparent', color: '#1A1A1A', border: '1px solid #E5E5E5' }}
                 >
                   Talk to Gray Solutions
                 </button>
@@ -141,7 +143,7 @@ export default function MagicTrucks() {
                   <span 
                     key={tag}
                     className="px-3 py-1.5 rounded-full text-xs font-medium"
-                    style={{ backgroundColor: 'rgba(26,26,26,0.06)', color: 'rgba(26,26,26,0.6)' }}
+                    style={{ backgroundColor: '#F5F5F5', color: '#666666' }}
                   >
                     {tag}
                   </span>
@@ -194,7 +196,7 @@ export default function MagicTrucks() {
                 <h3 className="text-lg font-semibold mb-3" style={{ color: '#1A1A1A' }}>
                   {item.title}
                 </h3>
-                <p className="text-base leading-relaxed" style={{ color: 'rgba(26,26,26,0.6)' }}>
+                <p className="text-base leading-relaxed" style={{ color: '#666666' }}>
                   {item.text}
                 </p>
               </motion.div>
@@ -204,7 +206,7 @@ export default function MagicTrucks() {
       </section>
 
       {/* Product Suite Banner */}
-      <section className="py-8 md:py-12" style={{ backgroundColor: '#F6F7FA' }}>
+      <section className="py-8 md:py-12" style={{ backgroundColor: '#FAFAFA' }}>
         <div className="max-w-[1400px] mx-auto px-4 md:px-10">
           <motion.img 
             src={laptopScreens}
@@ -241,7 +243,7 @@ export default function MagicTrucks() {
               <motion.div
                 key={idx}
                 className="p-8 rounded-2xl"
-                style={{ backgroundColor: '#F6F7FA' }}
+                style={{ backgroundColor: '#FAFAFA' }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -249,14 +251,14 @@ export default function MagicTrucks() {
               >
                 <span 
                   className="text-4xl font-bold block mb-4"
-                  style={{ color: 'rgba(26,26,26,0.15)' }}
+                  style={{ color: '#D4D4D4' }}
                 >
                   {item.num}
                 </span>
                 <h3 className="text-lg font-semibold mb-3" style={{ color: '#1A1A1A' }}>
                   {item.title}
                 </h3>
-                <p className="text-base leading-relaxed" style={{ color: 'rgba(26,26,26,0.6)' }}>
+                <p className="text-base leading-relaxed" style={{ color: '#666666' }}>
                   {item.text}
                 </p>
               </motion.div>
@@ -266,7 +268,7 @@ export default function MagicTrucks() {
       </section>
 
       {/* The Big Bet Section */}
-      <section className="py-12 md:py-28" style={{ backgroundColor: '#F6F7FA' }}>
+      <section className="py-12 md:py-28" style={{ backgroundColor: '#FAFAFA' }}>
         <div className="max-w-[1200px] mx-auto px-4 md:px-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <motion.div
@@ -278,7 +280,7 @@ export default function MagicTrucks() {
               <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#1A1A1A' }}>
                 The Big Bet
               </h2>
-              <p className="text-lg leading-relaxed mb-8" style={{ color: 'rgba(26,26,26,0.6)' }}>
+              <p className="text-lg leading-relaxed mb-8" style={{ color: '#666666' }}>
                 Build a logistics system that becomes the single source of truth for every shipment — while staying practical for India's real-world operations.
               </p>
               
@@ -291,7 +293,7 @@ export default function MagicTrucks() {
                   "Build trust beyond the app: brand + consistency makes businesses feel safe choosing you.",
                   "Optimize for repeat usage: the goal isn't one booking — it's predictable operations that bring customers back.",
                 ].map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-base" style={{ color: 'rgba(26,26,26,0.7)' }}>
+                  <li key={idx} className="flex items-start gap-3 text-base" style={{ color: '#666666' }}>
                     <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#1A1A1A' }} />
                     {item}
                   </li>
@@ -382,7 +384,7 @@ export default function MagicTrucks() {
       </section>
 
       {/* Gallery Section */}
-      <section className="py-12 md:py-28" style={{ backgroundColor: '#F6F7FA' }}>
+      <section className="py-12 md:py-28" style={{ backgroundColor: '#FAFAFA' }}>
         <div className="max-w-[1400px] mx-auto px-4 md:px-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -393,7 +395,7 @@ export default function MagicTrucks() {
             <h2 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: '#1A1A1A' }}>
               Proof of Work
             </h2>
-            <p className="text-lg" style={{ color: 'rgba(26,26,26,0.5)' }}>
+            <p className="text-lg" style={{ color: '#666666' }}>
               Screens, flows, and brand applications that make the system feel real.
             </p>
           </motion.div>
@@ -407,8 +409,8 @@ export default function MagicTrucks() {
                 className="px-5 py-2.5 rounded-full text-sm font-medium transition-all"
                 style={{
                   backgroundColor: activeGalleryTab === tab ? '#1A1A1A' : 'transparent',
-                  color: activeGalleryTab === tab ? '#FFFFFF' : 'rgba(26,26,26,0.6)',
-                  border: activeGalleryTab === tab ? 'none' : '1px solid rgba(26,26,26,0.15)',
+                  color: activeGalleryTab === tab ? '#FFFFFF' : '#666666',
+                  border: activeGalleryTab === tab ? 'none' : '1px solid #D4D4D4',
                 }}
               >
                 {tab}
@@ -431,7 +433,7 @@ export default function MagicTrucks() {
                   alt={item.caption}
                   className="w-full rounded-2xl mb-3"
                 />
-                <p className="text-sm" style={{ color: 'rgba(26,26,26,0.5)' }}>
+                <p className="text-sm" style={{ color: '#666666' }}>
                   {item.caption}
                 </p>
               </motion.div>
@@ -456,7 +458,7 @@ export default function MagicTrucks() {
       </section>
 
       {/* Closing CTA Section */}
-      <section className="py-12 md:py-28" style={{ backgroundColor: '#F6F7FA' }}>
+      <section className="py-12 md:py-28" style={{ backgroundColor: '#FAFAFA' }}>
         <div className="max-w-[800px] mx-auto px-4 md:px-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -467,7 +469,7 @@ export default function MagicTrucks() {
             <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#1A1A1A' }}>
               Want your product to feel world-standard and still India-real?
             </h2>
-            <p className="text-lg mb-8" style={{ color: 'rgba(26,26,26,0.6)' }}>
+            <p className="text-lg mb-8" style={{ color: '#666666' }}>
               We design systems that don't just look good — they reduce friction, build trust, and drive adoption.
             </p>
             <Link href="/contact">
@@ -497,6 +499,6 @@ export default function MagicTrucks() {
           </div>
         </div>
       </footer>
-    </motion.div>
+    </div>
   );
 }

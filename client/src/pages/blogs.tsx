@@ -103,7 +103,7 @@ export default function Blogs() {
             width: isScrolled ? '180px' : '100%',
             height: isScrolled ? '44px' : '100%',
             marginTop: isScrolled ? '12px' : '0',
-            backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : '#FAFAFA',
+            backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : '#FFFFFF',
             backdropFilter: isScrolled ? 'blur(12px)' : 'none',
             WebkitBackdropFilter: isScrolled ? 'blur(12px)' : 'none',
             boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.08)' : 'none',

@@ -124,16 +124,13 @@ export default function Services() {
   }, []);
 
   return (
-    <motion.div 
-      className="min-h-screen w-full font-sans"
+    <div 
+      className="min-h-screen w-full font-sans overflow-x-hidden"
       style={{ 
-        backgroundColor: '#F6F7FA',
-        color: '#0F172A',
+        backgroundColor: '#FAFAFA',
+        color: '#1A1A1A',
         fontFamily: '-apple-system, system-ui, sans-serif'
       }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.4 }}
     >
       {/* Fixed Header - Full width initially, transforms to floating pill on scroll */}
       <header 
@@ -152,7 +149,7 @@ export default function Services() {
             width: isScrolled ? '180px' : '100%',
             height: isScrolled ? '44px' : '100%',
             marginTop: isScrolled ? '12px' : '0',
-            backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : '#F6F7FA',
+            backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : '#FFFFFF',
             backdropFilter: isScrolled ? 'blur(12px)' : 'none',
             WebkitBackdropFilter: isScrolled ? 'blur(12px)' : 'none',
             boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.1)' : 'none',
@@ -182,7 +179,7 @@ export default function Services() {
       <section 
         ref={heroRef}
         className="relative"
-        style={{ backgroundColor: '#F6F7FA', paddingTop: '80px', height: '300vh' }}
+        style={{ backgroundColor: '#FAFAFA', paddingTop: '80px', height: '300vh' }}
       >
         <div 
           className="sticky overflow-hidden"
@@ -202,7 +199,13 @@ export default function Services() {
               }}
             >
               <motion.h1 
-                className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+                className="font-bold"
+                style={{ 
+                  fontSize: 'clamp(32px, 4.5vw, 52px)',
+                  lineHeight: '1.1',
+                  color: '#1A1A1A',
+                  letterSpacing: '-0.02em',
+                }}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -257,7 +260,7 @@ export default function Services() {
             <div className="mb-10">
               <span 
                 className="text-sm font-medium tracking-wide mb-3 block"
-                style={{ color: 'rgba(26,26,26,0.5)' }}
+                style={{ color: '#666666' }}
               >
                 Capabilities
               </span>
@@ -269,7 +272,7 @@ export default function Services() {
               </h2>
               <p 
                 className="text-base leading-relaxed mb-6"
-                style={{ color: 'rgba(26,26,26,0.6)' }}
+                style={{ color: '#666666' }}
               >
                 Gray Solutions designs brands, digital products, and AI-powered systems that actually move the business.
               </p>
@@ -283,7 +286,7 @@ export default function Services() {
                 </button>
                 <button 
                   className="px-6 py-3 rounded-full font-medium text-sm"
-                  style={{ backgroundColor: 'transparent', color: '#1A1A1A', border: '1px solid rgba(26,26,26,0.2)' }}
+                  style={{ backgroundColor: 'transparent', color: '#1A1A1A', border: '1px solid #E5E5E5' }}
                   data-testid="cta-see-work-mobile"
                 >
                   See Work
@@ -291,7 +294,7 @@ export default function Services() {
               </div>
               <span 
                 className="text-xs"
-                style={{ color: 'rgba(26,26,26,0.4)' }}
+                style={{ color: '#666666' }}
               >
                 Based in India. Working globally.
               </span>
@@ -311,7 +314,7 @@ export default function Services() {
                   <div 
                     key={item.id}
                     className="rounded-2xl overflow-hidden"
-                    style={{ backgroundColor: '#F6F7FA' }}
+                    style={{ backgroundColor: '#F5F5F5' }}
                     data-testid={`capability-mobile-${item.id}`}
                   >
                     <button
@@ -331,7 +334,7 @@ export default function Services() {
                       style={{ maxHeight: isExpanded ? '500px' : '0', opacity: isExpanded ? 1 : 0 }}
                     >
                       <div className="px-6 pb-6">
-                        <p className="text-base leading-relaxed" style={{ color: 'rgba(26,26,26,0.6)' }}>
+                        <p className="text-base leading-relaxed" style={{ color: '#666666' }}>
                           {item.description}
                         </p>
                       </div>
@@ -352,7 +355,7 @@ export default function Services() {
               >
                 <span 
                   className="text-sm font-medium tracking-wide mb-4 block"
-                  style={{ color: 'rgba(26,26,26,0.5)' }}
+                  style={{ color: '#666666' }}
                 >
                   Capabilities
                 </span>
@@ -364,7 +367,7 @@ export default function Services() {
                 </h2>
                 <p 
                   className="text-lg leading-relaxed mb-8"
-                  style={{ color: 'rgba(26,26,26,0.6)', maxWidth: '400px' }}
+                  style={{ color: '#666666', maxWidth: '400px' }}
                 >
                   Gray Solutions designs brands, digital products, and AI-powered systems that actually move the business.
                 </p>
@@ -378,7 +381,7 @@ export default function Services() {
                   </button>
                   <button 
                     className="px-7 py-3.5 rounded-full font-medium text-sm hover:bg-gray-50 transition-colors"
-                    style={{ backgroundColor: 'transparent', color: '#1A1A1A', border: '1px solid rgba(26,26,26,0.2)' }}
+                    style={{ backgroundColor: 'transparent', color: '#1A1A1A', border: '1px solid #E5E5E5' }}
                     data-testid="cta-see-work"
                   >
                     See Work
@@ -386,7 +389,7 @@ export default function Services() {
                 </div>
                 <span 
                   className="text-xs"
-                  style={{ color: 'rgba(26,26,26,0.4)' }}
+                  style={{ color: '#666666' }}
                 >
                   Based in India. Working globally.
                 </span>
@@ -409,7 +412,7 @@ export default function Services() {
                       key={item.id}
                       className="rounded-2xl overflow-hidden transition-shadow duration-200"
                       style={{ 
-                        backgroundColor: '#F6F7FA', 
+                        backgroundColor: '#FAFAFA', 
                         border: 'none',
                       }}
                       data-testid={`capability-${item.id}`}
@@ -439,7 +442,7 @@ export default function Services() {
                         <div className="px-8 pb-8">
                           <p 
                             className="text-lg leading-relaxed" 
-                            style={{ color: 'rgba(26,26,26,0.6)' }}
+                            style={{ color: '#666666' }}
                           >
                             {item.description}
                           </p>
@@ -457,12 +460,16 @@ export default function Services() {
       {/* Why Choose Us Section */}
       <section 
         className="py-16 md:py-24 relative z-10"
-        style={{ backgroundColor: '#F6F7FA' }}
+        style={{ backgroundColor: '#FAFAFA' }}
       >
         <div className="max-w-[1120px] mx-auto px-6 md:px-10">
           <h2 
-            className="text-2xl md:text-3xl font-bold mb-12"
-            style={{ color: '#1A1A1A' }}
+            className="font-bold mb-12"
+            style={{ 
+              fontSize: 'clamp(24px, 3vw, 36px)',
+              color: '#1A1A1A',
+              letterSpacing: '-0.02em',
+            }}
             data-testid="section-why-choose-us"
           >
             Why choose us?
@@ -536,7 +543,7 @@ export default function Services() {
                 </h3>
                 <p 
                   className="text-base leading-relaxed mb-6"
-                  style={{ color: 'rgba(26,26,26,0.6)' }}
+                  style={{ color: '#666666' }}
                 >
                   {item.description}
                 </p>
@@ -555,6 +562,6 @@ export default function Services() {
           </div>
         </div>
       </section>
-    </motion.div>
+    </div>
   );
 }
