@@ -374,29 +374,86 @@ export default function BlogDetail() {
             </motion.article>
           </div>
 
-          {/* Back to Blogs */}
-          <motion.div 
-            className="mt-16 pt-8 border-t border-black/10"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-          >
-            <Link href="/blogs">
-              <a 
-                className="inline-flex items-center gap-2 text-sm font-medium hover:gap-3 transition-all"
-                style={{ color: post.categoryColor }}
-                data-testid="back-to-blogs"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M19 12H5M12 19l-7-7 7-7"/>
-                </svg>
-                Back to all articles
-              </a>
-            </Link>
-          </motion.div>
-
         </div>
       </main>
+
+      {/* More Articles Section */}
+      <section 
+        className="py-16 md:py-20"
+        style={{ backgroundColor: '#FAFAFA' }}
+      >
+        <div className="max-w-[1200px] mx-auto px-4 md:px-8">
+          <motion.h2 
+            className="text-2xl md:text-3xl font-bold text-center mb-12"
+            style={{ color: '#1A1A1A' }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            More Articles
+          </motion.h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {Object.values(blogPostsData)
+              .filter(p => p.slug !== slug)
+              .slice(0, 3)
+              .map((relatedPost, index) => (
+                <Link key={relatedPost.id} href={`/blog/${relatedPost.slug}`}>
+                  <motion.article
+                    className="rounded-2xl overflow-hidden cursor-pointer group"
+                    style={{
+                      backgroundColor: '#FFFFFF',
+                      boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
+                      border: '1px solid rgba(0,0,0,0.04)',
+                    }}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    whileHover={{ y: -4, boxShadow: '0 12px 40px rgba(0,0,0,0.08)' }}
+                    data-testid={`related-blog-${relatedPost.id}`}
+                  >
+                    {/* Image Area */}
+                    <div 
+                      className="aspect-[4/3] flex items-center justify-center p-6 overflow-hidden"
+                      style={{ backgroundColor: relatedPost.bgColor }}
+                    >
+                      <div className="w-full h-full rounded-xl bg-white/60 flex items-center justify-center" style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
+                        <div className="text-center">
+                          <div className="w-16 h-16 mx-auto mb-3 rounded-xl" style={{ backgroundColor: relatedPost.categoryColor + '20' }}>
+                            <div className="w-full h-full flex items-center justify-center">
+                              <div className="w-8 h-8 rounded-lg" style={{ backgroundColor: relatedPost.categoryColor + '40' }} />
+                            </div>
+                          </div>
+                          <div className="space-y-1.5">
+                            <div className="h-2 w-24 mx-auto rounded-full" style={{ backgroundColor: 'rgba(0,0,0,0.1)' }} />
+                            <div className="h-2 w-16 mx-auto rounded-full" style={{ backgroundColor: 'rgba(0,0,0,0.06)' }} />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="p-5">
+                      <span 
+                        className="text-sm font-medium"
+                        style={{ color: relatedPost.categoryColor }}
+                      >
+                        {relatedPost.category}
+                      </span>
+                      <h3 
+                        className="text-lg font-bold mt-2 leading-snug group-hover:text-gray-600 transition-colors"
+                        style={{ color: '#1A1A1A' }}
+                      >
+                        {relatedPost.title}
+                      </h3>
+                    </div>
+                  </motion.article>
+                </Link>
+              ))}
+          </div>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer 
