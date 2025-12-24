@@ -321,8 +321,10 @@ export default function About() {
                 playsInline
                 className="w-full h-auto"
                 style={{
-                  filter: 'grayscale(100%) contrast(1.2) brightness(1.05)',
-                  imageRendering: 'crisp-edges',
+                  filter: 'grayscale(100%) contrast(1.4) brightness(1.1) saturate(1.2)',
+                  imageRendering: 'high-quality',
+                  WebkitBackfaceVisibility: 'hidden',
+                  backfaceVisibility: 'hidden',
                 }}
               />
             </div>
