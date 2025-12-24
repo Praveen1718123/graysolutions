@@ -656,8 +656,7 @@ export default function Services() {
                     alt=""
                     className="w-24 h-24 mb-5 object-contain"
                     style={{ 
-                      filter: 'grayscale(100%) contrast(1.1) brightness(0.95)',
-                      mixBlendMode: 'multiply',
+                      filter: 'grayscale(100%) contrast(1.3) brightness(1.15)',
                     }}
                   />
                 ) : (
