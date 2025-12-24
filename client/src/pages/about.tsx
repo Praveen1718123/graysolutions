@@ -43,6 +43,7 @@ export default function About() {
   const [isScrolled, setIsScrolled] = useState(false);
   const metricsRef = useRef(null);
   const metricsInView = useInView(metricsRef, { once: true, margin: "-100px" });
+  const howWeThinkRef = useRef(null);
   
   useEffect(() => {
     const handleScroll = () => {
