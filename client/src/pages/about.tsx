@@ -121,16 +121,13 @@ export default function About() {
   ];
 
   return (
-    <motion.div 
+    <div 
       className="min-h-screen w-full font-sans overflow-x-hidden"
       style={{ 
         backgroundColor: '#FAFAFA',
         color: '#1A1A1A',
         fontFamily: '-apple-system, system-ui, sans-serif',
       }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.4 }}
     >
       {/* Fixed Header */}
       <header 
@@ -1152,6 +1149,6 @@ export default function About() {
           </div>
         </div>
       </footer>
-    </motion.div>
+    </div>
   );
 }
