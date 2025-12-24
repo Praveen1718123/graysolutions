@@ -651,16 +651,14 @@ export default function Services() {
                 data-testid={`why-choose-us-${index}`}
               >
                   {item.imageIcon ? (
-                  <div className="w-16 h-16 mb-5">
-                    <img
-                      src={item.imageIcon}
-                      alt=""
-                      className="w-full h-full object-contain"
-                      style={{ 
-                        filter: 'grayscale(100%) contrast(1.1) brightness(0.95)',
-                      }}
-                    />
-                  </div>
+                  <img
+                    src={item.imageIcon}
+                    alt=""
+                    className="w-24 h-24 mb-5 object-contain"
+                    style={{ 
+                      filter: 'grayscale(100%) contrast(1.1) brightness(0.95)',
+                    }}
+                  />
                 ) : (
                   <div 
                     className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
