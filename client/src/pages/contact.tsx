@@ -178,146 +178,238 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Contact Form Section */}
+      {/* Drop Us a Message Section */}
       <section 
         className="py-16 md:py-24 relative z-10"
         style={{ backgroundColor: '#FAFAFA' }}
       >
-        <div className="max-w-[720px] mx-auto px-6 md:px-10">
-          <motion.h2 
-            className="font-bold mb-4 text-center"
-            style={{ 
-              fontSize: 'clamp(24px, 3vw, 36px)',
-              color: '#1A1A1A',
-              letterSpacing: '-0.02em',
-            }}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            Get in Touch
-          </motion.h2>
-          <motion.p 
-            className="text-base md:text-lg text-center mb-10"
-            style={{ color: '#666666' }}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-          >
-            Have a project in mind? Let's talk about it.
-          </motion.p>
-
-          <motion.form 
-            className="space-y-6" 
-            data-testid="contact-form"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div>
-                <label 
-                  className="block text-sm font-medium mb-2"
-                  style={{ color: '#1A1A1A' }}
-                >
-                  First Name
-                </label>
-                <input 
-                  type="text"
-                  className="w-full px-4 py-3 rounded-xl text-base transition-all"
-                  style={{ 
-                    backgroundColor: '#FFFFFF',
-                    border: '1px solid #E5E5E5',
-                    color: '#1A1A1A',
-                  }}
-                  placeholder="John"
-                  data-testid="input-first-name"
-                />
-              </div>
-              <div>
-                <label 
-                  className="block text-sm font-medium mb-2"
-                  style={{ color: '#1A1A1A' }}
-                >
-                  Last Name
-                </label>
-                <input 
-                  type="text"
-                  className="w-full px-4 py-3 rounded-xl text-base transition-all"
-                  style={{ 
-                    backgroundColor: '#FFFFFF',
-                    border: '1px solid #E5E5E5',
-                    color: '#1A1A1A',
-                  }}
-                  placeholder="Doe"
-                  data-testid="input-last-name"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label 
-                className="block text-sm font-medium mb-2"
-                style={{ color: '#1A1A1A' }}
-              >
-                Email
-              </label>
-              <input 
-                type="email"
-                className="w-full px-4 py-3 rounded-xl text-base transition-all"
-                style={{ 
-                  backgroundColor: '#FFFFFF',
-                  border: '1px solid #E5E5E5',
-                  color: '#1A1A1A',
-                }}
-                placeholder="john@example.com"
-                data-testid="input-email"
-              />
-            </div>
-
-            <div>
-              <label 
-                className="block text-sm font-medium mb-2"
-                style={{ color: '#1A1A1A' }}
-              >
-                Message
-              </label>
-              <textarea 
-                className="w-full px-4 py-3 rounded-xl text-base resize-none transition-all"
-                style={{ 
-                  backgroundColor: '#FFFFFF',
-                  border: '1px solid #E5E5E5',
-                  color: '#1A1A1A',
-                  minHeight: '150px',
-                }}
-                placeholder="Tell us about your project..."
-                data-testid="input-message"
-              />
-            </div>
-
-            <button 
-              type="submit"
-              className="w-full py-4 rounded-full text-base font-medium transition-all"
-              style={{ 
-                backgroundColor: '#1A1A1A',
-                color: '#FFFFFF',
-                boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.15)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 2px 12px rgba(0, 0, 0, 0.1)';
-              }}
-              data-testid="button-submit"
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+            {/* Left - Contact Info */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
             >
-              Send Message
-            </button>
-          </motion.form>
+              {/* Badge */}
+              <span 
+                className="text-sm font-medium mb-6 block"
+                style={{ color: '#1A1A1A' }}
+              >
+                [Contact]
+              </span>
+
+              {/* Heading */}
+              <h2 
+                className="font-bold mb-5"
+                style={{ 
+                  fontSize: 'clamp(32px, 4.5vw, 52px)',
+                  lineHeight: '1.1',
+                  color: '#1A1A1A',
+                  letterSpacing: '-0.02em',
+                }}
+              >
+                Drop Us a <span style={{ fontStyle: 'italic', fontWeight: 400 }}>Message</span>
+              </h2>
+
+              {/* Description */}
+              <p 
+                className="text-base md:text-lg leading-relaxed mb-10"
+                style={{ color: '#666666', maxWidth: '400px' }}
+              >
+                We're always happy to hear from you and will get back to you as soon as possible.
+              </p>
+
+              {/* Contact Details */}
+              <div className="space-y-6">
+                {/* Email */}
+                <div className="flex items-start gap-4">
+                  <div 
+                    className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{ backgroundColor: '#1A1A1A' }}
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#FFFFFF">
+                      <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <span 
+                      className="text-sm block mb-1"
+                      style={{ color: '#666666' }}
+                    >
+                      Email
+                    </span>
+                    <a 
+                      href="mailto:hello@graysolutions.in"
+                      className="text-base font-medium hover:opacity-70 transition-opacity"
+                      style={{ color: '#1A1A1A' }}
+                      data-testid="link-email"
+                    >
+                      hello@graysolutions.in
+                    </a>
+                  </div>
+                </div>
+
+                {/* Phone */}
+                <div className="flex items-start gap-4">
+                  <div 
+                    className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{ backgroundColor: '#1A1A1A' }}
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#FFFFFF">
+                      <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <span 
+                      className="text-sm block mb-1"
+                      style={{ color: '#666666' }}
+                    >
+                      Call
+                    </span>
+                    <a 
+                      href="tel:+919876543210"
+                      className="text-base font-medium hover:opacity-70 transition-opacity"
+                      style={{ color: '#1A1A1A' }}
+                      data-testid="link-phone"
+                    >
+                      +91 98765 43210
+                    </a>
+                  </div>
+                </div>
+
+                {/* Location */}
+                <div className="flex items-start gap-4">
+                  <div 
+                    className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{ backgroundColor: '#1A1A1A' }}
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#FFFFFF">
+                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <span 
+                      className="text-sm block mb-1"
+                      style={{ color: '#666666' }}
+                    >
+                      Visit Us
+                    </span>
+                    <a 
+                      href="https://maps.google.com/?q=Indiqube+Coworking+Coimbatore"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-base font-medium hover:opacity-70 transition-opacity"
+                      style={{ color: '#1A1A1A' }}
+                      data-testid="link-map"
+                    >
+                      See on Google Map
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Right - Contact Form */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+            >
+              <form 
+                className="space-y-5" 
+                data-testid="contact-form"
+              >
+                {/* Full Name */}
+                <div>
+                  <label 
+                    className="block text-sm font-medium mb-2"
+                    style={{ color: '#1A1A1A' }}
+                  >
+                    Full Name
+                  </label>
+                  <input 
+                    type="text"
+                    className="w-full px-5 py-4 rounded-xl text-base transition-all focus:outline-none focus:ring-2 focus:ring-offset-0"
+                    style={{ 
+                      backgroundColor: '#F5F5F5',
+                      border: 'none',
+                      color: '#1A1A1A',
+                    }}
+                    placeholder="Enter your name"
+                    data-testid="input-full-name"
+                  />
+                </div>
+
+                {/* Email Address */}
+                <div>
+                  <label 
+                    className="block text-sm font-medium mb-2"
+                    style={{ color: '#1A1A1A' }}
+                  >
+                    Email Address
+                  </label>
+                  <input 
+                    type="email"
+                    className="w-full px-5 py-4 rounded-xl text-base transition-all focus:outline-none focus:ring-2 focus:ring-offset-0"
+                    style={{ 
+                      backgroundColor: '#F5F5F5',
+                      border: 'none',
+                      color: '#1A1A1A',
+                    }}
+                    placeholder="Enter email address"
+                    data-testid="input-email"
+                  />
+                </div>
+
+                {/* Message */}
+                <div>
+                  <label 
+                    className="block text-sm font-medium mb-2"
+                    style={{ color: '#1A1A1A' }}
+                  >
+                    Write Your Message
+                  </label>
+                  <textarea 
+                    className="w-full px-5 py-4 rounded-xl text-base resize-none transition-all focus:outline-none focus:ring-2 focus:ring-offset-0"
+                    style={{ 
+                      backgroundColor: '#F5F5F5',
+                      border: 'none',
+                      color: '#1A1A1A',
+                      minHeight: '140px',
+                    }}
+                    placeholder="I want to collaborate"
+                    data-testid="input-message"
+                  />
+                </div>
+
+                {/* Submit Button */}
+                <button 
+                  type="submit"
+                  className="w-full py-4 rounded-full text-base font-medium transition-all flex items-center justify-center gap-3"
+                  style={{ 
+                    backgroundColor: '#1A1A1A',
+                    color: '#FFFFFF',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.15)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
+                  data-testid="button-submit"
+                >
+                  Send Message
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M7 17L17 7M17 7H7M17 7V17" />
+                  </svg>
+                </button>
+              </form>
+            </motion.div>
+          </div>
         </div>
       </section>
 
