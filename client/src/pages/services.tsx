@@ -597,8 +597,21 @@ export default function Services() {
                 title: "Straight talk, zero fluff",
                 description: "We're honest about what works and what doesn't. If your idea is bad, we'll tell you – then help you make it better. No jargon, no sugar-coating.",
                 icon: (
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="#1A1A1A">
-                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                    <defs>
+                      <linearGradient id="grad1a" x1="0%" y1="100%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#4F46E5" />
+                        <stop offset="100%" stopColor="#9333EA" />
+                      </linearGradient>
+                      <linearGradient id="grad1b" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="rgba(255,255,255,0.8)" />
+                        <stop offset="100%" stopColor="rgba(147,51,234,0.3)" />
+                      </linearGradient>
+                    </defs>
+                    <rect x="4" y="20" width="40" height="24" rx="6" fill="url(#grad1a)" />
+                    <path d="M24 8L32 20H16L24 8Z" fill="url(#grad1b)" style={{filter: 'blur(0.5px)'}} />
+                    <circle cx="24" cy="16" r="6" fill="url(#grad1b)" />
+                    <circle cx="24" cy="16" r="3" fill="white" />
                   </svg>
                 ),
               },
@@ -606,8 +619,20 @@ export default function Services() {
                 title: "Built for humans, powered by tech",
                 description: "Yes, we love AI and automation, but we start with empathy. We design experiences that feel natural and inclusive, using technology as a tool – not a gimmick.",
                 icon: (
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="#1A1A1A">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                    <defs>
+                      <linearGradient id="grad2a" x1="0%" y1="100%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#4F46E5" />
+                        <stop offset="100%" stopColor="#9333EA" />
+                      </linearGradient>
+                      <linearGradient id="grad2b" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="rgba(255,255,255,0.8)" />
+                        <stop offset="100%" stopColor="rgba(147,51,234,0.3)" />
+                      </linearGradient>
+                    </defs>
+                    <path d="M24 42s16-10 16-22c0-8.837-7.163-16-16-16S8 11.163 8 20c0 12 16 22 16 22z" fill="url(#grad2a)" />
+                    <path d="M24 36s12-7.5 12-16.5c0-6.627-5.373-12-12-12S12 12.873 12 19.5c0 9 12 16.5 12 16.5z" fill="url(#grad2b)" opacity="0.7" />
+                    <circle cx="24" cy="20" r="5" fill="white" />
                   </svg>
                 ),
               },
@@ -615,8 +640,21 @@ export default function Services() {
                 title: "ROI or GTFO",
                 description: "We don't chase likes. We measure success in real business terms: increased conversions, lower churn, faster workflows. You'll see dashboards that track the metrics that actually matter.",
                 icon: (
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="#1A1A1A">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z" />
+                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                    <defs>
+                      <linearGradient id="grad3a" x1="0%" y1="100%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#4F46E5" />
+                        <stop offset="100%" stopColor="#9333EA" />
+                      </linearGradient>
+                      <linearGradient id="grad3b" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="rgba(255,255,255,0.8)" />
+                        <stop offset="100%" stopColor="rgba(147,51,234,0.3)" />
+                      </linearGradient>
+                    </defs>
+                    <rect x="6" y="24" width="36" height="18" rx="4" fill="url(#grad3a)" />
+                    <rect x="10" y="16" width="28" height="14" rx="3" fill="url(#grad3b)" opacity="0.8" />
+                    <circle cx="24" cy="12" r="6" fill="url(#grad3b)" />
+                    <path d="M24 8v8M20 12h8" stroke="white" strokeWidth="2" strokeLinecap="round" />
                   </svg>
                 ),
               },
@@ -624,8 +662,20 @@ export default function Services() {
                 title: "Future-ready mindset",
                 description: "While others are still buzzing about Industry 4.0, we're already testing what's next – from generative AI to immersive experiences. We help you stay ahead without chasing every fad.",
                 icon: (
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="#1A1A1A">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                    <defs>
+                      <linearGradient id="grad4a" x1="0%" y1="100%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#4F46E5" />
+                        <stop offset="100%" stopColor="#9333EA" />
+                      </linearGradient>
+                      <linearGradient id="grad4b" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="rgba(255,255,255,0.8)" />
+                        <stop offset="100%" stopColor="rgba(147,51,234,0.3)" />
+                      </linearGradient>
+                    </defs>
+                    <path d="M24 4l6 12 13 2-9.5 9 2.5 13-12-6.5L12 40l2.5-13L5 18l13-2 6-12z" fill="url(#grad4a)" />
+                    <path d="M24 10l4 8 9 1.5-6.5 6 1.5 9-8-4.5-8 4.5 1.5-9-6.5-6 9-1.5 4-8z" fill="url(#grad4b)" opacity="0.7" />
+                    <circle cx="24" cy="24" r="4" fill="white" />
                   </svg>
                 ),
               },
@@ -633,8 +683,22 @@ export default function Services() {
                 title: "Small team, big impact",
                 description: "You get the agility and personal attention of a boutique studio with the capabilities of a larger network. We scale when needed but never make you feel like a number.",
                 icon: (
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="#1A1A1A">
-                    <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
+                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                    <defs>
+                      <linearGradient id="grad5a" x1="0%" y1="100%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#4F46E5" />
+                        <stop offset="100%" stopColor="#9333EA" />
+                      </linearGradient>
+                      <linearGradient id="grad5b" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="rgba(255,255,255,0.8)" />
+                        <stop offset="100%" stopColor="rgba(147,51,234,0.3)" />
+                      </linearGradient>
+                    </defs>
+                    <rect x="4" y="28" width="40" height="14" rx="5" fill="url(#grad5a)" />
+                    <circle cx="16" cy="18" r="8" fill="url(#grad5b)" opacity="0.8" />
+                    <circle cx="16" cy="18" r="4" fill="white" />
+                    <circle cx="32" cy="18" r="8" fill="url(#grad5a)" />
+                    <circle cx="32" cy="18" r="4" fill="white" />
                   </svg>
                 ),
               },
