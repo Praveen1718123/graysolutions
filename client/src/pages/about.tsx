@@ -43,8 +43,28 @@ export default function About() {
   const [isScrolled, setIsScrolled] = useState(false);
   const metricsRef = useRef(null);
   const metricsInView = useInView(metricsRef, { once: true, margin: "-100px" });
-  const howWeThinkRef = useRef(null);
   
+  const whatWeDoRef = useRef(null);
+  const { scrollYProgress: whatWeDoProgress } = useScroll({
+    target: whatWeDoRef,
+    offset: ["start end", "center center"]
+  });
+  const whatWeDoOpacity = useTransform(whatWeDoProgress, [0, 0.5, 1], [0.15, 0.5, 1]);
+  
+  const howWeThinkRef = useRef(null);
+  const { scrollYProgress: howWeThinkProgress } = useScroll({
+    target: howWeThinkRef,
+    offset: ["start end", "end start"]
+  });
+  const card1Opacity = useTransform(howWeThinkProgress, [0.1, 0.25, 0.4], [0.3, 1, 1]);
+  const card2Opacity = useTransform(howWeThinkProgress, [0.2, 0.35, 0.5], [0.3, 1, 1]);
+  const card3Opacity = useTransform(howWeThinkProgress, [0.3, 0.45, 0.6], [0.3, 1, 1]);
+  const card1Y = useTransform(howWeThinkProgress, [0.1, 0.25], [20, 0]);
+  const card2Y = useTransform(howWeThinkProgress, [0.2, 0.35], [20, 0]);
+  const card3Y = useTransform(howWeThinkProgress, [0.3, 0.45], [20, 0]);
+  const cardOpacities = [card1Opacity, card2Opacity, card3Opacity];
+  const cardYs = [card1Y, card2Y, card3Y];
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 150);
@@ -53,10 +73,10 @@ export default function About() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const services = [
+  const principles = [
     { 
-      title: "Digital Strategy & Experience", 
-      description: "We map out where you want to go and build digital products that get you there. Our strategists marry data with intuition to find your biggest opportunities, then our designers craft experiences that feel human – not like some soulless app.",
+      title: "Aesthetic clarity", 
+      description: "Visual and verbal systems that are intentional, minimal, and easy to understand — across both product and brand.",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="12" cy="12" r="10"/>
@@ -65,8 +85,8 @@ export default function About() {
       ),
     },
     { 
-      title: "Brand & Identity", 
-      description: "Your brand is more than colours and a logo. We help you figure out what you stand for and give you the tools to express it everywhere, from packaging to pixels. Think clear positioning, a voice with bite and visuals that stick.",
+      title: "Functional precision", 
+      description: "Digital products, flows, and communication systems that behave predictably, scale cleanly, and reduce friction for both users and operators.",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           <path d="M12 2L2 7l10 5 10-5-10-5z"/>
@@ -76,34 +96,11 @@ export default function About() {
       ),
     },
     { 
-      title: "Marketing & Growth", 
-      description: "Performance without the snake oil. From organic search to paid social to influencer collabs, we focus on what moves the needle. We track ROI in real time and ditch channels that don't pay off, so you're not bleeding budget.",
+      title: "Business alignment", 
+      description: "Strategic decisions tied to revenue, cost, risk, growth, and long-term value — not decoration, trends, or unnecessary complexity.",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-        </svg>
-      ),
-    },
-    { 
-      title: "Technology & Automation", 
-      description: "Fancy tech is useless if it doesn't make life easier. We build and integrate platforms, automation and AI so your workflows run smooth, your data is actionable and your team isn't stuck with manual grunt work.",
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-          <line x1="8" y1="21" x2="16" y2="21"/>
-          <line x1="12" y1="17" x2="12" y2="21"/>
-        </svg>
-      ),
-    },
-    { 
-      title: "Content & Storytelling", 
-      description: "People ignore ads but they share stories. Our writers, artists and video nerds create content people actually care about – from snappy copy and 3D visuals to interactive experiences – all tuned to resonate with your audience and reflect your brand's voice.",
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-          <polyline points="14 2 14 8 20 8"/>
-          <line x1="16" y1="13" x2="8" y2="13"/>
-          <line x1="16" y1="17" x2="8" y2="17"/>
         </svg>
       ),
     },
@@ -357,18 +354,24 @@ export default function About() {
                 className="text-sm font-medium tracking-wide mb-4 block"
                 style={{ color: 'rgba(26,26,26,0.5)' }}
               >
-                What We Do
+                Our Approach
               </span>
               <h2 
                 className="text-2xl md:text-3xl font-bold mb-6"
                 style={{ color: '#1A1A1A' }}
               >
-                Our services
+                How we think
               </h2>
+              <p 
+                className="text-base md:text-lg leading-relaxed"
+                style={{ color: '#555555' }}
+              >
+                We see every product, brand, and system as part of a broader operational and commercial environment. Three principles guide our work:
+              </p>
             </motion.div>
             
             <div className="space-y-5">
-              {services.map((service, index) => (
+              {principles.map((principle, index) => (
                 <motion.div
                   key={index}
                   className="p-6 rounded-xl flex gap-4"
@@ -381,17 +384,17 @@ export default function About() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
-                  data-testid={`service-mobile-${index}`}
+                  data-testid={`principle-mobile-${index}`}
                 >
                   <div className="flex-shrink-0 mt-0.5" style={{ color: '#1A1A1A' }}>
-                    {service.icon}
+                    {principle.icon}
                   </div>
                   <div>
                     <h3 className="text-base font-semibold mb-2" style={{ color: '#1A1A1A' }}>
-                      {service.title}
+                      {principle.title}
                     </h3>
                     <p className="text-sm leading-relaxed" style={{ color: '#666666' }}>
-                      {service.description}
+                      {principle.description}
                     </p>
                   </div>
                 </motion.div>
@@ -411,22 +414,28 @@ export default function About() {
                   className="text-sm font-medium tracking-wide mb-4 block"
                   style={{ color: 'rgba(26,26,26,0.5)' }}
                 >
-                  What We Do
+                  Our Approach
                 </span>
                 <h2 
                   className="text-3xl lg:text-4xl font-bold mb-6"
                   style={{ color: '#1A1A1A' }}
-                  data-testid="section-what-we-do"
+                  data-testid="section-how-we-think"
                 >
-                  Our services
+                  How we think
                 </h2>
+                <p 
+                  className="text-base md:text-lg leading-relaxed"
+                  style={{ color: '#555555', maxWidth: '400px' }}
+                >
+                  We see every product, brand, and system as part of a broader operational and commercial environment. Three principles guide our work:
+                </p>
               </div>
             </div>
 
             {/* Right Column - Cards scroll naturally */}
             <div>
               <div className="space-y-8">
-                {services.map((service, index) => (
+                {principles.map((principle, index) => (
                   <div
                     key={index}
                     className="p-10 rounded-2xl flex gap-5"
@@ -434,22 +443,22 @@ export default function About() {
                       backgroundColor: '#FFFFFF',
                       boxShadow: '0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03)',
                       border: '1px solid rgba(0,0,0,0.04)',
-                      minHeight: '220px',
+                      minHeight: '280px',
                     }}
-                    data-testid={`service-${index}`}
+                    data-testid={`principle-${index}`}
                   >
                     <div 
                       className="flex-shrink-0 mt-1"
                       style={{ color: '#1A1A1A' }}
                     >
-                      {service.icon}
+                      {principle.icon}
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold mb-3" style={{ color: '#1A1A1A' }}>
-                        {service.title}
+                        {principle.title}
                       </h3>
                       <p className="text-base leading-relaxed" style={{ color: '#666666' }}>
-                        {service.description}
+                        {principle.description}
                       </p>
                     </div>
                   </div>
@@ -459,6 +468,56 @@ export default function About() {
               <div style={{ height: '300px' }} />
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* What We Do - Full Width Dark Section */}
+      <section 
+        ref={whatWeDoRef}
+        className="relative py-16 md:py-20 overflow-hidden"
+        style={{ 
+          background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 25%, #1a1a1a 50%, #333333 75%, #1a1a1a 100%)',
+        }}
+      >
+        {/* Animated gradient overlay */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse 80% 60% at 80% 50%, rgba(255,255,255,0.08) 0%, transparent 50%), radial-gradient(ellipse 60% 40% at 20% 80%, rgba(255,255,255,0.05) 0%, transparent 50%)',
+          }}
+        />
+        
+        <div className="relative z-10 max-w-[1200px] mx-auto px-6 md:px-10">
+          <motion.div style={{ opacity: whatWeDoOpacity }}>
+            {/* Badge */}
+            <div 
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6"
+              style={{
+                background: 'rgba(255, 255, 255, 0.1)',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+              }}
+            >
+              <span 
+                className="text-xs font-medium tracking-widest uppercase"
+                style={{ color: 'rgba(255, 255, 255, 0.8)' }}
+              >
+                WHAT WE DO
+              </span>
+            </div>
+
+            {/* Large text */}
+            <h2 
+              className="font-bold leading-tight"
+              style={{ 
+                fontSize: 'clamp(28px, 4.5vw, 48px)',
+                maxWidth: '900px',
+                color: '#FFFFFF',
+              }}
+              data-testid="section-what-we-do"
+            >
+              We partner with businesses to build reliable products and systems.
+            </h2>
+          </motion.div>
         </div>
       </section>
 
