@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 import heroVideo from "@assets/hero-video-horizontal.mp4";
-import iconAnimationVideo from "@assets/Screen_Recording_2025-12-24_at_4.40.56_PM_1766574684352.mov";
+import chatIconImage from "@assets/Screenshot_2025-12-24_at_5.02.50_PM_1766575981767.png";
 
 export default function Services() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -598,7 +598,7 @@ export default function Services() {
                 title: "Straight talk, zero fluff",
                 description: "We're honest about what works and what doesn't. If your idea is bad, we'll tell you – then help you make it better. No jargon, no sugar-coating.",
                 icon: null,
-                videoIcon: iconAnimationVideo,
+                imageIcon: chatIconImage,
               },
               {
                 title: "Built for humans, powered by tech",
@@ -640,7 +640,7 @@ export default function Services() {
                   </svg>
                 ),
               },
-            ].map((item: { title: string; description: string; icon: React.ReactNode; videoIcon?: string }, index) => (
+            ].map((item: { title: string; description: string; icon: React.ReactNode; imageIcon?: string }, index) => (
               <div
                 key={index}
                 className="p-8 rounded-2xl"
@@ -650,20 +650,16 @@ export default function Services() {
                 }}
                 data-testid={`why-choose-us-${index}`}
               >
-                  {item.videoIcon ? (
-                  <div className="w-20 h-20 mb-5 overflow-hidden">
-                    <video
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="w-full h-full object-cover"
+                  {item.imageIcon ? (
+                  <div className="w-16 h-16 mb-5">
+                    <img
+                      src={item.imageIcon}
+                      alt=""
+                      className="w-full h-full object-contain"
                       style={{ 
-                        filter: 'grayscale(100%) contrast(1.2) brightness(0.9)',
+                        filter: 'grayscale(100%) contrast(1.1) brightness(0.95)',
                       }}
-                    >
-                      <source src={item.videoIcon} type="video/mp4" />
-                    </video>
+                    />
                   </div>
                 ) : (
                   <div 
