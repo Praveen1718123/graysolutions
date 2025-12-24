@@ -131,6 +131,7 @@ export default function Landing() {
                 const caseStudyLinks: Record<string, string> = {
                   "Magic Trucks": "/case-study/magic-trucks",
                   "Eagle": "/case-study/eagle",
+                  "TIX": "/case-study/tix",
                 };
                 const caseStudyLink = caseStudyLinks[filter] || null;
                 
