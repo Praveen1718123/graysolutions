@@ -406,11 +406,12 @@ export default function About() {
           </div>
 
           {/* Desktop Layout - 2 Column with Sticky Left */}
-          <div className="hidden lg:grid lg:grid-cols-2 gap-12 lg:gap-20" style={{ alignItems: 'start' }}>
+          <div className="hidden lg:grid lg:grid-cols-2 gap-12 lg:gap-20">
             {/* Left Column - Sticky */}
-            <div className="relative h-fit">
+            <div className="relative">
               <div 
-                className="sticky top-[120px]"
+                className="sticky"
+                style={{ top: '120px' }}
               >
                 <span 
                   className="text-sm font-medium tracking-wide mb-4 block"
