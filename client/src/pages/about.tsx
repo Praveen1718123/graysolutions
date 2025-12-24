@@ -321,9 +321,8 @@ export default function About() {
                 playsInline
                 className="w-full h-auto"
                 style={{
-                  filter: 'grayscale(100%) contrast(1.1)',
-                  transform: 'scale(1.3)',
-                  transformOrigin: 'center center',
+                  filter: 'grayscale(100%) contrast(1.2) brightness(1.05)',
+                  imageRendering: 'crisp-edges',
                 }}
               />
             </div>
