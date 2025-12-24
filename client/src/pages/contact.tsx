@@ -5,6 +5,30 @@ import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 
 export default function Contact() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+
+  const faqItems = [
+    {
+      question: "What industries does Gray Solutions serve?",
+      answer: "We work across various industries including logistics, manufacturing, healthcare, fintech, and B2B SaaS. Our focus is on businesses that need digital products, brand systems, or AI-powered solutions."
+    },
+    {
+      question: "How do I know which service is right for my business?",
+      answer: "We start every engagement with a discovery call to understand your goals, challenges, and timeline. From there, we recommend the right approach — whether that's a full product build, brand refresh, or targeted AI integration."
+    },
+    {
+      question: "Do you offer customized solutions or standard frameworks?",
+      answer: "Everything we build is custom. We don't believe in one-size-fits-all solutions. Each project is tailored to your specific business context, users, and growth objectives."
+    },
+    {
+      question: "How do you measure success with clients?",
+      answer: "We define success metrics upfront with every client — whether that's user adoption, conversion rates, operational efficiency, or brand recognition. We track and report on these throughout our engagement."
+    },
+    {
+      question: "How can I get started with Gray Solutions?",
+      answer: "Simply reach out via our contact form or email us at hello@graysolutions.in. We'll schedule a free discovery call to discuss your project and see if we're a good fit."
+    },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -408,6 +432,127 @@ export default function Contact() {
                   </svg>
                 </button>
               </form>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section 
+        className="py-16 md:py-24 relative z-10"
+        style={{ backgroundColor: '#FFFFFF' }}
+      >
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+            {/* Left - Heading & CTA Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 
+                className="font-bold mb-8"
+                style={{ 
+                  fontSize: 'clamp(32px, 4.5vw, 52px)',
+                  lineHeight: '1.1',
+                  color: '#1A1A1A',
+                  letterSpacing: '-0.02em',
+                }}
+              >
+                Frequently Asked<br />
+                <span style={{ fontStyle: 'italic', fontWeight: 400 }}>Questions.</span>
+              </h2>
+
+              {/* Still have a question card */}
+              <div 
+                className="p-6 rounded-2xl"
+                style={{ backgroundColor: '#F5F5F5' }}
+              >
+                <h3 
+                  className="text-lg font-semibold mb-2"
+                  style={{ color: '#1A1A1A' }}
+                >
+                  Still have a question?
+                </h3>
+                <p 
+                  className="text-sm leading-relaxed mb-5"
+                  style={{ color: '#666666' }}
+                >
+                  Our team is ready to assist you with anything you need.
+                </p>
+                <a 
+                  href="tel:+919876543210"
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-sm font-medium transition-all hover:shadow-md"
+                  style={{ 
+                    backgroundColor: '#FFFFFF',
+                    color: '#1A1A1A',
+                    border: '1px solid #E5E5E5',
+                  }}
+                  data-testid="button-make-call"
+                >
+                  Make A Call
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M7 17L17 7M17 7H7M17 7V17" />
+                  </svg>
+                </a>
+              </div>
+            </motion.div>
+
+            {/* Right - FAQ Accordion */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+            >
+              <div className="space-y-0">
+                {faqItems.map((item, idx) => {
+                  const isExpanded = expandedFaq === idx;
+                  return (
+                    <div 
+                      key={idx}
+                      style={{ borderBottom: '1px solid #E5E5E5' }}
+                      data-testid={`faq-item-${idx}`}
+                    >
+                      <button
+                        className="w-full py-5 flex items-center justify-between text-left focus:outline-none"
+                        onClick={() => setExpandedFaq(isExpanded ? null : idx)}
+                        aria-expanded={isExpanded}
+                      >
+                        <span 
+                          className="text-base font-medium pr-4"
+                          style={{ color: '#1A1A1A' }}
+                        >
+                          {item.question}
+                        </span>
+                        <span 
+                          className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-colors"
+                          style={{ 
+                            backgroundColor: isExpanded ? '#1A1A1A' : '#F5F5F5',
+                            color: isExpanded ? '#FFFFFF' : '#1A1A1A',
+                          }}
+                        >
+                          {isExpanded ? '−' : '+'}
+                        </span>
+                      </button>
+                      <div 
+                        className="overflow-hidden transition-all duration-300 ease-out"
+                        style={{ 
+                          maxHeight: isExpanded ? '200px' : '0', 
+                          opacity: isExpanded ? 1 : 0 
+                        }}
+                      >
+                        <p 
+                          className="pb-5 text-base leading-relaxed"
+                          style={{ color: '#666666' }}
+                        >
+                          {item.answer}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </motion.div>
           </div>
         </div>
