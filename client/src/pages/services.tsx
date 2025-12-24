@@ -532,12 +532,11 @@ export default function Services() {
             {/* Accordion on mobile */}
             <div className="space-y-3">
               {[
-                { id: 0, title: "Brand Design", description: "Positioning, identity, and systems that make you instantly recognizable — and consistent everywhere.", bullets: ["Brand strategy + messaging", "Visual identity + guidelines", "Templates + creative direction"] },
-                { id: 1, title: "Product & Experience Design", description: "From idea to flow to UI — we design interfaces that feel premium and work in the real world.", bullets: ["Product strategy + UX flows", "UI screens + design systems", "Prototypes + dev-ready handoff"] },
-                { id: 2, title: "Web & Platform Solutions", description: "Fast, responsive websites and web apps built to scale cleanly — without tech debt mess.", bullets: ["Marketing sites + landing pages", "Portals + dashboards", "Integrations + performance"] },
-                { id: 3, title: "Commerce & Shopify", description: "Conversion-first storefronts and Shopify builds that look premium and sell better.", bullets: ["Shopify setup + theme customization", "Product page + checkout optimization", "Tracking + basic retention automations"] },
-                { id: 4, title: "Content & Performance Marketing", description: "Creative + distribution as a system — built for demand, not vanity metrics.", bullets: ["Reels, ads, carousels, brand assets", "Meta/Google ad testing loops", "Landing page conversion improvements"] },
-                { id: 5, title: "AI Agents & Automation", description: "AI that reduces workload and speeds up operations — built around your actual workflows.", bullets: ["Lead-response + support agents", "RAG knowledge bots", "Automation pipelines + integrations"] },
+                { id: 0, title: "Digital Strategy & Experience", description: "We map out where you want to go and build digital products that get you there. Our strategists marry data with intuition to find your biggest opportunities, then our designers craft experiences that feel human – not like some soulless app." },
+                { id: 1, title: "Brand & Identity", description: "Your brand is more than colours and a logo. We help you figure out what you stand for and give you the tools to express it everywhere, from packaging to pixels. Think clear positioning, a voice with bite and visuals that stick." },
+                { id: 2, title: "Marketing & Growth", description: "Performance without the snake oil. From organic search to paid social to influencer collabs, we focus on what moves the needle. We track ROI in real time and ditch channels that don't pay off, so you're not bleeding budget." },
+                { id: 3, title: "Technology & Automation", description: "Fancy tech is useless if it doesn't make life easier. We build and integrate platforms, automation and AI so your workflows run smooth, your data is actionable and your team isn't stuck with manual grunt work." },
+                { id: 4, title: "Content & Storytelling", description: "People ignore ads but they share stories. Our writers, artists and video nerds create content people actually care about – from snappy copy and 3D visuals to interactive experiences – all tuned to resonate with your audience and reflect your brand's voice." },
               ].map((item) => {
                 const isExpanded = expandedCapability === item.id;
                 return (
@@ -564,17 +563,9 @@ export default function Services() {
                       style={{ maxHeight: isExpanded ? '500px' : '0', opacity: isExpanded ? 1 : 0 }}
                     >
                       <div className="px-6 pb-6">
-                        <p className="text-base leading-relaxed mb-5" style={{ color: 'rgba(26,26,26,0.6)' }}>
+                        <p className="text-base leading-relaxed" style={{ color: 'rgba(26,26,26,0.6)' }}>
                           {item.description}
                         </p>
-                        <ul className="space-y-3">
-                          {item.bullets.map((bullet, idx) => (
-                            <li key={idx} className="text-base flex items-start gap-3" style={{ color: 'rgba(26,26,26,0.7)' }}>
-                              <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#1A1A1A' }} />
-                              {bullet}
-                            </li>
-                          ))}
-                        </ul>
                       </div>
                     </div>
                   </div>
@@ -638,12 +629,11 @@ export default function Services() {
             <div>
               <div className="space-y-3">
                 {[
-                  { id: 0, title: "Brand Design", description: "Positioning, identity, and systems that make you instantly recognizable — and consistent everywhere.", bullets: ["Brand strategy + messaging", "Visual identity + guidelines", "Templates + creative direction"], link: "Explore Brand Design →" },
-                  { id: 1, title: "Product & Experience Design", description: "From idea to flow to UI — we design interfaces that feel premium and work in the real world.", bullets: ["Product strategy + UX flows", "UI screens + design systems", "Prototypes + dev-ready handoff"], link: "Explore Product Design →" },
-                  { id: 2, title: "Web & Platform Solutions", description: "Fast, responsive websites and web apps built to scale cleanly — without tech debt mess.", bullets: ["Marketing sites + landing pages", "Portals + dashboards", "Integrations + performance"], link: "Explore Web Solutions →" },
-                  { id: 3, title: "Commerce & Shopify", description: "Conversion-first storefronts and Shopify builds that look premium and sell better.", bullets: ["Shopify setup + theme customization", "Product page + checkout optimization", "Tracking + basic retention automations"], link: "Explore Commerce →" },
-                  { id: 4, title: "Content & Performance Marketing", description: "Creative + distribution as a system — built for demand, not vanity metrics.", bullets: ["Reels, ads, carousels, brand assets", "Meta/Google ad testing loops", "Landing page conversion improvements"], link: "Explore Marketing →" },
-                  { id: 5, title: "AI Agents & Automation", description: "AI that reduces workload and speeds up operations — built around your actual workflows.", bullets: ["Lead-response + support agents", "RAG knowledge bots", "Automation pipelines + integrations"], link: "Explore AI Agents →" },
+                  { id: 0, title: "Digital Strategy & Experience", description: "We map out where you want to go and build digital products that get you there. Our strategists marry data with intuition to find your biggest opportunities, then our designers craft experiences that feel human – not like some soulless app." },
+                  { id: 1, title: "Brand & Identity", description: "Your brand is more than colours and a logo. We help you figure out what you stand for and give you the tools to express it everywhere, from packaging to pixels. Think clear positioning, a voice with bite and visuals that stick." },
+                  { id: 2, title: "Marketing & Growth", description: "Performance without the snake oil. From organic search to paid social to influencer collabs, we focus on what moves the needle. We track ROI in real time and ditch channels that don't pay off, so you're not bleeding budget." },
+                  { id: 3, title: "Technology & Automation", description: "Fancy tech is useless if it doesn't make life easier. We build and integrate platforms, automation and AI so your workflows run smooth, your data is actionable and your team isn't stuck with manual grunt work." },
+                  { id: 4, title: "Content & Storytelling", description: "People ignore ads but they share stories. Our writers, artists and video nerds create content people actually care about – from snappy copy and 3D visuals to interactive experiences – all tuned to resonate with your audience and reflect your brand's voice." },
                 ].map((item) => {
                   const isExpanded = expandedCapability === item.id;
                   return (
@@ -680,23 +670,11 @@ export default function Services() {
                       >
                         <div className="px-8 pb-8">
                           <p 
-                            className="text-lg leading-relaxed mb-6" 
+                            className="text-lg leading-relaxed" 
                             style={{ color: 'rgba(26,26,26,0.6)' }}
                           >
                             {item.description}
                           </p>
-                          <ul className="space-y-3">
-                            {item.bullets.map((bullet, idx) => (
-                              <li 
-                                key={idx} 
-                                className="text-base flex items-start gap-3" 
-                                style={{ color: 'rgba(26,26,26,0.7)' }}
-                              >
-                                <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#1A1A1A' }} />
-                                {bullet}
-                              </li>
-                            ))}
-                          </ul>
                         </div>
                       </div>
                     </div>
