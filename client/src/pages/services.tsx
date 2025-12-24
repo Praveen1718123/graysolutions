@@ -3,7 +3,6 @@ import { Link } from "wouter";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 import heroVideo from "@assets/hero-video-horizontal.mp4";
-import chatIconImage from "@assets/Screenshot_2025-12-24_at_5.02.50_PM_1766575981767.png";
 
 export default function Services() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -597,8 +596,11 @@ export default function Services() {
               {
                 title: "Straight talk, zero fluff",
                 description: "We're honest about what works and what doesn't. If your idea is bad, we'll tell you – then help you make it better. No jargon, no sugar-coating.",
-                icon: null,
-                imageIcon: chatIconImage,
+                icon: (
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                  </svg>
+                ),
               },
               {
                 title: "Built for humans, powered by tech",
@@ -640,7 +642,7 @@ export default function Services() {
                   </svg>
                 ),
               },
-            ].map((item: { title: string; description: string; icon: React.ReactNode; imageIcon?: string }, index) => (
+            ].map((item, index) => (
               <div
                 key={index}
                 className="p-8 rounded-2xl"
@@ -650,23 +652,12 @@ export default function Services() {
                 }}
                 data-testid={`why-choose-us-${index}`}
               >
-                  {item.imageIcon ? (
-                  <img
-                    src={item.imageIcon}
-                    alt=""
-                    className="w-24 h-24 mb-5 object-contain"
-                    style={{ 
-                      filter: 'grayscale(100%) contrast(1.5) brightness(1.05)',
-                    }}
-                  />
-                ) : (
-                  <div 
-                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
-                    style={{ backgroundColor: '#F6F7FA' }}
-                  >
-                    {item.icon}
-                  </div>
-                )}
+                <div 
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
+                  style={{ backgroundColor: '#F6F7FA' }}
+                >
+                  {item.icon}
+                </div>
                 <h3 
                   className="text-xl font-semibold mb-3"
                   style={{ color: '#1A1A1A' }}
@@ -674,11 +665,21 @@ export default function Services() {
                   {item.title}
                 </h3>
                 <p 
-                  className="text-base leading-relaxed"
+                  className="text-base leading-relaxed mb-6"
                   style={{ color: 'rgba(26,26,26,0.6)' }}
                 >
                   {item.description}
                 </p>
+                <button 
+                  className="flex items-center gap-2 text-sm font-medium"
+                  style={{ color: '#1A1A1A' }}
+                >
+                  Read More
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </button>
               </div>
             ))}
           </div>
