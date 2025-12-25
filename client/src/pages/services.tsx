@@ -562,6 +562,41 @@ export default function Services() {
           </div>
         </div>
       </section>
+
+      {/* Let's Build Something Real Section */}
+      <section 
+        className="py-16 md:py-24 relative z-10"
+        style={{ backgroundColor: '#1A1A1A' }}
+      >
+        <div className="max-w-[900px] mx-auto px-6 md:px-10 text-center">
+          <h2 
+            className="font-bold mb-6"
+            style={{ 
+              fontSize: 'clamp(32px, 4.5vw, 52px)',
+              lineHeight: '1.1',
+              color: '#FFFFFF',
+              letterSpacing: '-0.02em',
+            }}
+          >
+            Let's build something real
+          </h2>
+          <p 
+            className="text-lg leading-relaxed mb-10 mx-auto"
+            style={{ color: 'rgba(255,255,255,0.7)', maxWidth: '700px' }}
+          >
+            Ready to ditch the status quo? Let's talk about what's holding you back and how we can help. Whether you need a brand overhaul, a digital product that actually resonates, or a growth strategy that pays for itself, we're here to make it happen.
+          </p>
+          <Link href="/contact">
+            <button 
+              className="px-8 py-4 rounded-full font-medium text-base transition-all hover:shadow-lg"
+              style={{ backgroundColor: '#FFFFFF', color: '#1A1A1A' }}
+              data-testid="cta-lets-talk"
+            >
+              Let's Talk
+            </button>
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }
