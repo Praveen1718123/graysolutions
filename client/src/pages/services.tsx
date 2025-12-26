@@ -1,14 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "wouter";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 import logoImage from "@assets/Group_69_(1)_1764854226570.png";
-import heroVideo from "@assets/hero-video-horizontal.mp4";
 import Footer from "@/components/footer";
 
 export default function Services() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const heroRef = useRef<HTMLElement>(null);
-
   const [expandedCapability, setExpandedCapability] = useState<number | null>(null);
 
   const capabilitiesData = [
@@ -92,32 +89,10 @@ export default function Services() {
     },
   ];
 
-  // Framer Motion scroll tracking for smooth animations
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"]
-  });
-
-  // Smooth spring for video scale
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
-
-  // Transform values based on scroll progress
-  // Text slides up and fades out quickly
-  const textTranslateY = useTransform(smoothProgress, [0, 0.15], [0, -150]);
-  const textOpacity = useTransform(smoothProgress, [0, 0.1], [1, 0]);
-  
-  // Video expands to full screen and stays there
-  // 0-20%: video scales up and moves to center
-  // 20-100%: video stays fullscreen (user continues scrolling but video is fixed)
-  const videoScale = useTransform(smoothProgress, [0, 0.2, 1], [0.7, 1.4, 1.4]);
-  const videoTranslateY = useTransform(smoothProgress, [0, 0.2, 1], [0, -30, -30]);
-  const videoBorderRadius = useTransform(smoothProgress, [0, 0.15, 0.2], [24, 4, 0]);
-
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      // Header transforms after scrolling 150px
-      setIsScrolled(scrollY > 150);
+      setIsScrolled(scrollY > 50);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -176,82 +151,10 @@ export default function Services() {
         </div>
       </header>
 
-      {/* Hero Section with Scroll-based Video Expansion */}
-      <section 
-        ref={heroRef}
-        className="relative"
-        style={{ backgroundColor: '#FAFAFA', paddingTop: '80px', height: '300vh' }}
-      >
-        <div 
-          className="sticky overflow-hidden"
-          style={{
-            top: isScrolled ? '70px' : '80px',
-            height: isScrolled ? 'calc(100vh - 70px)' : 'calc(100vh - 80px)',
-            transition: 'top 500ms cubic-bezier(0.4, 0, 0.2, 1), height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
-          }}
-        >
-          <div className="max-w-[1120px] mx-auto px-4 md:px-10 h-full flex flex-col pt-4 md:pt-8">
-            {/* Text Content - Slides up and fades out */}
-            <motion.div 
-              className="hero-content z-10 pb-8 text-left max-w-3xl"
-              style={{
-                opacity: textOpacity,
-                y: textTranslateY,
-              }}
-            >
-              <motion.h1 
-                className="font-bold"
-                style={{ 
-                  fontSize: 'clamp(32px, 4.5vw, 52px)',
-                  lineHeight: '1.1',
-                  color: '#1A1A1A',
-                  letterSpacing: '-0.02em',
-                }}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                data-testid="hero-heading"
-              >
-                We design, build & automate the products your customers actually use.
-              </motion.h1>
-            </motion.div>
-
-            {/* Video Card - Expands to full screen */}
-            <div className="hero-media flex items-center justify-center flex-1">
-              <motion.div
-                className="overflow-hidden"
-                style={{
-                  background: '#000',
-                  width: '100vw',
-                  scale: videoScale,
-                  y: videoTranslateY,
-                  borderRadius: videoBorderRadius,
-                  transformOrigin: 'center center',
-                  boxShadow: '0 25px 80px rgba(0,0,0,0.15)',
-                }}
-              >
-                <div className="aspect-video w-full">
-                  <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="w-full h-full object-cover"
-                    data-testid="hero-video"
-                  >
-                    <source src={heroVideo} type="video/mp4" />
-                  </video>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Capabilities Section - 2 Column Layout */}
       <section 
         className="relative z-10"
-        style={{ backgroundColor: '#FFFFFF', minHeight: '80vh' }}
+        style={{ backgroundColor: '#FFFFFF', minHeight: '80vh', paddingTop: '100px' }}
         data-testid="section-capabilities"
       >
         <div className="w-full px-6 md:px-16 lg:px-24 py-16 md:py-24">
