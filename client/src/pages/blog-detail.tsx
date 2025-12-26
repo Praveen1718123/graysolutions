@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "wouter";
 import { motion } from "framer-motion";
-import logoImage from "@assets/Group_69_(1)_1764854226570.png";
+import logoImage from "@assets/Frame_34_(1)_1766734005330.png";
 import Footer from "@/components/footer";
 
 interface BlogPost {
