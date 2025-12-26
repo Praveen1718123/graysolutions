@@ -122,8 +122,8 @@ export default function Services() {
 
       {/* Hero Section */}
       <section 
-        className="relative z-10 pt-32 md:pt-48 pb-24 md:pb-36"
-        style={{ backgroundColor: '#FAFAFA', minHeight: '60vh' }}
+        className="relative z-10 pt-40 md:pt-56 pb-32 md:pb-48"
+        style={{ backgroundColor: '#FAFAFA', minHeight: '80vh' }}
         data-testid="section-services-hero"
       >
         <div className="max-w-[1000px] mx-auto px-6 md:px-10 text-center flex flex-col justify-center h-full">
