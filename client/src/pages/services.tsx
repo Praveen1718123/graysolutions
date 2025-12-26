@@ -361,6 +361,158 @@ export default function Services() {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <section 
+        className="py-16 md:py-24"
+        style={{ backgroundColor: '#FFFFFF' }}
+        data-testid="section-testimonials"
+      >
+        <div className="max-w-[1400px] mx-auto px-6 md:px-10">
+          <h2 
+            className="font-bold mb-12"
+            style={{ 
+              fontSize: 'clamp(24px, 3vw, 36px)',
+              color: '#1A1A1A',
+              letterSpacing: '-0.02em',
+            }}
+          >
+            What our clients say
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                quote: "Their strategic insight and hands-on approach helped us streamline operations and unlock new growth opportunities. We saw measurable results within months.",
+                name: "Cameron Williamson",
+                role: "CEO, TechStart",
+                avatar: "CW",
+              },
+              {
+                quote: "Their consultants didn't just offer advice—they rolled up their sleeves and worked alongside us to solve complex challenges and deliver real results.",
+                name: "Theresa Webb",
+                role: "Product Director",
+                avatar: "TW",
+              },
+              {
+                quote: "One of the things that impressed us most was their transparency and communication. We were kept in the loop at every stage of the project.",
+                name: "Annette Black",
+                role: "Founder, Retail Co",
+                avatar: "AB",
+              },
+              {
+                quote: "They provided clarity where we had confusion, and direction where we had chaos. One of the best investments we've made as a company.",
+                name: "Jane Cooper",
+                role: "Operations Lead",
+                avatar: "JC",
+              },
+            ].map((testimonial, index) => (
+              <div
+                key={index}
+                className="p-6 md:p-8 rounded-2xl flex flex-col"
+                style={{ backgroundColor: '#FAFAFA' }}
+                data-testid={`testimonial-${index}`}
+              >
+                <div 
+                  className="text-4xl mb-4 font-serif"
+                  style={{ color: '#CCCCCC' }}
+                >
+                  "
+                </div>
+                <p 
+                  className="text-base leading-relaxed mb-6 flex-grow"
+                  style={{ color: '#666666' }}
+                >
+                  "{testimonial.quote}"
+                </p>
+                <div className="flex items-center gap-3">
+                  <div 
+                    className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium"
+                    style={{ backgroundColor: '#E5E5E5', color: '#1A1A1A' }}
+                  >
+                    {testimonial.avatar}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold" style={{ color: '#1A1A1A' }}>
+                      {testimonial.name}
+                    </p>
+                    <p className="text-xs" style={{ color: '#666666' }}>
+                      {testimonial.role}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Case Studies Section */}
+      <section 
+        className="py-16 md:py-24"
+        style={{ backgroundColor: '#FAFAFA' }}
+        data-testid="section-case-studies"
+      >
+        <div className="max-w-[1400px] mx-auto px-6 md:px-10">
+          <div className="flex items-center justify-between mb-12">
+            <h2 
+              className="font-bold"
+              style={{ 
+                fontSize: 'clamp(24px, 3vw, 36px)',
+                color: '#1A1A1A',
+                letterSpacing: '-0.02em',
+              }}
+            >
+              See our work
+            </h2>
+            <Link href="/">
+              <span 
+                className="text-sm font-medium hover:underline cursor-pointer"
+                style={{ color: '#666666' }}
+                data-testid="link-view-all-work"
+              >
+                View all →
+              </span>
+            </Link>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { title: "Magic Trucks", category: "Brand & Product", href: "/case-study/magic-trucks" },
+              { title: "Eagle", category: "Web Platform", href: "/case-study/eagle" },
+              { title: "TIX", category: "Mobile App", href: "/case-study/tix" },
+              { title: "Gray Solutions", category: "Brand Identity", href: "/case-study/gray-solutions" },
+            ].map((caseStudy, index) => (
+              <Link key={index} href={caseStudy.href}>
+                <div
+                  className="p-6 md:p-8 rounded-2xl cursor-pointer transition-all hover:shadow-lg group"
+                  style={{ backgroundColor: '#FFFFFF' }}
+                  data-testid={`case-study-link-${index}`}
+                >
+                  <span 
+                    className="text-xs font-medium mb-2 block"
+                    style={{ color: '#666666' }}
+                  >
+                    {caseStudy.category}
+                  </span>
+                  <h3 
+                    className="text-xl font-semibold mb-4 group-hover:underline"
+                    style={{ color: '#1A1A1A' }}
+                  >
+                    {caseStudy.title}
+                  </h3>
+                  <span 
+                    className="text-sm font-medium"
+                    style={{ color: '#1A1A1A' }}
+                  >
+                    View case study →
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section 
         className="py-16 md:py-24"
