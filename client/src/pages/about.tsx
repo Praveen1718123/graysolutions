@@ -317,6 +317,7 @@ export default function About() {
                 loop
                 muted
                 playsInline
+                preload="metadata"
                 className="w-full h-auto"
                 style={{
                   filter: 'grayscale(100%) contrast(1.2) brightness(1.05)',
@@ -792,6 +793,7 @@ export default function About() {
           loop
           muted
           playsInline
+          preload="metadata"
           className="absolute inset-0 w-full h-full"
           style={{
             filter: 'grayscale(100%) contrast(1.1)',

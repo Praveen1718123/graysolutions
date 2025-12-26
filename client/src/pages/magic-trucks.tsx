@@ -162,6 +162,8 @@ export default function MagicTrucks() {
                 src={heroImage} 
                 alt="Magic Trucks platform shown on laptop and mobile"
                 className="w-full rounded-2xl"
+                loading="eager"
+                decoding="async"
               />
             </motion.div>
           </div>
@@ -213,6 +215,8 @@ export default function MagicTrucks() {
             src={laptopScreens}
             alt="Desktop product screens collage for shipment management"
             className="w-full rounded-2xl"
+            loading="lazy"
+            decoding="async"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -312,6 +316,8 @@ export default function MagicTrucks() {
                 src={mobileHandImage}
                 alt="Mobile tracking screen shown in-hand"
                 className="w-full rounded-2xl"
+                loading="lazy"
+                decoding="async"
               />
             </motion.div>
           </div>
@@ -433,6 +439,8 @@ export default function MagicTrucks() {
                   src={item.src}
                   alt={item.caption}
                   className="w-full rounded-2xl mb-3"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <p className="text-sm" style={{ color: '#666666' }}>
                   {item.caption}
@@ -450,6 +458,8 @@ export default function MagicTrucks() {
             src={truckHighway}
             alt="Magic Trucks branded trailer on Indian roads"
             className="w-full"
+            loading="lazy"
+            decoding="async"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}

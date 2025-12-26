@@ -165,6 +165,8 @@ export default function Eagle() {
                 src={heroImage} 
                 alt="Eagle brand brochure shown in-hand"
                 className="w-full rounded-2xl"
+                loading="eager"
+                decoding="async"
               />
             </motion.div>
           </div>
@@ -315,6 +317,8 @@ export default function Eagle() {
                 src={ppeImage}
                 alt="Eagle hardhat branding in industrial context"
                 className="w-full rounded-2xl"
+                loading="lazy"
+                decoding="async"
               />
             </motion.div>
           </div>
@@ -436,6 +440,8 @@ export default function Eagle() {
                   src={item.src}
                   alt={item.caption}
                   className="w-full rounded-2xl mb-3"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <p className="text-sm" style={{ color: '#666666' }}>
                   {item.caption}
@@ -452,6 +458,8 @@ export default function Eagle() {
           src={wallpaper2}
           alt="Eagle brand wallpaper in port context"
           className="w-full"
+          loading="lazy"
+          decoding="async"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}

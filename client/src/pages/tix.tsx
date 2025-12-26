@@ -163,6 +163,8 @@ export default function Tix() {
                 src={heroImage} 
                 alt="TIX app shown on iPhone in hand"
                 className="w-full rounded-2xl"
+                loading="eager"
+                decoding="async"
               />
             </motion.div>
           </div>
@@ -422,6 +424,8 @@ export default function Tix() {
                   src={img.src} 
                   alt={img.caption}
                   className="w-full aspect-[4/3] object-cover"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <p className="text-sm p-4" style={{ color: '#666666' }}>
                   {img.caption}

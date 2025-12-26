@@ -150,6 +150,8 @@ export default function Landing() {
                             src={study.image}
                             alt={study.title}
                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            loading="lazy"
+                            decoding="async"
                           />
                         </div>
                         {/* Text Content */}
@@ -264,6 +266,7 @@ export default function Landing() {
           muted
           loop
           playsInline
+          preload="auto"
           className="w-full h-full object-cover"
         >
           <source src={heroVideo} type="video/mp4" />

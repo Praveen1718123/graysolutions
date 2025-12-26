@@ -299,6 +299,8 @@ export default function GraySolutions() {
                 src={desktopImage}
                 alt="Gray Solutions homepage design"
                 className="w-full rounded-2xl object-cover"
+                loading="lazy"
+                decoding="async"
               />
             </motion.div>
           </div>
