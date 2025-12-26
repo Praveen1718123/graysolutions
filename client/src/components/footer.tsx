@@ -21,52 +21,7 @@ export default function Footer() {
 
   return (
     <footer className="relative z-10">
-      {/* Section 1: Let's Connect - Light Cream Background */}
-      <section 
-        className="py-12 md:py-16"
-        style={{ backgroundColor: '#F5F0E8' }}
-      >
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
-          <h2 
-            className="mb-3"
-            style={{ 
-              fontSize: 'clamp(28px, 4vw, 42px)',
-              lineHeight: '1.2',
-              color: '#1A1A1A',
-              fontFamily: 'Georgia, serif',
-              fontStyle: 'italic',
-              fontWeight: '400',
-            }}
-          >
-            Let's connect
-          </h2>
-          <p 
-            className="text-base mb-6"
-            style={{ color: '#666666', maxWidth: '450px' }}
-          >
-            Get in touch to learn more about human-centred products that inspire, engage, and connect.
-          </p>
-          <Link href="/contact">
-            <button 
-              className="px-5 py-2.5 rounded-sm font-medium text-sm flex items-center gap-2 transition-all hover:opacity-90"
-              style={{ 
-                backgroundColor: 'transparent', 
-                color: '#1A1A1A', 
-                border: '1px solid #1A1A1A' 
-              }}
-              data-testid="footer-contact-us"
-            >
-              CONTACT US
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="7" y1="17" x2="17" y2="7" />
-                <polyline points="7 7 17 7 17 17" />
-              </svg>
-            </button>
-          </Link>
-        </div>
-      </section>
-
-      {/* Section 2: Newsletter - Gradient Background */}
+      {/* Section 1: Newsletter - Gradient Background */}
       <section 
         className="py-6 md:py-8"
         style={{ 
