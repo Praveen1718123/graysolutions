@@ -7,15 +7,17 @@ export default function Footer() {
 
   const navLinks = {
     col1: [
+      { label: "Home", href: "/" },
       { label: "Services", href: "/services" },
-      { label: "Case Studies", href: "/#case-studies" },
       { label: "About", href: "/about" },
       { label: "Blog", href: "/blogs" },
+      { label: "Contact", href: "/contact" },
     ],
     col2: [
-      { label: "Journal", href: "/blogs" },
-      { label: "Careers", href: "/contact" },
-      { label: "Contact", href: "/contact" },
+      { label: "Magic Trucks", href: "/case-study/magic-trucks" },
+      { label: "Eagle", href: "/case-study/eagle" },
+      { label: "TIX", href: "/case-study/tix" },
+      { label: "Gray", href: "/case-study/gray-solutions" },
     ],
   };
 
