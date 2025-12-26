@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import logoImage from "@assets/Frame_34_(1)_1766734005330.png";
+import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 import Footer from "@/components/footer";
 import heroImage from "@assets/mokcup_1_1765899763586.png";
 import laptopScreens from "@assets/54066314_updlaptop_screerns0008_1765899763583.png";

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import logoImage from "@assets/Frame_34_(1)_1766734005330.png";
+import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 import ctaImage from "@assets/stock_images/two_professionals_co_f8f9803a.jpg";
 import Footer from "@/components/footer";
 

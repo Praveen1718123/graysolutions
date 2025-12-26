@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "wouter";
-import logoImage from "@assets/Frame_34_(1)_1766734005330.png";
-import logoImageWhite from "@assets/Frame_34_1766733931947.png";
+import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
