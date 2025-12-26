@@ -122,15 +122,15 @@ export default function Services() {
 
       {/* Hero Section */}
       <section 
-        className="relative z-10 pt-28 md:pt-40 pb-16 md:pb-24"
-        style={{ backgroundColor: '#FAFAFA' }}
+        className="relative z-10 pt-32 md:pt-48 pb-24 md:pb-36"
+        style={{ backgroundColor: '#FAFAFA', minHeight: '60vh' }}
         data-testid="section-services-hero"
       >
-        <div className="max-w-[900px] mx-auto px-6 md:px-10 text-center">
+        <div className="max-w-[1000px] mx-auto px-6 md:px-10 text-center flex flex-col justify-center h-full">
           <motion.h1 
-            className="font-bold mb-4 md:mb-6"
+            className="font-bold mb-6 md:mb-8"
             style={{ 
-              fontSize: 'clamp(36px, 5vw, 56px)',
+              fontSize: 'clamp(36px, 5vw, 60px)',
               lineHeight: '1.1',
               color: '#1A1A1A',
               letterSpacing: '-0.02em',
@@ -139,21 +139,8 @@ export default function Services() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            Build. Launch. Scale.
+            We design, build & automate the products your customers actually use.
           </motion.h1>
-          <motion.p 
-            className="text-lg md:text-xl mb-8 md:mb-10 mx-auto"
-            style={{ 
-              color: '#666666',
-              maxWidth: '600px',
-              lineHeight: '1.6',
-            }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            We design brands, digital products, and AI-powered systems that actually move the business.
-          </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
