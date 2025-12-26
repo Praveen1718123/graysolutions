@@ -4,13 +4,13 @@ import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import logoImage from "@assets/Group_25_(5)_1766734675194.png";
 import Footer from "@/components/footer";
-import heroImage from "@assets/mokcup_1_1765899763586.png";
-import laptopScreens from "@assets/54066314_updlaptop_screerns0008_1765899763583.png";
+import heroImage from "@assets/optimized/mokcup_1_1765899763586.jpg";
+import laptopScreens from "@assets/optimized/54066314_updlaptop_screerns0008_1765899763583.jpg";
 import mobileHandImage from "@assets/magic_23_1765899763585.jpg";
-import mobileGridImage from "@assets/magic_trucks_neww-01_1765899763585.png";
+import mobileGridImage from "@assets/optimized/magic_trucks_neww-01_1765899763585.jpg";
 import appIconImage from "@assets/3D_App_Icon_Mockup_[Qorecraft]2_1765899763581.jpg";
-import truckHighway from "@assets/Generated_Image_October_07,_2025_-_12_10PM_1765899763584.png";
-import truckRoadside from "@assets/Generated_Image_October_07,_2025_-_12_15PM_1765899763584.png";
+import truckHighway from "@assets/optimized/Generated_Image_October_07,_2025_-_12_10PM_1765899763584.jpg";
+import truckRoadside from "@assets/optimized/Generated_Image_October_07,_2025_-_12_15PM_1765899763584.jpg";
 import brochureImage from "@assets/Two_Magazines_on_Table_Mockup2_1765899763586.jpg";
 
 export default function MagicTrucks() {

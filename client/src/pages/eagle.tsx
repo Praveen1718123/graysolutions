@@ -3,16 +3,16 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import logoImage from "@assets/Group_25_(5)_1766734675194.png";
 import Footer from "@/components/footer";
-import heroImage from "@assets/Eagle_Web_2_1765901229010.png";
-import guidelinesImage from "@assets/Eagle_web_elements-04_1765901229015.png";
+import heroImage from "@assets/optimized/Eagle_Web_2_1765901229010.jpg";
+import guidelinesImage from "@assets/optimized/Eagle_web_elements-04_1765901229015.jpg";
 import ppeImage from "@assets/Eagle_Web_3_1765901229014.jpg";
-import equipmentImage from "@assets/Camera_Angle_02_1765901229015.png";
-import realEquipment1 from "@assets/Eagle_2_1765901229015.png";
-import realEquipment2 from "@assets/Eagle_3_1765901229015.png";
-import containerImage from "@assets/Eagle_Container_1765901229016.png";
-import toteBagImage from "@assets/Eagle_Tote_Bag_1765901229016.png";
-import wallpaper1 from "@assets/Eagle_Wallpaper-02_1765901229017.png";
-import wallpaper2 from "@assets/Eagle_Wallpaper-03_1765901229017.png";
+import equipmentImage from "@assets/optimized/Camera_Angle_02_1765901229015.jpg";
+import realEquipment1 from "@assets/optimized/Eagle_2_1765901229015.jpg";
+import realEquipment2 from "@assets/optimized/Eagle_3_1765901229015.jpg";
+import containerImage from "@assets/optimized/Eagle_Container_1765901229016.jpg";
+import toteBagImage from "@assets/optimized/Eagle_Tote_Bag_1765901229016.jpg";
+import wallpaper1 from "@assets/optimized/Eagle_Wallpaper-02_1765901229017.jpg";
+import wallpaper2 from "@assets/optimized/Eagle_Wallpaper-03_1765901229017.jpg";
 
 export default function Eagle() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -218,6 +218,8 @@ export default function Eagle() {
             src={guidelinesImage}
             alt="Eagle brand identity guideline preview grid"
             className="w-full rounded-2xl"
+            loading="lazy"
+            decoding="async"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import logoImage from "@assets/Group_25_(5)_1766734675194.png";
 import Footer from "@/components/footer";
 import heroVideo from "@assets/hero-video-horizontal.mp4";
-import desktopImage from "@assets/Desktop_-_4_(2)_1765460573017.png";
+import desktopImage from "@assets/optimized/Desktop_-_4_(2)_1765460573017.jpg";
 import screenshotAbout from "@assets/Screenshot_2025-12-24_at_2.03.21_PM_1766565203775.png";
 
 export default function GraySolutions() {

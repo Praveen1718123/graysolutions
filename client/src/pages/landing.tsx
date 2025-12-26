@@ -5,10 +5,10 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logoImage from "@assets/Group_25_(5)_1766734675194.png";
 import heroVideo from "@assets/hero-video-horizontal.mp4";
-import magicTrucksImage from "@assets/mokcup_1_1765899763586.png";
-import eagleImage from "@assets/Eagle_Web_2_1765901229010.png";
+import magicTrucksImage from "@assets/optimized/mokcup_1_1765899763586.jpg";
+import eagleImage from "@assets/optimized/Eagle_Web_2_1765901229010.jpg";
 import tixImage from "@assets/Free_iPhone_16_Pro_PSD_Mockup_Tix_1766597838175.jpg";
-import graySolutionsImage from "@assets/Desktop_-_4_(2)_1765460573017.png";
+import graySolutionsImage from "@assets/optimized/Desktop_-_4_(2)_1765460573017.jpg";
 
 export default function Landing() {
   const [showAllCaseStudies, setShowAllCaseStudies] = useState(false);
