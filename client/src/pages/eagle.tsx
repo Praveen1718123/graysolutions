@@ -173,9 +173,9 @@ export default function Eagle() {
 
       {/* Quick Brief Section */}
       <section className="py-12 md:py-28" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
+        <div className="max-w-[680px] mx-auto px-4 md:px-10">
           <motion.h2 
-            className="text-2xl md:text-3xl font-bold mb-12"
+            className="text-2xl md:text-3xl font-bold mb-12 text-center"
             style={{ color: '#1A1A1A' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -184,7 +184,7 @@ export default function Eagle() {
             Quick Brief
           </motion.h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="space-y-10">
             {[
               { title: "Ambition", text: "Create a brand that feels serious, dependable, and instantly recognizable—the kind of identity clients trust when operations are high-risk and time-sensitive." },
               { title: "Reality Check", text: "Industrial businesses often look inconsistent across assets: brochure says one thing, equipment looks different, and staff uniform has another style. That inconsistency silently kills trust." },
@@ -197,10 +197,10 @@ export default function Eagle() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
               >
-                <h3 className="text-lg font-semibold mb-3" style={{ color: '#1A1A1A' }}>
+                <h3 className="text-lg font-semibold mb-3 text-center" style={{ color: '#1A1A1A' }}>
                   {item.title}
                 </h3>
-                <p className="text-base leading-relaxed" style={{ color: '#666666' }}>
+                <p className="text-base leading-relaxed text-center" style={{ color: '#666666' }}>
                   {item.text}
                 </p>
               </motion.div>
@@ -226,9 +226,9 @@ export default function Eagle() {
 
       {/* Insights Section */}
       <section className="py-12 md:py-28" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
+        <div className="max-w-[680px] mx-auto px-4 md:px-10">
           <motion.h2 
-            className="text-2xl md:text-3xl font-bold mb-12"
+            className="text-2xl md:text-3xl font-bold mb-12 text-center"
             style={{ color: '#1A1A1A' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -237,7 +237,7 @@ export default function Eagle() {
             Insights
           </motion.h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="space-y-8">
             {[
               { num: "1", title: "In industrial categories, trust is visual first.", text: "Before anyone reads your pitch, they judge your credibility by how consistent you look across environments." },
               { num: "2", title: "A brand isn't a logo — it's a repeatable system.", text: "The goal is not \"a nice design,\" it's a system teams can apply without breaking it." },
@@ -254,15 +254,15 @@ export default function Eagle() {
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
               >
                 <span 
-                  className="text-4xl font-bold block mb-4"
+                  className="text-4xl font-bold block mb-4 text-center"
                   style={{ color: 'rgba(220,38,38,0.2)' }}
                 >
                   {item.num}
                 </span>
-                <h3 className="text-lg font-semibold mb-3" style={{ color: '#1A1A1A' }}>
+                <h3 className="text-lg font-semibold mb-3 text-center" style={{ color: '#1A1A1A' }}>
                   {item.title}
                 </h3>
-                <p className="text-base leading-relaxed" style={{ color: '#666666' }}>
+                <p className="text-base leading-relaxed text-center" style={{ color: '#666666' }}>
                   {item.text}
                 </p>
               </motion.div>
@@ -273,59 +273,58 @@ export default function Eagle() {
 
       {/* The Big Bet Section */}
       <section className="py-12 md:py-28" style={{ backgroundColor: '#FAFAFA' }}>
-        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#1A1A1A' }}>
-                The Big Bet
-              </h2>
-              <p className="text-lg leading-relaxed mb-8" style={{ color: '#666666' }}>
-                Make Eagle feel like a company that runs clean operations—by designing an identity that stays consistent under real-world pressure.
-              </p>
-              
-              <h3 className="text-xl font-semibold mb-4" style={{ color: '#1A1A1A' }}>The Strategy</h3>
-              <ul className="space-y-3">
-                {[
-                  "Build a recognizable core: a strong mark + bold identity that reads instantly at distance.",
-                  "Design for environments, not just screens: assets that work in sunlight, dust, warehouses, ports, and print.",
-                  "Create strict rules for consistency: so teams can roll it out across vendors without quality dropping.",
-                  "Extend into physical touchpoints: brochure, equipment, containers, PPE, and brand wallpapers.",
-                  "Make it scalable: templates + guidelines so future assets look like Eagle without re-designing every time.",
-                ].map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-base" style={{ color: '#666666' }}>
-                    <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#DC2626' }} />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
+        <div className="max-w-[680px] mx-auto px-4 md:px-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center" style={{ color: '#1A1A1A' }}>
+              The Big Bet
+            </h2>
+            <p className="text-lg leading-relaxed mb-8 text-center" style={{ color: '#666666' }}>
+              Make Eagle feel like a company that runs clean operations—by designing an identity that stays consistent under real-world pressure.
+            </p>
+            
+            <h3 className="text-xl font-semibold mb-4 text-center" style={{ color: '#1A1A1A' }}>The Strategy</h3>
+            <ul className="space-y-3">
+              {[
+                "Build a recognizable core: a strong mark + bold identity that reads instantly at distance.",
+                "Design for environments, not just screens: assets that work in sunlight, dust, warehouses, ports, and print.",
+                "Create strict rules for consistency: so teams can roll it out across vendors without quality dropping.",
+                "Extend into physical touchpoints: brochure, equipment, containers, PPE, and brand wallpapers.",
+                "Make it scalable: templates + guidelines so future assets look like Eagle without re-designing every time.",
+              ].map((item, idx) => (
+                <li key={idx} className="flex items-start gap-3 text-base" style={{ color: '#666666' }}>
+                  <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#DC2626' }} />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              <img 
-                src={ppeImage}
-                alt="Eagle hardhat branding in industrial context"
-                className="w-full rounded-2xl"
-              />
-            </motion.div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mt-12"
+          >
+            <img 
+              src={ppeImage}
+              alt="Eagle hardhat branding in industrial context"
+              className="w-full rounded-2xl"
+            />
+          </motion.div>
         </div>
       </section>
 
       {/* Impact Section */}
       <section className="py-12 md:py-28" style={{ backgroundColor: '#DC2626' }}>
-        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
+        <div className="max-w-[680px] mx-auto px-4 md:px-10">
           <motion.h2 
-            className="text-2xl md:text-3xl font-bold mb-12"
+            className="text-2xl md:text-3xl font-bold mb-12 text-center"
             style={{ color: '#FFFFFF' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -334,9 +333,9 @@ export default function Eagle() {
             Impact
           </motion.h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
+          <div className="space-y-10 mb-16">
             <div>
-              <h3 className="text-lg font-semibold mb-4" style={{ color: 'rgba(255,255,255,0.7)' }}>
+              <h3 className="text-lg font-semibold mb-4 text-center" style={{ color: 'rgba(255,255,255,0.7)' }}>
                 Impact delivered (now)
               </h3>
               <ul className="space-y-3">
@@ -354,7 +353,7 @@ export default function Eagle() {
             </div>
             
             <div>
-              <h3 className="text-lg font-semibold mb-4" style={{ color: 'rgba(255,255,255,0.7)' }}>
+              <h3 className="text-lg font-semibold mb-4 text-center" style={{ color: 'rgba(255,255,255,0.7)' }}>
                 Impact to measure (later)
               </h3>
               <ul className="space-y-3">
@@ -364,7 +363,7 @@ export default function Eagle() {
                   "↓ Time to create marketing collateral",
                   "↓ Rework from vendors / printers",
                 ].map((item, idx) => (
-                  <li key={idx} className="text-base" style={{ color: 'rgba(255,255,255,0.9)' }}>
+                  <li key={idx} className="text-base text-center" style={{ color: 'rgba(255,255,255,0.9)' }}>
                     {item}
                   </li>
                 ))}
@@ -394,7 +393,7 @@ export default function Eagle() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-12"
+            className="mb-12 text-center"
           >
             <h2 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: '#1A1A1A' }}>
               Brand in the Real World

@@ -171,9 +171,9 @@ export default function Tix() {
 
       {/* Quick Brief Section */}
       <section className="py-12 md:py-28" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
+        <div className="max-w-[680px] mx-auto px-4 md:px-10">
           <motion.h2 
-            className="text-2xl md:text-3xl font-bold mb-12"
+            className="text-2xl md:text-3xl font-bold mb-12 text-center"
             style={{ color: '#1A1A1A' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -181,7 +181,7 @@ export default function Tix() {
           >
             Quick Brief
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="space-y-10">
             {[
               { title: "Challenge", text: "India's entertainment space is fragmented — movies on one app, events on another, no unified discovery. Users juggle multiple platforms with inconsistent experiences." },
               { title: "Approach", text: "Design a single platform that brings together movies, live events, and streaming with a bold visual identity that stands out in a crowded market." },
@@ -194,10 +194,10 @@ export default function Tix() {
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
               >
-                <h3 className="text-lg font-semibold mb-3" style={{ color: '#1A1A1A' }}>
+                <h3 className="text-lg font-semibold mb-3 text-center" style={{ color: '#1A1A1A' }}>
                   {item.title}
                 </h3>
-                <p className="text-base leading-relaxed" style={{ color: '#666666' }}>
+                <p className="text-base leading-relaxed text-center" style={{ color: '#666666' }}>
                   {item.text}
                 </p>
               </motion.div>
@@ -222,9 +222,9 @@ export default function Tix() {
 
       {/* Insights Section */}
       <section className="py-12 md:py-28" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
+        <div className="max-w-[680px] mx-auto px-4 md:px-10">
           <motion.h2 
-            className="text-2xl md:text-3xl font-bold mb-12"
+            className="text-2xl md:text-3xl font-bold mb-12 text-center"
             style={{ color: '#1A1A1A' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -232,7 +232,7 @@ export default function Tix() {
           >
             Insights
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="space-y-8">
             {[
               { num: "01", title: "Unified Discovery", text: "Movies, events, and streaming in one place — no more app-hopping." },
               { num: "02", title: "Bold Brand Identity", text: "Vibrant green stands out in a sea of red and blue entertainment apps." },
@@ -241,21 +241,23 @@ export default function Tix() {
             ].map((item, idx) => (
               <motion.div 
                 key={idx}
+                className="p-8 rounded-2xl"
+                style={{ backgroundColor: '#FAFAFA' }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
               >
                 <span 
-                  className="text-4xl font-bold block mb-4"
+                  className="text-4xl font-bold block mb-4 text-center"
                   style={{ color: '#D4D4D4' }}
                 >
                   {item.num}
                 </span>
-                <h3 className="text-lg font-semibold mb-3" style={{ color: '#1A1A1A' }}>
+                <h3 className="text-lg font-semibold mb-3 text-center" style={{ color: '#1A1A1A' }}>
                   {item.title}
                 </h3>
-                <p className="text-base leading-relaxed" style={{ color: '#666666' }}>
+                <p className="text-base leading-relaxed text-center" style={{ color: '#666666' }}>
                   {item.text}
                 </p>
               </motion.div>
@@ -281,52 +283,50 @@ export default function Tix() {
 
       {/* Process Section */}
       <section className="py-12 md:py-28" style={{ backgroundColor: '#FAFAFA' }}>
-        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#1A1A1A' }}>
-                Process & Approach
-              </h2>
-              <p className="text-lg leading-relaxed mb-8" style={{ color: '#666666' }}>
-                We designed TIX to feel exciting, modern, and distinctly Indian — while keeping the booking flow simple enough for first-time users.
-              </p>
-              <h3 className="text-xl font-semibold mb-4" style={{ color: '#1A1A1A' }}>The Strategy</h3>
-              <ul className="space-y-3">
-                {[
-                  "Build a bold visual identity that cuts through entertainment app clutter with signature green.",
-                  "Design mobile-first experience optimized for discovery and quick booking.",
-                  "Create flexible brand system for cinema partnerships, event promotions, and merchandise.",
-                  "Plan for expansion into streaming and original content with scalable design patterns.",
-                ].map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-base" style={{ color: '#666666' }}>
-                    <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#00D26A' }} />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
+        <div className="max-w-[680px] mx-auto px-4 md:px-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center" style={{ color: '#1A1A1A' }}>
+              Process & Approach
+            </h2>
+            <p className="text-lg leading-relaxed mb-8 text-center" style={{ color: '#666666' }}>
+              We designed TIX to feel exciting, modern, and distinctly Indian — while keeping the booking flow simple enough for first-time users.
+            </p>
+            <h3 className="text-xl font-semibold mb-4 text-center" style={{ color: '#1A1A1A' }}>The Strategy</h3>
+            <ul className="space-y-3">
+              {[
+                "Build a bold visual identity that cuts through entertainment app clutter with signature green.",
+                "Design mobile-first experience optimized for discovery and quick booking.",
+                "Create flexible brand system for cinema partnerships, event promotions, and merchandise.",
+                "Plan for expansion into streaming and original content with scalable design patterns.",
+              ].map((item, idx) => (
+                <li key={idx} className="flex items-start gap-3 text-base" style={{ color: '#666666' }}>
+                  <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#00D26A' }} />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
 
-            <motion.img 
-              src={arrowImage}
-              alt="TIX movies events and more campaign"
-              className="w-full rounded-2xl object-cover"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            />
-          </div>
+          <motion.img 
+            src={arrowImage}
+            alt="TIX movies events and more campaign"
+            className="w-full rounded-2xl object-cover mt-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          />
         </div>
       </section>
 
       {/* Quote Section */}
       <section className="py-16 md:py-24" style={{ backgroundColor: '#1A1A1A' }}>
-        <div className="max-w-[1000px] mx-auto px-4 md:px-10">
+        <div className="max-w-[680px] mx-auto px-4 md:px-10">
           <motion.h2 
-            className="text-2xl md:text-3xl font-bold mb-12"
+            className="text-2xl md:text-3xl font-bold mb-12 text-center"
             style={{ color: '#FFFFFF' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -334,20 +334,20 @@ export default function Tix() {
           >
             Design Principles
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="space-y-10">
             <div>
-              <h3 className="text-lg font-semibold mb-4" style={{ color: 'rgba(255,255,255,0.7)' }}>
+              <h3 className="text-lg font-semibold mb-4 text-center" style={{ color: 'rgba(255,255,255,0.7)' }}>
                 Entertainment First
               </h3>
-              <p className="text-base leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>
+              <p className="text-base leading-relaxed text-center" style={{ color: 'rgba(255,255,255,0.5)' }}>
                 Every screen is designed to spark excitement — from movie posters to event banners. The dark theme makes content pop while reducing eye strain during late-night browsing.
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-4" style={{ color: 'rgba(255,255,255,0.7)' }}>
+              <h3 className="text-lg font-semibold mb-4 text-center" style={{ color: 'rgba(255,255,255,0.7)' }}>
                 Signature Green
               </h3>
-              <p className="text-base leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>
+              <p className="text-base leading-relaxed text-center" style={{ color: 'rgba(255,255,255,0.5)' }}>
                 The vibrant green (#00D26A) creates instant brand recognition. It's used strategically for CTAs, highlights, and the app icon — standing out on any home screen.
               </p>
             </div>
@@ -375,7 +375,7 @@ export default function Tix() {
       <section className="py-12 md:py-28" style={{ backgroundColor: '#FAFAFA' }}>
         <div className="max-w-[1400px] mx-auto px-4 md:px-10">
           <motion.div 
-            className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10"
+            className="mb-10 text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

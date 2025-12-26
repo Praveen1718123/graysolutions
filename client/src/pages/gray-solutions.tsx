@@ -163,33 +163,32 @@ export default function GraySolutions() {
 
       {/* The Decision Section */}
       <section className="py-12 md:py-28" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
+        <div className="max-w-[680px] mx-auto px-4 md:px-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-3xl"
           >
             <h2 
-              className="text-2xl md:text-3xl font-bold mb-8"
+              className="text-2xl md:text-3xl font-bold mb-8 text-center"
               style={{ color: '#1A1A1A' }}
             >
               The Decision
             </h2>
             <p 
-              className="text-lg leading-relaxed mb-6"
+              className="text-lg leading-relaxed mb-6 text-center"
               style={{ color: '#666666' }}
             >
               We've helped dozens of companies build their digital presence. But when it came to our own website, we kept putting it off. The classic "cobbler's children have no shoes" problem.
             </p>
             <p 
-              className="text-lg leading-relaxed mb-6"
+              className="text-lg leading-relaxed mb-6 text-center"
               style={{ color: '#666666' }}
             >
               In late 2024, we decided: no more excuses. We would treat Gray Solutions as our most important client — and design a website that truly represents what we stand for.
             </p>
             <p 
-              className="text-lg leading-relaxed"
+              className="text-lg leading-relaxed text-center"
               style={{ color: '#666666' }}
             >
               The goal wasn't just to look good. It was to demonstrate our philosophy: that great design is invisible until it needs to be seen. That motion creates emotion. That less is almost always more.
@@ -200,9 +199,9 @@ export default function GraySolutions() {
 
       {/* Design Principles Grid */}
       <section className="py-12 md:py-28" style={{ backgroundColor: '#FAFAFA' }}>
-        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
+        <div className="max-w-[680px] mx-auto px-4 md:px-10">
           <motion.h2 
-            className="text-2xl md:text-3xl font-bold mb-12"
+            className="text-2xl md:text-3xl font-bold mb-12 text-center"
             style={{ color: '#1A1A1A' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -210,7 +209,7 @@ export default function GraySolutions() {
           >
             Our Design Principles
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="space-y-8">
             {[
               { num: "01", title: "Motion as Meaning", text: "Every animation serves a purpose. Scroll-triggered reveals, hover states, and transitions all guide the eye naturally." },
               { num: "02", title: "Radical Simplicity", text: "We stripped away everything that didn't earn its place. No decorative elements, no clutter — just content and space." },
@@ -219,21 +218,23 @@ export default function GraySolutions() {
             ].map((item, idx) => (
               <motion.div 
                 key={idx}
+                className="p-8 rounded-2xl"
+                style={{ backgroundColor: '#FFFFFF' }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
               >
                 <span 
-                  className="text-4xl font-bold block mb-4"
+                  className="text-4xl font-bold block mb-4 text-center"
                   style={{ color: '#D4D4D4' }}
                 >
                   {item.num}
                 </span>
-                <h3 className="text-lg font-semibold mb-3" style={{ color: '#1A1A1A' }}>
+                <h3 className="text-lg font-semibold mb-3 text-center" style={{ color: '#1A1A1A' }}>
                   {item.title}
                 </h3>
-                <p className="text-base leading-relaxed" style={{ color: '#666666' }}>
+                <p className="text-base leading-relaxed text-center" style={{ color: '#666666' }}>
                   {item.text}
                 </p>
               </motion.div>
@@ -259,85 +260,84 @@ export default function GraySolutions() {
 
       {/* Process Section */}
       <section className="py-12 md:py-28" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#1A1A1A' }}>
-                The Process
-              </h2>
-              <p className="text-lg leading-relaxed mb-8" style={{ color: '#666666' }}>
-                We followed the same process we use for clients — with one key difference: we had full creative freedom to experiment.
-              </p>
-              <h3 className="text-xl font-semibold mb-4" style={{ color: '#1A1A1A' }}>What We Built</h3>
-              <ul className="space-y-3">
-                {[
-                  "Immersive video-first homepage that captures attention in 3 seconds.",
-                  "Scroll-based animations that reveal content naturally as you explore.",
-                  "Case study pages that showcase our work without overwhelming.",
-                  "A contact experience that feels welcoming, not transactional.",
-                  "Dark/light themes that respect user preferences.",
-                ].map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-base" style={{ color: '#666666' }}>
-                    <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#1A1A1A' }} />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-            >
-              <img 
-                src={desktopImage}
-                alt="Gray Solutions homepage design"
-                className="w-full rounded-2xl object-cover"
-              />
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* POV Section */}
-      <section className="py-12 md:py-28" style={{ backgroundColor: '#FAFAFA' }}>
-        <div className="max-w-[900px] mx-auto px-4 md:px-10">
+        <div className="max-w-[680px] mx-auto px-4 md:px-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-2xl md:text-3xl font-bold mb-8" style={{ color: '#1A1A1A' }}>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center" style={{ color: '#1A1A1A' }}>
+              The Process
+            </h2>
+            <p className="text-lg leading-relaxed mb-8 text-center" style={{ color: '#666666' }}>
+              We followed the same process we use for clients — with one key difference: we had full creative freedom to experiment.
+            </p>
+            <h3 className="text-xl font-semibold mb-4 text-center" style={{ color: '#1A1A1A' }}>What We Built</h3>
+            <ul className="space-y-3">
+              {[
+                "Immersive video-first homepage that captures attention in 3 seconds.",
+                "Scroll-based animations that reveal content naturally as you explore.",
+                "Case study pages that showcase our work without overwhelming.",
+                "A contact experience that feels welcoming, not transactional.",
+                "Dark/light themes that respect user preferences.",
+              ].map((item, idx) => (
+                <li key={idx} className="flex items-start gap-3 text-base" style={{ color: '#666666' }}>
+                  <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#1A1A1A' }} />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="mt-12"
+          >
+            <img 
+              src={desktopImage}
+              alt="Gray Solutions homepage design"
+              className="w-full rounded-2xl object-cover"
+            />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* POV Section */}
+      <section className="py-12 md:py-28" style={{ backgroundColor: '#FAFAFA' }}>
+        <div className="max-w-[680px] mx-auto px-4 md:px-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center" style={{ color: '#1A1A1A' }}>
               Our Point of View
             </h2>
             <div className="space-y-8">
               <div>
-                <h3 className="text-xl font-semibold mb-3" style={{ color: '#1A1A1A' }}>
+                <h3 className="text-xl font-semibold mb-3 text-center" style={{ color: '#1A1A1A' }}>
                   On Design Agencies
                 </h3>
-                <p className="text-lg leading-relaxed" style={{ color: '#666666' }}>
+                <p className="text-lg leading-relaxed text-center" style={{ color: '#666666' }}>
                   Most agency websites try too hard to be impressive. They're filled with awards, client logos, and jargon. We wanted something different — a site that shows our work and gets out of the way.
                 </p>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-3" style={{ color: '#1A1A1A' }}>
+                <h3 className="text-xl font-semibold mb-3 text-center" style={{ color: '#1A1A1A' }}>
                   On Indian Design
                 </h3>
-                <p className="text-lg leading-relaxed" style={{ color: '#666666' }}>
+                <p className="text-lg leading-relaxed text-center" style={{ color: '#666666' }}>
                   We're proud to be based in India, serving clients globally. Our design sensibility isn't "Indian" or "Western" — it's universal. Clean, functional, and built for the modern web.
                 </p>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-3" style={{ color: '#1A1A1A' }}>
+                <h3 className="text-xl font-semibold mb-3 text-center" style={{ color: '#1A1A1A' }}>
                   On Our Future
                 </h3>
-                <p className="text-lg leading-relaxed" style={{ color: '#666666' }}>
+                <p className="text-lg leading-relaxed text-center" style={{ color: '#666666' }}>
                   This website will evolve. We'll add new case studies, refine interactions, and push what's possible. But the core philosophy stays: simple, intentional, and always in service of the work.
                 </p>
               </div>
@@ -364,9 +364,9 @@ export default function GraySolutions() {
 
       {/* Results Section */}
       <section className="py-12 md:py-28" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
+        <div className="max-w-[680px] mx-auto px-4 md:px-10">
           <motion.h2 
-            className="text-2xl md:text-3xl font-bold mb-12"
+            className="text-2xl md:text-3xl font-bold mb-12 text-center"
             style={{ color: '#1A1A1A' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -374,7 +374,7 @@ export default function GraySolutions() {
           >
             The Outcome
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="space-y-6">
             {[
               { stat: "100%", label: "In-house designed and built by our team" },
               { stat: "5", label: "Pages crafted with intention" },
