@@ -363,13 +363,13 @@ export default function Services() {
 
       {/* Testimonials Section */}
       <section 
-        className="py-16 md:py-24"
+        className="py-16 md:py-24 overflow-hidden"
         style={{ backgroundColor: '#FFFFFF' }}
         data-testid="section-testimonials"
       >
-        <div className="max-w-[1400px] mx-auto px-6 md:px-10">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-10 mb-12">
           <h2 
-            className="font-bold mb-12"
+            className="font-bold"
             style={{ 
               fontSize: 'clamp(24px, 3vw, 36px)',
               color: '#1A1A1A',
@@ -378,71 +378,107 @@ export default function Services() {
           >
             What our clients say
           </h2>
+        </div>
+        
+        {/* Marquee Container with Blur Edges */}
+        <div className="relative">
+          {/* Left Blur */}
+          <div 
+            className="absolute left-0 top-0 bottom-0 z-10 pointer-events-none"
+            style={{ 
+              width: '120px',
+              background: 'linear-gradient(to right, #FFFFFF 0%, transparent 100%)',
+            }}
+          />
+          {/* Right Blur */}
+          <div 
+            className="absolute right-0 top-0 bottom-0 z-10 pointer-events-none"
+            style={{ 
+              width: '120px',
+              background: 'linear-gradient(to left, #FFFFFF 0%, transparent 100%)',
+            }}
+          />
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                quote: "Their strategic insight and hands-on approach helped us streamline operations and unlock new growth opportunities. We saw measurable results within months.",
-                name: "Cameron Williamson",
-                role: "CEO, TechStart",
-                avatar: "CW",
+          {/* Scrolling Content */}
+          <motion.div
+            className="flex gap-6"
+            animate={{ x: [0, -1600] }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 30,
+                ease: "linear",
               },
-              {
-                quote: "Their consultants didn't just offer advice—they rolled up their sleeves and worked alongside us to solve complex challenges and deliver real results.",
-                name: "Theresa Webb",
-                role: "Product Director",
-                avatar: "TW",
-              },
-              {
-                quote: "One of the things that impressed us most was their transparency and communication. We were kept in the loop at every stage of the project.",
-                name: "Annette Black",
-                role: "Founder, Retail Co",
-                avatar: "AB",
-              },
-              {
-                quote: "They provided clarity where we had confusion, and direction where we had chaos. One of the best investments we've made as a company.",
-                name: "Jane Cooper",
-                role: "Operations Lead",
-                avatar: "JC",
-              },
-            ].map((testimonial, index) => (
-              <div
-                key={index}
-                className="p-6 md:p-8 rounded-2xl flex flex-col"
-                style={{ backgroundColor: '#FAFAFA' }}
-                data-testid={`testimonial-${index}`}
-              >
-                <div 
-                  className="text-4xl mb-4 font-serif"
-                  style={{ color: '#CCCCCC' }}
-                >
-                  "
-                </div>
-                <p 
-                  className="text-base leading-relaxed mb-6 flex-grow"
-                  style={{ color: '#666666' }}
-                >
-                  "{testimonial.quote}"
-                </p>
-                <div className="flex items-center gap-3">
-                  <div 
-                    className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium"
-                    style={{ backgroundColor: '#E5E5E5', color: '#1A1A1A' }}
+            }}
+          >
+            {[...Array(2)].map((_, setIndex) => (
+              <React.Fragment key={setIndex}>
+                {[
+                  {
+                    quote: "Their strategic insight and hands-on approach helped us streamline operations and unlock new growth opportunities. We saw measurable results within months.",
+                    name: "Cameron Williamson",
+                    role: "CEO, TechStart",
+                    avatar: "CW",
+                  },
+                  {
+                    quote: "Their consultants didn't just offer advice—they rolled up their sleeves and worked alongside us to solve complex challenges and deliver real results.",
+                    name: "Theresa Webb",
+                    role: "Product Director",
+                    avatar: "TW",
+                  },
+                  {
+                    quote: "One of the things that impressed us most was their transparency and communication. We were kept in the loop at every stage of the project.",
+                    name: "Annette Black",
+                    role: "Founder, Retail Co",
+                    avatar: "AB",
+                  },
+                  {
+                    quote: "They provided clarity where we had confusion, and direction where we had chaos. One of the best investments we've made as a company.",
+                    name: "Jane Cooper",
+                    role: "Operations Lead",
+                    avatar: "JC",
+                  },
+                ].map((testimonial, index) => (
+                  <div
+                    key={`${setIndex}-${index}`}
+                    className="p-6 md:p-8 rounded-2xl flex flex-col flex-shrink-0"
+                    style={{ backgroundColor: '#FAFAFA', width: '340px', minHeight: '280px' }}
+                    data-testid={`testimonial-${setIndex}-${index}`}
                   >
-                    {testimonial.avatar}
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold" style={{ color: '#1A1A1A' }}>
-                      {testimonial.name}
+                    <div 
+                      className="text-4xl mb-4 font-serif"
+                      style={{ color: '#CCCCCC' }}
+                    >
+                      "
+                    </div>
+                    <p 
+                      className="text-base leading-relaxed mb-6 flex-grow"
+                      style={{ color: '#666666' }}
+                    >
+                      "{testimonial.quote}"
                     </p>
-                    <p className="text-xs" style={{ color: '#666666' }}>
-                      {testimonial.role}
-                    </p>
+                    <div className="flex items-center gap-3">
+                      <div 
+                        className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium"
+                        style={{ backgroundColor: '#E5E5E5', color: '#1A1A1A' }}
+                      >
+                        {testimonial.avatar}
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold" style={{ color: '#1A1A1A' }}>
+                          {testimonial.name}
+                        </p>
+                        <p className="text-xs" style={{ color: '#666666' }}>
+                          {testimonial.role}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
+                ))}
+              </React.Fragment>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
