@@ -120,9 +120,61 @@ export default function Services() {
         </div>
       </header>
 
+      {/* Hero Section */}
+      <section 
+        className="relative z-10 pt-28 md:pt-40 pb-16 md:pb-24"
+        style={{ backgroundColor: '#FAFAFA' }}
+        data-testid="section-services-hero"
+      >
+        <div className="max-w-[900px] mx-auto px-6 md:px-10 text-center">
+          <motion.h1 
+            className="font-bold mb-4 md:mb-6"
+            style={{ 
+              fontSize: 'clamp(36px, 5vw, 56px)',
+              lineHeight: '1.1',
+              color: '#1A1A1A',
+              letterSpacing: '-0.02em',
+            }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            Build. Launch. Scale.
+          </motion.h1>
+          <motion.p 
+            className="text-lg md:text-xl mb-8 md:mb-10 mx-auto"
+            style={{ 
+              color: '#666666',
+              maxWidth: '600px',
+              lineHeight: '1.6',
+            }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            We design brands, digital products, and AI-powered systems that actually move the business.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <Link href="/contact">
+              <button 
+                className="px-8 py-4 rounded-full font-medium text-base transition-all hover:opacity-90"
+                style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}
+                data-testid="cta-services-hero"
+              >
+                Start a Project
+              </button>
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Capabilities Section - Horizontal Card Layout */}
       <section 
-        className="relative z-10 pt-28 md:pt-32 pb-16 md:pb-24"
+        className="relative z-10 py-16 md:py-24"
         style={{ backgroundColor: '#FFFFFF' }}
         data-testid="section-capabilities"
       >
