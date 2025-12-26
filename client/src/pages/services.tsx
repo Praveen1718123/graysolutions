@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "wouter";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import logoImage from "@assets/Group_25_(5)_1766734675194.png";
 import Footer from "@/components/footer";
@@ -9,10 +9,30 @@ import productDesignImg from "@assets/stock_images/modern_digital_produ_807a649b
 import webPlatformImg from "@assets/stock_images/web_development_codi_7cf7da0f.jpg";
 import commerceImg from "@assets/stock_images/ecommerce_shopping_o_773b9c07.jpg";
 import contentMarketingImg from "@assets/stock_images/content_marketing_cr_8c06f177.jpg";
+import magicTrucksThumb from "@assets/optimized/mokcup_1_1765899763586.jpg";
+import eagleThumb from "@assets/optimized/Eagle_Web_2_1765901229010.jpg";
+import tixThumb from "@assets/optimized/Desktop_-_4_(2)_1765460573017.jpg";
+import grayThumb from "@assets/optimized/Camera_Angle_02_1765901229015.jpg";
 
 export default function Services() {
   const [isScrolled, setIsScrolled] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const heroAnimRef = useRef<HTMLDivElement>(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springX = useSpring(mouseX, { stiffness: 50, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (heroAnimRef.current) {
+      const rect = heroAnimRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      mouseX.set(x);
+      mouseY.set(y);
+    }
+  };
 
   const capabilities = [
     {
@@ -122,40 +142,160 @@ export default function Services() {
 
       {/* Hero Section */}
       <section 
-        className="relative z-10 pt-40 md:pt-56 pb-32 md:pb-48"
+        className="relative z-10 pt-28 md:pt-40 pb-16 md:pb-24"
         style={{ backgroundColor: '#FAFAFA', minHeight: '80vh' }}
         data-testid="section-services-hero"
       >
-        <div className="max-w-[1000px] mx-auto px-6 md:px-10 text-center flex flex-col justify-center h-full">
-          <motion.h1 
-            className="font-bold mb-6 md:mb-8"
-            style={{ 
-              fontSize: 'clamp(36px, 5vw, 60px)',
-              lineHeight: '1.1',
-              color: '#1A1A1A',
-              letterSpacing: '-0.02em',
-            }}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            We design, build & automate the products your customers actually use.
-          </motion.h1>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <Link href="/contact">
-              <button 
-                className="px-8 py-4 rounded-full font-medium text-base transition-all hover:opacity-90"
-                style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}
-                data-testid="cta-services-hero"
+        <div className="max-w-[1400px] mx-auto px-6 md:px-10 h-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-[60vh]">
+            {/* Left Side - Text */}
+            <motion.div
+              className="text-left"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h1 
+                className="font-bold mb-6 md:mb-8"
+                style={{ 
+                  fontSize: 'clamp(36px, 5vw, 56px)',
+                  lineHeight: '1.1',
+                  color: '#1A1A1A',
+                  letterSpacing: '-0.02em',
+                }}
               >
-                Start a Project
-              </button>
-            </Link>
-          </motion.div>
+                We design, build & automate the products your customers actually use.
+              </h1>
+              <Link href="/contact">
+                <button 
+                  className="px-8 py-4 rounded-full font-medium text-base transition-all hover:opacity-90"
+                  style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}
+                  data-testid="cta-services-hero"
+                >
+                  Start a Project
+                </button>
+              </Link>
+            </motion.div>
+
+            {/* Right Side - Interactive Animation */}
+            <motion.div
+              ref={heroAnimRef}
+              className="relative w-full aspect-square max-w-[500px] mx-auto cursor-pointer overflow-hidden rounded-3xl"
+              style={{ backgroundColor: '#FFFFFF' }}
+              onMouseMove={handleMouseMove}
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              data-testid="hero-animation"
+            >
+              {/* Animated Shapes */}
+              <motion.div
+                className="absolute"
+                style={{
+                  width: '120px',
+                  height: '120px',
+                  borderRadius: '50%',
+                  backgroundColor: '#1A1A1A',
+                  left: '20%',
+                  top: '15%',
+                }}
+                animate={{
+                  x: isHovering ? [0, 10, -5, 0] : 0,
+                  y: isHovering ? [0, -10, 5, 0] : 0,
+                  scale: isHovering ? 1.1 : 1,
+                }}
+                transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
+              />
+              <motion.div
+                className="absolute"
+                style={{
+                  width: '80px',
+                  height: '80px',
+                  borderRadius: '50%',
+                  backgroundColor: '#1A1A1A',
+                  right: '25%',
+                  top: '30%',
+                }}
+                animate={{
+                  x: isHovering ? [0, -15, 8, 0] : 0,
+                  y: isHovering ? [0, 8, -12, 0] : 0,
+                  scale: isHovering ? 1.15 : 1,
+                }}
+                transition={{ duration: 2.5, repeat: Infinity, repeatType: "reverse", delay: 0.3 }}
+              />
+              <motion.div
+                className="absolute"
+                style={{
+                  width: '60px',
+                  height: '60px',
+                  borderRadius: '12px',
+                  backgroundColor: '#1A1A1A',
+                  left: '35%',
+                  bottom: '25%',
+                }}
+                animate={{
+                  rotate: isHovering ? [0, 45, 0] : 0,
+                  scale: isHovering ? 1.2 : 1,
+                }}
+                transition={{ duration: 3, repeat: Infinity, repeatType: "reverse", delay: 0.5 }}
+              />
+              <motion.div
+                className="absolute"
+                style={{
+                  width: '100px',
+                  height: '100px',
+                  borderRadius: '50%',
+                  border: '3px solid #1A1A1A',
+                  backgroundColor: 'transparent',
+                  right: '15%',
+                  bottom: '20%',
+                }}
+                animate={{
+                  scale: isHovering ? [1, 1.2, 1] : 1,
+                }}
+                transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", delay: 0.7 }}
+              />
+              <motion.div
+                className="absolute"
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  backgroundColor: '#1A1A1A',
+                  left: '15%',
+                  bottom: '40%',
+                }}
+                animate={{
+                  y: isHovering ? [0, -20, 10, 0] : 0,
+                }}
+                transition={{ duration: 2.2, repeat: Infinity, repeatType: "reverse", delay: 0.2 }}
+              />
+              
+              {/* Mouse-following diffusion effect */}
+              <motion.div
+                className="absolute pointer-events-none"
+                style={{
+                  width: '250px',
+                  height: '250px',
+                  borderRadius: '50%',
+                  background: 'radial-gradient(circle, rgba(26,26,26,0.2) 0%, rgba(26,26,26,0.1) 30%, transparent 70%)',
+                  left: springX,
+                  top: springY,
+                  translateX: '-50%',
+                  translateY: '-50%',
+                  opacity: isHovering ? 1 : 0,
+                  scale: isHovering ? 1.2 : 0.5,
+                }}
+                animate={{
+                  opacity: isHovering ? 1 : 0,
+                  scale: isHovering ? 1.2 : 0.5,
+                }}
+                transition={{ opacity: { duration: 0.2 }, scale: { duration: 0.3 } }}
+              />
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -513,35 +653,46 @@ export default function Services() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { title: "Magic Trucks", category: "Brand & Product", href: "/case-study/magic-trucks" },
-              { title: "Eagle", category: "Web Platform", href: "/case-study/eagle" },
-              { title: "TIX", category: "Mobile App", href: "/case-study/tix" },
-              { title: "Gray Solutions", category: "Brand Identity", href: "/case-study/gray-solutions" },
+              { title: "Magic Trucks", category: "Brand & Product", href: "/case-study/magic-trucks", thumbnail: magicTrucksThumb },
+              { title: "Eagle", category: "Web Platform", href: "/case-study/eagle", thumbnail: eagleThumb },
+              { title: "TIX", category: "Mobile App", href: "/case-study/tix", thumbnail: tixThumb },
+              { title: "Gray Solutions", category: "Brand Identity", href: "/case-study/gray-solutions", thumbnail: grayThumb },
             ].map((caseStudy, index) => (
               <Link key={index} href={caseStudy.href}>
                 <div
-                  className="p-6 md:p-8 rounded-2xl cursor-pointer transition-all hover:shadow-lg group"
+                  className="rounded-2xl cursor-pointer transition-all hover:shadow-lg group overflow-hidden"
                   style={{ backgroundColor: '#FFFFFF' }}
                   data-testid={`case-study-link-${index}`}
                 >
-                  <span 
-                    className="text-xs font-medium mb-2 block"
-                    style={{ color: '#666666' }}
-                  >
-                    {caseStudy.category}
-                  </span>
-                  <h3 
-                    className="text-xl font-semibold mb-4 group-hover:underline"
-                    style={{ color: '#1A1A1A' }}
-                  >
-                    {caseStudy.title}
-                  </h3>
-                  <span 
-                    className="text-sm font-medium"
-                    style={{ color: '#1A1A1A' }}
-                  >
-                    View case study →
-                  </span>
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img 
+                      src={caseStudy.thumbnail}
+                      alt={caseStudy.title}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <span 
+                      className="text-xs font-medium mb-1 block"
+                      style={{ color: '#666666' }}
+                    >
+                      {caseStudy.category}
+                    </span>
+                    <h3 
+                      className="text-lg font-semibold mb-2 group-hover:underline"
+                      style={{ color: '#1A1A1A' }}
+                    >
+                      {caseStudy.title}
+                    </h3>
+                    <span 
+                      className="text-sm font-medium"
+                      style={{ color: '#1A1A1A' }}
+                    >
+                      View case study →
+                    </span>
+                  </div>
                 </div>
               </Link>
             ))}
