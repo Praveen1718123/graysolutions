@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import logoImage from "@assets/Group_69_(1)_1764854226570.png";
+import logoImage from "@assets/Group_25_(5)_1766734675194.png";
 import Footer from "@/components/footer";
 import heroImage from "@assets/Free_iPhone_16_Pro_PSD_Mockup_Tix_1766597838175.jpg";
 import deckImage from "@assets/Tix_Deck-10_1766597838176.png";

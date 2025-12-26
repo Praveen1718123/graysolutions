@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "wouter";
-import logoImage from "@assets/Group_69_(1)_1764854226570.png";
+import logoWhite from "@assets/Group_25_(4)_1766734677573.png";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -119,20 +119,18 @@ export default function Footer() {
       <section style={{ backgroundColor: '#1A1A1A' }}>
         <div className="max-w-[1200px] mx-auto px-6 md:px-10 py-12 md:py-16">
           <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-10">
-            {/* Left - Large Brand Name */}
+            {/* Left - Large Brand Logo */}
             <div className="flex-1">
               <div className="flex items-end gap-6 flex-wrap">
-                <h2 
-                  className="font-bold leading-none"
-                  style={{ 
-                    fontSize: 'clamp(48px, 10vw, 120px)',
-                    color: '#F5F5F0',
-                    letterSpacing: '-0.03em',
-                    fontFamily: 'Georgia, serif',
-                  }}
-                >
-                  Gray
-                </h2>
+                <Link href="/">
+                  <img 
+                    src={logoWhite}
+                    alt="Gray Logo"
+                    className="cursor-pointer"
+                    style={{ height: 'clamp(60px, 12vw, 120px)', width: 'auto' }}
+                    data-testid="footer-logo"
+                  />
+                </Link>
                 <div className="pb-2 md:pb-4">
                   <p 
                     className="text-base md:text-lg leading-tight"
