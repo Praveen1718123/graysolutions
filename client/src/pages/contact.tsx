@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 import ctaImage from "@assets/stock_images/two_professionals_co_f8f9803a.jpg";
+import Footer from "@/components/footer";
 
 export default function Contact() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -661,29 +662,7 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer 
-        className="py-12 relative z-10"
-        style={{ backgroundColor: '#FAFAFA', borderTop: '1px solid #E5E5E5' }}
-      >
-        <div className="max-w-[1120px] mx-auto px-6 md:px-10">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <Link href="/">
-              <img 
-                src={logoImage} 
-                alt="Gray Solutions Logo" 
-                className="h-8 cursor-pointer"
-              />
-            </Link>
-            <p 
-              className="text-sm"
-              style={{ color: '#666666' }}
-            >
-              © 2024 Gray Solutions. All rights reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

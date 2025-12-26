@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import logoImage from "@assets/Group_69_(1)_1764854226570.png";
 import heroVideo from "@assets/hero-video-horizontal.mp4";
+import Footer from "@/components/footer";
 
 export default function Services() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -597,6 +598,8 @@ export default function Services() {
           </Link>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 }

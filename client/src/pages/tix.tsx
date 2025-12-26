@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import logoImage from "@assets/Group_69_(1)_1764854226570.png";
+import Footer from "@/components/footer";
 import heroImage from "@assets/Free_iPhone_16_Pro_PSD_Mockup_Tix_1766597838175.jpg";
 import deckImage from "@assets/Tix_Deck-10_1766597838176.png";
 import guidelinesImage from "@assets/Tix_Guidelines-05_1766597838176.png";
@@ -458,29 +459,7 @@ export default function Tix() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer 
-        className="py-12"
-        style={{ backgroundColor: '#FAFAFA', borderTop: '1px solid #E5E5E5' }}
-      >
-        <div className="max-w-[1120px] mx-auto px-6 md:px-10">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <Link href="/">
-              <img 
-                src={logoImage} 
-                alt="Gray Solutions Logo" 
-                className="h-8 cursor-pointer"
-              />
-            </Link>
-            <p 
-              className="text-sm"
-              style={{ color: '#666666' }}
-            >
-              © 2024 Gray Solutions. All rights reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

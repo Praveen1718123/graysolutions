@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "wouter";
 import { motion } from "framer-motion";
 import logoImage from "@assets/Group_69_(1)_1764854226570.png";
+import Footer from "@/components/footer";
 
 interface BlogPost {
   id: number;
@@ -455,24 +456,7 @@ export default function BlogDetail() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer 
-        className="py-10 md:py-14"
-        style={{ backgroundColor: '#1A1A1A' }}
-      >
-        <div className="max-w-[1120px] mx-auto px-4 md:px-10">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <img 
-              src={logoImage} 
-              alt="Gray Solutions" 
-              className="h-8 brightness-0 invert"
-            />
-            <p className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
-              Based in India. Working globally.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </motion.div>
   );
 }

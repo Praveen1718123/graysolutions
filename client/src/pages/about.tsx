@@ -10,6 +10,7 @@ import reliabilityGif from "@assets/From_KlickPin_CF_Kaldea_Visual_Identity_&_We
 import refineGif from "@assets/From_KlickPin_CF_Kaldea_Visual_Identity_&_Website_Design_Behan_1766517702605.gif";
 import designVideo from "@assets/From_KlickPin_CF_Abstract_gradient_geometric_shape_animation_[_1766517982162.mp4";
 import positionGif from "@assets/From_KlickPin_CF_Motion_Abstract_-_V1___Motion_graphics_design_1766518454195.gif";
+import Footer from "@/components/footer";
 
 function useCountUp(end: number, duration: number = 2000, inView: boolean) {
   const [count, setCount] = useState(0);
@@ -1131,24 +1132,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer 
-        className="py-10 md:py-14"
-        style={{ backgroundColor: '#1A1A1A' }}
-      >
-        <div className="max-w-[1120px] mx-auto px-4 md:px-10">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <img 
-              src={logoImage} 
-              alt="Gray Solutions" 
-              className="h-8 brightness-0 invert"
-            />
-            <p className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
-              Based in India. Working globally.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

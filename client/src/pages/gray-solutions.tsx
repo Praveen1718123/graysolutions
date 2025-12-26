@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import logoImage from "@assets/Group_69_(1)_1764854226570.png";
+import Footer from "@/components/footer";
 import heroVideo from "@assets/hero-video-horizontal.mp4";
 import desktopImage from "@assets/Desktop_-_4_(2)_1765460573017.png";
 import screenshotAbout from "@assets/Screenshot_2025-12-24_at_2.03.21_PM_1766565203775.png";
@@ -430,29 +431,7 @@ export default function GraySolutions() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer 
-        className="py-12"
-        style={{ backgroundColor: '#FAFAFA', borderTop: '1px solid #E5E5E5' }}
-      >
-        <div className="max-w-[1120px] mx-auto px-6 md:px-10">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <Link href="/">
-              <img 
-                src={logoImage} 
-                alt="Gray Solutions Logo" 
-                className="h-8 cursor-pointer"
-              />
-            </Link>
-            <p 
-              className="text-sm"
-              style={{ color: '#666666' }}
-            >
-              © 2024 Gray Solutions. All rights reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import logoImage from "@assets/Group_69_(1)_1764854226570.png";
+import Footer from "@/components/footer";
 import heroImage from "@assets/mokcup_1_1765899763586.png";
 import laptopScreens from "@assets/54066314_updlaptop_screerns0008_1765899763583.png";
 import mobileHandImage from "@assets/magic_23_1765899763585.jpg";
@@ -484,21 +485,7 @@ export default function MagicTrucks() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-8 md:py-12" style={{ backgroundColor: '#1A1A1A' }}>
-        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <img 
-              src={logoImage} 
-              alt="Gray Solutions" 
-              className="h-8 brightness-0 invert"
-            />
-            <p className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
-              Based in India. Working globally.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
