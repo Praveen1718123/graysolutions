@@ -170,9 +170,9 @@ export default function MagicTrucks() {
 
       {/* Quick Brief Section */}
       <section className="py-12 md:py-28" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-[680px] mx-auto px-4 md:px-10">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
           <motion.h2 
-            className="text-2xl md:text-3xl font-bold mb-12 text-center"
+            className="text-2xl md:text-3xl font-bold mb-12"
             style={{ color: '#1A1A1A' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -181,7 +181,7 @@ export default function MagicTrucks() {
             Quick Brief
           </motion.h2>
           
-          <div className="space-y-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {[
               { title: "Ambition", text: "Make freight booking + tracking feel simple, trustworthy, and repeatable — without forcing teams to change their habits overnight." },
               { title: "Reality Check", text: "Indian logistics runs on fast coordination: calls, WhatsApp updates, manual docs, and constant follow-ups. Most tools fail because they add friction instead of removing uncertainty." },
@@ -194,10 +194,10 @@ export default function MagicTrucks() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
               >
-                <h3 className="text-lg font-semibold mb-3 text-center" style={{ color: '#1A1A1A' }}>
+                <h3 className="text-lg font-semibold mb-3" style={{ color: '#1A1A1A' }}>
                   {item.title}
                 </h3>
-                <p className="text-base leading-relaxed text-center" style={{ color: '#666666' }}>
+                <p className="text-base leading-relaxed" style={{ color: '#666666' }}>
                   {item.text}
                 </p>
               </motion.div>
@@ -223,9 +223,9 @@ export default function MagicTrucks() {
 
       {/* Insights Section */}
       <section className="py-12 md:py-28" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-[680px] mx-auto px-4 md:px-10">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
           <motion.h2 
-            className="text-2xl md:text-3xl font-bold mb-12 text-center"
+            className="text-2xl md:text-3xl font-bold mb-12"
             style={{ color: '#1A1A1A' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -234,7 +234,7 @@ export default function MagicTrucks() {
             Insights
           </motion.h2>
           
-          <div className="space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {[
               { num: "1", title: "People don't buy \"features.\" They buy certainty.", text: "If a user can't see current status, ETA, and next step instantly, they fall back to calling someone." },
               { num: "2", title: "Logistics is a trust business before it's a tech business.", text: "The product has to look and feel dependable — because decisions involve money, risk, and time." },
@@ -251,15 +251,15 @@ export default function MagicTrucks() {
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
               >
                 <span 
-                  className="text-4xl font-bold block mb-4 text-center"
+                  className="text-4xl font-bold block mb-4"
                   style={{ color: '#D4D4D4' }}
                 >
                   {item.num}
                 </span>
-                <h3 className="text-lg font-semibold mb-3 text-center" style={{ color: '#1A1A1A' }}>
+                <h3 className="text-lg font-semibold mb-3" style={{ color: '#1A1A1A' }}>
                   {item.title}
                 </h3>
-                <p className="text-base leading-relaxed text-center" style={{ color: '#666666' }}>
+                <p className="text-base leading-relaxed" style={{ color: '#666666' }}>
                   {item.text}
                 </p>
               </motion.div>
@@ -270,58 +270,59 @@ export default function MagicTrucks() {
 
       {/* The Big Bet Section */}
       <section className="py-12 md:py-28" style={{ backgroundColor: '#FAFAFA' }}>
-        <div className="max-w-[680px] mx-auto px-4 md:px-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center" style={{ color: '#1A1A1A' }}>
-              The Big Bet
-            </h2>
-            <p className="text-lg leading-relaxed mb-8 text-center" style={{ color: '#666666' }}>
-              Build a logistics system that becomes the single source of truth for every shipment — while staying practical for India's real-world operations.
-            </p>
-            
-            <h3 className="text-xl font-semibold mb-4 text-center" style={{ color: '#1A1A1A' }}>The Strategy</h3>
-            <ul className="space-y-3">
-              {[
-                "Win with clarity, not complexity: make \"what's happening\" obvious, not hidden in workflows.",
-                "Standardize the shipment lifecycle: Quote → Book → Dispatch → In Transit → Proof → Closure → History.",
-                "Reduce follow-ups by design: fewer calls, fewer \"where is it\" messages, fewer misunderstandings.",
-                "Build trust beyond the app: brand + consistency makes businesses feel safe choosing you.",
-                "Optimize for repeat usage: the goal isn't one booking — it's predictable operations that bring customers back.",
-              ].map((item, idx) => (
-                <li key={idx} className="flex items-start gap-3 text-base" style={{ color: '#666666' }}>
-                  <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#1A1A1A' }} />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#1A1A1A' }}>
+                The Big Bet
+              </h2>
+              <p className="text-lg leading-relaxed mb-8" style={{ color: '#666666' }}>
+                Build a logistics system that becomes the single source of truth for every shipment — while staying practical for India's real-world operations.
+              </p>
+              
+              <h3 className="text-xl font-semibold mb-4" style={{ color: '#1A1A1A' }}>The Strategy</h3>
+              <ul className="space-y-3">
+                {[
+                  "Win with clarity, not complexity: make \"what's happening\" obvious, not hidden in workflows.",
+                  "Standardize the shipment lifecycle: Quote → Book → Dispatch → In Transit → Proof → Closure → History.",
+                  "Reduce follow-ups by design: fewer calls, fewer \"where is it\" messages, fewer misunderstandings.",
+                  "Build trust beyond the app: brand + consistency makes businesses feel safe choosing you.",
+                  "Optimize for repeat usage: the goal isn't one booking — it's predictable operations that bring customers back.",
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-3 text-base" style={{ color: '#666666' }}>
+                    <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#1A1A1A' }} />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="mt-12"
-          >
-            <img 
-              src={mobileHandImage}
-              alt="Mobile tracking screen shown in-hand"
-              className="w-full rounded-2xl"
-            />
-          </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              <img 
+                src={mobileHandImage}
+                alt="Mobile tracking screen shown in-hand"
+                className="w-full rounded-2xl"
+              />
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Impact Section */}
       <section className="py-12 md:py-28" style={{ backgroundColor: '#1A1A1A' }}>
-        <div className="max-w-[680px] mx-auto px-4 md:px-10">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
           <motion.h2 
-            className="text-2xl md:text-3xl font-bold mb-12 text-center"
+            className="text-2xl md:text-3xl font-bold mb-12"
             style={{ color: '#FFFFFF' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -330,9 +331,9 @@ export default function MagicTrucks() {
             Impact
           </motion.h2>
           
-          <div className="space-y-10 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
             <div>
-              <h3 className="text-lg font-semibold mb-4 text-center" style={{ color: 'rgba(255,255,255,0.5)' }}>
+              <h3 className="text-lg font-semibold mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
                 Impact delivered (now)
               </h3>
               <ul className="space-y-3">
@@ -350,7 +351,7 @@ export default function MagicTrucks() {
             </div>
             
             <div>
-              <h3 className="text-lg font-semibold mb-4 text-center" style={{ color: 'rgba(255,255,255,0.5)' }}>
+              <h3 className="text-lg font-semibold mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
                 Impact to measure (later)
               </h3>
               <ul className="space-y-3">
@@ -360,7 +361,7 @@ export default function MagicTrucks() {
                   "↓ Support queries about shipment status",
                   "↑ Repeat shippers (retention)",
                 ].map((item, idx) => (
-                  <li key={idx} className="text-base text-center" style={{ color: 'rgba(255,255,255,0.7)' }}>
+                  <li key={idx} className="text-base" style={{ color: 'rgba(255,255,255,0.7)' }}>
                     {item}
                   </li>
                 ))}
@@ -390,7 +391,7 @@ export default function MagicTrucks() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-12 text-center"
+            className="mb-12"
           >
             <h2 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: '#1A1A1A' }}>
               Proof of Work
