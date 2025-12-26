@@ -6,6 +6,11 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Landing from "@/pages/landing";
 import Services from "@/pages/services";
+import ServiceBrandDesign from "@/pages/service-brand-design";
+import ServiceProductDesign from "@/pages/service-product-design";
+import ServiceWebPlatform from "@/pages/service-web-platform";
+import ServiceCommerce from "@/pages/service-commerce";
+import ServiceContentMarketing from "@/pages/service-content-marketing";
 import About from "@/pages/about";
 import Blogs from "@/pages/blogs";
 import BlogDetail from "@/pages/blog-detail";
@@ -20,6 +25,11 @@ function Router() {
     <Switch>
       <Route path="/" component={Landing} />
       <Route path="/services" component={Services} />
+      <Route path="/services/brand-design" component={ServiceBrandDesign} />
+      <Route path="/services/product-design" component={ServiceProductDesign} />
+      <Route path="/services/web-platform" component={ServiceWebPlatform} />
+      <Route path="/services/commerce" component={ServiceCommerce} />
+      <Route path="/services/content-marketing" component={ServiceContentMarketing} />
       <Route path="/about" component={About} />
       <Route path="/case-study/magic-trucks" component={MagicTrucks} />
       <Route path="/case-study/eagle" component={Eagle} />

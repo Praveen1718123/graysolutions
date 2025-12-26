@@ -1,91 +1,49 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import logoImage from "@assets/Group_25_(5)_1766734675194.png";
 import Footer from "@/components/footer";
+import brandDesignImg from "@assets/stock_images/professional_brand_d_908b1411.jpg";
+import productDesignImg from "@assets/stock_images/modern_digital_produ_807a649b.jpg";
+import webPlatformImg from "@assets/stock_images/web_development_codi_7cf7da0f.jpg";
+import commerceImg from "@assets/stock_images/ecommerce_shopping_o_773b9c07.jpg";
+import contentMarketingImg from "@assets/stock_images/content_marketing_cr_8c06f177.jpg";
 
 export default function Services() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [expandedCapability, setExpandedCapability] = useState<number | null>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const capabilitiesData = [
+  const capabilities = [
     {
-      id: 0,
-      title: "Brand design",
-      description: "Building brands that look premium, sound clear, and stay consistent everywhere — from first impression to repeat purchase.",
-      items: [
-        { title: "Brand strategy & positioning", desc: "Defining your category, audience, and 'why us' so your brand isn't just another option." },
-        { title: "Naming & messaging systems", desc: "Naming, tone of voice, taglines, and message hierarchy that sells without sounding salesy." },
-        { title: "Visual identity systems", desc: "Logo direction, typography, color, layouts, and guidelines that scale across teams and platforms." },
-        { title: "Brand design kits", desc: "Reusable templates for social, decks, proposals, and internal docs — consistent by default." },
-        { title: "Packaging & product presentation", desc: "Packaging, labels, and product visuals designed to look trustable on shelf and online." },
-        { title: "Creative direction", desc: "A clear visual lane for shoots, reels, ads, and web — so everything feels like one brand." },
-      ]
+      id: "brand-design",
+      title: "Brand Design",
+      image: brandDesignImg,
+      href: "/services/brand-design",
     },
     {
-      id: 1,
-      title: "Product & experience design",
-      description: "Reimagining how people interact with your brand through digital products and experiences that drive business and human impact.",
-      items: [
-        { title: "Solutions design & consulting", desc: "Defining technology strategies to operationalize new solutions and capabilities." },
-        { title: "Product strategy & vision", desc: "Identifying product opportunities, prioritizing the right bets, and shaping the roadmap." },
-        { title: "Experience design & development", desc: "Designing and validating flows fast — from wireframes to high-fidelity UI." },
-        { title: "AI product strategy & development", desc: "LLM integrations, agent workflows, and AI features designed like real product—not demos." },
-        { title: "Commerce experience design", desc: "Conversion-first shopping experiences across web, mobile, and marketplaces." },
-        { title: "Design systems & components", desc: "A scalable UI kit that keeps your product consistent and speeds up development." },
-      ]
+      id: "product-design",
+      title: "Product & Experience",
+      image: productDesignImg,
+      href: "/services/product-design",
     },
     {
-      id: 2,
-      title: "Web & platform solutions",
-      description: "Modern websites and platforms built to load fast, scale clean, and convert without chaos.",
-      items: [
-        { title: "Websites & landing pages", desc: "High-end marketing sites that are performance-first and conversion-ready." },
-        { title: "Web applications & dashboards", desc: "Admin panels, portals, and internal tools built for clarity and speed." },
-        { title: "MVP builds", desc: "Ship the first version fast with the right architecture to evolve later." },
-        { title: "Integrations & workflows", desc: "Payments, CRM, WhatsApp, email, forms, analytics — connected end-to-end." },
-        { title: "Performance & SEO foundation", desc: "Technical SEO, structure, speed, and accessibility baked in from day one." },
-        { title: "Maintenance & iteration", desc: "Ongoing improvements, new pages/features, fixes, and optimization cycles." },
-      ]
+      id: "web-platform",
+      title: "Web & Platform",
+      image: webPlatformImg,
+      href: "/services/web-platform",
     },
     {
-      id: 3,
-      title: "Commerce design & Shopify",
-      description: "Storefronts that feel premium and convert — with a backend setup that won't break later.",
-      items: [
-        { title: "Shopify setup & structure", desc: "Collections, navigation, policies, shipping, taxes, and clean store architecture." },
-        { title: "Theme customization", desc: "High-quality UI polish on a reliable theme (no bloated hacks)." },
-        { title: "Product page optimization", desc: "Better PDP layout, trust elements, sizing logic, upsells, and clarity." },
-        { title: "Checkout & funnel improvements", desc: "Reduce drop-offs with smarter flows, offers, and friction removal." },
-        { title: "Automations & retention", desc: "Abandoned cart, post-purchase flows, basic segmentation, and lifecycle journeys." },
-        { title: "Analytics & tracking", desc: "Pixel setup + clean measurement so your ads/decisions aren't guessing." },
-      ]
+      id: "commerce",
+      title: "Commerce & Shopify",
+      image: commerceImg,
+      href: "/services/commerce",
     },
     {
-      id: 4,
-      title: "Content & performance marketing",
-      description: "Creative + distribution as a system — built to generate demand, not just 'posts'.",
-      items: [
-        { title: "Content strategy & calendar", desc: "What to post, why it matters, and how it maps to business outcomes." },
-        { title: "Creative production", desc: "Reels, carousels, ad creatives, brand videos — designed to stop scroll." },
-        { title: "Performance ads (Meta/Google)", desc: "Testing frameworks, targeting, creative iterations, and funnel alignment." },
-        { title: "Landing page conversion", desc: "Ad → landing → conversion improvements that move numbers." },
-        { title: "Personal branding content", desc: "Founder-led content that builds trust, authority, and inbound leads." },
-        { title: "Reporting & optimization", desc: "Simple insights, real next steps, and continuous iteration cycles." },
-      ]
-    },
-    {
-      id: 5,
-      title: "AI agents & automation",
-      description: "AI that reduces work, speeds up ops, and feels native to your business.",
-      items: [
-        { title: "Lead response agents", desc: "Instant replies, qualification, and routing across WhatsApp/web/email." },
-        { title: "Support & FAQ bots", desc: "Knowledge-based support that actually answers and escalates cleanly." },
-        { title: "Internal assistants", desc: "Ops, sales, HR, and finance helpers that summarize, draft, and execute workflows." },
-        { title: "RAG + knowledge systems", desc: "Your docs, SOPs, and databases turned into a searchable 'company brain'." },
-        { title: "Automation pipelines", desc: "Zapier/Make/custom workflows to remove repetitive tasks end-to-end." },
-        { title: "AI productization", desc: "Turn your workflows into a sellable AI feature or standalone product." },
-      ]
+      id: "content-marketing",
+      title: "Content & Marketing",
+      image: contentMarketingImg,
+      href: "/services/content-marketing",
     },
   ];
 
@@ -99,6 +57,18 @@ export default function Services() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -340, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 340, behavior: 'smooth' });
+    }
+  };
+
   return (
     <div 
       className="min-h-screen w-full font-sans overflow-x-hidden"
@@ -108,7 +78,7 @@ export default function Services() {
         fontFamily: '-apple-system, system-ui, sans-serif'
       }}
     >
-      {/* Fixed Header - Full width initially, transforms to floating pill on scroll */}
+      {/* Fixed Header */}
       <header 
         className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 md:px-0"
         style={{
@@ -134,11 +104,10 @@ export default function Services() {
             transition: 'all 500ms cubic-bezier(0.4, 0, 0.2, 1)',
           }}
         >
-          {/* Logo Image */}
           <Link href="/">
             <img 
               src={logoImage} 
-              alt="Gray Solutions Logo" 
+              alt="Gray Logo" 
               className="cursor-pointer"
               style={{
                 height: isScrolled ? '24px' : '36px',
@@ -151,212 +120,108 @@ export default function Services() {
         </div>
       </header>
 
-      {/* Capabilities Section - 2 Column Layout */}
+      {/* Capabilities Section - Horizontal Card Layout */}
       <section 
-        className="relative z-10"
-        style={{ backgroundColor: '#FFFFFF', minHeight: '80vh', paddingTop: '100px' }}
+        className="relative z-10 pt-28 md:pt-32 pb-16 md:pb-24"
+        style={{ backgroundColor: '#FFFFFF' }}
         data-testid="section-capabilities"
       >
-        <div className="w-full px-6 md:px-16 lg:px-24 py-16 md:py-24">
-          {/* Mobile: Single Column */}
-          <div className="md:hidden">
-            {/* Left content as header on mobile */}
-            <div className="mb-10">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-10">
+          {/* Header with Navigation */}
+          <div className="flex items-center justify-between mb-8 md:mb-12">
+            <div>
               <span 
-                className="text-sm font-medium tracking-wide mb-3 block"
+                className="text-sm font-medium tracking-wide mb-2 block"
                 style={{ color: '#666666' }}
               >
-                Capabilities
+                What We Do
               </span>
               <h2 
-                className="text-3xl font-bold mb-4"
+                className="text-2xl md:text-3xl font-bold"
                 style={{ color: '#1A1A1A' }}
               >
-                Build. Launch. Scale.
+                Our Capabilities
               </h2>
-              <p 
-                className="text-base leading-relaxed mb-6"
-                style={{ color: '#666666' }}
-              >
-                Gray Solutions designs brands, digital products, and AI-powered systems that actually move the business.
-              </p>
-              <div className="flex gap-3 mb-4">
-                <button 
-                  className="px-6 py-3 rounded-full font-medium text-sm"
-                  style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}
-                  data-testid="cta-book-call-mobile"
-                >
-                  Book a Call
-                </button>
-                <button 
-                  className="px-6 py-3 rounded-full font-medium text-sm"
-                  style={{ backgroundColor: 'transparent', color: '#1A1A1A', border: '1px solid #E5E5E5' }}
-                  data-testid="cta-see-work-mobile"
-                >
-                  See Work
-                </button>
-              </div>
-              <span 
-                className="text-xs"
-                style={{ color: '#666666' }}
-              >
-                Based in India. Working globally.
-              </span>
             </div>
-
-            {/* Accordion on mobile */}
-            <div className="space-y-3">
-              {[
-                { id: 0, title: "Digital Strategy & Experience", description: "We map out where you want to go and build digital products that get you there. Our strategists marry data with intuition to find your biggest opportunities, then our designers craft experiences that feel human – not like some soulless app." },
-                { id: 1, title: "Brand & Identity", description: "Your brand is more than colours and a logo. We help you figure out what you stand for and give you the tools to express it everywhere, from packaging to pixels. Think clear positioning, a voice with bite and visuals that stick." },
-                { id: 2, title: "Marketing & Growth", description: "Performance without the snake oil. From organic search to paid social to influencer collabs, we focus on what moves the needle. We track ROI in real time and ditch channels that don't pay off, so you're not bleeding budget." },
-                { id: 3, title: "Technology & Automation", description: "Fancy tech is useless if it doesn't make life easier. We build and integrate platforms, automation and AI so your workflows run smooth, your data is actionable and your team isn't stuck with manual grunt work." },
-                { id: 4, title: "Content & Storytelling", description: "People ignore ads but they share stories. Our writers, artists and video nerds create content people actually care about – from snappy copy and 3D visuals to interactive experiences – all tuned to resonate with your audience and reflect your brand's voice." },
-              ].map((item) => {
-                const isExpanded = expandedCapability === item.id;
-                return (
-                  <div 
-                    key={item.id}
-                    className="rounded-2xl overflow-hidden"
-                    style={{ backgroundColor: '#F5F5F5' }}
-                    data-testid={`capability-mobile-${item.id}`}
-                  >
-                    <button
-                      className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
-                      onClick={() => setExpandedCapability(isExpanded ? null : item.id)}
-                      aria-expanded={isExpanded}
-                    >
-                      <span className="text-lg font-semibold" style={{ color: '#1A1A1A' }}>
-                        {item.title}
-                      </span>
-                      <span className="text-xl" style={{ color: '#1A1A1A' }}>
-                        {isExpanded ? '−' : '+'}
-                      </span>
-                    </button>
-                    <div 
-                      className="overflow-hidden transition-all duration-300 ease-out"
-                      style={{ maxHeight: isExpanded ? '500px' : '0', opacity: isExpanded ? 1 : 0 }}
-                    >
-                      <div className="px-6 pb-6">
-                        <p className="text-base leading-relaxed" style={{ color: '#666666' }}>
-                          {item.description}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+            
+            {/* Navigation Arrows */}
+            <div className="hidden md:flex items-center gap-2">
+              <button
+                onClick={scrollLeft}
+                className="w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-gray-100"
+                style={{ backgroundColor: '#F5F5F5' }}
+                data-testid="capabilities-scroll-left"
+              >
+                <ChevronLeft size={20} style={{ color: '#1A1A1A' }} />
+              </button>
+              <button
+                onClick={scrollRight}
+                className="w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-gray-100"
+                style={{ backgroundColor: '#F5F5F5' }}
+                data-testid="capabilities-scroll-right"
+              >
+                <ChevronRight size={20} style={{ color: '#1A1A1A' }} />
+              </button>
             </div>
           </div>
 
-          {/* Desktop: 2-Column Layout - Normal page scroll with sticky left */}
-          <div className="hidden md:grid md:grid-cols-2 gap-12 lg:gap-20">
-            {/* Left Column - Sticky */}
-            <div className="relative">
-              <div 
-                className="sticky"
-                style={{ top: '120px' }}
-              >
-                <span 
-                  className="text-sm font-medium tracking-wide mb-4 block"
-                  style={{ color: '#666666' }}
+          {/* Horizontal Scrolling Cards */}
+          <div 
+            ref={scrollContainerRef}
+            className="flex gap-4 md:gap-6 overflow-x-auto pb-4 scrollbar-hide"
+            style={{ 
+              scrollSnapType: 'x mandatory',
+              WebkitOverflowScrolling: 'touch',
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+            }}
+          >
+            {capabilities.map((capability, index) => (
+              <Link key={capability.id} href={capability.href} data-testid={`link-capability-${capability.id}`}>
+                <motion.div
+                  className="relative flex-shrink-0 rounded-xl overflow-hidden cursor-pointer group"
+                  style={{ 
+                    width: 'clamp(280px, 30vw, 340px)',
+                    aspectRatio: '3/4',
+                    scrollSnapAlign: 'start',
+                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  data-testid={`capability-card-${capability.id}`}
                 >
-                  Capabilities
-                </span>
-                <h2 
-                  className="text-4xl lg:text-5xl font-bold mb-5 leading-tight"
-                  style={{ color: '#1A1A1A' }}
-                >
-                  Build. Launch. Scale.
-                </h2>
-                <p 
-                  className="text-lg leading-relaxed mb-8"
-                  style={{ color: '#666666', maxWidth: '400px' }}
-                >
-                  Gray Solutions designs brands, digital products, and AI-powered systems that actually move the business.
-                </p>
-                <div className="flex gap-3 mb-5">
-                  <button 
-                    className="px-7 py-3.5 rounded-full font-medium text-sm hover:opacity-90 transition-opacity"
-                    style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}
-                    data-testid="cta-book-call"
-                  >
-                    Book a Call
-                  </button>
-                  <button 
-                    className="px-7 py-3.5 rounded-full font-medium text-sm hover:bg-gray-50 transition-colors"
-                    style={{ backgroundColor: 'transparent', color: '#1A1A1A', border: '1px solid #E5E5E5' }}
-                    data-testid="cta-see-work"
-                  >
-                    See Work
-                  </button>
-                </div>
-                <span 
-                  className="text-xs"
-                  style={{ color: '#666666' }}
-                >
-                  Based in India. Working globally.
-                </span>
-              </div>
-            </div>
-
-            {/* Right Column - Flows naturally with page scroll */}
-            <div>
-              <div className="space-y-3">
-                {[
-                  { id: 0, title: "Digital Strategy & Experience", description: "We map out where you want to go and build digital products that get you there. Our strategists marry data with intuition to find your biggest opportunities, then our designers craft experiences that feel human – not like some soulless app." },
-                  { id: 1, title: "Brand & Identity", description: "Your brand is more than colours and a logo. We help you figure out what you stand for and give you the tools to express it everywhere, from packaging to pixels. Think clear positioning, a voice with bite and visuals that stick." },
-                  { id: 2, title: "Marketing & Growth", description: "Performance without the snake oil. From organic search to paid social to influencer collabs, we focus on what moves the needle. We track ROI in real time and ditch channels that don't pay off, so you're not bleeding budget." },
-                  { id: 3, title: "Technology & Automation", description: "Fancy tech is useless if it doesn't make life easier. We build and integrate platforms, automation and AI so your workflows run smooth, your data is actionable and your team isn't stuck with manual grunt work." },
-                  { id: 4, title: "Content & Storytelling", description: "People ignore ads but they share stories. Our writers, artists and video nerds create content people actually care about – from snappy copy and 3D visuals to interactive experiences – all tuned to resonate with your audience and reflect your brand's voice." },
-                ].map((item) => {
-                  const isExpanded = expandedCapability === item.id;
-                  return (
-                    <div 
-                      key={item.id}
-                      className="rounded-2xl overflow-hidden transition-shadow duration-200"
+                  {/* Image */}
+                  <img 
+                    src={capability.image}
+                    alt={capability.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  
+                  {/* Gradient Overlay */}
+                  <div 
+                    className="absolute inset-0"
+                    style={{
+                      background: 'linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.6) 100%)',
+                    }}
+                  />
+                  
+                  {/* Button Overlay */}
+                  <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
+                    <span 
+                      className="px-6 py-3 rounded-sm text-sm font-medium whitespace-nowrap transition-all group-hover:shadow-lg"
                       style={{ 
-                        backgroundColor: '#FAFAFA', 
-                        border: 'none',
+                        backgroundColor: '#FFFFFF',
+                        color: '#1A1A1A',
                       }}
-                      data-testid={`capability-${item.id}`}
                     >
-                      <button
-                        className="w-full px-8 py-6 flex items-center justify-between text-left focus:outline-none"
-                        onClick={() => setExpandedCapability(isExpanded ? null : item.id)}
-                        aria-expanded={isExpanded}
-                      >
-                        <span className="text-xl font-semibold" style={{ color: '#1A1A1A' }}>
-                          {item.title}
-                        </span>
-                        <span 
-                          className="text-2xl font-light w-8 h-8 flex items-center justify-center"
-                          style={{ color: '#1A1A1A' }}
-                        >
-                          {isExpanded ? '−' : '+'}
-                        </span>
-                      </button>
-                      <div 
-                        className="overflow-hidden transition-all duration-300 ease-out"
-                        style={{ 
-                          maxHeight: isExpanded ? '600px' : '0', 
-                          opacity: isExpanded ? 1 : 0,
-                        }}
-                      >
-                        <div className="px-8 pb-8">
-                          <p 
-                            className="text-lg leading-relaxed" 
-                            style={{ color: '#666666' }}
-                          >
-                            {item.description}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+                      {capability.title}
+                    </span>
+                  </div>
+                </motion.div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -440,63 +305,52 @@ export default function Services() {
                   {item.icon}
                 </div>
                 <h3 
-                  className="text-xl font-semibold mb-3"
+                  className="text-lg font-semibold mb-3"
                   style={{ color: '#1A1A1A' }}
                 >
                   {item.title}
                 </h3>
                 <p 
-                  className="text-base leading-relaxed mb-6"
+                  className="text-base leading-relaxed"
                   style={{ color: '#666666' }}
                 >
                   {item.description}
                 </p>
-                <button 
-                  className="flex items-center gap-2 text-sm font-medium"
-                  style={{ color: '#1A1A1A' }}
-                >
-                  Read More
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </button>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Let's Build Something Real Section */}
+      {/* CTA Section */}
       <section 
-        className="py-16 md:py-24 relative z-10"
+        className="py-16 md:py-24"
         style={{ backgroundColor: '#1A1A1A' }}
       >
         <div className="max-w-[900px] mx-auto px-6 md:px-10 text-center">
           <h2 
             className="font-bold mb-6"
             style={{ 
-              fontSize: 'clamp(32px, 4.5vw, 52px)',
-              lineHeight: '1.1',
+              fontSize: 'clamp(28px, 4vw, 42px)',
               color: '#FFFFFF',
-              letterSpacing: '-0.02em',
+              lineHeight: '1.2',
             }}
           >
-            Let's build something real
+            Ready to build something great?
           </h2>
           <p 
-            className="text-lg leading-relaxed mb-10 mx-auto"
-            style={{ color: 'rgba(255,255,255,0.7)', maxWidth: '700px' }}
+            className="text-lg mb-8"
+            style={{ color: 'rgba(255,255,255,0.7)' }}
           >
-            Ready to ditch the status quo? Let's talk about what's holding you back and how we can help. Whether you need a brand overhaul, a digital product that actually resonates, or a growth strategy that pays for itself, we're here to make it happen.
+            Let's talk about your project and see how we can help.
           </p>
           <Link href="/contact">
             <button 
-              className="px-8 py-4 rounded-full font-medium text-base transition-all hover:shadow-lg"
+              className="px-8 py-4 rounded-full font-medium text-base transition-all hover:opacity-90"
               style={{ backgroundColor: '#FFFFFF', color: '#1A1A1A' }}
-              data-testid="cta-lets-talk"
+              data-testid="cta-contact"
             >
-              Let's Talk
+              Get in Touch
             </button>
           </Link>
         </div>
