@@ -213,7 +213,7 @@ export default function Footer() {
         >
           <div className="max-w-[1200px] mx-auto px-6 md:px-10 py-6">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm" style={{ color: 'rgba(255,255,255,0.4)' }}>
-              <p>© 2024 Gray Solutions. All rights reserved.</p>
+              <p>© 2024 Gray. All rights reserved.</p>
               <div className="flex items-center gap-4 md:gap-6 flex-wrap justify-center">
                 <span>Indiqube Echo, Coimbatore, Tamil Nadu</span>
                 <Link href="#">
