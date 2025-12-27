@@ -17,8 +17,40 @@ interface BlogPost {
 }
 
 const blogPostsData: Record<string, BlogPost> = {
-  "aligning-teams-efficiency": {
+  "ai-marketing-copilot": {
     id: 1,
+    slug: "ai-marketing-copilot",
+    category: "AI & Marketing",
+    categoryColor: "#7C3AED",
+    title: "AI Becomes Your Marketing Co-Pilot (Not a Magic Replacement)",
+    bgColor: "#F5F3FF",
+    date: "Dec 27, 2025",
+    author: "Gray Team",
+    sections: [
+      {
+        heading: "AI is No Longer a Novelty",
+        content: "AI is no longer a novelty — it's quickly becoming the backbone of modern marketing workflows. In 2026, the teams that win won't \"use AI sometimes.\" They'll treat it like a co-pilot embedded into daily execution: content drafting, creative iterations, audience insights, reporting, and campaign optimisation."
+      },
+      {
+        heading: "The Real Shift in Marketing",
+        content: "The real shift isn't \"ChatGPT can write a blog.\" The shift is AI becoming a marketing operating system under the hood — helping teams make faster decisions, automate repetitive actions, and personalize journeys at scale. Even the biggest ad platforms are moving toward heavier automation, where marketers provide inputs (creative + objectives + budget) and the system handles targeting, testing, and delivery logic."
+      },
+      {
+        heading: "The Smart Question to Ask",
+        content: "The smartest companies have stopped asking \"Should we use AI?\" and started asking \"Where can AI save time and improve output quality?\" The goal is simple: reduce friction and elevate human focus. Let machines handle repetitive, data-heavy work, so your team can spend more time on strategy, narrative, creative direction, and relationship-building."
+      },
+      {
+        heading: "Actionable Tip",
+        content: "Pick one manual process that quietly burns hours every week — reporting, lead qualification, competitor tracking, content repurposing — and pilot one AI workflow to reduce that workload by 30–50%. And document a basic internal policy (what's allowed, what's not, what requires human review), so AI improves consistency instead of creating chaos."
+      },
+      {
+        heading: "The Bottom Line",
+        content: "The move is not \"full automation.\" The move is human-led systems with AI acceleration — fast, measurable, and controlled."
+      }
+    ]
+  },
+  "aligning-teams-efficiency": {
+    id: 2,
     slug: "aligning-teams-efficiency",
     category: "Plan Smart",
     categoryColor: "#3B82F6",
@@ -46,7 +78,7 @@ const blogPostsData: Record<string, BlogPost> = {
     ]
   },
   "dynamic-workflows": {
-    id: 2,
+    id: 3,
     slug: "dynamic-workflows",
     category: "Stay Ahead",
     categoryColor: "#3B82F6",
@@ -74,7 +106,7 @@ const blogPostsData: Record<string, BlogPost> = {
     ]
   },
   "task-prioritization": {
-    id: 3,
+    id: 4,
     slug: "task-prioritization",
     category: "Smart Priorities",
     categoryColor: "#DC2626",
@@ -102,7 +134,7 @@ const blogPostsData: Record<string, BlogPost> = {
     ]
   },
   "progress-insights": {
-    id: 4,
+    id: 5,
     slug: "progress-insights",
     category: "Data Driven",
     categoryColor: "#059669",
@@ -130,7 +162,7 @@ const blogPostsData: Record<string, BlogPost> = {
     ]
   },
   "project-sprint-overview": {
-    id: 5,
+    id: 6,
     slug: "project-sprint-overview",
     category: "Sprint Planning",
     categoryColor: "#7C3AED",
@@ -158,7 +190,7 @@ const blogPostsData: Record<string, BlogPost> = {
     ]
   },
   "user-activity-tracking": {
-    id: 6,
+    id: 7,
     slug: "user-activity-tracking",
     category: "User Analytics",
     categoryColor: "#DC2626",

@@ -16,6 +16,14 @@ interface BlogPost {
 const blogPosts: BlogPost[] = [
   {
     id: 1,
+    slug: "ai-marketing-copilot",
+    category: "AI & Marketing",
+    categoryColor: "#7C3AED",
+    title: "AI Becomes Your Marketing Co-Pilot (Not a Magic Replacement)",
+    bgColor: "#F5F3FF",
+  },
+  {
+    id: 2,
     slug: "aligning-teams-efficiency",
     category: "Plan Smart",
     categoryColor: "#3B82F6",
@@ -23,7 +31,7 @@ const blogPosts: BlogPost[] = [
     bgColor: "#EEF4FF",
   },
   {
-    id: 2,
+    id: 3,
     slug: "dynamic-workflows",
     category: "Stay Ahead",
     categoryColor: "#3B82F6",
@@ -31,7 +39,7 @@ const blogPosts: BlogPost[] = [
     bgColor: "#E8F4F8",
   },
   {
-    id: 3,
+    id: 4,
     slug: "task-prioritization",
     category: "Smart Priorities",
     categoryColor: "#DC2626",
@@ -39,7 +47,7 @@ const blogPosts: BlogPost[] = [
     bgColor: "#FEF2F2",
   },
   {
-    id: 4,
+    id: 5,
     slug: "progress-insights",
     category: "Data Driven",
     categoryColor: "#059669",
@@ -47,7 +55,7 @@ const blogPosts: BlogPost[] = [
     bgColor: "#ECFDF5",
   },
   {
-    id: 5,
+    id: 6,
     slug: "project-sprint-overview",
     category: "Sprint Planning",
     categoryColor: "#7C3AED",
@@ -55,7 +63,7 @@ const blogPosts: BlogPost[] = [
     bgColor: "#F5F3FF",
   },
   {
-    id: 6,
+    id: 7,
     slug: "user-activity-tracking",
     category: "User Analytics",
     categoryColor: "#DC2626",

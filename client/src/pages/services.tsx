@@ -299,14 +299,188 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Capabilities Section - Horizontal Card Layout */}
+      {/* Capabilities Section - Card Grid Layout */}
       <section 
         className="relative z-10 py-16 md:py-24"
         style={{ backgroundColor: '#FFFFFF' }}
         data-testid="section-capabilities"
       >
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+          {/* Card Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Card 1 - Make useful stuff (Glowing Sphere) */}
+            <Link href="/services/brand-design" data-testid="link-capability-brand-design">
+              <motion.div
+                className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg"
+                style={{ backgroundColor: '#F5F5F5' }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0 }}
+                data-testid="capability-card-brand-design"
+              >
+                <h3 
+                  className="text-xl md:text-2xl font-bold mb-6 leading-tight"
+                  style={{ color: '#1A1A1A' }}
+                >
+                  Make<br />useful stuff
+                </h3>
+                
+                {/* Abstract Illustration - Glowing Sphere */}
+                <div className="relative h-40 mb-6 flex items-center justify-center">
+                  <div 
+                    className="relative w-28 h-28 rounded-full"
+                    style={{
+                      background: 'radial-gradient(circle at 30% 30%, #FFFFFF 0%, #E8E8E8 40%, #C0C0C0 80%)',
+                      boxShadow: '0 20px 60px -15px rgba(59, 130, 246, 0.5), 0 10px 30px -10px rgba(59, 130, 246, 0.3), inset 0 -5px 20px rgba(59, 130, 246, 0.2)',
+                    }}
+                  />
+                  <div 
+                    className="absolute w-32 h-32 rounded-full"
+                    style={{
+                      background: 'radial-gradient(circle, transparent 50%, rgba(59, 130, 246, 0.15) 100%)',
+                      filter: 'blur(8px)',
+                    }}
+                  />
+                </div>
+                
+                <p 
+                  className="text-sm leading-relaxed"
+                  style={{ color: '#666666' }}
+                >
+                  Everything we create has to earn its place, no empty words. Your site or product should look unique and actually help you win customers.
+                </p>
+              </motion.div>
+            </Link>
+
+            {/* Card 2 - Speak plainly (Motion Trail) */}
+            <Link href="/services/product-design" data-testid="link-capability-product-design">
+              <motion.div
+                className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg"
+                style={{ backgroundColor: '#F5F5F5' }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                data-testid="capability-card-product-design"
+              >
+                <h3 
+                  className="text-xl md:text-2xl font-bold mb-6 leading-tight"
+                  style={{ color: '#1A1A1A' }}
+                >
+                  Speak<br />plainly
+                </h3>
+                
+                {/* Abstract Illustration - Motion Trail */}
+                <div className="relative h-40 mb-6 flex items-center justify-center">
+                  <div className="relative w-full flex items-center justify-center">
+                    {/* Gradient trail */}
+                    <div 
+                      className="absolute h-1 rounded-full"
+                      style={{
+                        width: '140px',
+                        background: 'linear-gradient(90deg, transparent 0%, rgba(220, 38, 127, 0.3) 30%, rgba(220, 38, 127, 0.8) 70%, rgba(59, 130, 246, 0.9) 100%)',
+                        filter: 'blur(3px)',
+                      }}
+                    />
+                    <div 
+                      className="absolute h-0.5 rounded-full"
+                      style={{
+                        width: '140px',
+                        background: 'linear-gradient(90deg, transparent 0%, rgba(220, 38, 127, 0.5) 50%, rgba(59, 130, 246, 1) 100%)',
+                      }}
+                    />
+                    {/* End sphere */}
+                    <div 
+                      className="absolute right-[calc(50%-70px)] w-4 h-4 rounded-full"
+                      style={{
+                        background: 'radial-gradient(circle at 30% 30%, #6366F1 0%, #3B82F6 100%)',
+                        boxShadow: '0 0 20px rgba(59, 130, 246, 0.6)',
+                      }}
+                    />
+                  </div>
+                </div>
+                
+                <p 
+                  className="text-sm leading-relaxed"
+                  style={{ color: '#666666' }}
+                >
+                  We keep communication plain and honest. If something's off from the start we're not afraid to speak up, so we can move to finding a solution.
+                </p>
+              </motion.div>
+            </Link>
+
+            {/* Card 3 - Work with good people (Overlapping Circles) */}
+            <Link href="/services/web-platform" data-testid="link-capability-web-platform">
+              <motion.div
+                className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg"
+                style={{ backgroundColor: '#F5F5F5' }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                data-testid="capability-card-web-platform"
+              >
+                <h3 
+                  className="text-xl md:text-2xl font-bold mb-6 leading-tight"
+                  style={{ color: '#1A1A1A' }}
+                >
+                  Work with<br />good people
+                </h3>
+                
+                {/* Abstract Illustration - Overlapping Circles */}
+                <div className="relative h-40 mb-6 flex items-center justify-center">
+                  <div className="relative w-32 h-32">
+                    {/* Large transparent circle */}
+                    <div 
+                      className="absolute w-24 h-24 rounded-full"
+                      style={{
+                        left: '0',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        border: '1.5px solid rgba(59, 130, 246, 0.3)',
+                        background: 'radial-gradient(circle at 70% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 70%)',
+                      }}
+                    />
+                    {/* Medium circle */}
+                    <div 
+                      className="absolute w-20 h-20 rounded-full"
+                      style={{
+                        right: '0',
+                        top: '20%',
+                        border: '1.5px solid rgba(59, 130, 246, 0.4)',
+                        background: 'radial-gradient(circle at 30% 30%, rgba(147, 197, 253, 0.3) 0%, transparent 70%)',
+                      }}
+                    />
+                    {/* Small solid sphere */}
+                    <div 
+                      className="absolute w-6 h-6 rounded-full"
+                      style={{
+                        right: '25%',
+                        top: '10%',
+                        background: 'radial-gradient(circle at 30% 30%, #FFFFFF 0%, #E0E7FF 50%, #A5B4FC 100%)',
+                        boxShadow: '0 4px 15px rgba(99, 102, 241, 0.4)',
+                      }}
+                    />
+                  </div>
+                </div>
+                
+                <p 
+                  className="text-sm leading-relaxed"
+                  style={{ color: '#666666' }}
+                >
+                  Great projects grow out of solid relationships. We treat clients like teammates, rely on each other's mix of skills, and move fast together.
+                </p>
+              </motion.div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Services Section */}
+      <section 
+        className="relative z-10 py-16 md:py-24"
+        style={{ backgroundColor: '#FAFAFA' }}
+        data-testid="section-our-services"
+      >
         <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-          {/* Header with Navigation */}
           <div className="flex items-center justify-between mb-8 md:mb-12">
             <div>
               <span 
@@ -319,32 +493,30 @@ export default function Services() {
                 className="text-2xl md:text-3xl font-bold"
                 style={{ color: '#1A1A1A' }}
               >
-                Our Capabilities
+                Our Services
               </h2>
             </div>
             
-            {/* Navigation Arrows */}
             <div className="hidden md:flex items-center gap-2">
               <button
                 onClick={scrollLeft}
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-gray-100"
-                style={{ backgroundColor: '#F5F5F5' }}
-                data-testid="capabilities-scroll-left"
+                style={{ backgroundColor: '#FFFFFF' }}
+                data-testid="services-scroll-left"
               >
                 <ChevronLeft size={20} style={{ color: '#1A1A1A' }} />
               </button>
               <button
                 onClick={scrollRight}
                 className="w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-gray-100"
-                style={{ backgroundColor: '#F5F5F5' }}
-                data-testid="capabilities-scroll-right"
+                style={{ backgroundColor: '#FFFFFF' }}
+                data-testid="services-scroll-right"
               >
                 <ChevronRight size={20} style={{ color: '#1A1A1A' }} />
               </button>
             </div>
           </div>
 
-          {/* Horizontal Scrolling Cards */}
           <div 
             ref={scrollContainerRef}
             className="flex gap-4 md:gap-6 overflow-x-auto pb-4 scrollbar-hide"
@@ -356,7 +528,7 @@ export default function Services() {
             }}
           >
             {capabilities.map((capability, index) => (
-              <Link key={capability.id} href={capability.href} data-testid={`link-capability-${capability.id}`}>
+              <Link key={capability.id} href={capability.href} data-testid={`link-service-${capability.id}`}>
                 <motion.div
                   className="relative flex-shrink-0 rounded-xl overflow-hidden cursor-pointer group"
                   style={{ 
@@ -367,9 +539,8 @@ export default function Services() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  data-testid={`capability-card-${capability.id}`}
+                  data-testid={`service-card-${capability.id}`}
                 >
-                  {/* Image */}
                   <img 
                     src={capability.image}
                     alt={capability.title}
@@ -378,7 +549,6 @@ export default function Services() {
                     decoding="async"
                   />
                   
-                  {/* Gradient Overlay */}
                   <div 
                     className="absolute inset-0"
                     style={{
@@ -386,7 +556,6 @@ export default function Services() {
                     }}
                   />
                   
-                  {/* Button Overlay */}
                   <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
                     <span 
                       className="px-6 py-3 rounded-sm text-sm font-medium whitespace-nowrap transition-all group-hover:shadow-lg"
