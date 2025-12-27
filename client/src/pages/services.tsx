@@ -299,33 +299,47 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Capabilities Section - Card Grid Layout */}
+      {/* Our Services Section */}
       <section 
         className="relative z-10 py-16 md:py-24"
         style={{ backgroundColor: '#FFFFFF' }}
-        data-testid="section-capabilities"
+        data-testid="section-our-services"
       >
         <div className="max-w-[1200px] mx-auto px-6 md:px-10">
-          {/* Card Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Card 1 - Make useful stuff (Glowing Sphere) */}
-            <Link href="/services/brand-design" data-testid="link-capability-brand-design">
+          <div className="mb-8 md:mb-12">
+            <span 
+              className="text-sm font-medium tracking-wide mb-2 block"
+              style={{ color: '#666666' }}
+            >
+              What We Do
+            </span>
+            <h2 
+              className="text-2xl md:text-3xl font-bold"
+              style={{ color: '#1A1A1A' }}
+            >
+              Our Services
+            </h2>
+          </div>
+
+          {/* First 3 Cards in Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {/* Brand Design */}
+            <Link href="/services/brand-design" data-testid="link-service-brand-design">
               <motion.div
-                className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg"
+                className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg h-full"
                 style={{ backgroundColor: '#F5F5F5' }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0 }}
-                data-testid="capability-card-brand-design"
+                data-testid="service-card-brand-design"
               >
                 <h3 
                   className="text-xl md:text-2xl font-bold mb-6 leading-tight"
                   style={{ color: '#1A1A1A' }}
                 >
-                  Make<br />useful stuff
+                  Brand<br />Design
                 </h3>
                 
-                {/* Abstract Illustration - Glowing Sphere */}
                 <div className="relative h-40 mb-6 flex items-center justify-center">
                   <div 
                     className="relative w-28 h-28 rounded-full"
@@ -347,194 +361,6 @@ export default function Services() {
                   className="text-sm leading-relaxed"
                   style={{ color: '#666666' }}
                 >
-                  Everything we create has to earn its place, no empty words. Your site or product should look unique and actually help you win customers.
-                </p>
-              </motion.div>
-            </Link>
-
-            {/* Card 2 - Speak plainly (Motion Trail) */}
-            <Link href="/services/product-design" data-testid="link-capability-product-design">
-              <motion.div
-                className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg"
-                style={{ backgroundColor: '#F5F5F5' }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                data-testid="capability-card-product-design"
-              >
-                <h3 
-                  className="text-xl md:text-2xl font-bold mb-6 leading-tight"
-                  style={{ color: '#1A1A1A' }}
-                >
-                  Speak<br />plainly
-                </h3>
-                
-                {/* Abstract Illustration - Motion Trail */}
-                <div className="relative h-40 mb-6 flex items-center justify-center">
-                  <div className="relative w-full flex items-center justify-center">
-                    {/* Gradient trail */}
-                    <div 
-                      className="absolute h-1 rounded-full"
-                      style={{
-                        width: '140px',
-                        background: 'linear-gradient(90deg, transparent 0%, rgba(220, 38, 127, 0.3) 30%, rgba(220, 38, 127, 0.8) 70%, rgba(59, 130, 246, 0.9) 100%)',
-                        filter: 'blur(3px)',
-                      }}
-                    />
-                    <div 
-                      className="absolute h-0.5 rounded-full"
-                      style={{
-                        width: '140px',
-                        background: 'linear-gradient(90deg, transparent 0%, rgba(220, 38, 127, 0.5) 50%, rgba(59, 130, 246, 1) 100%)',
-                      }}
-                    />
-                    {/* End sphere */}
-                    <div 
-                      className="absolute right-[calc(50%-70px)] w-4 h-4 rounded-full"
-                      style={{
-                        background: 'radial-gradient(circle at 30% 30%, #6366F1 0%, #3B82F6 100%)',
-                        boxShadow: '0 0 20px rgba(59, 130, 246, 0.6)',
-                      }}
-                    />
-                  </div>
-                </div>
-                
-                <p 
-                  className="text-sm leading-relaxed"
-                  style={{ color: '#666666' }}
-                >
-                  We keep communication plain and honest. If something's off from the start we're not afraid to speak up, so we can move to finding a solution.
-                </p>
-              </motion.div>
-            </Link>
-
-            {/* Card 3 - Work with good people (Overlapping Circles) */}
-            <Link href="/services/web-platform" data-testid="link-capability-web-platform">
-              <motion.div
-                className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg"
-                style={{ backgroundColor: '#F5F5F5' }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                data-testid="capability-card-web-platform"
-              >
-                <h3 
-                  className="text-xl md:text-2xl font-bold mb-6 leading-tight"
-                  style={{ color: '#1A1A1A' }}
-                >
-                  Work with<br />good people
-                </h3>
-                
-                {/* Abstract Illustration - Overlapping Circles */}
-                <div className="relative h-40 mb-6 flex items-center justify-center">
-                  <div className="relative w-32 h-32">
-                    {/* Large transparent circle */}
-                    <div 
-                      className="absolute w-24 h-24 rounded-full"
-                      style={{
-                        left: '0',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        border: '1.5px solid rgba(59, 130, 246, 0.3)',
-                        background: 'radial-gradient(circle at 70% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 70%)',
-                      }}
-                    />
-                    {/* Medium circle */}
-                    <div 
-                      className="absolute w-20 h-20 rounded-full"
-                      style={{
-                        right: '0',
-                        top: '20%',
-                        border: '1.5px solid rgba(59, 130, 246, 0.4)',
-                        background: 'radial-gradient(circle at 30% 30%, rgba(147, 197, 253, 0.3) 0%, transparent 70%)',
-                      }}
-                    />
-                    {/* Small solid sphere */}
-                    <div 
-                      className="absolute w-6 h-6 rounded-full"
-                      style={{
-                        right: '25%',
-                        top: '10%',
-                        background: 'radial-gradient(circle at 30% 30%, #FFFFFF 0%, #E0E7FF 50%, #A5B4FC 100%)',
-                        boxShadow: '0 4px 15px rgba(99, 102, 241, 0.4)',
-                      }}
-                    />
-                  </div>
-                </div>
-                
-                <p 
-                  className="text-sm leading-relaxed"
-                  style={{ color: '#666666' }}
-                >
-                  Great projects grow out of solid relationships. We treat clients like teammates, rely on each other's mix of skills, and move fast together.
-                </p>
-              </motion.div>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Our Services Section */}
-      <section 
-        className="relative z-10 py-16 md:py-24"
-        style={{ backgroundColor: '#FAFAFA' }}
-        data-testid="section-our-services"
-      >
-        <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-          <div className="mb-8 md:mb-12">
-            <span 
-              className="text-sm font-medium tracking-wide mb-2 block"
-              style={{ color: '#666666' }}
-            >
-              What We Do
-            </span>
-            <h2 
-              className="text-2xl md:text-3xl font-bold"
-              style={{ color: '#1A1A1A' }}
-            >
-              Our Services
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
-            {/* Brand Design */}
-            <Link href="/services/brand-design" data-testid="link-service-brand-design">
-              <motion.div
-                className="rounded-2xl p-6 cursor-pointer group transition-all hover:shadow-lg h-full"
-                style={{ backgroundColor: '#F5F5F5' }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0 }}
-                data-testid="service-card-brand-design"
-              >
-                <h3 
-                  className="text-lg md:text-xl font-bold mb-5 leading-tight"
-                  style={{ color: '#1A1A1A' }}
-                >
-                  Brand<br />Design
-                </h3>
-                
-                <div className="relative h-32 mb-5 flex items-center justify-center">
-                  <div 
-                    className="relative w-20 h-20 rounded-full"
-                    style={{
-                      background: 'radial-gradient(circle at 30% 30%, #FFFFFF 0%, #E8E8E8 40%, #C0C0C0 80%)',
-                      boxShadow: '0 15px 40px -10px rgba(59, 130, 246, 0.4), inset 0 -4px 15px rgba(59, 130, 246, 0.15)',
-                    }}
-                  />
-                  <div 
-                    className="absolute w-24 h-24 rounded-full"
-                    style={{
-                      background: 'radial-gradient(circle, transparent 50%, rgba(59, 130, 246, 0.12) 100%)',
-                      filter: 'blur(6px)',
-                    }}
-                  />
-                </div>
-                
-                <p 
-                  className="text-sm leading-relaxed"
-                  style={{ color: '#666666' }}
-                >
                   We craft distinctive brand identities that resonate with your audience and set you apart from competitors.
                 </p>
               </motion.div>
@@ -543,7 +369,7 @@ export default function Services() {
             {/* Product & Experience */}
             <Link href="/services/product-design" data-testid="link-service-product-design">
               <motion.div
-                className="rounded-2xl p-6 cursor-pointer group transition-all hover:shadow-lg h-full"
+                className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg h-full"
                 style={{ backgroundColor: '#F5F5F5' }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -551,18 +377,18 @@ export default function Services() {
                 data-testid="service-card-product-design"
               >
                 <h3 
-                  className="text-lg md:text-xl font-bold mb-5 leading-tight"
+                  className="text-xl md:text-2xl font-bold mb-6 leading-tight"
                   style={{ color: '#1A1A1A' }}
                 >
                   Product &<br />Experience
                 </h3>
                 
-                <div className="relative h-32 mb-5 flex items-center justify-center">
+                <div className="relative h-40 mb-6 flex items-center justify-center">
                   <div className="relative w-full flex items-center justify-center">
                     <div 
                       className="absolute h-1 rounded-full"
                       style={{
-                        width: '100px',
+                        width: '140px',
                         background: 'linear-gradient(90deg, transparent 0%, rgba(220, 38, 127, 0.3) 30%, rgba(220, 38, 127, 0.8) 70%, rgba(59, 130, 246, 0.9) 100%)',
                         filter: 'blur(3px)',
                       }}
@@ -570,16 +396,15 @@ export default function Services() {
                     <div 
                       className="absolute h-0.5 rounded-full"
                       style={{
-                        width: '100px',
+                        width: '140px',
                         background: 'linear-gradient(90deg, transparent 0%, rgba(220, 38, 127, 0.5) 50%, rgba(59, 130, 246, 1) 100%)',
                       }}
                     />
                     <div 
-                      className="absolute w-3 h-3 rounded-full"
+                      className="absolute right-[calc(50%-70px)] w-4 h-4 rounded-full"
                       style={{
-                        right: 'calc(50% - 50px)',
                         background: 'radial-gradient(circle at 30% 30%, #6366F1 0%, #3B82F6 100%)',
-                        boxShadow: '0 0 15px rgba(59, 130, 246, 0.5)',
+                        boxShadow: '0 0 20px rgba(59, 130, 246, 0.6)',
                       }}
                     />
                   </div>
@@ -597,7 +422,7 @@ export default function Services() {
             {/* Web & Platform */}
             <Link href="/services/web-platform" data-testid="link-service-web-platform">
               <motion.div
-                className="rounded-2xl p-6 cursor-pointer group transition-all hover:shadow-lg h-full"
+                className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg h-full"
                 style={{ backgroundColor: '#F5F5F5' }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -605,16 +430,16 @@ export default function Services() {
                 data-testid="service-card-web-platform"
               >
                 <h3 
-                  className="text-lg md:text-xl font-bold mb-5 leading-tight"
+                  className="text-xl md:text-2xl font-bold mb-6 leading-tight"
                   style={{ color: '#1A1A1A' }}
                 >
                   Web &<br />Platform
                 </h3>
                 
-                <div className="relative h-32 mb-5 flex items-center justify-center">
-                  <div className="relative w-24 h-24">
+                <div className="relative h-40 mb-6 flex items-center justify-center">
+                  <div className="relative w-32 h-32">
                     <div 
-                      className="absolute w-16 h-16 rounded-full"
+                      className="absolute w-24 h-24 rounded-full"
                       style={{
                         left: '0',
                         top: '50%',
@@ -624,7 +449,7 @@ export default function Services() {
                       }}
                     />
                     <div 
-                      className="absolute w-14 h-14 rounded-full"
+                      className="absolute w-20 h-20 rounded-full"
                       style={{
                         right: '0',
                         top: '20%',
@@ -633,12 +458,12 @@ export default function Services() {
                       }}
                     />
                     <div 
-                      className="absolute w-5 h-5 rounded-full"
+                      className="absolute w-6 h-6 rounded-full"
                       style={{
-                        right: '20%',
+                        right: '25%',
                         top: '10%',
                         background: 'radial-gradient(circle at 30% 30%, #FFFFFF 0%, #E0E7FF 50%, #A5B4FC 100%)',
-                        boxShadow: '0 3px 12px rgba(99, 102, 241, 0.4)',
+                        boxShadow: '0 4px 15px rgba(99, 102, 241, 0.4)',
                       }}
                     />
                   </div>
@@ -652,117 +477,153 @@ export default function Services() {
                 </p>
               </motion.div>
             </Link>
+          </div>
 
-            {/* Commerce & Shopify */}
-            <Link href="/services/commerce" data-testid="link-service-commerce">
-              <motion.div
-                className="rounded-2xl p-6 cursor-pointer group transition-all hover:shadow-lg h-full"
-                style={{ backgroundColor: '#F5F5F5' }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                data-testid="service-card-commerce"
-              >
-                <h3 
-                  className="text-lg md:text-xl font-bold mb-5 leading-tight"
-                  style={{ color: '#1A1A1A' }}
+          {/* Remaining 2 Cards in Horizontal Slider */}
+          <div className="relative">
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-sm font-medium" style={{ color: '#666666' }}>More services</span>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={scrollLeft}
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-gray-100"
+                  style={{ backgroundColor: '#F5F5F5' }}
+                  data-testid="services-scroll-left"
                 >
-                  Commerce &<br />Shopify
-                </h3>
-                
-                <div className="relative h-32 mb-5 flex items-center justify-center">
-                  <div className="relative">
-                    <div 
-                      className="w-14 h-14 rounded-lg"
-                      style={{
-                        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                        boxShadow: '0 10px 30px -5px rgba(102, 126, 234, 0.4)',
-                        transform: 'rotate(15deg)',
-                      }}
-                    />
-                    <div 
-                      className="absolute w-10 h-10 rounded-lg"
-                      style={{
-                        top: '-8px',
-                        left: '20px',
-                        background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(230,230,250,0.8) 100%)',
-                        border: '1px solid rgba(102, 126, 234, 0.2)',
-                        transform: 'rotate(-10deg)',
-                      }}
-                    />
+                  <ChevronLeft size={20} style={{ color: '#1A1A1A' }} />
+                </button>
+                <button
+                  onClick={scrollRight}
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-gray-100"
+                  style={{ backgroundColor: '#F5F5F5' }}
+                  data-testid="services-scroll-right"
+                >
+                  <ChevronRight size={20} style={{ color: '#1A1A1A' }} />
+                </button>
+              </div>
+            </div>
+            
+            <div 
+              ref={scrollContainerRef}
+              className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide"
+              style={{ 
+                scrollSnapType: 'x mandatory',
+                WebkitOverflowScrolling: 'touch',
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+              }}
+            >
+              {/* Commerce & Shopify */}
+              <Link href="/services/commerce" data-testid="link-service-commerce">
+                <motion.div
+                  className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg flex-shrink-0"
+                  style={{ backgroundColor: '#F5F5F5', width: 'clamp(300px, 40vw, 380px)', scrollSnapAlign: 'start' }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  data-testid="service-card-commerce"
+                >
+                  <h3 
+                    className="text-xl md:text-2xl font-bold mb-6 leading-tight"
+                    style={{ color: '#1A1A1A' }}
+                  >
+                    Commerce &<br />Shopify
+                  </h3>
+                  
+                  <div className="relative h-40 mb-6 flex items-center justify-center">
+                    <div className="relative">
+                      <div 
+                        className="w-16 h-16 rounded-lg"
+                        style={{
+                          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                          boxShadow: '0 15px 40px -5px rgba(102, 126, 234, 0.5)',
+                          transform: 'rotate(15deg)',
+                        }}
+                      />
+                      <div 
+                        className="absolute w-12 h-12 rounded-lg"
+                        style={{
+                          top: '-10px',
+                          left: '24px',
+                          background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(230,230,250,0.8) 100%)',
+                          border: '1px solid rgba(102, 126, 234, 0.2)',
+                          transform: 'rotate(-10deg)',
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-                
-                <p 
-                  className="text-sm leading-relaxed"
-                  style={{ color: '#666666' }}
-                >
-                  E-commerce solutions that convert browsers into buyers with seamless shopping experiences.
-                </p>
-              </motion.div>
-            </Link>
+                  
+                  <p 
+                    className="text-sm leading-relaxed"
+                    style={{ color: '#666666' }}
+                  >
+                    E-commerce solutions that convert browsers into buyers with seamless shopping experiences.
+                  </p>
+                </motion.div>
+              </Link>
 
-            {/* Content & Marketing */}
-            <Link href="/services/content-marketing" data-testid="link-service-content-marketing">
-              <motion.div
-                className="rounded-2xl p-6 cursor-pointer group transition-all hover:shadow-lg h-full"
-                style={{ backgroundColor: '#F5F5F5' }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                data-testid="service-card-content-marketing"
-              >
-                <h3 
-                  className="text-lg md:text-xl font-bold mb-5 leading-tight"
-                  style={{ color: '#1A1A1A' }}
+              {/* Content & Marketing */}
+              <Link href="/services/content-marketing" data-testid="link-service-content-marketing">
+                <motion.div
+                  className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg flex-shrink-0"
+                  style={{ backgroundColor: '#F5F5F5', width: 'clamp(300px, 40vw, 380px)', scrollSnapAlign: 'start' }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                  data-testid="service-card-content-marketing"
                 >
-                  Content &<br />Marketing
-                </h3>
-                
-                <div className="relative h-32 mb-5 flex items-center justify-center">
-                  <div className="relative flex gap-1">
-                    <div 
-                      className="w-3 rounded-full"
-                      style={{
-                        height: '40px',
-                        background: 'linear-gradient(180deg, #3B82F6 0%, #93C5FD 100%)',
-                      }}
-                    />
-                    <div 
-                      className="w-3 rounded-full"
-                      style={{
-                        height: '55px',
-                        background: 'linear-gradient(180deg, #8B5CF6 0%, #C4B5FD 100%)',
-                        marginTop: '-15px',
-                      }}
-                    />
-                    <div 
-                      className="w-3 rounded-full"
-                      style={{
-                        height: '35px',
-                        background: 'linear-gradient(180deg, #EC4899 0%, #F9A8D4 100%)',
-                        marginTop: '5px',
-                      }}
-                    />
-                    <div 
-                      className="w-3 rounded-full"
-                      style={{
-                        height: '50px',
-                        background: 'linear-gradient(180deg, #10B981 0%, #6EE7B7 100%)',
-                        marginTop: '-10px',
-                      }}
-                    />
+                  <h3 
+                    className="text-xl md:text-2xl font-bold mb-6 leading-tight"
+                    style={{ color: '#1A1A1A' }}
+                  >
+                    Content &<br />Marketing
+                  </h3>
+                  
+                  <div className="relative h-40 mb-6 flex items-center justify-center">
+                    <div className="relative flex gap-1.5">
+                      <div 
+                        className="w-4 rounded-full"
+                        style={{
+                          height: '50px',
+                          background: 'linear-gradient(180deg, #3B82F6 0%, #93C5FD 100%)',
+                        }}
+                      />
+                      <div 
+                        className="w-4 rounded-full"
+                        style={{
+                          height: '70px',
+                          background: 'linear-gradient(180deg, #8B5CF6 0%, #C4B5FD 100%)',
+                          marginTop: '-20px',
+                        }}
+                      />
+                      <div 
+                        className="w-4 rounded-full"
+                        style={{
+                          height: '45px',
+                          background: 'linear-gradient(180deg, #EC4899 0%, #F9A8D4 100%)',
+                          marginTop: '5px',
+                        }}
+                      />
+                      <div 
+                        className="w-4 rounded-full"
+                        style={{
+                          height: '60px',
+                          background: 'linear-gradient(180deg, #10B981 0%, #6EE7B7 100%)',
+                          marginTop: '-10px',
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-                
-                <p 
-                  className="text-sm leading-relaxed"
-                  style={{ color: '#666666' }}
-                >
-                  Strategic content and marketing campaigns that amplify your brand and drive growth.
-                </p>
-              </motion.div>
-            </Link>
+                  
+                  <p 
+                    className="text-sm leading-relaxed"
+                    style={{ color: '#666666' }}
+                  >
+                    Strategic content and marketing campaigns that amplify your brand and drive growth.
+                  </p>
+                </motion.div>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
