@@ -481,95 +481,288 @@ export default function Services() {
         data-testid="section-our-services"
       >
         <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-          <div className="flex items-center justify-between mb-8 md:mb-12">
-            <div>
-              <span 
-                className="text-sm font-medium tracking-wide mb-2 block"
-                style={{ color: '#666666' }}
-              >
-                What We Do
-              </span>
-              <h2 
-                className="text-2xl md:text-3xl font-bold"
-                style={{ color: '#1A1A1A' }}
-              >
-                Our Services
-              </h2>
-            </div>
-            
-            <div className="hidden md:flex items-center gap-2">
-              <button
-                onClick={scrollLeft}
-                className="w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-gray-100"
-                style={{ backgroundColor: '#FFFFFF' }}
-                data-testid="services-scroll-left"
-              >
-                <ChevronLeft size={20} style={{ color: '#1A1A1A' }} />
-              </button>
-              <button
-                onClick={scrollRight}
-                className="w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-gray-100"
-                style={{ backgroundColor: '#FFFFFF' }}
-                data-testid="services-scroll-right"
-              >
-                <ChevronRight size={20} style={{ color: '#1A1A1A' }} />
-              </button>
-            </div>
+          <div className="mb-8 md:mb-12">
+            <span 
+              className="text-sm font-medium tracking-wide mb-2 block"
+              style={{ color: '#666666' }}
+            >
+              What We Do
+            </span>
+            <h2 
+              className="text-2xl md:text-3xl font-bold"
+              style={{ color: '#1A1A1A' }}
+            >
+              Our Services
+            </h2>
           </div>
 
-          <div 
-            ref={scrollContainerRef}
-            className="flex gap-4 md:gap-6 overflow-x-auto pb-4 scrollbar-hide"
-            style={{ 
-              scrollSnapType: 'x mandatory',
-              WebkitOverflowScrolling: 'touch',
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
-            }}
-          >
-            {capabilities.map((capability, index) => (
-              <Link key={capability.id} href={capability.href} data-testid={`link-service-${capability.id}`}>
-                <motion.div
-                  className="relative flex-shrink-0 rounded-xl overflow-hidden cursor-pointer group"
-                  style={{ 
-                    width: 'clamp(280px, 30vw, 340px)',
-                    aspectRatio: '3/4',
-                    scrollSnapAlign: 'start',
-                  }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  data-testid={`service-card-${capability.id}`}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+            {/* Brand Design */}
+            <Link href="/services/brand-design" data-testid="link-service-brand-design">
+              <motion.div
+                className="rounded-2xl p-6 cursor-pointer group transition-all hover:shadow-lg h-full"
+                style={{ backgroundColor: '#F5F5F5' }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0 }}
+                data-testid="service-card-brand-design"
+              >
+                <h3 
+                  className="text-lg md:text-xl font-bold mb-5 leading-tight"
+                  style={{ color: '#1A1A1A' }}
                 >
-                  <img 
-                    src={capability.image}
-                    alt={capability.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  
+                  Brand<br />Design
+                </h3>
+                
+                <div className="relative h-32 mb-5 flex items-center justify-center">
                   <div 
-                    className="absolute inset-0"
+                    className="relative w-20 h-20 rounded-full"
                     style={{
-                      background: 'linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.6) 100%)',
+                      background: 'radial-gradient(circle at 30% 30%, #FFFFFF 0%, #E8E8E8 40%, #C0C0C0 80%)',
+                      boxShadow: '0 15px 40px -10px rgba(59, 130, 246, 0.4), inset 0 -4px 15px rgba(59, 130, 246, 0.15)',
                     }}
                   />
-                  
-                  <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
-                    <span 
-                      className="px-6 py-3 rounded-sm text-sm font-medium whitespace-nowrap transition-all group-hover:shadow-lg"
-                      style={{ 
-                        backgroundColor: '#FFFFFF',
-                        color: '#1A1A1A',
+                  <div 
+                    className="absolute w-24 h-24 rounded-full"
+                    style={{
+                      background: 'radial-gradient(circle, transparent 50%, rgba(59, 130, 246, 0.12) 100%)',
+                      filter: 'blur(6px)',
+                    }}
+                  />
+                </div>
+                
+                <p 
+                  className="text-sm leading-relaxed"
+                  style={{ color: '#666666' }}
+                >
+                  We craft distinctive brand identities that resonate with your audience and set you apart from competitors.
+                </p>
+              </motion.div>
+            </Link>
+
+            {/* Product & Experience */}
+            <Link href="/services/product-design" data-testid="link-service-product-design">
+              <motion.div
+                className="rounded-2xl p-6 cursor-pointer group transition-all hover:shadow-lg h-full"
+                style={{ backgroundColor: '#F5F5F5' }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                data-testid="service-card-product-design"
+              >
+                <h3 
+                  className="text-lg md:text-xl font-bold mb-5 leading-tight"
+                  style={{ color: '#1A1A1A' }}
+                >
+                  Product &<br />Experience
+                </h3>
+                
+                <div className="relative h-32 mb-5 flex items-center justify-center">
+                  <div className="relative w-full flex items-center justify-center">
+                    <div 
+                      className="absolute h-1 rounded-full"
+                      style={{
+                        width: '100px',
+                        background: 'linear-gradient(90deg, transparent 0%, rgba(220, 38, 127, 0.3) 30%, rgba(220, 38, 127, 0.8) 70%, rgba(59, 130, 246, 0.9) 100%)',
+                        filter: 'blur(3px)',
                       }}
-                    >
-                      {capability.title}
-                    </span>
+                    />
+                    <div 
+                      className="absolute h-0.5 rounded-full"
+                      style={{
+                        width: '100px',
+                        background: 'linear-gradient(90deg, transparent 0%, rgba(220, 38, 127, 0.5) 50%, rgba(59, 130, 246, 1) 100%)',
+                      }}
+                    />
+                    <div 
+                      className="absolute w-3 h-3 rounded-full"
+                      style={{
+                        right: 'calc(50% - 50px)',
+                        background: 'radial-gradient(circle at 30% 30%, #6366F1 0%, #3B82F6 100%)',
+                        boxShadow: '0 0 15px rgba(59, 130, 246, 0.5)',
+                      }}
+                    />
                   </div>
-                </motion.div>
-              </Link>
-            ))}
+                </div>
+                
+                <p 
+                  className="text-sm leading-relaxed"
+                  style={{ color: '#666666' }}
+                >
+                  User-centered digital products that delight customers and drive meaningful engagement.
+                </p>
+              </motion.div>
+            </Link>
+
+            {/* Web & Platform */}
+            <Link href="/services/web-platform" data-testid="link-service-web-platform">
+              <motion.div
+                className="rounded-2xl p-6 cursor-pointer group transition-all hover:shadow-lg h-full"
+                style={{ backgroundColor: '#F5F5F5' }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                data-testid="service-card-web-platform"
+              >
+                <h3 
+                  className="text-lg md:text-xl font-bold mb-5 leading-tight"
+                  style={{ color: '#1A1A1A' }}
+                >
+                  Web &<br />Platform
+                </h3>
+                
+                <div className="relative h-32 mb-5 flex items-center justify-center">
+                  <div className="relative w-24 h-24">
+                    <div 
+                      className="absolute w-16 h-16 rounded-full"
+                      style={{
+                        left: '0',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        border: '1.5px solid rgba(59, 130, 246, 0.3)',
+                        background: 'radial-gradient(circle at 70% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 70%)',
+                      }}
+                    />
+                    <div 
+                      className="absolute w-14 h-14 rounded-full"
+                      style={{
+                        right: '0',
+                        top: '20%',
+                        border: '1.5px solid rgba(59, 130, 246, 0.4)',
+                        background: 'radial-gradient(circle at 30% 30%, rgba(147, 197, 253, 0.3) 0%, transparent 70%)',
+                      }}
+                    />
+                    <div 
+                      className="absolute w-5 h-5 rounded-full"
+                      style={{
+                        right: '20%',
+                        top: '10%',
+                        background: 'radial-gradient(circle at 30% 30%, #FFFFFF 0%, #E0E7FF 50%, #A5B4FC 100%)',
+                        boxShadow: '0 3px 12px rgba(99, 102, 241, 0.4)',
+                      }}
+                    />
+                  </div>
+                </div>
+                
+                <p 
+                  className="text-sm leading-relaxed"
+                  style={{ color: '#666666' }}
+                >
+                  Scalable web applications and platforms built with modern technologies for performance.
+                </p>
+              </motion.div>
+            </Link>
+
+            {/* Commerce & Shopify */}
+            <Link href="/services/commerce" data-testid="link-service-commerce">
+              <motion.div
+                className="rounded-2xl p-6 cursor-pointer group transition-all hover:shadow-lg h-full"
+                style={{ backgroundColor: '#F5F5F5' }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                data-testid="service-card-commerce"
+              >
+                <h3 
+                  className="text-lg md:text-xl font-bold mb-5 leading-tight"
+                  style={{ color: '#1A1A1A' }}
+                >
+                  Commerce &<br />Shopify
+                </h3>
+                
+                <div className="relative h-32 mb-5 flex items-center justify-center">
+                  <div className="relative">
+                    <div 
+                      className="w-14 h-14 rounded-lg"
+                      style={{
+                        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                        boxShadow: '0 10px 30px -5px rgba(102, 126, 234, 0.4)',
+                        transform: 'rotate(15deg)',
+                      }}
+                    />
+                    <div 
+                      className="absolute w-10 h-10 rounded-lg"
+                      style={{
+                        top: '-8px',
+                        left: '20px',
+                        background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(230,230,250,0.8) 100%)',
+                        border: '1px solid rgba(102, 126, 234, 0.2)',
+                        transform: 'rotate(-10deg)',
+                      }}
+                    />
+                  </div>
+                </div>
+                
+                <p 
+                  className="text-sm leading-relaxed"
+                  style={{ color: '#666666' }}
+                >
+                  E-commerce solutions that convert browsers into buyers with seamless shopping experiences.
+                </p>
+              </motion.div>
+            </Link>
+
+            {/* Content & Marketing */}
+            <Link href="/services/content-marketing" data-testid="link-service-content-marketing">
+              <motion.div
+                className="rounded-2xl p-6 cursor-pointer group transition-all hover:shadow-lg h-full"
+                style={{ backgroundColor: '#F5F5F5' }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                data-testid="service-card-content-marketing"
+              >
+                <h3 
+                  className="text-lg md:text-xl font-bold mb-5 leading-tight"
+                  style={{ color: '#1A1A1A' }}
+                >
+                  Content &<br />Marketing
+                </h3>
+                
+                <div className="relative h-32 mb-5 flex items-center justify-center">
+                  <div className="relative flex gap-1">
+                    <div 
+                      className="w-3 rounded-full"
+                      style={{
+                        height: '40px',
+                        background: 'linear-gradient(180deg, #3B82F6 0%, #93C5FD 100%)',
+                      }}
+                    />
+                    <div 
+                      className="w-3 rounded-full"
+                      style={{
+                        height: '55px',
+                        background: 'linear-gradient(180deg, #8B5CF6 0%, #C4B5FD 100%)',
+                        marginTop: '-15px',
+                      }}
+                    />
+                    <div 
+                      className="w-3 rounded-full"
+                      style={{
+                        height: '35px',
+                        background: 'linear-gradient(180deg, #EC4899 0%, #F9A8D4 100%)',
+                        marginTop: '5px',
+                      }}
+                    />
+                    <div 
+                      className="w-3 rounded-full"
+                      style={{
+                        height: '50px',
+                        background: 'linear-gradient(180deg, #10B981 0%, #6EE7B7 100%)',
+                        marginTop: '-10px',
+                      }}
+                    />
+                  </div>
+                </div>
+                
+                <p 
+                  className="text-sm leading-relaxed"
+                  style={{ color: '#666666' }}
+                >
+                  Strategic content and marketing campaigns that amplify your brand and drive growth.
+                </p>
+              </motion.div>
+            </Link>
           </div>
         </div>
       </section>
