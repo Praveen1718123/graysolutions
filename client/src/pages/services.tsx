@@ -325,7 +325,7 @@ export default function Services() {
         {/* Full-Width Service Cards with Rounded Corners and Gaps */}
         <div 
           className="flex w-full gap-3 px-3"
-          style={{ height: '500px' }}
+          style={{ height: '80vh', minHeight: '500px' }}
         >
           {[
             {
