@@ -361,7 +361,7 @@ export default function Services() {
               title: 'Automations & AI',
               description: 'Lead capture → CRM → follow-ups → pipeline updates → dashboards. AI-assisted content ops.',
               href: '/services/automations-ai',
-              bgImage: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80',
+              bgVideo: '/assets/automations-ai-video.mp4',
             },
           ].map((service, index) => (
             <Link 
