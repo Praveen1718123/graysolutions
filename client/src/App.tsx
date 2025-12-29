@@ -9,6 +9,9 @@ import Services from "@/pages/services";
 import ServiceBrandDesign from "@/pages/service-brand-design";
 import ServiceBrandContent from "@/pages/service-brand-content";
 import ServiceGrowthPerformance from "@/pages/service-growth-performance";
+import ServiceProductWeb from "@/pages/service-product-web";
+import ServiceCommerceStudio from "@/pages/service-commerce-studio";
+import ServiceAutomationsAI from "@/pages/service-automations-ai";
 import ServiceProductDesign from "@/pages/service-product-design";
 import ServiceWebPlatform from "@/pages/service-web-platform";
 import ServiceCommerce from "@/pages/service-commerce";
@@ -30,6 +33,9 @@ function Router() {
       <Route path="/services/brand-design" component={ServiceBrandDesign} />
       <Route path="/services/brand-content" component={ServiceBrandContent} />
       <Route path="/services/growth-performance" component={ServiceGrowthPerformance} />
+      <Route path="/services/product-web" component={ServiceProductWeb} />
+      <Route path="/services/commerce-studio" component={ServiceCommerceStudio} />
+      <Route path="/services/automations-ai" component={ServiceAutomationsAI} />
       <Route path="/services/product-design" component={ServiceProductDesign} />
       <Route path="/services/web-platform" component={ServiceWebPlatform} />
       <Route path="/services/commerce" component={ServiceCommerce} />

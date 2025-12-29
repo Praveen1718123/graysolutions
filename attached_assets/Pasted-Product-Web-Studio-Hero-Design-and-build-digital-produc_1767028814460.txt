@@ -1,0 +1,219 @@
+Product & Web Studio
+Hero
+
+Design and build digital products people don’t struggle to use.
+We handle UX, UI, and development for websites and MVPs — with conversion, usability, and scalability baked in.
+
+Primary CTA: Book a Product Call
+Secondary CTA: Get a UX + Website Audit
+
+Who this is for
+
+Founders launching an MVP fast but clean
+
+Businesses with a site that looks fine but converts badly
+
+Teams needing UX cleanup before building more features
+
+Companies migrating from “patchwork screens” to a real product system
+
+Problems we solve
+
+Users don’t understand the flow → drop-offs happen
+
+Too many screens, no structure, no hierarchy
+
+Website is “pretty” but not conversion-driven
+
+Dev builds without UX logic → rework + delays
+
+No design system → inconsistent UI + slow iteration
+
+What you get (modules)
+
+Product Strategy Lite: goals, scope, success metrics, prioritization
+
+UX Architecture: IA, user flows, wireframes
+
+UI System: clean UI, components, design system
+
+Build: responsive web + integrations (as needed)
+
+Conversion Layer: landing structure, copy hierarchy, CTAs, forms
+
+Handover + QA: specs, testing support, launch checklist
+
+Packages
+
+Website Conversion Revamp (best for service businesses)
+
+MVP Build (0 → v1 in weeks, not months)
+
+Product Partnership (ongoing design + dev)
+
+Process
+
+Audit → UX flow → UI system → Build + QA → Launch + iterate
+
+Outcomes
+
+Better conversion, fewer drop-offs, faster shipping, cleaner product direction.
+
+FAQ
+
+Do you do design only? Yes (handoff-ready).
+Do you also build? Yes, design + dev together is preferred.
+Which stack? Depends on project; we ship clean and maintainable.
+
+CTA
+
+Want a product/website teardown?
+Get a UX + Website Audit with clear fixes and priorities.
+
+Commerce Studio (Shopify & D2C)
+Hero
+
+Shopify stores that sell — not just “look nice.”
+We build and optimize Shopify for conversion: product pages, checkout, speed, retention flows, and tracking.
+
+Primary CTA: Book a Shopify Call
+Secondary CTA: Get a Store Audit
+
+Who this is for
+
+D2C brands launching or rebuilding Shopify
+
+Brands with traffic but low conversion rate
+
+Teams lacking retention systems (email/SMS) and losing repeat sales
+
+Founders needing a clean catalog + product page system
+
+Problems we solve
+
+Low CVR (product page doesn’t persuade)
+
+Slow store speed + bad mobile UX
+
+Weak trust signals (reviews, proof, guarantees)
+
+Checkout friction + drop-offs
+
+No email/SMS flows → zero retention
+
+Tracking is broken → ads feel like gambling
+
+What you get (modules)
+
+Store Architecture: collections, navigation, search, PDP system
+
+Theme Build/Revamp: premium UI, mobile-first conversion UX
+
+Product Page System: layout, copy blocks, proof, FAQs, bundles
+
+Checkout + Speed: performance cleanup, friction removal
+
+Retention Flows: welcome, browse abandon, cart abandon, post-purchase, winback
+
+Tracking: pixel/GA4 basics + key events + reporting
+
+Packages
+
+Shopify Launch (new store, done right)
+
+Shopify Revamp (rebuild + conversion upgrades)
+
+Shopify Growth System (store + retention + tracking + monthly optimization)
+
+Process
+
+Audit → roadmap → design system → build → QA → launch → optimize
+
+Outcomes
+
+Higher conversion rate, better AOV, better repeat rate, cleaner attribution.
+
+FAQ
+
+Do you run ads too? Yes via Growth & Performance (separate engagement).
+Do you do Shopify only? Mostly yes, to stay sharp.
+Can you migrate from Woo/Wix? Yes.
+
+CTA
+
+Want to know what’s killing your conversion?
+Get a Store Audit with prioritized fixes.
+
+Automations & AI Systems
+Hero
+
+Stop losing leads. Stop doing repetitive work.
+We set up automations + AI workflows across lead capture, CRM, WhatsApp/email follow-ups, reporting, and internal ops.
+
+Primary CTA: Book an Automation Call
+Secondary CTA: Get a Workflow Audit
+
+Who this is for
+
+Agencies and businesses losing leads due to slow follow-up
+
+Teams wasting hours on manual admin + reporting
+
+Founders who want a proper CRM + pipeline discipline
+
+Businesses needing WhatsApp-first automation (India-friendly)
+
+Problems we solve
+
+Leads come in but nobody responds fast
+
+No pipeline visibility (leads scattered in WhatsApp/Sheets)
+
+Manual follow-ups → inconsistent conversions
+
+No automations for reminders, assignments, updates
+
+Reporting is painful and delayed
+
+Support/replies repeat the same questions daily
+
+What you get (modules)
+
+Lead Capture + Routing: website/Meta leads → CRM → assign owner → notify instantly
+
+WhatsApp + Email Sequences: auto-replies, qualification, follow-ups, reminders
+
+CRM Setup: stages, fields, SOPs, lead scoring
+
+AI Assistants: qualification bot, FAQ bot, appointment booking assistant
+
+Ops Automations: task creation, internal approvals, invoice triggers (if needed)
+
+Dashboards: weekly pipeline + performance report
+
+Packages
+
+Lead Response System (fastest ROI: speed to lead)
+
+CRM + Pipeline Build (structure + reporting)
+
+Automation Partnership (monthly: improve + expand workflows)
+
+Process
+
+Audit → map workflows → build automations → test → launch → optimize
+
+Outcomes
+
+Faster response time, fewer missed leads, cleaner pipeline, less manual work.
+
+FAQ
+
+What tools do you use? Depends: Zapier/Make, WhatsApp providers, HubSpot/Zoho, Google Sheets, etc.
+Do you build custom too? Yes if needed, but we start lean.
+Can you do AI without making it cringe? Yes — AI is for speed + consistency, not fake “human” vibes.
+
+CTA
+
+Want to see where you’re leaking leads?
+Get a Workflow Audit and we’ll show the quickest fixes.
