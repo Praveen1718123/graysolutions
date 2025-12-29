@@ -352,21 +352,21 @@ export default function Services() {
               msOverflowStyle: 'none',
             }}
           >
-            {/* Brand Design */}
-            <Link href="/services/brand-design" data-testid="link-service-brand-design">
+            {/* Brand & Content Studio */}
+            <Link href="/services/brand-content" data-testid="link-service-brand-content">
               <motion.div
                 className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg flex-shrink-0"
                 style={{ backgroundColor: '#F5F5F5', width: 'clamp(300px, 28vw, 360px)', scrollSnapAlign: 'start' }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0 }}
-                data-testid="service-card-brand-design"
+                data-testid="service-card-brand-content"
               >
                 <h3 
                   className="text-xl md:text-2xl font-bold mb-6 leading-tight"
                   style={{ color: '#1A1A1A' }}
                 >
-                  Brand<br />Design
+                  Brand &<br />Content Studio
                 </h3>
                 
                 <div className="relative h-40 mb-6 flex items-center justify-center">
@@ -390,26 +390,26 @@ export default function Services() {
                   className="text-sm leading-relaxed"
                   style={{ color: '#666666' }}
                 >
-                  We craft distinctive brand identities that resonate with your audience and set you apart from competitors.
+                  Brand positioning, messaging, creative direction, content strategy, reels/editing, founder brand.
                 </p>
               </motion.div>
             </Link>
 
-            {/* Product & Experience */}
-            <Link href="/services/product-design" data-testid="link-service-product-design">
+            {/* Growth & Performance */}
+            <Link href="/services/growth-performance" data-testid="link-service-growth-performance">
               <motion.div
                 className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg flex-shrink-0"
                 style={{ backgroundColor: '#F5F5F5', width: 'clamp(300px, 28vw, 360px)', scrollSnapAlign: 'start' }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                data-testid="service-card-product-design"
+                data-testid="service-card-growth-performance"
               >
                 <h3 
                   className="text-xl md:text-2xl font-bold mb-6 leading-tight"
                   style={{ color: '#1A1A1A' }}
                 >
-                  Product &<br />Experience
+                  Growth &<br />Performance
                 </h3>
                 
                 <div className="relative h-40 mb-6 flex items-center justify-center">
@@ -443,26 +443,26 @@ export default function Services() {
                   className="text-sm leading-relaxed"
                   style={{ color: '#666666' }}
                 >
-                  User-centered digital products that delight customers and drive meaningful engagement.
+                  Paid ads, funnels, landing pages, CRO, analytics, lead-gen.
                 </p>
               </motion.div>
             </Link>
 
-            {/* Web & Platform */}
-            <Link href="/services/web-platform" data-testid="link-service-web-platform">
+            {/* Product & Web Studio */}
+            <Link href="/services/product-web" data-testid="link-service-product-web">
               <motion.div
                 className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg flex-shrink-0"
                 style={{ backgroundColor: '#F5F5F5', width: 'clamp(300px, 28vw, 360px)', scrollSnapAlign: 'start' }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                data-testid="service-card-web-platform"
+                data-testid="service-card-product-web"
               >
                 <h3 
                   className="text-xl md:text-2xl font-bold mb-6 leading-tight"
                   style={{ color: '#1A1A1A' }}
                 >
-                  Web &<br />Platform
+                  Product &<br />Web Studio
                 </h3>
                 
                 <div className="relative h-40 mb-6 flex items-center justify-center">
@@ -502,26 +502,26 @@ export default function Services() {
                   className="text-sm leading-relaxed"
                   style={{ color: '#666666' }}
                 >
-                  Scalable web applications and platforms built with modern technologies for performance.
+                  UI/UX, websites, MVP builds, web apps, product design + development.
                 </p>
               </motion.div>
             </Link>
 
-            {/* Commerce & Shopify */}
-            <Link href="/services/commerce" data-testid="link-service-commerce">
+            {/* Commerce Studio */}
+            <Link href="/services/commerce-studio" data-testid="link-service-commerce-studio">
               <motion.div
                 className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg flex-shrink-0"
                 style={{ backgroundColor: '#F5F5F5', width: 'clamp(300px, 28vw, 360px)', scrollSnapAlign: 'start' }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
-                data-testid="service-card-commerce"
+                data-testid="service-card-commerce-studio"
               >
                 <h3 
                   className="text-xl md:text-2xl font-bold mb-6 leading-tight"
                   style={{ color: '#1A1A1A' }}
                 >
-                  Commerce &<br />Shopify
+                  Commerce<br />Studio
                 </h3>
                 
                 <div className="relative h-40 mb-6 flex items-center justify-center">
@@ -551,26 +551,26 @@ export default function Services() {
                   className="text-sm leading-relaxed"
                   style={{ color: '#666666' }}
                 >
-                  E-commerce solutions that convert browsers into buyers with seamless shopping experiences.
+                  Shopify builds/revamps, product pages, checkout optimization, email/SMS flows, integrations.
                 </p>
               </motion.div>
             </Link>
 
-            {/* Content & Marketing */}
-            <Link href="/services/content-marketing" data-testid="link-service-content-marketing">
+            {/* Automations & AI Systems */}
+            <Link href="/services/automations-ai" data-testid="link-service-automations-ai">
               <motion.div
                 className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg flex-shrink-0"
                 style={{ backgroundColor: '#F5F5F5', width: 'clamp(300px, 28vw, 360px)', scrollSnapAlign: 'start' }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
-                data-testid="service-card-content-marketing"
+                data-testid="service-card-automations-ai"
               >
                 <h3 
                   className="text-xl md:text-2xl font-bold mb-6 leading-tight"
                   style={{ color: '#1A1A1A' }}
                 >
-                  Content &<br />Marketing
+                  Automations &<br />AI Systems
                 </h3>
                 
                 <div className="relative h-40 mb-6 flex items-center justify-center">
@@ -613,7 +613,7 @@ export default function Services() {
                   className="text-sm leading-relaxed"
                   style={{ color: '#666666' }}
                 >
-                  Strategic content and marketing campaigns that amplify your brand and drive growth.
+                  Lead capture → CRM → follow-ups → pipeline updates → dashboards. AI-assisted content ops, chat agents, workflow automation.
                 </p>
               </motion.div>
             </Link>
