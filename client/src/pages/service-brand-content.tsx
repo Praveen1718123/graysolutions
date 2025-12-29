@@ -511,6 +511,35 @@ export default function ServiceBrandContent() {
         </div>
       </section>
 
+      <section className="py-12" style={{ backgroundColor: '#FAFAFA' }}>
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+          <div className="flex justify-between items-center">
+            <div className="w-1/2 pr-4">
+              <Link href="/services/automations-ai" className="group flex items-center gap-3">
+                <svg className="w-5 h-5 transition-transform group-hover:-translate-x-1" style={{ color: '#666666' }} viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+                <div>
+                  <span className="text-xs font-medium tracking-wide block" style={{ color: '#999999' }}>Previous</span>
+                  <span className="text-base font-semibold" style={{ color: '#1A1A1A' }}>Automations & AI</span>
+                </div>
+              </Link>
+            </div>
+            <div className="w-1/2 pl-4 text-right">
+              <Link href="/services/growth-performance" className="group inline-flex items-center gap-3 justify-end">
+                <div>
+                  <span className="text-xs font-medium tracking-wide block" style={{ color: '#999999' }}>Next</span>
+                  <span className="text-base font-semibold" style={{ color: '#1A1A1A' }}>Growth & Performance</span>
+                </div>
+                <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" style={{ color: '#666666' }} viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
