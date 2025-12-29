@@ -378,10 +378,18 @@ export default function Services() {
                 <video
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   src={service.bgVideo}
-                  autoPlay
                   muted
                   loop
                   playsInline
+                  ref={(el) => {
+                    if (el) {
+                      if (activeServiceIndex === index) {
+                        el.play().catch(() => {});
+                      } else {
+                        el.pause();
+                      }
+                    }
+                  }}
                 />
               ) : (
                 <div 
