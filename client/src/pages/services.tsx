@@ -23,6 +23,7 @@ export default function Services() {
   const springX = useSpring(mouseX, { stiffness: 50, damping: 20 });
   const springY = useSpring(mouseY, { stiffness: 50, damping: 20 });
   const [isHovering, setIsHovering] = useState(false);
+  const [activeServiceIndex, setActiveServiceIndex] = useState(0);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (heroAnimRef.current) {
@@ -301,21 +302,21 @@ export default function Services() {
 
       {/* Our Services Section - Full Width */}
       <section 
-        className="relative z-10"
-        style={{ backgroundColor: '#1A1A1A' }}
+        className="relative z-10 py-16 md:py-24"
+        style={{ backgroundColor: '#FFFFFF' }}
         data-testid="section-our-services"
       >
         {/* Section Header */}
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10 py-12">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10 mb-8">
           <span 
             className="text-sm font-medium tracking-wide mb-2 block"
-            style={{ color: '#999999' }}
+            style={{ color: '#666666' }}
           >
             What We Do
           </span>
           <h2 
             className="text-2xl md:text-3xl font-bold"
-            style={{ color: '#FFFFFF' }}
+            style={{ color: '#1A1A1A' }}
           >
             Our Services
           </h2>
@@ -323,7 +324,7 @@ export default function Services() {
 
         {/* Full-Width Service Cards with Rounded Corners and Gaps */}
         <div 
-          className="flex w-full gap-3 px-3 pb-3 group/container"
+          className="flex w-full gap-3 px-3"
           style={{ height: '500px' }}
         >
           {[
@@ -368,11 +369,10 @@ export default function Services() {
               href={service.href} 
               data-testid={`link-service-${service.id}`}
               className={`group relative overflow-hidden cursor-pointer transition-all duration-500 ease-out rounded-2xl ${
-                index === 0 
-                  ? 'flex-[2.5] group-hover/container:[&:not(:hover)]:flex-1 hover:flex-[2.5]' 
-                  : 'flex-1 hover:flex-[2.5]'
+                activeServiceIndex === index ? 'flex-[2.5]' : 'flex-1'
               }`}
               style={{ minWidth: '80px' }}
+              onMouseEnter={() => setActiveServiceIndex(index)}
             >
               <div 
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
@@ -387,7 +387,7 @@ export default function Services() {
                 }}
               />
               
-              <div className="relative z-10 h-full flex flex-col justify-end p-6">
+              <div className="relative z-10 h-full flex flex-col justify-end p-6 pb-8">
                 <h3 
                   className="text-lg md:text-xl font-bold leading-tight text-white mb-2 transition-all duration-300"
                 >
@@ -396,14 +396,14 @@ export default function Services() {
                 
                 <p 
                   className={`text-sm leading-relaxed text-white/70 transition-opacity duration-500 max-w-xs ${
-                    index === 0 ? 'opacity-100 group-hover/container:[&:not(:hover)]:opacity-0 group-hover:opacity-100' : 'opacity-0 group-hover:opacity-100'
+                    activeServiceIndex === index ? 'opacity-100' : 'opacity-0'
                   }`}
                 >
                   {service.description}
                 </p>
                 
                 <div className={`mt-4 transition-opacity duration-500 ${
-                  index === 0 ? 'opacity-100 group-hover/container:[&:not(:hover)]:opacity-0 group-hover:opacity-100' : 'opacity-0 group-hover:opacity-100'
+                  activeServiceIndex === index ? 'opacity-100' : 'opacity-0'
                 }`}>
                   <span className="inline-flex items-center gap-2 text-white text-sm font-medium border border-white/50 rounded-full px-4 py-2 hover:bg-white hover:text-black transition-colors">
                     Learn More
