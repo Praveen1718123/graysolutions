@@ -321,13 +321,42 @@ export default function Services() {
             </h2>
           </div>
 
-          {/* First 3 Cards in Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          {/* Navigation Controls */}
+          <div className="flex items-center justify-end gap-2 mb-6">
+            <button
+              onClick={scrollLeft}
+              className="w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-gray-100"
+              style={{ backgroundColor: '#F5F5F5' }}
+              data-testid="services-scroll-left"
+            >
+              <ChevronLeft size={20} style={{ color: '#1A1A1A' }} />
+            </button>
+            <button
+              onClick={scrollRight}
+              className="w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-gray-100"
+              style={{ backgroundColor: '#F5F5F5' }}
+              data-testid="services-scroll-right"
+            >
+              <ChevronRight size={20} style={{ color: '#1A1A1A' }} />
+            </button>
+          </div>
+
+          {/* All 5 Cards in Horizontal Scroll */}
+          <div 
+            ref={scrollContainerRef}
+            className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide"
+            style={{ 
+              scrollSnapType: 'x mandatory',
+              WebkitOverflowScrolling: 'touch',
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+            }}
+          >
             {/* Brand Design */}
             <Link href="/services/brand-design" data-testid="link-service-brand-design">
               <motion.div
-                className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg h-full"
-                style={{ backgroundColor: '#F5F5F5' }}
+                className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg flex-shrink-0"
+                style={{ backgroundColor: '#F5F5F5', width: 'clamp(300px, 28vw, 360px)', scrollSnapAlign: 'start' }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0 }}
@@ -369,8 +398,8 @@ export default function Services() {
             {/* Product & Experience */}
             <Link href="/services/product-design" data-testid="link-service-product-design">
               <motion.div
-                className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg h-full"
-                style={{ backgroundColor: '#F5F5F5' }}
+                className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg flex-shrink-0"
+                style={{ backgroundColor: '#F5F5F5', width: 'clamp(300px, 28vw, 360px)', scrollSnapAlign: 'start' }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
@@ -422,8 +451,8 @@ export default function Services() {
             {/* Web & Platform */}
             <Link href="/services/web-platform" data-testid="link-service-web-platform">
               <motion.div
-                className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg h-full"
-                style={{ backgroundColor: '#F5F5F5' }}
+                className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg flex-shrink-0"
+                style={{ backgroundColor: '#F5F5F5', width: 'clamp(300px, 28vw, 360px)', scrollSnapAlign: 'start' }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
@@ -477,153 +506,117 @@ export default function Services() {
                 </p>
               </motion.div>
             </Link>
-          </div>
 
-          {/* Remaining 2 Cards in Horizontal Slider */}
-          <div className="relative">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-sm font-medium" style={{ color: '#666666' }}>More services</span>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={scrollLeft}
-                  className="w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-gray-100"
-                  style={{ backgroundColor: '#F5F5F5' }}
-                  data-testid="services-scroll-left"
+            {/* Commerce & Shopify */}
+            <Link href="/services/commerce" data-testid="link-service-commerce">
+              <motion.div
+                className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg flex-shrink-0"
+                style={{ backgroundColor: '#F5F5F5', width: 'clamp(300px, 28vw, 360px)', scrollSnapAlign: 'start' }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                data-testid="service-card-commerce"
+              >
+                <h3 
+                  className="text-xl md:text-2xl font-bold mb-6 leading-tight"
+                  style={{ color: '#1A1A1A' }}
                 >
-                  <ChevronLeft size={20} style={{ color: '#1A1A1A' }} />
-                </button>
-                <button
-                  onClick={scrollRight}
-                  className="w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-gray-100"
-                  style={{ backgroundColor: '#F5F5F5' }}
-                  data-testid="services-scroll-right"
-                >
-                  <ChevronRight size={20} style={{ color: '#1A1A1A' }} />
-                </button>
-              </div>
-            </div>
-            
-            <div 
-              ref={scrollContainerRef}
-              className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide"
-              style={{ 
-                scrollSnapType: 'x mandatory',
-                WebkitOverflowScrolling: 'touch',
-                scrollbarWidth: 'none',
-                msOverflowStyle: 'none',
-              }}
-            >
-              {/* Commerce & Shopify */}
-              <Link href="/services/commerce" data-testid="link-service-commerce">
-                <motion.div
-                  className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg flex-shrink-0"
-                  style={{ backgroundColor: '#F5F5F5', width: 'clamp(300px, 40vw, 380px)', scrollSnapAlign: 'start' }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  data-testid="service-card-commerce"
-                >
-                  <h3 
-                    className="text-xl md:text-2xl font-bold mb-6 leading-tight"
-                    style={{ color: '#1A1A1A' }}
-                  >
-                    Commerce &<br />Shopify
-                  </h3>
-                  
-                  <div className="relative h-40 mb-6 flex items-center justify-center">
-                    <div className="relative">
-                      <div 
-                        className="w-16 h-16 rounded-lg"
-                        style={{
-                          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                          boxShadow: '0 15px 40px -5px rgba(102, 126, 234, 0.5)',
-                          transform: 'rotate(15deg)',
-                        }}
-                      />
-                      <div 
-                        className="absolute w-12 h-12 rounded-lg"
-                        style={{
-                          top: '-10px',
-                          left: '24px',
-                          background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(230,230,250,0.8) 100%)',
-                          border: '1px solid rgba(102, 126, 234, 0.2)',
-                          transform: 'rotate(-10deg)',
-                        }}
-                      />
-                    </div>
+                  Commerce &<br />Shopify
+                </h3>
+                
+                <div className="relative h-40 mb-6 flex items-center justify-center">
+                  <div className="relative">
+                    <div 
+                      className="w-16 h-16 rounded-lg"
+                      style={{
+                        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                        boxShadow: '0 15px 40px -5px rgba(102, 126, 234, 0.5)',
+                        transform: 'rotate(15deg)',
+                      }}
+                    />
+                    <div 
+                      className="absolute w-12 h-12 rounded-lg"
+                      style={{
+                        top: '-10px',
+                        left: '24px',
+                        background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(230,230,250,0.8) 100%)',
+                        border: '1px solid rgba(102, 126, 234, 0.2)',
+                        transform: 'rotate(-10deg)',
+                      }}
+                    />
                   </div>
-                  
-                  <p 
-                    className="text-sm leading-relaxed"
-                    style={{ color: '#666666' }}
-                  >
-                    E-commerce solutions that convert browsers into buyers with seamless shopping experiences.
-                  </p>
-                </motion.div>
-              </Link>
+                </div>
+                
+                <p 
+                  className="text-sm leading-relaxed"
+                  style={{ color: '#666666' }}
+                >
+                  E-commerce solutions that convert browsers into buyers with seamless shopping experiences.
+                </p>
+              </motion.div>
+            </Link>
 
-              {/* Content & Marketing */}
-              <Link href="/services/content-marketing" data-testid="link-service-content-marketing">
-                <motion.div
-                  className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg flex-shrink-0"
-                  style={{ backgroundColor: '#F5F5F5', width: 'clamp(300px, 40vw, 380px)', scrollSnapAlign: 'start' }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                  data-testid="service-card-content-marketing"
+            {/* Content & Marketing */}
+            <Link href="/services/content-marketing" data-testid="link-service-content-marketing">
+              <motion.div
+                className="rounded-2xl p-6 md:p-8 cursor-pointer group transition-all hover:shadow-lg flex-shrink-0"
+                style={{ backgroundColor: '#F5F5F5', width: 'clamp(300px, 28vw, 360px)', scrollSnapAlign: 'start' }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                data-testid="service-card-content-marketing"
+              >
+                <h3 
+                  className="text-xl md:text-2xl font-bold mb-6 leading-tight"
+                  style={{ color: '#1A1A1A' }}
                 >
-                  <h3 
-                    className="text-xl md:text-2xl font-bold mb-6 leading-tight"
-                    style={{ color: '#1A1A1A' }}
-                  >
-                    Content &<br />Marketing
-                  </h3>
-                  
-                  <div className="relative h-40 mb-6 flex items-center justify-center">
-                    <div className="relative flex gap-1.5">
-                      <div 
-                        className="w-4 rounded-full"
-                        style={{
-                          height: '50px',
-                          background: 'linear-gradient(180deg, #3B82F6 0%, #93C5FD 100%)',
-                        }}
-                      />
-                      <div 
-                        className="w-4 rounded-full"
-                        style={{
-                          height: '70px',
-                          background: 'linear-gradient(180deg, #8B5CF6 0%, #C4B5FD 100%)',
-                          marginTop: '-20px',
-                        }}
-                      />
-                      <div 
-                        className="w-4 rounded-full"
-                        style={{
-                          height: '45px',
-                          background: 'linear-gradient(180deg, #EC4899 0%, #F9A8D4 100%)',
-                          marginTop: '5px',
-                        }}
-                      />
-                      <div 
-                        className="w-4 rounded-full"
-                        style={{
-                          height: '60px',
-                          background: 'linear-gradient(180deg, #10B981 0%, #6EE7B7 100%)',
-                          marginTop: '-10px',
-                        }}
-                      />
-                    </div>
+                  Content &<br />Marketing
+                </h3>
+                
+                <div className="relative h-40 mb-6 flex items-center justify-center">
+                  <div className="relative flex gap-1.5">
+                    <div 
+                      className="w-4 rounded-full"
+                      style={{
+                        height: '50px',
+                        background: 'linear-gradient(180deg, #3B82F6 0%, #93C5FD 100%)',
+                      }}
+                    />
+                    <div 
+                      className="w-4 rounded-full"
+                      style={{
+                        height: '70px',
+                        background: 'linear-gradient(180deg, #8B5CF6 0%, #C4B5FD 100%)',
+                        marginTop: '-20px',
+                      }}
+                    />
+                    <div 
+                      className="w-4 rounded-full"
+                      style={{
+                        height: '45px',
+                        background: 'linear-gradient(180deg, #EC4899 0%, #F9A8D4 100%)',
+                        marginTop: '5px',
+                      }}
+                    />
+                    <div 
+                      className="w-4 rounded-full"
+                      style={{
+                        height: '60px',
+                        background: 'linear-gradient(180deg, #10B981 0%, #6EE7B7 100%)',
+                        marginTop: '-10px',
+                      }}
+                    />
                   </div>
-                  
-                  <p 
-                    className="text-sm leading-relaxed"
-                    style={{ color: '#666666' }}
-                  >
-                    Strategic content and marketing campaigns that amplify your brand and drive growth.
-                  </p>
-                </motion.div>
-              </Link>
-            </div>
+                </div>
+                
+                <p 
+                  className="text-sm leading-relaxed"
+                  style={{ color: '#666666' }}
+                >
+                  Strategic content and marketing campaigns that amplify your brand and drive growth.
+                </p>
+              </motion.div>
+            </Link>
           </div>
         </div>
       </section>
