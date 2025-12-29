@@ -321,9 +321,9 @@ export default function Services() {
           </h2>
         </div>
 
-        {/* Full-Width Service Cards */}
+        {/* Full-Width Service Cards with Rounded Corners and Gaps */}
         <div 
-          className="flex w-full"
+          className="flex w-full gap-3 px-3 pb-3 group/container"
           style={{ height: '500px' }}
         >
           {[
@@ -367,7 +367,11 @@ export default function Services() {
               key={service.id} 
               href={service.href} 
               data-testid={`link-service-${service.id}`}
-              className="flex-1 group relative overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:flex-[2.5]"
+              className={`group relative overflow-hidden cursor-pointer transition-all duration-500 ease-out rounded-2xl ${
+                index === 0 
+                  ? 'flex-[2.5] group-hover/container:[&:not(:hover)]:flex-1 hover:flex-[2.5]' 
+                  : 'flex-1 hover:flex-[2.5]'
+              }`}
               style={{ minWidth: '80px' }}
             >
               <div 
@@ -386,20 +390,21 @@ export default function Services() {
               <div className="relative z-10 h-full flex flex-col justify-end p-6">
                 <h3 
                   className="text-lg md:text-xl font-bold leading-tight text-white mb-2 transition-all duration-300"
-                  style={{ 
-                    writingMode: 'horizontal-tb',
-                  }}
                 >
                   {service.title}
                 </h3>
                 
                 <p 
-                  className="text-sm leading-relaxed text-white/70 opacity-0 group-hover:opacity-100 transition-opacity duration-500 max-w-xs"
+                  className={`text-sm leading-relaxed text-white/70 transition-opacity duration-500 max-w-xs ${
+                    index === 0 ? 'opacity-100 group-hover/container:[&:not(:hover)]:opacity-0 group-hover:opacity-100' : 'opacity-0 group-hover:opacity-100'
+                  }`}
                 >
                   {service.description}
                 </p>
                 
-                <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div className={`mt-4 transition-opacity duration-500 ${
+                  index === 0 ? 'opacity-100 group-hover/container:[&:not(:hover)]:opacity-0 group-hover:opacity-100' : 'opacity-0 group-hover:opacity-100'
+                }`}>
                   <span className="inline-flex items-center gap-2 text-white text-sm font-medium border border-white/50 rounded-full px-4 py-2 hover:bg-white hover:text-black transition-colors">
                     Learn More
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
