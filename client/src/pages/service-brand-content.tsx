@@ -75,10 +75,9 @@ export default function ServiceBrandContent() {
   const packages = [
     {
       name: "Brand Sprint",
-      badge: "Starter",
-      price: "Request",
-      priceLabel: "proposal",
+      badge: "Set A",
       description: "Best when you're unclear, rebranding, or repositioning.",
+      timeline: "7–14 days",
       features: [
         "Brand Foundation",
         "Messaging Framework",
@@ -88,10 +87,9 @@ export default function ServiceBrandContent() {
     },
     {
       name: "Content Engine",
-      badge: "Professional",
-      price: "Request",
-      priceLabel: "proposal",
+      badge: "Set B",
       description: "Best when you want consistent outputs + quality control.",
+      timeline: "Monthly retainer",
       features: [
         "Content Strategy System",
         "Script writing + editing",
@@ -104,10 +102,9 @@ export default function ServiceBrandContent() {
     },
     {
       name: "Founder Authority",
-      badge: "Premium",
-      price: "Custom",
-      priceLabel: "",
+      badge: "Set C",
       description: "Best when you want to dominate a niche and convert inbound consistently.",
+      timeline: "8–12 weeks + monthly",
       features: [
         "Everything in Content Engine",
         "Brand Sprint included",
@@ -187,22 +184,25 @@ export default function ServiceBrandContent() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="max-w-[700px]"
+            className="max-w-[800px]"
           >
             <span className="text-sm font-medium tracking-widest mb-4 block" style={{ color: 'rgba(255,255,255,0.7)' }}>
-              SERVICES
+              BRAND & CONTENT STUDIO
             </span>
             <h1 
-              className="font-bold"
+              className="font-bold mb-6"
               style={{ 
-                fontSize: 'clamp(42px, 6vw, 72px)',
-                lineHeight: '1.05',
+                fontSize: 'clamp(36px, 5vw, 56px)',
+                lineHeight: '1.1',
                 color: '#FFFFFF',
                 letterSpacing: '-0.02em',
               }}
             >
-              Brand & Content Studio
+              Turn your expertise into a content system.
             </h1>
+            <p className="text-lg md:text-xl leading-relaxed" style={{ color: 'rgba(255,255,255,0.85)' }}>
+              We define your narrative, design your content pillars, and produce high-retention reels — so your brand becomes recognizable and inbound becomes normal.
+            </p>
           </motion.div>
         </div>
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
@@ -356,11 +356,11 @@ export default function ServiceBrandContent() {
       <section className="py-20 md:py-28" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="max-w-[1200px] mx-auto px-6 md:px-10">
           <div className="text-center mb-12">
-            <span className="text-sm font-medium tracking-wide mb-3 block" style={{ color: '#666666' }}>Pricing</span>
+            <span className="text-sm font-medium tracking-wide mb-3 block" style={{ color: '#666666' }}>Options</span>
             <h2 className="font-bold mb-3" style={{ fontSize: 'clamp(28px, 4vw, 42px)', lineHeight: '1.15', color: '#1A1A1A', letterSpacing: '-0.02em' }}>
-              Packages
+              Choose Your Path
             </h2>
-            <p className="text-base" style={{ color: '#666666' }}>Choose the right package for your needs.</p>
+            <p className="text-base" style={{ color: '#666666' }}>Select the option that fits your current stage.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {packages.map((pkg, idx) => (
@@ -377,16 +377,14 @@ export default function ServiceBrandContent() {
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
               >
                 <span 
-                  className="text-xs font-semibold tracking-wide px-4 py-1.5 rounded-full self-start mb-6"
+                  className="text-xs font-semibold tracking-wide px-4 py-1.5 rounded-full self-start mb-4"
                   style={{ backgroundColor: (pkg as any).featured ? '#1A1A1A' : '#F0F0F0', color: (pkg as any).featured ? '#FFFFFF' : '#1A1A1A' }}
                 >
                   {pkg.badge}
                 </span>
-                <div className="mb-2">
-                  <span className="text-4xl md:text-5xl font-bold" style={{ color: '#1A1A1A' }}>{pkg.price}</span>
-                  {pkg.priceLabel && <span className="text-lg" style={{ color: '#666666' }}>/{pkg.priceLabel}</span>}
-                </div>
-                <p className="text-sm mb-6" style={{ color: '#666666' }}>{pkg.description}</p>
+                <h3 className="text-2xl font-bold mb-2" style={{ color: '#1A1A1A' }}>{pkg.name}</h3>
+                <p className="text-sm mb-2" style={{ color: '#666666' }}>{pkg.description}</p>
+                <p className="text-xs mb-6" style={{ color: '#999999' }}>Timeline: {pkg.timeline}</p>
                 <Link href="/contact" className="mb-6">
                   <button className="w-full py-3.5 rounded-full font-medium text-sm transition-all hover:opacity-90" style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}>
                     Get Started
