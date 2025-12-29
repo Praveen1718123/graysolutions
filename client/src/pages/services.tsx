@@ -387,30 +387,32 @@ export default function Services() {
                 }}
               />
               
-              <div className="relative z-10 h-full flex flex-col justify-end p-6 pb-8">
-                <h3 
-                  className="text-lg md:text-xl font-bold leading-tight text-white mb-2 transition-all duration-300"
-                >
-                  {service.title}
-                </h3>
-                
-                <p 
-                  className={`text-sm leading-relaxed text-white/70 transition-opacity duration-500 max-w-xs ${
-                    activeServiceIndex === index ? 'opacity-100' : 'opacity-0'
-                  }`}
-                >
-                  {service.description}
-                </p>
-                
-                <div className={`mt-4 transition-opacity duration-500 ${
-                  activeServiceIndex === index ? 'opacity-100' : 'opacity-0'
-                }`}>
-                  <span className="inline-flex items-center gap-2 text-white text-sm font-medium border border-white/50 rounded-full px-4 py-2 hover:bg-white hover:text-black transition-colors">
-                    Learn More
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                  </span>
+              <div className="relative z-10 h-full flex flex-col p-6">
+                <div className="mt-auto">
+                  <h3 
+                    className="text-lg md:text-xl font-bold leading-tight text-white mb-2 transition-all duration-300"
+                  >
+                    {service.title}
+                  </h3>
+                  
+                  <p 
+                    className={`text-sm leading-relaxed text-white/70 transition-all duration-500 max-w-xs ${
+                      activeServiceIndex === index ? 'opacity-100 max-h-20' : 'opacity-0 max-h-0 overflow-hidden'
+                    }`}
+                  >
+                    {service.description}
+                  </p>
+                  
+                  <div className={`transition-all duration-500 ${
+                    activeServiceIndex === index ? 'opacity-100 mt-4 max-h-12' : 'opacity-0 max-h-0 mt-0 overflow-hidden'
+                  }`}>
+                    <span className="inline-flex items-center gap-2 text-white text-sm font-medium border border-white/50 rounded-full px-4 py-2 hover:bg-white hover:text-black transition-colors">
+                      Learn More
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </span>
+                  </div>
                 </div>
               </div>
             </Link>
