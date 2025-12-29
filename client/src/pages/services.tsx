@@ -347,7 +347,7 @@ export default function Services() {
               title: 'Product & Web Studio',
               description: 'UI/UX, websites, MVP builds, web apps, product design + development.',
               href: '/services/product-web',
-              bgImage: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&q=80',
+              bgVideo: '/assets/product-web-video.mp4',
             },
             {
               id: 'commerce-studio',
