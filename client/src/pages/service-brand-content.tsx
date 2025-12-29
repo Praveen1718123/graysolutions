@@ -189,29 +189,20 @@ export default function ServiceBrandContent() {
             transition={{ duration: 0.8 }}
             className="max-w-[700px]"
           >
+            <span className="text-sm font-medium tracking-widest mb-4 block" style={{ color: 'rgba(255,255,255,0.7)' }}>
+              SERVICES
+            </span>
             <h1 
-              className="font-bold mb-6"
+              className="font-bold"
               style={{ 
-                fontSize: 'clamp(36px, 5vw, 56px)',
-                lineHeight: '1.1',
+                fontSize: 'clamp(42px, 6vw, 72px)',
+                lineHeight: '1.05',
                 color: '#FFFFFF',
                 letterSpacing: '-0.02em',
               }}
             >
-              Build a brand people trust
+              Brand & Content Studio
             </h1>
-            <p className="text-lg md:text-xl leading-relaxed mb-8" style={{ color: 'rgba(255,255,255,0.85)' }}>
-              We help founders turn messy ideas into sharp positioning, clean messaging, and a content engine that compounds weekly.
-            </p>
-            <Link href="/contact">
-              <button 
-                className="px-8 py-4 rounded-full font-medium text-base transition-all hover:scale-105"
-                style={{ backgroundColor: '#FFFFFF', color: '#1A1A1A' }}
-                data-testid="cta-hero"
-              >
-                Book a Strategy Call
-              </button>
-            </Link>
           </motion.div>
         </div>
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
