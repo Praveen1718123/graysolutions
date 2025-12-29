@@ -60,6 +60,12 @@ export default function Blogs() {
           backgroundPosition: 'center',
         }}
       >
+        <img 
+          src={logoImage} 
+          alt="Gray Logo" 
+          className="absolute top-6 right-6 md:top-10 md:right-10 z-20"
+          style={{ height: '32px', width: 'auto' }}
+        />
         <motion.div
           className="absolute bottom-10 left-1/2 -translate-x-1/2"
           initial={{ opacity: 0, y: 20 }}
