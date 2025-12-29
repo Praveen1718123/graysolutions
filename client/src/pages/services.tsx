@@ -333,7 +333,7 @@ export default function Services() {
               title: 'Brand & Content Studio',
               description: 'Brand positioning, messaging, creative direction, content strategy, reels/editing, founder brand.',
               href: '/services/brand-content',
-              bgVideo: '/assets/From_KlickPin_CF_3D_Motion_Design_Flow_(2)_with_Lighting_and_M_1767013484017.mp4',
+              bgVideo: '/assets/brand-content-video.mp4',
             },
             {
               id: 'growth-performance',
