@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "wouter";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import logoImage from "@assets/Group_25_(5)_1766734675194.png";
 import Footer from "@/components/footer";
@@ -17,23 +17,7 @@ import grayThumb from "@assets/optimized/Camera_Angle_02_1765901229015.jpg";
 export default function Services() {
   const [isScrolled, setIsScrolled] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const heroAnimRef = useRef<HTMLDivElement>(null);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const springX = useSpring(mouseX, { stiffness: 50, damping: 20 });
-  const springY = useSpring(mouseY, { stiffness: 50, damping: 20 });
-  const [isHovering, setIsHovering] = useState(false);
   const [activeServiceIndex, setActiveServiceIndex] = useState(0);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (heroAnimRef.current) {
-      const rect = heroAnimRef.current.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      mouseX.set(x);
-      mouseY.set(y);
-    }
-  };
 
   const capabilities = [
     {
@@ -141,163 +125,130 @@ export default function Services() {
         </div>
       </header>
 
-      {/* Hero Section */}
+      {/* Hero Section - Supabase Style */}
       <section 
-        className="relative z-10 pt-28 md:pt-40 pb-16 md:pb-24"
-        style={{ backgroundColor: '#FAFAFA', minHeight: '80vh' }}
+        className="relative z-10 pt-32 md:pt-40 pb-8 overflow-hidden"
+        style={{ backgroundColor: '#FFFFFF', minHeight: '100vh' }}
         data-testid="section-services-hero"
       >
-        <div className="max-w-[1400px] mx-auto px-6 md:px-10 h-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-[60vh]">
-            {/* Left Side - Text */}
-            <motion.div
-              className="text-left"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h1 
-                className="font-bold mb-6 md:mb-8"
-                style={{ 
-                  fontSize: 'clamp(36px, 5vw, 56px)',
-                  lineHeight: '1.1',
-                  color: '#1A1A1A',
-                  letterSpacing: '-0.02em',
-                }}
+        {/* Content */}
+        <div className="relative z-10 max-w-[1000px] mx-auto px-6 md:px-10 text-center">
+          <motion.h1 
+            className="font-bold mb-6"
+            style={{ 
+              fontSize: 'clamp(40px, 7vw, 72px)',
+              lineHeight: '1.05',
+              color: '#1A1A1A',
+              letterSpacing: '-0.03em',
+            }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            Design, Build & Scale<br />Your Digital Products
+          </motion.h1>
+          
+          <motion.div 
+            className="flex flex-col sm:flex-row gap-3 justify-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+          >
+            <Link href="/contact">
+              <button 
+                className="px-6 py-3 rounded-md font-medium text-sm transition-all hover:opacity-90"
+                style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}
+                data-testid="cta-services-hero"
               >
-                We design, build & automate the products your customers actually use.
-              </h1>
-              <Link href="/contact">
-                <button 
-                  className="px-8 py-4 rounded-full font-medium text-base transition-all hover:opacity-90"
-                  style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}
-                  data-testid="cta-services-hero"
-                >
-                  Start a Project
-                </button>
-              </Link>
-            </motion.div>
-
-            {/* Right Side - Interactive Animation */}
-            <motion.div
-              ref={heroAnimRef}
-              className="relative w-full aspect-square max-w-[500px] mx-auto cursor-pointer overflow-hidden rounded-3xl"
-              style={{ backgroundColor: '#FFFFFF' }}
-              onMouseMove={handleMouseMove}
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              data-testid="hero-animation"
-            >
-              {/* Animated Shapes */}
-              <motion.div
-                className="absolute"
-                style={{
-                  width: '120px',
-                  height: '120px',
-                  borderRadius: '50%',
-                  backgroundColor: '#1A1A1A',
-                  left: '20%',
-                  top: '15%',
-                }}
-                animate={{
-                  x: isHovering ? [0, 10, -5, 0] : 0,
-                  y: isHovering ? [0, -10, 5, 0] : 0,
-                  scale: isHovering ? 1.1 : 1,
-                }}
-                transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-              />
-              <motion.div
-                className="absolute"
-                style={{
-                  width: '80px',
-                  height: '80px',
-                  borderRadius: '50%',
-                  backgroundColor: '#1A1A1A',
-                  right: '25%',
-                  top: '30%',
-                }}
-                animate={{
-                  x: isHovering ? [0, -15, 8, 0] : 0,
-                  y: isHovering ? [0, 8, -12, 0] : 0,
-                  scale: isHovering ? 1.15 : 1,
-                }}
-                transition={{ duration: 2.5, repeat: Infinity, repeatType: "reverse", delay: 0.3 }}
-              />
-              <motion.div
-                className="absolute"
-                style={{
-                  width: '60px',
-                  height: '60px',
-                  borderRadius: '12px',
-                  backgroundColor: '#1A1A1A',
-                  left: '35%',
-                  bottom: '25%',
-                }}
-                animate={{
-                  rotate: isHovering ? [0, 45, 0] : 0,
-                  scale: isHovering ? 1.2 : 1,
-                }}
-                transition={{ duration: 3, repeat: Infinity, repeatType: "reverse", delay: 0.5 }}
-              />
-              <motion.div
-                className="absolute"
-                style={{
-                  width: '100px',
-                  height: '100px',
-                  borderRadius: '50%',
-                  border: '3px solid #1A1A1A',
-                  backgroundColor: 'transparent',
-                  right: '15%',
-                  bottom: '20%',
-                }}
-                animate={{
-                  scale: isHovering ? [1, 1.2, 1] : 1,
-                }}
-                transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", delay: 0.7 }}
-              />
-              <motion.div
-                className="absolute"
-                style={{
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '50%',
-                  backgroundColor: '#1A1A1A',
-                  left: '15%',
-                  bottom: '40%',
-                }}
-                animate={{
-                  y: isHovering ? [0, -20, 10, 0] : 0,
-                }}
-                transition={{ duration: 2.2, repeat: Infinity, repeatType: "reverse", delay: 0.2 }}
-              />
-              
-              {/* Mouse-following diffusion effect */}
-              <motion.div
-                className="absolute pointer-events-none"
-                style={{
-                  width: '250px',
-                  height: '250px',
-                  borderRadius: '50%',
-                  background: 'radial-gradient(circle, rgba(26,26,26,0.2) 0%, rgba(26,26,26,0.1) 30%, transparent 70%)',
-                  left: springX,
-                  top: springY,
-                  translateX: '-50%',
-                  translateY: '-50%',
-                  opacity: isHovering ? 1 : 0,
-                  scale: isHovering ? 1.2 : 0.5,
-                }}
-                animate={{
-                  opacity: isHovering ? 1 : 0,
-                  scale: isHovering ? 1.2 : 0.5,
-                }}
-                transition={{ opacity: { duration: 0.2 }, scale: { duration: 0.3 } }}
-              />
-            </motion.div>
-          </div>
+                Start a Project
+              </button>
+            </Link>
+            <Link href="/about">
+              <button 
+                className="px-6 py-3 rounded-md font-medium text-sm transition-all hover:bg-gray-100"
+                style={{ backgroundColor: 'transparent', color: '#1A1A1A' }}
+              >
+                Learn More
+              </button>
+            </Link>
+          </motion.div>
         </div>
+
+        {/* Curved Arc Animation - Supabase Style */}
+        <motion.div 
+          className="relative w-full flex justify-center"
+          style={{ height: '350px', marginTop: '-20px' }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
+          {/* Outer Arc */}
+          <motion.div
+            className="absolute"
+            style={{
+              width: '900px',
+              height: '900px',
+              borderRadius: '50%',
+              border: '60px solid #1A1A1A',
+              top: '80px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+            }}
+            animate={{
+              scale: [1, 1.02, 1],
+            }}
+            transition={{ duration: 4, repeat: Infinity, repeatType: "reverse" }}
+          />
+          {/* Middle Arc */}
+          <motion.div
+            className="absolute"
+            style={{
+              width: '750px',
+              height: '750px',
+              borderRadius: '50%',
+              border: '40px solid #404040',
+              top: '155px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+            }}
+            animate={{
+              scale: [1, 1.03, 1],
+            }}
+            transition={{ duration: 4.5, repeat: Infinity, repeatType: "reverse", delay: 0.2 }}
+          />
+          {/* Inner Arc */}
+          <motion.div
+            className="absolute"
+            style={{
+              width: '620px',
+              height: '620px',
+              borderRadius: '50%',
+              border: '25px solid #666666',
+              top: '220px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+            }}
+            animate={{
+              scale: [1, 1.04, 1],
+            }}
+            transition={{ duration: 5, repeat: Infinity, repeatType: "reverse", delay: 0.4 }}
+          />
+        </motion.div>
+
+        {/* Description Text */}
+        <motion.div 
+          className="relative z-20 max-w-[700px] mx-auto px-6 text-center mt-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
+          <p 
+            className="text-base md:text-lg leading-relaxed mb-6"
+            style={{ color: '#666666' }}
+          >
+            Gray is a product design and technology studio. We help brands with brand strategy, digital products, e-commerce, automation, and growth systems.
+          </p>
+        </motion.div>
       </section>
 
       {/* Our Services Section - Full Width */}
