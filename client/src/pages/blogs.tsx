@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import logoImage from "@assets/Group_25_(5)_1766734675194.png";
-import comingSoonBg from "@assets/image_1767029986458.png";
+import comingSoonBg from "@assets/ChatGPT_Image_Dec_29,_2025,_11_17_56_PM_1767030489424.png";
 
 export default function Blogs() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -60,40 +60,16 @@ export default function Blogs() {
           backgroundPosition: 'center',
         }}
       >
-        <div className="absolute inset-0 bg-black/40" />
         <motion.div
-          className="relative z-10 text-center px-6"
-          initial={{ opacity: 0, y: 30 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <span 
-            className="text-sm font-medium tracking-widest mb-4 block"
-            style={{ color: 'rgba(255,255,255,0.7)' }}
-          >
-            BLOG
-          </span>
-          <h1 
-            className="font-bold mb-6"
-            style={{ 
-              fontSize: 'clamp(48px, 8vw, 96px)',
-              lineHeight: '1',
-              color: '#FFFFFF',
-              letterSpacing: '-0.03em',
-            }}
-          >
-            Coming Soon
-          </h1>
-          <p 
-            className="text-lg md:text-xl mb-10 max-w-[500px] mx-auto"
-            style={{ color: 'rgba(255,255,255,0.8)' }}
-          >
-            We're crafting something special. Stay tuned for insights on design, technology, and growth.
-          </p>
           <Link href="/">
             <button 
               className="px-8 py-4 rounded-full font-medium text-base transition-all hover:opacity-90"
-              style={{ backgroundColor: '#FFFFFF', color: '#1A1A1A' }}
+              style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}
               data-testid="btn-back-home"
             >
               Back to Home
