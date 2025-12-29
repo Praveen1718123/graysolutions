@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import logoImage from "@assets/Group_25_(5)_1766734675194.png";
@@ -7,6 +7,7 @@ import Footer from "@/components/footer";
 export default function ServiceBrandContent() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,11 +17,17 @@ export default function ServiceBrandContent() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
+  }, []);
+
   const whoIsFor = [
-    "Founders building authority and inbound leads through content (not random posting)",
-    "Brands that look \"decent\" but don't feel premium or memorable",
-    "Teams creating content but lacking structure, consistency, and a strong point of view",
-    "Businesses that want repeatable content systems, not one-off creatives",
+    { title: "Founders", desc: "Building authority and inbound leads through content (not random posting)" },
+    { title: "Brands", desc: "That look \"decent\" but don't feel premium or memorable" },
+    { title: "Teams", desc: "Creating content but lacking structure, consistency, and a strong point of view" },
+    { title: "Businesses", desc: "That want repeatable content systems, not one-off creatives" },
   ];
 
   const problems = [
@@ -30,51 +37,37 @@ export default function ServiceBrandContent() {
     "Messaging is too broad — you attract everyone and close no one",
     "Video quality is fine, but story + hooks + structure are weak",
     "No content pillars, no series, no distribution rhythm",
-    "Founder brand exists… but doesn't convert to sales conversations",
   ];
 
   const modules = [
     {
       title: "Brand Foundation",
+      icon: "🎯",
       items: [
         "Positioning (who you're for, what you stand for, why you win)",
         "ICP clarity + buyer intent mapping",
         "Messaging framework (tagline, one-liner, narrative, proof points)",
-        "Brand voice guidelines (how you speak consistently)",
+        "Brand voice guidelines",
       ],
     },
     {
-      title: "Content Strategy System",
+      title: "Content Strategy",
+      icon: "📊",
       items: [
-        "Content pillars + series formats (so you're not inventing topics daily)",
+        "Content pillars + series formats",
         "Hook bank + angle bank (for reels + LinkedIn)",
-        "Monthly content calendar with themes + objectives",
+        "Monthly content calendar with themes",
         "Competitive scan + differentiation angles",
       ],
     },
     {
-      title: "Content Production (Reels + Short-form)",
+      title: "Content Production",
+      icon: "🎬",
       items: [
         "Script writing (hook → value → proof → CTA)",
-        "Creative direction (what to shoot, how to shoot, framing, pacing)",
-        "Editing (clean cuts, captions, pacing, retention-first)",
+        "Creative direction (framing, pacing)",
+        "Editing (captions, retention-first)",
         "Templates for consistent look and feel",
-      ],
-    },
-    {
-      title: "Founder/Team Enablement",
-      items: [
-        "Shooting SOPs (so shooting becomes easy + repeatable)",
-        "Prompting + scripting workflows (AI-assisted but human quality)",
-        "Feedback loops to improve retention + conversion over time",
-      ],
-    },
-    {
-      title: "Distribution & Repurposing",
-      items: [
-        "Instagram + LinkedIn repurposing plan",
-        "Carousels / posts derived from video content",
-        "Publishing rhythm + optimization checklist",
       ],
     },
   ];
@@ -86,7 +79,6 @@ export default function ServiceBrandContent() {
       price: "Request",
       priceLabel: "proposal",
       description: "Best when you're unclear, rebranding, or repositioning.",
-      timeline: "7–14 days",
       features: [
         "Brand Foundation",
         "Messaging Framework",
@@ -100,7 +92,6 @@ export default function ServiceBrandContent() {
       price: "Request",
       priceLabel: "proposal",
       description: "Best when you want consistent outputs + quality control.",
-      timeline: "Monthly retainer",
       features: [
         "Content Strategy System",
         "Script writing + editing",
@@ -117,7 +108,6 @@ export default function ServiceBrandContent() {
       price: "Custom",
       priceLabel: "",
       description: "Best when you want to dominate a niche and convert inbound consistently.",
-      timeline: "8–12 weeks + monthly",
       features: [
         "Everything in Content Engine",
         "Brand Sprint included",
@@ -129,82 +119,23 @@ export default function ServiceBrandContent() {
   ];
 
   const process = [
-    {
-      step: "01",
-      title: "Audit & Direction",
-      description: "We review your brand, competitors, current content, and audience signals.",
-    },
-    {
-      step: "02",
-      title: "Positioning & Messaging",
-      description: "We lock the narrative: what you say, how you say it, and why it matters.",
-    },
-    {
-      step: "03",
-      title: "Content System Setup",
-      description: "Pillars, series, hooks, templates, and calendar — so execution becomes repeatable.",
-    },
-    {
-      step: "04",
-      title: "Execution & Iteration",
-      description: "We ship content, track what holds attention, and improve every month.",
-    },
-  ];
-
-  const outcomes = [
-    "People understand what you do within 10 seconds",
-    "Your content becomes consistent, structured, and recognizable",
-    "More inbound conversations (not just likes)",
-    "Stronger authority in your niche + easier sales calls",
-    "Brand starts to feel premium and intentional",
-  ];
-
-  const proofMetrics = [
-    "Watch time / retention improvements",
-    "Profile visits → inquiries uplift",
-    "Content consistency (weekly output without burnout)",
-    "Lead quality (more \"warm\" inbound)",
-  ];
-
-  const sampleDeliverables = [
-    "Before/After brand messaging",
-    "Script + edit examples",
-    "Content pillar map + series framework",
-    "30-day calendar sample",
+    { step: "01", title: "Audit & Direction", description: "We review your brand, competitors, current content, and audience signals." },
+    { step: "02", title: "Positioning & Messaging", description: "We lock the narrative: what you say, how you say it, and why it matters." },
+    { step: "03", title: "Content System Setup", description: "Pillars, series, hooks, templates, and calendar — so execution becomes repeatable." },
+    { step: "04", title: "Execution & Iteration", description: "We ship content, track what holds attention, and improve every month." },
   ];
 
   const faqs = [
-    {
-      q: "Do you only do editing?",
-      a: "No. Editing without positioning is just polishing noise. We start with clarity, then production.",
-    },
-    {
-      q: "Will you shoot videos for us?",
-      a: "Usually you shoot with our direction + SOPs. If you want on-ground support, that's add-on / partner-based.",
-    },
-    {
-      q: "Do you handle posting too?",
-      a: "We can provide scheduling + distribution workflows. Full social management is separate.",
-    },
-    {
-      q: "What platforms do you focus on?",
-      a: "Instagram and LinkedIn by default. YouTube Shorts if it makes sense.",
-    },
-    {
-      q: "How soon will I see results?",
-      a: "You'll feel clarity fast (days). Content traction depends on consistency + niche + offer. Expect 4–8 weeks for clear signal.",
-    },
-    {
-      q: "Do you use AI?",
-      a: "Yes, for speed — not for soulless output. Strategy + creative judgment stays human.",
-    },
+    { q: "Do you only do editing?", a: "No. Editing without positioning is just polishing noise. We start with clarity, then production." },
+    { q: "Will you shoot videos for us?", a: "Usually you shoot with our direction + SOPs. If you want on-ground support, that's add-on / partner-based." },
+    { q: "Do you handle posting too?", a: "We can provide scheduling + distribution workflows. Full social management is separate." },
+    { q: "What platforms do you focus on?", a: "Instagram and LinkedIn by default. YouTube Shorts if it makes sense." },
+    { q: "How soon will I see results?", a: "You'll feel clarity fast (days). Content traction depends on consistency + niche + offer. Expect 4–8 weeks for clear signal." },
+    { q: "Do you use AI?", a: "Yes, for speed — not for soulless output. Strategy + creative judgment stays human." },
   ];
 
   return (
-    <div 
-      className="min-h-screen w-full font-sans overflow-x-hidden"
-      style={{ backgroundColor: '#FAFAFA', color: '#1A1A1A' }}
-    >
+    <div className="min-h-screen w-full font-sans overflow-x-hidden" style={{ backgroundColor: '#FAFAFA', color: '#1A1A1A' }}>
       <header 
         className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 md:px-0"
         style={{
@@ -221,7 +152,7 @@ export default function ServiceBrandContent() {
             width: isScrolled ? '180px' : '100%',
             height: isScrolled ? '44px' : '100%',
             marginTop: isScrolled ? '12px' : '0',
-            backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : '#FFFFFF',
+            backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : 'transparent',
             backdropFilter: isScrolled ? 'blur(12px)' : 'none',
             boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.1)' : 'none',
             borderRadius: isScrolled ? '999px' : '0',
@@ -233,79 +164,142 @@ export default function ServiceBrandContent() {
               src={logoImage} 
               alt="Gray Logo" 
               className="cursor-pointer"
-              style={{ height: isScrolled ? '24px' : '36px', width: 'auto' }}
+              style={{ height: isScrolled ? '24px' : '36px', width: 'auto', filter: isScrolled ? 'none' : 'brightness(0) invert(1)' }}
               data-testid="logo-nav"
             />
           </Link>
         </div>
       </header>
 
-      <section className="pt-24 md:pt-32 pb-16 md:pb-24" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+      <section className="relative w-full" style={{ height: '100vh', minHeight: '600px' }}>
+        <video
+          ref={videoRef}
+          className="absolute inset-0 w-full h-full object-cover"
+          src="/assets/brand-content-video.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-[800px]"
+            transition={{ duration: 0.8 }}
+            className="max-w-[700px]"
           >
-            <Link href="/services">
-              <span className="text-sm font-medium mb-4 inline-block cursor-pointer hover:underline" style={{ color: '#666666' }}>
-                ← Back to Services
-              </span>
-            </Link>
             <h1 
               className="font-bold mb-6"
               style={{ 
-                fontSize: 'clamp(32px, 4.5vw, 52px)',
+                fontSize: 'clamp(36px, 5vw, 56px)',
                 lineHeight: '1.1',
-                color: '#1A1A1A',
+                color: '#FFFFFF',
                 letterSpacing: '-0.02em',
               }}
             >
-              Build a brand people trust — and content people actually watch.
+              Build a brand people trust
             </h1>
-            <p className="text-lg md:text-xl leading-relaxed mb-8" style={{ color: '#666666' }}>
-              We help founders and teams turn messy ideas into sharp positioning, clean messaging, and a content engine that compounds weekly.
+            <p className="text-lg md:text-xl leading-relaxed mb-8" style={{ color: 'rgba(255,255,255,0.85)' }}>
+              We help founders turn messy ideas into sharp positioning, clean messaging, and a content engine that compounds weekly.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Link href="/contact">
-                <button 
-                  className="px-7 py-3.5 rounded-full font-medium text-sm transition-all hover:opacity-90"
-                  style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}
-                  data-testid="cta-strategy-call"
-                >
-                  Book a Strategy Call
-                </button>
-              </Link>
-              <Link href="/contact">
-                <button 
-                  className="px-7 py-3.5 rounded-full font-medium text-sm transition-all hover:bg-gray-100"
-                  style={{ backgroundColor: 'transparent', color: '#1A1A1A', border: '1px solid #E5E5E5' }}
-                  data-testid="cta-audit"
-                >
-                  Get a Brand + Content Audit
-                </button>
-              </Link>
-            </div>
+            <Link href="/contact">
+              <button 
+                className="px-8 py-4 rounded-full font-medium text-base transition-all hover:scale-105"
+                style={{ backgroundColor: '#FFFFFF', color: '#1A1A1A' }}
+                data-testid="cta-hero"
+              >
+                Book a Strategy Call
+              </button>
+            </Link>
+          </motion.div>
+        </div>
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+          <motion.div 
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="w-6 h-10 rounded-full border-2 border-white/50 flex items-start justify-center p-2"
+          >
+            <div className="w-1 h-2 bg-white/70 rounded-full" />
           </motion.div>
         </div>
       </section>
 
-      <section className="py-8 md:py-12" style={{ backgroundColor: '#FAFAFA' }}>
+      <section className="py-20 md:py-28" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="max-w-[1200px] mx-auto px-6 md:px-10">
-          <p className="text-base md:text-lg" style={{ color: '#666666' }}>
-            <strong style={{ color: '#1A1A1A' }}>What this is:</strong> A done-with-you / done-for-you studio for brand strategy + content systems + execution (reels, creative direction, editing, distribution).
-          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div>
+              <span className="text-sm font-medium tracking-wide mb-3 block" style={{ color: '#666666' }}>What We Do</span>
+              <h2 
+                className="font-bold"
+                style={{ fontSize: 'clamp(28px, 4vw, 42px)', lineHeight: '1.15', color: '#1A1A1A', letterSpacing: '-0.02em' }}
+              >
+                Brand & Content Studio
+              </h2>
+              <Link href="/contact">
+                <button 
+                  className="mt-6 px-6 py-3 rounded-full font-medium text-sm transition-all hover:opacity-90"
+                  style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}
+                >
+                  Get a Brand Audit
+                </button>
+              </Link>
+            </div>
+            <div>
+              <p className="text-lg leading-relaxed" style={{ color: '#666666' }}>
+                A done-with-you / done-for-you studio for brand strategy + content systems + execution (reels, creative direction, editing, distribution). We help you build a brand that people remember and content that actually drives leads.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="py-16 md:py-24" style={{ backgroundColor: '#FFFFFF' }}>
+      <section className="py-16 md:py-20" style={{ backgroundColor: '#FAFAFA' }}>
         <div className="max-w-[1200px] mx-auto px-6 md:px-10">
-          <h2 className="text-2xl md:text-3xl font-bold mb-8" style={{ color: '#1A1A1A' }}>
-            Who This Is For
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {whoIsFor.map((item, idx) => (
+              <motion.div
+                key={idx}
+                className="p-6 rounded-2xl"
+                style={{ 
+                  background: idx === 0 ? 'linear-gradient(135deg, #E8E0F0 0%, #F5F0FA 100%)' : 
+                              idx === 1 ? 'linear-gradient(135deg, #E0E8F0 0%, #F0F5FA 100%)' :
+                              idx === 2 ? 'linear-gradient(135deg, #F0E8E0 0%, #FAF5F0 100%)' :
+                              'linear-gradient(135deg, #E0F0E8 0%, #F0FAF5 100%)',
+                }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: idx * 0.1 }}
+              >
+                <h3 className="text-lg font-bold mb-2" style={{ color: '#1A1A1A' }}>{item.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: '#666666' }}>{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 md:py-28" style={{ backgroundColor: '#FFFFFF' }}>
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mb-12">
+            <div>
+              <span className="text-sm font-medium tracking-wide mb-3 block" style={{ color: '#666666' }}>The Problem</span>
+              <h2 
+                className="font-bold"
+                style={{ fontSize: 'clamp(28px, 4vw, 42px)', lineHeight: '1.15', color: '#1A1A1A', letterSpacing: '-0.02em' }}
+              >
+                Problems We Solve
+              </h2>
+            </div>
+            <div>
+              <p className="text-lg leading-relaxed" style={{ color: '#666666' }}>
+                Most brands struggle with clarity, consistency, and converting attention into real business results. Here's what we fix:
+              </p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {problems.map((problem, idx) => (
               <motion.div
                 key={idx}
                 className="flex items-start gap-3 p-5 rounded-xl"
@@ -313,67 +307,52 @@ export default function ServiceBrandContent() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.1 }}
-              >
-                <div className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: '#1A1A1A' }} />
-                <p className="text-base leading-relaxed" style={{ color: '#1A1A1A' }}>{item}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-24" style={{ backgroundColor: '#1A1A1A' }}>
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
-          <h2 className="text-2xl md:text-3xl font-bold mb-8" style={{ color: '#FFFFFF' }}>
-            Problems We Solve
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {problems.map((problem, idx) => (
-              <motion.div
-                key={idx}
-                className="flex items-start gap-3 p-5 rounded-xl"
-                style={{ backgroundColor: 'rgba(255,255,255,0.05)' }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.05 }}
               >
                 <div className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: '#E74C8C' }} />
-                <p className="text-base leading-relaxed" style={{ color: 'rgba(255,255,255,0.9)' }}>{problem}</p>
+                <p className="text-sm leading-relaxed" style={{ color: '#1A1A1A' }}>{problem}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-16 md:py-24" style={{ backgroundColor: '#FAFAFA' }}>
+      <section className="py-20 md:py-28" style={{ backgroundColor: '#FAFAFA' }}>
         <div className="max-w-[1200px] mx-auto px-6 md:px-10">
-          <h2 className="text-2xl md:text-3xl font-bold mb-12" style={{ color: '#1A1A1A' }}>
-            What You Get
-          </h2>
-          <div className="space-y-6">
+          <div className="text-center mb-12">
+            <span className="text-sm font-medium tracking-wide mb-3 block" style={{ color: '#666666' }}>What You Get</span>
+            <h2 
+              className="font-bold"
+              style={{ fontSize: 'clamp(28px, 4vw, 42px)', lineHeight: '1.15', color: '#1A1A1A', letterSpacing: '-0.02em' }}
+            >
+              Our Modules
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {modules.map((module, idx) => (
               <motion.div
                 key={idx}
-                className="p-8 rounded-2xl"
-                style={{ backgroundColor: '#FFFFFF' }}
+                className="p-8 rounded-3xl"
+                style={{ 
+                  background: idx === 0 ? 'linear-gradient(180deg, #F5F0FA 0%, #FFFFFF 100%)' : 
+                              idx === 1 ? 'linear-gradient(180deg, #F0F5FA 0%, #FFFFFF 100%)' :
+                              'linear-gradient(180deg, #FAF5F0 0%, #FFFFFF 100%)',
+                  border: '1px solid #E5E5E5',
+                }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
               >
-                <div className="flex items-center gap-4 mb-4">
-                  <span className="text-sm font-bold px-3 py-1 rounded-full" style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}>
-                    {String(idx + 1).padStart(2, '0')}
-                  </span>
-                  <h3 className="text-xl font-semibold" style={{ color: '#1A1A1A' }}>{module.title}</h3>
-                </div>
-                <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 ml-12">
+                <span className="text-3xl mb-4 block">{module.icon}</span>
+                <h3 className="text-xl font-bold mb-4" style={{ color: '#1A1A1A' }}>{module.title}</h3>
+                <ul className="space-y-2">
                   {module.items.map((item, itemIdx) => (
                     <li key={itemIdx} className="flex items-start gap-2">
-                      <span style={{ color: '#666666' }}>→</span>
-                      <span className="text-base" style={{ color: '#666666' }}>{item}</span>
+                      <svg className="w-4 h-4 flex-shrink-0 mt-0.5" viewBox="0 0 20 20" fill="#666666">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      <span className="text-sm" style={{ color: '#666666' }}>{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -383,15 +362,14 @@ export default function ServiceBrandContent() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24" style={{ backgroundColor: '#FAFAFA' }}>
+      <section className="py-20 md:py-28" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="max-w-[1200px] mx-auto px-6 md:px-10">
           <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-3" style={{ color: '#1A1A1A' }}>
+            <span className="text-sm font-medium tracking-wide mb-3 block" style={{ color: '#666666' }}>Pricing</span>
+            <h2 className="font-bold mb-3" style={{ fontSize: 'clamp(28px, 4vw, 42px)', lineHeight: '1.15', color: '#1A1A1A', letterSpacing: '-0.02em' }}>
               Packages
             </h2>
-            <p className="text-base" style={{ color: '#666666' }}>
-              Choose the right package for your needs.
-            </p>
+            <p className="text-base" style={{ color: '#666666' }}>Choose the right package for your needs.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {packages.map((pkg, idx) => (
@@ -409,36 +387,20 @@ export default function ServiceBrandContent() {
               >
                 <span 
                   className="text-xs font-semibold tracking-wide px-4 py-1.5 rounded-full self-start mb-6"
-                  style={{ 
-                    backgroundColor: (pkg as any).featured ? '#1A1A1A' : '#F0F0F0',
-                    color: (pkg as any).featured ? '#FFFFFF' : '#1A1A1A',
-                  }}
+                  style={{ backgroundColor: (pkg as any).featured ? '#1A1A1A' : '#F0F0F0', color: (pkg as any).featured ? '#FFFFFF' : '#1A1A1A' }}
                 >
                   {pkg.badge}
                 </span>
-                
                 <div className="mb-2">
-                  <span className="text-4xl md:text-5xl font-bold" style={{ color: '#1A1A1A' }}>
-                    {pkg.price}
-                  </span>
-                  {pkg.priceLabel && (
-                    <span className="text-lg" style={{ color: '#666666' }}>/{pkg.priceLabel}</span>
-                  )}
+                  <span className="text-4xl md:text-5xl font-bold" style={{ color: '#1A1A1A' }}>{pkg.price}</span>
+                  {pkg.priceLabel && <span className="text-lg" style={{ color: '#666666' }}>/{pkg.priceLabel}</span>}
                 </div>
-                
-                <p className="text-sm mb-6" style={{ color: '#666666' }}>
-                  {pkg.description}
-                </p>
-                
+                <p className="text-sm mb-6" style={{ color: '#666666' }}>{pkg.description}</p>
                 <Link href="/contact" className="mb-6">
-                  <button 
-                    className="w-full py-3.5 rounded-full font-medium text-sm transition-all hover:opacity-90"
-                    style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}
-                  >
+                  <button className="w-full py-3.5 rounded-full font-medium text-sm transition-all hover:opacity-90" style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}>
                     Get Started
                   </button>
                 </Link>
-                
                 <ul className="space-y-3 mt-auto">
                   {pkg.features.map((feature, featureIdx) => (
                     <li key={featureIdx} className="flex items-start gap-3">
@@ -455,23 +417,26 @@ export default function ServiceBrandContent() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24" style={{ backgroundColor: '#FAFAFA' }}>
+      <section className="py-20 md:py-28" style={{ backgroundColor: '#FAFAFA' }}>
         <div className="max-w-[1200px] mx-auto px-6 md:px-10">
-          <h2 className="text-2xl md:text-3xl font-bold mb-12" style={{ color: '#1A1A1A' }}>
-            Our Process
-          </h2>
+          <div className="text-center mb-12">
+            <span className="text-sm font-medium tracking-wide mb-3 block" style={{ color: '#666666' }}>How It Works</span>
+            <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 4vw, 42px)', lineHeight: '1.15', color: '#1A1A1A', letterSpacing: '-0.02em' }}>
+              Our Process
+            </h2>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {process.map((step, idx) => (
               <motion.div
                 key={idx}
                 className="p-6 rounded-2xl"
-                style={{ backgroundColor: '#FFFFFF' }}
+                style={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E5E5' }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
               >
-                <span className="text-3xl font-bold mb-4 block" style={{ color: '#E5E5E5' }}>{step.step}</span>
+                <span className="text-4xl font-bold mb-4 block" style={{ color: '#E5E5E5' }}>{step.step}</span>
                 <h3 className="text-lg font-semibold mb-2" style={{ color: '#1A1A1A' }}>{step.title}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: '#666666' }}>{step.description}</p>
               </motion.div>
@@ -480,69 +445,13 @@ export default function ServiceBrandContent() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
-          <h2 className="text-2xl md:text-3xl font-bold mb-8" style={{ color: '#1A1A1A' }}>
-            What "Good" Looks Like
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {outcomes.map((outcome, idx) => (
-              <motion.div
-                key={idx}
-                className="flex items-start gap-3 p-5 rounded-xl"
-                style={{ backgroundColor: '#FAFAFA' }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.1 }}
-              >
-                <svg className="w-5 h-5 flex-shrink-0 mt-0.5" viewBox="0 0 20 20" fill="#22C55E">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                <p className="text-base" style={{ color: '#1A1A1A' }}>{outcome}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-24" style={{ backgroundColor: '#FAFAFA' }}>
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
-          <h2 className="text-2xl md:text-3xl font-bold mb-12" style={{ color: '#1A1A1A' }}>
-            Proof
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-8 rounded-2xl" style={{ backgroundColor: '#FFFFFF' }}>
-              <h3 className="text-lg font-semibold mb-4" style={{ color: '#1A1A1A' }}>Mini Results We Track</h3>
-              <ul className="space-y-3">
-                {proofMetrics.map((metric, idx) => (
-                  <li key={idx} className="flex items-start gap-2">
-                    <span style={{ color: '#666666' }}>→</span>
-                    <span className="text-base" style={{ color: '#666666' }}>{metric}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="p-8 rounded-2xl" style={{ backgroundColor: '#FFFFFF' }}>
-              <h3 className="text-lg font-semibold mb-4" style={{ color: '#1A1A1A' }}>Sample Deliverables We Can Show</h3>
-              <ul className="space-y-3">
-                {sampleDeliverables.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-2">
-                    <span style={{ color: '#666666' }}>→</span>
-                    <span className="text-base" style={{ color: '#666666' }}>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-24" style={{ backgroundColor: '#FFFFFF' }}>
+      <section className="py-20 md:py-28" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="max-w-[800px] mx-auto px-6 md:px-10">
-          <h2 className="text-2xl md:text-3xl font-bold mb-8" style={{ color: '#1A1A1A' }}>
-            FAQs
-          </h2>
+          <div className="text-center mb-12">
+            <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 4vw, 42px)', lineHeight: '1.15', color: '#1A1A1A', letterSpacing: '-0.02em' }}>
+              FAQs
+            </h2>
+          </div>
           <div className="space-y-3">
             {faqs.map((faq, idx) => (
               <motion.div
@@ -563,8 +472,7 @@ export default function ServiceBrandContent() {
                   <svg 
                     className="w-5 h-5 flex-shrink-0 transition-transform duration-300"
                     style={{ transform: openFaq === idx ? 'rotate(180deg)' : 'rotate(0deg)', color: '#666666' }}
-                    viewBox="0 0 20 20" 
-                    fill="currentColor"
+                    viewBox="0 0 20 20" fill="currentColor"
                   >
                     <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>
@@ -580,21 +488,17 @@ export default function ServiceBrandContent() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24" style={{ backgroundColor: '#1A1A1A' }}>
+      <section className="py-20 md:py-28" style={{ backgroundColor: '#1A1A1A' }}>
         <div className="max-w-[800px] mx-auto px-6 md:px-10 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#FFFFFF' }}>
-            Want your brand + content system built properly?
+            Ready to build your brand properly?
           </h2>
           <p className="text-lg mb-8" style={{ color: 'rgba(255,255,255,0.7)' }}>
             Get a Brand & Content Audit and we'll tell you what's broken, what to fix first, and the fastest path to consistent inbound.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/contact">
-              <button 
-                className="px-8 py-4 rounded-full font-medium text-base transition-all hover:opacity-90"
-                style={{ backgroundColor: '#FFFFFF', color: '#1A1A1A' }}
-                data-testid="cta-book-call-bottom"
-              >
+              <button className="px-8 py-4 rounded-full font-medium text-base transition-all hover:opacity-90" style={{ backgroundColor: '#FFFFFF', color: '#1A1A1A' }}>
                 Book a Call
               </button>
             </Link>
@@ -604,7 +508,6 @@ export default function ServiceBrandContent() {
               rel="noopener noreferrer"
               className="px-8 py-4 rounded-full font-medium text-base transition-all hover:bg-white/10 inline-flex items-center justify-center gap-2"
               style={{ backgroundColor: 'transparent', color: '#FFFFFF', border: '1px solid rgba(255,255,255,0.3)' }}
-              data-testid="cta-whatsapp"
             >
               WhatsApp Us
             </a>
