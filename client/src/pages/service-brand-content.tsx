@@ -24,10 +24,10 @@ export default function ServiceBrandContent() {
   }, []);
 
   const whoIsFor = [
-    { title: "Founders", desc: "Building authority and inbound leads through content (not random posting)" },
-    { title: "Brands", desc: "That look \"decent\" but don't feel premium or memorable" },
-    { title: "Teams", desc: "Creating content but lacking structure, consistency, and a strong point of view" },
-    { title: "Businesses", desc: "That want repeatable content systems, not one-off creatives" },
+    { icon: "👤", title: "Founders", desc: "Building authority and inbound leads through content (not random posting)" },
+    { icon: "✨", title: "Brands", desc: "That look \"decent\" but don't feel premium or memorable" },
+    { icon: "👥", title: "Teams", desc: "Creating content but lacking structure, consistency, and a strong point of view" },
+    { icon: "🏢", title: "Businesses", desc: "That want repeatable content systems, not one-off creatives" },
   ];
 
   const problems = [
@@ -247,6 +247,12 @@ export default function ServiceBrandContent() {
 
       <section className="py-16 md:py-20" style={{ backgroundColor: '#FAFAFA' }}>
         <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+          <div className="text-center mb-10">
+            <span className="text-sm font-medium tracking-wide mb-3 block" style={{ color: '#666666' }}>Who This Is For</span>
+            <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 4vw, 42px)', lineHeight: '1.15', color: '#1A1A1A', letterSpacing: '-0.02em' }}>
+              Built For People Who Mean Business
+            </h2>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {whoIsFor.map((item, idx) => (
               <motion.div
@@ -263,6 +269,7 @@ export default function ServiceBrandContent() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
               >
+                <span className="text-2xl mb-3 block">{item.icon}</span>
                 <h3 className="text-lg font-bold mb-2" style={{ color: '#1A1A1A' }}>{item.title}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: '#666666' }}>{item.desc}</p>
               </motion.div>
