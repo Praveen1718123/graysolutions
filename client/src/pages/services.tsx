@@ -378,11 +378,10 @@ export default function Services() {
                 <video
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   src={service.bgVideo}
+                  autoPlay
                   muted
                   loop
                   playsInline
-                  onMouseEnter={(e) => (e.target as HTMLVideoElement).play()}
-                  onMouseLeave={(e) => (e.target as HTMLVideoElement).pause()}
                 />
               ) : (
                 <div 
