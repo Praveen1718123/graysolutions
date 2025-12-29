@@ -340,7 +340,7 @@ export default function Services() {
               title: 'Growth & Performance',
               description: 'Paid ads, funnels, landing pages, CRO, analytics, lead-gen.',
               href: '/services/growth-performance',
-              bgImage: '/assets/growth-performance.gif',
+              bgGif: '/assets/growth-performance.gif',
             },
             {
               id: 'product-web',
@@ -354,7 +354,7 @@ export default function Services() {
               title: 'Commerce Studio',
               description: 'Shopify builds/revamps, product pages, checkout optimization, email/SMS flows, integrations.',
               href: '/services/commerce-studio',
-              bgImage: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80',
+              bgVideo: '/assets/commerce-studio-video.mp4',
             },
             {
               id: 'automations-ai',
@@ -389,6 +389,14 @@ export default function Services() {
                         el.pause();
                       }
                     }
+                  }}
+                />
+              ) : 'bgGif' in service ? (
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                  style={{ 
+                    backgroundImage: activeServiceIndex === index ? `url(${service.bgGif})` : 'none',
+                    backgroundColor: activeServiceIndex === index ? 'transparent' : '#2a2a2a',
                   }}
                 />
               ) : (
