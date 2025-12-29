@@ -307,7 +307,7 @@ export default function Services() {
         data-testid="section-our-services"
       >
         {/* Section Header */}
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10 mb-8">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10 mb-8 text-center">
           <span 
             className="text-sm font-medium tracking-wide mb-2 block"
             style={{ color: '#666666' }}

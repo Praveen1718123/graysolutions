@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "wouter";
 import logoWhite from "@assets/Group_25_(4)_1766734677573.png";
-import footerBg from "@assets/image_1766744766763.png";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -77,14 +76,10 @@ export default function Footer() {
         </div>
       </section>
 
-      {/* Section 2: Main Footer - With Background Image */}
+      {/* Section 2: Main Footer - Solid Black Background */}
       <section 
         style={{ 
           backgroundColor: '#1A1A1A',
-          backgroundImage: `url(${footerBg})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
         }}
       >
         <div className="max-w-[1200px] mx-auto px-6 md:px-10 py-10 md:py-14">
