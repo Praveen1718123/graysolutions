@@ -8,6 +8,7 @@ import Landing from "@/pages/landing";
 import Services from "@/pages/services";
 import ServiceBrandDesign from "@/pages/service-brand-design";
 import ServiceBrandContent from "@/pages/service-brand-content";
+import ServiceGrowthPerformance from "@/pages/service-growth-performance";
 import ServiceProductDesign from "@/pages/service-product-design";
 import ServiceWebPlatform from "@/pages/service-web-platform";
 import ServiceCommerce from "@/pages/service-commerce";
@@ -28,6 +29,7 @@ function Router() {
       <Route path="/services" component={Services} />
       <Route path="/services/brand-design" component={ServiceBrandDesign} />
       <Route path="/services/brand-content" component={ServiceBrandContent} />
+      <Route path="/services/growth-performance" component={ServiceGrowthPerformance} />
       <Route path="/services/product-design" component={ServiceProductDesign} />
       <Route path="/services/web-platform" component={ServiceWebPlatform} />
       <Route path="/services/commerce" component={ServiceCommerce} />
