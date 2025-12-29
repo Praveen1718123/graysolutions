@@ -340,7 +340,7 @@ export default function Services() {
               title: 'Growth & Performance',
               description: 'Paid ads, funnels, landing pages, CRO, analytics, lead-gen.',
               href: '/services/growth-performance',
-              bgGif: '/assets/growth-performance.gif',
+              bgVideo: '/assets/growth-performance-video.mp4',
             },
             {
               id: 'product-web',
