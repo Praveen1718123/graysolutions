@@ -82,25 +82,49 @@ export default function ServiceBrandContent() {
   const packages = [
     {
       name: "Brand Sprint",
-      subtitle: "Strategy-first",
+      badge: "Starter",
+      price: "Request",
+      priceLabel: "proposal",
       description: "Best when you're unclear, rebranding, or repositioning.",
-      includes: "Brand Foundation + Messaging Framework + Content Pillars + 2 weeks of content plan",
       timeline: "7–14 days",
+      features: [
+        "Brand Foundation",
+        "Messaging Framework",
+        "Content Pillars",
+        "2 weeks content plan",
+      ],
     },
     {
       name: "Content Engine",
-      subtitle: "Monthly",
+      badge: "Professional",
+      price: "Request",
+      priceLabel: "proposal",
       description: "Best when you want consistent outputs + quality control.",
-      includes: "Content Strategy System + scripting + editing + monthly calendar + optimization loop",
-      outputs: "8–16 reels/month + repurposed LinkedIn posts",
       timeline: "Monthly retainer",
+      features: [
+        "Content Strategy System",
+        "Script writing + editing",
+        "Monthly calendar",
+        "8–16 reels/month",
+        "LinkedIn repurposing",
+        "Optimization loop",
+      ],
+      featured: true,
     },
     {
-      name: "Founder Authority System",
-      subtitle: "Premium",
+      name: "Founder Authority",
+      badge: "Premium",
+      price: "Custom",
+      priceLabel: "",
       description: "Best when you want to dominate a niche and convert inbound consistently.",
-      includes: "Brand Sprint + Content Engine + founder narrative + series strategy + distribution system",
-      timeline: "8–12 weeks initial build, then monthly",
+      timeline: "8–12 weeks + monthly",
+      features: [
+        "Everything in Content Engine",
+        "Brand Sprint included",
+        "Founder narrative",
+        "Series strategy",
+        "Distribution system",
+      ],
     },
   ];
 
@@ -359,44 +383,72 @@ export default function ServiceBrandContent() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24" style={{ backgroundColor: '#FFFFFF' }}>
+      <section className="py-16 md:py-24" style={{ backgroundColor: '#FAFAFA' }}>
         <div className="max-w-[1200px] mx-auto px-6 md:px-10">
-          <h2 className="text-2xl md:text-3xl font-bold mb-12" style={{ color: '#1A1A1A' }}>
-            Packages
-          </h2>
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold mb-3" style={{ color: '#1A1A1A' }}>
+              Packages
+            </h2>
+            <p className="text-base" style={{ color: '#666666' }}>
+              Choose the right package for your needs.
+            </p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {packages.map((pkg, idx) => (
               <motion.div
                 key={idx}
-                className="p-8 rounded-2xl flex flex-col h-full"
-                style={{ backgroundColor: idx === 2 ? '#1A1A1A' : '#FAFAFA' }}
+                className="p-8 rounded-3xl flex flex-col h-full"
+                style={{ 
+                  backgroundColor: (pkg as any).featured ? '#E8F4FF' : '#FFFFFF',
+                  border: '1px solid #E5E5E5',
+                }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
               >
-                <span className="text-xs font-medium tracking-wide mb-2" style={{ color: idx === 2 ? 'rgba(255,255,255,0.6)' : '#666666' }}>
-                  {pkg.subtitle}
+                <span 
+                  className="text-xs font-semibold tracking-wide px-4 py-1.5 rounded-full self-start mb-6"
+                  style={{ 
+                    backgroundColor: (pkg as any).featured ? '#1A1A1A' : '#F0F0F0',
+                    color: (pkg as any).featured ? '#FFFFFF' : '#1A1A1A',
+                  }}
+                >
+                  {pkg.badge}
                 </span>
-                <h3 className="text-xl font-bold mb-3" style={{ color: idx === 2 ? '#FFFFFF' : '#1A1A1A' }}>
-                  {pkg.name}
-                </h3>
-                <p className="text-sm mb-4" style={{ color: idx === 2 ? 'rgba(255,255,255,0.8)' : '#666666' }}>
+                
+                <div className="mb-2">
+                  <span className="text-4xl md:text-5xl font-bold" style={{ color: '#1A1A1A' }}>
+                    {pkg.price}
+                  </span>
+                  {pkg.priceLabel && (
+                    <span className="text-lg" style={{ color: '#666666' }}>/{pkg.priceLabel}</span>
+                  )}
+                </div>
+                
+                <p className="text-sm mb-6" style={{ color: '#666666' }}>
                   {pkg.description}
                 </p>
-                <div className="mt-auto pt-4 border-t" style={{ borderColor: idx === 2 ? 'rgba(255,255,255,0.1)' : '#E5E5E5' }}>
-                  <p className="text-sm mb-2" style={{ color: idx === 2 ? 'rgba(255,255,255,0.7)' : '#666666' }}>
-                    <strong style={{ color: idx === 2 ? '#FFFFFF' : '#1A1A1A' }}>Includes:</strong> {pkg.includes}
-                  </p>
-                  {pkg.outputs && (
-                    <p className="text-sm mb-2" style={{ color: idx === 2 ? 'rgba(255,255,255,0.7)' : '#666666' }}>
-                      <strong style={{ color: idx === 2 ? '#FFFFFF' : '#1A1A1A' }}>Outputs:</strong> {pkg.outputs}
-                    </p>
-                  )}
-                  <p className="text-sm" style={{ color: idx === 2 ? 'rgba(255,255,255,0.7)' : '#666666' }}>
-                    <strong style={{ color: idx === 2 ? '#FFFFFF' : '#1A1A1A' }}>Timeline:</strong> {pkg.timeline}
-                  </p>
-                </div>
+                
+                <Link href="/contact" className="mb-6">
+                  <button 
+                    className="w-full py-3.5 rounded-full font-medium text-sm transition-all hover:opacity-90"
+                    style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}
+                  >
+                    Get Started
+                  </button>
+                </Link>
+                
+                <ul className="space-y-3 mt-auto">
+                  {pkg.features.map((feature, featureIdx) => (
+                    <li key={featureIdx} className="flex items-start gap-3">
+                      <svg className="w-5 h-5 flex-shrink-0 mt-0.5" viewBox="0 0 20 20" fill="#666666">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      <span className="text-sm" style={{ color: '#1A1A1A' }}>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
             ))}
           </div>
