@@ -560,7 +560,7 @@ export default function ServiceProductWeb() {
         </div>
       </section>
 
-      <Footer />
+      <Footer hideNewsletter />
     </div>
   );
 }

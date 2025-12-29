@@ -560,7 +560,7 @@ export default function ServiceCommerceStudio() {
         </div>
       </section>
 
-      <Footer />
+      <Footer hideNewsletter />
     </div>
   );
 }

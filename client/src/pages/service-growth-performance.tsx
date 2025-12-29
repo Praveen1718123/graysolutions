@@ -578,7 +578,7 @@ export default function ServiceGrowthPerformance() {
         </div>
       </section>
 
-      <Footer />
+      <Footer hideNewsletter />
     </div>
   );
 }

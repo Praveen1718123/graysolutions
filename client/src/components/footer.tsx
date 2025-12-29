@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { Link } from "wouter";
 import logoWhite from "@assets/Group_25_(4)_1766734677573.png";
 
-export default function Footer() {
+interface FooterProps {
+  hideNewsletter?: boolean;
+}
+
+export default function Footer({ hideNewsletter = false }: FooterProps) {
   const [email, setEmail] = useState("");
 
   const navLinks = {
@@ -24,57 +28,59 @@ export default function Footer() {
   return (
     <footer className="relative z-10">
       {/* Section 1: Newsletter - White Background */}
-      <section 
-        className="py-6 md:py-8"
-        style={{ 
-          backgroundColor: '#FFFFFF',
-        }}
-      >
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-            <h3 
-              className="font-medium"
-              style={{ 
-                fontSize: 'clamp(18px, 2vw, 24px)',
-                color: '#1A1A1A',
-              }}
-            >
-              Join our newsletter
-            </h3>
-            <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
-              <input
-                type="email"
-                placeholder="Email Address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="px-4 py-2 text-sm w-full sm:w-56"
+      {!hideNewsletter && (
+        <section 
+          className="py-6 md:py-8"
+          style={{ 
+            backgroundColor: '#FFFFFF',
+          }}
+        >
+          <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+              <h3 
+                className="font-medium"
                 style={{ 
-                  backgroundColor: '#F5F5F5',
-                  border: '1px solid #E5E5E5',
+                  fontSize: 'clamp(18px, 2vw, 24px)',
                   color: '#1A1A1A',
-                  borderRadius: '2px',
                 }}
-                data-testid="footer-email-input"
-              />
-              <button 
-                className="px-4 py-2 font-medium text-sm flex items-center justify-center gap-2 transition-all hover:opacity-90 whitespace-nowrap"
-                style={{ 
-                  backgroundColor: '#1A1A1A', 
-                  color: '#FFFFFF',
-                  borderRadius: '2px',
-                }}
-                data-testid="footer-subscribe"
               >
-                SUBSCRIBE
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="7" y1="17" x2="17" y2="7" />
-                  <polyline points="7 7 17 7 17 17" />
-                </svg>
-              </button>
+                Join our newsletter
+              </h3>
+              <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
+                <input
+                  type="email"
+                  placeholder="Email Address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="px-4 py-2 text-sm w-full sm:w-56"
+                  style={{ 
+                    backgroundColor: '#F5F5F5',
+                    border: '1px solid #E5E5E5',
+                    color: '#1A1A1A',
+                    borderRadius: '2px',
+                  }}
+                  data-testid="footer-email-input"
+                />
+                <button 
+                  className="px-4 py-2 font-medium text-sm flex items-center justify-center gap-2 transition-all hover:opacity-90 whitespace-nowrap"
+                  style={{ 
+                    backgroundColor: '#1A1A1A', 
+                    color: '#FFFFFF',
+                    borderRadius: '2px',
+                  }}
+                  data-testid="footer-subscribe"
+                >
+                  SUBSCRIBE
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7" />
+                    <polyline points="7 7 17 7 17 17" />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Section 2: Main Footer - Solid Black Background */}
       <section 

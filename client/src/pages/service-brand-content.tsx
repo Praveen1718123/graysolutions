@@ -540,7 +540,7 @@ export default function ServiceBrandContent() {
         </div>
       </section>
 
-      <Footer />
+      <Footer hideNewsletter />
     </div>
   );
 }
