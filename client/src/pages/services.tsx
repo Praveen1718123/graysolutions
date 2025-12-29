@@ -333,7 +333,7 @@ export default function Services() {
               title: 'Brand & Content Studio',
               description: 'Brand positioning, messaging, creative direction, content strategy, reels/editing, founder brand.',
               href: '/services/brand-content',
-              bgImage: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80',
+              bgVideo: '/assets/From_KlickPin_CF_3D_Motion_Design_Flow_(2)_with_Lighting_and_M_1767013484017.mp4',
             },
             {
               id: 'growth-performance',
@@ -374,12 +374,23 @@ export default function Services() {
               style={{ minWidth: '80px' }}
               onMouseEnter={() => setActiveServiceIndex(index)}
             >
-              <div 
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                style={{ 
-                  backgroundImage: `url(${service.bgImage})`,
-                }}
-              />
+              {'bgVideo' in service ? (
+                <video
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  src={service.bgVideo}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
+              ) : (
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                  style={{ 
+                    backgroundImage: `url(${(service as any).bgImage})`,
+                  }}
+                />
+              )}
               <div 
                 className="absolute inset-0 transition-opacity duration-500"
                 style={{ 
