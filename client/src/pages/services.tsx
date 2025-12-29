@@ -299,122 +299,117 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Our Services Section */}
+      {/* Our Services Section - Full Width */}
       <section 
-        className="relative z-10 py-16 md:py-24"
-        style={{ backgroundColor: '#FFFFFF' }}
+        className="relative z-10"
+        style={{ backgroundColor: '#1A1A1A' }}
         data-testid="section-our-services"
       >
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
-          <div className="mb-8 md:mb-12">
-            <span 
-              className="text-sm font-medium tracking-wide mb-2 block"
-              style={{ color: '#666666' }}
-            >
-              What We Do
-            </span>
-            <h2 
-              className="text-2xl md:text-3xl font-bold"
-              style={{ color: '#1A1A1A' }}
-            >
-              Our Services
-            </h2>
-          </div>
+        {/* Section Header */}
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10 py-12">
+          <span 
+            className="text-sm font-medium tracking-wide mb-2 block"
+            style={{ color: '#999999' }}
+          >
+            What We Do
+          </span>
+          <h2 
+            className="text-2xl md:text-3xl font-bold"
+            style={{ color: '#FFFFFF' }}
+          >
+            Our Services
+          </h2>
+        </div>
 
-          {/* 5-Tile Grid with Hover Effects */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {[
-              {
-                id: 'brand-content',
-                title: 'Brand & Content Studio',
-                description: 'Brand positioning, messaging, creative direction, content strategy, reels/editing, founder brand.',
-                href: '/services/brand-content',
-                gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-              },
-              {
-                id: 'growth-performance',
-                title: 'Growth & Performance',
-                description: 'Paid ads, funnels, landing pages, CRO, analytics, lead-gen.',
-                href: '/services/growth-performance',
-                gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-              },
-              {
-                id: 'product-web',
-                title: 'Product & Web Studio',
-                description: 'UI/UX, websites, MVP builds, web apps, product design + development.',
-                href: '/services/product-web',
-                gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-              },
-              {
-                id: 'commerce-studio',
-                title: 'Commerce Studio',
-                description: 'Shopify builds/revamps, product pages, checkout optimization, email/SMS flows, integrations.',
-                href: '/services/commerce-studio',
-                gradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-              },
-              {
-                id: 'automations-ai',
-                title: 'Automations & AI Systems',
-                description: 'Lead capture → CRM → follow-ups → pipeline updates → dashboards. AI-assisted content ops, chat agents, workflow automation.',
-                href: '/services/automations-ai',
-                gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
-              },
-            ].map((service, index) => (
-              <Link key={service.id} href={service.href} data-testid={`link-service-${service.id}`}>
-                <motion.div
-                  className="rounded-2xl cursor-pointer group relative overflow-hidden"
+        {/* Full-Width Service Cards */}
+        <div 
+          className="flex w-full"
+          style={{ height: '500px' }}
+        >
+          {[
+            {
+              id: 'brand-content',
+              title: 'Brand & Content Studio',
+              description: 'Brand positioning, messaging, creative direction, content strategy, reels/editing, founder brand.',
+              href: '/services/brand-content',
+              bgImage: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80',
+            },
+            {
+              id: 'growth-performance',
+              title: 'Growth & Performance',
+              description: 'Paid ads, funnels, landing pages, CRO, analytics, lead-gen.',
+              href: '/services/growth-performance',
+              bgImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
+            },
+            {
+              id: 'product-web',
+              title: 'Product & Web Studio',
+              description: 'UI/UX, websites, MVP builds, web apps, product design + development.',
+              href: '/services/product-web',
+              bgImage: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&q=80',
+            },
+            {
+              id: 'commerce-studio',
+              title: 'Commerce Studio',
+              description: 'Shopify builds/revamps, product pages, checkout optimization, email/SMS flows, integrations.',
+              href: '/services/commerce-studio',
+              bgImage: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80',
+            },
+            {
+              id: 'automations-ai',
+              title: 'Automations & AI',
+              description: 'Lead capture → CRM → follow-ups → pipeline updates → dashboards. AI-assisted content ops.',
+              href: '/services/automations-ai',
+              bgImage: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80',
+            },
+          ].map((service, index) => (
+            <Link 
+              key={service.id} 
+              href={service.href} 
+              data-testid={`link-service-${service.id}`}
+              className="flex-1 group relative overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:flex-[2.5]"
+              style={{ minWidth: '80px' }}
+            >
+              <div 
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style={{ 
+                  backgroundImage: `url(${service.bgImage})`,
+                }}
+              />
+              <div 
+                className="absolute inset-0 transition-opacity duration-500"
+                style={{ 
+                  background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.3) 100%)',
+                }}
+              />
+              
+              <div className="relative z-10 h-full flex flex-col justify-end p-6">
+                <h3 
+                  className="text-lg md:text-xl font-bold leading-tight text-white mb-2 transition-all duration-300"
                   style={{ 
-                    backgroundColor: '#F5F5F5',
-                    height: '320px',
+                    writingMode: 'horizontal-tb',
                   }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ 
-                    scale: 1.05,
-                    zIndex: 10,
-                    boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
-                  }}
-                  data-testid={`service-card-${service.id}`}
                 >
-                  <div 
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    style={{ background: service.gradient }}
-                  >
-                    <video
-                      className="w-full h-full object-cover opacity-30"
-                      src="https://assets.mixkit.co/videos/preview/mixkit-abstract-technology-network-connections-animation-12461-large.mp4"
-                      muted
-                      loop
-                      playsInline
-                      onMouseEnter={(e) => (e.target as HTMLVideoElement).play()}
-                      onMouseLeave={(e) => {
-                        const video = e.target as HTMLVideoElement;
-                        video.pause();
-                        video.currentTime = 0;
-                      }}
-                    />
-                  </div>
-                  
-                  <div className="relative z-10 p-5 h-full flex flex-col">
-                    <h3 
-                      className="text-base md:text-lg font-bold mb-3 leading-tight group-hover:text-white transition-colors duration-300"
-                      style={{ color: '#1A1A1A' }}
-                    >
-                      {service.title}
-                    </h3>
-                    
-                    <p 
-                      className="text-xs leading-relaxed mt-auto group-hover:text-white/90 transition-colors duration-300"
-                      style={{ color: '#666666' }}
-                    >
-                      {service.description}
-                    </p>
-                  </div>
-                </motion.div>
-              </Link>
-            ))}
-          </div>
+                  {service.title}
+                </h3>
+                
+                <p 
+                  className="text-sm leading-relaxed text-white/70 opacity-0 group-hover:opacity-100 transition-opacity duration-500 max-w-xs"
+                >
+                  {service.description}
+                </p>
+                
+                <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <span className="inline-flex items-center gap-2 text-white text-sm font-medium border border-white/50 rounded-full px-4 py-2 hover:bg-white hover:text-black transition-colors">
+                    Learn More
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
