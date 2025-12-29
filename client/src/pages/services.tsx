@@ -344,7 +344,7 @@ export default function Services() {
           {/* All 5 Cards in Horizontal Scroll */}
           <div 
             ref={scrollContainerRef}
-            className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide"
+            className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide -mr-16 pr-16"
             style={{ 
               scrollSnapType: 'x mandatory',
               WebkitOverflowScrolling: 'touch',
