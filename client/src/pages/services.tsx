@@ -395,8 +395,7 @@ export default function Services() {
                 <div 
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                   style={{ 
-                    backgroundImage: activeServiceIndex === index ? `url(${service.bgGif})` : 'none',
-                    backgroundColor: activeServiceIndex === index ? 'transparent' : '#2a2a2a',
+                    backgroundImage: `url(${service.bgGif})`,
                   }}
                 />
               ) : (
