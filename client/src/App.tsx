@@ -23,6 +23,7 @@ import MagicTrucks from "@/pages/magic-trucks";
 import Eagle from "@/pages/eagle";
 import Tix from "@/pages/tix";
 import GraySolutions from "@/pages/gray-solutions";
+import GoGauge from "@/pages/gogauge";
 import Contact from "@/pages/contact";
 
 function Router() {
@@ -45,6 +46,7 @@ function Router() {
       <Route path="/case-study/eagle" component={Eagle} />
       <Route path="/case-study/tix" component={Tix} />
       <Route path="/case-study/gray-solutions" component={GraySolutions} />
+      <Route path="/case-study/gogauge" component={GoGauge} />
       <Route path="/blogs" component={Blogs} />
       <Route path="/blog/:slug" component={BlogDetail} />
       <Route path="/contact" component={Contact} />

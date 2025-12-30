@@ -9,6 +9,7 @@ import magicTrucksImage from "@assets/optimized/mokcup_1_1765899763586.jpg";
 import eagleImage from "@assets/optimized/Eagle_Web_2_1765901229010.jpg";
 import tixImage from "@assets/Free_iPhone_16_Pro_PSD_Mockup_Tix_1766597838175.jpg";
 import graySolutionsImage from "@assets/optimized/Desktop_-_4_(2)_1765460573017.jpg";
+import goGaugeImage from "@assets/Go_Gauge_Slide_1-01_1767087653809.png";
 
 export default function Landing() {
   const [showAllCaseStudies, setShowAllCaseStudies] = useState(false);
@@ -26,7 +27,7 @@ export default function Landing() {
     "Magic Trucks",
     "Eagle",
     "TIX",
-    "AI Receptionist",
+    "GoGauge",
     "Gray Solutions",
     "Show All",
   ];
@@ -55,6 +56,14 @@ export default function Landing() {
       image: tixImage,
       href: "/case-study/tix",
       aspectRatio: "portrait",
+    },
+    {
+      id: "gogauge",
+      client: "GoGauge",
+      title: "Complete brand identity for marine & logistics leader",
+      image: goGaugeImage,
+      href: "/case-study/gogauge",
+      aspectRatio: "landscape",
     },
     {
       id: "gray-solutions",

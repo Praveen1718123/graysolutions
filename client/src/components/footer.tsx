@@ -21,6 +21,7 @@ export default function Footer({ hideNewsletter = false }: FooterProps) {
       { label: "Magic Trucks", href: "/case-study/magic-trucks" },
       { label: "Eagle", href: "/case-study/eagle" },
       { label: "TIX", href: "/case-study/tix" },
+      { label: "GoGauge", href: "/case-study/gogauge" },
       { label: "Gray", href: "/case-study/gray-solutions" },
     ],
   };
