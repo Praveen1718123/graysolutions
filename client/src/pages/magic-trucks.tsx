@@ -113,7 +113,7 @@ export default function MagicTrucks() {
                 }}
                 data-testid="hero-headline"
               >
-                Magic Trucks — Transporting in India. Made Simple.
+                Magic Trucks — Transporting Made Simple.
               </h1>
               <p 
                 className="text-base md:text-lg leading-relaxed mb-8"
