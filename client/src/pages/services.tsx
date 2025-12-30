@@ -9,6 +9,7 @@ import productDesignImg from "@assets/stock_images/modern_digital_produ_807a649b
 import webPlatformImg from "@assets/stock_images/web_development_codi_7cf7da0f.jpg";
 import commerceImg from "@assets/stock_images/ecommerce_shopping_o_773b9c07.jpg";
 import contentMarketingImg from "@assets/stock_images/content_marketing_cr_8c06f177.jpg";
+import heroBackgroundImg from "@assets/image_1767108156647.png";
 import magicTrucksThumb from "@assets/optimized/mokcup_1_1765899763586.jpg";
 import eagleThumb from "@assets/optimized/Eagle_Web_2_1765901229010.jpg";
 import tixThumb from "@assets/optimized/Desktop_-_4_(2)_1765460573017.jpg";
@@ -125,130 +126,124 @@ export default function Services() {
         </div>
       </header>
 
-      {/* Hero Section - Supabase Style */}
+      {/* Hero Section - Full Image Background */}
       <section 
-        className="relative z-10 pt-32 md:pt-40 pb-8 overflow-hidden"
-        style={{ backgroundColor: '#FFFFFF', minHeight: '100vh' }}
+        className="relative z-10 overflow-hidden"
+        style={{ minHeight: '100vh' }}
         data-testid="section-services-hero"
       >
-        {/* Content */}
-        <div className="relative z-10 max-w-[1000px] mx-auto px-6 md:px-10 text-center">
-          <motion.h1 
-            className="font-bold mb-6"
-            style={{ 
-              fontSize: 'clamp(40px, 7vw, 72px)',
-              lineHeight: '1.05',
-              color: '#1A1A1A',
-              letterSpacing: '-0.03em',
-            }}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            Design, Build & Scale<br />Your Digital Products
-          </motion.h1>
-          
-          <motion.div 
-            className="flex flex-col sm:flex-row gap-3 justify-center mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-          >
-            <Link href="/contact">
-              <button 
-                className="px-6 py-3 rounded-md font-medium text-sm transition-all hover:opacity-90"
-                style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}
-                data-testid="cta-services-hero"
-              >
-                Start a Project
-              </button>
-            </Link>
-            <Link href="/about">
-              <button 
-                className="px-6 py-3 rounded-md font-medium text-sm transition-all hover:bg-gray-100"
-                style={{ backgroundColor: 'transparent', color: '#1A1A1A' }}
-              >
-                Learn More
-              </button>
-            </Link>
-          </motion.div>
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 w-full h-full"
+          style={{
+            backgroundImage: `url(${heroBackgroundImg})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+        
+        {/* Dark Overlay for text readability */}
+        <div 
+          className="absolute inset-0"
+          style={{ backgroundColor: 'rgba(0,0,0,0.3)' }}
+        />
+
+        {/* Content Container */}
+        <div 
+          className="relative z-10 min-h-screen flex flex-col justify-end px-6 md:px-10 lg:px-16 pb-16 md:pb-20"
+        >
+          <div className="max-w-[1400px] mx-auto w-full">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+              {/* Left Side - Title and Description */}
+              <div className="lg:col-span-8">
+                <motion.h1 
+                  className="font-light mb-6"
+                  style={{ 
+                    fontSize: 'clamp(48px, 8vw, 96px)',
+                    lineHeight: '1.0',
+                    color: '#FFFFFF',
+                    letterSpacing: '-0.02em',
+                  }}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  Design, Build<br />& Scale
+                </motion.h1>
+                
+                <motion.p 
+                  className="text-sm md:text-base max-w-md"
+                  style={{ color: 'rgba(255,255,255,0.7)' }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  We help brands with strategy, digital products, e-commerce, automation, and growth systems.
+                </motion.p>
+              </div>
+
+              {/* Right Side - Stats */}
+              <div className="lg:col-span-4 flex flex-row lg:flex-col gap-6 lg:gap-8 lg:items-end lg:text-right">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                >
+                  <span 
+                    className="block font-light"
+                    style={{ fontSize: 'clamp(32px, 4vw, 48px)', color: '#FFFFFF' }}
+                  >
+                    50+
+                  </span>
+                  <span 
+                    className="text-xs uppercase tracking-wider"
+                    style={{ color: 'rgba(255,255,255,0.6)' }}
+                  >
+                    Projects Delivered
+                  </span>
+                </motion.div>
+                
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
+                  <span 
+                    className="block font-light"
+                    style={{ fontSize: 'clamp(32px, 4vw, 48px)', color: '#FFFFFF' }}
+                  >
+                    5
+                  </span>
+                  <span 
+                    className="text-xs uppercase tracking-wider"
+                    style={{ color: 'rgba(255,255,255,0.6)' }}
+                  >
+                    Core Studios
+                  </span>
+                </motion.div>
+                
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                >
+                  <span 
+                    className="block font-light"
+                    style={{ fontSize: 'clamp(32px, 4vw, 48px)', color: '#FFFFFF' }}
+                  >
+                    100%
+                  </span>
+                  <span 
+                    className="text-xs uppercase tracking-wider"
+                    style={{ color: 'rgba(255,255,255,0.6)' }}
+                  >
+                    In-House Team
+                  </span>
+                </motion.div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        {/* Curved Arc Animation - Supabase Style */}
-        <motion.div 
-          className="relative w-full flex justify-center"
-          style={{ height: '350px', marginTop: '-20px' }}
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-        >
-          {/* Outer Arc */}
-          <motion.div
-            className="absolute"
-            style={{
-              width: '900px',
-              height: '900px',
-              borderRadius: '50%',
-              border: '60px solid #1A1A1A',
-              top: '80px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-            }}
-            animate={{
-              scale: [1, 1.02, 1],
-            }}
-            transition={{ duration: 4, repeat: Infinity, repeatType: "reverse" }}
-          />
-          {/* Middle Arc */}
-          <motion.div
-            className="absolute"
-            style={{
-              width: '750px',
-              height: '750px',
-              borderRadius: '50%',
-              border: '40px solid #404040',
-              top: '155px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-            }}
-            animate={{
-              scale: [1, 1.03, 1],
-            }}
-            transition={{ duration: 4.5, repeat: Infinity, repeatType: "reverse", delay: 0.2 }}
-          />
-          {/* Inner Arc */}
-          <motion.div
-            className="absolute"
-            style={{
-              width: '620px',
-              height: '620px',
-              borderRadius: '50%',
-              border: '25px solid #666666',
-              top: '220px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-            }}
-            animate={{
-              scale: [1, 1.04, 1],
-            }}
-            transition={{ duration: 5, repeat: Infinity, repeatType: "reverse", delay: 0.4 }}
-          />
-        </motion.div>
-
-        {/* Description Text */}
-        <motion.div 
-          className="relative z-20 max-w-[700px] mx-auto px-6 text-center mt-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-        >
-          <p 
-            className="text-base md:text-lg leading-relaxed mb-6"
-            style={{ color: '#666666' }}
-          >
-            Gray is a product design and technology studio. We help brands with brand strategy, digital products, e-commerce, automation, and growth systems.
-          </p>
-        </motion.div>
       </section>
 
       {/* Our Services Section - Full Width */}
