@@ -138,6 +138,8 @@ export default function GoGauge() {
                 alt="GoGauge brand identity"
                 className="w-full rounded-2xl"
                 style={{ boxShadow: '0 20px 60px rgba(0,0,0,0.1)' }}
+                loading="lazy"
+                decoding="async"
               />
             </motion.div>
           </div>
@@ -174,6 +176,8 @@ export default function GoGauge() {
             src={overviewImage}
             alt="GoGauge complete brand materials"
             className="w-full rounded-2xl"
+            loading="lazy"
+            decoding="async"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -218,6 +222,8 @@ export default function GoGauge() {
               src={containerImage}
               alt="GoGauge shipping container branding"
               className="w-full rounded-2xl"
+              loading="lazy"
+              decoding="async"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -227,6 +233,8 @@ export default function GoGauge() {
               src={laptopImage}
               alt="GoGauge website on laptop"
               className="w-full rounded-2xl"
+              loading="lazy"
+              decoding="async"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -263,6 +271,8 @@ export default function GoGauge() {
             src={brandingImage}
             alt="GoGauge brand guidelines"
             className="w-full rounded-2xl"
+            loading="lazy"
+            decoding="async"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -278,6 +288,8 @@ export default function GoGauge() {
               src={standeeImage}
               alt="GoGauge trade show standees"
               className="w-full rounded-2xl"
+              loading="lazy"
+              decoding="async"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -287,6 +299,8 @@ export default function GoGauge() {
               src={socialImage}
               alt="GoGauge social media content"
               className="w-full rounded-2xl"
+              loading="lazy"
+              decoding="async"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

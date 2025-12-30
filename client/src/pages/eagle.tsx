@@ -165,7 +165,7 @@ export default function Eagle() {
                 src={heroImage} 
                 alt="Eagle brand brochure shown in-hand"
                 className="w-full rounded-2xl"
-                loading="eager"
+                loading="lazy"
                 decoding="async"
               />
             </motion.div>

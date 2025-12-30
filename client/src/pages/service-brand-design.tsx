@@ -113,7 +113,7 @@ export default function ServiceBrandDesign() {
                 src={heroImage}
                 alt="Brand Design"
                 className="w-full rounded-2xl"
-                loading="eager"
+                loading="lazy"
                 decoding="async"
               />
             </motion.div>

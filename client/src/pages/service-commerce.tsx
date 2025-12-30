@@ -113,7 +113,7 @@ export default function ServiceCommerce() {
                 src={heroImage}
                 alt="Ecommerce"
                 className="w-full rounded-2xl"
-                loading="eager"
+                loading="lazy"
                 decoding="async"
               />
             </motion.div>

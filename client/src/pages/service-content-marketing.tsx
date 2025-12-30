@@ -113,7 +113,7 @@ export default function ServiceContentMarketing() {
                 src={heroImage}
                 alt="Content Marketing"
                 className="w-full rounded-2xl"
-                loading="eager"
+                loading="lazy"
                 decoding="async"
               />
             </motion.div>

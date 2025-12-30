@@ -275,7 +275,7 @@ export default function Landing() {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           className="w-full h-full object-cover"
         >
           <source src={heroVideo} type="video/mp4" />

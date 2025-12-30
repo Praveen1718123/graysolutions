@@ -162,7 +162,7 @@ export default function MagicTrucks() {
                 src={heroImage} 
                 alt="Magic Trucks platform shown on laptop and mobile"
                 className="w-full rounded-2xl"
-                loading="eager"
+                loading="lazy"
                 decoding="async"
               />
             </motion.div>

@@ -113,7 +113,7 @@ export default function ServiceWebPlatform() {
                 src={heroImage}
                 alt="Web Development"
                 className="w-full rounded-2xl"
-                loading="eager"
+                loading="lazy"
                 decoding="async"
               />
             </motion.div>

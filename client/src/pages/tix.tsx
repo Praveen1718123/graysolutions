@@ -163,7 +163,7 @@ export default function Tix() {
                 src={heroImage} 
                 alt="TIX app shown on iPhone in hand"
                 className="w-full rounded-2xl"
-                loading="eager"
+                loading="lazy"
                 decoding="async"
               />
             </motion.div>
@@ -245,6 +245,8 @@ export default function Tix() {
             src={deckImage}
             alt="TIX platform overview with multiple phone screens"
             className="w-full rounded-2xl"
+            loading="lazy"
+            decoding="async"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -303,6 +305,8 @@ export default function Tix() {
             src={guidelinesImage}
             alt="TIX brand identity with movies and events icons"
             className="w-full rounded-2xl"
+            loading="lazy"
+            decoding="async"
             style={{ backgroundColor: '#FAFAFA' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -346,6 +350,8 @@ export default function Tix() {
               src={arrowImage}
               alt="TIX movies events and more campaign"
               className="w-full rounded-2xl object-cover"
+              loading="lazy"
+              decoding="async"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
