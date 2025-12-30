@@ -153,95 +153,30 @@ export default function Services() {
           className="relative z-10 min-h-screen flex flex-col justify-end px-6 md:px-10 lg:px-16 pb-16 md:pb-20"
         >
           <div className="max-w-[1400px] mx-auto w-full">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
-              {/* Left Side - Title and Description */}
-              <div className="lg:col-span-8">
-                <motion.h1 
-                  className="font-light mb-6"
-                  style={{ 
-                    fontSize: 'clamp(48px, 8vw, 96px)',
-                    lineHeight: '1.0',
-                    color: '#FFFFFF',
-                    letterSpacing: '-0.02em',
-                  }}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  Design, Build<br />& Scale
-                </motion.h1>
-                
-                <motion.p 
-                  className="text-sm md:text-base max-w-md"
-                  style={{ color: 'rgba(255,255,255,0.7)' }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                  We help brands with strategy, digital products, e-commerce, automation, and growth systems.
-                </motion.p>
-              </div>
-
-              {/* Right Side - Stats */}
-              <div className="lg:col-span-4 flex flex-row lg:flex-col gap-6 lg:gap-8 lg:items-end lg:text-right">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                >
-                  <span 
-                    className="block font-light"
-                    style={{ fontSize: 'clamp(32px, 4vw, 48px)', color: '#FFFFFF' }}
-                  >
-                    50+
-                  </span>
-                  <span 
-                    className="text-xs uppercase tracking-wider"
-                    style={{ color: 'rgba(255,255,255,0.6)' }}
-                  >
-                    Projects Delivered
-                  </span>
-                </motion.div>
-                
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                >
-                  <span 
-                    className="block font-light"
-                    style={{ fontSize: 'clamp(32px, 4vw, 48px)', color: '#FFFFFF' }}
-                  >
-                    5
-                  </span>
-                  <span 
-                    className="text-xs uppercase tracking-wider"
-                    style={{ color: 'rgba(255,255,255,0.6)' }}
-                  >
-                    Core Studios
-                  </span>
-                </motion.div>
-                
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
-                >
-                  <span 
-                    className="block font-light"
-                    style={{ fontSize: 'clamp(32px, 4vw, 48px)', color: '#FFFFFF' }}
-                  >
-                    100%
-                  </span>
-                  <span 
-                    className="text-xs uppercase tracking-wider"
-                    style={{ color: 'rgba(255,255,255,0.6)' }}
-                  >
-                    In-House Team
-                  </span>
-                </motion.div>
-              </div>
-            </div>
+            <motion.h1 
+              className="font-bold mb-6"
+              style={{ 
+                fontSize: 'clamp(56px, 10vw, 120px)',
+                lineHeight: '1.0',
+                color: '#FFFFFF',
+                letterSpacing: '-0.02em',
+              }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              Design, Build<br />& Scale
+            </motion.h1>
+            
+            <motion.p 
+              className="text-base md:text-lg max-w-lg font-medium"
+              style={{ color: 'rgba(255,255,255,0.8)' }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              We help brands with strategy, digital products, e-commerce, automation, and growth systems.
+            </motion.p>
           </div>
         </div>
       </section>
