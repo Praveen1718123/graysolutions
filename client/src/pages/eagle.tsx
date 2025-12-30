@@ -211,8 +211,38 @@ export default function Eagle() {
         </div>
       </section>
 
+      {/* What We Did Section */}
+      <section className="py-16 md:py-24" style={{ backgroundColor: '#FAFAFA' }}>
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+          <div className="text-center mb-12">
+            <span className="text-sm font-medium tracking-wide mb-3 block" style={{ color: '#666666' }}>What We Did</span>
+            <h2 
+              className="font-bold"
+              style={{ fontSize: 'clamp(28px, 4vw, 42px)', lineHeight: '1.15', color: '#1A1A1A', letterSpacing: '-0.02em' }}
+            >
+              Full-Service Brand Partnership
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {["Brand Identity", "Brand Guidelines", "Logo Design", "Print Design", "PPE Branding", "Equipment Branding", "Container Branding", "Merchandise"].map((service, idx) => (
+              <motion.div
+                key={service}
+                className="p-5 rounded-xl text-center"
+                style={{ backgroundColor: '#FFFFFF' }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: idx * 0.05 }}
+              >
+                <span className="text-sm font-medium" style={{ color: '#1A1A1A' }}>{service}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Brand Guidelines Banner */}
-      <section className="py-8 md:py-12" style={{ backgroundColor: '#FAFAFA' }}>
+      <section className="py-8 md:py-12" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="max-w-[1400px] mx-auto px-4 md:px-10">
           <motion.img 
             src={guidelinesImage}
