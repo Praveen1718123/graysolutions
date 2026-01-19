@@ -123,15 +123,15 @@ export default function MagicTrucks() {
               </p>
               
               {/* CTAs */}
-              <div className="flex gap-4 mb-8">
+              <div className="flex flex-wrap gap-3 md:gap-4 mb-8">
                 <button 
-                  className="px-7 py-3.5 rounded-full font-medium text-sm transition-all"
+                  className="px-5 md:px-7 py-3 md:py-3.5 rounded-full font-medium text-sm transition-all"
                   style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}
                 >
                   View Screens
                 </button>
                 <button 
-                  className="px-7 py-3.5 rounded-full font-medium text-sm transition-all hover:bg-gray-100"
+                  className="px-5 md:px-7 py-3 md:py-3.5 rounded-full font-medium text-sm transition-all hover:bg-gray-100"
                   style={{ backgroundColor: 'transparent', color: '#1A1A1A', border: '1px solid #E5E5E5' }}
                 >
                   Talk to Gray Solutions
@@ -183,7 +183,7 @@ export default function MagicTrucks() {
             Quick Brief
           </motion.h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
             {[
               { title: "Ambition", text: "Make freight booking + tracking feel simple, trustworthy, and repeatable — without forcing teams to change their habits overnight." },
               { title: "Reality Check", text: "Indian logistics runs on fast coordination: calls, WhatsApp updates, manual docs, and constant follow-ups. Most tools fail because they add friction instead of removing uncertainty." },
@@ -210,7 +210,7 @@ export default function MagicTrucks() {
 
       {/* What We Did Section */}
       <section className="py-16 md:py-24" style={{ backgroundColor: '#FAFAFA' }}>
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
           <div className="text-center mb-12">
             <span className="text-sm font-medium tracking-wide mb-3 block" style={{ color: '#666666' }}>What We Did</span>
             <h2 
@@ -268,7 +268,7 @@ export default function MagicTrucks() {
             Insights
           </motion.h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
             {[
               { num: "1", title: "People don't buy \"features.\" They buy certainty.", text: "If a user can't see current status, ETA, and next step instantly, they fall back to calling someone." },
               { num: "2", title: "Logistics is a trust business before it's a tech business.", text: "The product has to look and feel dependable — because decisions involve money, risk, and time." },
@@ -305,7 +305,7 @@ export default function MagicTrucks() {
       {/* The Big Bet Section */}
       <section className="py-12 md:py-28" style={{ backgroundColor: '#FAFAFA' }}>
         <div className="max-w-[1200px] mx-auto px-4 md:px-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -367,7 +367,7 @@ export default function MagicTrucks() {
             Impact
           </motion.h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mb-10 md:mb-16">
             <div>
               <h3 className="text-lg font-semibold mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
                 Impact delivered (now)
@@ -456,7 +456,7 @@ export default function MagicTrucks() {
           </div>
 
           {/* Gallery Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
             {filteredGallery.map((item, idx) => (
               <motion.div
                 key={idx}

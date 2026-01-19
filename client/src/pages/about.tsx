@@ -297,19 +297,13 @@ export default function About() {
 
           {/* Right - Video Animation */}
           <motion.div 
-            className="order-1 lg:order-2 flex justify-center lg:justify-end items-center"
+            className="order-1 lg:order-2 flex justify-center lg:justify-end items-center w-full lg:overflow-visible overflow-hidden"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            style={{ overflow: 'visible' }}
           >
             <div 
-              className="relative"
-              style={{ 
-                width: '140%',
-                maxWidth: '900px',
-                marginRight: '-20%',
-              }}
+              className="relative w-full lg:w-[140%] max-w-[900px] lg:mr-[-20%]"
             >
               <video
                 src={benefitsVideo}
@@ -340,10 +334,10 @@ export default function About() {
       {/* How We Think - 2 Column Section with Sticky Left */}
       <section 
         ref={howWeThinkRef}
-        className="py-20 md:py-28 relative"
-        style={{ backgroundColor: '#FAFAFA', minHeight: '100vh' }}
+        className="py-12 sm:py-20 md:py-28 relative"
+        style={{ backgroundColor: '#FAFAFA', minHeight: 'auto' }}
       >
-        <div className="max-w-[1120px] mx-auto px-4 md:px-10">
+        <div className="max-w-[1120px] mx-auto px-4 sm:px-6 md:px-10">
           {/* Mobile Layout */}
           <div className="md:hidden space-y-8">
             <motion.div
@@ -489,11 +483,11 @@ export default function About() {
           }}
         />
         
-        <div className="relative z-10 max-w-[1200px] mx-auto px-6 md:px-10">
+        <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-6 md:px-10">
           <motion.div style={{ opacity: whatWeDoOpacity }}>
             {/* Badge */}
             <div 
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4 sm:mb-6"
               style={{
                 background: 'rgba(255, 255, 255, 0.1)',
                 border: '1px solid rgba(255, 255, 255, 0.15)',
@@ -509,9 +503,8 @@ export default function About() {
 
             {/* Large text */}
             <h2 
-              className="font-bold leading-tight"
+              className="font-bold leading-tight text-xl sm:text-2xl md:text-3xl lg:text-4xl"
               style={{ 
-                fontSize: 'clamp(28px, 4.5vw, 48px)',
                 maxWidth: '900px',
                 color: '#FFFFFF',
               }}
@@ -525,7 +518,7 @@ export default function About() {
 
       {/* Key Benefits Section */}
       <section 
-        className="py-20 md:py-28 relative overflow-hidden"
+        className="py-12 sm:py-20 md:py-28 relative overflow-hidden"
         style={{ 
           background: 'linear-gradient(135deg, #fafafa 0%, #f5f5f5 25%, #ffffff 50%, #f8f8f8 75%, #fafafa 100%)',
         }}
@@ -564,7 +557,7 @@ export default function About() {
             </motion.div>
             
             <motion.h2 
-              className="text-3xl md:text-4xl lg:text-5xl font-bold mb-5"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-5"
               style={{ color: '#1A1A1A' }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -589,7 +582,7 @@ export default function About() {
           
           {/* Main Benefits Card */}
           <motion.div
-            className="rounded-3xl p-8 md:p-12"
+            className="rounded-2xl sm:rounded-3xl p-4 sm:p-8 md:p-12"
             style={{
               backgroundColor: '#FFFFFF',
               boxShadow: '0 4px 24px rgba(0,0,0,0.06), 0 12px 48px rgba(0,0,0,0.04)',
@@ -638,7 +631,7 @@ export default function About() {
                 ].map((benefit, index) => (
                   <motion.div
                     key={index}
-                    className="flex gap-4 p-4 rounded-xl transition-all duration-200 cursor-default"
+                    className="flex gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl transition-all duration-200 cursor-default"
                     style={{ backgroundColor: 'transparent' }}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -652,7 +645,7 @@ export default function About() {
                     data-testid={`benefit-left-${index}`}
                   >
                     <motion.div 
-                      className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center"
+                      className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center"
                       style={{ 
                         backgroundColor: 'rgba(0, 0, 0, 0.04)',
                       }}
@@ -663,10 +656,10 @@ export default function About() {
                       {benefit.icon}
                     </motion.div>
                     <div>
-                      <h4 className="font-semibold text-base mb-1" style={{ color: '#1A1A1A' }}>
+                      <h4 className="font-semibold text-sm sm:text-base mb-0.5 sm:mb-1" style={{ color: '#1A1A1A' }}>
                         {benefit.title}
                       </h4>
-                      <p className="text-sm" style={{ color: '#666666' }}>
+                      <p className="text-xs sm:text-sm" style={{ color: '#666666' }}>
                         {benefit.description}
                       </p>
                     </div>
@@ -740,7 +733,7 @@ export default function About() {
                 ].map((benefit, index) => (
                   <motion.div
                     key={index}
-                    className="flex gap-4 p-4 rounded-xl transition-all duration-200 cursor-default"
+                    className="flex gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl transition-all duration-200 cursor-default"
                     style={{ backgroundColor: 'transparent' }}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -754,7 +747,7 @@ export default function About() {
                     data-testid={`benefit-right-${index}`}
                   >
                     <motion.div 
-                      className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center"
+                      className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center"
                       style={{ 
                         backgroundColor: 'rgba(0, 0, 0, 0.04)',
                       }}
@@ -765,10 +758,10 @@ export default function About() {
                       {benefit.icon}
                     </motion.div>
                     <div>
-                      <h4 className="font-semibold text-base mb-1" style={{ color: '#1A1A1A' }}>
+                      <h4 className="font-semibold text-sm sm:text-base mb-0.5 sm:mb-1" style={{ color: '#1A1A1A' }}>
                         {benefit.title}
                       </h4>
-                      <p className="text-sm" style={{ color: '#666666' }}>
+                      <p className="text-xs sm:text-sm" style={{ color: '#666666' }}>
                         {benefit.description}
                       </p>
                     </div>
@@ -783,7 +776,7 @@ export default function About() {
       {/* By the Numbers - Full Width Stats Strip */}
       <section 
         ref={metricsRef}
-        className="py-16 md:py-24 relative overflow-hidden"
+        className="py-10 sm:py-16 md:py-24 relative overflow-hidden"
         style={{ backgroundColor: '#1A1A1A' }}
       >
         {/* Video Background */}
@@ -805,31 +798,31 @@ export default function About() {
         />
         <div className="relative z-10 max-w-[1280px] mx-auto px-4 md:px-10">
           <motion.div
-            className="text-center mb-12"
+            className="text-center mb-8 sm:mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
             <h2 
-              className="text-2xl md:text-3xl font-bold mb-3"
+              className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-3"
               style={{ color: '#FFFFFF' }}
               data-testid="section-by-the-numbers"
             >
               By the numbers
             </h2>
             <p 
-              className="text-base"
+              className="text-sm sm:text-base px-4"
               style={{ color: 'rgba(255,255,255,0.6)' }}
             >
               We measure ourselves by consistency, clarity, and the outcomes we enable.
             </p>
           </motion.div>
           
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 md:gap-8">
             {metrics.map((metric, index) => (
               <motion.div
                 key={index}
-                className="text-center p-6 rounded-xl"
+                className="text-center p-3 sm:p-6 rounded-xl"
                 style={{ 
                   backgroundColor: 'rgba(255,255,255,0.05)',
                   border: '1px solid rgba(255,255,255,0.08)',
@@ -841,7 +834,7 @@ export default function About() {
                 data-testid={`metric-${index}`}
               >
                 <div 
-                  className="text-4xl md:text-5xl font-bold mb-3"
+                  className="text-2xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-3"
                   style={{ color: '#FFFFFF' }}
                 >
                   {metric.display ? (
@@ -851,13 +844,13 @@ export default function About() {
                   )}
                 </div>
                 <p 
-                  className="text-sm font-medium mb-2"
+                  className="text-xs sm:text-sm font-medium mb-1 sm:mb-2 line-clamp-2"
                   style={{ color: 'rgba(255,255,255,0.9)' }}
                 >
                   {metric.title}
                 </p>
                 <p 
-                  className="text-xs leading-relaxed"
+                  className="text-[10px] sm:text-xs leading-relaxed hidden sm:block"
                   style={{ color: 'rgba(255,255,255,0.5)' }}
                 >
                   {metric.description}
@@ -870,25 +863,25 @@ export default function About() {
 
       {/* How We Work - 4-Box Bento Grid */}
       <section 
-        className="py-20 md:py-28"
+        className="py-12 sm:py-20 md:py-28"
         style={{ backgroundColor: '#FAFAFA' }}
       >
-        <div className="max-w-[1120px] mx-auto px-4 md:px-10">
+        <div className="max-w-[1120px] mx-auto px-4 sm:px-6 md:px-10">
           <motion.div
-            className="mb-14"
+            className="mb-8 sm:mb-14"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
             <h2 
-              className="text-2xl md:text-3xl font-bold mb-3"
+              className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-3"
               style={{ color: '#1A1A1A' }}
               data-testid="section-how-we-work"
             >
               How we work
             </h2>
             <p 
-              className="text-base"
+              className="text-sm sm:text-base"
               style={{ color: '#666666' }}
             >
               Our process is structured, deliberate, and consistent across brand, product, and engineering assignments.
@@ -896,11 +889,11 @@ export default function About() {
           </motion.div>
           
           {/* 2x2 Bento Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {howWeWork.map((item, index) => (
               <motion.div
                 key={index}
-                className="rounded-3xl overflow-hidden cursor-default bg-white"
+                className="rounded-2xl sm:rounded-3xl overflow-hidden cursor-default bg-white"
                 initial={{ opacity: 0.4, y: 8 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -913,9 +906,8 @@ export default function About() {
               >
                 {/* Visual Area with Gradient BG */}
                 <div 
-                  className="w-full relative overflow-hidden flex items-center justify-center"
-                  style={{ 
-                    height: '300px',
+                  className="w-full relative overflow-hidden flex items-center justify-center h-[200px] sm:h-[250px] md:h-[300px]"
+                  style={{
                     background: index === 0 
                       ? 'linear-gradient(135deg, #e8f4f8 0%, #d4e8f0 30%, #c9dce8 60%, #bdd0e0 100%)'
                       : index === 1
@@ -1014,15 +1006,15 @@ export default function About() {
                 </div>
                 
                 {/* Text Content */}
-                <div className="p-6">
+                <div className="p-4 sm:p-6">
                   <h3 
-                    className="text-xl font-bold mb-2"
+                    className="text-base sm:text-xl font-bold mb-1 sm:mb-2"
                     style={{ color: '#1A1A1A' }}
                   >
                     {item.title}
                   </h3>
                   <p 
-                    className="text-sm leading-relaxed"
+                    className="text-xs sm:text-sm leading-relaxed"
                     style={{ color: '#555555' }}
                   >
                     {item.description}
@@ -1036,11 +1028,11 @@ export default function About() {
 
       {/* Our Position - Two Column CTA */}
       <section 
-        className="py-20 md:py-28"
+        className="py-12 sm:py-20 md:py-28"
         style={{ backgroundColor: '#f5f5f5' }}
       >
-        <div className="max-w-[1120px] mx-auto px-4 md:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="max-w-[1120px] mx-auto px-4 sm:px-6 md:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
             {/* Left: Content */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -1057,7 +1049,7 @@ export default function About() {
               </div>
               
               <h2 
-                className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight"
                 style={{ color: '#1A1A1A' }}
                 data-testid="section-our-position"
               >

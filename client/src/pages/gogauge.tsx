@@ -147,8 +147,8 @@ export default function GoGauge() {
       </section>
 
       <section className="py-16 md:py-24" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             <div>
               <span className="text-sm font-medium tracking-wide mb-3 block" style={{ color: '#666666' }}>Overview</span>
               <h2 
@@ -171,7 +171,7 @@ export default function GoGauge() {
       </section>
 
       <section className="py-16 md:py-24" style={{ backgroundColor: '#FAFAFA' }}>
-        <div className="max-w-[1400px] mx-auto px-6 md:px-10">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-10">
           <motion.img 
             src={overviewImage}
             alt="GoGauge complete brand materials"
@@ -187,7 +187,7 @@ export default function GoGauge() {
       </section>
 
       <section className="py-16 md:py-24" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
           <div className="text-center mb-12">
             <span className="text-sm font-medium tracking-wide mb-3 block" style={{ color: '#666666' }}>What We Did</span>
             <h2 
@@ -216,8 +216,8 @@ export default function GoGauge() {
       </section>
 
       <section className="py-16 md:py-24" style={{ backgroundColor: '#FAFAFA' }}>
-        <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
             <motion.img 
               src={containerImage}
               alt="GoGauge shipping container branding"
@@ -245,8 +245,8 @@ export default function GoGauge() {
       </section>
 
       <section className="py-16 md:py-24" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             <div>
               <span className="text-sm font-medium tracking-wide mb-3 block" style={{ color: '#666666' }}>Brand Identity</span>
               <h2 
@@ -266,7 +266,7 @@ export default function GoGauge() {
       </section>
 
       <section className="py-16 md:py-24" style={{ backgroundColor: '#FAFAFA' }}>
-        <div className="max-w-[1400px] mx-auto px-6 md:px-10">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-10">
           <motion.img 
             src={brandingImage}
             alt="GoGauge brand guidelines"
@@ -282,8 +282,8 @@ export default function GoGauge() {
       </section>
 
       <section className="py-16 md:py-24" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
             <motion.img 
               src={standeeImage}
               alt="GoGauge trade show standees"
@@ -311,7 +311,7 @@ export default function GoGauge() {
       </section>
 
       <section className="py-20 md:py-28" style={{ backgroundColor: '#1A1A1A' }}>
-        <div className="max-w-[800px] mx-auto px-6 md:px-10 text-center">
+        <div className="max-w-[800px] mx-auto px-4 md:px-10 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#FFFFFF' }}>
             Ready to build your brand?
           </h2>

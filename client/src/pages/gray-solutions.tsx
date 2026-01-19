@@ -111,15 +111,15 @@ export default function GraySolutions() {
               </p>
               
               {/* CTAs */}
-              <div className="flex gap-4 mb-8">
+              <div className="flex flex-wrap gap-3 md:gap-4 mb-8">
                 <button 
-                  className="px-7 py-3.5 rounded-full font-medium text-sm transition-all"
+                  className="px-5 md:px-7 py-3 md:py-3.5 rounded-full font-medium text-sm transition-all"
                   style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}
                 >
                   View Live Site
                 </button>
                 <button 
-                  className="px-7 py-3.5 rounded-full font-medium text-sm transition-all hover:bg-gray-100"
+                  className="px-5 md:px-7 py-3 md:py-3.5 rounded-full font-medium text-sm transition-all hover:bg-gray-100"
                   style={{ backgroundColor: 'transparent', color: '#1A1A1A', border: '1px solid #E5E5E5' }}
                 >
                   Work With Us
@@ -200,7 +200,7 @@ export default function GraySolutions() {
 
       {/* What We Did Section */}
       <section className="py-16 md:py-24" style={{ backgroundColor: '#FAFAFA' }}>
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
           <div className="text-center mb-12">
             <span className="text-sm font-medium tracking-wide mb-3 block" style={{ color: '#666666' }}>What We Did</span>
             <h2 
@@ -240,7 +240,7 @@ export default function GraySolutions() {
           >
             Our Design Principles
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
             {[
               { num: "01", title: "Motion as Meaning", text: "Every animation serves a purpose. Scroll-triggered reveals, hover states, and transitions all guide the eye naturally." },
               { num: "02", title: "Radical Simplicity", text: "We stripped away everything that didn't earn its place. No decorative elements, no clutter — just content and space." },
@@ -290,7 +290,7 @@ export default function GraySolutions() {
       {/* Process Section */}
       <section className="py-12 md:py-28" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="max-w-[1200px] mx-auto px-4 md:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -406,7 +406,7 @@ export default function GraySolutions() {
           >
             The Outcome
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {[
               { stat: "100%", label: "In-house designed and built by our team" },
               { stat: "5", label: "Pages crafted with intention" },

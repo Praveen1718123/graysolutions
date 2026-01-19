@@ -106,13 +106,7 @@ export default function Contact() {
         }}
       >
         <div 
-          className="relative z-10 max-w-[1400px] mx-auto"
-          style={{ 
-            paddingTop: '140px',
-            paddingBottom: '80px',
-            paddingLeft: 'clamp(24px, 5vw, 80px)',
-            paddingRight: 'clamp(24px, 5vw, 80px)',
-          }}
+          className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 pt-28 sm:pt-32 md:pt-36 pb-12 sm:pb-16 md:pb-20"
         >
           {/* Badge */}
           <motion.div 
@@ -139,9 +133,8 @@ export default function Contact() {
 
           {/* Headline */}
           <motion.h1 
-            className="font-bold mb-5"
+            className="font-bold mb-5 text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
             style={{ 
-              fontSize: 'clamp(32px, 4.5vw, 52px)',
               lineHeight: '1.1',
               color: '#1A1A1A',
               letterSpacing: '-0.02em',
@@ -173,7 +166,7 @@ export default function Contact() {
             transition={{ duration: 0.5, delay: 0.5 }}
           >
             <div 
-              className="p-8 rounded-2xl"
+              className="p-5 sm:p-6 md:p-8 rounded-2xl"
               style={{ 
                 backgroundColor: '#FAFAFA',
                 border: '1px solid #E5E5E5',
@@ -213,8 +206,8 @@ export default function Contact() {
         className="py-16 md:py-24 relative z-10"
         style={{ backgroundColor: '#FAFAFA' }}
       >
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16">
             {/* Left - Contact Info */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -231,9 +224,8 @@ export default function Contact() {
 
               {/* Heading */}
               <h2 
-                className="font-bold mb-5"
+                className="font-bold mb-5 text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
                 style={{ 
-                  fontSize: 'clamp(32px, 4.5vw, 52px)',
                   lineHeight: '1.1',
                   color: '#1A1A1A',
                   letterSpacing: '-0.02em',
@@ -361,7 +353,7 @@ export default function Contact() {
                   </label>
                   <input 
                     type="text"
-                    className="w-full px-5 py-4 rounded-xl text-base transition-all focus:outline-none focus:ring-2 focus:ring-offset-0"
+                    className="w-full px-4 sm:px-5 py-3 sm:py-4 rounded-xl text-base transition-all focus:outline-none focus:ring-2 focus:ring-offset-0"
                     style={{ 
                       backgroundColor: '#F5F5F5',
                       border: 'none',
@@ -382,7 +374,7 @@ export default function Contact() {
                   </label>
                   <input 
                     type="email"
-                    className="w-full px-5 py-4 rounded-xl text-base transition-all focus:outline-none focus:ring-2 focus:ring-offset-0"
+                    className="w-full px-4 sm:px-5 py-3 sm:py-4 rounded-xl text-base transition-all focus:outline-none focus:ring-2 focus:ring-offset-0"
                     style={{ 
                       backgroundColor: '#F5F5F5',
                       border: 'none',
@@ -402,12 +394,12 @@ export default function Contact() {
                     Write Your Message
                   </label>
                   <textarea 
-                    className="w-full px-5 py-4 rounded-xl text-base resize-none transition-all focus:outline-none focus:ring-2 focus:ring-offset-0"
+                    className="w-full px-4 sm:px-5 py-3 sm:py-4 rounded-xl text-base resize-none transition-all focus:outline-none focus:ring-2 focus:ring-offset-0"
                     style={{ 
                       backgroundColor: '#F5F5F5',
                       border: 'none',
                       color: '#1A1A1A',
-                      minHeight: '140px',
+                      minHeight: '120px',
                     }}
                     placeholder="I want to collaborate"
                     data-testid="input-message"
@@ -448,8 +440,8 @@ export default function Contact() {
         className="py-16 md:py-24 relative z-10"
         style={{ backgroundColor: '#FFFFFF' }}
       >
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16">
             {/* Left - Heading & CTA Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -457,9 +449,8 @@ export default function Contact() {
               viewport={{ once: true }}
             >
               <h2 
-                className="font-bold mb-8"
+                className="font-bold mb-6 sm:mb-8 text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
                 style={{ 
-                  fontSize: 'clamp(32px, 4.5vw, 52px)',
                   lineHeight: '1.1',
                   color: '#1A1A1A',
                   letterSpacing: '-0.02em',
@@ -471,7 +462,7 @@ export default function Contact() {
 
               {/* Still have a question card */}
               <div 
-                className="p-6 rounded-2xl"
+                className="p-4 sm:p-5 md:p-6 rounded-2xl"
                 style={{ backgroundColor: '#F5F5F5' }}
               >
                 <h3 
@@ -544,12 +535,12 @@ export default function Contact() {
                       <div 
                         className="overflow-hidden transition-all duration-300 ease-out"
                         style={{ 
-                          maxHeight: isExpanded ? '200px' : '0', 
+                          maxHeight: isExpanded ? '500px' : '0', 
                           opacity: isExpanded ? 1 : 0 
                         }}
                       >
                         <p 
-                          className="pb-5 text-base leading-relaxed"
+                          className="pb-5 text-sm sm:text-base leading-relaxed"
                           style={{ color: '#666666' }}
                         >
                           {item.answer}
@@ -569,8 +560,8 @@ export default function Contact() {
         className="py-16 md:py-24 relative z-10"
         style={{ backgroundColor: '#1A1A1A' }}
       >
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 items-center">
             {/* Left - Content */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -579,7 +570,7 @@ export default function Contact() {
             >
               {/* Badge */}
               <span 
-                className="text-sm font-medium mb-6 block"
+                className="text-sm font-medium mb-4 sm:mb-6 block"
                 style={{ color: '#FFFFFF' }}
               >
                 [CTA]
@@ -587,9 +578,8 @@ export default function Contact() {
 
               {/* Heading */}
               <h2 
-                className="font-bold mb-8"
+                className="font-bold mb-6 sm:mb-8 text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
                 style={{ 
-                  fontSize: 'clamp(32px, 4.5vw, 52px)',
                   lineHeight: '1.1',
                   color: '#FFFFFF',
                   letterSpacing: '-0.02em',
@@ -603,7 +593,7 @@ export default function Contact() {
               {/* CTA Button */}
               <a 
                 href="#contact-form"
-                className="inline-flex items-center gap-3 px-6 py-3 rounded-full text-sm font-medium transition-all hover:shadow-lg mb-10"
+                className="inline-flex sm:inline-flex w-full sm:w-auto items-center justify-center gap-3 px-6 py-3 rounded-full text-sm font-medium transition-all hover:shadow-lg mb-8 sm:mb-10"
                 style={{ 
                   backgroundColor: '#FFFFFF',
                   color: '#1A1A1A',
@@ -622,7 +612,7 @@ export default function Contact() {
               </a>
 
               {/* Bullet Points */}
-              <ul className="space-y-3">
+              <ul className="space-y-2 sm:space-y-3">
                 {[
                   "Schedule a Free Consultation",
                   "Discover Custom Solutions",
@@ -630,10 +620,10 @@ export default function Contact() {
                 ].map((item, idx) => (
                   <li 
                     key={idx}
-                    className="flex items-center gap-3 text-base"
+                    className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base"
                     style={{ color: '#FFFFFF' }}
                   >
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="flex-shrink-0">
                       <circle cx="12" cy="12" r="10" fill="#FFFFFF" fillOpacity="0.2" />
                       <path d="M8 12l3 3 5-6" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>

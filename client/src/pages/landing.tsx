@@ -89,12 +89,12 @@ export default function Landing() {
           >
             {/* Modal Header */}
             <div className="sticky top-0 bg-white z-10 border-b border-gray-100">
-              <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-6 flex items-center justify-between">
+              <div className="max-w-[1400px] mx-auto px-4 md:px-10 py-4 md:py-6 flex items-center justify-between">
                 <Link href="/">
                   <img 
                     src={logoImage} 
                     alt="Gray Solutions Logo" 
-                    className="h-8 md:h-10 cursor-pointer" 
+                    className="h-7 sm:h-8 md:h-10 cursor-pointer" 
                   />
                 </Link>
                 <button
@@ -108,14 +108,14 @@ export default function Landing() {
             </div>
 
             {/* Modal Content */}
-            <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-12 md:py-16">
+            <div className="max-w-[1400px] mx-auto px-4 md:px-10 py-8 md:py-16">
               <motion.h1 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="font-bold mb-4"
+                className="font-bold mb-3 md:mb-4"
                 style={{ 
-                  fontSize: 'clamp(32px, 4.5vw, 52px)',
+                  fontSize: 'clamp(28px, 5vw, 52px)',
                   lineHeight: '1.1',
                   color: '#1A1A1A',
                   letterSpacing: '-0.02em',
@@ -127,14 +127,18 @@ export default function Landing() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15 }}
-                className="text-lg mb-12"
-                style={{ color: '#666666', maxWidth: '600px' }}
+                className="mb-8 md:mb-12"
+                style={{ 
+                  fontSize: 'clamp(14px, 2.5vw, 18px)',
+                  color: '#666666', 
+                  maxWidth: '600px' 
+                }}
               >
                 Selected work showcasing our approach to design, technology, and brand building.
               </motion.p>
 
-              {/* Case Studies Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+              {/* Case Studies Grid - Single column on mobile */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
                 {caseStudies.map((study, index) => (
                   <motion.div
                     key={study.id}
@@ -149,7 +153,7 @@ export default function Landing() {
                       >
                         {/* Image Container */}
                         <div 
-                          className="relative overflow-hidden rounded-lg mb-4"
+                          className="relative overflow-hidden rounded-lg mb-3 md:mb-4"
                           style={{ 
                             aspectRatio: study.aspectRatio === 'portrait' ? '3/4' : '4/3',
                             backgroundColor: '#F5F5F5',
@@ -166,13 +170,13 @@ export default function Landing() {
                         {/* Text Content */}
                         <div>
                           <p 
-                            className="text-sm mb-2"
+                            className="text-xs sm:text-sm mb-1 sm:mb-2"
                             style={{ color: '#666666' }}
                           >
                             {study.client}
                           </p>
                           <h3 
-                            className="text-lg font-medium leading-snug group-hover:text-gray-600 transition-colors"
+                            className="text-base sm:text-lg font-medium leading-snug group-hover:text-gray-600 transition-colors"
                             style={{ color: '#1A1A1A' }}
                           >
                             {study.title}
@@ -190,24 +194,26 @@ export default function Landing() {
 
       {/* 1. Top Header Zone */}
       <header className="h-auto md:h-[160px] flex-none flex flex-col bg-white relative z-10 transition-colors duration-300">
-        <div className="flex-1 flex flex-col justify-center items-center pt-4 md:pt-6 pb-4 md:pb-6 px-4">
+        <div className="flex-1 flex flex-col justify-center items-center pt-3 sm:pt-4 md:pt-6 pb-3 sm:pb-4 md:pb-6 px-4">
           {/* Line 1: Site Logo */}
-          <div className="mb-3 md:mb-5">
+          <div className="mb-2 sm:mb-3 md:mb-5">
             <Link href="/">
               <img 
                 src={logoImage} 
                 alt="Gray Solutions Logo" 
-                className="h-10 md:h-16 w-auto dark:invert cursor-pointer" 
+                className="h-8 sm:h-10 md:h-16 w-auto dark:invert cursor-pointer" 
               />
             </Link>
           </div>
           
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden absolute right-4 top-4 p-2"
+            className="md:hidden absolute right-3 sm:right-4 top-3 sm:top-4 p-2 hover:bg-gray-100 rounded-lg transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            data-testid="mobile-menu-toggle"
           >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
           
           {/* Line 2: Primary Navigation - Desktop */}
@@ -238,38 +244,45 @@ export default function Landing() {
           </nav>
 
           {/* Mobile Navigation */}
-          {mobileMenuOpen && (
-            <nav className="md:hidden w-full mt-4 pb-4 border-t border-gray-100 pt-4">
-              <ul className="flex flex-col items-center gap-4">
-                {navItems.map((item) => {
-                  const isActive = location === item.href;
-                  return (
-                    <li key={item.label}>
-                      <Link href={item.href}>
-                        <span 
-                          className={`
-                            text-[16px] tracking-tight transition-colors duration-200 cursor-pointer
-                            ${isActive 
-                              ? "text-black font-medium" 
-                              : "text-[#8A8A8A] font-normal"
-                            }
-                          `}
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          {item.label}
-                        </span>
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </nav>
-          )}
+          <AnimatePresence>
+            {mobileMenuOpen && (
+              <motion.nav 
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.2 }}
+                className="md:hidden w-full mt-3 sm:mt-4 border-t border-gray-100 overflow-hidden"
+              >
+                <ul className="flex flex-col items-center gap-3 sm:gap-4 py-3 sm:py-4">
+                  {navItems.map((item) => {
+                    const isActive = location === item.href;
+                    return (
+                      <li key={item.label}>
+                        <Link href={item.href} onClick={() => setMobileMenuOpen(false)}>
+                          <span 
+                            className={`
+                              text-[15px] sm:text-[16px] tracking-tight transition-colors duration-200 cursor-pointer py-1 px-2
+                              ${isActive 
+                                ? "text-black font-medium" 
+                                : "text-[#8A8A8A] font-normal hover:text-black"
+                              }
+                            `}
+                          >
+                            {item.label}
+                          </span>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </motion.nav>
+            )}
+          </AnimatePresence>
         </div>
       </header>
 
       {/* 2. Middle Hero Zone - Video Only */}
-      <main className="flex-1 w-full bg-white overflow-hidden min-h-0">
+      <main className="flex-1 w-full bg-white overflow-hidden min-h-[150px] sm:min-h-[200px]">
         <video
           autoPlay
           muted
@@ -277,6 +290,7 @@ export default function Landing() {
           playsInline
           preload="metadata"
           className="w-full h-full object-cover"
+          style={{ minHeight: 'inherit' }}
         >
           <source src={heroVideo} type="video/mp4" />
         </video>
@@ -284,10 +298,10 @@ export default function Landing() {
 
       {/* 3. Bottom Case Studies Zone */}
       <footer className="h-auto md:h-[100px] flex-none flex flex-col bg-white dark:bg-[#111] border-t border-brand-gray-line dark:border-[#333] relative z-10 transition-colors duration-300">
-        <div className="flex-1 flex flex-col items-center justify-center py-3 md:py-4">
+        <div className="flex-1 flex flex-col items-center justify-center py-2 sm:py-3 md:py-4">
           {/* Row 1: Filters - Horizontal scroll on mobile */}
-          <div className="w-full px-2 md:px-4 mb-2 md:mb-4 overflow-x-auto">
-            <ul className="flex justify-start md:justify-evenly items-center w-max md:w-full gap-2 md:gap-0 px-2 md:px-0">
+          <div className="w-full px-2 sm:px-3 md:px-4 mb-1.5 sm:mb-2 md:mb-4 overflow-x-auto scrollbar-hide">
+            <ul className="flex justify-start md:justify-evenly items-center w-max md:w-full gap-1.5 sm:gap-2 md:gap-0 px-1 sm:px-2 md:px-0">
               {filterItems.map((filter) => {
                 const caseStudyLinks: Record<string, string> = {
                   "Magic Trucks": "/case-study/magic-trucks",
@@ -304,7 +318,7 @@ export default function Landing() {
                       <Button
                         variant="outline"
                         onClick={() => setShowAllCaseStudies(true)}
-                        className="text-[12px] md:text-[14px] px-3 md:px-4 py-1.5 md:py-2 bg-white text-black border-gray-200 hover:bg-black hover:text-white hover:border-black transition-all duration-200"
+                        className="text-[11px] sm:text-[12px] md:text-[14px] px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 h-auto min-h-[28px] sm:min-h-[32px] md:min-h-[36px] bg-white text-black border-gray-200 hover:bg-black hover:text-white hover:border-black transition-all duration-200 whitespace-nowrap"
                         data-testid="show-all-case-studies"
                       >
                         {filter}
@@ -319,7 +333,7 @@ export default function Landing() {
                       <Link href={caseStudyLink}>
                         <Button
                           variant="outline"
-                          className="text-[12px] md:text-[14px] px-3 md:px-4 py-1.5 md:py-2 bg-white text-black border-gray-200 hover:bg-black hover:text-white hover:border-black transition-all duration-200"
+                          className="text-[11px] sm:text-[12px] md:text-[14px] px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 h-auto min-h-[28px] sm:min-h-[32px] md:min-h-[36px] bg-white text-black border-gray-200 hover:bg-black hover:text-white hover:border-black transition-all duration-200 whitespace-nowrap"
                         >
                           {filter}
                         </Button>
@@ -332,7 +346,7 @@ export default function Landing() {
                   <li key={filter} className="flex-shrink-0">
                     <Button
                       variant="outline"
-                      className="text-[12px] md:text-[14px] px-3 md:px-4 py-1.5 md:py-2 bg-white text-black border-gray-200 hover:bg-black hover:text-white hover:border-black transition-all duration-200"
+                      className="text-[11px] sm:text-[12px] md:text-[14px] px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 h-auto min-h-[28px] sm:min-h-[32px] md:min-h-[36px] bg-white text-black border-gray-200 hover:bg-black hover:text-white hover:border-black transition-all duration-200 whitespace-nowrap"
                     >
                       {filter}
                     </Button>
@@ -343,7 +357,7 @@ export default function Landing() {
           </div>
           
           {/* Row 2: Label */}
-          <span className="text-[13px] md:text-[15px] text-gray-600 dark:text-gray-400 font-medium tracking-wide transition-colors">
+          <span className="text-[11px] sm:text-[13px] md:text-[15px] text-gray-600 dark:text-gray-400 font-medium tracking-wide transition-colors">
             Case Studies
           </span>
         </div>
