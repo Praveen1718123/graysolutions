@@ -471,7 +471,7 @@ export default function Services() {
           {/* Scrolling Content */}
           <motion.div
             className="flex gap-6"
-            animate={{ x: [0, -1600] }}
+            animate={{ x: [0, -1900] }}
             transition={{
               x: {
                 repeat: Infinity,
@@ -485,28 +485,34 @@ export default function Services() {
               <React.Fragment key={setIndex}>
                 {[
                   {
-                    quote: "Their strategic insight and hands-on approach helped us streamline operations and unlock new growth opportunities. We saw measurable results within months.",
-                    name: "Cameron Williamson",
-                    role: "CEO, TechStart",
-                    avatar: "CW",
+                    quote: "Gray Solutions were insanely clear from day one — scope, timelines, and what's realistic. They executed fast, shared progress without us chasing, and delivered exactly what we needed.",
+                    name: "Vimal Baskaran",
+                    role: "Founder, GoGauge",
+                    avatar: "VB",
                   },
                   {
-                    quote: "Their consultants didn't just offer advice—they rolled up their sleeves and worked alongside us to solve complex challenges and deliver real results.",
-                    name: "Theresa Webb",
-                    role: "Product Director",
-                    avatar: "TW",
+                    quote: "What I liked most was their speed + structure. No random promises — just a clean plan, sharp creatives, and consistent delivery. Communication was solid throughout.",
+                    name: "Sarath",
+                    role: "Founder, Eagle",
+                    avatar: "SA",
                   },
                   {
-                    quote: "One of the things that impressed us most was their transparency and communication. We were kept in the loop at every stage of the project.",
-                    name: "Annette Black",
-                    role: "Founder, Retail Co",
-                    avatar: "AB",
+                    quote: "They didn't just 'build a website' — they helped us position the brand properly. Clean UI, strong messaging, and a process that felt professional end-to-end.",
+                    name: "Vignesh Selvaganapathy",
+                    role: "Founder, Modulr Homes",
+                    avatar: "VS",
                   },
                   {
-                    quote: "They provided clarity where we had confusion, and direction where we had chaos. One of the best investments we've made as a company.",
-                    name: "Jane Cooper",
-                    role: "Operations Lead",
-                    avatar: "JC",
+                    quote: "Gray Solutions understood the product quickly and translated it into real output — design + development + launch support. Smooth coordination and zero confusion.",
+                    name: "Jagadish",
+                    role: "Founder, TIX",
+                    avatar: "JG",
+                  },
+                  {
+                    quote: "Their work feels premium. From branding to content direction, everything was aligned and polished. The best part — they don't disappear after delivery.",
+                    name: "Velmurugan",
+                    role: "Founder, KOPO",
+                    avatar: "VM",
                   },
                 ].map((testimonial, index) => (
                   <div
