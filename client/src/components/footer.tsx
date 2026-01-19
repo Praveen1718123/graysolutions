@@ -18,10 +18,10 @@ export default function Footer({ hideNewsletter = false }: FooterProps) {
       { label: "Contact", href: "/contact" },
     ],
     col2: [
-      { label: "Magic Trucks", href: "/case-study/magic-trucks" },
-      { label: "Eagle", href: "/case-study/eagle" },
-      { label: "TIX", href: "/case-study/tix" },
       { label: "GoGauge", href: "/case-study/gogauge" },
+      { label: "Eagle", href: "/case-study/eagle" },
+      { label: "Magic Trucks", href: "/case-study/magic-trucks" },
+      { label: "TIX", href: "/case-study/tix" },
       { label: "Gray", href: "/case-study/gray-solutions" },
     ],
   };

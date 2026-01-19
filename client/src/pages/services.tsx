@@ -19,6 +19,14 @@ export default function Services() {
   const [isScrolled, setIsScrolled] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [activeServiceIndex, setActiveServiceIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const capabilities = [
     {
@@ -205,8 +213,8 @@ export default function Services() {
 
         {/* Full-Width Service Cards with Rounded Corners and Gaps */}
         <div 
-          className="flex w-full gap-3 px-3"
-          style={{ height: '80vh', minHeight: '500px' }}
+          className="flex flex-col md:flex-row w-full gap-3 px-3"
+          style={{ minHeight: '500px' }}
         >
           {[
             {
@@ -249,10 +257,13 @@ export default function Services() {
               key={service.id} 
               href={service.href} 
               data-testid={`link-service-${service.id}`}
-              className={`group relative overflow-hidden cursor-pointer transition-all duration-500 ease-out rounded-2xl ${
-                activeServiceIndex === index ? 'flex-[2.5]' : 'flex-1'
-              }`}
-              style={{ minWidth: '80px' }}
+              className="group relative overflow-hidden cursor-pointer transition-all duration-500 ease-out rounded-2xl"
+              style={{ 
+                minWidth: isMobile ? 'auto' : '80px', 
+                minHeight: '180px',
+                flex: isMobile ? 'none' : (activeServiceIndex === index ? '2.5' : '1'),
+                height: isMobile ? '200px' : 'auto',
+              }}
               onMouseEnter={() => setActiveServiceIndex(index)}
             >
               {'bgVideo' in service ? (
@@ -303,16 +314,12 @@ export default function Services() {
                   </h3>
                   
                   <p 
-                    className={`text-sm leading-relaxed text-white/70 transition-all duration-500 max-w-xs ${
-                      activeServiceIndex === index ? 'opacity-100 max-h-20' : 'opacity-0 max-h-0 overflow-hidden'
-                    }`}
+                    className="text-sm leading-relaxed text-white/70 max-w-xs"
                   >
                     {service.description}
                   </p>
                   
-                  <div className={`transition-all duration-500 ${
-                    activeServiceIndex === index ? 'opacity-100 mt-4 max-h-12' : 'opacity-0 max-h-0 mt-0 overflow-hidden'
-                  }`}>
+                  <div className="mt-4">
                     <span className="inline-flex items-center gap-2 text-white text-sm font-medium border border-white/50 rounded-full px-4 py-2 hover:bg-white hover:text-black transition-colors">
                       Learn More
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

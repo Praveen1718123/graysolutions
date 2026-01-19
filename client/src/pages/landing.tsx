@@ -34,11 +34,11 @@ export default function Landing() {
 
   const caseStudies = [
     {
-      id: "magic-trucks",
-      client: "Magic Trucks",
-      title: "Real-time logistics tracking for India's trucking ecosystem",
-      image: magicTrucksImage,
-      href: "/case-study/magic-trucks",
+      id: "gogauge",
+      client: "GoGauge",
+      title: "Complete brand identity for marine & logistics leader",
+      image: goGaugeImage,
+      href: "/case-study/gogauge",
       aspectRatio: "landscape",
     },
     {
@@ -50,20 +50,20 @@ export default function Landing() {
       aspectRatio: "landscape",
     },
     {
+      id: "magic-trucks",
+      client: "Magic Trucks",
+      title: "Real-time logistics tracking for India's trucking ecosystem",
+      image: magicTrucksImage,
+      href: "/case-study/magic-trucks",
+      aspectRatio: "landscape",
+    },
+    {
       id: "tix",
       client: "TIX",
       title: "A seamless movie and event booking experience",
       image: tixImage,
       href: "/case-study/tix",
       aspectRatio: "portrait",
-    },
-    {
-      id: "gogauge",
-      client: "GoGauge",
-      title: "Complete brand identity for marine & logistics leader",
-      image: goGaugeImage,
-      href: "/case-study/gogauge",
-      aspectRatio: "landscape",
     },
     {
       id: "gray-solutions",
