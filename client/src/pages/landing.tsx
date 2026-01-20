@@ -26,7 +26,7 @@ export default function Landing() {
   const filterItems = [
     "GoGauge",
     "Eagle",
-    "Modulr Homes",
+    "Gray Solutions",
     "TIX",
     "KOPO",
     "Show All",
@@ -50,11 +50,11 @@ export default function Landing() {
       aspectRatio: "landscape",
     },
     {
-      id: "modulr-homes",
-      client: "Modulr Homes",
-      title: "Brand positioning and website for modular construction",
+      id: "gray-solutions",
+      client: "Gray Solutions",
+      title: "Designing our own digital presence from scratch",
       image: graySolutionsImage,
-      href: "/case-study/modulr-homes",
+      href: "/case-study/gray-solutions",
       aspectRatio: "landscape",
     },
     {
@@ -71,6 +71,18 @@ export default function Landing() {
       title: "Premium branding and content direction",
       image: magicTrucksImage,
       href: "/case-study/kopo",
+      aspectRatio: "landscape",
+    },
+  ];
+
+  const allCaseStudies = [
+    ...caseStudies,
+    {
+      id: "modulr-homes",
+      client: "Modulr Homes",
+      title: "Brand positioning and website for modular construction",
+      image: graySolutionsImage,
+      href: "/case-study/modulr-homes",
       aspectRatio: "landscape",
     },
   ];
@@ -139,7 +151,7 @@ export default function Landing() {
 
               {/* Case Studies Grid - Single column on mobile */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-                {caseStudies.map((study, index) => (
+                {allCaseStudies.map((study, index) => (
                   <motion.div
                     key={study.id}
                     initial={{ opacity: 0, y: 30 }}
