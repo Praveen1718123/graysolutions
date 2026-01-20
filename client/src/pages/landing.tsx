@@ -24,11 +24,11 @@ export default function Landing() {
   ];
 
   const filterItems = [
-    "Magic Trucks",
-    "Eagle",
-    "TIX",
     "GoGauge",
-    "Gray Solutions",
+    "Eagle",
+    "Modulr Homes",
+    "TIX",
+    "KOPO",
     "Show All",
   ];
 
@@ -50,11 +50,11 @@ export default function Landing() {
       aspectRatio: "landscape",
     },
     {
-      id: "magic-trucks",
-      client: "Magic Trucks",
-      title: "Real-time logistics tracking for India's trucking ecosystem",
-      image: magicTrucksImage,
-      href: "/case-study/magic-trucks",
+      id: "modulr-homes",
+      client: "Modulr Homes",
+      title: "Brand positioning and website for modular construction",
+      image: graySolutionsImage,
+      href: "/case-study/modulr-homes",
       aspectRatio: "landscape",
     },
     {
@@ -66,11 +66,11 @@ export default function Landing() {
       aspectRatio: "portrait",
     },
     {
-      id: "gray-solutions",
-      client: "Gray Solutions",
-      title: "Designing our own digital presence from scratch",
-      image: graySolutionsImage,
-      href: "/case-study/gray-solutions",
+      id: "kopo",
+      client: "KOPO",
+      title: "Premium branding and content direction",
+      image: magicTrucksImage,
+      href: "/case-study/kopo",
       aspectRatio: "landscape",
     },
   ];

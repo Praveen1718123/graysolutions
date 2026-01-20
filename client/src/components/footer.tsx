@@ -20,9 +20,9 @@ export default function Footer({ hideNewsletter = false }: FooterProps) {
     col2: [
       { label: "GoGauge", href: "/case-study/gogauge" },
       { label: "Eagle", href: "/case-study/eagle" },
-      { label: "Magic Trucks", href: "/case-study/magic-trucks" },
+      { label: "Modulr Homes", href: "/case-study/modulr-homes" },
       { label: "TIX", href: "/case-study/tix" },
-      { label: "Gray", href: "/case-study/gray-solutions" },
+      { label: "KOPO", href: "/case-study/kopo" },
     ],
   };
 
