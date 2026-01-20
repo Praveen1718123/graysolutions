@@ -125,22 +125,6 @@ export default function Eagle() {
                 A full brand identity system designed to make Eagle look consistent, credible, and "enterprise-ready" across print, safety gear, equipment, and industrial environments.
               </p>
               
-              {/* CTAs */}
-              <div className="flex flex-wrap gap-3 md:gap-4 mb-8">
-                <button 
-                  className="px-5 md:px-7 py-3 md:py-3.5 rounded-full font-medium text-sm transition-all"
-                  style={{ backgroundColor: '#DC2626', color: '#FFFFFF' }}
-                >
-                  View Brand System
-                </button>
-                <button 
-                  className="px-5 md:px-7 py-3 md:py-3.5 rounded-full font-medium text-sm transition-all hover:bg-gray-100"
-                  style={{ backgroundColor: 'transparent', color: '#1A1A1A', border: '1px solid #E5E5E5' }}
-                >
-                  Talk to Gray Solutions
-                </button>
-              </div>
-
               {/* Quick Stats */}
               <div className="flex flex-wrap gap-2">
                 {["Brand Identity", "Guidelines", "Print + Physical Assets", "Industrial / Port Ops"].map((tag) => (

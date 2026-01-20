@@ -104,17 +104,6 @@ export default function GoGauge() {
                 A complete brand identity and digital presence for GoGauge, a project forwarding and marine logistics company operating across Singapore, Malaysia, India, and UAE.
               </p>
               
-              <div className="flex gap-4 mb-8">
-                <Link href="/contact">
-                  <button 
-                    className="px-7 py-3.5 rounded-full font-medium text-sm transition-all"
-                    style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}
-                  >
-                    Start Your Project
-                  </button>
-                </Link>
-              </div>
-
               <div className="flex flex-wrap gap-2">
                 {services.slice(0, 4).map((tag) => (
                   <span 
