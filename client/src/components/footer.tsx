@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "wouter";
-import logoWhite from "@assets/Group_25_(4)_1766734677573.png";
+import logoWhite from "@assets/Frame_33_copy2_1_(1)_1768900373646.png";
 
 interface FooterProps {
   hideNewsletter?: boolean;
