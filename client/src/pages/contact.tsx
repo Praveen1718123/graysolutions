@@ -87,7 +87,7 @@ export default function Contact() {
               alt="Gray Solutions Logo" 
               className="cursor-pointer"
               style={{
-                height: isScrolled ? '24px' : '36px',
+                height: isScrolled ? '28px' : '48px',
                 width: 'auto',
                 transition: 'height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
               }}

@@ -59,7 +59,7 @@ export default function ServiceCommerce() {
               src={logoImage} 
               alt="Gray Logo" 
               className="cursor-pointer"
-              style={{ height: isScrolled ? '24px' : '36px', width: 'auto' }}
+              style={{ height: isScrolled ? '28px' : '48px', width: 'auto' }}
               data-testid="logo-nav"
             />
           </Link>

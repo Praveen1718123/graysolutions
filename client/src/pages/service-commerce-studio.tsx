@@ -164,7 +164,7 @@ export default function ServiceCommerceStudio() {
               src={logoImage} 
               alt="Gray Logo" 
               className="cursor-pointer"
-              style={{ height: isScrolled ? '24px' : '36px', width: 'auto', filter: isScrolled ? 'none' : 'brightness(0) invert(1)' }}
+              style={{ height: isScrolled ? '28px' : '48px', width: 'auto', filter: isScrolled ? 'none' : 'brightness(0) invert(1)' }}
               data-testid="logo-nav"
             />
           </Link>
