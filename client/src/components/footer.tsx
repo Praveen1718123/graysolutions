@@ -117,7 +117,7 @@ export default function Footer({ hideNewsletter = false }: FooterProps) {
               <ul className="space-y-1.5 sm:space-y-1">
                 {navLinks.col1.map((link, idx) => (
                   <li key={idx}>
-                    <Link href={link.href}>
+                    <Link href={link.href} onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
                       <span 
                         className="text-sm hover:text-white transition-colors cursor-pointer"
                         style={{ color: 'rgba(255,255,255,0.6)' }}
@@ -131,7 +131,7 @@ export default function Footer({ hideNewsletter = false }: FooterProps) {
               <ul className="space-y-1.5 sm:space-y-1">
                 {navLinks.col2.map((link, idx) => (
                   <li key={idx}>
-                    <Link href={link.href}>
+                    <Link href={link.href} onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
                       <span 
                         className="text-sm hover:text-white transition-colors cursor-pointer"
                         style={{ color: 'rgba(255,255,255,0.6)' }}

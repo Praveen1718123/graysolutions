@@ -262,12 +262,12 @@ export default function Contact() {
                       Email
                     </span>
                     <a 
-                      href="mailto:hello@graysolutions.in"
+                      href="mailto:connect@graysolutions.in"
                       className="text-base font-medium hover:opacity-70 transition-opacity"
                       style={{ color: '#1A1A1A' }}
                       data-testid="link-email"
                     >
-                      hello@graysolutions.in
+                      connect@graysolutions.in
                     </a>
                   </div>
                 </div>
@@ -290,12 +290,12 @@ export default function Contact() {
                       Call
                     </span>
                     <a 
-                      href="tel:+919876543210"
+                      href="tel:+916380267018"
                       className="text-base font-medium hover:opacity-70 transition-opacity"
                       style={{ color: '#1A1A1A' }}
                       data-testid="link-phone"
                     >
-                      +91 98765 43210
+                      +91 63802 67018
                     </a>
                   </div>
                 </div>
