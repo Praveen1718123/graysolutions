@@ -3,7 +3,7 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import logoImage from "@assets/Frame_33_copy2_2_(1)_1768895375486.png";
+import logoImage from "@assets/Frame_33_copy2_5_1769069990169.png";
 import heroVideo from "@assets/hero-video-horizontal.mp4";
 import magicTrucksImage from "@assets/optimized/mokcup_1_1765899763586.jpg";
 import eagleImage from "@assets/optimized/Eagle_Web_2_1765901229010.jpg";
