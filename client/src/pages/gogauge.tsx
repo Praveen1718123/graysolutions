@@ -63,7 +63,10 @@ export default function GoGauge() {
         >
           <Link href="/">
             <img 
-              src={logoImage} 
+              src={logoImage}
+              width="140"
+              height="64"
+              decoding="async"
               alt="Gray Logo" 
               className="cursor-pointer"
               style={{

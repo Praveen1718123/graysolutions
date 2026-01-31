@@ -286,7 +286,10 @@ export default function BlogDetail() {
         >
           <Link href="/">
             <img 
-              src={logoImage} 
+              src={logoImage}
+              width="140"
+              height="64"
+              decoding="async"
               alt="Gray Solutions Logo" 
               className="cursor-pointer"
               style={{

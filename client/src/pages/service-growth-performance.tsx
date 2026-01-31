@@ -164,7 +164,10 @@ export default function ServiceGrowthPerformance() {
         >
           <Link href="/">
             <img 
-              src={logoImage} 
+              src={logoImage}
+              width="140"
+              height="64"
+              decoding="async"
               alt="Gray Logo" 
               className="cursor-pointer"
               style={{ height: isScrolled ? '28px' : '48px', width: 'auto', filter: isScrolled ? 'none' : 'brightness(0) invert(1)' }}

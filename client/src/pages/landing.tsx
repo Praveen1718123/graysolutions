@@ -103,11 +103,21 @@ export default function Landing() {
             <div className="sticky top-0 bg-white z-10 border-b border-gray-100">
               <div className="max-w-[1400px] mx-auto px-4 md:px-10 py-4 md:py-6 flex items-center justify-between">
                 <Link href="/">
-                  <img 
-                    src={logoImage} 
-                    alt="Gray Solutions Logo" 
-                    className="h-7 sm:h-8 md:h-10 cursor-pointer" 
-                  />
+                  <picture>
+                    <source 
+                      srcSet="/assets/logo-140.webp 140w, /assets/logo-280.webp 280w" 
+                      sizes="140px"
+                      type="image/webp"
+                    />
+                    <img 
+                      src={logoImage}
+                      width="140"
+                      height="64"
+                      decoding="async"
+                      alt="Gray Solutions Logo" 
+                      className="h-7 sm:h-8 md:h-10 cursor-pointer" 
+                    />
+                  </picture>
                 </Link>
                 <button
                   onClick={() => setShowAllCaseStudies(false)}
@@ -210,11 +220,21 @@ export default function Landing() {
           {/* Line 1: Site Logo */}
           <div className="mb-2 sm:mb-3 md:mb-5">
             <Link href="/">
-              <img 
-                src={logoImage} 
-                alt="Gray Solutions Logo" 
-                className="h-8 sm:h-10 md:h-16 w-auto dark:invert cursor-pointer" 
-              />
+              <picture>
+                <source 
+                  srcSet="/assets/logo-140.webp 140w, /assets/logo-280.webp 280w" 
+                  sizes="140px"
+                  type="image/webp"
+                />
+                <img 
+                  src={logoImage} 
+                  alt="Gray Solutions Logo" 
+                  width="140"
+                  height="64"
+                  decoding="async"
+                  className="h-8 sm:h-10 md:h-16 w-auto dark:invert cursor-pointer" 
+                />
+              </picture>
             </Link>
           </div>
           

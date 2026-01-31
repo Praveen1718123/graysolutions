@@ -1,0 +1,75 @@
+Goal: Optimize assets + loading for graysolutions.in without any UI/UX changes (no visual changes, no layout changes, no animation changes). Only performance improvements. Current PSI flags: oversized logo image (~96KiB savings), unused JS (~267KiB) in main bundle, some images missing width/height, some render-blocking.
+
+Do the following exactly:
+
+Logo optimization (NO visual change)
+
+Find the logo file currently served from /assets/Frame_33_copy2_2_(1)_*.png (huge dimensions but displayed ~140×64).
+
+Generate optimized versions:
+
+logo-140.webp and logo-280.webp (retina)
+
+Keep same transparency/background and same look.
+
+Update the logo <img>:
+
+Keep existing CSS classes exactly the same.
+
+Add width="140" height="64" (use the actual rendered size you use in CSS, match ratio).
+
+Add decoding="async".
+
+Add srcset="/assets/logo-140.webp 140w, /assets/logo-280.webp 280w" and sizes="140px".
+
+Keep alt unchanged.
+
+Fix image dimensions across site (NO UI change)
+
+For every <img> tag in the project:
+
+Add explicit width and height attributes matching each image’s intrinsic ratio (don’t change CSS).
+
+Do not modify styling or layout.
+
+Lazy-load non-critical images
+
+Add loading="lazy" + decoding="async" to all images except the first above-the-fold hero/LCP image.
+
+Keep hero image eager (no lazy).
+
+Reduce unused JS (~267KiB) without changing behavior
+
+Identify unused imports/components and remove them.
+
+Implement code-splitting for non-critical sections:
+
+Case studies section / below-the-fold sections / heavy visual components should be loaded via dynamic import (React.lazy + Suspense or framework equivalent).
+
+Ensure final rendered UI remains identical after load.
+
+No features removed, only deferred loading.
+
+Remove render-blocking
+
+Ensure non-critical scripts load with defer (or framework best practice).
+
+If fonts/external origins exist, add preconnect links in <head> (do not change fonts visually).
+
+Caching headers (safe)
+
+Configure static assets caching:
+
+/assets/* (hashed build assets) → Cache-Control: public, max-age=31536000, immutable
+
+Keep HTML short cache or no-cache.
+
+Output needed:
+
+Show exact files changed + code diffs.
+
+Confirm /about-us and /contact-us routes work.
+
+Run Lighthouse/PageSpeed again and report updated Mobile: Performance score, FCP, LCP.
+
+Constraint: Do NOT change UI visuals or layout at all.

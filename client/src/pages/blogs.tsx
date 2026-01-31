@@ -42,7 +42,10 @@ export default function Blogs() {
         >
           <Link href="/">
             <img 
-              src={logoImage} 
+              src={logoImage}
+              width="140"
+              height="64"
+              decoding="async"
               alt="Gray Logo" 
               className="cursor-pointer"
               style={{ height: isScrolled ? '28px' : '48px', width: 'auto', filter: isScrolled ? 'none' : 'brightness(0) invert(1)' }}
@@ -61,7 +64,10 @@ export default function Blogs() {
         }}
       >
         <img 
-          src={logoImage} 
+          src={logoImage}
+              width="140"
+              height="64"
+              decoding="async"
           alt="Gray Logo" 
           className="absolute top-6 right-6 md:top-10 md:right-10 z-20"
           style={{ height: '32px', width: 'auto' }}
