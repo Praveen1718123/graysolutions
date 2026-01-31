@@ -8,6 +8,10 @@ export async function registerRoutes(
   app: Express
 ): Promise<Server> {
   
+  // Redirects for old URLs
+  app.get("/about-us", (_req, res) => res.redirect(301, "/about"));
+  app.get("/contact-us", (_req, res) => res.redirect(301, "/contact"));
+  
   // Get all case studies or filter by category
   app.get("/api/case-studies", async (req, res) => {
     try {
