@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import logoImage from "@assets/Frame_33_copy2_2_(1)_1768895375486.png";
 import Footer from "@/components/footer";
+import { getUseCasesForService } from "@/data/services";
 
 export default function ServiceAutomationsAI() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -377,20 +378,8 @@ export default function ServiceAutomationsAI() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
               >
-                <span 
-                  className="text-xs font-semibold tracking-wide px-4 py-1.5 rounded-full self-start mb-4"
-                  style={{ backgroundColor: (pkg as any).featured ? '#1A1A1A' : '#F0F0F0', color: (pkg as any).featured ? '#FFFFFF' : '#1A1A1A' }}
-                >
-                  {pkg.badge}
-                </span>
                 <h3 className="text-2xl font-bold mb-2" style={{ color: '#1A1A1A' }}>{pkg.name}</h3>
-                <p className="text-sm mb-2" style={{ color: '#666666' }}>{pkg.description}</p>
-                <p className="text-xs mb-6" style={{ color: '#999999' }}>Timeline: {pkg.timeline}</p>
-                <Link href="/contact" className="mb-6">
-                  <button className="w-full py-3.5 rounded-full font-medium text-sm transition-all hover:opacity-90" style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}>
-                    Get Started
-                  </button>
-                </Link>
+                <p className="text-sm mb-6" style={{ color: '#666666' }}>{pkg.description}</p>
                 <ul className="space-y-3 mt-auto">
                   {pkg.features.map((feature, featureIdx) => (
                     <li key={featureIdx} className="flex items-start gap-3">
@@ -501,6 +490,54 @@ export default function ServiceAutomationsAI() {
                     <p className="text-base leading-relaxed" style={{ color: '#666666' }}>{faq.a}</p>
                   </div>
                 )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 md:py-28" style={{ backgroundColor: '#FFFFFF' }}>
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+          <div className="text-center mb-12">
+            <span className="text-sm font-medium tracking-wide mb-3 block" style={{ color: '#666666' }}>Real Work</span>
+            <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 4vw, 42px)', lineHeight: '1.15', color: '#1A1A1A', letterSpacing: '-0.02em' }}>
+              Recommended Use Cases
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {getUseCasesForService("automations-ai").map((uc, idx) => (
+              <motion.div
+                key={uc.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: idx * 0.1 }}
+              >
+                <Link href={uc.href}>
+                  <div
+                    className="p-8 rounded-3xl h-full transition-all duration-300 hover:shadow-lg cursor-pointer"
+                    style={{ backgroundColor: '#FAFAFA', border: '1px solid #E5E5E5' }}
+                    data-testid={`use-case-${uc.id}`}
+                  >
+                    <div className="flex items-center gap-3 mb-4">
+                      <h3 className="text-xl font-bold" style={{ color: '#1A1A1A' }}>{uc.title}</h3>
+                      {(uc as any).inProgress && (
+                        <span className="text-xs font-medium px-3 py-1 rounded-full" style={{ backgroundColor: '#FFF3CD', color: '#856404' }}>
+                          In Progress
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-base leading-relaxed" style={{ color: '#666666' }}>
+                      {uc.shortDescription}
+                    </p>
+                    <div className="mt-6 flex items-center gap-2">
+                      <span className="text-sm font-medium" style={{ color: '#1A1A1A' }}>View Details</span>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </div>
+                  </div>
+                </Link>
               </motion.div>
             ))}
           </div>

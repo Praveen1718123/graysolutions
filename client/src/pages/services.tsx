@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import logoImage from "@assets/Frame_33_copy2_2_(1)_1768895375486.png";
 import Footer from "@/components/footer";
+import { services as servicesData } from "@/data/services";
 import brandDesignImg from "@assets/stock_images/professional_brand_d_908b1411.jpg";
 import productDesignImg from "@assets/stock_images/modern_digital_produ_807a649b.jpg";
 import webPlatformImg from "@assets/stock_images/web_development_codi_7cf7da0f.jpg";
@@ -219,121 +220,72 @@ export default function Services() {
           className="flex flex-col md:flex-row w-full gap-3 px-3"
           style={{ minHeight: '500px' }}
         >
-          {[
-            {
-              id: 'brand-content',
-              title: 'Brand & Content Studio',
-              description: 'Brand positioning, messaging, creative direction, content strategy, reels/editing, founder brand.',
-              href: '/services/brand-content',
-              bgVideo: '/assets/brand-content-video.mp4',
-            },
-            {
-              id: 'growth-performance',
-              title: 'Growth & Performance',
-              description: 'Paid ads, funnels, landing pages, CRO, analytics, lead-gen.',
-              href: '/services/growth-performance',
-              bgVideo: '/assets/growth-performance-video.mp4',
-            },
-            {
-              id: 'product-web',
-              title: 'Product & Web Studio',
-              description: 'UI/UX, websites, MVP builds, web apps, product design + development.',
-              href: '/services/product-web',
-              bgVideo: '/assets/product-web-video.mp4',
-            },
-            {
-              id: 'commerce-studio',
-              title: 'Commerce Studio',
-              description: 'Shopify builds/revamps, product pages, checkout optimization, email/SMS flows, integrations.',
-              href: '/services/commerce-studio',
-              bgVideo: '/assets/commerce-studio-video.mp4',
-            },
-            {
-              id: 'automations-ai',
-              title: 'Automations & AI',
-              description: 'Lead capture → CRM → follow-ups → pipeline updates → dashboards. AI-assisted content ops.',
-              href: '/services/automations-ai',
-              bgVideo: '/assets/automations-ai-video.mp4',
-            },
-          ].map((service, index) => (
-            <Link 
-              key={service.id} 
-              href={service.href} 
-              data-testid={`link-service-${service.id}`}
-              className="group relative overflow-hidden cursor-pointer transition-all duration-500 ease-out rounded-2xl"
-              style={{ 
-                minWidth: isMobile ? 'auto' : '80px', 
-                minHeight: '180px',
-                flex: isMobile ? 'none' : (activeServiceIndex === index ? '2.5' : '1'),
-                height: isMobile ? '200px' : 'auto',
-              }}
-              onMouseEnter={() => setActiveServiceIndex(index)}
-            >
-              {'bgVideo' in service ? (
-                <video
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  src={service.bgVideo}
-                  muted
-                  loop
-                  playsInline
-                  ref={(el) => {
-                    if (el) {
-                      if (activeServiceIndex === index) {
-                        el.play().catch(() => {});
-                      } else {
-                        el.pause();
-                      }
-                    }
-                  }}
-                />
-              ) : 'bgGif' in service ? (
-                <div 
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                  style={{ 
-                    backgroundImage: `url(${service.bgGif})`,
-                  }}
-                />
-              ) : (
-                <div 
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                  style={{ 
-                    backgroundImage: `url(${(service as any).bgImage})`,
-                  }}
-                />
-              )}
-              <div 
-                className="absolute inset-0 transition-opacity duration-500"
+          {servicesData.map((service, index) => {
+            const bgVideos: Record<string, string> = {
+              'brand-content': '/assets/brand-content-video.mp4',
+              'growth-performance': '/assets/growth-performance-video.mp4',
+              'product-web': '/assets/product-web-video.mp4',
+              'commerce-studio': '/assets/commerce-studio-video.mp4',
+              'automations-ai': '/assets/automations-ai-video.mp4',
+            };
+            const bgVideo = bgVideos[service.id];
+            return (
+              <Link 
+                key={service.id} 
+                href={service.href} 
+                data-testid={`link-service-${service.id}`}
+                className="group relative overflow-hidden cursor-pointer transition-all duration-500 ease-out rounded-2xl"
                 style={{ 
-                  background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.3) 100%)',
+                  minWidth: isMobile ? 'auto' : '80px', 
+                  minHeight: '180px',
+                  flex: isMobile ? 'none' : (activeServiceIndex === index ? '2.5' : '1'),
+                  height: isMobile ? '200px' : 'auto',
                 }}
-              />
-              
-              <div className="relative z-10 h-full flex flex-col p-6">
-                <div className="mt-auto">
-                  <h3 
-                    className="text-lg md:text-xl font-bold leading-tight text-white mb-2 transition-all duration-300"
-                  >
-                    {service.title}
-                  </h3>
-                  
-                  <p 
-                    className="text-sm leading-relaxed text-white/70 max-w-xs"
-                  >
-                    {service.description}
-                  </p>
-                  
-                  <div className="mt-4">
-                    <span className="inline-flex items-center gap-2 text-white text-sm font-medium border border-white/50 rounded-full px-4 py-2 hover:bg-white hover:text-black transition-colors">
-                      Learn More
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                      </svg>
-                    </span>
+                onMouseEnter={() => setActiveServiceIndex(index)}
+              >
+                {bgVideo && (
+                  <video
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    src={bgVideo}
+                    muted
+                    loop
+                    playsInline
+                    ref={(el) => {
+                      if (el) {
+                        if (activeServiceIndex === index) {
+                          el.play().catch(() => {});
+                        } else {
+                          el.pause();
+                        }
+                      }
+                    }}
+                  />
+                )}
+                <div 
+                  className="absolute inset-0 transition-opacity duration-500"
+                  style={{ 
+                    background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.3) 100%)',
+                  }}
+                />
+                
+                <div className="relative z-10 h-full flex flex-col p-6">
+                  <div className="mt-auto">
+                    <h3 
+                      className="text-lg md:text-xl font-bold leading-tight text-white mb-2 transition-all duration-300"
+                    >
+                      {service.title}
+                    </h3>
+                    
+                    <p 
+                      className="text-sm leading-relaxed text-white/70 max-w-xs"
+                    >
+                      {service.thumbnailSubtext}
+                    </p>
                   </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
         </div>
       </section>
 

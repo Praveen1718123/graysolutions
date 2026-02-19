@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import logoImage from "@assets/Frame_33_copy2_2_(1)_1768895375486.png";
 import Footer from "@/components/footer";
+import { services as allServices } from "@/data/services";
 import heroImage from "@assets/Go_Gauge_Slide_1-01_1767087653809.png";
 import containerImage from "@assets/6395621_2045_1767087653808.png";
 import laptopImage from "@assets/e3b89fe5-7e4b-4ce3-a4fd-7120f52e9261_1767087653809.png";
@@ -158,6 +159,29 @@ export default function GoGauge() {
                 We partnered with GoGauge to build their complete brand identity from scratch — including logo design, brand guidelines, website, digital marketing, social media presence, and all print collateral.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-10 md:py-14" style={{ backgroundColor: '#FFFFFF' }}>
+        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
+          <div className="flex flex-wrap gap-3">
+            {allServices
+              .filter((s) => ["brand-content", "growth-performance", "product-web"].includes(s.id))
+              .map((s) => (
+                <Link key={s.id} href={s.href}>
+                  <span
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer hover:shadow-md"
+                    style={{ backgroundColor: '#F5F5F5', color: '#1A1A1A', border: '1px solid #E5E5E5' }}
+                    data-testid={`service-chip-${s.id}`}
+                  >
+                    {s.title}
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </span>
+                </Link>
+              ))}
           </div>
         </div>
       </section>
