@@ -392,20 +392,8 @@ export default function ServiceGrowthPerformance() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
               >
-                <span 
-                  className="text-xs font-semibold tracking-wide px-4 py-1.5 rounded-full self-start mb-4"
-                  style={{ backgroundColor: (pkg as any).featured ? '#1A1A1A' : '#F0F0F0', color: (pkg as any).featured ? '#FFFFFF' : '#1A1A1A' }}
-                >
-                  {pkg.badge}
-                </span>
                 <h3 className="text-2xl font-bold mb-2" style={{ color: '#1A1A1A' }}>{pkg.name}</h3>
-                <p className="text-sm mb-2" style={{ color: '#666666' }}>{pkg.description}</p>
-                <p className="text-xs mb-6" style={{ color: '#999999' }}>Timeline: {pkg.timeline}</p>
-                <Link href="/contact" className="mb-6">
-                  <button className="w-full py-3.5 rounded-full font-medium text-sm transition-all hover:opacity-90" style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}>
-                    Get Started
-                  </button>
-                </Link>
+                <p className="text-sm mb-6" style={{ color: '#666666' }}>{pkg.description}</p>
                 <ul className="space-y-3 mt-auto">
                   {pkg.features.map((feature, featureIdx) => (
                     <li key={featureIdx} className="flex items-start gap-3">
