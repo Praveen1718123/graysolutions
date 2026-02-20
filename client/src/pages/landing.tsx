@@ -8,11 +8,10 @@ import heroVideo from "@assets/hero-video-horizontal.mp4";
 import magicTrucksImage from "@assets/optimized/mokcup_1_1765899763586.jpg";
 import eagleImage from "@assets/optimized/Eagle_Web_2_1765901229010.jpg";
 import tixImage from "@assets/Free_iPhone_16_Pro_PSD_Mockup_Tix_1766597838175.jpg";
-import graySolutionsImage from "@assets/optimized/Desktop_-_4_(2)_1765460573017.jpg";
+
 import goGaugeImage from "@assets/Go_Gauge_Slide_1-01_1767087653809.png";
 
 export default function Landing() {
-  const [showAllCaseStudies, setShowAllCaseStudies] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [location] = useLocation();
 
@@ -26,10 +25,8 @@ export default function Landing() {
   const filterItems = [
     "GoGauge",
     "Eagle",
-    "Gray Solutions",
     "TIX",
     "KOPO",
-    "Show All",
   ];
 
   const caseStudies = [
@@ -50,14 +47,6 @@ export default function Landing() {
       aspectRatio: "landscape",
     },
     {
-      id: "gray-solutions",
-      client: "Gray Solutions",
-      title: "Designing our own digital presence from scratch",
-      image: graySolutionsImage,
-      href: "/case-study/gray-solutions",
-      aspectRatio: "landscape",
-    },
-    {
       id: "tix",
       client: "TIX",
       title: "A seamless movie and event booking experience",
@@ -75,145 +64,8 @@ export default function Landing() {
     },
   ];
 
-  const allCaseStudies = [
-    ...caseStudies,
-    {
-      id: "modulr-homes",
-      client: "Modulr Homes",
-      title: "Brand positioning and website for modular construction",
-      image: graySolutionsImage,
-      href: "/case-study/modulr-homes",
-      aspectRatio: "landscape",
-    },
-  ];
-
   return (
     <div className="h-screen w-full flex flex-col bg-white overflow-hidden font-sans text-brand-text-dark transition-colors duration-300">
-      {/* Case Studies Modal */}
-      <AnimatePresence>
-        {showAllCaseStudies && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 bg-white overflow-auto"
-          >
-            {/* Modal Header */}
-            <div className="sticky top-0 bg-white z-10 border-b border-gray-100">
-              <div className="max-w-[1400px] mx-auto px-4 md:px-10 py-4 md:py-6 flex items-center justify-between">
-                <Link href="/">
-                  <picture>
-                    <source 
-                      srcSet="/assets/logo-140.webp 140w, /assets/logo-280.webp 280w" 
-                      sizes="140px"
-                      type="image/webp"
-                    />
-                    <img 
-                      src={logoImage}
-                      width="140"
-                      height="64"
-                      decoding="async"
-                      alt="Gray Solutions Logo" 
-                      className="h-7 sm:h-8 md:h-10 cursor-pointer" 
-                    />
-                  </picture>
-                </Link>
-                <button
-                  onClick={() => setShowAllCaseStudies(false)}
-                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-                  data-testid="close-case-studies"
-                >
-                  <X size={24} style={{ color: '#1A1A1A' }} />
-                </button>
-              </div>
-            </div>
-
-            {/* Modal Content */}
-            <div className="max-w-[1400px] mx-auto px-4 md:px-10 py-8 md:py-16">
-              <motion.h1 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                className="font-bold mb-3 md:mb-4"
-                style={{ 
-                  fontSize: 'clamp(28px, 5vw, 52px)',
-                  lineHeight: '1.1',
-                  color: '#1A1A1A',
-                  letterSpacing: '-0.02em',
-                }}
-              >
-                Case Studies
-              </motion.h1>
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.15 }}
-                className="mb-8 md:mb-12"
-                style={{ 
-                  fontSize: 'clamp(14px, 2.5vw, 18px)',
-                  color: '#666666', 
-                  maxWidth: '600px' 
-                }}
-              >
-                Selected work showcasing our approach to design, technology, and brand building.
-              </motion.p>
-
-              {/* Case Studies Grid - Single column on mobile */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-                {allCaseStudies.map((study, index) => (
-                  <motion.div
-                    key={study.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 + index * 0.1 }}
-                  >
-                    <Link href={study.href}>
-                      <div 
-                        className="group cursor-pointer"
-                        data-testid={`case-study-card-${study.id}`}
-                      >
-                        {/* Image Container */}
-                        <div 
-                          className="relative overflow-hidden rounded-lg mb-3 md:mb-4"
-                          style={{ 
-                            aspectRatio: study.aspectRatio === 'portrait' ? '3/4' : '4/3',
-                            backgroundColor: '#F5F5F5',
-                          }}
-                        >
-                          <img 
-                            src={study.image}
-                            alt={study.title}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                            loading="lazy"
-                            decoding="async"
-                          />
-                        </div>
-                        {/* Text Content */}
-                        <div>
-                          <p 
-                            className="text-xs sm:text-sm mb-1 sm:mb-2"
-                            style={{ color: '#666666' }}
-                          >
-                            {study.client}
-                          </p>
-                          <h3 
-                            className="text-base sm:text-lg font-medium leading-snug group-hover:text-gray-600 transition-colors"
-                            style={{ color: '#1A1A1A' }}
-                          >
-                            {study.title}
-                          </h3>
-                        </div>
-                      </div>
-                    </Link>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* 1. Top Header Zone */}
       <header className="h-auto md:h-[160px] flex-none flex flex-col bg-white relative z-10 transition-colors duration-300">
         <div className="flex-1 flex flex-col justify-center items-center pt-3 sm:pt-4 md:pt-6 pb-3 sm:pb-4 md:pb-6 px-4">
@@ -340,24 +192,8 @@ export default function Landing() {
                   "Eagle": "/case-study/eagle",
                   "TIX": "/case-study/tix",
                   "GoGauge": "/case-study/gogauge",
-                  "Gray Solutions": "/case-study/gray-solutions",
                 };
                 const caseStudyLink = caseStudyLinks[filter] || null;
-                
-                if (filter === "Show All") {
-                  return (
-                    <li key={filter} className="flex-shrink-0">
-                      <Button
-                        variant="outline"
-                        onClick={() => setShowAllCaseStudies(true)}
-                        className="text-[11px] sm:text-[12px] md:text-[14px] px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 h-auto min-h-[28px] sm:min-h-[32px] md:min-h-[36px] bg-white text-black border-gray-200 hover:bg-black hover:text-white hover:border-black transition-all duration-200 whitespace-nowrap"
-                        data-testid="show-all-case-studies"
-                      >
-                        {filter}
-                      </Button>
-                    </li>
-                  );
-                }
                 
                 if (caseStudyLink) {
                   return (
