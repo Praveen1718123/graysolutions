@@ -47,20 +47,20 @@ export default function Landing() {
       aspectRatio: "landscape",
     },
     {
-      id: "tix",
-      client: "TIX",
-      title: "A seamless movie and event booking experience",
-      image: tixImage,
-      href: "/case-study/tix",
-      aspectRatio: "portrait",
-    },
-    {
       id: "magic-trucks",
       client: "Magic Trucks",
       title: "Fleet branding and digital presence for logistics",
       image: magicTrucksImage,
       href: "/case-study/magic-trucks",
       aspectRatio: "landscape",
+    },
+    {
+      id: "tix",
+      client: "TIX",
+      title: "A seamless movie and event booking experience",
+      image: tixImage,
+      href: "/case-study/tix",
+      aspectRatio: "portrait",
     },
   ];
 
