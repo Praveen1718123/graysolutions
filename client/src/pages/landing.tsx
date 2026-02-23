@@ -26,7 +26,7 @@ export default function Landing() {
     "GoGauge",
     "Eagle",
     "TIX",
-    "KOPO",
+    "Magic Trucks",
   ];
 
   const caseStudies = [
@@ -55,11 +55,11 @@ export default function Landing() {
       aspectRatio: "portrait",
     },
     {
-      id: "kopo",
-      client: "KOPO",
-      title: "Premium branding and content direction",
+      id: "magic-trucks",
+      client: "Magic Trucks",
+      title: "Fleet branding and digital presence for logistics",
       image: magicTrucksImage,
-      href: "/case-study/kopo",
+      href: "/case-study/magic-trucks",
       aspectRatio: "landscape",
     },
   ];
