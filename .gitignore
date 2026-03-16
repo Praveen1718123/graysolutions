@@ -1,6 +1,30 @@
+# Dependencies
 node_modules
+
+# Build output
 dist
+
+# Environment
+.env
+.env.local
+
+# OS
 .DS_Store
-server/public
+
+# Vite
 vite.config.ts.*
+server/public
+
+# Replit
+.replit
+replit.nix
+.config/
+
+# Archives
 *.tar.gz
+
+# Large media (serve from CDN or local only)
+attached_assets/*.mp4
+attached_assets/*.mov
+attached_assets/*.gif
+attached_assets/*.heic
