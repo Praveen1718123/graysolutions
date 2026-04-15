@@ -244,7 +244,7 @@ export default function About() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.35 }}
             >
-              A product, design, technology, and consulting studio focused on clarity, reliability, and measurable outcomes.
+              A product, design, technology, and consulting studio focused on clarity, reliability, and measurable outcomes. Founded by Praveen Raj, Senior Product Designer with 10+ years at HCL Technologies.
             </motion.p>
 
             {/* CTA row */}
@@ -254,25 +254,28 @@ export default function About() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
-              <button 
-                className="px-6 py-3 rounded-full font-medium text-sm transition-all"
-                style={{ 
-                  backgroundColor: '#1A1A1A', 
+              <a
+                href="https://calendly.com/praveenraj"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 rounded-full font-medium text-sm transition-all inline-block"
+                style={{
+                  backgroundColor: '#1A1A1A',
                   color: '#FFFFFF',
                   boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.15)';
+                  (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-2px)';
+                  (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.15)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 2px 12px rgba(0, 0, 0, 0.1)';
+                  (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(0)';
+                  (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 2px 12px rgba(0, 0, 0, 0.1)';
                 }}
                 data-testid="cta-talk-to-us"
               >
-                Talk to us
-              </button>
+                Book a 30-min Free Brand Audit Call
+              </a>
               
               <span className="hidden sm:block text-gray-300">·</span>
               
