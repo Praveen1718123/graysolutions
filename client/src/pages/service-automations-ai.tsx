@@ -505,41 +505,52 @@ export default function ServiceAutomationsAI() {
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {getUseCasesForService("automations-ai").map((uc, idx) => (
-              <motion.div
-                key={uc.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.1 }}
-              >
-                <Link href={uc.href}>
-                  <div
-                    className="p-8 rounded-3xl h-full transition-all duration-300 hover:shadow-lg cursor-pointer"
-                    style={{ backgroundColor: '#FAFAFA', border: '1px solid #E5E5E5' }}
-                    data-testid={`use-case-${uc.id}`}
-                  >
-                    <div className="flex items-center gap-3 mb-4">
-                      <h3 className="text-xl font-bold" style={{ color: '#1A1A1A' }}>{uc.title}</h3>
-                      {(uc as any).inProgress && (
-                        <span className="text-xs font-medium px-3 py-1 rounded-full" style={{ backgroundColor: '#FFF3CD', color: '#856404' }}>
-                          In Progress
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-base leading-relaxed" style={{ color: '#666666' }}>
-                      {uc.shortDescription}
-                    </p>
-                    <div className="mt-6 flex items-center gap-2">
-                      <span className="text-sm font-medium" style={{ color: '#1A1A1A' }}>View Details</span>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                      </svg>
-                    </div>
+            {getUseCasesForService("automations-ai").map((uc, idx) => {
+              const isExternal = uc.href.startsWith("http");
+              const content = (
+                <div
+                  className="p-8 rounded-3xl h-full transition-all duration-300 hover:shadow-lg cursor-pointer"
+                  style={{ backgroundColor: '#FAFAFA', border: '1px solid #E5E5E5' }}
+                  data-testid={`use-case-${uc.id}`}
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <h3 className="text-xl font-bold" style={{ color: '#1A1A1A' }}>{uc.title}</h3>
+                    {(uc as any).inProgress && (
+                      <span className="text-xs font-medium px-3 py-1 rounded-full" style={{ backgroundColor: '#FFF3CD', color: '#856404' }}>
+                        In Progress
+                      </span>
+                    )}
                   </div>
-                </Link>
-              </motion.div>
-            ))}
+                  <p className="text-base leading-relaxed" style={{ color: '#666666' }}>
+                    {uc.shortDescription}
+                  </p>
+                  <div className="mt-6 flex items-center gap-2">
+                    <span className="text-sm font-medium" style={{ color: '#1A1A1A' }}>View Details</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="2">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </div>
+                </div>
+              );
+
+              return (
+                <motion.div
+                  key={uc.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: idx * 0.1 }}
+                >
+                  {isExternal ? (
+                    <a href={uc.href} target="_blank" rel="noopener noreferrer">
+                      {content}
+                    </a>
+                  ) : (
+                    <Link href={uc.href}>{content}</Link>
+                  )}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
