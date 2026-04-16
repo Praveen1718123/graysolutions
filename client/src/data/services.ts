@@ -72,7 +72,7 @@ export const useCases = [
     slug: "voice-agent",
     shortDescription: "We're building a voice-based agent that handles conversations, captures intent, and routes actions to the right place — reducing manual follow-ups and improving response speed.",
     serviceIds: ["automations-ai"],
-    href: "https://graysolutions-voice-agent.web.app",
+    href: "https://gva.graysolutions.in/",
     inProgress: false,
   },
 ];
