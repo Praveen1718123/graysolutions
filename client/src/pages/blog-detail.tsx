@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRoute, Link } from "wouter";
 import { motion } from "framer-motion";
-import BlockContent from "@sanity/block-content-to-react";
+import { PortableText } from "@portabletext/react";
 import { getBlogPost, urlFor, sanityClient } from "@/lib/sanity";
 import logoImage from "@assets/Frame_33_copy2_2_(1)_1768895375486.png";
 import Footer from "@/components/footer";
@@ -147,10 +147,8 @@ export default function BlogDetail() {
             prose-headings:font-bold prose-headings:tracking-tight 
             prose-p:leading-relaxed prose-p:text-gray-700
             prose-img:rounded-3xl prose-a:text-black prose-a:font-bold">
-            <BlockContent
-              blocks={post.body}
-              projectId={sanityClient.config().projectId}
-              dataset={sanityClient.config().dataset}
+            <PortableText
+              value={post.body}
             />
           </div>
         </article>

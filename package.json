@@ -42,7 +42,7 @@
     "@radix-ui/react-toggle": "^1.1.10",
     "@radix-ui/react-toggle-group": "^1.1.11",
     "@radix-ui/react-tooltip": "^1.2.8",
-    "@sanity/block-content-to-react": "^3.0.0",
+    "@portabletext/react": "^3.1.0",
     "@sanity/client": "^7.21.0",
     "@sanity/image-url": "^2.1.1",
     "@sanity/vision": "^5.21.0",
@@ -84,8 +84,13 @@
     "vaul": "^1.1.2",
     "wouter": "^3.3.5",
     "ws": "^8.18.0",
+    "@tailwindcss/vite": "^4.2.2",
     "zod": "^3.25.76",
-    "zod-validation-error": "^3.4.0"
+    "zod-validation-error": "^3.4.0",
+    "cross-env": "^10.1.0",
+    "tsx": "^4.20.5",
+    "vite": "^7.1.9",
+    "esbuild": "^0.25.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.2",
@@ -101,14 +106,10 @@
     "@types/ws": "^8.5.13",
     "@vitejs/plugin-react": "^5.0.4",
     "autoprefixer": "^10.4.21",
-    "cross-env": "^10.1.0",
     "drizzle-kit": "^0.31.4",
-    "esbuild": "^0.25.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.14",
-    "tsx": "^4.20.5",
-    "typescript": "5.6.3",
-    "vite": "^7.1.9"
+    "typescript": "5.6.3"
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.8"
