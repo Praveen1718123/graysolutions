@@ -4,14 +4,14 @@ import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import logoImage from "@assets/Frame_33_copy2_2_(1)_1768895375486.png";
 import Footer from "@/components/footer";
-import heroImage from "@assets/Free_iPhone_16_Pro_PSD_Mockup_Tix_1766597838175.jpg";
-import deckImage from "@assets/Tix_Deck-10_1766597838176.png";
-import guidelinesImage from "@assets/Tix_Guidelines-05_1766597838176.png";
-import arrowImage from "@assets/Tix_Guidelines-06_1766597838176.png";
-import appIconImage from "@assets/Tix_Guidelines-07_1766597838176.png";
-import moviePosterImage from "@assets/Tix_Guidelines-08_1766597838176.png";
-import bagImage from "@assets/Tix_Guidelines-09_1766597838176.png";
-import mobileHandImage from "@assets/Tix_Guidelines-10_1766597838176.png";
+import heroImage from "@assets/optimized/tix_iphone_mockup.webp";
+import deckImage from "@assets/optimized/tix_deck.webp";
+import guidelinesImage from "@assets/optimized/tix_guidelines_05.webp";
+import arrowImage from "@assets/optimized/tix_arrow.webp";
+import appIconImage from "@assets/optimized/tix_app_icon.webp";
+import moviePosterImage from "@assets/optimized/tix_movie_poster.webp";
+import bagImage from "@assets/optimized/tix_bag.webp";
+import mobileHandImage from "@assets/optimized/tix_mobile_hand.webp";
 
 export default function Tix() {
   const [isScrolled, setIsScrolled] = useState(false);

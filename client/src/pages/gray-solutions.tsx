@@ -5,7 +5,7 @@ import logoImage from "@assets/Frame_33_copy2_2_(1)_1768895375486.png";
 import Footer from "@/components/footer";
 import heroVideo from "@assets/hero-video-horizontal.mp4";
 import desktopImage from "@assets/optimized/Desktop_-_4_(2)_1765460573017.jpg";
-import screenshotAbout from "@assets/Screenshot_2025-12-24_at_2.03.21_PM_1766565203775.png";
+import screenshotAbout from "@assets/optimized/screenshot_about.webp";
 
 export default function GraySolutions() {
   const [isScrolled, setIsScrolled] = useState(false);

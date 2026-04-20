@@ -1,4 +1,5 @@
 import express, { type Request, Response, NextFunction } from "express";
+import compression from "compression";
 import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
 import { createServer } from "http";
@@ -17,6 +18,9 @@ declare module "http" {
     rawBody: unknown;
   }
 }
+
+// Gzip compress all responses (JS, CSS, JSON, HTML) — ~70% smaller transfers
+app.use(compression({ level: 6, threshold: 1024 }));
 
 app.use(
   express.json({

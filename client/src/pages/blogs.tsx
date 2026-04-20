@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import logoImage from "@assets/Frame_33_copy2_2_(1)_1768895375486.png";
-import comingSoonBg from "@assets/ChatGPT_Image_Dec_29,_2025,_11_17_56_PM_1767030489424.png";
+import comingSoonBg from "@assets/optimized/coming_soon_bg.webp";
 
 export default function Blogs() {
   const [isScrolled, setIsScrolled] = useState(false);
