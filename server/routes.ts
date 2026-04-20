@@ -158,10 +158,12 @@ export async function registerRoutes(
       console.log("[Newsletter] Sending via Resend...");
       const result = await resend.emails.send({
         from: "Gray Solutions <newsletter@graysolutions.in>",
-        to: emails,
+        to: ["newsletter@graysolutions.in"], // Sent to self
+        bcc: emails, // Actual subscribers in BCC for privacy
         subject: subject,
         html: htmlTemplate,
       });
+
 
       console.log("[Newsletter] Resend API Full Response:", JSON.stringify(result, null, 2));
 

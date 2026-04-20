@@ -35,11 +35,14 @@ export default function AdminDashboard() {
 
   const { data: queries, isLoading: queriesLoading } = useQuery<ContactQuery[]>({
     queryKey: ["/api/admin/queries"],
+    refetchInterval: 30000, // Auto-refresh every 30 seconds
   });
 
   const { data: subscribers, isLoading: subscribersLoading } = useQuery<NewsletterSubscriber[]>({
     queryKey: ["/api/admin/subscribers"],
+    refetchInterval: 30000, // Auto-refresh every 30 seconds
   });
+
 
   const broadcastMutation = useMutation({
     mutationFn: async (data: { subject: string; content: string }) => {

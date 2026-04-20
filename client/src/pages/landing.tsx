@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "wouter";
+import { PrefetchLink } from "@/components/ui/prefetch-link";
 import { Button } from "@/components/ui/button";
+
 // import { Menu, X } from "lucide-react";
 
 // Video is now in public/ for faster preloading
@@ -72,7 +74,7 @@ export default function Landing() {
         <div className="flex-1 flex flex-col justify-center items-center pt-3 sm:pt-4 md:pt-6 pb-3 sm:pb-4 md:pb-6 px-4">
           {/* Line 1: Site Logo */}
           <div className="mb-2 sm:mb-3 md:mb-5">
-            <Link href="/">
+            <PrefetchLink href="/">
               <picture>
                 <source 
                   srcSet="/assets/logo-140.webp 140w, /assets/logo-280.webp 280w" 
@@ -88,7 +90,7 @@ export default function Landing() {
                   className="h-8 sm:h-10 md:h-16 w-auto dark:invert cursor-pointer" 
                 />
               </picture>
-            </Link>
+            </PrefetchLink>
           </div>
           
           {/* Mobile Menu Button */}
@@ -112,7 +114,7 @@ export default function Landing() {
                 const isActive = location === item.href;
                 return (
                   <li key={item.label} className="flex items-center">
-                    <Link href={item.href}>
+                    <PrefetchLink href={item.href}>
                       <span 
                         className={`
                           text-[15px] lg:text-[17px] tracking-tight transition-colors duration-200 cursor-pointer inline-flex items-center h-8
@@ -125,7 +127,7 @@ export default function Landing() {
                       >
                         {item.label}
                       </span>
-                    </Link>
+                    </PrefetchLink>
                   </li>
                 );
               })}
@@ -144,7 +146,7 @@ export default function Landing() {
                 const isActive = location === item.href;
                 return (
                   <li key={item.label}>
-                    <Link href={item.href} onClick={() => setMobileMenuOpen(false)}>
+                    <PrefetchLink href={item.href} onClick={() => setMobileMenuOpen(false)}>
                       <span 
                         className={`
                           text-[15px] sm:text-[16px] tracking-tight transition-colors duration-200 cursor-pointer py-1 px-2
@@ -156,7 +158,7 @@ export default function Landing() {
                       >
                         {item.label}
                       </span>
-                    </Link>
+                    </PrefetchLink>
                   </li>
                 );
               })}
@@ -198,14 +200,14 @@ export default function Landing() {
                 if (caseStudyLink) {
                   return (
                     <li key={filter} className="flex-shrink-0">
-                      <Link href={caseStudyLink}>
+                      <PrefetchLink href={caseStudyLink}>
                         <Button
                           variant="outline"
                           className="text-[11px] sm:text-[12px] md:text-[14px] px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 h-auto min-h-[28px] sm:min-h-[32px] md:min-h-[36px] bg-white text-black border-gray-200 hover:bg-black hover:text-white hover:border-black transition-all duration-200 whitespace-nowrap"
                         >
                           {filter}
                         </Button>
-                      </Link>
+                      </PrefetchLink>
                     </li>
                   );
                 }

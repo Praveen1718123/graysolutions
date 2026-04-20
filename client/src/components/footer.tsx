@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "wouter";
+import { PrefetchLink } from "@/components/ui/prefetch-link";
 import logoWhite from "@assets/Frame_33_copy2_1_(1)_1768900373646.png";
 import { NewsletterForm } from "./newsletter-form";
 
@@ -62,14 +62,14 @@ export default function Footer({ hideNewsletter = false }: FooterProps) {
           <div className="flex flex-col lg:flex-row items-start justify-between gap-6 sm:gap-8">
             {/* Left - Large Brand Logo with Descriptor */}
             <div className="flex items-end gap-4 sm:gap-5 md:gap-8">
-              <Link href="/">
+              <PrefetchLink href="/">
                 <img 
                   src={logoWhite}
                   alt="Gray Logo"
                   className="cursor-pointer h-16 sm:h-20 md:h-28 lg:h-[140px] w-auto"
                   data-testid="footer-logo"
                 />
-              </Link>
+              </PrefetchLink>
               <div className="pb-0.5 sm:pb-1 md:pb-3">
                 <p 
                   className="text-sm sm:text-base md:text-lg leading-tight"
@@ -85,28 +85,28 @@ export default function Footer({ hideNewsletter = false }: FooterProps) {
               <ul className="space-y-1.5 sm:space-y-1">
                 {navLinks.col1.map((link, idx) => (
                   <li key={idx}>
-                    <Link href={link.href} onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
+                    <PrefetchLink href={link.href} onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
                       <span 
                         className="text-sm hover:text-white transition-colors cursor-pointer"
                         style={{ color: 'rgba(255,255,255,0.6)' }}
                       >
                         {link.label}
                       </span>
-                    </Link>
+                    </PrefetchLink>
                   </li>
                 ))}
               </ul>
               <ul className="space-y-1.5 sm:space-y-1">
                 {navLinks.col2.map((link, idx) => (
                   <li key={idx}>
-                    <Link href={link.href} onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
+                    <PrefetchLink href={link.href} onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
                       <span 
                         className="text-sm hover:text-white transition-colors cursor-pointer"
                         style={{ color: 'rgba(255,255,255,0.6)' }}
                       >
                         {link.label}
                       </span>
-                    </Link>
+                    </PrefetchLink>
                   </li>
                 ))}
               </ul>
@@ -151,12 +151,12 @@ export default function Footer({ hideNewsletter = false }: FooterProps) {
               <span className="hidden sm:inline">Indiqube Echo, Coimbatore, Tamil Nadu</span>
               <span className="sm:hidden text-[11px]">Indiqube Echo, Coimbatore, TN</span>
               <div className="flex gap-4 sm:gap-6 mt-1 sm:mt-0">
-                <Link href="#">
+                <PrefetchLink href="#">
                   <span className="hover:text-white transition-colors cursor-pointer">Privacy Policy</span>
-                </Link>
-                <Link href="#">
+                </PrefetchLink>
+                <PrefetchLink href="#">
                   <span className="hover:text-white transition-colors cursor-pointer">Terms of Service</span>
-                </Link>
+                </PrefetchLink>
               </div>
             </div>
           </div>

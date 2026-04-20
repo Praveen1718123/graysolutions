@@ -1,34 +1,34 @@
 import { Switch, Route } from "wouter";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { AuthProvider } from "@/hooks/use-auth";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import NotFound from "@/pages/not-found";
-// import Landing from "@/pages/landing";
-const Landing = lazy(() => import("@/pages/landing"));
+import { pageImports, preloadCriticalPages } from "./lib/preloader";
 
-// Code-split heavy pages
-const Services = lazy(() => import("@/pages/services"));
-const ServiceBrandDesign = lazy(() => import("@/pages/service-brand-design"));
-const ServiceBrandContent = lazy(() => import("@/pages/service-brand-content"));
-const ServiceGrowthPerformance = lazy(() => import("@/pages/service-growth-performance"));
-const ServiceProductWeb = lazy(() => import("@/pages/service-product-web"));
-const ServiceCommerceStudio = lazy(() => import("@/pages/service-commerce-studio"));
-const ServiceAutomationsAI = lazy(() => import("@/pages/service-automations-ai"));
-const ServiceProductDesign = lazy(() => import("@/pages/service-product-design"));
-const ServiceWebPlatform = lazy(() => import("@/pages/service-web-platform"));
-const ServiceCommerce = lazy(() => import("@/pages/service-commerce"));
-const ServiceContentMarketing = lazy(() => import("@/pages/service-content-marketing"));
-const About = lazy(() => import("@/pages/about"));
-const Blogs = lazy(() => import("@/pages/blogs"));
-const BlogDetail = lazy(() => import("@/pages/blog-detail"));
-const MagicTrucks = lazy(() => import("@/pages/magic-trucks"));
-const Eagle = lazy(() => import("@/pages/eagle"));
-const Tix = lazy(() => import("@/pages/tix"));
-const GraySolutions = lazy(() => import("@/pages/gray-solutions"));
-const GoGauge = lazy(() => import("@/pages/gogauge"));
-const Contact = lazy(() => import("@/pages/contact"));
+// Lazy components using central registry
+const Landing = lazy(pageImports.landing);
+const Services = lazy(pageImports.services);
+const ServiceBrandDesign = lazy(pageImports["brand-design"]);
+const ServiceBrandContent = lazy(pageImports["brand-content"]);
+const ServiceGrowthPerformance = lazy(pageImports["growth-performance"]);
+const ServiceProductWeb = lazy(pageImports["product-web"]);
+const ServiceCommerceStudio = lazy(pageImports["commerce-studio"]);
+const ServiceAutomationsAI = lazy(pageImports["automations-ai"]);
+const ServiceProductDesign = lazy(pageImports["product-design"]);
+const ServiceWebPlatform = lazy(pageImports["web-platform"]);
+const ServiceCommerce = lazy(pageImports.commerce);
+const ServiceContentMarketing = lazy(pageImports["content-marketing"]);
+const About = lazy(pageImports.about);
+const Blogs = lazy(pageImports.blogs);
+const BlogDetail = lazy(pageImports["blog-detail"]);
+const MagicTrucks = lazy(pageImports["magic-trucks"]);
+const Eagle = lazy(pageImports.eagle);
+const Tix = lazy(pageImports.tix);
+const GraySolutions = lazy(pageImports["gray-solutions"]);
+const GoGauge = lazy(pageImports.gogauge);
+const Contact = lazy(pageImports.contact);
 
 // Admin Portal
 const AdminAuth = lazy(() => import("@/pages/admin/auth-page"));
@@ -42,6 +42,11 @@ const PageLoader = () => (
 );
 
 function Router() {
+  useEffect(() => {
+    // Preload top-level sections after initial render
+    preloadCriticalPages();
+  }, []);
+
   return (
     <Suspense fallback={<PageLoader />}>
       <Switch>
