@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/neon-serverless";
 import { Pool } from "@neondatabase/serverless";
@@ -40,7 +41,16 @@ export class DatabaseStorage implements IStorage {
   public sessionStore: session.Store;
 
   constructor() {
-    const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+    const connectionString = process.env.DATABASE_URL;
+    if (!connectionString) {
+      console.error("FATAL ERROR: DATABASE_URL is not set in environment.");
+      throw new Error("DATABASE_URL is missing. Connection aborted.");
+    }
+    
+    // Log configuration status (redacted for security)
+    console.log("Database Storage: Initializing Pool...");
+    
+    const pool = new Pool({ connectionString });
     this.db = drizzle(pool);
     this.sessionStore = new PostgresSessionStore({
       pool,
