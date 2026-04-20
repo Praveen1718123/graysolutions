@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import logoImage from "@assets/Frame_33_copy2_2_(1)_1768895375486.png";
 import ctaImage from "@assets/stock_images/two_professionals_co_f8f9803a.jpg";
 import Footer from "@/components/footer";
+import { ContactForm } from "@/components/contact-form";
 
 export default function Contact() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -341,98 +342,9 @@ export default function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
+              id="contact-form"
             >
-              <form 
-                className="space-y-5" 
-                data-testid="contact-form"
-              >
-                {/* Full Name */}
-                <div>
-                  <label 
-                    className="block text-sm font-medium mb-2"
-                    style={{ color: '#1A1A1A' }}
-                  >
-                    Full Name
-                  </label>
-                  <input 
-                    type="text"
-                    className="w-full px-4 sm:px-5 py-3 sm:py-4 rounded-xl text-base transition-all focus:outline-none focus:ring-2 focus:ring-offset-0"
-                    style={{ 
-                      backgroundColor: '#F5F5F5',
-                      border: 'none',
-                      color: '#1A1A1A',
-                    }}
-                    placeholder="Enter your name"
-                    data-testid="input-full-name"
-                  />
-                </div>
-
-                {/* Email Address */}
-                <div>
-                  <label 
-                    className="block text-sm font-medium mb-2"
-                    style={{ color: '#1A1A1A' }}
-                  >
-                    Email Address
-                  </label>
-                  <input 
-                    type="email"
-                    className="w-full px-4 sm:px-5 py-3 sm:py-4 rounded-xl text-base transition-all focus:outline-none focus:ring-2 focus:ring-offset-0"
-                    style={{ 
-                      backgroundColor: '#F5F5F5',
-                      border: 'none',
-                      color: '#1A1A1A',
-                    }}
-                    placeholder="Enter email address"
-                    data-testid="input-email"
-                  />
-                </div>
-
-                {/* Message */}
-                <div>
-                  <label 
-                    className="block text-sm font-medium mb-2"
-                    style={{ color: '#1A1A1A' }}
-                  >
-                    Write Your Message
-                  </label>
-                  <textarea 
-                    className="w-full px-4 sm:px-5 py-3 sm:py-4 rounded-xl text-base resize-none transition-all focus:outline-none focus:ring-2 focus:ring-offset-0"
-                    style={{ 
-                      backgroundColor: '#F5F5F5',
-                      border: 'none',
-                      color: '#1A1A1A',
-                      minHeight: '120px',
-                    }}
-                    placeholder="I want to collaborate"
-                    data-testid="input-message"
-                  />
-                </div>
-
-                {/* Submit Button */}
-                <button 
-                  type="submit"
-                  className="w-full py-4 rounded-full text-base font-medium transition-all flex items-center justify-center gap-3"
-                  style={{ 
-                    backgroundColor: '#1A1A1A',
-                    color: '#FFFFFF',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.15)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = 'none';
-                  }}
-                  data-testid="button-submit"
-                >
-                  Send Message
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M7 17L17 7M17 7H7M17 7V17" />
-                  </svg>
-                </button>
-              </form>
+              <ContactForm />
             </motion.div>
           </div>
         </div>

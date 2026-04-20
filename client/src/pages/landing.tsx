@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import logoImage from "@assets/Frame_33_copy2_2_(1)_1768895375486.png";
-import heroVideo from "@assets/hero-video-horizontal.mp4";
-import magicTrucksImage from "@assets/optimized/mokcup_1_1765899763586.jpg";
-import eagleImage from "@assets/optimized/Eagle_Web_2_1765901229010.jpg";
-import tixImage from "@assets/Free_iPhone_16_Pro_PSD_Mockup_Tix_1766597838175.jpg";
+// import { Menu, X } from "lucide-react";
 
-import goGaugeImage from "@assets/Go_Gauge_Slide_1-01_1767087653809.png";
+// Video is now in public/ for faster preloading
+const heroVideo = "/hero-video-horizontal.mp4";
+import logoImage from "@assets/Frame_33_copy2_2_(1)_1768895375486.png";
+import magicTrucksImage from "@assets/mokcup_1_1765899763586.webp";
+import eagleImage from "@assets/Eagle_Web_2_1765901229010.webp";
+import tixImage from "@assets/Free_iPhone_16_Pro_PSD_Mockup_Tix_1766597838175.webp";
+
+import goGaugeImage from "@assets/Go_Gauge_Slide_1-01_1767087653809.webp";
 
 export default function Landing() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -97,7 +98,11 @@ export default function Landing() {
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             data-testid="mobile-menu-toggle"
           >
-            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+            {mobileMenuOpen ? (
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            ) : (
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            )}
           </button>
           
           {/* Line 2: Primary Navigation - Desktop */}
@@ -127,41 +132,36 @@ export default function Landing() {
             </ul>
           </nav>
 
-          {/* Mobile Navigation */}
-          <AnimatePresence>
-            {mobileMenuOpen && (
-              <motion.nav 
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.2 }}
-                className="md:hidden w-full mt-3 sm:mt-4 border-t border-gray-100 overflow-hidden"
-              >
-                <ul className="flex flex-col items-center gap-3 sm:gap-4 py-3 sm:py-4">
-                  {navItems.map((item) => {
-                    const isActive = location === item.href;
-                    return (
-                      <li key={item.label}>
-                        <Link href={item.href} onClick={() => setMobileMenuOpen(false)}>
-                          <span 
-                            className={`
-                              text-[15px] sm:text-[16px] tracking-tight transition-colors duration-200 cursor-pointer py-1 px-2
-                              ${isActive 
-                                ? "text-black font-medium" 
-                                : "text-[#8A8A8A] font-normal hover:text-black"
-                              }
-                            `}
-                          >
-                            {item.label}
-                          </span>
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </motion.nav>
-            )}
-          </AnimatePresence>
+          {/* Mobile Navigation - Simple CSS transition */}
+          <nav 
+            className={`
+              md:hidden w-full border-t border-gray-100 overflow-hidden transition-all duration-300 ease-in-out
+              ${mobileMenuOpen ? "max-h-[300px] opacity-100 mt-3 sm:mt-4" : "max-h-0 opacity-0 mt-0"}
+            `}
+          >
+            <ul className="flex flex-col items-center gap-3 sm:gap-4 py-3 sm:py-4">
+              {navItems.map((item) => {
+                const isActive = location === item.href;
+                return (
+                  <li key={item.label}>
+                    <Link href={item.href} onClick={() => setMobileMenuOpen(false)}>
+                      <span 
+                        className={`
+                          text-[15px] sm:text-[16px] tracking-tight transition-colors duration-200 cursor-pointer py-1 px-2
+                          ${isActive 
+                            ? "text-black font-medium" 
+                            : "text-[#8A8A8A] font-normal hover:text-black"
+                          }
+                        `}
+                      >
+                        {item.label}
+                      </span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
         </div>
       </header>
 

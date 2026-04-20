@@ -4,13 +4,13 @@ import { motion } from "framer-motion";
 import logoImage from "@assets/Frame_33_copy2_2_(1)_1768895375486.png";
 import Footer from "@/components/footer";
 import { services as allServices } from "@/data/services";
-import heroImage from "@assets/Go_Gauge_Slide_1-01_1767087653809.png";
-import containerImage from "@assets/6395621_2045_1767087653808.png";
-import laptopImage from "@assets/e3b89fe5-7e4b-4ce3-a4fd-7120f52e9261_1767087653809.png";
-import brandingImage from "@assets/Go_Gauge_Work-01_1767087653809.png";
-import standeeImage from "@assets/Go_Gauge_Standee_New_1767087653809.jpg";
-import socialImage from "@assets/GO_GAUGE_WORKS_2_1767087653809.png";
-import overviewImage from "@assets/2_1767087653805.png";
+import heroImage from "@assets/Go_Gauge_Slide_1-01_1767087653809.webp";
+import containerImage from "@assets/6395621_2045_1767087653808.webp";
+import laptopImage from "@assets/e3b89fe5-7e4b-4ce3-a4fd-7120f52e9261_1767087653809.webp";
+import brandingImage from "@assets/Go_Gauge_Work-01_1767087653809.webp";
+import standeeImage from "@assets/Go_Gauge_Standee_New_1767087653809.webp";
+import socialImage from "@assets/GO_GAUGE_WORKS_2_1767087653809.webp";
+import overviewImage from "@assets/2_1767087653805.webp";
 
 export default function GoGauge() {
   const [isScrolled, setIsScrolled] = useState(false);

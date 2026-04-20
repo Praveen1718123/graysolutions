@@ -1,5 +1,8 @@
 import express, { type Request, Response, NextFunction } from "express";
+import compression from "compression";
+import helmet from "helmet";
 import { registerRoutes } from "./routes";
+import { setupAuth, seedAdminUser } from "./auth";
 import { serveStatic } from "./static";
 import { createServer } from "http";
 import ws from "ws";
@@ -10,6 +13,13 @@ if (!globalThis.WebSocket) {
 }
 
 const app = express();
+
+// Security and Performance Middleware
+app.use(helmet({
+  contentSecurityPolicy: false, // Disable CSP for now to avoid issues with inline scripts/SVGs
+}));
+app.use(compression());
+
 const httpServer = createServer(app);
 
 declare module "http" {
@@ -66,6 +76,12 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  // Initialize Auth
+  setupAuth(app);
+  
+  // Seed Admin User
+  await seedAdminUser();
+
   await registerRoutes(httpServer, app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
@@ -91,6 +107,12 @@ app.use((req, res, next) => {
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
   const port = parseInt(process.env.PORT || "5000", 10);
+  
+  // Log environment status
+  log(`Checking environment...`);
+  log(`RESEND_API_KEY: ${process.env.RESEND_API_KEY ? 'Configured (starts with ' + process.env.RESEND_API_KEY.substring(0, 3) + '...)' : 'MISSING'}`);
+  log(`DATABASE_URL: ${process.env.DATABASE_URL ? 'Configured' : 'MISSING'}`);
+
   httpServer.listen(
     {
       port,

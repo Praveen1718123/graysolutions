@@ -7,7 +7,8 @@ Agency website for Gray Solutions — a product design and technology studio bas
 - Frontend: React 18 + TypeScript + Vite + Tailwind CSS v4
 - Backend: Express.js + TypeScript
 - Database: Neon Postgres + Drizzle ORM
-- Routing: Wouter
+- CMS: Sanity Studio (Headless)
+- Emails: Resend + React Email
 - Animations: Framer Motion
 
 ## Project Structure
@@ -16,6 +17,7 @@ Agency website for Gray Solutions — a product design and technology studio bas
 client/       React frontend (Vite)
 server/       Express backend
 shared/       Shared TypeScript types & Drizzle schema
+studio/       Sanity Studio (Headless CMS)
 ```
 
 ## Getting Started

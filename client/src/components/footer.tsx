@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "wouter";
 import logoWhite from "@assets/Frame_33_copy2_1_(1)_1768900373646.png";
+import { NewsletterForm } from "./newsletter-form";
 
 interface FooterProps {
   hideNewsletter?: boolean;
 }
 
 export default function Footer({ hideNewsletter = false }: FooterProps) {
-  const [email, setEmail] = useState("");
 
   const navLinks = {
     col1: [
@@ -46,37 +46,7 @@ export default function Footer({ hideNewsletter = false }: FooterProps) {
               >
                 Join our newsletter
               </h3>
-              <div className="flex flex-col w-full md:w-auto gap-2">
-                <input
-                  type="email"
-                  placeholder="Email Address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="px-3 sm:px-4 py-2.5 sm:py-2 text-sm w-full md:w-56"
-                  style={{ 
-                    backgroundColor: '#F5F5F5',
-                    border: '1px solid #E5E5E5',
-                    color: '#1A1A1A',
-                    borderRadius: '2px',
-                  }}
-                  data-testid="footer-email-input"
-                />
-                <button 
-                  className="px-4 py-2.5 sm:py-2 font-medium text-sm flex items-center justify-center gap-2 transition-all hover:opacity-90 whitespace-nowrap w-full md:w-auto"
-                  style={{ 
-                    backgroundColor: '#1A1A1A', 
-                    color: '#FFFFFF',
-                    borderRadius: '2px',
-                  }}
-                  data-testid="footer-subscribe"
-                >
-                  SUBSCRIBE
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="7" y1="17" x2="17" y2="7" />
-                    <polyline points="7 7 17 7 17 17" />
-                  </svg>
-                </button>
-              </div>
+              <NewsletterForm />
             </div>
           </div>
         </section>

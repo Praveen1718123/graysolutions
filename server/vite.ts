@@ -48,8 +48,15 @@ export async function setupVite(server: Server, app: Express) {
         `src="/src/main.tsx"`,
         `src="/src/main.tsx?v=${nanoid()}"`,
       );
-      const page = await vite.transformIndexHtml(url, template);
-      res.status(200).set({ "Content-Type": "text/html" }).end(page);
+      try {
+        const page = await vite.transformIndexHtml(url, template);
+        res.status(200).set({ "Content-Type": "text/html" }).end(page);
+      } catch (e: any) {
+        console.log(`Vite transform error for ${url}: ${e.message}`, "vite");
+        if (e.stack) console.error(e.stack);
+        // Fallback to untransformed template to prevent site crash
+        res.status(200).set({ "Content-Type": "text/html" }).end(template);
+      }
     } catch (e) {
       vite.ssrFixStacktrace(e as Error);
       next(e);

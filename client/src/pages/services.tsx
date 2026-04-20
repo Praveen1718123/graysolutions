@@ -10,11 +10,11 @@ import productDesignImg from "@assets/stock_images/modern_digital_produ_807a649b
 import webPlatformImg from "@assets/stock_images/web_development_codi_7cf7da0f.jpg";
 import commerceImg from "@assets/stock_images/ecommerce_shopping_o_773b9c07.jpg";
 import contentMarketingImg from "@assets/stock_images/content_marketing_cr_8c06f177.jpg";
-import heroBackgroundImg from "@assets/image_1767108156647.png";
-import magicTrucksThumb from "@assets/optimized/mokcup_1_1765899763586.jpg";
-import eagleThumb from "@assets/optimized/Eagle_Web_2_1765901229010.jpg";
-import tixThumb from "@assets/optimized/Desktop_-_4_(2)_1765460573017.jpg";
-import grayThumb from "@assets/optimized/Camera_Angle_02_1765901229015.jpg";
+import heroBackgroundImg from "@assets/image_1767108156647.webp";
+import magicTrucksThumb from "@assets/mokcup_1_1765899763586.webp";
+import eagleThumb from "@assets/Eagle_Web_2_1765901229010.webp";
+import tixThumb from "@assets/Desktop_-_4_(2)_1765460573017.webp";
+import grayThumb from "@assets/Camera_Angle_02_1765901229015.webp";
 
 export default function Services() {
   const [isScrolled, setIsScrolled] = useState(false);

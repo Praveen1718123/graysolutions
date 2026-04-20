@@ -3,16 +3,16 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import logoImage from "@assets/Frame_33_copy2_2_(1)_1768895375486.png";
 import Footer from "@/components/footer";
-import heroImage from "@assets/optimized/Eagle_Web_2_1765901229010.jpg";
-import guidelinesImage from "@assets/optimized/Eagle_web_elements-04_1765901229015.jpg";
+import heroImage from "@assets/Eagle_Web_2_1765901229010.webp";
+import guidelinesImage from "@assets/Eagle_web_elements-04_1765901229015.webp";
 import ppeImage from "@assets/Eagle_Web_3_1765901229014.jpg";
-import equipmentImage from "@assets/optimized/Camera_Angle_02_1765901229015.jpg";
-import realEquipment1 from "@assets/optimized/Eagle_2_1765901229015.jpg";
-import realEquipment2 from "@assets/optimized/Eagle_3_1765901229015.jpg";
-import containerImage from "@assets/optimized/Eagle_Container_1765901229016.jpg";
-import toteBagImage from "@assets/optimized/Eagle_Tote_Bag_1765901229016.jpg";
-import wallpaper1 from "@assets/optimized/Eagle_Wallpaper-02_1765901229017.jpg";
-import wallpaper2 from "@assets/optimized/Eagle_Wallpaper-03_1765901229017.jpg";
+import equipmentImage from "@assets/Camera_Angle_02_1765901229015.webp";
+import realEquipment1 from "@assets/Eagle_2_1765901229015.webp";
+import realEquipment2 from "@assets/Eagle_3_1765901229015.webp";
+import containerImage from "@assets/Eagle_Container_1765901229016.webp";
+import toteBagImage from "@assets/Eagle_Tote_Bag_1765901229016.webp";
+import wallpaper1 from "@assets/Eagle_Wallpaper-02_1765901229017.webp";
+import wallpaper2 from "@assets/Eagle_Wallpaper-03_1765901229017.webp";
 
 export default function Eagle() {
   const [isScrolled, setIsScrolled] = useState(false);

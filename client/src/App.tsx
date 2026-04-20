@@ -1,7 +1,12 @@
 import { Switch, Route } from "wouter";
 import { lazy, Suspense } from "react";
+import { AuthProvider } from "@/hooks/use-auth";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./lib/queryClient";
+import { Toaster } from "@/components/ui/toaster";
 import NotFound from "@/pages/not-found";
-import Landing from "@/pages/landing";
+// import Landing from "@/pages/landing";
+const Landing = lazy(() => import("@/pages/landing"));
 
 // Code-split heavy pages
 const Services = lazy(() => import("@/pages/services"));
@@ -24,6 +29,10 @@ const Tix = lazy(() => import("@/pages/tix"));
 const GraySolutions = lazy(() => import("@/pages/gray-solutions"));
 const GoGauge = lazy(() => import("@/pages/gogauge"));
 const Contact = lazy(() => import("@/pages/contact"));
+
+// Admin Portal
+const AdminAuth = lazy(() => import("@/pages/admin/auth-page"));
+const AdminDashboard = lazy(() => import("@/pages/admin/dashboard"));
 
 // Minimal loading fallback
 const PageLoader = () => (
@@ -57,6 +66,11 @@ function Router() {
         <Route path="/blogs" component={Blogs} />
         <Route path="/blog/:slug" component={BlogDetail} />
         <Route path="/contact" component={Contact} />
+        
+        {/* Admin Portal */}
+        <Route path="/admin/auth" component={AdminAuth} />
+        <Route path="/admin" component={AdminDashboard} />
+        
         <Route component={NotFound} />
       </Switch>
     </Suspense>
@@ -64,7 +78,14 @@ function Router() {
 }
 
 function App() {
-  return <Router />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <Router />
+        <Toaster />
+      </AuthProvider>
+    </QueryClientProvider>
+  );
 }
 
 export default App;

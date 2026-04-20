@@ -18,8 +18,26 @@ export default defineConfig({
     },
   },
   root: path.resolve(import.meta.dirname, "client"),
+  server: {
+    watch: {
+      ignored: ["**/studio/**", "**/node_modules/**"],
+    },
+  },
+  optimizeDeps: {
+    exclude: ["sanity"],
+  },
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    assetsInlineLimit: 8192,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "vendor-react": ["react", "react-dom", "wouter"],
+          "vendor-ui": ["lucide-react", "framer-motion", "@radix-ui/react-slot", "@radix-ui/react-toast"],
+          "vendor-query": ["@tanstack/react-query"],
+        },
+      },
+    },
   },
 });
