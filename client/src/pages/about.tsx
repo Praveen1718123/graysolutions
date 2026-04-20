@@ -5,11 +5,11 @@ import logoImage from "@assets/Frame_33_copy2_2_(1)_1768895375486.png";
 import heroVideo from "@assets/From_KlickPin_CF_Red_and_White_Abstract_Wall_ArtJiayuan_Liang__1766475001318.mp4";
 import benefitsVideo from "@assets/From_KlickPin_CF_by_Meloq_Arai_—_a_3D_Motion_Designer_@meloqar_1766508779038.mp4";
 import numbersVideo from "@assets/From_KlickPin_CF_light_hero___abstract_flare_[Video]___Editing_1766512132613.mp4";
-import contextGif from "@assets/From_KlickPin_CF_Kaldea_Visual_Identity_&_Website_Design_on_Be_1766516930656.gif";
-import reliabilityGif from "@assets/From_KlickPin_CF_Kaldea_Visual_Identity_&_Website_Design_Behan_1766517492447.gif";
-import refineGif from "@assets/From_KlickPin_CF_Kaldea_Visual_Identity_&_Website_Design_Behan_1766517702605.gif";
+import contextGif from "@assets/optimized/context_anim.webp";
+import reliabilityGif from "@assets/optimized/reliability_anim.webp";
+import refineGif from "@assets/optimized/refine_anim.webp";
 import designVideo from "@assets/From_KlickPin_CF_Abstract_gradient_geometric_shape_animation_[_1766517982162.mp4";
-import positionGif from "@assets/From_KlickPin_CF_Motion_Abstract_-_V1___Motion_graphics_design_1766518454195.gif";
+import positionGif from "@assets/optimized/position_anim.webp";
 import Footer from "@/components/footer";
 
 function useCountUp(end: number, duration: number = 2000, inView: boolean) {
@@ -244,7 +244,7 @@ export default function About() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.35 }}
             >
-              A product, design, technology, and consulting studio focused on clarity, reliability, and measurable outcomes.
+              A product, design, technology, and consulting studio focused on clarity, reliability, and measurable outcomes. Founded by Praveen Raj, Senior Product Designer with 10+ years at HCL Technologies.
             </motion.p>
 
             {/* CTA row */}
@@ -254,25 +254,28 @@ export default function About() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
-              <button 
-                className="px-6 py-3 rounded-full font-medium text-sm transition-all"
-                style={{ 
-                  backgroundColor: '#1A1A1A', 
+              <a
+                href="https://calendly.com/praveenraj"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 rounded-full font-medium text-sm transition-all inline-block"
+                style={{
+                  backgroundColor: '#1A1A1A',
                   color: '#FFFFFF',
                   boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.15)';
+                  (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-2px)';
+                  (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.15)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 2px 12px rgba(0, 0, 0, 0.1)';
+                  (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(0)';
+                  (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 2px 12px rgba(0, 0, 0, 0.1)';
                 }}
                 data-testid="cta-talk-to-us"
               >
-                Talk to us
-              </button>
+                Book a 30-min Free Brand Audit Call
+              </a>
               
               <span className="hidden sm:block text-gray-300">·</span>
               

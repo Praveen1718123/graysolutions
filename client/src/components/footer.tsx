@@ -75,9 +75,7 @@ export default function Footer({ hideNewsletter = false }: FooterProps) {
                   className="text-sm sm:text-base md:text-lg leading-tight"
                   style={{ color: '#F5F0E8' }}
                 >
-                  Product Design<br />
-                  & Technology<br />
-                  Studio
+                  Design. Build. Scale.
                 </p>
               </div>
             </div>
