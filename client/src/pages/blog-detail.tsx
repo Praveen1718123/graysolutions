@@ -9,7 +9,7 @@ import { ArrowLeft, Clock, User, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function BlogDetail() {
-  const [, params] = useRoute("/blog/:slug");
+  const [, params] = useRoute("/blogs/:slug");
   const [post, setPost] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -23,7 +23,9 @@ export default function BlogDetail() {
     const fetchPost = async () => {
       if (params?.slug) {
         try {
+          console.log(`Fetching blog post for slug: ${params.slug}...`);
           const data = await getBlogPost(params.slug);
+          console.log("Fetched post data:", data);
           setPost(data);
         } catch (error) {
           console.error("Error fetching blog post:", error);
@@ -147,9 +149,13 @@ export default function BlogDetail() {
             prose-headings:font-bold prose-headings:tracking-tight 
             prose-p:leading-relaxed prose-p:text-gray-700
             prose-img:rounded-3xl prose-a:text-black prose-a:font-bold">
-            <PortableText
-              value={post.body}
-            />
+            {post.body ? (
+              <PortableText
+                value={post.body}
+              />
+            ) : (
+              <p className="text-gray-500 italic">This post has no content yet.</p>
+            )}
           </div>
         </article>
       </main>

@@ -18,8 +18,16 @@ export default function Blogs() {
 
     const fetchPosts = async () => {
       try {
+        console.log("Fetching blog posts...");
         const data = await getBlogPosts();
-        setPosts(data);
+        console.log("Fetched posts data:", data);
+        
+        if (!data || !Array.isArray(data)) {
+          console.error("Expected array of posts, but got:", data);
+          setPosts([]);
+        } else {
+          setPosts(data);
+        }
       } catch (error) {
         console.error("Error fetching blog posts:", error);
       } finally {
@@ -96,15 +104,21 @@ export default function Blogs() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 sm:gap-16">
-            {posts.map((post, idx) => (
-              <motion.article 
-                key={post.slug.current}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1 }}
-                className="group cursor-pointer"
-              >
-                <Link href={`/blog/${post.slug.current}`}>
+            {posts.map((post, idx) => {
+              if (!post.slug?.current) {
+                console.warn(`Post at index ${idx} is missing a slug:`, post);
+                return null;
+              }
+              
+              return (
+                <motion.article 
+                  key={post.slug.current}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="group cursor-pointer"
+                >
+                <Link href={`/blogs/${post.slug.current}`}>
                   <div>
                     <div className="relative overflow-hidden rounded-2xl aspect-[16/10] mb-6 bg-gray-100">
                       {post.mainImage && (
@@ -133,7 +147,8 @@ export default function Blogs() {
                   </div>
                 </Link>
               </motion.article>
-            ))}
+              );
+            })}
           </div>
         )}
 

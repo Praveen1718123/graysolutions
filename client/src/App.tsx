@@ -69,7 +69,7 @@ function Router() {
         <Route path="/case-study/gray-solutions" component={GraySolutions} />
         <Route path="/case-study/gogauge" component={GoGauge} />
         <Route path="/blogs" component={Blogs} />
-        <Route path="/blog/:slug" component={BlogDetail} />
+        <Route path="/blogs/:slug" component={BlogDetail} />
         <Route path="/contact" component={Contact} />
         
         {/* Admin Portal */}

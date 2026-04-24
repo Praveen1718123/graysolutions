@@ -23,8 +23,20 @@ export const postType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'image',
+      name: 'author',
+      type: 'reference',
+      to: [{type: 'author'}],
+    }),
+    defineField({
+      name: 'mainImage',
+      title: 'Main Image',
       type: 'image',
+      options: {hotspot: true},
+    }),
+    defineField({
+      name: 'categories',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'category'}]}],
     }),
     defineField({
       name: 'body',

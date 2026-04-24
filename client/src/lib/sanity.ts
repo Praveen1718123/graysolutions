@@ -1,10 +1,15 @@
 import { createClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 
+const PROJECT_ID = "p8fa55hl";
+const DATASET = "production";
+
+console.log("Initializing Sanity client with:", { projectId: PROJECT_ID, dataset: DATASET });
+
 export const sanityClient = createClient({
-  projectId: import.meta.env.VITE_SANITY_PROJECT_ID || "p8fa55hl",
-  dataset: import.meta.env.VITE_SANITY_DATASET || "production",
-  useCdn: true,
+  projectId: PROJECT_ID,
+  dataset: DATASET,
+  useCdn: false, // Set to false to ensure we always get the latest content
   apiVersion: "2024-04-20",
 });
 
