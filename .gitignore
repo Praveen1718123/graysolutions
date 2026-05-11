@@ -20,6 +20,9 @@ server/public
 replit.nix
 .config/
 
+# Claude Code local config
+.claude/
+
 # Archives
 *.tar.gz
 

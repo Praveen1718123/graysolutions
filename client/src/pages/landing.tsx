@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 
 // Optimized assets (WebP)
@@ -93,6 +93,41 @@ const footerCols = {
   Writing: ["Notes", "Newsletter", "Archive"],
   Contact: ["connect@graysolutions.in", "+91 63802 67018", "Coimbatore, India", "© 2026 Gray Solutions"],
 };
+
+// Studio themes — placeholder gradient pairs. Replace with real WebP images later.
+// Each theme has Frame A (initial) and Frame B (resolved). Crossfades on scroll.
+const studioThemes = [
+  {
+    id: "technology",
+    label: "01 — Technology",
+    frameA: "linear-gradient(135deg, #0A0F1A 0%, #1A2540 60%, #2A3D6B 100%)",
+    frameB: "linear-gradient(135deg, #1A2540 0%, #4A7FCC 50%, #A8D8FF 100%)",
+  },
+  {
+    id: "materiality",
+    label: "02 — Materiality",
+    frameA: "linear-gradient(135deg, #1A1410 0%, #3A2E22 60%, #5C4A38 100%)",
+    frameB: "linear-gradient(135deg, #3A2E22 0%, #8C7558 50%, #D8C5A6 100%)",
+  },
+  {
+    id: "generative",
+    label: "03 — Generative",
+    frameA: "linear-gradient(135deg, #1A0A1A 0%, #3D1E40 60%, #6B2E70 100%)",
+    frameB: "linear-gradient(135deg, #3D1E40 0%, #B856C2 50%, #FFAEE0 100%)",
+  },
+  {
+    id: "craft",
+    label: "04 — Craft",
+    frameA: "linear-gradient(135deg, #14100A 0%, #3D2F1E 60%, #6B5036 100%)",
+    frameB: "linear-gradient(135deg, #3D2F1E 0%, #C99860 50%, #FFD7A6 100%)",
+  },
+  {
+    id: "motion",
+    label: "05 — Motion",
+    frameA: "linear-gradient(135deg, #0A1414 0%, #1E3D3A 60%, #2E6B66 100%)",
+    frameB: "linear-gradient(135deg, #1E3D3A 0%, #58C2B5 50%, #AEFFEE 100%)",
+  },
+];
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Sticky Navigation
@@ -624,6 +659,184 @@ function Services() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Section 6 — Studio (logo series, scroll-driven crossfade with placeholder gradients)
+// GSAP + ScrollTrigger is lazy-loaded only when the section enters the viewport.
+// prefers-reduced-motion users see only Frame B (resolved state) as a static image.
+// ─────────────────────────────────────────────────────────────────────────────
+function StudioSection() {
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const themeRefs  = useRef<Array<HTMLDivElement | null>>([]);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  // Detect prefers-reduced-motion on mount
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  // Lazy-load GSAP + ScrollTrigger only when the Studio section enters viewport
+  useEffect(() => {
+    if (reducedMotion) return;
+    if (typeof window === "undefined" || !wrapperRef.current) return;
+
+    let triggers: any[] = [];
+    let gsapInstance: any = null;
+    let cancelled = false;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        observer.disconnect();
+
+        Promise.all([
+          import("gsap"),
+          import("gsap/ScrollTrigger"),
+        ]).then(([gsapMod, stMod]: [any, any]) => {
+          if (cancelled) return;
+          const gsap = gsapMod.default || gsapMod;
+          const ScrollTrigger = stMod.ScrollTrigger || stMod.default;
+          gsap.registerPlugin(ScrollTrigger);
+          gsapInstance = gsap;
+
+          themeRefs.current.forEach((section) => {
+            if (!section) return;
+            const frameA = section.querySelector(".frame-a") as HTMLElement | null;
+            const frameB = section.querySelector(".frame-b") as HTMLElement | null;
+            if (!frameA || !frameB) return;
+
+            const st = ScrollTrigger.create({
+              trigger: section,
+              start: "top center",
+              end: "bottom center",
+              scrub: true,
+              onUpdate: (self: any) => {
+                const p = self.progress;
+                frameA.style.opacity = String(1 - p);
+                frameB.style.opacity = String(p);
+              },
+            });
+            triggers.push(st);
+          });
+        }).catch((err) => {
+          // GSAP failed to load — show resolved state for everyone, no animation
+          console.warn("Studio: GSAP load failed, showing static state.", err);
+          themeRefs.current.forEach((section) => {
+            const frameA = section?.querySelector(".frame-a") as HTMLElement | null;
+            const frameB = section?.querySelector(".frame-b") as HTMLElement | null;
+            if (frameA) frameA.style.opacity = "0";
+            if (frameB) frameB.style.opacity = "1";
+          });
+        });
+      },
+      { rootMargin: "200px 0px" }
+    );
+
+    observer.observe(wrapperRef.current);
+
+    return () => {
+      cancelled = true;
+      observer.disconnect();
+      triggers.forEach((t) => t?.kill?.());
+      if (gsapInstance?.ScrollTrigger) gsapInstance.ScrollTrigger.refresh?.();
+    };
+  }, [reducedMotion]);
+
+  return (
+    <section
+      id="studio"
+      ref={wrapperRef}
+      className="relative w-full"
+      style={{ backgroundColor: BG_DARK, scrollMarginTop: "72px" }}
+      aria-labelledby="studio-heading"
+    >
+      {/* Intro */}
+      <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 pt-20 md:pt-28 pb-12 md:pb-16">
+        <p
+          className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-white/50 mb-3"
+          style={{ fontFamily: FONT_MONO }}
+        >
+          Studio
+        </p>
+        <h2
+          id="studio-heading"
+          className="font-bold text-white leading-[1.05] tracking-[-0.02em] mb-5 md:mb-6"
+          style={{ fontFamily: FONT_HEAD, fontSize: "clamp(32px, 5vw, 56px)", maxWidth: "20ch" }}
+        >
+          One mark, <span style={{ color: ACCENT }}>five expressions.</span>
+        </h2>
+        <p
+          className="text-[16px] md:text-[18px] leading-relaxed"
+          style={{ color: TEXT_MUTED_DARK, fontFamily: FONT_BODY, maxWidth: "60ch" }}
+        >
+          The work we make ranges across brand, software, and AI. The studio identity reflects that range.
+        </p>
+      </div>
+
+      {/* Five themed sub-sections */}
+      <div className="flex flex-col">
+        {studioThemes.map((theme, idx) => (
+          <div
+            key={theme.id}
+            ref={(el) => { themeRefs.current[idx] = el; }}
+            className="studio-theme relative overflow-hidden"
+            style={{ height: "80vh", minHeight: "520px" }}
+          >
+            {/* Frame A — initial */}
+            <div
+              className="frame-a absolute inset-0 w-full h-full"
+              style={{
+                background: theme.frameA,
+                opacity: reducedMotion ? 0 : 1,
+                transition: reducedMotion ? "none" : undefined,
+                willChange: "opacity",
+              }}
+              aria-hidden="true"
+            />
+            {/* Frame B — resolved */}
+            <div
+              className="frame-b absolute inset-0 w-full h-full"
+              style={{
+                background: theme.frameB,
+                opacity: reducedMotion ? 1 : 0,
+                transition: reducedMotion ? "none" : undefined,
+                willChange: "opacity",
+              }}
+              aria-hidden="true"
+            />
+
+            {/* Centred Gray wordmark placeholder */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <span
+                className="font-bold tracking-[-0.04em] text-white/85"
+                style={{
+                  fontFamily: FONT_HEAD,
+                  fontSize: "clamp(72px, 14vw, 200px)",
+                  textShadow: "0 4px 40px rgba(0,0,0,0.35)",
+                }}
+              >
+                Gray
+              </span>
+            </div>
+
+            {/* Theme label, top-left */}
+            <span
+              className="absolute top-6 left-5 md:top-8 md:left-8 lg:left-12 text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-white/75 z-10"
+              style={{ fontFamily: FONT_MONO }}
+            >
+              {theme.label}
+            </span>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Section 7 — Approach
 // ─────────────────────────────────────────────────────────────────────────────
 function Approach() {
@@ -793,6 +1006,7 @@ export default function Landing() {
         <SelectedWork />
         <InDevelopment />
         <Services />
+        <StudioSection />
         <Approach />
         <CloseCTA />
       </main>

@@ -139,13 +139,12 @@ export default function Services() {
       </header>
 
       {/* Hero Section - Full Image Background */}
-      <section 
-        className="relative z-10 overflow-hidden"
-        style={{ minHeight: '100vh' }}
+      <section
+        className="relative z-10 overflow-hidden min-h-[85vh] md:min-h-screen"
         data-testid="section-services-hero"
       >
         {/* Background Image */}
-        <div 
+        <div
           className="absolute inset-0 w-full h-full"
           style={{
             backgroundImage: `url(${heroBackgroundImg})`,
@@ -153,11 +152,13 @@ export default function Services() {
             backgroundPosition: 'center',
           }}
         />
-        
-        {/* Dark Overlay for text readability */}
-        <div 
+
+        {/* Dark Overlay for text readability — stronger gradient at bottom where text sits */}
+        <div
           className="absolute inset-0"
-          style={{ backgroundColor: 'rgba(0,0,0,0.3)' }}
+          style={{
+            background: 'linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.7) 100%)',
+          }}
         />
 
         {/* Content Container */}
@@ -165,13 +166,14 @@ export default function Services() {
           className="relative z-10 min-h-screen flex flex-col justify-end px-6 md:px-10 lg:px-16 pb-16 md:pb-20"
         >
           <div className="max-w-[1400px] mx-auto w-full">
-            <motion.h1 
-              className="font-bold mb-6"
-              style={{ 
-                fontSize: 'clamp(56px, 10vw, 120px)',
+            <motion.h1
+              className="font-bold mb-4 md:mb-6"
+              style={{
+                fontSize: 'clamp(44px, 10vw, 120px)',
                 lineHeight: '1.0',
                 color: '#FFFFFF',
                 letterSpacing: '-0.02em',
+                textShadow: '0 2px 24px rgba(0,0,0,0.4)',
               }}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
