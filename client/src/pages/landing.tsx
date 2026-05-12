@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 // Optimized assets (WebP)
 import goGaugeImage from "@assets/optimized/gogauge_slide.webp";
@@ -69,7 +70,7 @@ const selectedWork = [
     sector: "F&B · Strategy & Brand",
     year: "2026",
     href: "#contact",
-    image: null, // Placeholder gradient block
+    image: null,
   },
 ];
 
@@ -87,6 +88,54 @@ const approach = [
   { step: "Hand over",  description: "Documentation, systems, and a short note on what to watch next." },
 ];
 
+const testimonials = [
+  {
+    quote: "Gray Solutions were insanely clear from day one — scope, timelines, and what's realistic. They executed fast, shared progress without us chasing, and delivered exactly what we needed.",
+    name: "Vimal Baskaran",
+    role: "Founder",
+    company: "GoGauge",
+  },
+  {
+    quote: "What I liked most was their speed + structure. No random promises — just a clean plan, sharp creatives, and consistent delivery. Communication was solid throughout.",
+    name: "Sarath",
+    role: "Founder",
+    company: "Eagle",
+  },
+  {
+    quote: "They didn't just 'build a website' — they helped us position the brand properly. Clean UI, strong messaging, and a process that felt professional end-to-end.",
+    name: "Vignesh Selvaganapathy",
+    role: "Founder",
+    company: "Modulr Homes",
+  },
+];
+
+const faqItems = [
+  {
+    question: "What does Gray Solutions do?",
+    answer: "We help businesses grow through clear strategy, good design, and execution that ships. That includes brand positioning, websites, social content, ad creatives, and software — built to be consistent and measurable.",
+  },
+  {
+    question: "What does a typical timeline look like?",
+    answer: "Most projects run in 2–6 weeks depending on scope. Week 1: discovery, goals, audit, direction. Weeks 2–3: strategy, copy structure, design system. Weeks 3–5: production — website, creatives, content, ads. Weeks 5–6: QA, launch, tracking, optimisation plan. If you need something faster, we can run a sprint-based delivery.",
+  },
+  {
+    question: "What do you need from us to start?",
+    answer: "To move fast and avoid rework, we usually need: your business goal (leads, conversions, awareness, hiring), your offer and pricing, access to existing assets (logo, brand files, website, social handles), any past performance data, and one decision-maker for approvals.",
+  },
+  {
+    question: "How is pricing structured?",
+    answer: "Pricing is based on scope, complexity, and speed — not hours logged. We work in three ways: project-based (fixed scope, fixed price — best for websites and launches), monthly retainer (ongoing content, ads, and optimisation — best for sustained growth), and sprint packages (short, high-output cycles — best for fast turnarounds). After discovery, you'll get a clear breakdown of deliverables and cost.",
+  },
+  {
+    question: "What causes timelines or budgets to change?",
+    answer: "Usually one of these: scope expands after kickoff (new pages, extra creatives, new features), feedback loops take longer than planned (delayed approvals), new requirements appear mid-way, or missing inputs (assets, logins, product details, past data). We'll always flag changes early and document them before moving forward.",
+  },
+  {
+    question: "What makes Gray different from a typical agency?",
+    answer: "Most agencies sell activity. We sell output that connects to a business goal. We build systems, not one-off assets. We keep things minimal and functional. We work with a small, senior team — not a layered chain of contractors. Every decision ties back to something measurable.",
+  },
+];
+
 const footerCols = {
   Work: ["GoGauge", "Eagle", "Magic Trucks", "Cafe66"],
   Studio: ["Approach", "Services", "Careers"],
@@ -94,8 +143,6 @@ const footerCols = {
   Contact: ["connect@graysolutions.in", "+91 63802 67018", "Coimbatore, India", "© 2026 Gray Solutions"],
 };
 
-// Studio themes — placeholder gradient pairs. Replace with real WebP images later.
-// Each theme has Frame A (initial) and Frame B (resolved). Crossfades on scroll.
 const studioThemes = [
   {
     id: "technology",
@@ -130,6 +177,53 @@ const studioThemes = [
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Infinite Marquee
+// Two copies of the text; Framer Motion animates x from 0% → -50% in a loop.
+// ─────────────────────────────────────────────────────────────────────────────
+const MARQUEE_TEXT = "Brand systems · Software in production · AI that earns its place · Built to hold up ·";
+
+function InfiniteMarquee({ reverse = false }: { reverse?: boolean }) {
+  const reduced = useReducedMotion();
+
+  const textClass = "text-[11px] tracking-[0.18em] uppercase pr-20 whitespace-nowrap select-none";
+  const textStyle = { color: "rgba(255,255,255,0.38)", fontFamily: FONT_MONO };
+
+  if (reduced) {
+    return (
+      <div className="overflow-hidden py-3" aria-hidden="true">
+        <span className={textClass} style={textStyle}>{MARQUEE_TEXT}</span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="overflow-hidden py-3" aria-hidden="true">
+      <motion.div
+        className="inline-flex"
+        animate={{ x: reverse ? ["-50%", "0%"] : ["0%", "-50%"] }}
+        transition={{ duration: 28, ease: "linear", repeat: Infinity, repeatType: "loop" }}
+        style={{ willChange: "transform" }}
+      >
+        <span className={textClass} style={textStyle}>{MARQUEE_TEXT}</span>
+        <span className={textClass} style={textStyle}>{MARQUEE_TEXT}</span>
+      </motion.div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Fade-up on scroll (shared helper)
+// ─────────────────────────────────────────────────────────────────────────────
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (delay: number = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, delay, ease: [0.25, 0.4, 0.25, 1] },
+  }),
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Sticky Navigation
 // ─────────────────────────────────────────────────────────────────────────────
 function Navigation() {
@@ -143,7 +237,6 @@ function Navigation() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll when menu open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -172,25 +265,25 @@ function Navigation() {
         }}
       >
         <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 h-[64px] md:h-[72px] flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/">
-            <a
-              className="text-[20px] md:text-[22px] font-bold tracking-tight text-white cursor-pointer"
-              style={{ fontFamily: FONT_HEAD }}
-              aria-label="Gray Solutions homepage"
-            >
-              Gray
-            </a>
+          <Link
+            href="/"
+            className="text-[20px] md:text-[22px] font-bold tracking-tight text-white cursor-pointer"
+            style={{ fontFamily: FONT_HEAD }}
+            aria-label="Gray Solutions homepage"
+          >
+            Gray
           </Link>
 
-          {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-8 lg:gap-10" aria-label="Main">
-            {navItems.map((item) => (
+            {navItems.map((item) =>
               item.external ? (
-                <Link key={item.label} href={item.href}>
-                  <a className="text-[14px] text-white/75 hover:text-white transition-colors cursor-pointer" style={{ fontFamily: FONT_BODY }}>
-                    {item.label}
-                  </a>
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="text-[14px] text-white/75 hover:text-white transition-colors cursor-pointer"
+                  style={{ fontFamily: FONT_BODY }}
+                >
+                  {item.label}
                 </Link>
               ) : (
                 <a
@@ -203,7 +296,7 @@ function Navigation() {
                   {item.label}
                 </a>
               )
-            ))}
+            )}
             <a
               href="#contact"
               onClick={(e) => handleAnchorClick(e, "#contact")}
@@ -214,7 +307,6 @@ function Navigation() {
             </a>
           </nav>
 
-          {/* Mobile hamburger */}
           <button
             className="md:hidden p-2 -mr-2 text-white"
             onClick={() => setMenuOpen(true)}
@@ -229,7 +321,6 @@ function Navigation() {
         </div>
       </header>
 
-      {/* Mobile full-screen overlay */}
       <div
         className="fixed inset-0 z-[60] md:hidden"
         style={{
@@ -242,11 +333,7 @@ function Navigation() {
       >
         <div className="h-[64px] flex items-center justify-between px-5">
           <span className="text-[20px] font-bold tracking-tight text-white" style={{ fontFamily: FONT_HEAD }}>Gray</span>
-          <button
-            className="p-2 -mr-2 text-white"
-            onClick={() => setMenuOpen(false)}
-            aria-label="Close menu"
-          >
+          <button className="p-2 -mr-2 text-white" onClick={() => setMenuOpen(false)} aria-label="Close menu">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               <line x1="6" y1="6" x2="18" y2="18" />
               <line x1="18" y1="6" x2="6" y2="18" />
@@ -254,16 +341,16 @@ function Navigation() {
           </button>
         </div>
         <nav className="flex flex-col gap-2 px-5 pt-10" aria-label="Mobile">
-          {navItems.map((item) => (
+          {navItems.map((item) =>
             item.external ? (
-              <Link key={item.label} href={item.href}>
-                <a
-                  onClick={() => setMenuOpen(false)}
-                  className="block text-[28px] font-semibold py-3 text-white cursor-pointer"
-                  style={{ fontFamily: FONT_HEAD }}
-                >
-                  {item.label}
-                </a>
+              <Link
+                key={item.label}
+                href={item.href}
+                onClick={() => setMenuOpen(false)}
+                className="block text-[28px] font-semibold py-3 text-white cursor-pointer"
+                style={{ fontFamily: FONT_HEAD }}
+              >
+                {item.label}
               </Link>
             ) : (
               <a
@@ -276,7 +363,7 @@ function Navigation() {
                 {item.label}
               </a>
             )
-          ))}
+          )}
           <a
             href="#contact"
             onClick={(e) => handleAnchorClick(e, "#contact")}
@@ -295,70 +382,115 @@ function Navigation() {
 // Section 1 — Hero
 // ─────────────────────────────────────────────────────────────────────────────
 function Hero() {
+  const reduced = useReducedMotion();
   const scrollTo = (sel: string) => {
     const el = document.querySelector(sel);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  // Word-by-word headline animation
+  const headlineWords = ["Work", "that"];
+  const wordVariants = {
+    hidden: { opacity: 0, y: 22 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, delay: reduced ? 0 : 0.25 + i * 0.1, ease: [0.25, 0.4, 0.25, 1] },
+    }),
+  };
+
   return (
     <section
-      className="relative w-full flex items-center"
-      style={{ backgroundColor: BG_DARK, minHeight: "85vh", paddingTop: "84px", paddingBottom: "60px" }}
+      className="relative w-full flex flex-col"
+      style={{ backgroundColor: BG_DARK, minHeight: "85vh", paddingTop: "64px" }}
       aria-labelledby="hero-heading"
     >
-      <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 w-full">
-        <p
-          className="text-[12px] md:text-[13px] tracking-[0.18em] uppercase text-white/55 mb-6 md:mb-8"
-          style={{ fontFamily: FONT_MONO }}
-        >
-          Brand · Software · AI
-        </p>
-        <h1
-          id="hero-heading"
-          className="font-bold text-white leading-[0.96] tracking-[-0.02em]"
-          style={{
-            fontFamily: FONT_HEAD,
-            fontSize: "clamp(48px, 11vw, 140px)",
-            maxWidth: "16ch",
-          }}
-        >
-          Work that{" "}
-          <span style={{ color: ACCENT }}>holds up.</span>
-        </h1>
-        <p
-          className="mt-6 md:mt-8 text-[16px] md:text-[18px] lg:text-[20px] leading-relaxed"
-          style={{ color: TEXT_MUTED_DARK, fontFamily: FONT_BODY, maxWidth: "640px" }}
-        >
-          Brand systems, software, and AI built for production. Working with teams across India and the UAE since 2015.
-        </p>
+      {/* Top marquee strip */}
+      <div style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+        <InfiniteMarquee />
+      </div>
 
-        <div className="mt-10 md:mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
-          <button
-            onClick={() => scrollTo("#selected-work")}
-            className="inline-flex items-center justify-center px-7 py-4 rounded-full text-[15px] font-medium bg-white text-black hover:bg-white/90 transition-colors min-h-[48px]"
-            style={{ fontFamily: FONT_BODY }}
-            data-testid="cta-see-work"
+      {/* Main content */}
+      <div className="flex-1 flex items-center py-14 md:py-20">
+        <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 w-full">
+          <motion.p
+            className="text-[12px] md:text-[13px] tracking-[0.18em] uppercase text-white/55 mb-6 md:mb-8"
+            style={{ fontFamily: FONT_MONO }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: reduced ? 0 : 0.1 }}
           >
-            See the work →
-          </button>
-          <button
-            onClick={() => scrollTo("#contact")}
-            className="inline-flex items-center text-[15px] text-white/85 hover:text-white transition-colors min-h-[44px]"
-            style={{ fontFamily: FONT_BODY }}
-            data-testid="cta-book-audit"
+            Brand · Software · AI
+          </motion.p>
+
+          <h1
+            id="hero-heading"
+            className="font-bold text-white leading-[0.96] tracking-[-0.02em]"
+            style={{ fontFamily: FONT_HEAD, fontSize: "clamp(52px, 11vw, 140px)", maxWidth: "16ch" }}
           >
-            Book a brand audit →
-          </button>
+            {headlineWords.map((word, i) => (
+              <motion.span
+                key={word}
+                className="inline-block mr-[0.22em]"
+                custom={i}
+                variants={wordVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                {word}
+              </motion.span>
+            ))}
+            <br />
+            <motion.span
+              className="inline-block"
+              style={{ color: ACCENT }}
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: reduced ? 0 : 0.48, ease: [0.25, 0.4, 0.25, 1] }}
+            >
+              holds up.
+            </motion.span>
+          </h1>
+
+          <motion.p
+            className="mt-6 md:mt-8 text-[16px] md:text-[18px] lg:text-[20px] leading-relaxed"
+            style={{ color: TEXT_MUTED_DARK, fontFamily: FONT_BODY, maxWidth: "640px" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.55, delay: reduced ? 0 : 0.68 }}
+          >
+            Brand systems, software, and AI built for production. Working with teams across India and the UAE since 2015.
+          </motion.p>
+
+          <motion.div
+            className="mt-10 md:mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.55, delay: reduced ? 0 : 0.88 }}
+          >
+            <button
+              onClick={() => scrollTo("#selected-work")}
+              className="inline-flex items-center justify-center px-7 py-4 rounded-full text-[15px] font-medium bg-white text-black hover:bg-white/90 transition-colors min-h-[48px]"
+              style={{ fontFamily: FONT_BODY }}
+              data-testid="cta-see-work"
+            >
+              See the work →
+            </button>
+            <button
+              onClick={() => scrollTo("#contact")}
+              className="inline-flex items-center text-[15px] text-white/85 hover:text-white transition-colors min-h-[44px]"
+              style={{ fontFamily: FONT_BODY }}
+              data-testid="cta-book-audit"
+            >
+              Book a brand audit →
+            </button>
+          </motion.div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 pointer-events-none"
-        aria-hidden="true"
-      >
-        <span className="text-[11px] tracking-[0.2em] uppercase text-white/40" style={{ fontFamily: FONT_MONO }}>Scroll</span>
-        <span className="block w-px h-8 bg-white/25" />
+      {/* Bottom marquee strip (reverse direction) */}
+      <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+        <InfiniteMarquee reverse />
       </div>
     </section>
   );
@@ -379,15 +511,25 @@ function ClientStrip() {
       aria-label="Selected clients"
     >
       <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 py-8 md:py-10">
-        <p
+        <motion.p
           className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-white/50 mb-4 md:mb-5"
           style={{ fontFamily: FONT_MONO }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          custom={0}
         >
           Selected clients
-        </p>
-        <div
+        </motion.p>
+        <motion.div
           className="flex flex-wrap items-center gap-x-3 sm:gap-x-5 md:gap-x-7 gap-y-2 text-white/85 text-[15px] sm:text-[17px] md:text-[20px] font-medium"
           style={{ fontFamily: FONT_HEAD, letterSpacing: "0.02em" }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          custom={0.1}
         >
           {clientNames.map((name, i) => (
             <React.Fragment key={name}>
@@ -395,7 +537,7 @@ function ClientStrip() {
               {i < clientNames.length - 1 && <span className="text-white/35">·</span>}
             </React.Fragment>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -413,7 +555,14 @@ function SelectedWork() {
       aria-labelledby="selected-work-heading"
     >
       <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 py-20 md:py-28">
-        <div className="mb-12 md:mb-20">
+        <motion.div
+          className="mb-12 md:mb-20"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          custom={0}
+        >
           <p
             className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-white/50 mb-3"
             style={{ fontFamily: FONT_MONO }}
@@ -427,50 +576,48 @@ function SelectedWork() {
           >
             Four projects worth scrolling.
           </h2>
-        </div>
+        </motion.div>
 
         <div className="flex flex-col gap-16 md:gap-24 lg:gap-28">
           {selectedWork.map((work, idx) => {
-            const imageFirst = idx % 2 === 1; // alternate
+            const imageFirst = idx % 2 === 1;
             return (
-              <article
+              <motion.article
                 key={work.id}
                 className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center group"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-60px" }}
+                variants={fadeUp}
+                custom={0}
               >
                 {/* Image */}
-                <Link href={work.href}>
-                  <a
-                    className={`relative block lg:col-span-7 overflow-hidden rounded-xl md:rounded-2xl cursor-pointer ${imageFirst ? "lg:order-1" : "lg:order-2"}`}
-                    style={{ aspectRatio: "16 / 10", backgroundColor: BG_DARK_ALT }}
-                    aria-label={`View ${work.client} case study`}
-                  >
-                    {work.image ? (
-                      <img
-                        src={work.image}
-                        alt={`${work.client} — ${work.description}`}
-                        loading="lazy"
-                        decoding="async"
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                      />
-                    ) : (
-                      // Placeholder gradient block
-                      <div
-                        className="absolute inset-0 w-full h-full"
-                        style={{
-                          background: "linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%)",
-                        }}
-                      >
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <span
-                            className="text-white/30 text-[14px] tracking-[0.2em] uppercase"
-                            style={{ fontFamily: FONT_MONO }}
-                          >
-                            Imagery coming soon
-                          </span>
-                        </div>
+                <Link
+                  href={work.href}
+                  className={`relative block lg:col-span-7 overflow-hidden rounded-xl md:rounded-2xl cursor-pointer ${imageFirst ? "lg:order-1" : "lg:order-2"}`}
+                  style={{ aspectRatio: "16 / 10", backgroundColor: BG_DARK_ALT }}
+                  aria-label={`View ${work.client} case study`}
+                >
+                  {work.image ? (
+                    <img
+                      src={work.image}
+                      alt={`${work.client} — ${work.description}`}
+                      loading="lazy"
+                      decoding="async"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    />
+                  ) : (
+                    <div
+                      className="absolute inset-0 w-full h-full"
+                      style={{ background: "linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%)" }}
+                    >
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-white/30 text-[14px] tracking-[0.2em] uppercase" style={{ fontFamily: FONT_MONO }}>
+                          Imagery coming soon
+                        </span>
                       </div>
-                    )}
-                  </a>
+                    </div>
+                  )}
                 </Link>
 
                 {/* Copy */}
@@ -495,17 +642,16 @@ function SelectedWork() {
                   >
                     {work.description}
                   </p>
-                  <Link href={work.href}>
-                    <a
-                      className="inline-flex items-center gap-2 text-[15px] font-medium text-white border-b border-white/30 hover:border-white pb-1 transition-colors cursor-pointer"
-                      style={{ fontFamily: FONT_BODY }}
-                    >
-                      View case study
-                      <span className="transition-transform group-hover:translate-x-1">→</span>
-                    </a>
+                  <Link
+                    href={work.href}
+                    className="inline-flex items-center gap-2 text-[15px] font-medium text-white border-b border-white/30 hover:border-white pb-1 transition-colors cursor-pointer group/link"
+                    style={{ fontFamily: FONT_BODY }}
+                  >
+                    View case study
+                    <span className="transition-transform duration-200 group-hover/link:translate-x-1">→</span>
                   </Link>
                 </div>
-              </article>
+              </motion.article>
             );
           })}
         </div>
@@ -525,21 +671,36 @@ function InDevelopment() {
       aria-labelledby="in-development-heading"
     >
       <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 py-20 md:py-28">
-        <p
-          className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-white/50 mb-3"
-          style={{ fontFamily: FONT_MONO }}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          custom={0}
         >
-          In development
-        </p>
-        <h2
-          id="in-development-heading"
-          className="font-bold text-white leading-[1.05] tracking-[-0.02em] mb-12 md:mb-16"
-          style={{ fontFamily: FONT_HEAD, fontSize: "clamp(32px, 5vw, 56px)" }}
-        >
-          TIX
-        </h2>
+          <p
+            className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-white/50 mb-3"
+            style={{ fontFamily: FONT_MONO }}
+          >
+            In development
+          </p>
+          <h2
+            id="in-development-heading"
+            className="font-bold text-white leading-[1.05] tracking-[-0.02em] mb-12 md:mb-16"
+            style={{ fontFamily: FONT_HEAD, fontSize: "clamp(32px, 5vw, 56px)" }}
+          >
+            TIX
+          </h2>
+        </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <motion.div
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          custom={0.1}
+        >
           <div className="lg:col-span-7 relative overflow-hidden rounded-xl md:rounded-2xl" style={{ aspectRatio: "16 / 10", backgroundColor: "#1a1a1a" }}>
             <img
               src={tixImage}
@@ -575,7 +736,7 @@ function InDevelopment() {
               Follow progress →
             </a>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -595,7 +756,14 @@ function Services() {
       aria-labelledby="services-heading"
     >
       <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 py-20 md:py-28">
-        <div className="mb-12 md:mb-16">
+        <motion.div
+          className="mb-12 md:mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          custom={0}
+        >
           <p
             className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-white/50 mb-3"
             style={{ fontFamily: FONT_MONO }}
@@ -609,13 +777,13 @@ function Services() {
           >
             Four things we do well.
           </h2>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10">
           {services.map((s, idx) => {
             const isOpen = active === idx;
             return (
-              <button
+              <motion.button
                 key={s.number}
                 type="button"
                 onClick={() => setActive(isOpen ? null : idx)}
@@ -624,6 +792,11 @@ function Services() {
                 className="text-left p-6 md:p-8 transition-colors duration-300 hover:bg-white/[0.03] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
                 style={{ backgroundColor: BG_DARK, minHeight: "180px" }}
                 aria-expanded={isOpen}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                custom={idx * 0.07}
               >
                 <span
                   className="block text-[12px] tracking-[0.18em] uppercase mb-4"
@@ -649,7 +822,7 @@ function Services() {
                 >
                   {s.oneLiner}
                 </p>
-              </button>
+              </motion.button>
             );
           })}
         </div>
@@ -659,16 +832,13 @@ function Services() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Section 6 — Studio (logo series, scroll-driven crossfade with placeholder gradients)
-// GSAP + ScrollTrigger is lazy-loaded only when the section enters the viewport.
-// prefers-reduced-motion users see only Frame B (resolved state) as a static image.
+// Section 6 — Studio (scroll-driven crossfade with placeholder gradients)
 // ─────────────────────────────────────────────────────────────────────────────
 function StudioSection() {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const themeRefs  = useRef<Array<HTMLDivElement | null>>([]);
   const [reducedMotion, setReducedMotion] = useState(false);
 
-  // Detect prefers-reduced-motion on mount
   useEffect(() => {
     if (typeof window === "undefined") return;
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -678,7 +848,6 @@ function StudioSection() {
     return () => mq.removeEventListener("change", handler);
   }, []);
 
-  // Lazy-load GSAP + ScrollTrigger only when the Studio section enters viewport
   useEffect(() => {
     if (reducedMotion) return;
     if (typeof window === "undefined" || !wrapperRef.current) return;
@@ -692,10 +861,7 @@ function StudioSection() {
         if (!entries.some((e) => e.isIntersecting)) return;
         observer.disconnect();
 
-        Promise.all([
-          import("gsap"),
-          import("gsap/ScrollTrigger"),
-        ]).then(([gsapMod, stMod]: [any, any]) => {
+        Promise.all([import("gsap"), import("gsap/ScrollTrigger")]).then(([gsapMod, stMod]: [any, any]) => {
           if (cancelled) return;
           const gsap = gsapMod.default || gsapMod;
           const ScrollTrigger = stMod.ScrollTrigger || stMod.default;
@@ -721,9 +887,7 @@ function StudioSection() {
             });
             triggers.push(st);
           });
-        }).catch((err) => {
-          // GSAP failed to load — show resolved state for everyone, no animation
-          console.warn("Studio: GSAP load failed, showing static state.", err);
+        }).catch(() => {
           themeRefs.current.forEach((section) => {
             const frameA = section?.querySelector(".frame-a") as HTMLElement | null;
             const frameB = section?.querySelector(".frame-b") as HTMLElement | null;
@@ -753,7 +917,6 @@ function StudioSection() {
       style={{ backgroundColor: BG_DARK, scrollMarginTop: "72px" }}
       aria-labelledby="studio-heading"
     >
-      {/* Intro */}
       <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 pt-20 md:pt-28 pb-12 md:pb-16">
         <p
           className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-white/50 mb-3"
@@ -776,7 +939,6 @@ function StudioSection() {
         </p>
       </div>
 
-      {/* Five themed sub-sections */}
       <div className="flex flex-col">
         {studioThemes.map((theme, idx) => (
           <div
@@ -785,44 +947,24 @@ function StudioSection() {
             className="studio-theme relative overflow-hidden"
             style={{ height: "80vh", minHeight: "520px" }}
           >
-            {/* Frame A — initial */}
             <div
               className="frame-a absolute inset-0 w-full h-full"
-              style={{
-                background: theme.frameA,
-                opacity: reducedMotion ? 0 : 1,
-                transition: reducedMotion ? "none" : undefined,
-                willChange: "opacity",
-              }}
+              style={{ background: theme.frameA, opacity: reducedMotion ? 0 : 1, willChange: "opacity" }}
               aria-hidden="true"
             />
-            {/* Frame B — resolved */}
             <div
               className="frame-b absolute inset-0 w-full h-full"
-              style={{
-                background: theme.frameB,
-                opacity: reducedMotion ? 1 : 0,
-                transition: reducedMotion ? "none" : undefined,
-                willChange: "opacity",
-              }}
+              style={{ background: theme.frameB, opacity: reducedMotion ? 1 : 0, willChange: "opacity" }}
               aria-hidden="true"
             />
-
-            {/* Centred Gray wordmark placeholder */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
               <span
                 className="font-bold tracking-[-0.04em] text-white/85"
-                style={{
-                  fontFamily: FONT_HEAD,
-                  fontSize: "clamp(72px, 14vw, 200px)",
-                  textShadow: "0 4px 40px rgba(0,0,0,0.35)",
-                }}
+                style={{ fontFamily: FONT_HEAD, fontSize: "clamp(72px, 14vw, 200px)", textShadow: "0 4px 40px rgba(0,0,0,0.35)" }}
               >
                 Gray
               </span>
             </div>
-
-            {/* Theme label, top-left */}
             <span
               className="absolute top-6 left-5 md:top-8 md:left-8 lg:left-12 text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-white/75 z-10"
               style={{ fontFamily: FONT_MONO }}
@@ -847,7 +989,14 @@ function Approach() {
       aria-labelledby="approach-heading"
     >
       <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 py-20 md:py-28">
-        <div className="mb-12 md:mb-16">
+        <motion.div
+          className="mb-12 md:mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          custom={0}
+        >
           <p
             className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase mb-3"
             style={{ color: TEXT_MUTED_LIGHT, fontFamily: FONT_MONO }}
@@ -861,11 +1010,18 @@ function Approach() {
           >
             How we work, in four steps.
           </h2>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8 lg:gap-10">
           {approach.map((a, idx) => (
-            <div key={a.step}>
+            <motion.div
+              key={a.step}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              custom={idx * 0.08}
+            >
               <span
                 className="block text-[11px] tracking-[0.2em] uppercase mb-4"
                 style={{ color: TEXT_MUTED_LIGHT, fontFamily: FONT_MONO }}
@@ -884,7 +1040,7 @@ function Approach() {
               >
                 {a.description}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -893,54 +1049,266 @@ function Approach() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Section 8 — Close CTA
+// Section 8 — Testimonials
+// ─────────────────────────────────────────────────────────────────────────────
+function Testimonials() {
+  return (
+    <section
+      className="w-full"
+      style={{ backgroundColor: BG_DARK_ALT }}
+      aria-labelledby="testimonials-heading"
+    >
+      <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 py-20 md:py-28">
+        <motion.div
+          className="mb-12 md:mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          custom={0}
+        >
+          <p
+            className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-white/50 mb-3"
+            style={{ fontFamily: FONT_MONO }}
+          >
+            What clients say
+          </p>
+          <h2
+            id="testimonials-heading"
+            className="font-bold text-white leading-[1.05] tracking-[-0.02em]"
+            style={{ fontFamily: FONT_HEAD, fontSize: "clamp(28px, 4vw, 44px)", maxWidth: "30ch" }}
+          >
+            Straight from the people we've worked with.
+          </h2>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-7">
+          {testimonials.map((t, i) => (
+            <motion.article
+              key={t.name}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              custom={i * 0.1}
+              className="flex flex-col"
+              style={{
+                backgroundColor: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderRadius: "16px",
+                padding: "28px 28px 32px",
+              }}
+            >
+              {/* Quote mark */}
+              <span
+                className="block mb-5 text-[32px] leading-none"
+                style={{ color: ACCENT, fontFamily: FONT_HEAD }}
+                aria-hidden="true"
+              >
+                "
+              </span>
+
+              <blockquote className="flex-1">
+                <p
+                  className="text-[15px] md:text-[16px] leading-relaxed mb-8"
+                  style={{ color: "rgba(255,255,255,0.82)", fontFamily: FONT_BODY }}
+                >
+                  {t.quote}
+                </p>
+              </blockquote>
+
+              <footer>
+                <p
+                  className="text-[15px] font-semibold text-white mb-0.5"
+                  style={{ fontFamily: FONT_HEAD }}
+                >
+                  {t.name}
+                </p>
+                <p
+                  className="text-[13px]"
+                  style={{ color: "rgba(255,255,255,0.45)", fontFamily: FONT_BODY }}
+                >
+                  {t.role}, {t.company}
+                </p>
+              </footer>
+            </motion.article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Section 9 — FAQ
+// ─────────────────────────────────────────────────────────────────────────────
+function FAQ() {
+  const [open, setOpen] = useState<number | null>(null);
+  const reduced = useReducedMotion();
+
+  return (
+    <section
+      className="w-full"
+      style={{ backgroundColor: BG_DARK }}
+      aria-labelledby="faq-heading"
+    >
+      <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 py-20 md:py-28">
+        <motion.div
+          className="mb-12 md:mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          custom={0}
+        >
+          <p
+            className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-white/50 mb-3"
+            style={{ fontFamily: FONT_MONO }}
+          >
+            FAQ
+          </p>
+          <h2
+            id="faq-heading"
+            className="font-bold text-white leading-[1.05] tracking-[-0.02em]"
+            style={{ fontFamily: FONT_HEAD, fontSize: "clamp(28px, 4vw, 44px)", maxWidth: "24ch" }}
+          >
+            Questions we get asked.
+          </h2>
+        </motion.div>
+
+        <div
+          className="max-w-[840px]"
+          style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}
+        >
+          {faqItems.map((item, i) => {
+            const isOpen = open === i;
+            return (
+              <motion.div
+                key={i}
+                style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                custom={i * 0.05}
+              >
+                <button
+                  className="w-full py-6 flex items-start justify-between text-left gap-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 rounded"
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  aria-expanded={isOpen}
+                >
+                  <span
+                    className="text-[16px] md:text-[17px] font-medium text-white leading-snug"
+                    style={{ fontFamily: FONT_HEAD }}
+                  >
+                    {item.question}
+                  </span>
+                  <motion.span
+                    className="flex-shrink-0 w-7 h-7 rounded-full border border-white/20 flex items-center justify-center text-white/60 mt-0.5"
+                    style={{ fontFamily: FONT_BODY, fontSize: "18px", lineHeight: 1 }}
+                    animate={{ rotate: isOpen ? 45 : 0 }}
+                    transition={{ duration: reduced ? 0 : 0.2, ease: "easeInOut" }}
+                    aria-hidden="true"
+                  >
+                    +
+                  </motion.span>
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      key="answer"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: reduced ? 0 : 0.28, ease: [0.25, 0.4, 0.25, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <p
+                        className="pb-7 text-[15px] md:text-[16px] leading-relaxed"
+                        style={{ color: TEXT_MUTED_DARK, fontFamily: FONT_BODY, maxWidth: "68ch" }}
+                      >
+                        {item.answer}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Section 10 — Close CTA
 // ─────────────────────────────────────────────────────────────────────────────
 function CloseCTA() {
   return (
     <section
       id="contact"
       className="w-full"
-      style={{ backgroundColor: BG_DARK, scrollMarginTop: "72px" }}
+      style={{ backgroundColor: BG_DARK, scrollMarginTop: "72px", borderTop: "1px solid rgba(255,255,255,0.08)" }}
       aria-labelledby="cta-heading"
     >
       <div className="mx-auto max-w-[1100px] px-5 md:px-8 lg:px-12 py-24 md:py-36 text-center">
-        <h2
+        <motion.h2
           id="cta-heading"
           className="font-bold text-white leading-[1.02] tracking-[-0.02em] mb-6 md:mb-8"
           style={{ fontFamily: FONT_HEAD, fontSize: "clamp(40px, 7vw, 88px)" }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          custom={0}
         >
           Ready to start <br className="hidden sm:block" />something?
-        </h2>
-        <p
+        </motion.h2>
+        <motion.p
           className="text-[16px] md:text-[18px] lg:text-[20px] leading-relaxed mx-auto mb-10 md:mb-12"
           style={{ color: TEXT_MUTED_DARK, fontFamily: FONT_BODY, maxWidth: "560px" }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          custom={0.1}
         >
           We work with founders and teams who want brand, software, or AI built well. Tell us what you're working on.
-        </p>
+        </motion.p>
 
-        <a
-          href="https://calendly.com/praveenraj"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center px-8 py-4 rounded-full text-[15px] font-medium bg-white text-black hover:bg-white/90 transition-colors min-h-[52px]"
-          style={{ fontFamily: FONT_BODY }}
-          data-testid="close-cta-book"
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          custom={0.2}
         >
-          Book a brand audit →
-        </a>
+          <a
+            href="https://calendly.com/praveenraj"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center px-8 py-4 rounded-full text-[15px] font-medium bg-white text-black hover:bg-white/90 transition-colors min-h-[52px]"
+            style={{ fontFamily: FONT_BODY }}
+            data-testid="close-cta-book"
+          >
+            Book a brand audit →
+          </a>
 
-        <div
-          className="mt-10 md:mt-12 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-[14px] md:text-[15px]"
-          style={{ color: TEXT_MUTED_DARK, fontFamily: FONT_BODY }}
-        >
-          <a href="mailto:connect@graysolutions.in" className="hover:text-white transition-colors">
-            connect@graysolutions.in
-          </a>
-          <span className="hidden sm:inline text-white/25">·</span>
-          <a href="tel:+916380267018" className="hover:text-white transition-colors">
-            +91 63802 67018
-          </a>
-        </div>
+          <div
+            className="mt-10 md:mt-12 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-[14px] md:text-[15px]"
+            style={{ color: TEXT_MUTED_DARK, fontFamily: FONT_BODY }}
+          >
+            <a href="mailto:connect@graysolutions.in" className="hover:text-white transition-colors">
+              connect@graysolutions.in
+            </a>
+            <span className="hidden sm:inline text-white/25">·</span>
+            <a href="tel:+916380267018" className="hover:text-white transition-colors">
+              +91 63802 67018
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -985,18 +1353,13 @@ function LandingFooter() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Landing page (Phase 1)
+// Landing page — Phase 1 complete (11 sections)
 // ─────────────────────────────────────────────────────────────────────────────
 export default function Landing() {
   return (
     <div
       className="w-full"
-      style={{
-        backgroundColor: BG_DARK,
-        color: "#fff",
-        fontFamily: FONT_BODY,
-        overflowX: "hidden",
-      }}
+      style={{ backgroundColor: BG_DARK, color: "#fff", fontFamily: FONT_BODY, overflowX: "hidden" }}
     >
       <Navigation />
 
@@ -1008,6 +1371,8 @@ export default function Landing() {
         <Services />
         <StudioSection />
         <Approach />
+        <Testimonials />
+        <FAQ />
         <CloseCTA />
       </main>
 
