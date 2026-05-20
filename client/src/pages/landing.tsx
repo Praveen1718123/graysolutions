@@ -27,6 +27,25 @@ const FONT_MONO = "'JetBrains Mono', ui-monospace, monospace";
 // Premium easing curves
 const EXPO_OUT: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const EASE_OUT: [number, number, number, number] = [0.25, 0.4, 0.25, 1];
+const EXPO_OUT_CSS = "cubic-bezier(0.16, 1, 0.3, 1)";
+
+// 5-layer soft shadow — the exact Framer/Whenevr signature
+const SHADOW_5_LAYER = [
+  "rgba(108, 113, 128, 0.08) 0px 2px 4px",
+  "rgba(108, 113, 128, 0.07) 0px 7px 7px",
+  "rgba(108, 113, 128, 0.04) 0px 17px 10px",
+  "rgba(108, 113, 128, 0.01) 0px 29px 12px",
+  "rgba(108, 113, 128, 0) 0px 46px 13px",
+].join(", ");
+
+// Intensified version for hover state
+const SHADOW_5_LAYER_HOVER = [
+  "rgba(108, 113, 128, 0.16) 0px 4px 8px",
+  "rgba(108, 113, 128, 0.14) 0px 14px 14px",
+  "rgba(108, 113, 128, 0.08) 0px 34px 20px",
+  "rgba(108, 113, 128, 0.02) 0px 58px 24px",
+  "rgba(108, 113, 128, 0) 0px 92px 26px",
+].join(", ");
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Data
@@ -99,8 +118,6 @@ const services = [
   { number: "04", name: "AI",      oneLine: "Agents that take work off the table." },
 ];
 
-const heroWords = ["We", "build", "Brand.", "Digital.", "Product.", "AI."];
-
 // ─────────────────────────────────────────────────────────────────────────────
 // Lenis smooth scroll (site-wide, respects prefers-reduced-motion)
 // ─────────────────────────────────────────────────────────────────────────────
@@ -135,9 +152,95 @@ const fadeUp = {
   visible: (delay: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, delay, ease: EXPO_OUT },
+    transition: { duration: 0.6, delay, ease: EXPO_OUT },
   }),
 };
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SlidingButton — Framer-style text-slide-up hover reveal
+// Renders text twice; on hover the first copy slides up & out, second slides in.
+// ─────────────────────────────────────────────────────────────────────────────
+type SlidingButtonProps = {
+  children: React.ReactNode;
+  variant?: "primary" | "secondary";
+  onClick?: () => void;
+  href?: string;
+  className?: string;
+  "data-testid"?: string;
+};
+
+function SlidingButton({
+  children,
+  variant = "primary",
+  onClick,
+  href,
+  className = "",
+  ...rest
+}: SlidingButtonProps) {
+  const baseStyle: React.CSSProperties =
+    variant === "primary"
+      ? { backgroundColor: TEXT_PRIMARY, color: BG_PRIMARY, fontFamily: FONT_BODY }
+      : {
+          backgroundColor: "rgba(255,255,255,0.03)",
+          color: TEXT_PRIMARY,
+          border: `1px solid ${BORDER_SUBTLE}`,
+          fontFamily: FONT_BODY,
+        };
+
+  const baseClasses =
+    "group relative overflow-hidden inline-flex items-center justify-center rounded-full text-[15px] font-semibold min-h-[52px] px-7 py-4 transition-colors";
+
+  const inner = (
+    <>
+      <span
+        className="inline-flex items-center gap-2"
+        style={{
+          transition: `transform 300ms ${EXPO_OUT_CSS}, opacity 300ms ${EXPO_OUT_CSS}`,
+        }}
+      >
+        {children}
+      </span>
+      <span
+        className="absolute inset-0 inline-flex items-center justify-center gap-2"
+        style={{
+          transform: "translateY(100%)",
+          transition: `transform 300ms ${EXPO_OUT_CSS}`,
+        }}
+        aria-hidden="true"
+      >
+        {children}
+      </span>
+      <style>{`
+        .sliding-btn:hover > span:first-of-type { transform: translateY(-100%); opacity: 0; }
+        .sliding-btn:hover > span:last-of-type { transform: translateY(0); }
+      `}</style>
+    </>
+  );
+
+  if (href) {
+    return (
+      <a
+        href={href}
+        className={`sliding-btn ${baseClasses} ${className}`}
+        style={baseStyle}
+        {...rest}
+      >
+        {inner}
+      </a>
+    );
+  }
+
+  return (
+    <button
+      onClick={onClick}
+      className={`sliding-btn ${baseClasses} ${className}`}
+      style={baseStyle}
+      {...rest}
+    >
+      {inner}
+    </button>
+  );
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Discipline marquee — infinite horizontal scroll
@@ -238,15 +341,17 @@ function Navigation() {
           </Link>
 
           <div className="flex items-center gap-3 md:gap-5">
-            <button
-              onClick={() => scrollTo("#contact")}
-              className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[14px] font-medium transition-all group"
-              style={{ fontFamily: FONT_BODY, color: BG_PRIMARY, backgroundColor: TEXT_PRIMARY }}
-              data-testid="cta-start-project-nav"
-            >
-              <span>Start a project</span>
-              <span className="transition-transform group-hover:translate-x-1">→</span>
-            </button>
+            <div className="hidden md:block">
+              <SlidingButton
+                onClick={() => scrollTo("#contact")}
+                variant="primary"
+                className="!min-h-[44px] !px-5 !py-2.5 !text-[14px]"
+                data-testid="cta-start-project-nav"
+              >
+                <span>Start a project</span>
+                <span>→</span>
+              </SlidingButton>
+            </div>
             <button
               onClick={() => setMenuOpen(true)}
               className="flex items-center justify-center w-11 h-11 rounded-full transition-colors"
@@ -367,26 +472,34 @@ function Navigation() {
 // ─────────────────────────────────────────────────────────────────────────────
 // Hero
 // ─────────────────────────────────────────────────────────────────────────────
+// Rotating words for the hero — "We build [X]"
+const ROTATING_WORDS: { text: string; color: string }[] = [
+  { text: "Brand.",      color: TEXT_PRIMARY },
+  { text: "Digital.",    color: TEXT_PRIMARY },
+  { text: "Product.",    color: TEXT_PRIMARY },
+  { text: "AI.",         color: TEXT_PRIMARY },
+  { text: "End to end.", color: ACCENT_CYAN  },
+];
+
 function Hero() {
   const reduced = useReducedMotion();
+  const [rotIdx, setRotIdx] = useState(0);
 
-  const wordVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        delay: reduced ? 0 : 0.2 + i * 0.06,
-        ease: EXPO_OUT,
-      },
-    }),
-  };
+  // Cycle through ROTATING_WORDS every 5s — pause when prefers-reduced-motion is on
+  useEffect(() => {
+    if (reduced) return;
+    const id = window.setInterval(() => {
+      setRotIdx((i) => (i + 1) % ROTATING_WORDS.length);
+    }, 5000);
+    return () => window.clearInterval(id);
+  }, [reduced]);
 
   const scrollTo = (id: string) => {
     const el = document.querySelector(id);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
+
+  const current = ROTATING_WORDS[rotIdx];
 
   return (
     <section
@@ -409,27 +522,43 @@ function Hero() {
               maxWidth: "16ch",
             }}
           >
-            {heroWords.map((word, i) => (
-              <motion.span
-                key={`${word}-${i}`}
-                className="inline-block mr-[0.22em]"
-                custom={i}
-                variants={wordVariants}
-                initial="hidden"
-                animate="visible"
-              >
-                {word}
-              </motion.span>
-            ))}
+            {/* Static prefix */}
             <motion.span
-              className="inline-block"
-              style={{ color: ACCENT_CYAN }}
-              custom={heroWords.length}
-              variants={wordVariants}
-              initial="hidden"
-              animate="visible"
+              className="inline-block mr-[0.22em]"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: reduced ? 0 : 0.2, ease: EXPO_OUT }}
             >
-              End to end.
+              We build
+            </motion.span>
+
+            {/* Rotating word slot — overflow-hidden, slide-up swap */}
+            <motion.span
+              className="relative inline-block align-baseline overflow-hidden"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: reduced ? 0 : 0.32, ease: EXPO_OUT }}
+              style={{
+                lineHeight: 0.98,
+                // Reserve vertical space so the slot doesn't collapse during exits
+                paddingBottom: "0.12em",
+              }}
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={rotIdx}
+                  className="inline-block"
+                  style={{ color: current.color }}
+                  initial={reduced ? { opacity: 1, y: 0 } : { opacity: 0, y: "100%" }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={reduced ? { opacity: 0, y: 0 } : { opacity: 0, y: "-100%" }}
+                  transition={{ duration: reduced ? 0 : 0.6, ease: EXPO_OUT }}
+                >
+                  {current.text}
+                </motion.span>
+              </AnimatePresence>
             </motion.span>
           </h1>
 
@@ -442,42 +571,35 @@ function Hero() {
               lineHeight: 1.5,
               maxWidth: "640px",
             }}
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: reduced ? 0 : 0.7, ease: EXPO_OUT }}
+            transition={{ duration: 0.6, delay: reduced ? 0 : 0.8, ease: EXPO_OUT }}
           >
             One team, from first idea to shipped work.
           </motion.p>
 
           <motion.div
             className="mt-12 md:mt-16 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5"
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: reduced ? 0 : 0.9, ease: EXPO_OUT }}
+            transition={{ duration: 0.6, delay: reduced ? 0 : 1.0, ease: EXPO_OUT }}
           >
-            <button
+            <SlidingButton
               onClick={() => scrollTo("#work")}
-              className="group inline-flex items-center gap-2 px-7 py-4 rounded-full text-[15px] font-medium transition-all min-h-[52px]"
-              style={{ fontFamily: FONT_BODY, color: BG_PRIMARY, backgroundColor: TEXT_PRIMARY }}
+              variant="primary"
               data-testid="cta-see-work"
             >
               <span>See the work</span>
-              <span className="transition-transform group-hover:translate-x-1">→</span>
-            </button>
-            <button
+              <span>→</span>
+            </SlidingButton>
+            <SlidingButton
               onClick={() => scrollTo("#contact")}
-              className="group inline-flex items-center gap-2 px-7 py-4 rounded-full text-[15px] font-medium transition-all min-h-[52px]"
-              style={{
-                fontFamily: FONT_BODY,
-                color: TEXT_PRIMARY,
-                border: `1px solid ${BORDER_SUBTLE}`,
-                backgroundColor: "rgba(255,255,255,0.03)",
-              }}
+              variant="secondary"
               data-testid="cta-start-project"
             >
               <span>Start a project</span>
-              <span className="transition-transform group-hover:translate-x-1">→</span>
-            </button>
+              <span>→</span>
+            </SlidingButton>
           </motion.div>
         </div>
       </div>
@@ -539,15 +661,17 @@ function SelectedWork() {
                   minHeight: "400px",
                   height: "100%",
                   border: `1px solid ${BORDER_SUBTLE}`,
+                  boxShadow: SHADOW_5_LAYER,
                 }}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ scale: 1.02, boxShadow: SHADOW_5_LAYER_HOVER }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.8, delay: idx * 0.08, ease: EXPO_OUT }}
+                transition={{ duration: 0.6, delay: idx * 0.12, ease: EXPO_OUT }}
               >
                 {/* Background image or gradient */}
                 <div
-                  className="absolute inset-0 transition-all duration-[600ms] ease-out group-hover:scale-[1.04] group-hover:brightness-110"
+                  className="absolute inset-0"
                   style={
                     tile.image
                       ? {
@@ -686,7 +810,7 @@ function Services() {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.8, delay: idx * 0.1, ease: EXPO_OUT }}
+              transition={{ duration: 0.6, delay: idx * 0.12, ease: EXPO_OUT }}
             >
               <span
                 className="block mb-6 text-[12px] uppercase tracking-[0.24em]"
@@ -763,39 +887,38 @@ function CloseCTA() {
               fontSize: "clamp(18px, 1.6vw, 22px)",
               lineHeight: 1.5,
             }}
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.15, ease: EXPO_OUT }}
+            transition={{ duration: 0.6, delay: 0.12, ease: EXPO_OUT }}
           >
             Tell us what you&apos;re building.
           </motion.p>
-          <motion.a
-            href="mailto:connect@graysolutions.in"
-            className="group inline-flex items-center gap-2 px-8 py-4 rounded-full text-[15px] font-medium transition-all mt-12 md:mt-14"
-            style={{
-              fontFamily: FONT_BODY,
-              color: BG_PRIMARY,
-              backgroundColor: TEXT_PRIMARY,
-              minHeight: "52px",
-            }}
-            initial={{ opacity: 0, y: 24 }}
+          <motion.div
+            className="mt-12 md:mt-14"
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3, ease: EXPO_OUT }}
-            data-testid="cta-get-in-touch"
+            transition={{ duration: 0.6, delay: 0.24, ease: EXPO_OUT }}
           >
-            <span>Get in touch</span>
-            <span className="transition-transform group-hover:translate-x-1">→</span>
-          </motion.a>
+            <SlidingButton
+              href="mailto:connect@graysolutions.in"
+              variant="primary"
+              className="!px-8"
+              data-testid="cta-get-in-touch"
+            >
+              <span>Get in touch</span>
+              <span>→</span>
+            </SlidingButton>
+          </motion.div>
 
           <motion.div
             className="mt-10 md:mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-[14px]"
             style={{ color: TEXT_MUTED, fontFamily: FONT_MONO }}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.45, ease: EXPO_OUT }}
+            transition={{ duration: 0.6, delay: 0.36, ease: EXPO_OUT }}
           >
             <a href="mailto:connect@graysolutions.in" className="hover:text-white transition-colors">connect@graysolutions.in</a>
             <span className="opacity-50">·</span>
