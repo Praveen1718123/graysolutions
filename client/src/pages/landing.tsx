@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import Lenis from "lenis";
 
 // Optimized assets (WebP)
 import goGaugeImage from "@assets/optimized/gogauge_slide.webp";
@@ -10,502 +12,747 @@ import tixImage from "@assets/optimized/tix_iphone_mockup.webp";
 // ─────────────────────────────────────────────────────────────────────────────
 // Design tokens
 // ─────────────────────────────────────────────────────────────────────────────
-const BG_DARK = "#0A0A0A";
-const BG_DARK_ALT = "#141414";
-const BG_LIGHT = "#F5F2EC";
-const ACCENT = "#A8D8FF";
-const TEXT_MUTED_DARK = "rgba(255,255,255,0.65)";
-const TEXT_MUTED_LIGHT = "rgba(10,10,10,0.65)";
+const BG_PRIMARY = "#0A0A0A";
+const BG_SECONDARY = "#141414";
+const TEXT_PRIMARY = "#FFFFFF";
+const TEXT_SECONDARY = "#A0A0A0";
+const TEXT_MUTED = "#6B6B6B";
+const ACCENT_CYAN = "#A8D8FF";
+const BORDER_SUBTLE = "#1F1F1F";
 
-const FONT_HEAD = "'Plus Jakarta Sans', 'Inter', ui-sans-serif, system-ui, sans-serif";
+const FONT_DISPLAY = "'Plus Jakarta Sans', 'Inter', ui-sans-serif, system-ui, sans-serif";
 const FONT_BODY = "'DM Sans', 'Inter', ui-sans-serif, system-ui, sans-serif";
 const FONT_MONO = "'JetBrains Mono', ui-monospace, monospace";
+
+// Premium easing curves
+const EXPO_OUT: [number, number, number, number] = [0.16, 1, 0.3, 1];
+const EASE_OUT: [number, number, number, number] = [0.25, 0.4, 0.25, 1];
+const EXPO_OUT_CSS = "cubic-bezier(0.16, 1, 0.3, 1)";
+
+// 5-layer soft shadow — the exact Framer/Whenevr signature
+const SHADOW_5_LAYER = [
+  "rgba(108, 113, 128, 0.08) 0px 2px 4px",
+  "rgba(108, 113, 128, 0.07) 0px 7px 7px",
+  "rgba(108, 113, 128, 0.04) 0px 17px 10px",
+  "rgba(108, 113, 128, 0.01) 0px 29px 12px",
+  "rgba(108, 113, 128, 0) 0px 46px 13px",
+].join(", ");
+
+// Intensified version for hover state
+const SHADOW_5_LAYER_HOVER = [
+  "rgba(108, 113, 128, 0.16) 0px 4px 8px",
+  "rgba(108, 113, 128, 0.14) 0px 14px 14px",
+  "rgba(108, 113, 128, 0.08) 0px 34px 20px",
+  "rgba(108, 113, 128, 0.02) 0px 58px 24px",
+  "rgba(108, 113, 128, 0) 0px 92px 26px",
+].join(", ");
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Data
 // ─────────────────────────────────────────────────────────────────────────────
 const navItems = [
-  { label: "Work", href: "#selected-work" },
+  { label: "Home", href: "/", external: true },
+  { label: "Work", href: "#work" },
   { label: "Services", href: "#services" },
-  { label: "Studio", href: "#studio" },
   { label: "About", href: "/about", external: true },
   { label: "Contact", href: "#contact" },
 ];
 
-const clientNames = ["GoGauge", "Eagle", "Magic Trucks", "Cafe66", "TIX"];
-
 const selectedWork = [
   {
-    id: "gogauge",
-    client: "GoGauge",
-    description: "Rebrand, strategy, and operating system for a logistics platform.",
-    sector: "Logistics",
-    year: "2024",
-    href: "/case-study/gogauge",
-    image: goGaugeImage,
+    id: "magic-trucks",
+    client: "Magic Trucks",
+    scope: "Brand · Product · AI",
+    href: "/case-study/magic-trucks",
+    image: magicTrucksImage,
+    gradient: null,
+  },
+  {
+    id: "gva",
+    client: "Gray Voice Agent",
+    scope: "Product · AI · Brand",
+    label: "Our product",
+    href: "#",
+    image: null,
+    gradient: "linear-gradient(135deg, #0A1A2A 0%, #1A3A5A 50%, #2A5588 100%)",
   },
   {
     id: "eagle",
     client: "Eagle",
-    description: "Fleet-wide brand revamp across digital, vehicles, merchandise, and uniforms — Dubai.",
-    sector: "Freight & Industrial",
-    year: "2024",
+    scope: "Brand",
     href: "/case-study/eagle",
     image: eagleImage,
+    gradient: null,
   },
   {
-    id: "magic-trucks",
-    client: "Magic Trucks",
-    description: "B2B SaaS platform for the trucking and freight industry.",
-    sector: "SaaS",
-    year: "2025",
-    href: "/case-study/magic-trucks",
-    image: magicTrucksImage,
+    id: "gogauge",
+    client: "GoGauge",
+    scope: "Brand · Digital · Strategy",
+    href: "/case-study/gogauge",
+    image: goGaugeImage,
+    gradient: null,
   },
   {
     id: "cafe66",
     client: "Cafe66",
-    description: "Brand strategy, business consulting, and digital presence for a growing F&B brand.",
-    sector: "F&B · Strategy & Brand",
-    year: "2026",
-    href: "#contact",
-    image: null, // Placeholder gradient block
+    scope: "Digital · Strategy",
+    href: "#",
+    image: null,
+    gradient: "linear-gradient(135deg, #1A1209 0%, #3A2818 50%, #5A4028 100%)",
+  },
+  {
+    id: "tix",
+    client: "TIX",
+    scope: "Brand · Product",
+    label: "In development",
+    href: "/case-study/tix",
+    image: tixImage,
+    gradient: null,
   },
 ];
 
 const services = [
-  { number: "01", name: "Branding & Identity", oneLiner: "Logo systems, guidelines, packaging, livery, merchandise, print." },
-  { number: "02", name: "Digital Marketing",   oneLiner: "Social presence, content systems, campaigns, performance." },
-  { number: "03", name: "Software & Product",  oneLiner: "Web apps, B2B SaaS platforms, websites, internal tools." },
-  { number: "04", name: "AI & Automation",     oneLiner: "Workflow automation, AI integrations, voice and conversational systems." },
-];
-
-const approach = [
-  { step: "Listen",     description: "We sit with the people closest to the problem." },
-  { step: "Sketch",     description: "First drafts. Rough on purpose. Cheap to throw away." },
-  { step: "Build",      description: "The version that goes into your stack." },
-  { step: "Hand over",  description: "Documentation, systems, and a short note on what to watch next." },
-];
-
-const footerCols = {
-  Work: ["GoGauge", "Eagle", "Magic Trucks", "Cafe66"],
-  Studio: ["Approach", "Services", "Careers"],
-  Writing: ["Notes", "Newsletter", "Archive"],
-  Contact: ["connect@graysolutions.in", "+91 63802 67018", "Coimbatore, India", "© 2026 Gray Solutions"],
-};
-
-// Studio themes — placeholder gradient pairs. Replace with real WebP images later.
-// Each theme has Frame A (initial) and Frame B (resolved). Crossfades on scroll.
-const studioThemes = [
-  {
-    id: "technology",
-    label: "01 — Technology",
-    frameA: "linear-gradient(135deg, #0A0F1A 0%, #1A2540 60%, #2A3D6B 100%)",
-    frameB: "linear-gradient(135deg, #1A2540 0%, #4A7FCC 50%, #A8D8FF 100%)",
-  },
-  {
-    id: "materiality",
-    label: "02 — Materiality",
-    frameA: "linear-gradient(135deg, #1A1410 0%, #3A2E22 60%, #5C4A38 100%)",
-    frameB: "linear-gradient(135deg, #3A2E22 0%, #8C7558 50%, #D8C5A6 100%)",
-  },
-  {
-    id: "generative",
-    label: "03 — Generative",
-    frameA: "linear-gradient(135deg, #1A0A1A 0%, #3D1E40 60%, #6B2E70 100%)",
-    frameB: "linear-gradient(135deg, #3D1E40 0%, #B856C2 50%, #FFAEE0 100%)",
-  },
-  {
-    id: "craft",
-    label: "04 — Craft",
-    frameA: "linear-gradient(135deg, #14100A 0%, #3D2F1E 60%, #6B5036 100%)",
-    frameB: "linear-gradient(135deg, #3D2F1E 0%, #C99860 50%, #FFD7A6 100%)",
-  },
-  {
-    id: "motion",
-    label: "05 — Motion",
-    frameA: "linear-gradient(135deg, #0A1414 0%, #1E3D3A 60%, #2E6B66 100%)",
-    frameB: "linear-gradient(135deg, #1E3D3A 0%, #58C2B5 50%, #AEFFEE 100%)",
-  },
+  { number: "01", name: "Brand",   oneLine: "The system that holds everything together." },
+  { number: "02", name: "Digital", oneLine: "Where the brand meets the customer." },
+  { number: "03", name: "Product", oneLine: "From the first PRD to the shipped version." },
+  { number: "04", name: "AI",      oneLine: "Agents that take work off the table." },
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Sticky Navigation
+// Lenis smooth scroll (site-wide, respects prefers-reduced-motion)
+// ─────────────────────────────────────────────────────────────────────────────
+function useLenis() {
+  const reduced = useReducedMotion();
+  useEffect(() => {
+    if (reduced) return;
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 1,
+    });
+    let rafId: number;
+    function raf(time: number) {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+    rafId = requestAnimationFrame(raf);
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+    };
+  }, [reduced]);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Section reveal — fade up on scroll into view
+// ─────────────────────────────────────────────────────────────────────────────
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (delay: number = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay, ease: EXPO_OUT },
+  }),
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SlidingButton — Framer-style text-slide-up hover reveal
+// Renders text twice; on hover the first copy slides up & out, second slides in.
+// ─────────────────────────────────────────────────────────────────────────────
+type SlidingButtonProps = {
+  children: React.ReactNode;
+  variant?: "primary" | "secondary";
+  onClick?: () => void;
+  href?: string;
+  className?: string;
+  "data-testid"?: string;
+};
+
+function SlidingButton({
+  children,
+  variant = "primary",
+  onClick,
+  href,
+  className = "",
+  ...rest
+}: SlidingButtonProps) {
+  const baseStyle: React.CSSProperties =
+    variant === "primary"
+      ? { backgroundColor: TEXT_PRIMARY, color: BG_PRIMARY, fontFamily: FONT_BODY }
+      : {
+          backgroundColor: "rgba(255,255,255,0.03)",
+          color: TEXT_PRIMARY,
+          border: `1px solid ${BORDER_SUBTLE}`,
+          fontFamily: FONT_BODY,
+        };
+
+  const baseClasses =
+    "group relative overflow-hidden inline-flex items-center justify-center rounded-full text-[15px] font-semibold min-h-[52px] px-7 py-4 transition-colors";
+
+  const inner = (
+    <>
+      <span
+        className="inline-flex items-center gap-2"
+        style={{
+          transition: `transform 300ms ${EXPO_OUT_CSS}, opacity 300ms ${EXPO_OUT_CSS}`,
+        }}
+      >
+        {children}
+      </span>
+      <span
+        className="absolute inset-0 inline-flex items-center justify-center gap-2"
+        style={{
+          transform: "translateY(100%)",
+          transition: `transform 300ms ${EXPO_OUT_CSS}`,
+        }}
+        aria-hidden="true"
+      >
+        {children}
+      </span>
+      <style>{`
+        .sliding-btn:hover > span:first-of-type { transform: translateY(-100%); opacity: 0; }
+        .sliding-btn:hover > span:last-of-type { transform: translateY(0); }
+      `}</style>
+    </>
+  );
+
+  if (href) {
+    return (
+      <a
+        href={href}
+        className={`sliding-btn ${baseClasses} ${className}`}
+        style={baseStyle}
+        {...rest}
+      >
+        {inner}
+      </a>
+    );
+  }
+
+  return (
+    <button
+      onClick={onClick}
+      className={`sliding-btn ${baseClasses} ${className}`}
+      style={baseStyle}
+      {...rest}
+    >
+      {inner}
+    </button>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Discipline marquee — infinite horizontal scroll
+// ─────────────────────────────────────────────────────────────────────────────
+const MARQUEE_TEXT = "Brand · Digital · Product · AI · ";
+
+function DisciplineMarquee() {
+  const reduced = useReducedMotion();
+  const [paused, setPaused] = useState(false);
+
+  const textStyle: React.CSSProperties = {
+    color: TEXT_MUTED,
+    fontFamily: FONT_MONO,
+    fontSize: "12px",
+    letterSpacing: "0.24em",
+    textTransform: "uppercase",
+    paddingRight: "3rem",
+    whiteSpace: "nowrap",
+  };
+
+  if (reduced) {
+    return (
+      <div className="overflow-hidden py-4" aria-hidden="true">
+        <span style={textStyle}>{MARQUEE_TEXT.repeat(4)}</span>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="overflow-hidden py-4"
+      aria-hidden="true"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      style={{ borderTop: `1px solid ${BORDER_SUBTLE}`, borderBottom: `1px solid ${BORDER_SUBTLE}` }}
+    >
+      <motion.div
+        className="inline-flex"
+        animate={paused ? { x: undefined } : { x: ["0%", "-50%"] }}
+        transition={{ duration: 40, ease: "linear", repeat: Infinity, repeatType: "loop" }}
+        style={{ willChange: "transform" }}
+      >
+        <span style={textStyle}>{MARQUEE_TEXT.repeat(8)}</span>
+        <span style={textStyle}>{MARQUEE_TEXT.repeat(8)}</span>
+      </motion.div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Navigation — sticky, transparent over hero, blurs on scroll
 // ─────────────────────────────────────────────────────────────────────────────
 function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    const onScroll = () => setScrolled(window.scrollY > 80);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll when menu open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [menuOpen]);
 
-  const handleAnchorClick = (e: React.MouseEvent, href: string) => {
-    if (href.startsWith("#")) {
-      e.preventDefault();
-      setMenuOpen(false);
-      const el = document.querySelector(href);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else {
-      setMenuOpen(false);
-    }
+  const scrollTo = (id: string) => {
+    setMenuOpen(false);
+    const el = document.querySelector(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
         style={{
-          backgroundColor: scrolled ? "rgba(10,10,10,0.85)" : "transparent",
-          backdropFilter: scrolled ? "blur(12px)" : "none",
-          WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
-          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.08)" : "1px solid transparent",
+          backgroundColor: scrolled ? "rgba(10,10,10,0.72)" : "transparent",
+          backdropFilter: scrolled ? "saturate(180%) blur(16px)" : "none",
+          WebkitBackdropFilter: scrolled ? "saturate(180%) blur(16px)" : "none",
+          borderBottom: scrolled ? `1px solid ${BORDER_SUBTLE}` : "1px solid transparent",
         }}
       >
-        <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 h-[64px] md:h-[72px] flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/">
-            <a
-              className="text-[20px] md:text-[22px] font-bold tracking-tight text-white cursor-pointer"
-              style={{ fontFamily: FONT_HEAD }}
-              aria-label="Gray Solutions homepage"
-            >
-              Gray
-            </a>
+        <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 h-[72px] md:h-[80px] flex items-center justify-between">
+          <Link href="/" className="flex items-center cursor-pointer" aria-label="Gray Solutions homepage">
+            <img
+              src="/assets/logo-140.webp"
+              srcSet="/assets/logo-140.webp 1x, /assets/logo-280.webp 2x"
+              alt="Gray Solutions"
+              width={90}
+              height={32}
+              style={{ display: "block" }}
+            />
           </Link>
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-8 lg:gap-10" aria-label="Main">
-            {navItems.map((item) => (
-              item.external ? (
-                <Link key={item.label} href={item.href}>
-                  <a className="text-[14px] text-white/75 hover:text-white transition-colors cursor-pointer" style={{ fontFamily: FONT_BODY }}>
-                    {item.label}
-                  </a>
-                </Link>
-              ) : (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  onClick={(e) => handleAnchorClick(e, item.href)}
-                  className="text-[14px] text-white/75 hover:text-white transition-colors"
-                  style={{ fontFamily: FONT_BODY }}
-                >
-                  {item.label}
-                </a>
-              )
-            ))}
-            <a
-              href="#contact"
-              onClick={(e) => handleAnchorClick(e, "#contact")}
-              className="text-[14px] font-medium px-4 lg:px-5 py-2 lg:py-2.5 rounded-full border border-white/15 hover:bg-white hover:text-black transition-all"
-              style={{ fontFamily: FONT_BODY }}
+          <div className="flex items-center gap-3 md:gap-5">
+            <div className="hidden md:block">
+              <SlidingButton
+                onClick={() => scrollTo("#contact")}
+                variant="primary"
+                className="!min-h-[44px] !px-5 !py-2.5 !text-[14px]"
+                data-testid="cta-start-project-nav"
+              >
+                <span>Start a project</span>
+                <span>→</span>
+              </SlidingButton>
+            </div>
+            <button
+              onClick={() => setMenuOpen(true)}
+              className="flex items-center justify-center w-11 h-11 rounded-full transition-colors"
+              style={{
+                color: TEXT_PRIMARY,
+                border: `1px solid ${BORDER_SUBTLE}`,
+                backgroundColor: "rgba(255,255,255,0.04)",
+              }}
+              aria-label="Open menu"
+              data-testid="nav-menu-button"
             >
-              Book a call →
-            </a>
-          </nav>
-
-          {/* Mobile hamburger */}
-          <button
-            className="md:hidden p-2 -mr-2 text-white"
-            onClick={() => setMenuOpen(true)}
-            aria-label="Open menu"
-            aria-expanded={menuOpen}
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <line x1="4" y1="7" x2="20" y2="7" />
-              <line x1="4" y1="17" x2="20" y2="17" />
-            </svg>
-          </button>
+              <svg width="18" height="14" viewBox="0 0 18 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                <line x1="1" y1="3" x2="17" y2="3" />
+                <line x1="1" y1="11" x2="17" y2="11" />
+              </svg>
+            </button>
+          </div>
         </div>
       </header>
 
-      {/* Mobile full-screen overlay */}
-      <div
-        className="fixed inset-0 z-[60] md:hidden"
-        style={{
-          backgroundColor: BG_DARK,
-          opacity: menuOpen ? 1 : 0,
-          pointerEvents: menuOpen ? "auto" : "none",
-          transition: "opacity 0.25s ease",
-        }}
-        aria-hidden={!menuOpen}
-      >
-        <div className="h-[64px] flex items-center justify-between px-5">
-          <span className="text-[20px] font-bold tracking-tight text-white" style={{ fontFamily: FONT_HEAD }}>Gray</span>
-          <button
-            className="p-2 -mr-2 text-white"
-            onClick={() => setMenuOpen(false)}
-            aria-label="Close menu"
+      {/* Full-screen menu overlay */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, ease: EXPO_OUT }}
+            className="fixed inset-0 z-[100]"
+            style={{ backgroundColor: BG_PRIMARY }}
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <line x1="6" y1="6" x2="18" y2="18" />
-              <line x1="18" y1="6" x2="6" y2="18" />
-            </svg>
-          </button>
-        </div>
-        <nav className="flex flex-col gap-2 px-5 pt-10" aria-label="Mobile">
-          {navItems.map((item) => (
-            item.external ? (
-              <Link key={item.label} href={item.href}>
-                <a
-                  onClick={() => setMenuOpen(false)}
-                  className="block text-[28px] font-semibold py-3 text-white cursor-pointer"
-                  style={{ fontFamily: FONT_HEAD }}
-                >
-                  {item.label}
-                </a>
-              </Link>
-            ) : (
-              <a
-                key={item.label}
-                href={item.href}
-                onClick={(e) => handleAnchorClick(e, item.href)}
-                className="block text-[28px] font-semibold py-3 text-white"
-                style={{ fontFamily: FONT_HEAD }}
+            <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 h-[72px] md:h-[80px] flex items-center justify-between">
+              <img
+                src="/assets/logo-140.webp"
+                srcSet="/assets/logo-140.webp 1x, /assets/logo-280.webp 2x"
+                alt="Gray Solutions"
+                width={90}
+                height={32}
+                style={{ display: "block" }}
+              />
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center justify-center w-11 h-11 rounded-full transition-colors"
+                style={{
+                  color: TEXT_PRIMARY,
+                  border: `1px solid ${BORDER_SUBTLE}`,
+                  backgroundColor: "rgba(255,255,255,0.04)",
+                }}
+                aria-label="Close menu"
               >
-                {item.label}
-              </a>
-            )
-          ))}
-          <a
-            href="#contact"
-            onClick={(e) => handleAnchorClick(e, "#contact")}
-            className="mt-6 inline-flex items-center justify-center px-6 py-4 rounded-full text-[15px] font-medium bg-white text-black w-full"
-            style={{ fontFamily: FONT_BODY }}
-          >
-            Book a call →
-          </a>
-        </nav>
-      </div>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                  <line x1="3" y1="3" x2="13" y2="13" />
+                  <line x1="13" y1="3" x2="3" y2="13" />
+                </svg>
+              </button>
+            </div>
+
+            <nav className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 pt-16 md:pt-24" aria-label="Main menu">
+              <ul className="flex flex-col gap-4 md:gap-6">
+                {navItems.map((item, i) => (
+                  <motion.li
+                    key={item.label}
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.1 + i * 0.06, ease: EXPO_OUT }}
+                  >
+                    {item.external ? (
+                      <Link
+                        href={item.href}
+                        className="block font-bold tracking-[-0.02em] cursor-pointer"
+                        style={{
+                          fontFamily: FONT_DISPLAY,
+                          color: TEXT_PRIMARY,
+                          fontSize: "clamp(40px, 7vw, 88px)",
+                          lineHeight: 1.0,
+                        }}
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        {item.label}
+                      </Link>
+                    ) : (
+                      <button
+                        onClick={() => scrollTo(item.href)}
+                        className="block text-left font-bold tracking-[-0.02em] w-full"
+                        style={{
+                          fontFamily: FONT_DISPLAY,
+                          color: TEXT_PRIMARY,
+                          fontSize: "clamp(40px, 7vw, 88px)",
+                          lineHeight: 1.0,
+                        }}
+                      >
+                        {item.label}
+                      </button>
+                    )}
+                  </motion.li>
+                ))}
+              </ul>
+
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5, ease: EXPO_OUT }}
+                className="mt-16 md:mt-24 flex flex-wrap items-center gap-x-8 gap-y-3 text-[14px]"
+                style={{ color: TEXT_SECONDARY, fontFamily: FONT_MONO }}
+              >
+                <a href="mailto:connect@graysolutions.in" className="hover:text-white transition-colors">connect@graysolutions.in</a>
+                <a href="tel:+916380267018" className="hover:text-white transition-colors">+91 63802 67018</a>
+                <span>Coimbatore, India</span>
+              </motion.div>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Section 1 — Hero
+// Hero
 // ─────────────────────────────────────────────────────────────────────────────
+// Rotating words for the hero — "We build [X]"
+const ROTATING_WORDS: { text: string; color: string }[] = [
+  { text: "Brand.",      color: TEXT_PRIMARY },
+  { text: "Digital.",    color: TEXT_PRIMARY },
+  { text: "Product.",    color: TEXT_PRIMARY },
+  { text: "AI.",         color: TEXT_PRIMARY },
+  { text: "End to end.", color: ACCENT_CYAN  },
+];
+
 function Hero() {
-  const scrollTo = (sel: string) => {
-    const el = document.querySelector(sel);
+  const reduced = useReducedMotion();
+  const [rotIdx, setRotIdx] = useState(0);
+
+  // Cycle through ROTATING_WORDS every 5s — pause when prefers-reduced-motion is on
+  useEffect(() => {
+    if (reduced) return;
+    const id = window.setInterval(() => {
+      setRotIdx((i) => (i + 1) % ROTATING_WORDS.length);
+    }, 5000);
+    return () => window.clearInterval(id);
+  }, [reduced]);
+
+  const scrollTo = (id: string) => {
+    const el = document.querySelector(id);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  const current = ROTATING_WORDS[rotIdx];
+
   return (
     <section
-      className="relative w-full flex items-center"
-      style={{ backgroundColor: BG_DARK, minHeight: "85vh", paddingTop: "84px", paddingBottom: "60px" }}
+      className="relative w-full flex flex-col justify-end"
+      style={{ backgroundColor: BG_PRIMARY, minHeight: "85vh", paddingTop: "80px" }}
       aria-labelledby="hero-heading"
     >
-      <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 w-full">
-        <p
-          className="text-[12px] md:text-[13px] tracking-[0.18em] uppercase text-white/55 mb-6 md:mb-8"
-          style={{ fontFamily: FONT_MONO }}
-        >
-          Brand · Software · AI
-        </p>
-        <h1
-          id="hero-heading"
-          className="font-bold text-white leading-[0.96] tracking-[-0.02em]"
-          style={{
-            fontFamily: FONT_HEAD,
-            fontSize: "clamp(48px, 11vw, 140px)",
-            maxWidth: "16ch",
-          }}
-        >
-          Work that{" "}
-          <span style={{ color: ACCENT }}>holds up.</span>
-        </h1>
-        <p
-          className="mt-6 md:mt-8 text-[16px] md:text-[18px] lg:text-[20px] leading-relaxed"
-          style={{ color: TEXT_MUTED_DARK, fontFamily: FONT_BODY, maxWidth: "640px" }}
-        >
-          Brand systems, software, and AI built for production. Working with teams across India and the UAE since 2015.
-        </p>
+      <DisciplineMarquee />
 
-        <div className="mt-10 md:mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
-          <button
-            onClick={() => scrollTo("#selected-work")}
-            className="inline-flex items-center justify-center px-7 py-4 rounded-full text-[15px] font-medium bg-white text-black hover:bg-white/90 transition-colors min-h-[48px]"
-            style={{ fontFamily: FONT_BODY }}
-            data-testid="cta-see-work"
+      <div className="flex-1 flex items-center py-16 md:py-24">
+        <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 w-full">
+          <h1
+            id="hero-heading"
+            className="font-bold tracking-[-0.025em]"
+            style={{
+              fontFamily: FONT_DISPLAY,
+              color: TEXT_PRIMARY,
+              fontSize: "clamp(48px, 9.5vw, 128px)",
+              lineHeight: 0.98,
+              maxWidth: "16ch",
+            }}
           >
-            See the work →
-          </button>
-          <button
-            onClick={() => scrollTo("#contact")}
-            className="inline-flex items-center text-[15px] text-white/85 hover:text-white transition-colors min-h-[44px]"
-            style={{ fontFamily: FONT_BODY }}
-            data-testid="cta-book-audit"
+            {/* Static prefix */}
+            <motion.span
+              className="inline-block mr-[0.22em]"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: reduced ? 0 : 0.2, ease: EXPO_OUT }}
+            >
+              We build
+            </motion.span>
+
+            {/* Rotating word slot — overflow-hidden, slide-up swap */}
+            <motion.span
+              className="relative inline-block align-baseline overflow-hidden"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: reduced ? 0 : 0.32, ease: EXPO_OUT }}
+              style={{
+                lineHeight: 0.98,
+                // Reserve vertical space so the slot doesn't collapse during exits
+                paddingBottom: "0.12em",
+              }}
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={rotIdx}
+                  className="inline-block"
+                  style={{ color: current.color }}
+                  initial={reduced ? { opacity: 1, y: 0 } : { opacity: 0, y: "100%" }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={reduced ? { opacity: 0, y: 0 } : { opacity: 0, y: "-100%" }}
+                  transition={{ duration: reduced ? 0 : 0.6, ease: EXPO_OUT }}
+                >
+                  {current.text}
+                </motion.span>
+              </AnimatePresence>
+            </motion.span>
+          </h1>
+
+          <motion.p
+            className="mt-8 md:mt-10"
+            style={{
+              color: TEXT_SECONDARY,
+              fontFamily: FONT_BODY,
+              fontSize: "clamp(18px, 1.8vw, 24px)",
+              lineHeight: 1.5,
+              maxWidth: "640px",
+            }}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: reduced ? 0 : 0.8, ease: EXPO_OUT }}
           >
-            Book a brand audit →
-          </button>
+            One team, from first idea to shipped work.
+          </motion.p>
+
+          <motion.div
+            className="mt-12 md:mt-16 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: reduced ? 0 : 1.0, ease: EXPO_OUT }}
+          >
+            <SlidingButton
+              onClick={() => scrollTo("#work")}
+              variant="primary"
+              data-testid="cta-see-work"
+            >
+              <span>See the work</span>
+              <span>→</span>
+            </SlidingButton>
+            <SlidingButton
+              onClick={() => scrollTo("#contact")}
+              variant="secondary"
+              data-testid="cta-start-project"
+            >
+              <span>Start a project</span>
+              <span>→</span>
+            </SlidingButton>
+          </motion.div>
         </div>
-      </div>
-
-      {/* Scroll indicator */}
-      <div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 pointer-events-none"
-        aria-hidden="true"
-      >
-        <span className="text-[11px] tracking-[0.2em] uppercase text-white/40" style={{ fontFamily: FONT_MONO }}>Scroll</span>
-        <span className="block w-px h-8 bg-white/25" />
       </div>
     </section>
   );
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Section 2 — Client Proof Strip
-// ─────────────────────────────────────────────────────────────────────────────
-function ClientStrip() {
-  return (
-    <section
-      className="w-full"
-      style={{
-        backgroundColor: BG_DARK,
-        borderTop: "1px solid rgba(255,255,255,0.08)",
-        borderBottom: "1px solid rgba(255,255,255,0.08)",
-      }}
-      aria-label="Selected clients"
-    >
-      <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 py-8 md:py-10">
-        <p
-          className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-white/50 mb-4 md:mb-5"
-          style={{ fontFamily: FONT_MONO }}
-        >
-          Selected clients
-        </p>
-        <div
-          className="flex flex-wrap items-center gap-x-3 sm:gap-x-5 md:gap-x-7 gap-y-2 text-white/85 text-[15px] sm:text-[17px] md:text-[20px] font-medium"
-          style={{ fontFamily: FONT_HEAD, letterSpacing: "0.02em" }}
-        >
-          {clientNames.map((name, i) => (
-            <React.Fragment key={name}>
-              <span>{name}</span>
-              {i < clientNames.length - 1 && <span className="text-white/35">·</span>}
-            </React.Fragment>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Section 3 — Selected Work
+// Selected Work — 3+3 grid
 // ─────────────────────────────────────────────────────────────────────────────
 function SelectedWork() {
   return (
     <section
-      id="selected-work"
+      id="work"
       className="w-full"
-      style={{ backgroundColor: BG_DARK, scrollMarginTop: "72px" }}
-      aria-labelledby="selected-work-heading"
+      style={{ backgroundColor: BG_PRIMARY, scrollMarginTop: "80px" }}
+      aria-labelledby="work-heading"
     >
-      <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 py-20 md:py-28">
-        <div className="mb-12 md:mb-20">
-          <p
-            className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-white/50 mb-3"
-            style={{ fontFamily: FONT_MONO }}
-          >
-            Selected work
-          </p>
-          <h2
-            id="selected-work-heading"
-            className="font-bold text-white leading-[1.05] tracking-[-0.02em]"
-            style={{ fontFamily: FONT_HEAD, fontSize: "clamp(32px, 5vw, 56px)", maxWidth: "20ch" }}
-          >
-            Four projects worth scrolling.
-          </h2>
-        </div>
+      <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 py-20 md:py-40">
+        <motion.div
+          className="mb-12 md:mb-20 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeUp}
+        >
+          <div>
+            <p
+              className="mb-4 text-[12px] uppercase tracking-[0.24em]"
+              style={{ color: TEXT_MUTED, fontFamily: FONT_MONO }}
+            >
+              Selected work
+            </p>
+            <h2
+              id="work-heading"
+              className="font-bold tracking-[-0.025em]"
+              style={{
+                fontFamily: FONT_DISPLAY,
+                color: TEXT_PRIMARY,
+                fontSize: "clamp(36px, 5.5vw, 72px)",
+                lineHeight: 1.0,
+                maxWidth: "20ch",
+              }}
+            >
+              Work we&apos;ve shipped.
+            </h2>
+          </div>
+        </motion.div>
 
-        <div className="flex flex-col gap-16 md:gap-24 lg:gap-28">
-          {selectedWork.map((work, idx) => {
-            const imageFirst = idx % 2 === 1; // alternate
-            return (
-              <article
-                key={work.id}
-                className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center group"
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {selectedWork.map((tile, idx) => {
+            const isLinkable = tile.href !== "#";
+            const inner = (
+              <motion.article
+                className="group relative overflow-hidden cursor-pointer"
+                style={{
+                  backgroundColor: BG_SECONDARY,
+                  borderRadius: "20px",
+                  minHeight: "400px",
+                  height: "100%",
+                  border: `1px solid ${BORDER_SUBTLE}`,
+                  boxShadow: SHADOW_5_LAYER,
+                }}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ scale: 1.02, boxShadow: SHADOW_5_LAYER_HOVER }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: idx * 0.12, ease: EXPO_OUT }}
               >
-                {/* Image */}
-                <Link href={work.href}>
-                  <a
-                    className={`relative block lg:col-span-7 overflow-hidden rounded-xl md:rounded-2xl cursor-pointer ${imageFirst ? "lg:order-1" : "lg:order-2"}`}
-                    style={{ aspectRatio: "16 / 10", backgroundColor: BG_DARK_ALT }}
-                    aria-label={`View ${work.client} case study`}
-                  >
-                    {work.image ? (
-                      <img
-                        src={work.image}
-                        alt={`${work.client} — ${work.description}`}
-                        loading="lazy"
-                        decoding="async"
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                      />
-                    ) : (
-                      // Placeholder gradient block
-                      <div
-                        className="absolute inset-0 w-full h-full"
-                        style={{
-                          background: "linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%)",
-                        }}
-                      >
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <span
-                            className="text-white/30 text-[14px] tracking-[0.2em] uppercase"
-                            style={{ fontFamily: FONT_MONO }}
-                          >
-                            Imagery coming soon
-                          </span>
-                        </div>
-                      </div>
-                    )}
-                  </a>
-                </Link>
+                {/* Background image or gradient */}
+                <div
+                  className="absolute inset-0"
+                  style={
+                    tile.image
+                      ? {
+                          backgroundImage: `url(${tile.image})`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                        }
+                      : { background: tile.gradient || BG_SECONDARY }
+                  }
+                  aria-hidden="true"
+                />
 
-                {/* Copy */}
-                <div className={`lg:col-span-5 ${imageFirst ? "lg:order-2" : "lg:order-1"}`}>
+                {/* Overlay gradient for legibility */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(180deg, rgba(10,10,10,0.05) 0%, rgba(10,10,10,0.35) 55%, rgba(10,10,10,0.88) 100%)",
+                  }}
+                  aria-hidden="true"
+                />
+
+                {/* Label pill (top-left) */}
+                {tile.label && (
                   <div
-                    className="flex items-center gap-3 mb-4 text-[11px] tracking-[0.18em] uppercase text-white/50"
-                    style={{ fontFamily: FONT_MONO }}
+                    className="absolute top-5 left-5 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] uppercase tracking-[0.18em]"
+                    style={{
+                      color: TEXT_PRIMARY,
+                      fontFamily: FONT_MONO,
+                      backgroundColor: "rgba(255,255,255,0.08)",
+                      backdropFilter: "blur(10px)",
+                      WebkitBackdropFilter: "blur(10px)",
+                      border: "1px solid rgba(255,255,255,0.12)",
+                    }}
                   >
-                    <span>{work.sector}</span>
-                    <span className="text-white/25">·</span>
-                    <span>{work.year}</span>
+                    {tile.label}
                   </div>
+                )}
+
+                {/* Hover arrow (top-right) */}
+                <div
+                  className="absolute top-5 right-5 flex items-center justify-center w-10 h-10 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:translate-x-0 translate-x-2"
+                  style={{ backgroundColor: "rgba(255,255,255,0.95)", color: BG_PRIMARY }}
+                  aria-hidden="true"
+                >
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                    <path d="M3 11L11 3M11 3H5M11 3V9" />
+                  </svg>
+                </div>
+
+                {/* Content (bottom) */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-7">
                   <h3
-                    className="font-bold text-white leading-[1.05] tracking-[-0.02em] mb-4"
-                    style={{ fontFamily: FONT_HEAD, fontSize: "clamp(28px, 4vw, 44px)" }}
+                    className="font-bold tracking-[-0.02em] mb-2"
+                    style={{
+                      fontFamily: FONT_DISPLAY,
+                      color: TEXT_PRIMARY,
+                      fontSize: "clamp(24px, 2.6vw, 36px)",
+                      lineHeight: 1.05,
+                    }}
                   >
-                    {work.client}
+                    {tile.client}
                   </h3>
                   <p
-                    className="text-[16px] md:text-[17px] leading-relaxed mb-6"
-                    style={{ color: TEXT_MUTED_DARK, fontFamily: FONT_BODY, maxWidth: "44ch" }}
+                    className="text-[12px] uppercase tracking-[0.18em]"
+                    style={{ color: "rgba(255,255,255,0.65)", fontFamily: FONT_MONO }}
                   >
-                    {work.description}
+                    {tile.scope}
                   </p>
-                  <Link href={work.href}>
-                    <a
-                      className="inline-flex items-center gap-2 text-[15px] font-medium text-white border-b border-white/30 hover:border-white pb-1 transition-colors cursor-pointer"
-                      style={{ fontFamily: FONT_BODY }}
-                    >
-                      View case study
-                      <span className="transition-transform group-hover:translate-x-1">→</span>
-                    </a>
-                  </Link>
                 </div>
-              </article>
+              </motion.article>
+            );
+
+            return isLinkable ? (
+              <Link key={tile.id} href={tile.href} className="block cursor-pointer">
+                {inner}
+              </Link>
+            ) : (
+              <div key={tile.id} className="block">
+                {inner}
+              </div>
             );
           })}
         </div>
@@ -515,376 +762,84 @@ function SelectedWork() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Section 4 — In Development (TIX)
-// ─────────────────────────────────────────────────────────────────────────────
-function InDevelopment() {
-  return (
-    <section
-      className="w-full"
-      style={{ backgroundColor: BG_DARK_ALT }}
-      aria-labelledby="in-development-heading"
-    >
-      <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 py-20 md:py-28">
-        <p
-          className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-white/50 mb-3"
-          style={{ fontFamily: FONT_MONO }}
-        >
-          In development
-        </p>
-        <h2
-          id="in-development-heading"
-          className="font-bold text-white leading-[1.05] tracking-[-0.02em] mb-12 md:mb-16"
-          style={{ fontFamily: FONT_HEAD, fontSize: "clamp(32px, 5vw, 56px)" }}
-        >
-          TIX
-        </h2>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          <div className="lg:col-span-7 relative overflow-hidden rounded-xl md:rounded-2xl" style={{ aspectRatio: "16 / 10", backgroundColor: "#1a1a1a" }}>
-            <img
-              src={tixImage}
-              alt="TIX — ticketing experience platform brand identity"
-              loading="lazy"
-              decoding="async"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          </div>
-          <div className="lg:col-span-5">
-            <p
-              className="text-[17px] md:text-[19px] leading-relaxed mb-6"
-              style={{ color: TEXT_MUTED_DARK, fontFamily: FONT_BODY, maxWidth: "44ch" }}
-            >
-              A ticketing experience platform — alternative to existing event booking aggregators.
-            </p>
-            <div
-              className="flex flex-wrap items-center gap-2 mb-8 text-[12px] tracking-[0.16em] uppercase"
-              style={{ fontFamily: FONT_MONO, color: ACCENT }}
-            >
-              <span className="inline-block w-2 h-2 rounded-full" style={{ backgroundColor: ACCENT }} />
-              Branding complete · Product in development
-            </div>
-            <a
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="inline-flex items-center gap-2 text-[15px] font-medium text-white border-b border-white/30 hover:border-white pb-1 transition-colors"
-              style={{ fontFamily: FONT_BODY }}
-            >
-              Follow progress →
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Section 5 — Services
+// Services — 4 columns
 // ─────────────────────────────────────────────────────────────────────────────
 function Services() {
-  const [active, setActive] = useState<number | null>(null);
-
   return (
     <section
       id="services"
       className="w-full"
-      style={{ backgroundColor: BG_DARK, scrollMarginTop: "72px" }}
+      style={{ backgroundColor: BG_PRIMARY, scrollMarginTop: "80px", borderTop: `1px solid ${BORDER_SUBTLE}` }}
       aria-labelledby="services-heading"
     >
-      <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 py-20 md:py-28">
-        <div className="mb-12 md:mb-16">
+      <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 py-20 md:py-40">
+        <motion.div
+          className="mb-12 md:mb-20"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeUp}
+        >
           <p
-            className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-white/50 mb-3"
-            style={{ fontFamily: FONT_MONO }}
+            className="mb-4 text-[12px] uppercase tracking-[0.24em]"
+            style={{ color: TEXT_MUTED, fontFamily: FONT_MONO }}
           >
             Services
           </p>
           <h2
             id="services-heading"
-            className="font-bold text-white leading-[1.05] tracking-[-0.02em]"
-            style={{ fontFamily: FONT_HEAD, fontSize: "clamp(32px, 5vw, 56px)", maxWidth: "20ch" }}
+            className="font-bold tracking-[-0.025em]"
+            style={{
+              fontFamily: FONT_DISPLAY,
+              color: TEXT_PRIMARY,
+              fontSize: "clamp(36px, 5.5vw, 72px)",
+              lineHeight: 1.0,
+              maxWidth: "22ch",
+            }}
           >
-            Four things we do well.
+            Four disciplines, one team.
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10">
-          {services.map((s, idx) => {
-            const isOpen = active === idx;
-            return (
-              <button
-                key={s.number}
-                type="button"
-                onClick={() => setActive(isOpen ? null : idx)}
-                onMouseEnter={() => setActive(idx)}
-                onMouseLeave={() => setActive(null)}
-                className="text-left p-6 md:p-8 transition-colors duration-300 hover:bg-white/[0.03] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
-                style={{ backgroundColor: BG_DARK, minHeight: "180px" }}
-                aria-expanded={isOpen}
-              >
-                <span
-                  className="block text-[12px] tracking-[0.18em] uppercase mb-4"
-                  style={{ color: ACCENT, fontFamily: FONT_MONO }}
-                >
-                  {s.number}
-                </span>
-                <h3
-                  className="text-white font-semibold leading-tight mb-3"
-                  style={{ fontFamily: FONT_HEAD, fontSize: "clamp(20px, 2vw, 22px)" }}
-                >
-                  {s.name}
-                </h3>
-                <p
-                  className="text-[14px] md:text-[15px] leading-relaxed transition-all duration-300"
-                  style={{
-                    color: TEXT_MUTED_DARK,
-                    fontFamily: FONT_BODY,
-                    maxHeight: isOpen ? "200px" : "0",
-                    opacity: isOpen ? 1 : 0,
-                    overflow: "hidden",
-                  }}
-                >
-                  {s.oneLiner}
-                </p>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Section 6 — Studio (logo series, scroll-driven crossfade with placeholder gradients)
-// GSAP + ScrollTrigger is lazy-loaded only when the section enters the viewport.
-// prefers-reduced-motion users see only Frame B (resolved state) as a static image.
-// ─────────────────────────────────────────────────────────────────────────────
-function StudioSection() {
-  const wrapperRef = useRef<HTMLDivElement | null>(null);
-  const themeRefs  = useRef<Array<HTMLDivElement | null>>([]);
-  const [reducedMotion, setReducedMotion] = useState(false);
-
-  // Detect prefers-reduced-motion on mount
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
-
-  // Lazy-load GSAP + ScrollTrigger only when the Studio section enters viewport
-  useEffect(() => {
-    if (reducedMotion) return;
-    if (typeof window === "undefined" || !wrapperRef.current) return;
-
-    let triggers: any[] = [];
-    let gsapInstance: any = null;
-    let cancelled = false;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (!entries.some((e) => e.isIntersecting)) return;
-        observer.disconnect();
-
-        Promise.all([
-          import("gsap"),
-          import("gsap/ScrollTrigger"),
-        ]).then(([gsapMod, stMod]: [any, any]) => {
-          if (cancelled) return;
-          const gsap = gsapMod.default || gsapMod;
-          const ScrollTrigger = stMod.ScrollTrigger || stMod.default;
-          gsap.registerPlugin(ScrollTrigger);
-          gsapInstance = gsap;
-
-          themeRefs.current.forEach((section) => {
-            if (!section) return;
-            const frameA = section.querySelector(".frame-a") as HTMLElement | null;
-            const frameB = section.querySelector(".frame-b") as HTMLElement | null;
-            if (!frameA || !frameB) return;
-
-            const st = ScrollTrigger.create({
-              trigger: section,
-              start: "top center",
-              end: "bottom center",
-              scrub: true,
-              onUpdate: (self: any) => {
-                const p = self.progress;
-                frameA.style.opacity = String(1 - p);
-                frameB.style.opacity = String(p);
-              },
-            });
-            triggers.push(st);
-          });
-        }).catch((err) => {
-          // GSAP failed to load — show resolved state for everyone, no animation
-          console.warn("Studio: GSAP load failed, showing static state.", err);
-          themeRefs.current.forEach((section) => {
-            const frameA = section?.querySelector(".frame-a") as HTMLElement | null;
-            const frameB = section?.querySelector(".frame-b") as HTMLElement | null;
-            if (frameA) frameA.style.opacity = "0";
-            if (frameB) frameB.style.opacity = "1";
-          });
-        });
-      },
-      { rootMargin: "200px 0px" }
-    );
-
-    observer.observe(wrapperRef.current);
-
-    return () => {
-      cancelled = true;
-      observer.disconnect();
-      triggers.forEach((t) => t?.kill?.());
-      if (gsapInstance?.ScrollTrigger) gsapInstance.ScrollTrigger.refresh?.();
-    };
-  }, [reducedMotion]);
-
-  return (
-    <section
-      id="studio"
-      ref={wrapperRef}
-      className="relative w-full"
-      style={{ backgroundColor: BG_DARK, scrollMarginTop: "72px" }}
-      aria-labelledby="studio-heading"
-    >
-      {/* Intro */}
-      <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 pt-20 md:pt-28 pb-12 md:pb-16">
-        <p
-          className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-white/50 mb-3"
-          style={{ fontFamily: FONT_MONO }}
-        >
-          Studio
-        </p>
-        <h2
-          id="studio-heading"
-          className="font-bold text-white leading-[1.05] tracking-[-0.02em] mb-5 md:mb-6"
-          style={{ fontFamily: FONT_HEAD, fontSize: "clamp(32px, 5vw, 56px)", maxWidth: "20ch" }}
-        >
-          One mark, <span style={{ color: ACCENT }}>five expressions.</span>
-        </h2>
-        <p
-          className="text-[16px] md:text-[18px] leading-relaxed"
-          style={{ color: TEXT_MUTED_DARK, fontFamily: FONT_BODY, maxWidth: "60ch" }}
-        >
-          The work we make ranges across brand, software, and AI. The studio identity reflects that range.
-        </p>
-      </div>
-
-      {/* Five themed sub-sections */}
-      <div className="flex flex-col">
-        {studioThemes.map((theme, idx) => (
-          <div
-            key={theme.id}
-            ref={(el) => { themeRefs.current[idx] = el; }}
-            className="studio-theme relative overflow-hidden"
-            style={{ height: "80vh", minHeight: "520px" }}
-          >
-            {/* Frame A — initial */}
-            <div
-              className="frame-a absolute inset-0 w-full h-full"
-              style={{
-                background: theme.frameA,
-                opacity: reducedMotion ? 0 : 1,
-                transition: reducedMotion ? "none" : undefined,
-                willChange: "opacity",
-              }}
-              aria-hidden="true"
-            />
-            {/* Frame B — resolved */}
-            <div
-              className="frame-b absolute inset-0 w-full h-full"
-              style={{
-                background: theme.frameB,
-                opacity: reducedMotion ? 1 : 0,
-                transition: reducedMotion ? "none" : undefined,
-                willChange: "opacity",
-              }}
-              aria-hidden="true"
-            />
-
-            {/* Centred Gray wordmark placeholder */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <span
-                className="font-bold tracking-[-0.04em] text-white/85"
-                style={{
-                  fontFamily: FONT_HEAD,
-                  fontSize: "clamp(72px, 14vw, 200px)",
-                  textShadow: "0 4px 40px rgba(0,0,0,0.35)",
-                }}
-              >
-                Gray
-              </span>
-            </div>
-
-            {/* Theme label, top-left */}
-            <span
-              className="absolute top-6 left-5 md:top-8 md:left-8 lg:left-12 text-[11px] md:text-[12px] tracking-[0.2em] uppercase text-white/75 z-10"
-              style={{ fontFamily: FONT_MONO }}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-10 lg:gap-0">
+          {services.map((service, idx) => (
+            <motion.div
+              key={service.number}
+              className="lg:pr-8 lg:pl-8 lg:first:pl-0 lg:last:pr-0"
+              style={{ borderLeft: idx > 0 ? `1px solid ${BORDER_SUBTLE}` : "none" }}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: idx * 0.12, ease: EXPO_OUT }}
             >
-              {theme.label}
-            </span>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Section 7 — Approach
-// ─────────────────────────────────────────────────────────────────────────────
-function Approach() {
-  return (
-    <section
-      className="w-full"
-      style={{ backgroundColor: BG_LIGHT }}
-      aria-labelledby="approach-heading"
-    >
-      <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 py-20 md:py-28">
-        <div className="mb-12 md:mb-16">
-          <p
-            className="text-[11px] md:text-[12px] tracking-[0.2em] uppercase mb-3"
-            style={{ color: TEXT_MUTED_LIGHT, fontFamily: FONT_MONO }}
-          >
-            Approach
-          </p>
-          <h2
-            id="approach-heading"
-            className="font-bold leading-[1.05] tracking-[-0.02em]"
-            style={{ color: BG_DARK, fontFamily: FONT_HEAD, fontSize: "clamp(28px, 4vw, 44px)", maxWidth: "24ch" }}
-          >
-            How we work, in four steps.
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8 lg:gap-10">
-          {approach.map((a, idx) => (
-            <div key={a.step}>
               <span
-                className="block text-[11px] tracking-[0.2em] uppercase mb-4"
-                style={{ color: TEXT_MUTED_LIGHT, fontFamily: FONT_MONO }}
+                className="block mb-6 text-[12px] uppercase tracking-[0.24em]"
+                style={{ color: TEXT_MUTED, fontFamily: FONT_MONO }}
               >
-                {String(idx + 1).padStart(2, "0")}
+                {service.number}
               </span>
               <h3
-                className="font-bold leading-tight mb-3"
-                style={{ color: BG_DARK, fontFamily: FONT_HEAD, fontSize: "clamp(22px, 2vw, 26px)" }}
+                className="font-bold tracking-[-0.02em] mb-4"
+                style={{
+                  fontFamily: FONT_DISPLAY,
+                  color: TEXT_PRIMARY,
+                  fontSize: "clamp(32px, 3.2vw, 44px)",
+                  lineHeight: 1.0,
+                }}
               >
-                {a.step}
+                {service.name}
               </h3>
               <p
-                className="text-[15px] md:text-[16px] leading-relaxed"
-                style={{ color: TEXT_MUTED_LIGHT, fontFamily: FONT_BODY }}
+                style={{
+                  color: TEXT_SECONDARY,
+                  fontFamily: FONT_BODY,
+                  fontSize: "18px",
+                  lineHeight: 1.55,
+                }}
               >
-                {a.description}
+                {service.oneLine}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -893,54 +848,83 @@ function Approach() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Section 8 — Close CTA
+// Close CTA
 // ─────────────────────────────────────────────────────────────────────────────
 function CloseCTA() {
   return (
     <section
       id="contact"
       className="w-full"
-      style={{ backgroundColor: BG_DARK, scrollMarginTop: "72px" }}
+      style={{ backgroundColor: BG_PRIMARY, scrollMarginTop: "80px", borderTop: `1px solid ${BORDER_SUBTLE}` }}
       aria-labelledby="cta-heading"
     >
-      <div className="mx-auto max-w-[1100px] px-5 md:px-8 lg:px-12 py-24 md:py-36 text-center">
-        <h2
-          id="cta-heading"
-          className="font-bold text-white leading-[1.02] tracking-[-0.02em] mb-6 md:mb-8"
-          style={{ fontFamily: FONT_HEAD, fontSize: "clamp(40px, 7vw, 88px)" }}
+      <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 py-32 md:py-52">
+        <motion.div
+          className="flex flex-col items-center text-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeUp}
         >
-          Ready to start <br className="hidden sm:block" />something?
-        </h2>
-        <p
-          className="text-[16px] md:text-[18px] lg:text-[20px] leading-relaxed mx-auto mb-10 md:mb-12"
-          style={{ color: TEXT_MUTED_DARK, fontFamily: FONT_BODY, maxWidth: "560px" }}
-        >
-          We work with founders and teams who want brand, software, or AI built well. Tell us what you're working on.
-        </p>
+          <h2
+            id="cta-heading"
+            className="font-bold tracking-[-0.03em]"
+            style={{
+              fontFamily: FONT_DISPLAY,
+              color: TEXT_PRIMARY,
+              fontSize: "clamp(48px, 7vw, 96px)",
+              lineHeight: 0.98,
+              maxWidth: "14ch",
+            }}
+          >
+            Start a project.
+          </h2>
+          <motion.p
+            className="mt-8 md:mt-10"
+            style={{
+              color: TEXT_SECONDARY,
+              fontFamily: FONT_BODY,
+              fontSize: "clamp(18px, 1.6vw, 22px)",
+              lineHeight: 1.5,
+            }}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.12, ease: EXPO_OUT }}
+          >
+            Tell us what you&apos;re building.
+          </motion.p>
+          <motion.div
+            className="mt-12 md:mt-14"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.24, ease: EXPO_OUT }}
+          >
+            <SlidingButton
+              href="mailto:connect@graysolutions.in"
+              variant="primary"
+              className="!px-8"
+              data-testid="cta-get-in-touch"
+            >
+              <span>Get in touch</span>
+              <span>→</span>
+            </SlidingButton>
+          </motion.div>
 
-        <a
-          href="https://calendly.com/praveenraj"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center px-8 py-4 rounded-full text-[15px] font-medium bg-white text-black hover:bg-white/90 transition-colors min-h-[52px]"
-          style={{ fontFamily: FONT_BODY }}
-          data-testid="close-cta-book"
-        >
-          Book a brand audit →
-        </a>
-
-        <div
-          className="mt-10 md:mt-12 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-[14px] md:text-[15px]"
-          style={{ color: TEXT_MUTED_DARK, fontFamily: FONT_BODY }}
-        >
-          <a href="mailto:connect@graysolutions.in" className="hover:text-white transition-colors">
-            connect@graysolutions.in
-          </a>
-          <span className="hidden sm:inline text-white/25">·</span>
-          <a href="tel:+916380267018" className="hover:text-white transition-colors">
-            +91 63802 67018
-          </a>
-        </div>
+          <motion.div
+            className="mt-10 md:mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-[14px]"
+            style={{ color: TEXT_MUTED, fontFamily: FONT_MONO }}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.36, ease: EXPO_OUT }}
+          >
+            <a href="mailto:connect@graysolutions.in" className="hover:text-white transition-colors">connect@graysolutions.in</a>
+            <span className="opacity-50">·</span>
+            <a href="tel:+916380267018" className="hover:text-white transition-colors">+91 63802 67018</a>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
@@ -950,34 +934,75 @@ function CloseCTA() {
 // Footer
 // ─────────────────────────────────────────────────────────────────────────────
 function LandingFooter() {
+  const scrollTo = (id: string) => {
+    const el = document.querySelector(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <footer
       className="w-full"
-      style={{ backgroundColor: BG_DARK, borderTop: "1px solid rgba(255,255,255,0.08)" }}
+      style={{ backgroundColor: BG_PRIMARY, borderTop: `1px solid ${BORDER_SUBTLE}` }}
+      aria-label="Site footer"
     >
-      <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 py-14 md:py-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-8">
-          {Object.entries(footerCols).map(([title, items]) => (
-            <div key={title}>
-              <p
-                className="text-[11px] tracking-[0.2em] uppercase text-white/45 mb-4"
-                style={{ fontFamily: FONT_MONO }}
-              >
-                {title}
-              </p>
-              <ul className="space-y-2.5">
-                {items.map((item) => (
-                  <li
-                    key={item}
-                    className="text-[14px] md:text-[15px] text-white/80"
-                    style={{ fontFamily: FONT_BODY }}
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+      <div className="mx-auto max-w-[1400px] px-5 md:px-8 lg:px-12 py-16 md:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
+          {/* Column 1 — wordmark */}
+          <div>
+            <img
+              src="/assets/logo-140.webp"
+              srcSet="/assets/logo-140.webp 1x, /assets/logo-280.webp 2x"
+              alt="Gray Solutions"
+              width={100}
+              height={36}
+              style={{ display: "block", filter: "brightness(0.95)" }}
+            />
+          </div>
+
+          {/* Column 2 — links */}
+          <nav aria-label="Footer">
+            <ul className="flex flex-wrap gap-x-6 gap-y-2 text-[15px]" style={{ fontFamily: FONT_BODY }}>
+              <li>
+                <button onClick={() => scrollTo("#work")} style={{ color: TEXT_SECONDARY }} className="hover:text-white transition-colors">
+                  Work
+                </button>
+              </li>
+              <li>
+                <button onClick={() => scrollTo("#services")} style={{ color: TEXT_SECONDARY }} className="hover:text-white transition-colors">
+                  Services
+                </button>
+              </li>
+              <li>
+                <Link href="/about" style={{ color: TEXT_SECONDARY }} className="hover:text-white transition-colors cursor-pointer">
+                  About
+                </Link>
+              </li>
+              <li>
+                <button onClick={() => scrollTo("#contact")} style={{ color: TEXT_SECONDARY }} className="hover:text-white transition-colors">
+                  Contact
+                </button>
+              </li>
+            </ul>
+          </nav>
+
+          {/* Column 3 — contact */}
+          <div className="flex flex-col gap-2 text-[14px]" style={{ color: TEXT_SECONDARY, fontFamily: FONT_MONO }}>
+            <a href="mailto:connect@graysolutions.in" className="hover:text-white transition-colors">connect@graysolutions.in</a>
+            <a href="tel:+916380267018" className="hover:text-white transition-colors">+91 63802 67018</a>
+            <span>Coimbatore, India</span>
+          </div>
+        </div>
+
+        {/* Bottom row */}
+        <div
+          className="mt-12 md:mt-16 pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-[13px]"
+          style={{ color: TEXT_MUTED, fontFamily: FONT_MONO, borderTop: `1px solid ${BORDER_SUBTLE}` }}
+        >
+          <span>© 2026 Gray Solutions</span>
+          <div className="flex items-center gap-6">
+            <a href="#" className="hover:text-white transition-colors">Privacy</a>
+            <a href="#" className="hover:text-white transition-colors">Terms</a>
+          </div>
         </div>
       </div>
     </footer>
@@ -985,29 +1010,22 @@ function LandingFooter() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Landing page (Phase 1)
+// Landing Page (entry)
 // ─────────────────────────────────────────────────────────────────────────────
 export default function Landing() {
+  useLenis();
+
   return (
     <div
       className="w-full"
-      style={{
-        backgroundColor: BG_DARK,
-        color: "#fff",
-        fontFamily: FONT_BODY,
-        overflowX: "hidden",
-      }}
+      style={{ backgroundColor: BG_PRIMARY, color: TEXT_PRIMARY, fontFamily: FONT_BODY, overflowX: "hidden" }}
     >
       <Navigation />
 
       <main>
         <Hero />
-        <ClientStrip />
         <SelectedWork />
-        <InDevelopment />
         <Services />
-        <StudioSection />
-        <Approach />
         <CloseCTA />
       </main>
 
