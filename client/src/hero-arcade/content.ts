@@ -83,3 +83,14 @@ export const PARKED_RINGS: readonly { x: number; y: number }[] = [
   { x: 0.58, y: 0.30 },
   { x: 0.76, y: 0.22 },
 ] as const;
+
+/**
+ * Parked positions for the full-bleed hero layout: the copy owns the left
+ * half, so the arc lives in the open right airspace.
+ */
+export const PARKED_RINGS_FULL: readonly { x: number; y: number }[] = [
+  { x: 0.52, y: 0.52 },
+  { x: 0.63, y: 0.42 },
+  { x: 0.74, y: 0.32 },
+  { x: 0.85, y: 0.22 },
+] as const;

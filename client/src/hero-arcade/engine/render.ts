@@ -2,15 +2,13 @@
 // and in-canvas text at a fixed 480×240 logical resolution. All colors come
 // from the active theme; all sprite pixels come from the atlas.
 
-import { COPY, PARKED_RINGS } from "../content";
+import { COPY, PARKED_RINGS, PARKED_RINGS_FULL } from "../content";
 import type { ArcadeTheme } from "../theme";
 import {
   GROUND_Y,
   LOGICAL_H,
   LOGICAL_W,
   RUNNER_H,
-  RUNNER_W,
-  RUNNER_X,
   SPARKLE_COUNT,
   type World,
 } from "./entities";
@@ -41,9 +39,17 @@ function pickRunnerFrame(world: World): RunnerFrame {
   return Math.floor(r.animT * 9) % 2 === 0 ? 0 : 1;
 }
 
-export function createRenderer(ctx: CanvasRenderingContext2D, initialTheme: ArcadeTheme): Renderer {
+export function createRenderer(
+  ctx: CanvasRenderingContext2D,
+  initialTheme: ArcadeTheme,
+  transparent = false,
+): Renderer {
   let theme = initialTheme;
   let atlas: SpriteAtlas = createAtlas(theme);
+  // Full-bleed layout: the copy owns the left half, so centered/parked
+  // elements shift into the right airspace.
+  const parkedRings = transparent ? PARKED_RINGS_FULL : PARKED_RINGS;
+  const attractCx = transparent ? LOGICAL_W * 0.66 : LOGICAL_W / 2;
 
   // Static prerenders rebuilt on theme change.
   let bgGradient = makeBg();
@@ -120,18 +126,19 @@ export function createRenderer(ctx: CanvasRenderingContext2D, initialTheme: Arca
     }
 
     // Runner.
-    atlas.drawRunner(ctx, pickRunnerFrame(world), RUNNER_X, Math.round(world.runner.y) - RUNNER_H);
+    atlas.drawRunner(ctx, pickRunnerFrame(world), world.runnerX, Math.round(world.runner.y) - RUNNER_H);
   }
 
   function drawCompleteScene(world: World): void {
     // Rings park in a static ascending arc; DOM hotspots sit at these same
-    // fractions (PARKED_RINGS is the shared source of truth).
-    PARKED_RINGS.forEach((p, i) => {
+    // fractions (content.ts PARKED_RINGS* is the shared source of truth).
+    parkedRings.forEach((p, i) => {
       const flicker = 0.8 + 0.2 * Math.sin(world.t * 2.2 + i * 1.3);
       atlas.drawRing(ctx, (i % 2) as 0 | 1, p.x * LOGICAL_W, p.y * LOGICAL_H, flicker);
     });
-    // Runner idles at the left, facing the scene.
-    atlas.drawRunner(ctx, pickRunnerFrame(world), 34, GROUND_Y - RUNNER_H);
+    // Runner idles facing the scene (right of the copy in full-bleed).
+    const idleX = transparent ? Math.round(LOGICAL_W * 0.44) : 34;
+    atlas.drawRunner(ctx, pickRunnerFrame(world), idleX, GROUND_Y - RUNNER_H);
   }
 
   return {
@@ -144,13 +151,19 @@ export function createRenderer(ctx: CanvasRenderingContext2D, initialTheme: Arca
         ctx.translate(Math.sin(world.t * 70) * 2 * k, Math.cos(world.t * 55) * 1.5 * k);
       }
 
-      ctx.fillStyle = bgGradient;
-      ctx.fillRect(-4, -4, LOGICAL_W + 8, LOGICAL_H + 8);
+      if (transparent) {
+        // Full-bleed: the site backdrop shows through — no space fill, no
+        // nebula plates (sparkles + entities only).
+        ctx.clearRect(-4, -4, LOGICAL_W + 8, LOGICAL_H + 8);
+      } else {
+        ctx.fillStyle = bgGradient;
+        ctx.fillRect(-4, -4, LOGICAL_W + 8, LOGICAL_H + 8);
 
-      // Parallax plates: far → near. Driven by driftX (never snaps back).
-      atlas.drawPlate(ctx, 0, world.driftX * 0.15);
-      atlas.drawPlate(ctx, 1, world.driftX * 0.35);
-      atlas.drawPlate(ctx, 2, world.driftX * 0.7);
+        // Parallax plates: far → near. Driven by driftX (never snaps back).
+        atlas.drawPlate(ctx, 0, world.driftX * 0.15);
+        atlas.drawPlate(ctx, 1, world.driftX * 0.35);
+        atlas.drawPlate(ctx, 2, world.driftX * 0.7);
+      }
 
       // Twinkling foreground sparkles (skipped entirely on the low tier).
       const sparkleN = Math.min(SPARKLE_COUNT[world.quality], sparkles.length);
@@ -195,21 +208,22 @@ export function createRenderer(ctx: CanvasRenderingContext2D, initialTheme: Arca
       if (world.state === "attract") {
         const on = world.t % 0.83 < 0.5;
         if (on) {
-          drawTextCentered(ctx, COPY.attract, LOGICAL_W / 2, 64, 2, theme.canvasText.bright);
+          drawTextCentered(ctx, COPY.attract, attractCx, 64, 2, theme.canvasText.bright);
         }
       }
 
       ctx.restore();
 
-      // Gate white-out — one ≤300ms fade, drawn unshaken.
+      // Gate white-out — one ≤300ms fade, drawn unshaken. Softer in
+      // full-bleed so it never white-flashes over the hero copy.
       if (world.flashT > 0) {
-        ctx.globalAlpha = Math.min(1, world.flashT / FLASH_TIME) * 0.85;
+        ctx.globalAlpha = Math.min(1, world.flashT / FLASH_TIME) * (transparent ? 0.45 : 0.85);
         ctx.fillStyle = theme.flash;
         ctx.fillRect(0, 0, LOGICAL_W, LOGICAL_H);
         ctx.globalAlpha = 1;
       }
 
-      ctx.drawImage(vignette, 0, 0);
+      if (!transparent) ctx.drawImage(vignette, 0, 0);
     },
 
     setTheme(next: ArcadeTheme): void {

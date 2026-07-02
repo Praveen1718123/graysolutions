@@ -9,6 +9,20 @@ export type ArcadeThemeName = "cosmic" | "ember";
 export const DEBRIS_LABELS = false; // ships OFF — see content.ts DEBRIS_LABEL_TEXT
 export const DEFAULT_THEME: ArcadeThemeName = "cosmic";
 
+/**
+ * Stage layout. "full" = the game spans the whole hero region behind the
+ * copy (transparent canvas over the site backdrop, desktop only — mobile
+ * always uses the stacked card). "card" = contained 2:1 box beside the copy.
+ * Runtime-switchable for review via `?layout=full|card`.
+ */
+export type ArcadeLayout = "full" | "card";
+export const DEFAULT_LAYOUT: ArcadeLayout = "full";
+
+export function resolveLayoutParam(search: string): ArcadeLayout {
+  const v = new URLSearchParams(search).get("layout");
+  return v === "card" || v === "full" ? v : DEFAULT_LAYOUT;
+}
+
 export interface ArcadeTheme {
   name: ArcadeThemeName;
   /** Space background vertical gradient */

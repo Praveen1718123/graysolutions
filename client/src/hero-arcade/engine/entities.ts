@@ -9,6 +9,7 @@ export const LOGICAL_W = 480;
 export const LOGICAL_H = 240;
 export const GROUND_Y = 210; // runner feet line
 export const RUNNER_X = 96; // runner's fixed screen x (left edge of sprite)
+export const RUNNER_X_FULL = 200; // full-bleed: right of the hero copy column
 export const RUNNER_W = 24;
 export const RUNNER_H = 32;
 
@@ -99,6 +100,7 @@ export interface World {
   t: number; // elapsed seconds in current state machine life
   scrollX: number; // level scroll — advances only while running the stage
   driftX: number; // parallax-plate scroll — always drifts, never snaps back
+  runnerX: number; // runner's fixed screen x (full-bleed shifts it right of the copy)
   speedFactor: number; // eased toward ring-approach target
   runner: RunnerEnt;
   rings: RingEnt[];
@@ -114,7 +116,7 @@ export interface World {
   mobile: boolean;
 }
 
-export function buildWorld(mobile: boolean, debrisLabels: boolean): World {
+export function buildWorld(mobile: boolean, debrisLabels: boolean, runnerX = RUNNER_X): World {
   const debrisXs = mobile ? DEBRIS_X_MOBILE : DEBRIS_X_DESKTOP;
   return {
     state: "attract",
@@ -122,6 +124,7 @@ export function buildWorld(mobile: boolean, debrisLabels: boolean): World {
     t: 0,
     scrollX: 0,
     driftX: 0,
+    runnerX,
     speedFactor: 1,
     runner: { y: GROUND_Y, vy: 0, grounded: true, bufferT: 0, stumbleT: 0, animT: 0 },
     rings: RING_LAYOUT.map((r, i) => ({

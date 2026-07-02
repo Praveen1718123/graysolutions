@@ -14,7 +14,6 @@ import {
   RING_APPROACH_FACTOR,
   RUNNER_H,
   RUNNER_W,
-  RUNNER_X,
   STUMBLE_SPEED_FACTOR,
   STUMBLE_TIME,
   buildWorld,
@@ -54,11 +53,12 @@ export function createStage(
   mobile: boolean,
   debrisLabels: boolean,
   emit: (e: StageEvent) => void,
+  runnerX?: number,
 ): Stage {
-  let world = buildWorld(mobile, debrisLabels);
+  let world = buildWorld(mobile, debrisLabels, runnerX);
   const rand = mulberry32(0xa11ce);
 
-  const runnerWorldX = (): number => world.scrollX + RUNNER_X;
+  const runnerWorldX = (): number => world.scrollX + world.runnerX;
 
   function addScore(points: number): void {
     world.score += points;
@@ -94,7 +94,7 @@ export function createStage(
         d.hit = true;
         world.runner.stumbleT = STUMBLE_TIME;
         world.shakeT = 0.15;
-        spawnBurst(world, RUNNER_X + RUNNER_W / 2, GROUND_Y - 4, 10, 60, rand);
+        spawnBurst(world, world.runnerX + RUNNER_W / 2, GROUND_Y - 4, 10, 60, rand);
         emit({ type: "stumble" });
       }
     }
@@ -106,9 +106,9 @@ export function createStage(
       ring.cleared = passesThroughRing(world.runner, ring);
       if (ring.cleared) {
         addScore(RING_SCORE);
-        spawnBurst(world, RUNNER_X + RUNNER_W / 2, ring.cy, 26, 120, rand);
+        spawnBurst(world, world.runnerX + RUNNER_W / 2, ring.cy, 26, 120, rand);
         world.popups.push({
-          x: RUNNER_X + RUNNER_W + 6,
+          x: world.runnerX + RUNNER_W + 6,
           y: ring.cy - 18,
           text: `+${RING_SCORE}`,
           t: 0,
@@ -119,7 +119,7 @@ export function createStage(
         type: "ring",
         index: ring.index,
         cleared: ring.cleared,
-        xPct: RUNNER_X / 480,
+        xPct: world.runnerX / 480,
         yPct: ring.cy / LOGICAL_H,
       });
     }
@@ -131,7 +131,7 @@ export function createStage(
       world.gateT = 0;
       world.flashT = FLASH_TIME;
       addScore(GATE_SCORE);
-      spawnBurst(world, RUNNER_X + RUNNER_W / 2, GROUND_Y - RUNNER_H, 36, 160, rand);
+      spawnBurst(world, world.runnerX + RUNNER_W / 2, GROUND_Y - RUNNER_H, 36, 160, rand);
       emit({ type: "gate" });
       // Give the leap-through read even if the visitor never jumped.
       if (world.runner.grounded) queueJump(world.runner);
@@ -217,7 +217,7 @@ export function createStage(
     replay(): void {
       const quality = world.quality;
       const driftX = world.driftX;
-      world = buildWorld(mobile, debrisLabels);
+      world = buildWorld(mobile, debrisLabels, runnerX);
       world.quality = quality;
       world.driftX = driftX; // starfield keeps drifting seamlessly
       // Replay skips the attract screen — the visitor asked to run again.

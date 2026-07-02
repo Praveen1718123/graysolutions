@@ -8,7 +8,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { track } from "../analytics";
-import { PARKED_RINGS, RING_SERVICES } from "../content";
+import { PARKED_RINGS, PARKED_RINGS_FULL, RING_SERVICES } from "../content";
 
 export interface ActiveTip {
   index: number;
@@ -24,6 +24,8 @@ interface RingTooltipProps {
   /** Render as a plain focusable chip list (reduced-motion static poster). */
   staticList: boolean;
   mobile: boolean;
+  /** Full-bleed hero layout — parked rings live in the right airspace. */
+  full?: boolean;
 }
 
 function Chip({ index, style }: { index: number; style?: React.CSSProperties }) {
@@ -39,8 +41,9 @@ function Chip({ index, style }: { index: number; style?: React.CSSProperties }) 
   );
 }
 
-export default function RingTooltip({ tip, parked, staticList, mobile }: RingTooltipProps) {
+export default function RingTooltip({ tip, parked, staticList, mobile, full = false }: RingTooltipProps) {
   const [hovered, setHovered] = useState<number | null>(null);
+  const parkedRings = full ? PARKED_RINGS_FULL : PARKED_RINGS;
 
   // Hotspots unmount on replay without firing mouseleave/blur — clear the
   // hover so a chip can't reappear unprompted on the next completion.
@@ -51,6 +54,8 @@ export default function RingTooltip({ tip, parked, staticList, mobile }: RingToo
   // The in-play announcement region stays mounted permanently so screen
   // readers reliably announce ring clears (a live region that appears
   // together with its content is often skipped).
+  // Full-bleed: keep floating chips out of the hero copy's left half.
+  const minLeft = full ? 58 : 6;
   const liveRegion = (
     <div role="status" aria-live="polite" className="ah-tip-live">
       {tip ? (
@@ -60,7 +65,7 @@ export default function RingTooltip({ tip, parked, staticList, mobile }: RingToo
             mobile
               ? undefined
               : {
-                  left: `${Math.min(62, Math.max(6, tip.xPct * 100 + 8))}%`,
+                  left: `${Math.min(72, Math.max(minLeft, tip.xPct * 100 + 8))}%`,
                   top: `${Math.max(8, tip.yPct * 100 - 24)}%`,
                 }
           }
@@ -93,7 +98,7 @@ export default function RingTooltip({ tip, parked, staticList, mobile }: RingToo
     return (
       <div className="ah-hotspots">
         {RING_SERVICES.map((s, i) => {
-          const p = PARKED_RINGS[i];
+          const p = parkedRings[i];
           const describedBy = `ah-ringtip-${s.id}`;
           const showChip = hovered === i;
           return (
@@ -119,7 +124,7 @@ export default function RingTooltip({ tip, parked, staticList, mobile }: RingToo
                       mobile
                         ? undefined
                         : {
-                            left: `${Math.min(78, Math.max(4, p.x * 100 - 10))}%`,
+                            left: `${Math.min(78, Math.max(full ? 48 : 4, p.x * 100 - 10))}%`,
                             top: `${Math.max(6, p.y * 100 - 26)}%`,
                           }
                     }

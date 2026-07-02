@@ -4,7 +4,13 @@
 // controller. The shell's playfield button drives press() directly.
 
 import type { ArcadeTheme } from "../theme";
-import { LOGICAL_H, LOGICAL_W, type QualityTier, type StageState } from "./entities";
+import {
+  LOGICAL_H,
+  LOGICAL_W,
+  RUNNER_X_FULL,
+  type QualityTier,
+  type StageState,
+} from "./entities";
 import { bindGlobalKeys } from "./input";
 import { createLoop } from "./loop";
 import { createRenderer } from "./render";
@@ -18,6 +24,12 @@ export interface EngineOptions {
   theme: ArcadeTheme;
   mobile: boolean;
   debrisLabels: boolean;
+  /**
+   * Full-bleed hero layout: transparent canvas composited over the site
+   * backdrop — no space gradient, no parallax plates, no vignette; parked
+   * rings shift to the right airspace clear of the hero copy.
+   */
+  transparent?: boolean;
   onEvent: (e: StageEvent) => void;
 }
 
@@ -41,15 +53,16 @@ const DPR = Math.min(typeof window !== "undefined" ? window.devicePixelRatio || 
 export function createEngine(opts: EngineOptions): ArcadeEngine {
   const { canvas, mobile, debrisLabels, onEvent } = opts;
 
+  const transparent = opts.transparent === true;
   canvas.width = Math.round(LOGICAL_W * DPR);
   canvas.height = Math.round(LOGICAL_H * DPR);
-  const ctx = canvas.getContext("2d", { alpha: false });
+  const ctx = canvas.getContext("2d", { alpha: transparent });
   if (!ctx) throw new Error("2d context unavailable");
   ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
   ctx.imageSmoothingEnabled = false;
 
-  const stage = createStage(mobile, debrisLabels, onEvent);
-  const renderer = createRenderer(ctx, opts.theme);
+  const stage = createStage(mobile, debrisLabels, onEvent, transparent ? RUNNER_X_FULL : undefined);
+  const renderer = createRenderer(ctx, opts.theme, transparent);
   const loop = createLoop(
     (dt) => stage.update(dt),
     () => renderer.draw(stage.world),

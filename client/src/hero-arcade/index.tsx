@@ -18,7 +18,9 @@ import { COPY, RING_SERVICES } from "./content";
 import {
   DEBRIS_LABELS,
   getTheme,
+  resolveLayoutParam,
   resolveThemeParam,
+  type ArcadeLayout,
   type ArcadeThemeName,
 } from "./theme";
 import Hud from "./overlay/Hud";
@@ -35,21 +37,28 @@ type ShellPhase =
 
 const TIP_MS = 2500;
 
-function useIsMobile(): boolean {
-  const [mobile, setMobile] = useState(
-    () => typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches,
+function useMedia(query: string): boolean {
+  const [matches, setMatches] = useState(
+    () => typeof window !== "undefined" && window.matchMedia(query).matches,
   );
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767px)");
-    const onChange = (e: MediaQueryListEvent) => setMobile(e.matches);
+    const mq = window.matchMedia(query);
+    const onChange = (e: MediaQueryListEvent) => setMatches(e.matches);
     mq.addEventListener("change", onChange);
     return () => mq.removeEventListener("change", onChange);
-  }, []);
-  return mobile;
+  }, [query]);
+  return matches;
 }
 
+const useIsMobile = () => useMedia("(max-width: 767px)");
+// The full-bleed treatment needs the copy constrained to its 56% column,
+// which only happens at the site's lg breakpoint.
+const useIsDesktop = () => useMedia("(min-width: 1024px)");
+
 /** Static poster scene — runner + one ring over the theme space. Pure DOM/SVG. */
-function Poster() {
+function Poster({ full = false }: { full?: boolean }) {
+  // Full-bleed: the copy owns the left half, so the runner shifts right.
+  const runnerX = full ? 204 : 96;
   return (
     <svg
       className="ah-poster"
@@ -70,7 +79,7 @@ function Poster() {
       {/* ground */}
       <rect x={0} y={210} width={480} height={1} className="ah-poster-ground" />
       {/* runner (simplified pixel figure) */}
-      <g className="ah-poster-runner" transform="translate(96,178)">
+      <g className="ah-poster-runner" transform={`translate(${runnerX},178)`}>
         <rect x={6} y={0} width={12} height={8} />
         <rect x={4} y={10} width={14} height={12} />
         <rect x={2} y={24} width={7} height={8} />
@@ -83,6 +92,7 @@ function Poster() {
 
 interface ArcadeStageProps {
   themeName: ArcadeThemeName;
+  layout?: ArcadeLayout;
 }
 
 // Dev-only review override: ?arcade=reduced|complete forces those states so
@@ -92,10 +102,14 @@ function devArcadeParam(): string | null {
   return new URLSearchParams(window.location.search).get("arcade");
 }
 
-function ArcadeStage({ themeName }: ArcadeStageProps) {
+function ArcadeStage({ themeName, layout = "card" }: ArcadeStageProps) {
   const devParam = devArcadeParam();
   const reduced = (useReducedMotion() ?? false) || devParam === "reduced";
   const mobile = useIsMobile();
+  const desktop = useIsDesktop();
+  // Full-bleed is a desktop (lg+) treatment; below that the card box stacks
+  // under the copy as usual.
+  const full = layout === "full" && desktop;
   const theme = useMemo(() => getTheme(themeName), [themeName]);
 
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -116,9 +130,11 @@ function ArcadeStage({ themeName }: ArcadeStageProps) {
   const [needsPlayTap, setNeedsPlayTap] = useState(false);
 
   // loadEngine may resolve after a re-render — always hand it the latest
-  // theme rather than the one captured when the import started.
+  // theme/layout rather than the values captured when the import started.
   const themeRef = useRef(theme);
   themeRef.current = theme;
+  const fullRef = useRef(full);
+  fullRef.current = full;
 
   const onEvent = useCallback((e: StageEvent) => {
     switch (e.type) {
@@ -166,6 +182,7 @@ function ArcadeStage({ themeName }: ArcadeStageProps) {
         theme: themeRef.current,
         mobile,
         debrisLabels: DEBRIS_LABELS,
+        transparent: fullRef.current,
         onEvent,
       });
       engineRef.current = engine;
@@ -186,7 +203,7 @@ function ArcadeStage({ themeName }: ArcadeStageProps) {
       // hero still works as a static image.
       return null;
     }
-  }, [mobile, onEvent]);
+  }, [mobile, onEvent, layout]);
 
   // Loading strategy: reduced motion → never; save-data / low-end mobile →
   // explicit ▶ Play; otherwise lazy-load on approach + idle.
@@ -366,50 +383,43 @@ function ArcadeStage({ themeName }: ArcadeStageProps) {
   const parkedHotspots = complete && !reduced && engineReady;
   const staticServiceList = reduced || (complete && !engineReady);
 
-  return (
+  // Shared pieces between the card and full-bleed layouts.
+  const skipButton = showSkip && (
+    <button type="button" className="ah-skip" onClick={handleSkip} data-testid="arcade-skip">
+      {COPY.skip}
+    </button>
+  );
+
+  const visual = (
     <div
-      ref={containerRef}
-      className="ah-stage"
-      style={theme.dom as React.CSSProperties}
-      data-testid={`arcade-stage-${theme.name}`}
-      data-state={phase}
-      data-static={engineReady ? undefined : "true"}
+      className={`ah-visual${engineReady ? " ah-visual--live" : ""}`}
+      role="img"
+      aria-label={COPY.stageAria}
     >
-      {/* Skip — a real button, first in the stage's tab order. */}
-      {showSkip && (
-        <button
-          type="button"
-          className="ah-skip"
-          onClick={handleSkip}
-          data-testid="arcade-skip"
-        >
-          {COPY.skip}
-        </button>
-      )}
+      <Poster full={full} />
+      <canvas
+        ref={canvasRef}
+        className={`ah-canvas${engineReady ? " ah-canvas--on" : ""}`}
+        aria-hidden="true"
+      />
+    </div>
+  );
 
-      {/* Visual layer: poster below, canvas above (crossfades in). */}
-      <div className="ah-visual" role="img" aria-label={COPY.stageAria}>
-        <Poster />
-        <canvas
-          ref={canvasRef}
-          className={`ah-canvas${engineReady ? " ah-canvas--on" : ""}`}
-          aria-hidden="true"
-        />
-      </div>
+  // Playfield — the one control for the one interaction. A real button:
+  // native tap/click/Enter/Space, no scroll-swipe misfires, and page
+  // scrolling is never hijacked to start the game.
+  const playfield = showPlayfield && (
+    <button
+      type="button"
+      className="ah-playfield"
+      onClick={handlePlayfield}
+      aria-label={COPY.playfieldAria}
+      data-testid="arcade-playfield"
+    />
+  );
 
-      {/* Playfield — the one control for the one interaction. A real button:
-          native tap/click/Enter/Space, no scroll-swipe misfires, and page
-          scrolling is never hijacked to start the game. */}
-      {showPlayfield && (
-        <button
-          type="button"
-          className="ah-playfield"
-          onClick={handlePlayfield}
-          aria-label={COPY.playfieldAria}
-          data-testid="arcade-playfield"
-        />
-      )}
-
+  const overlays = (
+    <>
       <Hud score={score} ringsCleared={ringsCleared} />
 
       <RingTooltip
@@ -417,6 +427,7 @@ function ArcadeStage({ themeName }: ArcadeStageProps) {
         parked={parkedHotspots}
         staticList={staticServiceList}
         mobile={mobile}
+        full={full}
       />
 
       {showCta && <CtaPanel score={score} showScore={!reduced && !skipped && score > 0} />}
@@ -460,17 +471,60 @@ function ArcadeStage({ themeName }: ArcadeStageProps) {
           </ul>
         </nav>
       )}
+    </>
+  );
+
+  if (full) {
+    // Full-bleed: the game spans the hero region behind the copy. Two
+    // absolute layers around the DOM content (z-10): visual+playfield below
+    // it, controls above it. Skip stays the first focusable in the stage.
+    return (
+      <div
+        className="ah-full"
+        style={theme.dom as React.CSSProperties}
+        data-testid={`arcade-stage-${theme.name}`}
+        data-state={phase}
+        data-static={engineReady ? undefined : "true"}
+      >
+        {skipButton}
+        <div ref={containerRef} className="ah-full-visual">
+          {visual}
+          {playfield}
+        </div>
+        <div className="ah-full-ui">{overlays}</div>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      ref={containerRef}
+      className="ah-stage"
+      style={theme.dom as React.CSSProperties}
+      data-testid={`arcade-stage-${theme.name}`}
+      data-state={phase}
+      data-static={engineReady ? undefined : "true"}
+    >
+      {skipButton}
+      {visual}
+      {playfield}
+      {overlays}
     </div>
   );
 }
 
 /**
  * Public component. `?theme=cosmic|ember` switches palettes at runtime;
- * `?theme=both` stacks the two stages for side-by-side review screenshots.
+ * `?theme=both` stacks the two stages for side-by-side review screenshots
+ * (always as cards). `?layout=full|card` switches the hero treatment —
+ * full-bleed behind the copy vs the contained 2:1 box.
  */
 export default function ArcadeHero() {
   const [param] = useState(() =>
     typeof window === "undefined" ? "cosmic" : resolveThemeParam(window.location.search),
+  );
+  const [layout] = useState<ArcadeLayout>(() =>
+    typeof window === "undefined" ? "card" : resolveLayoutParam(window.location.search),
   );
 
   return (
@@ -481,12 +535,12 @@ export default function ArcadeHero() {
           {(["cosmic", "ember"] as const).map((t) => (
             <div key={t}>
               <p className="ah-both-label">{t}</p>
-              <ArcadeStage themeName={t} />
+              <ArcadeStage themeName={t} layout="card" />
             </div>
           ))}
         </div>
       ) : (
-        <ArcadeStage themeName={param} />
+        <ArcadeStage themeName={param} layout={layout} />
       )}
     </div>
   );
@@ -522,7 +576,13 @@ const ARCADE_CSS = `
 }
 .ah-playfield:focus-visible { outline: 2px solid var(--ah-focus); outline-offset: -3px; }
 .ah-tip-live { position: absolute; inset: 0; z-index: 20; pointer-events: none; }
-.ah-poster { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ah-poster {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  transition: opacity 240ms ease;
+}
+/* The canvas replaces the poster (matters in full-bleed, where the canvas
+   is transparent and would otherwise show both scenes at once). */
+.ah-visual--live .ah-poster { opacity: 0; }
 .ah-poster-star { fill: var(--ah-poster-star); opacity: 0.8; }
 .ah-poster-ring { fill: none; stroke: var(--ah-poster-ring); stroke-width: 2.5; }
 .ah-poster-ring-halo { fill: none; stroke: var(--ah-accent-soft); stroke-width: 7; }
@@ -678,6 +738,41 @@ const ARCADE_CSS = `
   -webkit-backdrop-filter: blur(var(--ah-hud-blur));
 }
 .ah-play:focus-visible { outline: 2px solid var(--ah-focus); outline-offset: 2px; }
+
+/* ── Full-bleed hero layout ─────────────────────────────────────────────────
+   The game spans the whole hero region behind the real DOM copy (z-10):
+   visual layer + playfield below it (z-4), controls above it (z-20 via a
+   pointer-events:none layer). The copy owns the left half, so centered
+   elements shift into the right airspace. */
+.ah-full { position: static; }
+.ah-full-visual { position: absolute; inset: 0; z-index: 4; }
+.ah-full-ui { position: absolute; inset: 0; z-index: 20; pointer-events: none; }
+.ah-full-ui .ah-btn,
+.ah-full-ui .ah-replay,
+.ah-full-ui .ah-play,
+.ah-full-ui .ah-static-service,
+.ah-full-ui .ah-hotspot { pointer-events: auto; }
+.ah-full > .ah-skip { z-index: 30; }
+.ah-full .ah-playfield { border-radius: 0; }
+.ah-full .ah-canvas, .ah-full .ah-poster { image-rendering: pixelated; }
+.ah-full .ah-hud {
+  left: auto; right: 12px; top: 44px;
+  flex-direction: column; align-items: flex-end; gap: 6px;
+  padding-right: 0;
+}
+.ah-full .ah-hint { left: 66%; }
+.ah-full .ah-cta {
+  left: auto; right: 4%; bottom: 14%;
+  transform: none; width: min(88%, 400px);
+}
+.ah-full[data-static="true"] .ah-cta { top: auto; bottom: 30%; }
+.ah-full .ah-static-services {
+  left: auto; right: 4%; bottom: 14%; max-width: 48%;
+  justify-content: flex-end;
+}
+.ah-full[data-static="true"] .ah-static-services { bottom: 8%; }
+.ah-full .ah-replay { left: auto; right: 12px; bottom: 10px; }
+.ah-full .ah-play { left: 70%; }
 
 /* Belt-and-suspenders: the shell never loads the engine under reduced
    motion, and this kills the remaining CSS motion too. */
