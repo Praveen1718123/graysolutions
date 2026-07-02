@@ -46,6 +46,8 @@ const PALETTES = {
     "#4c548a", "#59628f", "#6a7199", "#8b93c4", "#9aa4c8", "#a9b2cc",
     "#c4b5fd", "#8B5CF6", "#67e8f9", "#e9e2ff", "#e6ebff", "#e8ecfa",
     "#eef0ff", "#3B82F6",
+    // Gold energy ramp (rings/gate/pellets — the concept-art hybrid)
+    "#e05c2a", "#f0a33f", "#f6d558", "#ffe27a", "#ffe9b0",
   ],
   ember: [
     "#23211d", "#38352f", "#1c1a16", "#4a463f", "#57534b", "#6e6a5f",
