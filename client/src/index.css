@@ -71,3 +71,34 @@
     transform: scale(1.15);
   }
 }
+
+/* ── Liquid Glass (iOS-style) ──────────────────────────────────────────────
+   Gloss + cursor-driven specular highlight + a slow drifting sheen layered on
+   any translucent surface. Built from background-image layers (they paint
+   BELOW text, so content never washes out); the bright inset edge-rim lives in
+   each card's own box-shadow. --mx/--my are set per-element by a global
+   pointermove handler so the highlight follows the cursor. */
+.lg {
+  --mx: 50%;
+  --my: 0%;
+  background-image:
+    radial-gradient(120% 110% at var(--mx) var(--my),
+      rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.06) 30%, rgba(255, 255, 255, 0) 58%),
+    linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, 0.10) 49%,
+      rgba(255, 255, 255, 0.015) 55%, transparent 64%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.015) 46%,
+      rgba(255, 255, 255, 0.06) 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%, 260% 260%, 100% 100%;
+  background-position: 0 0, 120% 0%, 0 0;
+  animation: lgSheen 9s ease-in-out infinite alternate;
+}
+
+@keyframes lgSheen {
+  from { background-position: 0 0, 120% 0%, 0 0; }
+  to   { background-position: 0 0, -30% 120%, 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lg { animation: none; }
+}

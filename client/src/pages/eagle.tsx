@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import logoImage from "@assets/Frame_33_copy2_2_(1)_1768895375486.png";
 import Footer from "@/components/footer";
 import heroImage from "@assets/Eagle_Web_2_1765901229010.webp";
 import guidelinesImage from "@assets/Eagle_web_elements-04_1765901229015.webp";
@@ -13,6 +12,7 @@ import containerImage from "@assets/Eagle_Container_1765901229016.webp";
 import toteBagImage from "@assets/Eagle_Tote_Bag_1765901229016.webp";
 import wallpaper1 from "@assets/Eagle_Wallpaper-02_1765901229017.webp";
 import wallpaper2 from "@assets/Eagle_Wallpaper-03_1765901229017.webp";
+import SiteNav from "@/components/site-nav";
 
 export default function Eagle() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -54,50 +54,7 @@ export default function Eagle() {
         fontFamily: '-apple-system, system-ui, sans-serif'
       }}
     >
-      {/* Fixed Header - Pill transformation on scroll */}
-      <header 
-        className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 md:px-0"
-        style={{
-          height: isScrolled ? '70px' : '80px',
-          backgroundColor: 'transparent',
-          pointerEvents: 'none',
-          transition: 'height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
-        }}
-      >
-        <div 
-          className="flex items-center justify-center"
-          style={{
-            pointerEvents: 'auto',
-            width: isScrolled ? '180px' : '100%',
-            height: isScrolled ? '44px' : '100%',
-            marginTop: isScrolled ? '12px' : '0',
-            backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : '#FFFFFF',
-            backdropFilter: isScrolled ? 'blur(12px)' : 'none',
-            WebkitBackdropFilter: isScrolled ? 'blur(12px)' : 'none',
-            boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.1)' : 'none',
-            borderRadius: isScrolled ? '999px' : '0',
-            padding: isScrolled ? '0 24px' : '0',
-            transition: 'all 500ms cubic-bezier(0.4, 0, 0.2, 1)',
-          }}
-        >
-          <Link href="/">
-            <img 
-              src={logoImage}
-              width="140"
-              height="64"
-              decoding="async"
-              alt="Gray Solutions Logo" 
-              className="cursor-pointer"
-              style={{
-                height: isScrolled ? '28px' : '48px',
-                width: 'auto',
-                transition: 'height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
-              }}
-              data-testid="logo-nav"
-            />
-          </Link>
-        </div>
-      </header>
+      <SiteNav theme="light" />
 
       {/* Hero Section */}
       <section className="pt-24 md:pt-32 pb-12 md:pb-24" style={{ backgroundColor: '#FAFAFA' }}>

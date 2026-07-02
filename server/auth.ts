@@ -9,7 +9,7 @@ import { promisify } from "util";
 
 const scrypt = promisify(crypto.scrypt);
 
-async function hashPassword(password: string) {
+export async function hashPassword(password: string) {
   const salt = crypto.randomBytes(16).toString("hex");
   const derivedKey = (await scrypt(password, salt, 64)) as Buffer;
   return `${derivedKey.toString("hex")}.${salt}`;

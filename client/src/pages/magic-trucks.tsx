@@ -2,16 +2,21 @@ import React, { useEffect, useState, useRef } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import logoImage from "@assets/Frame_33_copy2_2_(1)_1768895375486.png";
 import Footer from "@/components/footer";
 import heroImage from "@assets/mokcup_1_1765899763586.webp";
-import laptopScreens from "@assets/54066314_updlaptop_screerns0008_1765899763583.webp";
-import mobileHandImage from "@assets/magic_23_1765899763585.jpg";
-import mobileGridImage from "@assets/magic_trucks_neww-01_1765899763585.webp";
+import adminDashboard from "@assets/magic-trucks-2026/admin-dashboard.webp";
+import adminKyc from "@assets/magic-trucks-2026/admin-kyc.webp";
+import driverHome from "@assets/magic-trucks-2026/driver-home.webp";
+import driverTrip from "@assets/magic-trucks-2026/driver-trip.webp";
+import shipperDashboard from "@assets/magic-trucks-2026/shipper-dashboard.webp";
+import shipperShipments from "@assets/magic-trucks-2026/shipper-shipments.webp";
+import carrierDashboard from "@assets/magic-trucks-2026/carrier-dashboard.webp";
+import carrierTruckboard from "@assets/magic-trucks-2026/carrier-truckboard.webp";
 import appIconImage from "@assets/3D_App_Icon_Mockup_[Qorecraft]2_1765899763581.webp";
 import truckHighway from "@assets/Generated_Image_October_07,_2025_-_12_10PM_1765899763584.webp";
 import truckRoadside from "@assets/Generated_Image_October_07,_2025_-_12_15PM_1765899763584.webp";
 import brochureImage from "@assets/Two_Magazines_on_Table_Mockup2_1765899763586.webp";
+import SiteNav from "@/components/site-nav";
 
 export default function MagicTrucks() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -26,12 +31,17 @@ export default function MagicTrucks() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const galleryTabs = ["All", "Desktop", "Mobile", "Brand", "Real World"];
+  const galleryTabs = ["All", "Application UI", "Brand", "Real World"];
 
   const galleryImages = [
-    { src: laptopScreens, category: "Desktop", caption: "Operations dashboard + shipment history + tracking overview." },
-    { src: mobileGridImage, category: "Mobile", caption: "Tracking, timeline updates, driver details, documents." },
-    { src: mobileHandImage, category: "Mobile", caption: "Mobile tracking screen shown in-hand." },
+    { src: adminDashboard,   category: "Application UI", caption: "Operations dashboard — what needs attention: KYC queue, disputes, recon, live shipments." },
+    { src: adminKyc,         category: "Application UI", caption: "KYC review queue — operations approval flow for shippers, carriers, and drivers." },
+    { src: driverHome,       category: "Application UI", caption: "Driver app home — today's trip, upcoming runs, and SOS." },
+    { src: driverTrip,       category: "Application UI", caption: "In-transit view — live ETA, progress timeline, and mark-as-delivered flow." },
+    { src: shipperDashboard, category: "Application UI", caption: "Shipper home — totals, on-time delivery, spend, recent shipments at a glance." },
+    { src: shipperShipments, category: "Application UI", caption: "Shipper shipments — route, vehicle, status, rate, ETA in one row." },
+    { src: carrierDashboard, category: "Application UI", caption: "Carrier dashboard — pending offers, fleet availability, payouts, document expiry." },
+    { src: carrierTruckboard,category: "Application UI", caption: "Truckboard — live map of fleet with active trips and lane planning." },
     { src: appIconImage, category: "Brand", caption: "Magic Trucks 3D app icon mockup." },
     { src: brochureImage, category: "Brand", caption: "Magic Trucks brochure mockup on table." },
     { src: truckHighway, category: "Real World", caption: "Magic Trucks branded trailer on Indian roads." },
@@ -51,50 +61,7 @@ export default function MagicTrucks() {
         fontFamily: '-apple-system, system-ui, sans-serif'
       }}
     >
-      {/* Fixed Header - Pill transformation on scroll */}
-      <header 
-        className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 md:px-0"
-        style={{
-          height: isScrolled ? '70px' : '80px',
-          backgroundColor: 'transparent',
-          pointerEvents: 'none',
-          transition: 'height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
-        }}
-      >
-        <div 
-          className="flex items-center justify-center"
-          style={{
-            pointerEvents: 'auto',
-            width: isScrolled ? '180px' : '100%',
-            height: isScrolled ? '44px' : '100%',
-            marginTop: isScrolled ? '12px' : '0',
-            backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : '#FFFFFF',
-            backdropFilter: isScrolled ? 'blur(12px)' : 'none',
-            WebkitBackdropFilter: isScrolled ? 'blur(12px)' : 'none',
-            boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.1)' : 'none',
-            borderRadius: isScrolled ? '999px' : '0',
-            padding: isScrolled ? '0 24px' : '0',
-            transition: 'all 500ms cubic-bezier(0.4, 0, 0.2, 1)',
-          }}
-        >
-          <Link href="/">
-            <img 
-              src={logoImage}
-              width="140"
-              height="64"
-              decoding="async"
-              alt="Gray Solutions Logo" 
-              className="cursor-pointer"
-              style={{
-                height: isScrolled ? '28px' : '48px',
-                width: 'auto',
-                transition: 'height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
-              }}
-              data-testid="logo-nav"
-            />
-          </Link>
-        </div>
-      </header>
+      <SiteNav theme="light" />
 
       {/* Hero Section */}
       <section className="pt-24 md:pt-32 pb-12 md:pb-24" style={{ backgroundColor: '#FAFAFA' }}>
@@ -122,12 +89,12 @@ export default function MagicTrucks() {
                 className="text-base md:text-lg leading-relaxed mb-8"
                 style={{ color: '#666666' }}
               >
-                A logistics platform concept built to reduce coordination chaos and make shipments feel predictable — for shippers, ops teams, and drivers.
+                An India-first freight operating system — now in its third generation — built to cut coordination chaos and make shipments predictable across four apps: shipper portal, carrier web, driver app, and an operations console, with a finance-OS behind it.
               </p>
-              
+
               {/* Quick Stats */}
               <div className="flex flex-wrap gap-2">
-                {["B2B", "FTL + Heavy Haul", "India-first workflows", "Desktop + Mobile"].map((tag) => (
+                {["B2B Freight OS", "Shipper · Carrier · Driver · Ops", "India-first workflows", "V3 — Shipped"].map((tag) => (
                   <span 
                     key={tag}
                     className="px-3 py-1.5 rounded-full text-xs font-medium"
@@ -174,7 +141,7 @@ export default function MagicTrucks() {
             {[
               { title: "Ambition", text: "Make freight booking + tracking feel simple, trustworthy, and repeatable — without forcing teams to change their habits overnight." },
               { title: "Reality Check", text: "Indian logistics runs on fast coordination: calls, WhatsApp updates, manual docs, and constant follow-ups. Most tools fail because they add friction instead of removing uncertainty." },
-              { title: "What We Shipped", text: "A structured shipment lifecycle concept + consistent product/brand system across desktop, mobile, and real-world identity — designed for trust and adoption." },
+              { title: "What We Shipped", text: "A full freight operating system — now V3. Four production apps (shipper portal, carrier web, driver app, and an operations console) plus a finance-OS for billing and unit economics, all on one consistent product and brand system across desktop, mobile, and real-world identity." },
             ].map((item, idx) => (
               <motion.div
                 key={idx}
@@ -228,9 +195,9 @@ export default function MagicTrucks() {
       {/* Product Suite Banner */}
       <section className="py-8 md:py-12" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="max-w-[1400px] mx-auto px-4 md:px-10">
-          <motion.img 
-            src={laptopScreens}
-            alt="Desktop product screens collage for shipment management"
+          <motion.img
+            src={adminDashboard}
+            alt="Magic Trucks operations dashboard — what needs attention today"
             className="w-full rounded-2xl"
             loading="lazy"
             decoding="async"
@@ -329,9 +296,9 @@ export default function MagicTrucks() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <img 
-                src={mobileHandImage}
-                alt="Mobile tracking screen shown in-hand"
+              <img
+                src={driverTrip}
+                alt="Magic Trucks driver app — in-transit trip with live ETA and progress timeline"
                 className="w-full rounded-2xl"
                 loading="lazy"
                 decoding="async"
@@ -363,7 +330,7 @@ export default function MagicTrucks() {
                 {[
                   "A clear, structured shipment lifecycle that reduces confusion",
                   "A unified product + brand identity that signals reliability",
-                  "A concept designed to scale from small teams to enterprise ops",
+                  "A shipped V3 platform built to scale from small fleets to enterprise ops",
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-start gap-3 text-base" style={{ color: '#FFFFFF' }}>
                     <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#FFFFFF' }} />

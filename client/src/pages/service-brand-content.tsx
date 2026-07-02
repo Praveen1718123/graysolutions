@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import logoImage from "@assets/Frame_33_copy2_2_(1)_1768895375486.png";
 import Footer from "@/components/footer";
+import SiteNav from "@/components/site-nav";
+import dsLightBoard from "@assets/design-system-2026/ds-light-board-v2.webp";
+import dsDarkBoard from "@assets/design-system-2026/ds-dark-board.webp";
 
 export default function ServiceBrandContent() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -133,43 +135,7 @@ export default function ServiceBrandContent() {
 
   return (
     <div className="min-h-screen w-full font-sans overflow-x-hidden" style={{ backgroundColor: '#FAFAFA', color: '#1A1A1A' }}>
-      <header 
-        className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 md:px-0"
-        style={{
-          height: isScrolled ? '70px' : '80px',
-          backgroundColor: 'transparent',
-          pointerEvents: 'none',
-          transition: 'height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
-        }}
-      >
-        <div 
-          className="flex items-center justify-center"
-          style={{
-            pointerEvents: 'auto',
-            width: isScrolled ? '180px' : '100%',
-            height: isScrolled ? '44px' : '100%',
-            marginTop: isScrolled ? '12px' : '0',
-            backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : 'transparent',
-            backdropFilter: isScrolled ? 'blur(12px)' : 'none',
-            boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.1)' : 'none',
-            borderRadius: isScrolled ? '999px' : '0',
-            transition: 'all 500ms cubic-bezier(0.4, 0, 0.2, 1)',
-          }}
-        >
-          <Link href="/">
-            <img 
-              src={logoImage}
-              width="140"
-              height="64"
-              decoding="async"
-              alt="Gray Logo" 
-              className="cursor-pointer"
-              style={{ height: isScrolled ? '28px' : '48px', width: 'auto', filter: isScrolled ? 'none' : 'brightness(0) invert(1)' }}
-              data-testid="logo-nav"
-            />
-          </Link>
-        </div>
-      </header>
+      <SiteNav theme="light" />
 
       <section className="relative w-full" style={{ height: '100vh', minHeight: '600px' }}>
         <video
@@ -190,7 +156,7 @@ export default function ServiceBrandContent() {
             className="max-w-[800px]"
           >
             <span className="text-sm font-medium tracking-widest mb-4 block" style={{ color: 'rgba(255,255,255,0.7)' }}>
-              BRAND & CONTENT STUDIO
+              BRAND & IDENTITY
             </span>
             <h1 
               className="font-bold mb-6"
@@ -228,7 +194,7 @@ export default function ServiceBrandContent() {
                 className="font-bold"
                 style={{ fontSize: 'clamp(28px, 4vw, 42px)', lineHeight: '1.15', color: '#1A1A1A', letterSpacing: '-0.02em' }}
               >
-                Brand & Content Studio
+                Brand & Identity
               </h2>
               <Link href="/contact">
                 <button 
@@ -404,6 +370,153 @@ export default function ServiceBrandContent() {
         </div>
       </section>
 
+      {/* ── Capability showcase — Gray Solutions Design System ───────────── */}
+      <section className="py-20 md:py-28" style={{ backgroundColor: "#FFFFFF" }} aria-labelledby="capability-ds-heading">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+          <motion.div
+            className="grid lg:grid-cols-[1fr_1.2fr] gap-10 lg:gap-16 items-start mb-12 md:mb-16"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div>
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-[11px] uppercase tracking-[0.18em] mb-5"
+                style={{ color: "#2563EB", backgroundColor: "#EEF2FF", border: "1px solid rgba(37,99,235,0.18)" }}>
+                Capability showcase
+              </span>
+              <h2
+                id="capability-ds-heading"
+                className="font-bold mb-4"
+                style={{ fontSize: "clamp(28px, 4vw, 44px)", lineHeight: 1.1, color: "#0D1117", letterSpacing: "-0.025em" }}
+              >
+                A design system, end to end.
+              </h2>
+              <p style={{ color: "#4B5563", fontSize: "clamp(15px, 1.1vw, 17px)", lineHeight: 1.6, maxWidth: 460 }}>
+                We don't just design logos — we build the system that holds the whole brand together. Type, color, spacing, components, motion, voice. Paired light + dark themes. Production-ready tokens.
+              </p>
+            </div>
+
+            {/* Coverage chips */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+              {[
+                "Color palette",
+                "Type scale",
+                "Spacing & 8pt grid",
+                "Component library",
+                "Icon system",
+                "Glass & glow",
+                "Buttons & inputs",
+                "Cards & KPIs",
+                "Navigation & dropdowns",
+                "Logo system",
+                "Brand voice",
+                "Motion tokens",
+              ].map((label) => (
+                <div
+                  key={label}
+                  className="px-3 py-2.5 rounded-lg text-[13px] font-medium"
+                  style={{
+                    backgroundColor: "#F8F9FB",
+                    color: "#1A1F29",
+                    border: "1px solid #EEF0F4",
+                  }}
+                >
+                  {label}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Showcase image — light theme foundations board */}
+          <motion.figure
+            className="relative overflow-hidden"
+            style={{
+              borderRadius: 20,
+              border: "1px solid #E5E7EB",
+              boxShadow: "0 1px 2px rgba(13,17,23,0.04), 0 12px 40px rgba(13,17,23,0.08)",
+              backgroundColor: "#FFFFFF",
+            }}
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <img
+              src={dsLightBoard}
+              alt="Gray Solutions design system — light theme foundations: type scale, color palette, component library"
+              className="w-full block"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption
+              className="px-4 md:px-6 py-3 text-[12px] uppercase tracking-[0.18em] flex items-center justify-between"
+              style={{ color: "#6B7180", borderTop: "1px solid #EEF0F4" }}
+            >
+              <span>Light theme · foundations board</span>
+              <span style={{ color: "#9CA3AF" }}>Gray Solutions DS v1.1</span>
+            </figcaption>
+          </motion.figure>
+
+          {/* Showcase image — dark theme foundations board */}
+          <motion.figure
+            className="relative overflow-hidden mt-5 md:mt-6"
+            style={{
+              borderRadius: 20,
+              border: "1px solid #1B2238",
+              boxShadow: "0 1px 2px rgba(13,17,23,0.06), 0 24px 60px rgba(13,17,23,0.15)",
+              backgroundColor: "#090B12",
+            }}
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <img
+              src={dsDarkBoard}
+              alt="Gray Solutions design system — dark theme foundations: color palette, glass card system, KPI cards, buttons, navigation"
+              className="w-full block"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption
+              className="px-4 md:px-6 py-3 text-[12px] uppercase tracking-[0.18em] flex items-center justify-between"
+              style={{ color: "rgba(255,255,255,0.55)", borderTop: "1px solid #1B2238" }}
+            >
+              <span>Dark theme · paired night mode</span>
+              <span style={{ color: "rgba(255,255,255,0.4)" }}>Gray Solutions DS v1.1</span>
+            </figcaption>
+          </motion.figure>
+
+          {/* CTA strip */}
+          <motion.div
+            className="mt-10 md:mt-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <p style={{ color: "#4B5563", fontSize: 14, lineHeight: 1.5, maxWidth: 520 }}>
+              Built by Gray Solutions, used across this site. Same spec is shipped to every brand engagement we run.
+            </p>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-[14px] font-medium transition-all cursor-pointer whitespace-nowrap"
+              style={{
+                color: "#FFFFFF",
+                backgroundColor: "#0D1117",
+                border: "1px solid #0D1117",
+              }}
+            >
+              <span>Start a brand project</span>
+              <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                <path d="M3 11L11 3M11 3H5M11 3V9" />
+              </svg>
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
       <section className="py-20 md:py-28" style={{ backgroundColor: '#FAFAFA' }}>
         <div className="max-w-[1200px] mx-auto px-6 md:px-10">
           <div className="text-center mb-12">
@@ -512,7 +625,7 @@ export default function ServiceBrandContent() {
                 </svg>
                 <div>
                   <span className="text-xs font-medium tracking-wide block" style={{ color: '#999999' }}>Previous</span>
-                  <span className="text-base font-semibold" style={{ color: '#1A1A1A' }}>Automations & AI</span>
+                  <span className="text-base font-semibold" style={{ color: '#1A1A1A' }}>AI & Automation</span>
                 </div>
               </Link>
             </div>
@@ -520,7 +633,7 @@ export default function ServiceBrandContent() {
               <Link href="/services/growth-performance" className="group inline-flex items-center gap-3 justify-end">
                 <div>
                   <span className="text-xs font-medium tracking-wide block" style={{ color: '#999999' }}>Next</span>
-                  <span className="text-base font-semibold" style={{ color: '#1A1A1A' }}>Growth & Performance</span>
+                  <span className="text-base font-semibold" style={{ color: '#1A1A1A' }}>Digital Marketing</span>
                 </div>
                 <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" style={{ color: '#666666' }} viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />

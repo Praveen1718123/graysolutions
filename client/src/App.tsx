@@ -28,7 +28,16 @@ const Eagle = lazy(pageImports.eagle);
 const Tix = lazy(pageImports.tix);
 const GraySolutions = lazy(pageImports["gray-solutions"]);
 const GoGauge = lazy(pageImports.gogauge);
+const Krft = lazy(pageImports.krft);
+const Thottam = lazy(pageImports.thottam);
+const Kopo = lazy(pageImports.kopo);
+const Cafe66 = lazy(pageImports.cafe66);
+const PhotoAutomation = lazy(pageImports["photo-automation"]);
 const Contact = lazy(pageImports.contact);
+const Work = lazy(() => import("@/pages/work"));
+const ProductTms = lazy(() => import("@/pages/product-tms"));
+const ProductVoiceAgent = lazy(() => import("@/pages/product-voice-agent"));
+const ProductQuickCommerce = lazy(() => import("@/pages/product-quick-commerce"));
 
 // Admin Portal
 const AdminAuth = lazy(() => import("@/pages/admin/auth-page"));
@@ -45,6 +54,20 @@ function Router() {
   useEffect(() => {
     // Preload top-level sections after initial render
     preloadCriticalPages();
+  }, []);
+
+  // Liquid-glass: drive each .lg surface's specular highlight from the cursor
+  useEffect(() => {
+    const onMove = (e: PointerEvent) => {
+      const target = e.target as HTMLElement | null;
+      const el = target && target.closest ? (target.closest(".lg") as HTMLElement | null) : null;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      el.style.setProperty("--mx", `${((e.clientX - r.left) / r.width) * 100}%`);
+      el.style.setProperty("--my", `${((e.clientY - r.top) / r.height) * 100}%`);
+    };
+    window.addEventListener("pointermove", onMove, { passive: true });
+    return () => window.removeEventListener("pointermove", onMove);
   }, []);
 
   return (
@@ -68,9 +91,18 @@ function Router() {
         <Route path="/case-study/tix" component={Tix} />
         <Route path="/case-study/gray-solutions" component={GraySolutions} />
         <Route path="/case-study/gogauge" component={GoGauge} />
+        <Route path="/case-study/krft" component={Krft} />
+        <Route path="/case-study/thottam" component={Thottam} />
+        <Route path="/case-study/kopo" component={Kopo} />
+        <Route path="/case-study/cafe66" component={Cafe66} />
+        <Route path="/case-study/photo-automation" component={PhotoAutomation} />
         <Route path="/blogs" component={Blogs} />
         <Route path="/blogs/:slug" component={BlogDetail} />
         <Route path="/contact" component={Contact} />
+        <Route path="/work" component={Work} />
+        <Route path="/products/transportation-management-system" component={ProductTms} />
+        <Route path="/products/voice-agent-ai" component={ProductVoiceAgent} />
+        <Route path="/products/quick-commerce" component={ProductQuickCommerce} />
         
         {/* Admin Portal */}
         <Route path="/admin/auth" component={AdminAuth} />

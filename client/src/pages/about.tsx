@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "wouter";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import logoImage from "@assets/Frame_33_copy2_2_(1)_1768895375486.png";
 import heroVideo from "@assets/From_KlickPin_CF_Red_and_White_Abstract_Wall_ArtJiayuan_Liang__1766475001318.mp4";
 import benefitsVideo from "@assets/From_KlickPin_CF_by_Meloq_Arai_—_a_3D_Motion_Designer_@meloqar_1766508779038.mp4";
 import numbersVideo from "@assets/From_KlickPin_CF_light_hero___abstract_flare_[Video]___Editing_1766512132613.mp4";
@@ -11,6 +10,7 @@ import refineGif from "@assets/optimized/refine_anim.webp";
 import designVideo from "@assets/From_KlickPin_CF_Abstract_gradient_geometric_shape_animation_[_1766517982162.mp4";
 import positionGif from "@assets/optimized/position_anim.webp";
 import Footer from "@/components/footer";
+import SiteNav from "@/components/site-nav";
 
 function useCountUp(end: number, duration: number = 2000, inView: boolean) {
   const [count, setCount] = useState(0);
@@ -130,50 +130,7 @@ export default function About() {
         fontFamily: '-apple-system, system-ui, sans-serif',
       }}
     >
-      {/* Fixed Header */}
-      <header 
-        className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 md:px-0"
-        style={{
-          height: isScrolled ? '70px' : '80px',
-          backgroundColor: 'transparent',
-          pointerEvents: 'none',
-          transition: 'height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
-        }}
-      >
-        <div 
-          className="flex items-center justify-center"
-          style={{
-            pointerEvents: 'auto',
-            width: isScrolled ? '180px' : '100%',
-            height: isScrolled ? '44px' : '100%',
-            marginTop: isScrolled ? '12px' : '0',
-            backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : '#FFFFFF',
-            backdropFilter: isScrolled ? 'blur(12px)' : 'none',
-            WebkitBackdropFilter: isScrolled ? 'blur(12px)' : 'none',
-            boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.08)' : 'none',
-            borderRadius: isScrolled ? '999px' : '0',
-            padding: isScrolled ? '0 24px' : '0',
-            transition: 'all 500ms cubic-bezier(0.4, 0, 0.2, 1)',
-          }}
-        >
-          <Link href="/">
-            <img 
-              src={logoImage}
-              width="140"
-              height="64"
-              decoding="async"
-              alt="Gray Solutions Logo" 
-              className="cursor-pointer"
-              style={{
-                height: isScrolled ? '28px' : '48px',
-                width: 'auto',
-                transition: 'height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
-              }}
-              data-testid="logo-nav"
-            />
-          </Link>
-        </div>
-      </header>
+      <SiteNav theme="light" />
 
       {/* Hero Section - Clean White with Video */}
       <section 
@@ -244,61 +201,8 @@ export default function About() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.35 }}
             >
-              A product, design, technology, and consulting studio focused on clarity, reliability, and measurable outcomes. Founded by Praveen Raj, Senior Product Designer with 10+ years at HCL Technologies.
+              A product, design, technology, and consulting studio focused on clarity, reliability, and measurable outcomes.
             </motion.p>
-
-            {/* CTA row */}
-            <motion.div 
-              className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-5"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-            >
-              <a
-                href="https://calendly.com/praveenraj"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-3 rounded-full font-medium text-sm transition-all inline-block"
-                style={{
-                  backgroundColor: '#1A1A1A',
-                  color: '#FFFFFF',
-                  boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-2px)';
-                  (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.15)';
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(0)';
-                  (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 2px 12px rgba(0, 0, 0, 0.1)';
-                }}
-                data-testid="cta-talk-to-us"
-              >
-                Book a 30-min Free Brand Audit Call
-              </a>
-              
-              <span className="hidden sm:block text-gray-300">·</span>
-              
-              <button 
-                className="px-6 py-3 rounded-full font-medium text-sm transition-all"
-                style={{ 
-                  backgroundColor: 'transparent', 
-                  color: '#1A1A1A',
-                  border: '1px solid #E0E0E0',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.backgroundColor = '#F5F5F5';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.backgroundColor = 'transparent';
-                }}
-                data-testid="cta-view-work"
-              >
-                View our work
-              </button>
-            </motion.div>
           </div>
 
           {/* Right - Video Animation */}

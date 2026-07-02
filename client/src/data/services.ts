@@ -1,42 +1,44 @@
+// Four universal services — matching the WhatWeDo section on the homepage
+// and the Services dropdown in the nav. Single source of truth.
 export const services = [
   {
     id: "brand-content",
-    title: "Brand & Content Studio",
+    title: "Brand & Identity",
     slug: "brand-content",
-    description: "Brand positioning, messaging, creative direction, content strategy, reels/editing, founder brand.",
-    thumbnailSubtext: "Brand identity and content systems built to position you clearly in your market.",
+    description:
+      "Logos, visual systems, brand positioning, messaging, content strategy, reels, and founder-led brand.",
+    thumbnailSubtext:
+      "Brand identity and content systems built to position you clearly in your market.",
     href: "/services/brand-content",
   },
   {
     id: "growth-performance",
-    title: "Growth & Performance",
+    title: "Digital Marketing",
     slug: "growth-performance",
-    description: "Paid ads, funnels, landing pages, CRO, analytics, lead-gen.",
-    thumbnailSubtext: "Performance marketing that ties spend directly to pipeline and revenue.",
+    description:
+      "Content, social, paid ads, funnels, landing pages, CRO, analytics, and lead-gen.",
+    thumbnailSubtext:
+      "Performance marketing that ties spend directly to pipeline and revenue.",
     href: "/services/growth-performance",
   },
   {
     id: "product-web",
-    title: "Product & Web Studio",
+    title: "Product & Software",
     slug: "product-web",
-    description: "UI/UX, websites, MVP builds, web apps, product design + development.",
-    thumbnailSubtext: "From wireframe to live product — design and development under one roof.",
+    description:
+      "Websites, web apps, MVP builds, custom software — design and development under one roof.",
+    thumbnailSubtext:
+      "From wireframe to live product — design and development under one roof.",
     href: "/services/product-web",
   },
   {
-    id: "commerce-studio",
-    title: "Commerce Studio",
-    slug: "commerce-studio",
-    description: "Shopify builds/revamps, product pages, checkout optimization, email/SMS flows, integrations.",
-    thumbnailSubtext: "End-to-end commerce builds that convert browsers into buyers.",
-    href: "/services/commerce-studio",
-  },
-  {
     id: "automations-ai",
-    title: "Automations & AI",
+    title: "AI & Automation",
     slug: "automations-ai",
-    description: "AI + automation that cuts repetitive tasks and speeds up execution across your business.",
-    thumbnailSubtext: "AI + automation that cuts repetitive tasks and speeds up execution across your business.",
+    description:
+      "Workflow automation, AI integration, voice agents, internal tools, and conversational systems.",
+    thumbnailSubtext:
+      "AI + automation that cuts repetitive tasks and speeds up execution across your business.",
     href: "/services/automations-ai",
   },
 ];

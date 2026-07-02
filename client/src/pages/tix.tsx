@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import logoImage from "@assets/Frame_33_copy2_2_(1)_1768895375486.png";
 import Footer from "@/components/footer";
 import heroImage from "@assets/Free_iPhone_16_Pro_PSD_Mockup_Tix_1766597838175.webp";
 import deckImage from "@assets/Tix_Deck-10_1766597838176.webp";
@@ -12,6 +11,18 @@ import appIconImage from "@assets/Tix_Guidelines-07_1766597838176.webp";
 import moviePosterImage from "@assets/Tix_Guidelines-08_1766597838176.webp";
 import bagImage from "@assets/Tix_Guidelines-09_1766597838176.webp";
 import mobileHandImage from "@assets/Tix_Guidelines-10_1766597838176.webp";
+// 2026 TIX brand + product system (10 hero screens)
+import tixBrandSystem from "@assets/tix-2026/tix-01-brand-system.webp";
+import tixLogoSystem from "@assets/tix-2026/tix-02-logo-system.webp";
+import tixVisualLanguage from "@assets/tix-2026/tix-03-visual-language.webp";
+import tixUiKit from "@assets/tix-2026/tix-04-ui-kit.webp";
+import tixCoreAppScreens from "@assets/tix-2026/tix-05-core-app-screens.webp";
+import tixBookingJourney from "@assets/tix-2026/tix-06-booking-journey.webp";
+import tixTicketsWallet from "@assets/tix-2026/tix-07-tickets-wallet.webp";
+import tixWebDesktop from "@assets/tix-2026/tix-08-web-desktop.webp";
+import tixCampaignKit from "@assets/tix-2026/tix-09-campaign-kit.webp";
+import tixMockupKit from "@assets/tix-2026/tix-10-mockup-kit.webp";
+import SiteNav from "@/components/site-nav";
 
 export default function Tix() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -26,17 +37,31 @@ export default function Tix() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const galleryTabs = ["All", "App", "Brand", "Marketing"];
+  const galleryTabs = ["All", "Brand assets", "Software & dev", "Marketing assets"];
 
   const galleryImages = [
-    { src: heroImage, category: "App", caption: "TIX mobile app home screen with movie listings." },
-    { src: mobileHandImage, category: "App", caption: "Mobile app shown in-hand with movie browsing." },
-    { src: appIconImage, category: "Brand", caption: "TIX app icon on iPhone home screen." },
-    { src: guidelinesImage, category: "Brand", caption: "TIX brand identity with movies and events." },
-    { src: moviePosterImage, category: "Marketing", caption: "Book Your TIX Now promotional graphic." },
-    { src: arrowImage, category: "Marketing", caption: "Movies, Events and much more campaign." },
-    { src: bagImage, category: "Brand", caption: "TIX branded tote bag merchandise." },
-    { src: deckImage, category: "Brand", caption: "TIX platform overview with app screens." },
+    // ── 2026 Brand + Product System ────────────────────────────────────────
+    { src: tixBrandSystem,     category: "Brand assets",    caption: "TIX brand system — video-first ticket booking for concerts, festivals, sports, and live experiences." },
+    { src: tixLogoSystem,      category: "Brand assets",    caption: "TIX logo system — primary, reverse, monogram, lockups, clear space, minimum size, and misuse rules." },
+    { src: tixVisualLanguage,  category: "Brand assets",    caption: "TIX visual language — color, typography hierarchy, icons, buttons, chips, tags, grids, and patterns." },
+    { src: tixMockupKit,       category: "Brand assets",    caption: "TIX brand application — tickets, lanyards, staff tees, hoodies, bags, ID, posters, and event signage." },
+    // Software & dev
+    { src: tixUiKit,           category: "Software & dev",  caption: "TIX UI kit — modular component library across forms, lists, cards, payments, status, and identity." },
+    { src: tixCoreAppScreens,  category: "Software & dev",  caption: "TIX core app screens — onboarding, sign-in, home/discover, categories, event detail, and search." },
+    { src: tixBookingJourney,  category: "Software & dev",  caption: "TIX booking journey — browse → seats → review → payment → confirmation in six steps." },
+    { src: tixTicketsWallet,   category: "Software & dev",  caption: "TIX tickets & wallet — digital tickets, QR pass, Apple/Google Wallet, transfer, alerts, and profile." },
+    { src: tixWebDesktop,      category: "Software & dev",  caption: "TIX web & desktop — landing, event listing, event detail, checkout, and organizer dashboard." },
+    // Marketing
+    { src: tixCampaignKit,     category: "Marketing assets", caption: "TIX campaign + marketing kit — social posts, story ads, event launches, banners, emails, billboards." },
+    // ── Legacy / earlier round ─────────────────────────────────────────────
+    { src: heroImage,          category: "Software & dev",  caption: "Early TIX mobile concept — home screen and movie listings (round one)." },
+    { src: mobileHandImage,    category: "Software & dev",  caption: "Early TIX in-hand mockup (round one)." },
+    { src: appIconImage,       category: "Brand assets",    caption: "TIX app icon on iPhone home screen." },
+    { src: guidelinesImage,    category: "Brand assets",    caption: "TIX early brand identity exploration." },
+    { src: moviePosterImage,   category: "Marketing assets", caption: "Book Your TIX Now — early promotional graphic." },
+    { src: arrowImage,         category: "Marketing assets", caption: "Movies, Events and much more — early campaign." },
+    { src: bagImage,           category: "Brand assets",    caption: "TIX branded tote bag merchandise." },
+    { src: deckImage,          category: "Brand assets",    caption: "Early TIX platform deck — overview with app screens." },
   ];
 
   const filteredGallery = activeGalleryTab === "All" 
@@ -52,50 +77,7 @@ export default function Tix() {
         fontFamily: '-apple-system, system-ui, sans-serif'
       }}
     >
-      {/* Fixed Header */}
-      <header 
-        className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 md:px-0"
-        style={{
-          height: isScrolled ? '70px' : '80px',
-          backgroundColor: 'transparent',
-          pointerEvents: 'none',
-          transition: 'height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
-        }}
-      >
-        <div 
-          className="flex items-center justify-center"
-          style={{
-            pointerEvents: 'auto',
-            width: isScrolled ? '180px' : '100%',
-            height: isScrolled ? '44px' : '100%',
-            marginTop: isScrolled ? '12px' : '0',
-            backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : '#FFFFFF',
-            backdropFilter: isScrolled ? 'blur(12px)' : 'none',
-            WebkitBackdropFilter: isScrolled ? 'blur(12px)' : 'none',
-            boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.1)' : 'none',
-            borderRadius: isScrolled ? '999px' : '0',
-            padding: isScrolled ? '0 24px' : '0',
-            transition: 'all 500ms cubic-bezier(0.4, 0, 0.2, 1)',
-          }}
-        >
-          <Link href="/">
-            <img 
-              src={logoImage}
-              width="140"
-              height="64"
-              decoding="async"
-              alt="Gray Solutions Logo" 
-              className="cursor-pointer"
-              style={{
-                height: isScrolled ? '28px' : '48px',
-                width: 'auto',
-                transition: 'height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
-              }}
-              data-testid="logo-nav"
-            />
-          </Link>
-        </div>
-      </header>
+      <SiteNav theme="light" />
 
       {/* Hero Section */}
       <section className="pt-24 md:pt-32 pb-12 md:pb-24" style={{ backgroundColor: '#FAFAFA' }}>
@@ -117,22 +99,45 @@ export default function Tix() {
                 }}
                 data-testid="hero-headline"
               >
-                TIX — The Next-Gen Ticketing & Streaming Platform
+                TIX — Watch the vibe. Book the experience.
               </h1>
-              <p 
+              <p
                 className="text-base md:text-lg leading-relaxed mb-8"
                 style={{ color: '#666666' }}
               >
-                A complete brand identity and app design for India's entertainment discovery platform — bringing movies, events, and streaming together in one seamless experience.
+                A video-first event-ticketing marketplace for live concerts and festivals — full brand system, mobile + web product, organizer and admin consoles, and the launch campaign. Discover events through short video, book in seconds, carry a dynamic-QR ticket, and resell safely if plans change.
               </p>
-              
+
+              {/* Live CTA — primary action, made prominent */}
+              <div className="mb-7">
+                <a
+                  href="https://tix-app-mu.vercel.app/tix"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-3 pl-5 pr-6 py-4 rounded-full text-base font-bold transition-all hover:-translate-y-0.5"
+                  style={{
+                    backgroundColor: '#1CE783',
+                    color: '#06150D',
+                    boxShadow: '0 16px 40px -8px rgba(28,231,131,0.7), 0 0 0 1px rgba(28,231,131,0.35)',
+                  }}
+                  data-testid="tix-live-link"
+                >
+                  <span className="relative flex h-2.5 w-2.5" aria-hidden="true">
+                    <span className="absolute inline-flex h-full w-full rounded-full animate-ping" style={{ backgroundColor: '#06150D', opacity: 0.55 }} />
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5" style={{ backgroundColor: '#06150D' }} />
+                  </span>
+                  View the live app
+                  <svg width="17" height="17" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"><path d="M3 11L11 3M11 3H5M11 3V9" /></svg>
+                </a>
+              </div>
+
               {/* Quick Stats */}
               <div className="flex flex-wrap gap-2">
-                {["Mobile App", "Brand Identity", "Entertainment", "India Market"].map((tag) => (
-                  <span 
+                {["Mobile + Web App", "Brand Identity", "Event Ticketing", "Live & Deployed"].map((tag) => (
+                  <span
                     key={tag}
                     className="px-3 py-1.5 rounded-full text-xs font-medium"
-                    style={{ backgroundColor: 'rgba(0,210,106,0.1)', color: '#00D26A' }}
+                    style={{ backgroundColor: 'rgba(28,231,131,0.12)', color: '#12A85F' }}
                   >
                     {tag}
                   </span>
@@ -146,9 +151,9 @@ export default function Tix() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <img 
-                src={heroImage} 
-                alt="TIX app shown on iPhone in hand"
+              <img
+                src={tixBrandSystem}
+                alt="TIX brand system — smart ticket booking platform"
                 className="w-full rounded-2xl"
                 loading="lazy"
                 decoding="async"
@@ -172,9 +177,9 @@ export default function Tix() {
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {[
-              { title: "Challenge", text: "India's entertainment space is fragmented — movies on one app, events on another, no unified discovery. Users juggle multiple platforms with inconsistent experiences." },
-              { title: "Approach", text: "Design a single platform that brings together movies, live events, and streaming with a bold visual identity that stands out in a crowded market." },
-              { title: "Outcome", text: "A complete brand system with vibrant green identity, intuitive mobile app design, and marketing assets ready for launch across India's entertainment scene." },
+              { title: "Challenge", text: "Discovering live events is flat and text-heavy — posters and lists tell you nothing about the experience, and buying tickets means trusting a faceless flow with no easy way to resell if plans change." },
+              { title: "Approach", text: "Build a video-first marketplace: short clips let people feel the vibe before they book, a fast multi-tier checkout carries a dynamic-QR ticket, and a safe resale layer plus organizer and admin consoles run the whole platform." },
+              { title: "Outcome", text: "A complete, deployed product — brand system in TIX's electric green, mobile + web apps, organizer creator tools, and admin governance — live with real verified artists and end-to-end booking, resale, and check-in." },
             ].map((item, idx) => (
               <motion.div 
                 key={idx}
@@ -255,10 +260,10 @@ export default function Tix() {
           </motion.h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
             {[
-              { num: "01", title: "Unified Discovery", text: "Movies, events, and streaming in one place — no more app-hopping." },
-              { num: "02", title: "Bold Brand Identity", text: "Vibrant green stands out in a sea of red and blue entertainment apps." },
-              { num: "03", title: "India-First Design", text: "Regional content, local languages, and payment methods built-in." },
-              { num: "04", title: "Seamless Booking", text: "From discovery to ticket in under 30 seconds with saved preferences." },
+              { num: "01", title: "Video-First Discovery", text: "Short clips let fans feel the event before they book — no flat posters or guesswork." },
+              { num: "02", title: "Bold Brand Identity", text: "Electric green stands out in a sea of red and blue ticketing apps." },
+              { num: "03", title: "India-First Design", text: "Verified artists, regional events, local languages, and UPI-first payments built-in." },
+              { num: "04", title: "Book & Resell", text: "Discovery to dynamic-QR ticket in seconds — with a safe resale layer if plans change." },
             ].map((item, idx) => (
               <motion.div 
                 key={idx}
@@ -322,11 +327,11 @@ export default function Tix() {
                 {[
                   "Build a bold visual identity that cuts through entertainment app clutter with signature green.",
                   "Design mobile-first experience optimized for discovery and quick booking.",
-                  "Create flexible brand system for cinema partnerships, event promotions, and merchandise.",
-                  "Plan for expansion into streaming and original content with scalable design patterns.",
+                  "Create a flexible brand system for artist partnerships, event promotions, and merchandise.",
+                  "Add a safe resale layer plus organizer and admin consoles so the whole marketplace runs end to end.",
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-start gap-3 text-base" style={{ color: '#666666' }}>
-                    <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#00D26A' }} />
+                    <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#1CE783' }} />
                     {item}
                   </li>
                 ))}
@@ -365,7 +370,7 @@ export default function Tix() {
                 Entertainment First
               </h3>
               <p className="text-base leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                Every screen is designed to spark excitement — from movie posters to event banners. The dark theme makes content pop while reducing eye strain during late-night browsing.
+                Every screen is designed to spark excitement — from artist reels to event banners. The dark theme makes content pop while reducing eye strain during late-night browsing.
               </p>
             </div>
             <div>
@@ -373,7 +378,7 @@ export default function Tix() {
                 Signature Green
               </h3>
               <p className="text-base leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                The vibrant green (#00D26A) creates instant brand recognition. It's used strategically for CTAs, highlights, and the app icon — standing out on any home screen.
+                The vibrant green (#1CE783) creates instant brand recognition. It's used strategically for CTAs, highlights, and the app icon — standing out on any home screen.
               </p>
             </div>
           </div>
@@ -381,7 +386,7 @@ export default function Tix() {
       </section>
 
       {/* Testimonial Quote */}
-      <section className="py-12 md:py-20" style={{ backgroundColor: '#00D26A' }}>
+      <section className="py-12 md:py-20" style={{ backgroundColor: '#1CE783' }}>
         <div className="max-w-[900px] mx-auto px-4 md:px-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -421,7 +426,7 @@ export default function Tix() {
                 onClick={() => setActiveGalleryTab(tab)}
                 className="px-5 py-2.5 rounded-full text-sm font-medium transition-all"
                 style={{
-                  backgroundColor: activeGalleryTab === tab ? '#00D26A' : 'transparent',
+                  backgroundColor: activeGalleryTab === tab ? '#1CE783' : 'transparent',
                   color: activeGalleryTab === tab ? '#000000' : '#666666',
                   border: activeGalleryTab === tab ? 'none' : '1px solid #D4D4D4',
                 }}
@@ -473,15 +478,28 @@ export default function Tix() {
             <p className="text-lg mb-8" style={{ color: '#666666' }}>
               We design brands and digital products that actually move the business. Let's talk about your next project.
             </p>
-            <Link href="/contact">
-              <button 
-                className="px-8 py-4 rounded-full font-medium text-base transition-all"
-                style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}
-                data-testid="cta-contact"
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+              <a
+                href="https://tix-app-mu.vercel.app/tix"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-bold text-base transition-all hover:-translate-y-0.5"
+                style={{ backgroundColor: '#1CE783', color: '#06150D', boxShadow: '0 16px 40px -8px rgba(28,231,131,0.7)' }}
+                data-testid="tix-live-link-bottom"
               >
-                Start a Conversation
-              </button>
-            </Link>
+                View the live app
+                <svg width="17" height="17" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"><path d="M3 11L11 3M11 3H5M11 3V9" /></svg>
+              </a>
+              <Link href="/contact">
+                <button
+                  className="px-8 py-4 rounded-full font-medium text-base transition-all"
+                  style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}
+                  data-testid="cta-contact"
+                >
+                  Start a Conversation
+                </button>
+              </Link>
+            </div>
           </motion.div>
         </div>
       </section>

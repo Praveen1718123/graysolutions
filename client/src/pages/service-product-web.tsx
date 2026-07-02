@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import logoImage from "@assets/Frame_33_copy2_2_(1)_1768895375486.png";
 import Footer from "@/components/footer";
+import SiteNav from "@/components/site-nav";
 
 export default function ServiceProductWeb() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -136,43 +136,7 @@ export default function ServiceProductWeb() {
 
   return (
     <div className="min-h-screen w-full font-sans overflow-x-hidden" style={{ backgroundColor: '#FAFAFA', color: '#1A1A1A' }}>
-      <header 
-        className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 md:px-0"
-        style={{
-          height: isScrolled ? '70px' : '80px',
-          backgroundColor: 'transparent',
-          pointerEvents: 'none',
-          transition: 'height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
-        }}
-      >
-        <div 
-          className="flex items-center justify-center"
-          style={{
-            pointerEvents: 'auto',
-            width: isScrolled ? '180px' : '100%',
-            height: isScrolled ? '44px' : '100%',
-            marginTop: isScrolled ? '12px' : '0',
-            backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : 'transparent',
-            backdropFilter: isScrolled ? 'blur(12px)' : 'none',
-            boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.1)' : 'none',
-            borderRadius: isScrolled ? '999px' : '0',
-            transition: 'all 500ms cubic-bezier(0.4, 0, 0.2, 1)',
-          }}
-        >
-          <Link href="/">
-            <img 
-              src={logoImage}
-              width="140"
-              height="64"
-              decoding="async"
-              alt="Gray Logo" 
-              className="cursor-pointer"
-              style={{ height: isScrolled ? '28px' : '48px', width: 'auto', filter: isScrolled ? 'none' : 'brightness(0) invert(1)' }}
-              data-testid="logo-nav"
-            />
-          </Link>
-        </div>
-      </header>
+      <SiteNav theme="light" />
 
       <section className="relative w-full" style={{ height: '100vh', minHeight: '600px' }}>
         <video
@@ -193,7 +157,7 @@ export default function ServiceProductWeb() {
             className="max-w-[800px]"
           >
             <span className="text-sm font-medium tracking-widest mb-4 block" style={{ color: 'rgba(255,255,255,0.7)' }}>
-              PRODUCT & WEB STUDIO
+              PRODUCT & SOFTWARE
             </span>
             <h1 
               className="font-bold mb-6"
@@ -228,7 +192,7 @@ export default function ServiceProductWeb() {
             <div>
               <span className="text-sm font-medium tracking-wide mb-3 block" style={{ color: '#666666' }}>What We Do</span>
               <h2 className="font-bold" style={{ fontSize: 'clamp(28px, 4vw, 42px)', lineHeight: '1.15', color: '#1A1A1A', letterSpacing: '-0.02em' }}>
-                Product & Web Studio
+                Product & Software
               </h2>
               <Link href="/contact">
                 <button className="mt-6 px-6 py-3 rounded-full font-medium text-sm transition-all hover:opacity-90" style={{ backgroundColor: '#1A1A1A', color: '#FFFFFF' }}>
@@ -532,15 +496,15 @@ export default function ServiceProductWeb() {
                 </svg>
                 <div>
                   <span className="text-xs font-medium tracking-wide block" style={{ color: '#999999' }}>Previous</span>
-                  <span className="text-base font-semibold" style={{ color: '#1A1A1A' }}>Growth & Performance</span>
+                  <span className="text-base font-semibold" style={{ color: '#1A1A1A' }}>Digital Marketing</span>
                 </div>
               </Link>
             </div>
             <div className="w-1/2 pl-4 text-right">
-              <Link href="/services/commerce-studio" className="group inline-flex items-center gap-3 justify-end">
+              <Link href="/services/automations-ai" className="group inline-flex items-center gap-3 justify-end">
                 <div>
                   <span className="text-xs font-medium tracking-wide block" style={{ color: '#999999' }}>Next</span>
-                  <span className="text-base font-semibold" style={{ color: '#1A1A1A' }}>Commerce Studio</span>
+                  <span className="text-base font-semibold" style={{ color: '#1A1A1A' }}>AI & Automation</span>
                 </div>
                 <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" style={{ color: '#666666' }} viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />

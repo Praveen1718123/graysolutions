@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import logoImage from "@assets/Frame_33_copy2_2_(1)_1768895375486.png";
 import Footer from "@/components/footer";
+import SiteNav from "@/components/site-nav";
 
 export default function ServiceGrowthPerformance() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -130,7 +130,7 @@ export default function ServiceGrowthPerformance() {
 
   const faqs = [
     { q: "Do you guarantee results?", a: "No legit performance team guarantees numbers without context. We guarantee disciplined execution, tracking, and continuous optimization." },
-    { q: "Do you create ad creatives too?", a: "Yes — strategy + direction + iterations. Full-scale production can be done via our Brand & Content Studio." },
+    { q: "Do you create ad creatives too?", a: "Yes — strategy + direction + iterations. Full-scale production can be done via our Brand & Identity." },
     { q: "Do you handle landing pages?", a: "Yes. We either build new pages or optimize existing ones. The goal is conversion, not design vanity." },
     { q: "What ad platforms do you run?", a: "Typically Meta and Google. Depending on the business: YouTube, LinkedIn, or others." },
     { q: "How long until we see improvement?", a: "You'll see cleaner data + early performance signal in 2–4 weeks. Meaningful scaling usually takes 6–12 weeks." },
@@ -139,43 +139,7 @@ export default function ServiceGrowthPerformance() {
 
   return (
     <div className="min-h-screen w-full font-sans overflow-x-hidden" style={{ backgroundColor: '#FAFAFA', color: '#1A1A1A' }}>
-      <header 
-        className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 md:px-0"
-        style={{
-          height: isScrolled ? '70px' : '80px',
-          backgroundColor: 'transparent',
-          pointerEvents: 'none',
-          transition: 'height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
-        }}
-      >
-        <div 
-          className="flex items-center justify-center"
-          style={{
-            pointerEvents: 'auto',
-            width: isScrolled ? '180px' : '100%',
-            height: isScrolled ? '44px' : '100%',
-            marginTop: isScrolled ? '12px' : '0',
-            backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : 'transparent',
-            backdropFilter: isScrolled ? 'blur(12px)' : 'none',
-            boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.1)' : 'none',
-            borderRadius: isScrolled ? '999px' : '0',
-            transition: 'all 500ms cubic-bezier(0.4, 0, 0.2, 1)',
-          }}
-        >
-          <Link href="/">
-            <img 
-              src={logoImage}
-              width="140"
-              height="64"
-              decoding="async"
-              alt="Gray Logo" 
-              className="cursor-pointer"
-              style={{ height: isScrolled ? '28px' : '48px', width: 'auto', filter: isScrolled ? 'none' : 'brightness(0) invert(1)' }}
-              data-testid="logo-nav"
-            />
-          </Link>
-        </div>
-      </header>
+      <SiteNav theme="light" />
 
       <section className="relative w-full" style={{ height: '100vh', minHeight: '600px' }}>
         <video
@@ -196,7 +160,7 @@ export default function ServiceGrowthPerformance() {
             className="max-w-[800px]"
           >
             <span className="text-sm font-medium tracking-widest mb-4 block" style={{ color: 'rgba(255,255,255,0.7)' }}>
-              GROWTH & PERFORMANCE
+              DIGITAL MARKETING
             </span>
             <h1 
               className="font-bold mb-6"
@@ -234,7 +198,7 @@ export default function ServiceGrowthPerformance() {
                 className="font-bold"
                 style={{ fontSize: 'clamp(28px, 4vw, 42px)', lineHeight: '1.15', color: '#1A1A1A', letterSpacing: '-0.02em' }}
               >
-                Growth & Performance
+                Digital Marketing
               </h2>
               <Link href="/contact">
                 <button 
@@ -550,7 +514,7 @@ export default function ServiceGrowthPerformance() {
                 </svg>
                 <div>
                   <span className="text-xs font-medium tracking-wide block" style={{ color: '#999999' }}>Previous</span>
-                  <span className="text-base font-semibold" style={{ color: '#1A1A1A' }}>Brand & Content Studio</span>
+                  <span className="text-base font-semibold" style={{ color: '#1A1A1A' }}>Brand & Identity</span>
                 </div>
               </Link>
             </div>
@@ -558,7 +522,7 @@ export default function ServiceGrowthPerformance() {
               <Link href="/services/product-web" className="group inline-flex items-center gap-3 justify-end">
                 <div>
                   <span className="text-xs font-medium tracking-wide block" style={{ color: '#999999' }}>Next</span>
-                  <span className="text-base font-semibold" style={{ color: '#1A1A1A' }}>Product & Web Studio</span>
+                  <span className="text-base font-semibold" style={{ color: '#1A1A1A' }}>Product & Software</span>
                 </div>
                 <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" style={{ color: '#666666' }} viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />

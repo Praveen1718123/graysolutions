@@ -59,6 +59,23 @@ async function buildAll() {
     external: externals,
     logLevel: "info",
   });
+
+  // Bundle the Vercel serverless entry into a single self-contained file at
+  // api/index.js. esbuild resolves the @shared alias and inlines all local
+  // (server/*) imports, leaving only bare package imports — which Vercel's
+  // function tracer includes from node_modules. This avoids the ESM
+  // "Cannot find module '../server/routes'" runtime failure.
+  console.log("building api function...");
+  await esbuild({
+    entryPoints: ["server/vercel-entry.ts"],
+    platform: "node",
+    target: "node20",
+    bundle: true,
+    format: "esm",
+    outfile: "api/index.js",
+    packages: "external", // keep node_modules external; bundle only local code
+    logLevel: "info",
+  });
 }
 
 buildAll().catch((err) => {

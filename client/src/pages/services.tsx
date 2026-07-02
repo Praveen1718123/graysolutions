@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import logoImage from "@assets/Frame_33_copy2_2_(1)_1768895375486.png";
 import Footer from "@/components/footer";
 import { services as servicesData } from "@/data/services";
 import brandDesignImg from "@assets/stock_images/professional_brand_d_908b1411.jpg";
@@ -15,6 +14,7 @@ import magicTrucksThumb from "@assets/mokcup_1_1765899763586.webp";
 import eagleThumb from "@assets/Eagle_Web_2_1765901229010.webp";
 import tixThumb from "@assets/Desktop_-_4_(2)_1765460573017.webp";
 import grayThumb from "@assets/Camera_Angle_02_1765901229015.webp";
+import SiteNav from "@/components/site-nav";
 
 export default function Services() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -93,50 +93,7 @@ export default function Services() {
         fontFamily: '-apple-system, system-ui, sans-serif'
       }}
     >
-      {/* Fixed Header */}
-      <header 
-        className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 md:px-0"
-        style={{
-          height: isScrolled ? '70px' : '80px',
-          backgroundColor: 'transparent',
-          pointerEvents: 'none',
-          transition: 'height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
-        }}
-      >
-        <div 
-          className="flex items-center justify-center"
-          style={{
-            pointerEvents: 'auto',
-            width: isScrolled ? '180px' : '100%',
-            height: isScrolled ? '44px' : '100%',
-            marginTop: isScrolled ? '12px' : '0',
-            backgroundColor: isScrolled ? 'rgba(255,255,255,0.92)' : '#FFFFFF',
-            backdropFilter: isScrolled ? 'blur(12px)' : 'none',
-            WebkitBackdropFilter: isScrolled ? 'blur(12px)' : 'none',
-            boxShadow: isScrolled ? '0 4px 24px rgba(0,0,0,0.1)' : 'none',
-            borderRadius: isScrolled ? '999px' : '0',
-            padding: isScrolled ? '0 24px' : '0',
-            transition: 'all 500ms cubic-bezier(0.4, 0, 0.2, 1)',
-          }}
-        >
-          <Link href="/">
-            <img 
-              src={logoImage}
-              width="140"
-              height="64"
-              decoding="async"
-              alt="Gray Logo" 
-              className="cursor-pointer"
-              style={{
-                height: isScrolled ? '28px' : '48px',
-                width: 'auto',
-                transition: 'height 500ms cubic-bezier(0.4, 0, 0.2, 1)',
-              }}
-              data-testid="logo-nav"
-            />
-          </Link>
-        </div>
-      </header>
+      <SiteNav theme="light" />
 
       {/* Hero Section - Full Image Background */}
       <section
@@ -511,84 +468,6 @@ export default function Services() {
               </React.Fragment>
             ))}
           </motion.div>
-        </div>
-      </section>
-
-      {/* Case Studies Section */}
-      <section 
-        className="py-16 md:py-24"
-        style={{ backgroundColor: '#FAFAFA' }}
-        data-testid="section-case-studies"
-      >
-        <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-          <div className="flex items-center justify-between mb-12">
-            <h2 
-              className="font-bold"
-              style={{ 
-                fontSize: 'clamp(24px, 3vw, 36px)',
-                color: '#1A1A1A',
-                letterSpacing: '-0.02em',
-              }}
-            >
-              See our work
-            </h2>
-            <Link href="/">
-              <span 
-                className="text-sm font-medium hover:underline cursor-pointer"
-                style={{ color: '#666666' }}
-                data-testid="link-view-all-work"
-              >
-                View all →
-              </span>
-            </Link>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { title: "Magic Trucks", category: "Brand & Product", href: "/case-study/magic-trucks", thumbnail: magicTrucksThumb },
-              { title: "Eagle", category: "Web Platform", href: "/case-study/eagle", thumbnail: eagleThumb },
-              { title: "TIX", category: "Mobile App", href: "/case-study/tix", thumbnail: tixThumb },
-              { title: "Gray Solutions", category: "Brand Identity", href: "/case-study/gray-solutions", thumbnail: grayThumb },
-            ].map((caseStudy, index) => (
-              <Link key={index} href={caseStudy.href}>
-                <div
-                  className="rounded-2xl cursor-pointer transition-all hover:shadow-lg group overflow-hidden"
-                  style={{ backgroundColor: '#FFFFFF' }}
-                  data-testid={`case-study-link-${index}`}
-                >
-                  <div className="aspect-[4/3] overflow-hidden">
-                    <img 
-                      src={caseStudy.thumbnail}
-                      alt={caseStudy.title}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                  <div className="p-5">
-                    <span 
-                      className="text-xs font-medium mb-1 block"
-                      style={{ color: '#666666' }}
-                    >
-                      {caseStudy.category}
-                    </span>
-                    <h3 
-                      className="text-lg font-semibold mb-2 group-hover:underline"
-                      style={{ color: '#1A1A1A' }}
-                    >
-                      {caseStudy.title}
-                    </h3>
-                    <span 
-                      className="text-sm font-medium"
-                      style={{ color: '#1A1A1A' }}
-                    >
-                      View case study →
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
         </div>
       </section>
 

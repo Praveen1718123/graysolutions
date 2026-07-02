@@ -1,167 +1,341 @@
-import React from "react";
-import { PrefetchLink } from "@/components/ui/prefetch-link";
-import logoWhite from "@assets/Frame_33_copy2_1_(1)_1768900373646.png";
-import { NewsletterForm } from "./newsletter-form";
+import React, { useState } from "react";
+import { Link } from "wouter";
+import {
+  Linkedin,
+  Twitter,
+  Instagram,
+  Dribbble,
+  MapPin,
+  ArrowUpRight,
+  ArrowRight,
+} from "lucide-react";
+
+// Design tokens (self-contained — footer used on every page)
+const BG = "#05070D";
+const TEXT_PRIMARY = "#F1F3F8";
+const TEXT_SECONDARY = "#8B92A3";
+const TEXT_MUTED = "#5A6273";
+const BORDER = "rgba(255,255,255,0.06)";
+const ACCENT_BLUE = "#3B82F6";
+const FONT_BODY = "'DM Sans', 'Inter', ui-sans-serif, system-ui, sans-serif";
+const FONT_DISPLAY = "'Plus Jakarta Sans', 'Inter', ui-sans-serif, system-ui, sans-serif";
+const FONT_MONO = "'JetBrains Mono', ui-monospace, monospace";
+
+type ColumnLink = {
+  label: string;
+  href: string;
+  external?: boolean;
+};
+
+const servicesLinks: ColumnLink[] = [
+  { label: "Brand & Identity",  href: "/services/brand-content"      },
+  { label: "Digital Marketing", href: "/services/growth-performance" },
+  { label: "Product & Software", href: "/services/product-web"       },
+  { label: "AI & Automation",   href: "/services/automations-ai"     },
+];
+
+const workLinks: ColumnLink[] = [
+  { label: "All Projects",       href: "/work" },
+  { label: "Brand & Identity",   href: "/work?filter=brand" },
+  { label: "Digital Marketing",  href: "/work?filter=digital" },
+  { label: "Product & Software", href: "/work?filter=product" },
+  { label: "AI & Automation",    href: "/work?filter=ai" },
+];
+
+const companyLinks: ColumnLink[] = [
+  { label: "About Us",     href: "/about" },
+  { label: "Our Process",  href: "/about#process" },
+  { label: "Case Studies", href: "/work" },
+  { label: "Careers",      href: "#" },
+  { label: "Contact Us",   href: "/contact" },
+];
+
+const socialLinks = [
+  { label: "LinkedIn",  href: "https://linkedin.com",  Icon: Linkedin  },
+  { label: "Twitter",   href: "https://twitter.com",   Icon: Twitter   },
+  { label: "Instagram", href: "https://instagram.com", Icon: Instagram },
+  { label: "Dribbble",  href: "https://dribbble.com",  Icon: Dribbble  },
+];
 
 interface FooterProps {
   hideNewsletter?: boolean;
 }
 
-export default function Footer({ hideNewsletter = false }: FooterProps) {
+function ColumnLinkRow({ href, label }: ColumnLink) {
+  return (
+    <li>
+      <a
+        href={href}
+        className="footer-col-link group inline-flex items-center gap-1.5 text-[14px] transition-colors"
+        style={{ color: TEXT_SECONDARY, fontFamily: FONT_BODY }}
+      >
+        <span>{label}</span>
+        <ArrowUpRight
+          size={12}
+          strokeWidth={1.6}
+          className="transition-all opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+        />
+      </a>
+    </li>
+  );
+}
 
-  const navLinks = {
-    col1: [
-      { label: "Home", href: "/" },
-      { label: "Services", href: "/services" },
-      { label: "About", href: "/about" },
-      { label: "Blog", href: "/blogs" },
-      { label: "Contact", href: "/contact" },
-    ],
-    col2: [
-      { label: "GoGauge", href: "/case-study/gogauge" },
-      { label: "Eagle", href: "/case-study/eagle" },
-      { label: "Gray Solutions", href: "/case-study/gray-solutions" },
-      { label: "TIX", href: "/case-study/tix" },
-      { label: "Magic Trucks", href: "/case-study/magic-trucks" },
-    ],
-  };
+export default function Footer({ hideNewsletter = false }: FooterProps) {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email || status === "sending") return;
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/newsletter/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      setStatus(res.ok ? "ok" : "error");
+      if (res.ok) setEmail("");
+    } catch {
+      setStatus("error");
+    }
+  }
 
   return (
-    <footer className="relative z-10">
-      {/* Section 1: Newsletter - White Background */}
-      {!hideNewsletter && (
-        <section 
-          className="py-5 sm:py-6 md:py-8"
-          style={{ 
-            backgroundColor: '#FFFFFF',
-          }}
+    <footer
+      className="w-full"
+      style={{ backgroundColor: BG, color: TEXT_PRIMARY, fontFamily: FONT_BODY }}
+      aria-label="Site footer"
+    >
+      <div className="mx-auto max-w-[1280px] px-5 md:px-8 lg:px-12 pt-14 md:pt-20 pb-8">
+        {/* Top divider */}
+        <div className="h-px w-full" style={{ backgroundColor: BORDER }} />
+
+        {/* Main grid */}
+        <div
+          className={`mt-12 md:mt-16 grid gap-10 lg:gap-12 ${
+            hideNewsletter
+              ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr]"
+              : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.25fr_0.9fr_0.9fr_0.9fr_1.4fr]"
+          }`}
         >
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-10">
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 sm:gap-4">
-              <h3 
-                className="font-medium text-lg sm:text-xl md:text-2xl"
-                style={{ 
-                  color: '#1A1A1A',
+          {/* Column 1 — Tagline + location + socials */}
+          <div className="flex flex-col gap-6">
+            <Link href="/" className="inline-block cursor-pointer" aria-label="Gray Solutions homepage">
+              <img
+                src="/assets/logo-140.webp"
+                srcSet="/assets/logo-140.webp 1x, /assets/logo-280.webp 2x"
+                alt="Gray Solutions"
+                width={100}
+                height={36}
+                style={{
+                  display: "block",
+                  filter:
+                    "brightness(0) invert(1) drop-shadow(0 0 12px rgba(59,130,246,0.15))",
+                }}
+              />
+            </Link>
+            <p
+              className="text-[14px]"
+              style={{ color: TEXT_SECONDARY, lineHeight: 1.6, maxWidth: 320 }}
+            >
+              A creative studio building brands, digital experiences, custom software, and AI solutions for ambitious teams.
+            </p>
+
+            {/* Location pin */}
+            <div className="pt-3" style={{ borderTop: `1px solid ${BORDER}` }}>
+              <a
+                href="https://www.google.com/maps?q=Coimbatore,+India"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full transition-colors hover:bg-white/[0.04]"
+                style={{ color: TEXT_MUTED, border: `1px solid ${BORDER}` }}
+                aria-label="Coimbatore, India"
+              >
+                <MapPin size={16} strokeWidth={1.6} />
+              </a>
+            </div>
+
+            {/* Social icons */}
+            <div className="flex items-center gap-2">
+              {socialLinks.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="footer-social inline-flex items-center justify-center w-10 h-10 rounded-full transition-colors"
+                  style={{ color: TEXT_MUTED, border: `1px solid ${BORDER}` }}
+                >
+                  <Icon size={15} strokeWidth={1.6} />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Column 2 — Services */}
+          <div className="flex flex-col gap-5">
+            <p
+              className="text-[11px] uppercase tracking-[0.24em]"
+              style={{ color: TEXT_MUTED, fontFamily: FONT_MONO }}
+            >
+              Services
+            </p>
+            <ul className="flex flex-col gap-3">
+              {servicesLinks.map((l) => (
+                <ColumnLinkRow key={l.label} {...l} />
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 3 — Work */}
+          <div className="flex flex-col gap-5">
+            <p
+              className="text-[11px] uppercase tracking-[0.24em]"
+              style={{ color: TEXT_MUTED, fontFamily: FONT_MONO }}
+            >
+              Work
+            </p>
+            <ul className="flex flex-col gap-3">
+              {workLinks.map((l) => (
+                <ColumnLinkRow key={l.label} {...l} />
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 4 — Company */}
+          <div className="flex flex-col gap-5">
+            <p
+              className="text-[11px] uppercase tracking-[0.24em]"
+              style={{ color: TEXT_MUTED, fontFamily: FONT_MONO }}
+            >
+              Company
+            </p>
+            <ul className="flex flex-col gap-3">
+              {companyLinks.map((l) => (
+                <ColumnLinkRow key={l.label} {...l} />
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 5 — Newsletter */}
+          {!hideNewsletter && (
+            <div className="flex flex-col gap-5">
+              <p
+                className="text-[11px] uppercase tracking-[0.24em]"
+                style={{ color: TEXT_MUTED, fontFamily: FONT_MONO }}
+              >
+                Stay in the loop
+              </p>
+              <h3
+                className="font-bold tracking-[-0.025em]"
+                style={{
+                  fontFamily: FONT_DISPLAY,
+                  color: TEXT_PRIMARY,
+                  fontSize: "clamp(20px, 1.8vw, 26px)",
+                  lineHeight: 1.15,
                 }}
               >
-                Join our newsletter
+                Insights, straight to your inbox.
               </h3>
-              <NewsletterForm />
-            </div>
-          </div>
-        </section>
-      )}
+              <p
+                className="text-[13px]"
+                style={{ color: TEXT_SECONDARY, lineHeight: 1.55 }}
+              >
+                Monthly insights on design, tech, AI, and growth. No spam, just value.
+              </p>
 
-      {/* Section 2: Main Footer - Solid Black Background */}
-      <section 
-        style={{ 
-          backgroundColor: '#1A1A1A',
-        }}
-      >
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-10 py-8 sm:py-10 md:py-14">
-          <div className="flex flex-col lg:flex-row items-start justify-between gap-6 sm:gap-8">
-            {/* Left - Large Brand Logo with Descriptor */}
-            <div className="flex items-end gap-4 sm:gap-5 md:gap-8">
-              <PrefetchLink href="/">
-                <img 
-                  src={logoWhite}
-                  alt="Gray Logo"
-                  className="cursor-pointer h-16 sm:h-20 md:h-28 lg:h-[140px] w-auto"
-                  data-testid="footer-logo"
-                />
-              </PrefetchLink>
-              <div className="pb-0.5 sm:pb-1 md:pb-3">
-                <p 
-                  className="text-sm sm:text-base md:text-lg leading-tight"
-                  style={{ color: '#F5F0E8' }}
+              <form onSubmit={onSubmit} className="flex flex-col gap-3">
+                <div
+                  className="flex items-stretch gap-1 p-1.5 rounded-2xl"
+                  style={{
+                    backgroundColor: "rgba(11,16,28,0.6)",
+                    border: `1px solid ${BORDER}`,
+                  }}
                 >
-                  Design. Build. Scale.
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    aria-label="Email address"
+                    className="flex-1 bg-transparent px-3 py-2 text-[14px] outline-none"
+                    style={{ color: TEXT_PRIMARY, fontFamily: FONT_BODY }}
+                  />
+                  <button
+                    type="submit"
+                    disabled={status === "sending"}
+                    className="inline-flex items-center justify-center px-4 rounded-xl transition-all"
+                    style={{
+                      color: "#FFFFFF",
+                      background: `linear-gradient(180deg, ${ACCENT_BLUE} 0%, #2563EB 100%)`,
+                      boxShadow:
+                        "inset 0 1px 0 rgba(255,255,255,0.18), 0 0 16px rgba(59,130,246,0.30)",
+                      minWidth: 56,
+                      opacity: status === "sending" ? 0.7 : 1,
+                    }}
+                    aria-label="Subscribe"
+                  >
+                    <ArrowRight size={16} strokeWidth={2} />
+                  </button>
+                </div>
+
+                <p
+                  className="inline-flex items-center gap-1.5 text-[12px]"
+                  style={{ color: TEXT_MUTED }}
+                >
+                  {status === "ok" ? (
+                    <>
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" style={{ color: "#22C55E" }}>
+                        <circle cx="6" cy="6" r="5" />
+                        <path d="M4 6l1.5 1.5L8 4.5" />
+                      </svg>
+                      <span>You're in. Talk soon.</span>
+                    </>
+                  ) : status === "error" ? (
+                    <span style={{ color: "#F87171" }}>Couldn't subscribe — try again in a moment.</span>
+                  ) : (
+                    <>
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="6" cy="6" r="5" />
+                        <path d="M4 6l1.5 1.5L8 4.5" />
+                      </svg>
+                      <span>We respect your privacy. Unsubscribe anytime.</span>
+                    </>
+                  )}
                 </p>
-              </div>
+              </form>
             </div>
-
-            {/* Right - Navigation Links */}
-            <div className="flex gap-8 sm:gap-12 md:gap-16 mt-2 lg:mt-0">
-              <ul className="space-y-1.5 sm:space-y-1">
-                {navLinks.col1.map((link, idx) => (
-                  <li key={idx}>
-                    <PrefetchLink href={link.href} onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
-                      <span 
-                        className="text-sm hover:text-white transition-colors cursor-pointer"
-                        style={{ color: 'rgba(255,255,255,0.6)' }}
-                      >
-                        {link.label}
-                      </span>
-                    </PrefetchLink>
-                  </li>
-                ))}
-              </ul>
-              <ul className="space-y-1.5 sm:space-y-1">
-                {navLinks.col2.map((link, idx) => (
-                  <li key={idx}>
-                    <PrefetchLink href={link.href} onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
-                      <span 
-                        className="text-sm hover:text-white transition-colors cursor-pointer"
-                        style={{ color: 'rgba(255,255,255,0.6)' }}
-                      >
-                        {link.label}
-                      </span>
-                    </PrefetchLink>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* Social Icons Row */}
-          <div className="flex items-center gap-4 sm:gap-3 mt-6 sm:mt-4">
-            <a 
-              href="https://instagram.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="w-8 h-8 sm:w-6 sm:h-6 flex items-center justify-center transition-colors hover:opacity-80"
-              data-testid="social-instagram"
-            >
-              <svg width="18" height="18" className="sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="rgba(255,255,255,0.5)">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-              </svg>
-            </a>
-            <a 
-              href="https://linkedin.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="w-8 h-8 sm:w-6 sm:h-6 flex items-center justify-center transition-colors hover:opacity-80"
-              data-testid="social-linkedin"
-            >
-              <svg width="18" height="18" className="sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="rgba(255,255,255,0.5)">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-              </svg>
-            </a>
-          </div>
+          )}
         </div>
 
-        {/* Bottom Bar */}
-        <div 
-          className="border-t"
-          style={{ borderColor: 'rgba(255,255,255,0.08)' }}
+        {/* Bottom row */}
+        <div
+          className="mt-14 md:mt-20 pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-[13px]"
+          style={{ color: TEXT_MUTED, fontFamily: FONT_BODY, borderTop: `1px solid ${BORDER}` }}
         >
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-10 py-3 sm:py-4">
-            <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-1.5 sm:gap-x-6 sm:gap-y-2 text-xs" style={{ color: 'rgba(255,255,255,0.4)' }}>
-              <span>© 2024 Gray. All rights reserved.</span>
-              <span className="hidden sm:inline">Indiqube Echo, Coimbatore, Tamil Nadu</span>
-              <span className="sm:hidden text-[11px]">Indiqube Echo, Coimbatore, TN</span>
-              <div className="flex gap-4 sm:gap-6 mt-1 sm:mt-0">
-                <PrefetchLink href="#">
-                  <span className="hover:text-white transition-colors cursor-pointer">Privacy Policy</span>
-                </PrefetchLink>
-                <PrefetchLink href="#">
-                  <span className="hover:text-white transition-colors cursor-pointer">Terms of Service</span>
-                </PrefetchLink>
-              </div>
-            </div>
+          <span>© {new Date().getFullYear()} Gray Solutions. All rights reserved.</span>
+          <div className="flex items-center gap-4 md:gap-6 flex-wrap">
+            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+            <span style={{ color: "rgba(255,255,255,0.15)" }}>•</span>
+            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            <span style={{ color: "rgba(255,255,255,0.15)" }}>•</span>
+            <a href="#" className="hover:text-white transition-colors">Cookies Policy</a>
           </div>
+          <span style={{ color: TEXT_MUTED, fontStyle: "italic" }}>Made with clarity</span>
         </div>
-      </section>
+      </div>
+
+      <style>{`
+        .footer-col-link:hover { color: ${TEXT_PRIMARY}; }
+        .footer-social:hover {
+          color: ${TEXT_PRIMARY};
+          border-color: rgba(59,130,246,0.45);
+          background-color: rgba(59,130,246,0.05);
+        }
+      `}</style>
     </footer>
   );
 }
