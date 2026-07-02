@@ -110,6 +110,7 @@ export interface World {
   runnerX: number; // runner's fixed screen x (full-bleed shifts it right of the copy)
   thrustHeld: boolean; // button currently held (hold = climb)
   thrustBoost: number; // seconds of thrust remaining from a discrete tap
+  thrustTime: number; // cumulative thrust seconds — gates the HOLD TO FLY coach
   speedFactor: number; // eased toward ring-approach target
   runner: RunnerEnt;
   rings: RingEnt[];
@@ -175,6 +176,7 @@ export function buildWorld(mobile: boolean, debrisLabels: boolean, runnerX = RUN
     runnerX,
     thrustHeld: false,
     thrustBoost: 0,
+    thrustTime: 0,
     speedFactor: 1,
     runner: { y: GROUND_Y, vy: 0, grounded: true, stumbleT: 0, animT: 0 },
     rings: RING_LAYOUT.map((r, i) => ({

@@ -88,7 +88,9 @@ export function createStage(
     world.driftX += advance;
 
     if (world.thrustBoost > 0) world.thrustBoost -= dt;
-    stepFlyer(world.runner, dt, world.thrustHeld || world.thrustBoost > 0);
+    const thrust = world.thrustHeld || world.thrustBoost > 0;
+    if (thrust) world.thrustTime += dt;
+    stepFlyer(world.runner, dt, thrust);
 
     // Debris: miss = stumble + screen nudge, never death.
     for (const d of world.debris) {

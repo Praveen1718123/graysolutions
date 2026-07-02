@@ -2,13 +2,14 @@
 // and in-canvas text at a fixed 480×240 logical resolution. All colors come
 // from the active theme; all sprite pixels come from the atlas.
 
-import { COPY, PARKED_RINGS, PARKED_RINGS_FULL } from "../content";
+import { COPY, PARKED_RINGS, PARKED_RINGS_FULL, RING_SERVICES } from "../content";
 import type { ArcadeTheme } from "../theme";
 import {
   GROUND_Y,
   LOGICAL_H,
   LOGICAL_W,
   RUNNER_H,
+  RUNNER_W,
   SPARKLE_COUNT,
   type World,
 } from "./entities";
@@ -161,13 +162,17 @@ export function createRenderer(
     }
 
     // Rings — cleared rings dim; missed rings drift behind at full glow so
-    // they stay "hoverable later" in the completed scene.
+    // they stay "hoverable later" in the completed scene. Every ring wears
+    // its service tag in-world, so the four names read even on a miss.
     for (const ring of world.rings) {
       const sx = ring.x - world.scrollX;
       if (sx < -60 || sx > viewW + 60) continue;
       const flicker = 0.78 + 0.22 * Math.sin(world.t * 5 + ring.index * 1.7);
       const alpha = ring.cleared ? 0.35 : flicker;
       atlas.drawRing(ctx, ring.variant, sx, ring.cy, alpha);
+      ctx.globalAlpha = ring.cleared ? 0.55 : 0.95;
+      drawTextCentered(ctx, RING_SERVICES[ring.index].tag, sx, ring.cy - 56, 1, theme.canvasText.bright);
+      ctx.globalAlpha = 1;
     }
 
     // Pellets — pulsing gold dots; the arcs trace the ideal jump curve.
@@ -206,6 +211,15 @@ export function createRenderer(
       ctx.fillRect(world.runnerX + 4, feetY - 4, 3, 2);
     }
     if (world.state === "attract") blinkOverlay(world, world.runnerX, feetY);
+
+    // Coach nudge: playing but still earthbound with (almost) no thrust yet —
+    // blink the one instruction that matters right above the astronaut.
+    if (world.state === "playing" && world.thrustTime < 0.5 && world.t > 1) {
+      const on = world.t % 0.83 < 0.55;
+      if (on) {
+        drawTextCentered(ctx, COPY.coach, world.runnerX + RUNNER_W / 2, feetY - RUNNER_H - 22, 2, theme.canvasText.bright);
+      }
+    }
   }
 
   function drawCompleteScene(world: World): void {
@@ -215,6 +229,8 @@ export function createRenderer(
     parkedRings.forEach((p, i) => {
       const flicker = 0.8 + 0.2 * Math.sin(world.t * 2.2 + i * 1.3);
       atlas.drawRing(ctx, (i % 2) as 0 | 1, p.x * viewW, p.y * LOGICAL_H, flicker);
+      // Label above the hoop, same as in-run — below collides with the panel.
+      drawTextCentered(ctx, RING_SERVICES[i].tag, p.x * viewW, p.y * LOGICAL_H - 56, 1, theme.canvasText.bright);
     });
     // Runner idles facing the scene (right of the copy in full-bleed).
     const idleX = fullBleed ? Math.round(viewW * 0.44) : 34;
