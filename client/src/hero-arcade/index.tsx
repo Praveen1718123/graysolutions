@@ -578,11 +578,11 @@ const ARCADE_CSS = `
 .ah-tip-live { position: absolute; inset: 0; z-index: 20; pointer-events: none; }
 .ah-poster {
   position: absolute; inset: 0; width: 100%; height: 100%;
-  transition: opacity 240ms ease;
+  transition: opacity 240ms ease, visibility 0s 240ms;
 }
 /* The canvas replaces the poster (matters in full-bleed, where the canvas
    is transparent and would otherwise show both scenes at once). */
-.ah-visual--live .ah-poster { opacity: 0; }
+.ah-visual--live .ah-poster { opacity: 0; visibility: hidden; }
 .ah-poster-star { fill: var(--ah-poster-star); opacity: 0.8; }
 .ah-poster-ring { fill: none; stroke: var(--ah-poster-ring); stroke-width: 2.5; }
 .ah-poster-ring-halo { fill: none; stroke: var(--ah-accent-soft); stroke-width: 7; }
@@ -641,7 +641,9 @@ const ARCADE_CSS = `
   position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 10px; letter-spacing: 0.14em;
-  color: var(--ah-text-dim); pointer-events: none; white-space: nowrap;
+  color: var(--ah-hud-text); pointer-events: none; white-space: nowrap;
+  background: var(--ah-hud-bg);
+  border-radius: 6px; padding: 3px 8px;
 }
 
 .ah-chip {
@@ -754,7 +756,14 @@ const ARCADE_CSS = `
 .ah-full-ui .ah-hotspot { pointer-events: auto; }
 .ah-full > .ah-skip { z-index: 30; }
 .ah-full .ah-playfield { border-radius: 0; }
-.ah-full .ah-canvas, .ah-full .ah-poster { image-rendering: pixelated; }
+/* Uniform pixel scale: the hero region isn't exactly 2:1, so cover-fit the
+   2:1 logical grid instead of stretching it (crops a little empty sky and
+   sub-ground; keeps every pixel square and the bitmap font crisp). */
+.ah-full .ah-canvas, .ah-full .ah-poster {
+  image-rendering: pixelated;
+  object-fit: cover;
+  object-position: center;
+}
 .ah-full .ah-hud {
   left: auto; right: 12px; top: 44px;
   flex-direction: column; align-items: flex-end; gap: 6px;
