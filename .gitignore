@@ -32,3 +32,5 @@ attached_assets/*.mov
 attached_assets/*.gif
 attached_assets/*.heic
 .vercel
+api/
+_convert.js

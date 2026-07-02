@@ -37,7 +37,9 @@ const Contact = lazy(pageImports.contact);
 const Work = lazy(() => import("@/pages/work"));
 const ProductTms = lazy(() => import("@/pages/product-tms"));
 const ProductVoiceAgent = lazy(() => import("@/pages/product-voice-agent"));
-const ProductQuickCommerce = lazy(() => import("@/pages/product-quick-commerce"));
+// Quick Commerce page still carries placeholder copy — route hidden until
+// the copy is final (re-enable here and in site-nav's Products dropdown).
+// const ProductQuickCommerce = lazy(() => import("@/pages/product-quick-commerce"));
 
 // Admin Portal
 const AdminAuth = lazy(() => import("@/pages/admin/auth-page"));
@@ -102,7 +104,7 @@ function Router() {
         <Route path="/work" component={Work} />
         <Route path="/products/transportation-management-system" component={ProductTms} />
         <Route path="/products/voice-agent-ai" component={ProductVoiceAgent} />
-        <Route path="/products/quick-commerce" component={ProductQuickCommerce} />
+        {/* <Route path="/products/quick-commerce" component={ProductQuickCommerce} /> */}
         
         {/* Admin Portal */}
         <Route path="/admin/auth" component={AdminAuth} />

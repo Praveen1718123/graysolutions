@@ -73,12 +73,14 @@ const navItems: NavItem[] = [
         description: "AI receptionist — picks up every call, qualifies leads, books meetings 24/7",
         tag: "Gray Voice Agent",
       },
-      {
-        label: "Hyperlocal Quick Commerce",
-        href: "/products/quick-commerce",
-        description: "10-minute delivery platform for D2C brands — storefront, dark store, dispatch",
-        tag: "Coming soon",
-      },
+      // Quick Commerce hidden until its placeholder copy is finalized —
+      // re-enable together with the route in App.tsx.
+      // {
+      //   label: "Hyperlocal Quick Commerce",
+      //   href: "/products/quick-commerce",
+      //   description: "10-minute delivery platform for D2C brands — storefront, dark store, dispatch",
+      //   tag: "Coming soon",
+      // },
     ],
   },
   { label: "Work",     href: "/work", external: true },
@@ -446,6 +448,42 @@ export default function SiteNav({ theme = "dark" }: { theme?: Theme } = {}) {
                       >
                         {item.label}
                       </Link>
+                    ) : item.dropdown ? (
+                      // Menu-only parent (e.g. Products): its href is a dead
+                      // anchor, so render the label as a heading and its
+                      // children as the actual mobile links.
+                      <div>
+                        <span
+                          className="block font-bold tracking-[-0.02em]"
+                          style={{
+                            fontFamily: FONT_DISPLAY,
+                            color: TEXT_PRIMARY,
+                            fontSize: "clamp(40px, 7vw, 88px)",
+                            lineHeight: 1.0,
+                          }}
+                        >
+                          {item.label}
+                        </span>
+                        <ul className="mt-3 flex flex-col gap-2 pl-1">
+                          {item.dropdown.map((child) => (
+                            <li key={child.href}>
+                              <Link
+                                href={child.href}
+                                onClick={() => setMenuOpen(false)}
+                                className="block cursor-pointer"
+                                style={{
+                                  fontFamily: FONT_BODY,
+                                  color: "rgba(255,255,255,0.72)",
+                                  fontSize: "clamp(16px, 2.4vw, 22px)",
+                                  lineHeight: 1.4,
+                                }}
+                              >
+                                {child.label} ↗
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     ) : (
                       <a
                         href={item.href}

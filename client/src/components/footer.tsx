@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { Link } from "wouter";
 import {
   Linkedin,
-  Twitter,
   Instagram,
-  Dribbble,
   MapPin,
   ArrowUpRight,
   ArrowRight,
@@ -44,17 +42,17 @@ const workLinks: ColumnLink[] = [
 
 const companyLinks: ColumnLink[] = [
   { label: "About Us",     href: "/about" },
-  { label: "Our Process",  href: "/about#process" },
+  { label: "Our Process",  href: "/about" },
   { label: "Case Studies", href: "/work" },
-  { label: "Careers",      href: "#" },
+  // Careers link removed until a careers page exists — no dead "#" links live.
   { label: "Contact Us",   href: "/contact" },
 ];
 
+// Only networks with real profiles ship; update hrefs to the actual profile
+// URLs when confirmed (bare homepages match what production showed before).
 const socialLinks = [
   { label: "LinkedIn",  href: "https://linkedin.com",  Icon: Linkedin  },
-  { label: "Twitter",   href: "https://twitter.com",   Icon: Twitter   },
   { label: "Instagram", href: "https://instagram.com", Icon: Instagram },
-  { label: "Dribbble",  href: "https://dribbble.com",  Icon: Dribbble  },
 ];
 
 interface FooterProps {
@@ -317,13 +315,8 @@ export default function Footer({ hideNewsletter = false }: FooterProps) {
           style={{ color: TEXT_MUTED, fontFamily: FONT_BODY, borderTop: `1px solid ${BORDER}` }}
         >
           <span>© {new Date().getFullYear()} Gray Solutions. All rights reserved.</span>
-          <div className="flex items-center gap-4 md:gap-6 flex-wrap">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <span style={{ color: "rgba(255,255,255,0.15)" }}>•</span>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-            <span style={{ color: "rgba(255,255,255,0.15)" }}>•</span>
-            <a href="#" className="hover:text-white transition-colors">Cookies Policy</a>
-          </div>
+          {/* Privacy/Terms/Cookies links return when those pages exist —
+              dead "#" anchors don't ship. */}
           <span style={{ color: TEXT_MUTED, fontStyle: "italic" }}>Made with clarity</span>
         </div>
       </div>

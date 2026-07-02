@@ -23,8 +23,14 @@ async function comparePasswords(supplied: string, stored: string) {
 }
 
 export function setupAuth(app: Express) {
+  // SESSION_SECRET must be set in production (Vercel env). The fallback only
+  // exists so local dev works without a .env — never rely on it live.
+  const sessionSecret = process.env.SESSION_SECRET || "gray-solutions-secret-8877";
+  if (process.env.NODE_ENV === "production" && !process.env.SESSION_SECRET) {
+    console.warn("[auth] SESSION_SECRET is not set — using the insecure dev fallback.");
+  }
   const sessionSettings: session.SessionOptions = {
-    secret: "gray-solutions-secret-8877", // Use a real secret in production
+    secret: sessionSecret,
     resave: false,
     saveUninitialized: false,
     store: storage.sessionStore,
@@ -86,8 +92,10 @@ export function setupAuth(app: Express) {
 
 // Helper to seed the initial admin user if not exists
 export async function seedAdminUser() {
+  // Override via ADMIN_INITIAL_PASSWORD in production, and rotate from the
+  // dashboard (/admin → change password) right after the first deploy.
   const adminUsername = "Gray Solutions";
-  const adminPassword = "Gray@Solutions";
+  const adminPassword = process.env.ADMIN_INITIAL_PASSWORD || "Gray@Solutions";
   
   const existing = await storage.getUserByUsername(adminUsername);
   if (!existing) {
