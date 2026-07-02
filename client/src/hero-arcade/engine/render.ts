@@ -127,6 +127,31 @@ export function createRenderer(
     ctx.drawImage(groundStrip, 0, GROUND_Y);
   }
 
+  // Ambient UFO flyby — deterministic from the state clock: appears a few
+  // seconds in, drifts right-to-left along the far background every ~12s.
+  function drawUfo(world: World): void {
+    const DELAY = 4;
+    const PERIOD = 12;
+    const FLIGHT = 7;
+    if (world.t < DELAY) return;
+    const phase = (world.t - DELAY) % PERIOD;
+    if (phase > FLIGHT) return;
+    const p = phase / FLIGHT;
+    const x = viewW + 24 - (viewW + 60) * p;
+    const y = 30 + 12 * Math.sin(phase * 1.1);
+    const lightOn = Math.floor(world.t * 1.5) % 2 === 0;
+    atlas.drawUfo(ctx, x, y, lightOn);
+  }
+
+  // Idle blink — the visor dims for a beat every few seconds. Character for
+  // two rectangles' worth of work.
+  function blinkOverlay(world: World, x: number, feetY: number): void {
+    const phase = world.t % 3.4;
+    if (phase < 3.2 || !world.runner.grounded) return;
+    ctx.fillStyle = theme.runner.suit;
+    ctx.fillRect(x + 10, feetY - RUNNER_H + 4, 6, 2);
+  }
+
   function drawRunScene(world: World): void {
     // Gate (behind rings once passed, so draw first).
     const gateScreenX = world.gate.x - world.scrollX;
@@ -145,6 +170,20 @@ export function createRenderer(
       atlas.drawRing(ctx, ring.variant, sx, ring.cy, alpha);
     }
 
+    // Pellets — pulsing gold dots; the arcs trace the ideal jump curve.
+    ctx.fillStyle = theme.ring.core;
+    for (const p of world.pellets) {
+      if (p.taken) continue;
+      const sx = p.x - world.scrollX;
+      if (sx < -8 || sx > viewW + 8) continue;
+      const pulse = 0.55 + 0.45 * (0.5 + 0.5 * Math.sin(world.t * 3 + p.x * 0.08));
+      ctx.globalAlpha = 0.22 * pulse;
+      ctx.fillRect(Math.round(sx) - 2, Math.round(p.y) - 2, 6, 6);
+      ctx.globalAlpha = pulse;
+      ctx.fillRect(Math.round(sx), Math.round(p.y), 2, 2);
+    }
+    ctx.globalAlpha = 1;
+
     // Debris.
     for (const d of world.debris) {
       const sx = d.x - world.scrollX;
@@ -157,6 +196,7 @@ export function createRenderer(
 
     // Runner.
     atlas.drawRunner(ctx, pickRunnerFrame(world), world.runnerX, Math.round(world.runner.y) - RUNNER_H);
+    if (world.state === "attract") blinkOverlay(world, world.runnerX, Math.round(world.runner.y));
   }
 
   function drawCompleteScene(world: World): void {
@@ -170,6 +210,7 @@ export function createRenderer(
     // Runner idles facing the scene (right of the copy in full-bleed).
     const idleX = fullBleed ? Math.round(viewW * 0.44) : 34;
     atlas.drawRunner(ctx, pickRunnerFrame(world), idleX, GROUND_Y - RUNNER_H);
+    blinkOverlay(world, idleX, GROUND_Y);
   }
 
   return {
@@ -204,6 +245,7 @@ export function createRenderer(
         ctx.globalAlpha = 1;
       }
 
+      drawUfo(world);
       drawGroundLine();
 
       if (world.state === "complete") {

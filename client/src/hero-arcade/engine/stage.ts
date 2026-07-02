@@ -10,6 +10,7 @@ import {
   GROUND_Y,
   LOGICAL_H,
   PARTICLE_CAP,
+  PELLET_SCORE,
   RING_APPROACH_DIST,
   RING_APPROACH_FACTOR,
   RUNNER_H,
@@ -96,6 +97,26 @@ export function createStage(
         world.shakeT = 0.15;
         spawnBurst(world, world.runnerX + RUNNER_W / 2, GROUND_Y - 4, 10, 60, rand);
         emit({ type: "stumble" });
+      }
+    }
+
+    // Pellets: collected on touch (+10) — the arcs through rings trace the
+    // ideal jump, so following them is both reward and tutorial.
+    const runnerCy = runnerCenterY(world.runner);
+    for (const p of world.pellets) {
+      if (p.taken) continue;
+      if (p.x < rwx || p.x > rwx + RUNNER_W) continue;
+      if (Math.abs(runnerCy - p.y) > 16) continue;
+      p.taken = true;
+      addScore(PELLET_SCORE);
+      if (world.popups.length < 5) {
+        world.popups.push({
+          x: world.runnerX + RUNNER_W + 4,
+          y: p.y - 10,
+          text: `+${PELLET_SCORE}`,
+          t: 0,
+          ttl: 0.5,
+        });
       }
     }
 

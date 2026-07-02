@@ -199,7 +199,27 @@ function paintRock(theme: ArcadeTheme, variant: number): HTMLCanvasElement {
   return c;
 }
 
-// ── Launch gate fallback ────────────────────────────────────────────────────
+// ── UFO fallback (ambient flyby) ────────────────────────────────────────────
+export const UFO_W = 20;
+export const UFO_H = 10;
+
+function paintUfo(theme: ArcadeTheme): HTMLCanvasElement {
+  const [c, ctx] = makeCanvas(UFO_W, UFO_H);
+  // Dome.
+  ctx.fillStyle = theme.runner.visor;
+  ctx.fillRect(8, 0, 4, 3);
+  ctx.fillStyle = theme.runner.outline;
+  ctx.fillRect(7, 2, 1, 1);
+  ctx.fillRect(12, 2, 1, 1);
+  // Saucer body.
+  ctx.fillStyle = theme.runner.shade;
+  ctx.fillRect(2, 3, 16, 2);
+  ctx.fillStyle = theme.runner.suit;
+  ctx.fillRect(0, 5, 20, 2);
+  ctx.fillStyle = theme.runner.shade;
+  ctx.fillRect(2, 7, 16, 1);
+  return c;
+}
 export const GATE_W = 84;
 export const GATE_H = 116;
 
@@ -284,6 +304,7 @@ export type SpriteKey =
   | "bg_mid"
   | "bg_near"
   | "gate"
+  | "ufo"
   | "rock_1"
   | "rock_2"
   | "rock_3"
@@ -297,6 +318,7 @@ const ALL_KEYS: readonly SpriteKey[] = [
   "bg_mid",
   "bg_near",
   "gate",
+  "ufo",
   "rock_1",
   "rock_2",
   "rock_3",
@@ -318,6 +340,7 @@ export interface SpriteAtlas {
   drawRing(ctx: CanvasRenderingContext2D, variant: 0 | 1, cx: number, cy: number, alpha: number): void;
   drawRock(ctx: CanvasRenderingContext2D, variant: number, x: number, groundY: number): void;
   drawGate(ctx: CanvasRenderingContext2D, x: number, groundY: number, alpha: number): void;
+  drawUfo(ctx: CanvasRenderingContext2D, x: number, y: number, lightOn: boolean): void;
   drawPlate(
     ctx: CanvasRenderingContext2D,
     depth: 0 | 1 | 2,
@@ -337,6 +360,7 @@ export function createAtlas(theme: ArcadeTheme): SpriteAtlas {
   const rings = [paintRing(theme, 0), paintRing(theme, 1)];
   const rocks = [0, 1, 2, 3].map((v) => paintRock(theme, v));
   const gate = paintGate(theme);
+  const ufo = paintUfo(theme);
   const plates = [paintPlate(theme, 0), paintPlate(theme, 1), paintPlate(theme, 2)];
 
   const png: Partial<Record<SpriteKey, HTMLImageElement>> = {};
@@ -394,6 +418,15 @@ export function createAtlas(theme: ArcadeTheme): SpriteAtlas {
       ctx.globalAlpha = alpha;
       ctx.drawImage(src, Math.round(x), groundY - GATE_H + 6, GATE_W, GATE_H);
       ctx.globalAlpha = 1;
+    },
+    drawUfo(ctx, x, y, lightOn) {
+      const src: CanvasImageSource = png.ufo ?? ufo;
+      ctx.drawImage(src, Math.round(x), Math.round(y), UFO_W, UFO_H);
+      // Belly lights — alternate at ~1.5Hz (under the 3Hz flash ceiling).
+      ctx.fillStyle = lightOn ? theme.ring.core : theme.ring.mid;
+      for (let i = 0; i < 3; i++) {
+        ctx.fillRect(Math.round(x) + 4 + i * 5 + (lightOn ? 0 : 1), Math.round(y) + 8, 2, 1);
+      }
     },
     drawPlate(ctx, depth, offsetX, viewW) {
       const key = (["bg_far", "bg_mid", "bg_near"] as const)[depth];

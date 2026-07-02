@@ -31,6 +31,7 @@ const TARGETS = {
   bg_mid: { width: 960, height: 240 },
   bg_near: { width: 960, height: 240 },
   gate: { width: 84, height: 116 },
+  ufo: { width: 20, height: 10 },
   rock_1: { width: 28, height: 28 },
   rock_2: { width: 28, height: 28 },
   rock_3: { width: 28, height: 28 },

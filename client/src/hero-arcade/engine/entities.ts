@@ -74,6 +74,15 @@ export interface Particle {
   color: 0 | 1 | 2; // index into theme.particles
 }
 
+/** Collectible dot (+10). Arcs through rings double as jump-timing guides. */
+export interface Pellet {
+  x: number;
+  y: number;
+  taken: boolean;
+}
+
+export const PELLET_SCORE = 10;
+
 export interface Popup {
   x: number; // screen-x
   y: number;
@@ -105,6 +114,7 @@ export interface World {
   rings: RingEnt[];
   debris: DebrisEnt[];
   gate: GateEnt;
+  pellets: Pellet[];
   particles: Particle[];
   popups: Popup[];
   score: number;
@@ -115,8 +125,40 @@ export interface World {
   mobile: boolean;
 }
 
+/**
+ * Pellet layout: a guide arc through each ring tracing the ideal jump
+ * parabola (touching down ~14px above ground at ±96), plus a ground trail
+ * between obstacles. Deterministic — pure function of the level layout.
+ */
+function buildPellets(
+  rings: readonly { x: number; cy: number }[],
+  debris: readonly { x: number; w: number }[],
+): Pellet[] {
+  const pellets: Pellet[] = [];
+  for (const r of rings) {
+    const k = (96 * 96) / (GROUND_Y - 14 - r.cy);
+    for (let dx = -96; dx <= 96; dx += 24) {
+      pellets.push({ x: r.x + dx, y: r.cy + (dx * dx) / k, taken: false });
+    }
+  }
+  for (let x = 260; x < GATE_X - 80; x += 28) {
+    if (rings.some((r) => Math.abs(x - r.x) < 110)) continue;
+    if (debris.some((d) => Math.abs(x - (d.x + d.w / 2)) < 44)) continue;
+    pellets.push({ x, y: GROUND_Y - 10, taken: false });
+  }
+  return pellets;
+}
+
 export function buildWorld(mobile: boolean, debrisLabels: boolean, runnerX = RUNNER_X): World {
   const debrisXs = mobile ? DEBRIS_X_MOBILE : DEBRIS_X_DESKTOP;
+  const debris = debrisXs.map((x, i) => ({
+    x,
+    w: 18 + ((i * 7) % 8),
+    h: 11 + ((i * 5) % 6),
+    variant: (i % 4) as 0 | 1 | 2 | 3,
+    hit: false,
+    label: debrisLabels ? DEBRIS_LABEL_TEXT[i % DEBRIS_LABEL_TEXT.length] : null,
+  }));
   return {
     state: "attract",
     skipped: false,
@@ -134,15 +176,9 @@ export function buildWorld(mobile: boolean, debrisLabels: boolean, runnerX = RUN
       resolved: false,
       cleared: false,
     })),
-    debris: debrisXs.map((x, i) => ({
-      x,
-      w: 18 + ((i * 7) % 8),
-      h: 11 + ((i * 5) % 6),
-      variant: (i % 4) as 0 | 1 | 2 | 3,
-      hit: false,
-      label: debrisLabels ? DEBRIS_LABEL_TEXT[i % DEBRIS_LABEL_TEXT.length] : null,
-    })),
+    debris,
     gate: { x: GATE_X, passed: false },
+    pellets: buildPellets(RING_LAYOUT, debris),
     particles: [],
     popups: [],
     score: 0,
