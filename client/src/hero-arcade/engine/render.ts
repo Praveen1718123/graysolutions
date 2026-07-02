@@ -170,8 +170,8 @@ export function createRenderer(
       const flicker = 0.78 + 0.22 * Math.sin(world.t * 5 + ring.index * 1.7);
       const alpha = ring.cleared ? 0.35 : flicker;
       atlas.drawRing(ctx, ring.variant, sx, ring.cy, alpha);
-      ctx.globalAlpha = ring.cleared ? 0.55 : 0.95;
-      drawTextCentered(ctx, RING_SERVICES[ring.index].tag, sx, ring.cy - 56, 1, theme.canvasText.bright);
+      ctx.globalAlpha = ring.cleared ? 0.5 : 0.92;
+      drawTextCentered(ctx, RING_SERVICES[ring.index].tag, sx, ring.cy - 58, 2, theme.canvasText.bright);
       ctx.globalAlpha = 1;
     }
 
@@ -227,10 +227,16 @@ export function createRenderer(
     // canvas geometry exactly, so both sides use the same view fractions
     // (content.ts PARKED_RINGS* is the shared source of truth).
     parkedRings.forEach((p, i) => {
+      // Rings park with a small stagger — world.t resets on entering
+      // complete, so each ring fades in ~90ms after the previous one.
+      const appear = Math.min(1, Math.max(0, (world.t - 0.15 - i * 0.09) / 0.3));
+      if (appear <= 0) return;
       const flicker = 0.8 + 0.2 * Math.sin(world.t * 2.2 + i * 1.3);
-      atlas.drawRing(ctx, (i % 2) as 0 | 1, p.x * viewW, p.y * LOGICAL_H, flicker);
+      atlas.drawRing(ctx, (i % 2) as 0 | 1, p.x * viewW, p.y * LOGICAL_H, flicker * appear);
       // Label above the hoop, same as in-run — below collides with the panel.
-      drawTextCentered(ctx, RING_SERVICES[i].tag, p.x * viewW, p.y * LOGICAL_H - 56, 1, theme.canvasText.bright);
+      ctx.globalAlpha = appear * 0.92;
+      drawTextCentered(ctx, RING_SERVICES[i].tag, p.x * viewW, p.y * LOGICAL_H - 58, 2, theme.canvasText.bright);
+      ctx.globalAlpha = 1;
     });
     // Runner idles facing the scene (right of the copy in full-bleed).
     const idleX = fullBleed ? Math.round(viewW * 0.44) : 34;

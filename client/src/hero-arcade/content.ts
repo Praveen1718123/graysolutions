@@ -85,10 +85,10 @@ export const DEBRIS_LABEL_TEXT: readonly string[] = [
  * layers must share this table.
  */
 export const PARKED_RINGS: readonly { x: number; y: number }[] = [
-  { x: 0.22, y: 0.50 },
-  { x: 0.40, y: 0.42 },
-  { x: 0.58, y: 0.34 },
-  { x: 0.76, y: 0.26 },
+  { x: 0.22, y: 0.52 },
+  { x: 0.40, y: 0.45 },
+  { x: 0.58, y: 0.38 },
+  { x: 0.76, y: 0.31 },
 ] as const;
 
 /**
@@ -98,8 +98,8 @@ export const PARKED_RINGS: readonly { x: number; y: number }[] = [
  * completion panel (right 4%, bottom ~14%).
  */
 export const PARKED_RINGS_FULL: readonly { x: number; y: number }[] = [
-  { x: 0.52, y: 0.56 },
-  { x: 0.63, y: 0.46 },
-  { x: 0.74, y: 0.36 },
-  { x: 0.85, y: 0.26 },
+  { x: 0.52, y: 0.57 },
+  { x: 0.63, y: 0.48 },
+  { x: 0.74, y: 0.40 },
+  { x: 0.85, y: 0.32 },
 ] as const;

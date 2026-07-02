@@ -711,7 +711,9 @@ const ARCADE_CSS = `
   position: absolute; width: 44px; height: 64px;
   transform: translate(-50%, -50%);
   border-radius: 50%; display: block;
+  transition: box-shadow 220ms ease;
 }
+.ah-hotspot:hover { box-shadow: 0 0 28px 6px var(--ah-accent-soft); }
 .ah-hotspot:focus-visible { outline: 2px solid var(--ah-focus); outline-offset: 2px; border-radius: 50%; }
 
 .ah-static-services {
@@ -738,6 +740,13 @@ const ARCADE_CSS = `
   animation: ah-fade-in 300ms ease both;
 }
 @keyframes ah-fade-in { from { opacity: 0; } to { opacity: 1; } }
+/* Full-bleed panel rises with a soft settle (card mode keeps the plain fade —
+   its centering transform can't be animated safely). */
+@keyframes ah-panel-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.ah-full .ah-cta { animation: ah-panel-in 420ms cubic-bezier(0.16, 1, 0.3, 1) both; }
 /* Static modes (reduced motion / skipped before load): panel sits higher so
    the service chip list stays clear at the bottom. */
 .ah-stage[data-static="true"] .ah-cta { bottom: auto; top: 18%; }
@@ -841,7 +850,7 @@ const ARCADE_CSS = `
 /* Belt-and-suspenders: the shell never loads the engine under reduced
    motion, and this kills the remaining CSS motion too. */
 @media (prefers-reduced-motion: reduce) {
-  .ah-cta { animation: none; }
-  .ah-canvas { transition: none; }
+  .ah-cta, .ah-full .ah-cta { animation: none; }
+  .ah-canvas, .ah-hotspot, .ah-poster { transition: none; }
 }
 `;
