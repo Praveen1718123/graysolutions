@@ -360,10 +360,12 @@ export function createAtlas(theme: ArcadeTheme): SpriteAtlas {
       const sheet = png.runner;
       if (sheet && sheet.height > 0) {
         // Horizontal sheet of square frames; clamp to available frames.
+        // Frames render at their natural aspect (height-fit, centered on the
+        // 24px logical body) so square art is never squeezed.
         const fs = sheet.height;
         const count = Math.max(1, Math.floor(sheet.width / fs));
         const i = Math.min(frame, count - 1);
-        ctx.drawImage(sheet, i * fs, 0, fs, fs, dx, dy, RUNNER_W, RUNNER_H);
+        ctx.drawImage(sheet, i * fs, 0, fs, fs, dx - (RUNNER_H - RUNNER_W) / 2, dy, RUNNER_H, RUNNER_H);
       } else {
         ctx.drawImage(runnerFrames[frame], dx, dy);
       }

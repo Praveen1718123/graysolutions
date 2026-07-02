@@ -97,7 +97,8 @@ export interface World {
   state: StageState;
   skipped: boolean;
   t: number; // elapsed seconds in current state machine life
-  scrollX: number;
+  scrollX: number; // level scroll — advances only while running the stage
+  driftX: number; // parallax-plate scroll — always drifts, never snaps back
   speedFactor: number; // eased toward ring-approach target
   runner: RunnerEnt;
   rings: RingEnt[];
@@ -120,6 +121,7 @@ export function buildWorld(mobile: boolean, debrisLabels: boolean): World {
     skipped: false,
     t: 0,
     scrollX: 0,
+    driftX: 0,
     speedFactor: 1,
     runner: { y: GROUND_Y, vy: 0, grounded: true, bufferT: 0, stumbleT: 0, animT: 0 },
     rings: RING_LAYOUT.map((r, i) => ({

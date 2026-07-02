@@ -35,6 +35,8 @@ export interface ArcadeTheme {
   particles: [string, string, string];
   /** Gate white-out flash color */
   flash: string;
+  /** Edge-darkening vignette color (rgba) */
+  vignette: string;
   /** In-canvas bitmap-font text (attract line, score popups) */
   canvasText: { bright: string; dim: string };
   /**
@@ -72,6 +74,7 @@ const cosmic: ArcadeTheme = {
   },
   particles: ["#c4b5fd", "#67e8f9", "#e6ebff"],
   flash: "#eef0ff",
+  vignette: "rgba(0,0,0,0.42)",
   canvasText: { bright: "#e6ebff", dim: "#6a7199" },
   dom: {
     "--ah-stage-bg": "linear-gradient(180deg, #0a0a14 0%, #05070D 100%)",
@@ -90,8 +93,10 @@ const cosmic: ArcadeTheme = {
     "--ah-chip-text-dim": "#a9b2cc",
     "--ah-panel-bg": "rgba(13,18,33,0.78)",
     "--ah-panel-border": "rgba(255,255,255,0.14)",
-    "--ah-cta-grad-a": "#3B82F6",
-    "--ah-cta-grad-b": "#8B5CF6",
+    // Darker ends of the site's blue→violet ramp: white text ≥4.5:1 across
+    // the whole gradient (plain #3B82F6/#8B5CF6 fail at ~3.3–3.7:1).
+    "--ah-cta-grad-a": "#2563EB",
+    "--ah-cta-grad-b": "#7C3AED",
     "--ah-cta-text": "#ffffff",
     "--ah-ghost-border": "rgba(255,255,255,0.22)",
     "--ah-ghost-text": "#c9d1e8",
@@ -99,6 +104,8 @@ const cosmic: ArcadeTheme = {
     "--ah-lives": "#67e8f9",
     "--ah-poster-ring": "#8B5CF6",
     "--ah-poster-star": "#8b93c4",
+    "--ah-stage-shadow":
+      "inset 0 1px 0 rgba(255,255,255,0.07), 0 18px 50px -20px rgba(0,0,0,0.6)",
   },
 };
 
@@ -132,6 +139,7 @@ const ember: ArcadeTheme = {
   },
   particles: ["#e05c2a", "#f0a33f", "#f6d558"],
   flash: "#f8ecd2",
+  vignette: "rgba(12,10,8,0.45)",
   canvasText: { bright: "#efe8d8", dim: "#8d8779" },
   dom: {
     "--ah-stage-bg": "linear-gradient(180deg, #38352f 0%, #23211d 100%)",
@@ -160,6 +168,8 @@ const ember: ArcadeTheme = {
     "--ah-lives": "#f0a33f",
     "--ah-poster-ring": "#f0a33f",
     "--ah-poster-star": "#8d8779",
+    "--ah-stage-shadow":
+      "inset 0 1px 0 rgba(243,234,216,0.07), 0 18px 50px -20px rgba(0,0,0,0.55)",
   },
 };
 

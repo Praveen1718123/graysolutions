@@ -44,6 +44,9 @@ export const COPY = {
   controlsHint: "space / tap — jump",
   skip: "Skip",
   replay: "Replay",
+  play: "▶ Play",
+  playfieldAria:
+    "Gray Arcade mini-game. Press to start, then space or tap to jump. Decorative — all services and links are available as regular content.",
   completeHeading: "One team, from first idea to shipped work.",
   ctaPrimary: "Start a project",
   ctaSecondary: "See the work",

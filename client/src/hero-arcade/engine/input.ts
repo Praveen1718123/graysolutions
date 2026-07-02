@@ -1,40 +1,29 @@
-// Gray Arcade — input. One interaction: space / tap = jump. Pointer input is
-// scoped to the stage element; the space key is only intercepted when it
-// would not steal from another interactive element, and only when the stage
-// actually consumes it (attract/playing) — otherwise the page scrolls as
-// normal.
+// Gray Arcade — input. The primary control surface is the shell's playfield
+// <button> (native click/Enter/Space semantics, no scroll-swipe misfires).
+// This module adds ONE nicety on top: while a run is actively playing AND the
+// stage is on-screen, a body-focused Space/ArrowUp still jumps, so a mouse
+// user who clicked to start doesn't lose the keyboard mid-run. It never
+// consumes keys in attract/complete, while paused, or when any interactive
+// element has focus — page scrolling stays intact.
 
-export function bindInput(
-  stageEl: HTMLElement,
-  onPress: () => boolean,
-): () => void {
-  const onPointerDown = (e: PointerEvent): void => {
-    if (e.button !== 0 && e.pointerType === "mouse") return;
-    // Let real controls (skip, replay, CTA links, tooltip chips) work.
-    const target = e.target as HTMLElement | null;
-    if (target && target.closest("a, button")) return;
-    onPress();
-  };
+export interface GlobalKeyOptions {
+  /** Consume the key only when this returns true (playing + on-screen). */
+  canConsume: () => boolean;
+  onPress: () => boolean;
+}
 
+export function bindGlobalKeys({ canConsume, onPress }: GlobalKeyOptions): () => void {
   const onKeyDown = (e: KeyboardEvent): void => {
     if (e.repeat) return;
-    if (e.code !== "Space" && e.code !== "ArrowUp" && e.code !== "Enter") return;
+    if (e.code !== "Space" && e.code !== "ArrowUp") return;
     const active = document.activeElement;
-    const stageHasFocus = active === stageEl || stageEl.contains(active);
-    // Space/ArrowUp work globally while the stage is on screen, but never
-    // when typing in a field or when another button/link has focus.
-    if (active && active !== document.body && !stageHasFocus) return;
-    if (active && active !== stageEl && stageHasFocus && (active as HTMLElement).closest("a, button")) {
-      return; // Enter/Space on the Skip button must click Skip, not jump.
-    }
-    if (e.code === "Enter" && !stageHasFocus) return;
+    // Never steal from form fields, buttons, or links — their own semantics
+    // (including the playfield button's native click) take precedence.
+    if (active && active !== document.body && active !== document.documentElement) return;
+    if (!canConsume()) return;
     if (onPress()) e.preventDefault();
   };
 
-  stageEl.addEventListener("pointerdown", onPointerDown);
   window.addEventListener("keydown", onKeyDown);
-  return () => {
-    stageEl.removeEventListener("pointerdown", onPointerDown);
-    window.removeEventListener("keydown", onKeyDown);
-  };
+  return () => window.removeEventListener("keydown", onKeyDown);
 }

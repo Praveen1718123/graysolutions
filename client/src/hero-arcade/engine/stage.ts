@@ -9,6 +9,7 @@ import {
   BASE_SPEED,
   GROUND_Y,
   LOGICAL_H,
+  PARTICLE_CAP,
   RING_APPROACH_DIST,
   RING_APPROACH_FACTOR,
   RUNNER_H,
@@ -79,7 +80,9 @@ export function createStage(
     const target = approaching ? RING_APPROACH_FACTOR : 1;
     world.speedFactor += (target - world.speedFactor) * Math.min(1, 3 * dt);
     const stumbleFactor = world.runner.stumbleT > 0 ? STUMBLE_SPEED_FACTOR : 1;
-    world.scrollX += BASE_SPEED * world.speedFactor * stumbleFactor * dt;
+    const advance = BASE_SPEED * world.speedFactor * stumbleFactor * dt;
+    world.scrollX += advance;
+    world.driftX += advance;
 
     stepRunner(world.runner, dt);
 
@@ -147,20 +150,25 @@ export function createStage(
 
       switch (world.state) {
         case "attract":
-          world.scrollX += ATTRACT_DRIFT * dt;
+          // Only the starfield drifts while idle — the level itself holds
+          // its start positions, so beginning the run never snaps.
+          world.driftX += ATTRACT_DRIFT * dt;
           world.runner.animT += dt;
           break;
         case "playing":
           updatePlaying(dt);
           break;
-        case "gate":
+        case "gate": {
           world.gateT += dt;
-          world.scrollX += BASE_SPEED * 0.6 * dt;
+          const advance = BASE_SPEED * 0.6 * dt;
+          world.scrollX += advance;
+          world.driftX += advance;
           stepRunner(world.runner, dt);
           if (world.gateT >= GATE_HOLD) enterComplete(false);
           break;
+        }
         case "complete":
-          world.scrollX += AMBIENT_DRIFT * dt;
+          world.driftX += AMBIENT_DRIFT * dt;
           world.runner.animT += dt;
           break;
       }
@@ -190,7 +198,6 @@ export function createStage(
         case "attract":
           world.state = "playing";
           world.t = 0;
-          world.scrollX = 0;
           emit({ type: "start" });
           return true;
         case "playing":
@@ -209,8 +216,10 @@ export function createStage(
 
     replay(): void {
       const quality = world.quality;
+      const driftX = world.driftX;
       world = buildWorld(mobile, debrisLabels);
       world.quality = quality;
+      world.driftX = driftX; // starfield keeps drifting seamlessly
       // Replay skips the attract screen — the visitor asked to run again.
       world.state = "playing";
       emit({ type: "start" });
@@ -218,6 +227,9 @@ export function createStage(
 
     setQuality(tier: QualityTier): void {
       world.quality = tier;
+      // Enforce the new cap on already-alive particles, not just new spawns.
+      const cap = PARTICLE_CAP[tier];
+      if (world.particles.length > cap) world.particles.length = cap;
     },
 
     state(): StageState {

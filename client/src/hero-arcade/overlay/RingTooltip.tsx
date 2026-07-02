@@ -5,7 +5,7 @@
 //     links (hover + focus show the chip) so every service stays reachable
 //     by keyboard. Hotspot positions mirror PARKED_RINGS on the canvas.
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { track } from "../analytics";
 import { PARKED_RINGS, RING_SERVICES } from "../content";
@@ -42,8 +42,35 @@ function Chip({ index, style }: { index: number; style?: React.CSSProperties }) 
 export default function RingTooltip({ tip, parked, staticList, mobile }: RingTooltipProps) {
   const [hovered, setHovered] = useState<number | null>(null);
 
+  // Hotspots unmount on replay without firing mouseleave/blur — clear the
+  // hover so a chip can't reappear unprompted on the next completion.
+  useEffect(() => {
+    if (!parked) setHovered(null);
+  }, [parked]);
+
+  // The in-play announcement region stays mounted permanently so screen
+  // readers reliably announce ring clears (a live region that appears
+  // together with its content is often skipped).
+  const liveRegion = (
+    <div role="status" aria-live="polite" className="ah-tip-live">
+      {tip ? (
+        <Chip
+          index={tip.index}
+          style={
+            mobile
+              ? undefined
+              : {
+                  left: `${Math.min(62, Math.max(6, tip.xPct * 100 + 8))}%`,
+                  top: `${Math.max(8, tip.yPct * 100 - 24)}%`,
+                }
+          }
+        />
+      ) : null}
+    </div>
+  );
+
   if (staticList) {
-    // Reduced motion: plain focusable elements, no positioning tricks.
+    // Static modes: plain focusable elements, no positioning tricks.
     return (
       <nav className="ah-static-services" aria-label="Services">
         {RING_SERVICES.map((s) => (
@@ -106,21 +133,7 @@ export default function RingTooltip({ tip, parked, staticList, mobile }: RingToo
     );
   }
 
-  if (tip) {
-    // Transient in-play chip. Mobile: fixed bottom chip; desktop: floats
-    // near where the ring was cleared.
-    const style: React.CSSProperties | undefined = mobile
-      ? undefined
-      : {
-          left: `${Math.min(62, Math.max(6, tip.xPct * 100 + 8))}%`,
-          top: `${Math.max(8, tip.yPct * 100 - 24)}%`,
-        };
-    return (
-      <div role="status" aria-live="polite">
-        <Chip index={tip.index} style={style} />
-      </div>
-    );
-  }
-
-  return null;
+  // Default (attract/playing/gate): just the persistent live region, which
+  // carries the transient chip while a ring clear is being announced.
+  return liveRegion;
 }

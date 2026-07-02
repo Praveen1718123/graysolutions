@@ -47,11 +47,11 @@ export function createRenderer(ctx: CanvasRenderingContext2D, initialTheme: Arca
 
   // Static prerenders rebuilt on theme change.
   let bgGradient = makeBg();
-  const vignette = makeVignette();
+  let vignette = makeVignette();
 
   const sparkles: Sparkle[] = [];
   const srand = mulberry32(0x5eed);
-  for (let i = 0; i < 26; i++) {
+  for (let i = 0; i < SPARKLE_COUNT[0]; i++) {
     sparkles.push({ x: srand() * LOGICAL_W, y: srand() * (LOGICAL_H - 60), phase: srand() * Math.PI * 2 });
   }
 
@@ -76,8 +76,8 @@ export function createRenderer(ctx: CanvasRenderingContext2D, initialTheme: Arca
         LOGICAL_H / 2,
         LOGICAL_W * 0.72,
       );
-      g.addColorStop(0, "rgba(0,0,0,0)");
-      g.addColorStop(1, "rgba(0,0,0,0.42)");
+      g.addColorStop(0, "transparent");
+      g.addColorStop(1, theme.vignette);
       vctx.fillStyle = g;
       vctx.fillRect(0, 0, LOGICAL_W, LOGICAL_H);
     }
@@ -147,20 +147,20 @@ export function createRenderer(ctx: CanvasRenderingContext2D, initialTheme: Arca
       ctx.fillStyle = bgGradient;
       ctx.fillRect(-4, -4, LOGICAL_W + 8, LOGICAL_H + 8);
 
-      // Parallax plates: far → near.
-      atlas.drawPlate(ctx, 0, world.scrollX * 0.15);
-      atlas.drawPlate(ctx, 1, world.scrollX * 0.35);
-      atlas.drawPlate(ctx, 2, world.scrollX * 0.7);
+      // Parallax plates: far → near. Driven by driftX (never snaps back).
+      atlas.drawPlate(ctx, 0, world.driftX * 0.15);
+      atlas.drawPlate(ctx, 1, world.driftX * 0.35);
+      atlas.drawPlate(ctx, 2, world.driftX * 0.7);
 
       // Twinkling foreground sparkles (skipped entirely on the low tier).
-      const sparkleN = SPARKLE_COUNT[world.quality];
+      const sparkleN = Math.min(SPARKLE_COUNT[world.quality], sparkles.length);
       if (sparkleN > 0) {
         ctx.fillStyle = theme.stars[2];
         for (let i = 0; i < sparkleN; i++) {
           const s = sparkles[i];
           const tw = 0.35 + 0.65 * (0.5 + 0.5 * Math.sin(world.t * 1.8 + s.phase));
           ctx.globalAlpha = tw;
-          const x = (((s.x - world.scrollX * 0.5) % LOGICAL_W) + LOGICAL_W) % LOGICAL_W;
+          const x = (((s.x - world.driftX * 0.5) % LOGICAL_W) + LOGICAL_W) % LOGICAL_W;
           ctx.fillRect(x, s.y, 1, 1);
         }
         ctx.globalAlpha = 1;
@@ -217,6 +217,7 @@ export function createRenderer(ctx: CanvasRenderingContext2D, initialTheme: Arca
       atlas.dispose();
       atlas = createAtlas(theme);
       bgGradient = makeBg();
+      vignette = makeVignette();
     },
 
     dispose(): void {

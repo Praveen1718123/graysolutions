@@ -12,6 +12,7 @@ import {
   useState,
 } from "react";
 import { useReducedMotion } from "framer-motion";
+import { Link } from "wouter";
 import { track } from "./analytics";
 import { COPY, RING_SERVICES } from "./content";
 import {
@@ -108,10 +109,16 @@ function ArcadeStage({ themeName }: ArcadeStageProps) {
   const [phase, setPhase] = useState<ShellPhase>("poster");
   const [engineReady, setEngineReady] = useState(false);
   const [staticComplete, setStaticComplete] = useState(false); // skipped pre-engine
+  const [skipped, setSkipped] = useState(false);
   const [score, setScore] = useState(0);
   const [ringsCleared, setRingsCleared] = useState(0);
   const [tip, setTip] = useState<ActiveTip | null>(null);
   const [needsPlayTap, setNeedsPlayTap] = useState(false);
+
+  // loadEngine may resolve after a re-render — always hand it the latest
+  // theme rather than the one captured when the import started.
+  const themeRef = useRef(theme);
+  themeRef.current = theme;
 
   const onEvent = useCallback((e: StageEvent) => {
     switch (e.type) {
@@ -139,6 +146,7 @@ function ArcadeStage({ themeName }: ArcadeStageProps) {
         break;
       case "complete":
         setPhase("complete");
+        setSkipped(e.skipped);
         setTip(null);
         break;
       case "stumble":
@@ -152,18 +160,17 @@ function ArcadeStage({ themeName }: ArcadeStageProps) {
     try {
       const mod = await import("./engine");
       const canvas = canvasRef.current;
-      const inputEl = containerRef.current;
-      if (!canvas || !inputEl || abortedRef.current || engineRef.current) return engineRef.current;
+      if (!canvas || abortedRef.current || engineRef.current) return engineRef.current;
       const engine = mod.createEngine({
         canvas,
-        inputEl,
-        theme,
+        theme: themeRef.current,
         mobile,
         debrisLabels: DEBRIS_LABELS,
         onEvent,
       });
       engineRef.current = engine;
       setEngineReady(true);
+      setNeedsPlayTap(false);
       setPhase("attract");
       engine.start();
       if (pendingReplayRef.current) {
@@ -179,7 +186,7 @@ function ArcadeStage({ themeName }: ArcadeStageProps) {
       // hero still works as a static image.
       return null;
     }
-  }, [theme, mobile, onEvent]);
+  }, [mobile, onEvent]);
 
   // Loading strategy: reduced motion → never; save-data / low-end mobile →
   // explicit ▶ Play; otherwise lazy-load on approach + idle.
@@ -193,7 +200,7 @@ function ArcadeStage({ themeName }: ArcadeStageProps) {
       nav.connection?.saveData === true ||
       (mobile && (nav.hardwareConcurrency ?? 8) <= 3);
     if (lowEnd) {
-      setNeedsPlayTap(true);
+      if (!engineRef.current) setNeedsPlayTap(true);
       return;
     }
     // Dev review params load immediately — screenshot tooling can't wait for
@@ -275,8 +282,21 @@ function ArcadeStage({ themeName }: ArcadeStageProps) {
     engineRef.current?.setTheme(theme);
   }, [theme]);
 
-  // Teardown.
+  // If the OS reduced-motion preference flips ON mid-session, shut the game
+  // down: destroy the engine and fall back to the static poster experience.
   useEffect(() => {
+    if (!reduced || !engineRef.current) return;
+    engineRef.current.destroy();
+    engineRef.current = null;
+    setEngineReady(false);
+    setPhase("poster");
+    setTip(null);
+  }, [reduced]);
+
+  // Teardown. The effect body re-arms the abort flag so HMR/StrictMode
+  // effect re-runs don't leave engine loading permanently blocked.
+  useEffect(() => {
+    abortedRef.current = false;
     return () => {
       abortedRef.current = true;
       window.clearTimeout(tipTimer.current);
@@ -288,11 +308,13 @@ function ArcadeStage({ themeName }: ArcadeStageProps) {
   const handleSkip = () => {
     track("arcade_skip");
     setTip(null);
+    setNeedsPlayTap(false);
     if (engineRef.current) {
       engineRef.current.skip();
     } else {
       abortedRef.current = true; // stop any in-flight autoload
       setStaticComplete(true);
+      setSkipped(true);
       setPhase("complete");
     }
   };
@@ -302,7 +324,9 @@ function ArcadeStage({ themeName }: ArcadeStageProps) {
     replayingRef.current = true;
     setScore(0);
     setRingsCleared(0);
+    setSkipped(false);
     setTip(null);
+    setNeedsPlayTap(false);
     if (engineRef.current) {
       setStaticComplete(false);
       engineRef.current.replay();
@@ -315,6 +339,16 @@ function ArcadeStage({ themeName }: ArcadeStageProps) {
     }
   };
 
+  // Playfield presses: start the run / jump. Also nudges a not-yet-loaded
+  // engine to load for impatient early clicks.
+  const handlePlayfield = () => {
+    if (engineRef.current) {
+      engineRef.current.press();
+    } else if (!reduced && !abortedRef.current) {
+      void loadEngine();
+    }
+  };
+
   const handlePlayTap = () => {
     setNeedsPlayTap(false);
     void loadEngine();
@@ -322,10 +356,11 @@ function ArcadeStage({ themeName }: ArcadeStageProps) {
 
   const complete = phase === "complete";
   const running = phase === "playing" || phase === "gate";
-  const showHint = !reduced && !complete && !needsPlayTap && !staticComplete;
+  const showHint = !reduced && engineReady && !complete && !needsPlayTap && !staticComplete;
   const showSkip = !reduced && !complete;
   const showCta = reduced || complete;
   const showReplay = !reduced && complete;
+  const showPlayfield = !reduced && !complete && !needsPlayTap;
   // Hotspots only make sense over the canvas's parked-rings scene; static
   // states (reduced motion, skipped-before-load) get the plain chip list.
   const parkedHotspots = complete && !reduced && engineReady;
@@ -336,10 +371,6 @@ function ArcadeStage({ themeName }: ArcadeStageProps) {
       ref={containerRef}
       className="ah-stage"
       style={theme.dom as React.CSSProperties}
-      tabIndex={reduced ? -1 : 0}
-      aria-label={
-        reduced ? undefined : "Gray Arcade mini-game. Press space or tap to jump. Skippable."
-      }
       data-testid={`arcade-stage-${theme.name}`}
       data-state={phase}
       data-static={engineReady ? undefined : "true"}
@@ -366,6 +397,19 @@ function ArcadeStage({ themeName }: ArcadeStageProps) {
         />
       </div>
 
+      {/* Playfield — the one control for the one interaction. A real button:
+          native tap/click/Enter/Space, no scroll-swipe misfires, and page
+          scrolling is never hijacked to start the game. */}
+      {showPlayfield && (
+        <button
+          type="button"
+          className="ah-playfield"
+          onClick={handlePlayfield}
+          aria-label={COPY.playfieldAria}
+          data-testid="arcade-playfield"
+        />
+      )}
+
       <Hud score={score} ringsCleared={ringsCleared} />
 
       <RingTooltip
@@ -375,11 +419,11 @@ function ArcadeStage({ themeName }: ArcadeStageProps) {
         mobile={mobile}
       />
 
-      {showCta && <CtaPanel score={score} showScore={!reduced && !staticComplete && score > 0} />}
+      {showCta && <CtaPanel score={score} showScore={!reduced && !skipped && score > 0} />}
 
-      {needsPlayTap && (
+      {needsPlayTap && !complete && (
         <button type="button" className="ah-play" onClick={handlePlayTap} data-testid="arcade-play">
-          ▶ Play
+          {COPY.play}
         </button>
       )}
 
@@ -401,15 +445,16 @@ function ArcadeStage({ themeName }: ArcadeStageProps) {
       )}
 
       {/* Services exist twice: rings in the game AND an accessible DOM list.
-          (In static modes the visible chip list plays this role instead.) */}
-      {!staticServiceList && (
+          (When the chip list or ring hotspots are up, THEY are the list —
+          don't expose a duplicate set of links.) */}
+      {!staticServiceList && !parkedHotspots && (
         <nav className="sr-only" aria-label="Services">
           <ul>
             {RING_SERVICES.map((s) => (
               <li key={s.id}>
-                <a href={s.href}>
+                <Link href={s.href}>
                   {s.name} — {s.line}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -464,13 +509,19 @@ const ARCADE_CSS = `
   border-radius: 22px; overflow: hidden;
   background: var(--ah-stage-bg);
   border: 1px solid var(--ah-stage-border);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 18px 50px -20px rgba(0,0,0,0.6);
+  box-shadow: var(--ah-stage-shadow);
   user-select: none; -webkit-user-select: none;
   touch-action: manipulation;
-  outline: none;
 }
-.ah-stage:focus-visible { box-shadow: 0 0 0 2px var(--ah-focus), 0 18px 50px -20px rgba(0,0,0,0.6); }
 .ah-visual { position: absolute; inset: 0; }
+.ah-playfield {
+  position: absolute; inset: 0; z-index: 5;
+  background: transparent; border: none; padding: 0; margin: 0;
+  cursor: pointer; border-radius: 22px;
+  -webkit-tap-highlight-color: transparent;
+}
+.ah-playfield:focus-visible { outline: 2px solid var(--ah-focus); outline-offset: -3px; }
+.ah-tip-live { position: absolute; inset: 0; z-index: 20; pointer-events: none; }
 .ah-poster { position: absolute; inset: 0; width: 100%; height: 100%; }
 .ah-poster-star { fill: var(--ah-poster-star); opacity: 0.8; }
 .ah-poster-ring { fill: none; stroke: var(--ah-poster-ring); stroke-width: 2.5; }
@@ -627,4 +678,11 @@ const ARCADE_CSS = `
   -webkit-backdrop-filter: blur(var(--ah-hud-blur));
 }
 .ah-play:focus-visible { outline: 2px solid var(--ah-focus); outline-offset: 2px; }
+
+/* Belt-and-suspenders: the shell never loads the engine under reduced
+   motion, and this kills the remaining CSS motion too. */
+@media (prefers-reduced-motion: reduce) {
+  .ah-cta { animation: none; }
+  .ah-canvas { transition: none; }
+}
 `;
