@@ -34,3 +34,4 @@ attached_assets/*.heic
 .vercel
 api/
 _convert.js
+.env.production.local
