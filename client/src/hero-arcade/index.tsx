@@ -357,14 +357,29 @@ function ArcadeStage({ themeName, layout = "card" }: ArcadeStageProps) {
     }
   };
 
-  // Playfield presses: start the run / jump. Also nudges a not-yet-loaded
-  // engine to load for impatient early clicks.
-  const handlePlayfield = () => {
+  // Playfield: press starts the run / gives a thrust burst; holding keeps
+  // the jetpack firing. Also nudges a not-yet-loaded engine for early taps.
+  const handlePlayfieldDown = () => {
     if (engineRef.current) {
       engineRef.current.press();
+      engineRef.current.setThrust(true);
     } else if (!reduced && !abortedRef.current) {
       void loadEngine();
     }
+  };
+  const handlePlayfieldUp = () => {
+    engineRef.current?.setThrust(false);
+  };
+  const handlePlayfieldKeyDown = (e: React.KeyboardEvent) => {
+    if (e.repeat) return;
+    if (e.code !== "Space" && e.code !== "Enter") return;
+    e.preventDefault(); // suppress the button's native click-on-keyup
+    handlePlayfieldDown();
+  };
+  const handlePlayfieldKeyUp = (e: React.KeyboardEvent) => {
+    if (e.code !== "Space" && e.code !== "Enter") return;
+    e.preventDefault();
+    handlePlayfieldUp();
   };
 
   const handlePlayTap = () => {
@@ -413,7 +428,12 @@ function ArcadeStage({ themeName, layout = "card" }: ArcadeStageProps) {
     <button
       type="button"
       className="ah-playfield"
-      onClick={handlePlayfield}
+      onPointerDown={handlePlayfieldDown}
+      onPointerUp={handlePlayfieldUp}
+      onPointerLeave={handlePlayfieldUp}
+      onPointerCancel={handlePlayfieldUp}
+      onKeyDown={handlePlayfieldKeyDown}
+      onKeyUp={handlePlayfieldKeyUp}
       aria-label={COPY.playfieldAria}
       data-testid="arcade-playfield"
     />

@@ -41,12 +41,12 @@ export const RING_SERVICES: readonly RingService[] = [
 export const COPY = {
   stageLabel: "STAGE 01 — CHAOS TO LAUNCH",
   attract: "PRESS SPACE / TAP",
-  controlsHint: "space / tap — jump",
+  controlsHint: "hold space / tap — fly",
   skip: "Skip",
   replay: "Replay",
   play: "▶ Play",
   playfieldAria:
-    "Gray Arcade mini-game. Press to start, then space or tap to jump. Decorative — all services and links are available as regular content.",
+    "Gray Arcade mini-game. Press to start, then hold space or tap to fly. Decorative — all services and links are available as regular content.",
   completeHeading: "One team, from first idea to shipped work.",
   ctaPrimary: "Start a project",
   ctaSecondary: "See the work",

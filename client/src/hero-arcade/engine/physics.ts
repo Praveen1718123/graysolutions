@@ -1,35 +1,30 @@
-// Gray Arcade — jump physics. Deliberately generous: the stage is a
-// narrative, not a challenge. Apex ≈104px clears the highest ring (96px
-// above ground) with margin, and a 120ms input buffer forgives early taps.
+// Gray Arcade — jetpack flight physics. One button: hold = thrust up,
+// release = drift down. Deliberately gentle — capped speeds, a soft ceiling,
+// and a generous ring aperture make aiming at a ring altitude trivial.
 
 import { GROUND_Y, RING_APERTURE, RUNNER_H, type RingEnt, type RunnerEnt } from "./entities";
 
-export const GRAVITY = 1500; // px/s²
-export const JUMP_V = -560; // px/s  → apex = v²/2g ≈ 104px
-export const JUMP_BUFFER = 0.12; // s
+export const GRAVITY = 520; // px/s² falling
+export const THRUST = -1150; // px/s² while thrusting (net climb ≈ −630)
+export const VY_MAX = 170; // px/s speed cap both directions
+export const CEIL_Y = 80; // feet never rise above this (stays under the HUD)
+export const TAP_BOOST = 0.16; // s of thrust granted by a discrete tap
 
-/** Queue a jump; lands immediately if grounded, else buffers briefly. */
-export function queueJump(r: RunnerEnt): void {
-  r.bufferT = JUMP_BUFFER;
-}
-
-/** Advance the runner one fixed step. */
-export function stepRunner(r: RunnerEnt, dt: number): void {
-  if (r.bufferT > 0) {
-    r.bufferT -= dt;
-    if (r.grounded) {
-      r.vy = JUMP_V;
-      r.grounded = false;
-      r.bufferT = 0;
-    }
-  }
-  if (!r.grounded) {
-    r.vy += GRAVITY * dt;
-    r.y += r.vy * dt;
-    if (r.y >= GROUND_Y) {
-      r.y = GROUND_Y;
-      r.vy = 0;
-      r.grounded = true;
+/** Advance the flyer one fixed step. */
+export function stepFlyer(r: RunnerEnt, dt: number, thrust: boolean): void {
+  r.vy += (thrust ? THRUST : 0) * dt + GRAVITY * dt;
+  if (r.vy > VY_MAX) r.vy = VY_MAX;
+  if (r.vy < -VY_MAX) r.vy = -VY_MAX;
+  r.y += r.vy * dt;
+  if (r.y >= GROUND_Y) {
+    r.y = GROUND_Y;
+    r.vy = 0;
+    r.grounded = true;
+  } else {
+    r.grounded = false;
+    if (r.y < CEIL_Y) {
+      r.y = CEIL_Y;
+      if (r.vy < 0) r.vy = 0;
     }
   }
   if (r.stumbleT > 0) r.stumbleT -= dt;

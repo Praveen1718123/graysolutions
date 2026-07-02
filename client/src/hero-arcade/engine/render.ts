@@ -194,9 +194,18 @@ export function createRenderer(
       }
     }
 
-    // Runner.
-    atlas.drawRunner(ctx, pickRunnerFrame(world), world.runnerX, Math.round(world.runner.y) - RUNNER_H);
-    if (world.state === "attract") blinkOverlay(world, world.runnerX, Math.round(world.runner.y));
+    // Runner (+ jet flame while thrusting airborne).
+    const feetY = Math.round(world.runner.y);
+    atlas.drawRunner(ctx, pickRunnerFrame(world), world.runnerX, feetY - RUNNER_H);
+    const thrusting = world.thrustHeld || world.thrustBoost > 0;
+    if (thrusting && !world.runner.grounded) {
+      const h = 4 + Math.round((Math.sin(world.t * 14) + 1) * 1.5); // 4–7px waver
+      ctx.fillStyle = theme.ring.mid;
+      ctx.fillRect(world.runnerX + 4, feetY - 4, 3, h);
+      ctx.fillStyle = theme.ring.core;
+      ctx.fillRect(world.runnerX + 4, feetY - 4, 3, 2);
+    }
+    if (world.state === "attract") blinkOverlay(world, world.runnerX, feetY);
   }
 
   function drawCompleteScene(world: World): void {

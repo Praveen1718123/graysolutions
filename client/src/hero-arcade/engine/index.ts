@@ -36,8 +36,10 @@ export interface ArcadeEngine {
   start(): void;
   pause(): void;
   resume(): void;
-  /** A press from the playfield button (tap/click/Enter/Space). */
+  /** A discrete press from the playfield (tap/click/Enter/Space). */
   press(): boolean;
+  /** Hold-to-fly: thrust on while the button/key is held. */
+  setThrust(on: boolean): void;
   skip(): void;
   replay(): void;
   setTheme(theme: ArcadeTheme): void;
@@ -110,7 +112,11 @@ export function createEngine(opts: EngineOptions): ArcadeEngine {
   // paused (off-screen/hidden tab) or idle stages never touch page scroll.
   const unbindKeys = bindGlobalKeys({
     canConsume: () => loop.running && stage.state() === "playing",
-    onPress: () => stage.press(),
+    onPress: () => {
+      stage.setThrust(true);
+      return stage.press();
+    },
+    onRelease: () => stage.setThrust(false),
   });
 
   // Dev-only debug handle for tuning and automated verification. tick()
@@ -118,6 +124,7 @@ export function createEngine(opts: EngineOptions): ArcadeEngine {
   if (import.meta.env.DEV) {
     (window as unknown as { __arcade?: unknown }).__arcade = {
       press: () => stage.press(),
+      setThrust: (on: boolean) => stage.setThrust(on),
       skip: () => stage.skip(),
       replay: () => stage.replay(),
       world: () => stage.world,
@@ -134,6 +141,8 @@ export function createEngine(opts: EngineOptions): ArcadeEngine {
       loop.start();
     },
     pause(): void {
+      // Never leave thrust latched while frozen off-screen.
+      stage.setThrust(false);
       loop.pause();
     },
     resume(): void {
@@ -141,6 +150,9 @@ export function createEngine(opts: EngineOptions): ArcadeEngine {
     },
     press(): boolean {
       return stage.press();
+    },
+    setThrust(on: boolean): void {
+      stage.setThrust(on);
     },
     skip(): void {
       stage.skip();

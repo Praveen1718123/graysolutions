@@ -23,7 +23,7 @@ import {
   type StageState,
   type World,
 } from "./entities";
-import { passesThroughRing, queueJump, runnerCenterY, stepRunner } from "./physics";
+import { TAP_BOOST, passesThroughRing, runnerCenterY, stepFlyer } from "./physics";
 import { mulberry32 } from "./sprites";
 
 export type StageEvent =
@@ -37,8 +37,10 @@ export type StageEvent =
 export interface Stage {
   readonly world: World;
   update(dt: number): void;
-  /** A press (space/tap). Returns true if the input was consumed. */
+  /** A discrete press (tap). Returns true if the input was consumed. */
   press(): boolean;
+  /** Hold-to-fly: thrust on while the button/key is held. */
+  setThrust(on: boolean): void;
   skip(): void;
   replay(): void;
   setQuality(tier: QualityTier): void;
@@ -85,7 +87,8 @@ export function createStage(
     world.scrollX += advance;
     world.driftX += advance;
 
-    stepRunner(world.runner, dt);
+    if (world.thrustBoost > 0) world.thrustBoost -= dt;
+    stepFlyer(world.runner, dt, world.thrustHeld || world.thrustBoost > 0);
 
     // Debris: miss = stumble + screen nudge, never death.
     for (const d of world.debris) {
@@ -154,8 +157,8 @@ export function createStage(
       addScore(GATE_SCORE);
       spawnBurst(world, world.runnerX + RUNNER_W / 2, GROUND_Y - RUNNER_H, 36, 160, rand);
       emit({ type: "gate" });
-      // Give the leap-through read even if the visitor never jumped.
-      if (world.runner.grounded) queueJump(world.runner);
+      // Lift through the gate even if the visitor never flew.
+      world.thrustBoost = Math.max(world.thrustBoost, 0.5);
     }
   }
 
@@ -184,7 +187,8 @@ export function createStage(
           const advance = BASE_SPEED * 0.6 * dt;
           world.scrollX += advance;
           world.driftX += advance;
-          stepRunner(world.runner, dt);
+          if (world.thrustBoost > 0) world.thrustBoost -= dt;
+          stepFlyer(world.runner, dt, world.thrustHeld || world.thrustBoost > 0);
           if (world.gateT >= GATE_HOLD) enterComplete(false);
           break;
         }
@@ -222,12 +226,18 @@ export function createStage(
           emit({ type: "start" });
           return true;
         case "playing":
-          queueJump(world.runner);
+          // A discrete tap grants a short burst, so tapping hovers and
+          // holding climbs — one input, two intuitive grips.
+          world.thrustBoost = TAP_BOOST;
           return true;
         default:
-          // Enter/Space = jump only while playing (a11y rule).
+          // Enter/Space = fly only while playing (a11y rule).
           return false;
       }
+    },
+
+    setThrust(on: boolean): void {
+      world.thrustHeld = on;
     },
 
     skip(): void {

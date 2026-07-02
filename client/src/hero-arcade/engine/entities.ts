@@ -95,7 +95,6 @@ export interface RunnerEnt {
   y: number; // feet y
   vy: number;
   grounded: boolean;
-  bufferT: number; // jump input buffer remaining
   stumbleT: number; // stumble animation remaining
   animT: number; // run-cycle clock
 }
@@ -109,6 +108,8 @@ export interface World {
   scrollX: number; // level scroll — advances only while running the stage
   driftX: number; // parallax-plate scroll — always drifts, never snaps back
   runnerX: number; // runner's fixed screen x (full-bleed shifts it right of the copy)
+  thrustHeld: boolean; // button currently held (hold = climb)
+  thrustBoost: number; // seconds of thrust remaining from a discrete tap
   speedFactor: number; // eased toward ring-approach target
   runner: RunnerEnt;
   rings: RingEnt[];
@@ -126,25 +127,28 @@ export interface World {
 }
 
 /**
- * Pellet layout: a guide arc through each ring tracing the ideal jump
- * parabola (touching down ~14px above ground at ±96), plus a ground trail
- * between obstacles. Deterministic — pure function of the level layout.
+ * Pellet layout: one continuous flight path — lifting off the ground,
+ * flowing through every ring center, and easing toward the gate mouth
+ * (the dotted line from the concept art). Deterministic.
  */
-function buildPellets(
-  rings: readonly { x: number; cy: number }[],
-  debris: readonly { x: number; w: number }[],
-): Pellet[] {
+function buildPellets(rings: readonly { x: number; cy: number }[]): Pellet[] {
+  // First waypoint sits well above debris height: the path itself teaches
+  // "lift off now" and following it clears the chaos rocks with margin.
+  const waypoints = [
+    { x: 280, y: GROUND_Y - 84 },
+    ...rings.map((r) => ({ x: r.x, y: r.cy })),
+    { x: GATE_X - 30, y: GROUND_Y - 64 },
+  ];
   const pellets: Pellet[] = [];
-  for (const r of rings) {
-    const k = (96 * 96) / (GROUND_Y - 14 - r.cy);
-    for (let dx = -96; dx <= 96; dx += 24) {
-      pellets.push({ x: r.x + dx, y: r.cy + (dx * dx) / k, taken: false });
+  for (let i = 0; i < waypoints.length - 1; i++) {
+    const a = waypoints[i];
+    const b = waypoints[i + 1];
+    const n = Math.max(1, Math.floor((b.x - a.x) / 26));
+    for (let j = i === 0 ? 0 : 1; j < n; j++) {
+      const t = j / n;
+      const ease = (1 - Math.cos(Math.PI * t)) / 2; // smooth altitude blend
+      pellets.push({ x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * ease, taken: false });
     }
-  }
-  for (let x = 260; x < GATE_X - 80; x += 28) {
-    if (rings.some((r) => Math.abs(x - r.x) < 110)) continue;
-    if (debris.some((d) => Math.abs(x - (d.x + d.w / 2)) < 44)) continue;
-    pellets.push({ x, y: GROUND_Y - 10, taken: false });
   }
   return pellets;
 }
@@ -163,11 +167,16 @@ export function buildWorld(mobile: boolean, debrisLabels: boolean, runnerX = RUN
     state: "attract",
     skipped: false,
     t: 0,
-    scrollX: 0,
+    // Level positions are authored against the card-mode anchor (RUNNER_X);
+    // offsetting the start scroll keeps every beat's TIMING identical when
+    // full-bleed anchors the runner further right.
+    scrollX: RUNNER_X - runnerX,
     driftX: 0,
     runnerX,
+    thrustHeld: false,
+    thrustBoost: 0,
     speedFactor: 1,
-    runner: { y: GROUND_Y, vy: 0, grounded: true, bufferT: 0, stumbleT: 0, animT: 0 },
+    runner: { y: GROUND_Y, vy: 0, grounded: true, stumbleT: 0, animT: 0 },
     rings: RING_LAYOUT.map((r, i) => ({
       index: i,
       x: r.x,
@@ -178,7 +187,7 @@ export function buildWorld(mobile: boolean, debrisLabels: boolean, runnerX = RUN
     })),
     debris,
     gate: { x: GATE_X, passed: false },
-    pellets: buildPellets(RING_LAYOUT, debris),
+    pellets: buildPellets(RING_LAYOUT),
     particles: [],
     popups: [],
     score: 0,
