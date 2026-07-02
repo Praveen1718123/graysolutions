@@ -19,8 +19,14 @@ export function bindGlobalKeys({ canConsume, onPress, onRelease }: GlobalKeyOpti
   let consumed = false;
 
   const onKeyDown = (e: KeyboardEvent): void => {
-    if (e.repeat) return;
     if (!KEYS.includes(e.code)) return;
+    if (e.repeat) {
+      // Auto-repeat during a hold: keep suppressing the browser default
+      // (page scroll) for the key we already consumed — but never start
+      // consuming on a repeat.
+      if (consumed) e.preventDefault();
+      return;
+    }
     const active = document.activeElement;
     // Never steal from form fields, buttons, or links — their own semantics
     // (including the playfield button's native handlers) take precedence.

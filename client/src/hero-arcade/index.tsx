@@ -375,9 +375,11 @@ function ArcadeStage({ themeName, layout = "card" }: ArcadeStageProps) {
     engineRef.current?.setThrust(false);
   };
   const handlePlayfieldKeyDown = (e: React.KeyboardEvent) => {
-    if (e.repeat) return;
     if (e.code !== "Space" && e.code !== "Enter") return;
-    e.preventDefault(); // suppress the button's native click-on-keyup
+    // Prevent BEFORE the repeat check: auto-repeat keydowns during a hold
+    // must also be suppressed or the page scrolls mid-flight.
+    e.preventDefault();
+    if (e.repeat) return;
     handlePlayfieldDown();
   };
   const handlePlayfieldKeyUp = (e: React.KeyboardEvent) => {
