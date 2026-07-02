@@ -57,13 +57,17 @@ const useIsDesktop = () => useMedia("(min-width: 1024px)");
 
 /** Static poster scene — runner + one ring over the theme space. Pure DOM/SVG. */
 function Poster({ full = false }: { full?: boolean }) {
-  // Full-bleed: the copy owns the left half, so the runner shifts right.
-  const runnerX = full ? 204 : 96;
+  // Full-bleed spans ~100vw: widen the coordinate system so the teaser
+  // scene renders at roughly the engine's pixel scale, not blown up.
+  const W = full ? 960 : 480;
+  const s = W / 480; // horizontal spread factor for scene elements
+  const runnerX = full ? Math.round(W * 0.42) : 96;
+  const ringX = Math.round(330 * s);
   return (
     <svg
       className="ah-poster"
-      viewBox="0 0 480 240"
-      // Anchor the ground when the box is wider than 2:1 (full-bleed).
+      viewBox={`0 0 ${W} 240`}
+      // Anchor the ground when the box is wider than the viewBox aspect.
       preserveAspectRatio={full ? "xMidYMax slice" : "xMidYMid slice"}
       aria-hidden="true"
     >
@@ -72,13 +76,13 @@ function Poster({ full = false }: { full?: boolean }) {
         [40, 34], [92, 88], [150, 22], [210, 64], [268, 30], [330, 96],
         [388, 48], [438, 110], [70, 150], [180, 128], [300, 150], [420, 26],
       ].map(([x, y], i) => (
-        <rect key={i} x={x} y={y} width={i % 3 === 0 ? 2 : 1} height={i % 3 === 0 ? 2 : 1} className="ah-poster-star" />
+        <rect key={i} x={Math.round(x * s)} y={y} width={i % 3 === 0 ? 2 : 1} height={i % 3 === 0 ? 2 : 1} className="ah-poster-star" />
       ))}
       {/* one service ring */}
-      <ellipse cx={330} cy={128} rx={14} ry={40} className="ah-poster-ring-halo" />
-      <ellipse cx={330} cy={128} rx={11} ry={36} className="ah-poster-ring" />
+      <ellipse cx={ringX} cy={128} rx={14} ry={40} className="ah-poster-ring-halo" />
+      <ellipse cx={ringX} cy={128} rx={11} ry={36} className="ah-poster-ring" />
       {/* ground */}
-      <rect x={0} y={210} width={480} height={1} className="ah-poster-ground" />
+      <rect x={0} y={210} width={W} height={1} className="ah-poster-ground" />
       {/* runner (simplified pixel figure) */}
       <g className="ah-poster-runner" transform={`translate(${runnerX},178)`}>
         <rect x={6} y={0} width={12} height={8} />
