@@ -7,7 +7,6 @@ import type { ArcadeTheme } from "../theme";
 import {
   LOGICAL_H,
   LOGICAL_W,
-  RUNNER_X_FULL,
   type QualityTier,
   type StageState,
 } from "./entities";
@@ -25,11 +24,11 @@ export interface EngineOptions {
   mobile: boolean;
   debrisLabels: boolean;
   /**
-   * Full-bleed hero layout: transparent canvas composited over the site
-   * backdrop — no space gradient, no parallax plates, no vignette; parked
-   * rings shift to the right airspace clear of the hero copy.
+   * Full-bleed hero layout: the engine owns the whole hero canvas and paints
+   * its own space scene (the site's photo backdrop is hidden); the runner
+   * anchor, attract line, and parked rings shift right of the hero copy.
    */
-  transparent?: boolean;
+  fullBleed?: boolean;
   onEvent: (e: StageEvent) => void;
 }
 
@@ -53,16 +52,54 @@ const DPR = Math.min(typeof window !== "undefined" ? window.devicePixelRatio || 
 export function createEngine(opts: EngineOptions): ArcadeEngine {
   const { canvas, mobile, debrisLabels, onEvent } = opts;
 
-  const transparent = opts.transparent === true;
-  canvas.width = Math.round(LOGICAL_W * DPR);
-  canvas.height = Math.round(LOGICAL_H * DPR);
-  const ctx = canvas.getContext("2d", { alpha: transparent });
-  if (!ctx) throw new Error("2d context unavailable");
-  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-  ctx.imageSmoothingEnabled = false;
+  const fullBleed = opts.fullBleed === true;
+  const maybeCtx = canvas.getContext("2d", { alpha: false });
+  if (!maybeCtx) throw new Error("2d context unavailable");
+  const ctx = maybeCtx;
 
-  const stage = createStage(mobile, debrisLabels, onEvent, transparent ? RUNNER_X_FULL : undefined);
-  const renderer = createRenderer(ctx, opts.theme, transparent);
+  // Backing store: 240 logical rows always. Card mode is a fixed 2:1 box
+  // (480 wide); full-bleed derives the logical width from the hero region's
+  // aspect so pixels stay square with zero cropping at any viewport.
+  const logicalWFor = (rect: { width: number; height: number }): number =>
+    Math.max(LOGICAL_W, Math.min(1600, Math.round((rect.width / rect.height) * LOGICAL_H)));
+
+  let viewW = LOGICAL_W;
+  if (fullBleed && canvas.parentElement) {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    if (rect.width >= 1 && rect.height >= 1) viewW = logicalWFor(rect);
+  }
+
+  // Full-bleed: anchor the runner ~42% across the initial view — clear of
+  // the copy column, leading the action zone on the right.
+  const stage = createStage(
+    mobile,
+    debrisLabels,
+    onEvent,
+    fullBleed ? Math.round(viewW * 0.42) : undefined,
+  );
+  const renderer = createRenderer(ctx, opts.theme, fullBleed);
+
+  function applySize(w: number): void {
+    viewW = w;
+    canvas.width = Math.round(viewW * DPR);
+    canvas.height = Math.round(LOGICAL_H * DPR);
+    // Resizing resets canvas context state.
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    ctx.imageSmoothingEnabled = false;
+    renderer.setViewWidth(viewW);
+  }
+  applySize(viewW);
+
+  let ro: ResizeObserver | null = null;
+  if (fullBleed && canvas.parentElement) {
+    ro = new ResizeObserver((entries) => {
+      const r = entries[0]?.contentRect;
+      if (!r || r.width < 1 || r.height < 1) return;
+      const w = logicalWFor(r);
+      if (w !== viewW) applySize(w);
+    });
+    ro.observe(canvas.parentElement);
+  }
   const loop = createLoop(
     (dt) => stage.update(dt),
     () => renderer.draw(stage.world),
@@ -120,6 +157,7 @@ export function createEngine(opts: EngineOptions): ArcadeEngine {
     },
     destroy(): void {
       unbindKeys();
+      ro?.disconnect();
       loop.destroy();
       renderer.dispose();
       if (import.meta.env.DEV) {

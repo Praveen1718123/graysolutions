@@ -9,7 +9,6 @@ export const LOGICAL_W = 480;
 export const LOGICAL_H = 240;
 export const GROUND_Y = 210; // runner feet line
 export const RUNNER_X = 96; // runner's fixed screen x (left edge of sprite)
-export const RUNNER_X_FULL = 200; // full-bleed: right of the hero copy column
 export const RUNNER_W = 24;
 export const RUNNER_H = 32;
 

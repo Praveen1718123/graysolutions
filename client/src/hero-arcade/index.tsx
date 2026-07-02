@@ -63,7 +63,8 @@ function Poster({ full = false }: { full?: boolean }) {
     <svg
       className="ah-poster"
       viewBox="0 0 480 240"
-      preserveAspectRatio="xMidYMid slice"
+      // Anchor the ground when the box is wider than 2:1 (full-bleed).
+      preserveAspectRatio={full ? "xMidYMax slice" : "xMidYMid slice"}
       aria-hidden="true"
     >
       {/* stardust */}
@@ -182,7 +183,7 @@ function ArcadeStage({ themeName, layout = "card" }: ArcadeStageProps) {
         theme: themeRef.current,
         mobile,
         debrisLabels: DEBRIS_LABELS,
-        transparent: fullRef.current,
+        fullBleed: fullRef.current,
         onEvent,
       });
       engineRef.current = engine;
@@ -418,17 +419,22 @@ function ArcadeStage({ themeName, layout = "card" }: ArcadeStageProps) {
     />
   );
 
+  // Ring visuals live on the canvas, so their DOM counterparts (hotspots,
+  // in-play chips) must share the canvas geometry — in full-bleed that's the
+  // breakout layer, not the container grid.
+  const ringOverlay = (
+    <RingTooltip
+      tip={running ? tip : null}
+      parked={parkedHotspots}
+      staticList={!full && staticServiceList}
+      mobile={mobile}
+      full={full}
+    />
+  );
+
   const overlays = (
     <>
       <Hud score={score} ringsCleared={ringsCleared} />
-
-      <RingTooltip
-        tip={running ? tip : null}
-        parked={parkedHotspots}
-        staticList={staticServiceList}
-        mobile={mobile}
-        full={full}
-      />
 
       {showCta && <CtaPanel score={score} showScore={!reduced && !skipped && score > 0} />}
 
@@ -475,9 +481,11 @@ function ArcadeStage({ themeName, layout = "card" }: ArcadeStageProps) {
   );
 
   if (full) {
-    // Full-bleed: the game spans the hero region behind the copy. Two
-    // absolute layers around the DOM content (z-10): visual+playfield below
-    // it, controls above it. Skip stays the first focusable in the stage.
+    // Full-bleed: the game spans the hero edge to edge behind the copy.
+    // Layers around the DOM content (z-10): scene+playfield below it
+    // (viewport-wide), ring hotspots above it sharing the scene geometry,
+    // and grid-aligned controls on the container. Skip stays the first
+    // focusable in the stage.
     return (
       <div
         className="ah-full"
@@ -491,7 +499,13 @@ function ArcadeStage({ themeName, layout = "card" }: ArcadeStageProps) {
           {visual}
           {playfield}
         </div>
-        <div className="ah-full-ui">{overlays}</div>
+        <div className="ah-full-rings">{ringOverlay}</div>
+        <div className="ah-full-ui">
+          {overlays}
+          {staticServiceList && (
+            <RingTooltip tip={null} parked={false} staticList mobile={mobile} full={full} />
+          )}
+        </div>
       </div>
     );
   }
@@ -508,6 +522,7 @@ function ArcadeStage({ themeName, layout = "card" }: ArcadeStageProps) {
       {skipButton}
       {visual}
       {playfield}
+      {ringOverlay}
       {overlays}
     </div>
   );
@@ -747,26 +762,35 @@ const ARCADE_CSS = `
    pointer-events:none layer). The copy owns the left half, so centered
    elements shift into the right airspace. */
 .ah-full { position: static; }
-.ah-full-visual { position: absolute; inset: 0; z-index: 4; }
+/* Scene + hotspot layers break out of the container to true edge-to-edge
+   (the hero section clips the 100vw overshoot). The engine derives its
+   logical width from this box's aspect, so pixels stay square with no
+   cropping at any viewport. */
+.ah-full-visual, .ah-full-rings {
+  position: absolute; top: 0; bottom: 0; left: 50%;
+  width: 100vw; transform: translateX(-50%);
+}
+.ah-full-visual {
+  z-index: 4;
+  /* The engine owns the hero canvas; the poster sits on the same theme
+     space so the pre-engine frame and the live canvas hand off seamlessly. */
+  background: var(--ah-stage-bg);
+}
+.ah-full-rings { z-index: 20; pointer-events: none; }
+.ah-full-rings .ah-hotspot { pointer-events: auto; }
 .ah-full-ui { position: absolute; inset: 0; z-index: 20; pointer-events: none; }
 .ah-full-ui .ah-btn,
 .ah-full-ui .ah-replay,
 .ah-full-ui .ah-play,
-.ah-full-ui .ah-static-service,
-.ah-full-ui .ah-hotspot { pointer-events: auto; }
+.ah-full-ui .ah-static-service { pointer-events: auto; }
 .ah-full > .ah-skip { z-index: 30; }
 .ah-full .ah-playfield { border-radius: 0; }
-/* Uniform pixel scale: the hero region isn't exactly 2:1, so cover-fit the
-   2:1 logical grid instead of stretching it (crops a little empty sky and
-   sub-ground; keeps every pixel square and the bitmap font crisp). */
-.ah-full .ah-canvas, .ah-full .ah-poster {
-  image-rendering: pixelated;
-  object-fit: cover;
-  object-position: center;
-}
+.ah-full .ah-canvas, .ah-full .ah-poster { image-rendering: pixelated; }
+/* One aligned control bar: stage label · score · lives · skip on a single
+   baseline, right-aligned — not a ragged stack. */
 .ah-full .ah-hud {
-  left: auto; right: 12px; top: 44px;
-  flex-direction: column; align-items: flex-end; gap: 6px;
+  left: auto; right: 64px; top: 10px;
+  justify-content: flex-end; align-items: center; gap: 8px;
   padding-right: 0;
 }
 .ah-full .ah-hint { left: 66%; }

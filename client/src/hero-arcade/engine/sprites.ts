@@ -318,7 +318,12 @@ export interface SpriteAtlas {
   drawRing(ctx: CanvasRenderingContext2D, variant: 0 | 1, cx: number, cy: number, alpha: number): void;
   drawRock(ctx: CanvasRenderingContext2D, variant: number, x: number, groundY: number): void;
   drawGate(ctx: CanvasRenderingContext2D, x: number, groundY: number, alpha: number): void;
-  drawPlate(ctx: CanvasRenderingContext2D, depth: 0 | 1 | 2, offsetX: number): void;
+  drawPlate(
+    ctx: CanvasRenderingContext2D,
+    depth: 0 | 1 | 2,
+    offsetX: number,
+    viewW: number,
+  ): void;
   dispose(): void;
 }
 
@@ -390,15 +395,15 @@ export function createAtlas(theme: ArcadeTheme): SpriteAtlas {
       ctx.drawImage(src, Math.round(x), groundY - GATE_H + 6, GATE_W, GATE_H);
       ctx.globalAlpha = 1;
     },
-    drawPlate(ctx, depth, offsetX) {
+    drawPlate(ctx, depth, offsetX, viewW) {
       const key = (["bg_far", "bg_mid", "bg_near"] as const)[depth];
       const src: CanvasImageSource = png[key] ?? plates[depth];
       const w = PLATE_W;
       const ox = ((offsetX % w) + w) % w;
-      ctx.drawImage(src, -ox, 0, w, LOGICAL_H);
-      ctx.drawImage(src, w - ox, 0, w, LOGICAL_H);
-      // Cover the tail when the logical width exceeds one tile minus offset.
-      if (w - ox < LOGICAL_W) ctx.drawImage(src, w * 2 - ox, 0, w, LOGICAL_H);
+      // Tile across however wide the view is (full-bleed width is dynamic).
+      for (let x = -ox; x < viewW; x += w) {
+        ctx.drawImage(src, x, 0, w, LOGICAL_H);
+      }
     },
     dispose() {
       disposed = true;
