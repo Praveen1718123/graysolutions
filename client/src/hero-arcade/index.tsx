@@ -146,6 +146,11 @@ function ArcadeStage({ themeName, layout = "card" }: ArcadeStageProps) {
       case "start":
         setPhase("playing");
         setTip(null);
+        // A new run always zeroes the run counters — ring count is
+        // incremental state and must never survive an engine recreation.
+        setScore(0);
+        setRingsCleared(0);
+        setSkipped(false);
         if (!replayingRef.current) track("arcade_start");
         replayingRef.current = false;
         break;
