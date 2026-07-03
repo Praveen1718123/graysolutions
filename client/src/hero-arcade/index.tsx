@@ -55,20 +55,27 @@ const useIsMobile = () => useMedia("(max-width: 767px)");
 // which only happens at the site's lg breakpoint.
 const useIsDesktop = () => useMedia("(min-width: 1024px)");
 
+type PosterVariant = "card" | "full" | "band";
+
 /** Static poster scene — runner + one ring over the theme space. Pure DOM/SVG. */
-function Poster({ full = false }: { full?: boolean }) {
+function Poster({ variant = "card" }: { variant?: PosterVariant }) {
   // Full-bleed spans ~100vw: widen the coordinate system so the teaser
-  // scene renders at roughly the engine's pixel scale, not blown up.
-  const W = full ? 960 : 480;
+  // scene renders at roughly the engine's pixel scale. The mobile band is
+  // taller than 2:1, so it gets a taller box with the ground re-anchored.
+  const W = variant === "full" ? 960 : 480;
+  const H = variant === "band" ? 340 : 240;
   const s = W / 480; // horizontal spread factor for scene elements
-  const runnerX = full ? Math.round(W * 0.42) : 96;
+  const sy = H / 240; // vertical spread for stardust
+  const groundY = H - 30;
+  const runnerX = variant === "full" ? Math.round(W * 0.42) : 96;
   const ringX = Math.round(330 * s);
+  const ringCy = groundY - 82;
   return (
     <svg
       className="ah-poster"
-      viewBox={`0 0 ${W} 240`}
-      // Anchor the ground when the box is wider than the viewBox aspect.
-      preserveAspectRatio={full ? "xMidYMax slice" : "xMidYMid slice"}
+      viewBox={`0 0 ${W} ${H}`}
+      // Anchor the ground when the box aspect differs from the viewBox.
+      preserveAspectRatio={variant === "card" ? "xMidYMid slice" : "xMidYMax slice"}
       aria-hidden="true"
     >
       {/* stardust */}
@@ -76,15 +83,15 @@ function Poster({ full = false }: { full?: boolean }) {
         [40, 34], [92, 88], [150, 22], [210, 64], [268, 30], [330, 96],
         [388, 48], [438, 110], [70, 150], [180, 128], [300, 150], [420, 26],
       ].map(([x, y], i) => (
-        <rect key={i} x={Math.round(x * s)} y={y} width={i % 3 === 0 ? 2 : 1} height={i % 3 === 0 ? 2 : 1} className="ah-poster-star" />
+        <rect key={i} x={Math.round(x * s)} y={Math.round(y * sy)} width={i % 3 === 0 ? 2 : 1} height={i % 3 === 0 ? 2 : 1} className="ah-poster-star" />
       ))}
       {/* one service ring */}
-      <ellipse cx={ringX} cy={128} rx={14} ry={40} className="ah-poster-ring-halo" />
-      <ellipse cx={ringX} cy={128} rx={11} ry={36} className="ah-poster-ring" />
+      <ellipse cx={ringX} cy={ringCy} rx={14} ry={40} className="ah-poster-ring-halo" />
+      <ellipse cx={ringX} cy={ringCy} rx={11} ry={36} className="ah-poster-ring" />
       {/* ground */}
-      <rect x={0} y={210} width={W} height={1} className="ah-poster-ground" />
+      <rect x={0} y={groundY} width={W} height={1} className="ah-poster-ground" />
       {/* runner (simplified pixel figure) */}
-      <g className="ah-poster-runner" transform={`translate(${runnerX},178)`}>
+      <g className="ah-poster-runner" transform={`translate(${runnerX},${groundY - 32})`}>
         <rect x={6} y={0} width={12} height={8} />
         <rect x={4} y={10} width={14} height={12} />
         <rect x={2} y={24} width={7} height={8} />
@@ -112,9 +119,11 @@ function ArcadeStage({ themeName, layout = "card" }: ArcadeStageProps) {
   const reduced = (useReducedMotion() ?? false) || devParam === "reduced";
   const mobile = useIsMobile();
   const desktop = useIsDesktop();
-  // Full-bleed is a desktop (lg+) treatment; below that the card box stacks
-  // under the copy as usual.
+  // Full-bleed is a desktop (lg+) treatment. Below lg, the default layout
+  // becomes the mobile BAND: a full-width, taller, chrome-less stage —
+  // mobile gets its own gaming interface, not a shrunken desktop card.
   const full = layout === "full" && desktop;
+  const band = layout === "full" && !desktop;
   const theme = useMemo(() => getTheme(themeName), [themeName]);
 
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -193,6 +202,7 @@ function ArcadeStage({ themeName, layout = "card" }: ArcadeStageProps) {
         mobile,
         debrisLabels: DEBRIS_LABELS,
         fullBleed: fullRef.current,
+        dynamicView: layout === "full", // full-bleed AND mobile band
         onEvent,
       });
       engineRef.current = engine;
@@ -423,7 +433,7 @@ function ArcadeStage({ themeName, layout = "card" }: ArcadeStageProps) {
       role="img"
       aria-label={COPY.stageAria}
     >
-      <Poster full={full} />
+      <Poster variant={full ? "full" : band ? "band" : "card"} />
       <canvas
         ref={canvasRef}
         className={`ah-canvas${engineReady ? " ah-canvas--on" : ""}`}
@@ -465,7 +475,7 @@ function ArcadeStage({ themeName, layout = "card" }: ArcadeStageProps) {
 
   const overlays = (
     <>
-      <Hud score={score} ringsCleared={ringsCleared} />
+      <Hud score={score} ringsCleared={ringsCleared} compact={mobile} />
 
       {showCta && <CtaPanel score={score} showScore={!reduced && !skipped && score > 0} />}
 
@@ -488,7 +498,7 @@ function ArcadeStage({ themeName, layout = "card" }: ArcadeStageProps) {
 
       {showHint && (
         <span className="ah-hint" aria-hidden="true">
-          {COPY.controlsHint}
+          {mobile ? COPY.controlsHintTouch : COPY.controlsHint}
         </span>
       )}
 
@@ -544,7 +554,7 @@ function ArcadeStage({ themeName, layout = "card" }: ArcadeStageProps) {
   return (
     <div
       ref={containerRef}
-      className="ah-stage"
+      className={`ah-stage${band ? " ah-stage--band" : ""}`}
       style={theme.dom as React.CSSProperties}
       data-testid={`arcade-stage-${theme.name}`}
       data-state={phase}
@@ -612,6 +622,19 @@ const ARCADE_CSS = `
   box-shadow: var(--ah-stage-shadow);
   user-select: none; -webkit-user-select: none;
   touch-action: manipulation;
+}
+/* Mobile band: the game gets its own full-width, taller, chrome-less stage
+   instead of a shrunken desktop card. Breaks out of the content column to
+   true edge-to-edge; the engine's dynamic viewport keeps pixels square. */
+.ah-stage--band {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  aspect-ratio: auto;
+  height: clamp(320px, 96vw, 440px);
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  box-shadow: none;
 }
 .ah-visual { position: absolute; inset: 0; }
 .ah-playfield {

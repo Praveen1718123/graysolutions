@@ -47,8 +47,10 @@ export const RING_SERVICES: readonly RingService[] = [
 export const COPY = {
   stageLabel: "STAGE 01 — CHAOS TO LAUNCH",
   attract: "HOLD SPACE / TAP TO FLY",
+  attractTouch: "TAP AND HOLD TO FLY",
   coach: "HOLD TO FLY",
   controlsHint: "hold space / tap — fly",
+  controlsHintTouch: "hold to fly",
   skip: "Skip",
   replay: "Replay",
   play: "▶ Play",

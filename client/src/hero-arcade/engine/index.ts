@@ -29,6 +29,12 @@ export interface EngineOptions {
    * anchor, attract line, and parked rings shift right of the hero copy.
    */
   fullBleed?: boolean;
+  /**
+   * Track the stage element's aspect ratio (ResizeObserver): wide stages
+   * grow logical width, tall stages (mobile band) grow logical height.
+   * Off for the fixed 2:1 review card.
+   */
+  dynamicView?: boolean;
   onEvent: (e: StageEvent) => void;
 }
 
@@ -55,20 +61,27 @@ export function createEngine(opts: EngineOptions): ArcadeEngine {
   const { canvas, mobile, debrisLabels, onEvent } = opts;
 
   const fullBleed = opts.fullBleed === true;
+  const dynamicView = opts.dynamicView === true || fullBleed;
   const maybeCtx = canvas.getContext("2d", { alpha: false });
   if (!maybeCtx) throw new Error("2d context unavailable");
   const ctx = maybeCtx;
 
-  // Backing store: 240 logical rows always. Card mode is a fixed 2:1 box
-  // (480 wide); full-bleed derives the logical width from the hero region's
-  // aspect so pixels stay square with zero cropping at any viewport.
-  const logicalWFor = (rect: { width: number; height: number }): number =>
-    Math.max(LOGICAL_W, Math.min(1600, Math.round((rect.width / rect.height) * LOGICAL_H)));
+  // Logical viewport: pixels stay square at any stage aspect. Wider than
+  // 2:1 grows width (240 rows fixed); taller grows height (the world
+  // anchors to the bottom, sky extends above). Review card stays 480×240.
+  const logicalFor = (rect: { width: number; height: number }): [number, number] => {
+    const aspect = rect.width / rect.height;
+    if (aspect >= LOGICAL_W / LOGICAL_H) {
+      return [Math.max(LOGICAL_W, Math.min(1600, Math.round(aspect * LOGICAL_H))), LOGICAL_H];
+    }
+    return [LOGICAL_W, Math.max(LOGICAL_H, Math.min(960, Math.round(LOGICAL_W / aspect)))];
+  };
 
   let viewW = LOGICAL_W;
-  if (fullBleed && canvas.parentElement) {
+  let viewH = LOGICAL_H;
+  if (dynamicView && canvas.parentElement) {
     const rect = canvas.parentElement.getBoundingClientRect();
-    if (rect.width >= 1 && rect.height >= 1) viewW = logicalWFor(rect);
+    if (rect.width >= 1 && rect.height >= 1) [viewW, viewH] = logicalFor(rect);
   }
 
   // Full-bleed: anchor the runner ~42% across the initial view — clear of
@@ -81,24 +94,25 @@ export function createEngine(opts: EngineOptions): ArcadeEngine {
   );
   const renderer = createRenderer(ctx, opts.theme, fullBleed);
 
-  function applySize(w: number): void {
+  function applySize(w: number, h: number): void {
     viewW = w;
+    viewH = h;
     canvas.width = Math.round(viewW * DPR);
-    canvas.height = Math.round(LOGICAL_H * DPR);
+    canvas.height = Math.round(viewH * DPR);
     // Resizing resets canvas context state.
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
     ctx.imageSmoothingEnabled = false;
-    renderer.setViewWidth(viewW);
+    renderer.setViewSize(viewW, viewH);
   }
-  applySize(viewW);
+  applySize(viewW, viewH);
 
   let ro: ResizeObserver | null = null;
-  if (fullBleed && canvas.parentElement) {
+  if (dynamicView && canvas.parentElement) {
     ro = new ResizeObserver((entries) => {
       const r = entries[0]?.contentRect;
       if (!r || r.width < 1 || r.height < 1) return;
-      const w = logicalWFor(r);
-      if (w !== viewW) applySize(w);
+      const [w, h] = logicalFor(r);
+      if (w !== viewW || h !== viewH) applySize(w, h);
     });
     ro.observe(canvas.parentElement);
   }

@@ -346,6 +346,7 @@ export interface SpriteAtlas {
     depth: 0 | 1 | 2,
     offsetX: number,
     viewW: number,
+    viewH: number,
   ): void;
   dispose(): void;
 }
@@ -428,14 +429,15 @@ export function createAtlas(theme: ArcadeTheme): SpriteAtlas {
         ctx.fillRect(Math.round(x) + 4 + i * 5 + (lightOn ? 0 : 1), Math.round(y) + 8, 2, 1);
       }
     },
-    drawPlate(ctx, depth, offsetX, viewW) {
+    drawPlate(ctx, depth, offsetX, viewW, viewH) {
       const key = (["bg_far", "bg_mid", "bg_near"] as const)[depth];
       const src: CanvasImageSource = png[key] ?? plates[depth];
       const w = PLATE_W;
       const ox = ((offsetX % w) + w) % w;
-      // Tile across however wide the view is (full-bleed width is dynamic).
+      // Tile across however wide the view is; stretch vertically to cover
+      // taller stages (a starfield tolerates ≤~1.6× vertical stretch).
       for (let x = -ox; x < viewW; x += w) {
-        ctx.drawImage(src, x, 0, w, LOGICAL_H);
+        ctx.drawImage(src, x, 0, w, viewH);
       }
     },
     dispose() {

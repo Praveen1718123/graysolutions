@@ -8,6 +8,8 @@ import { COPY } from "../content";
 interface HudProps {
   score: number;
   ringsCleared: number;
+  /** Mobile: short stage label, no bonus — one uncrowded line. */
+  compact?: boolean;
 }
 
 const FONT_MONO = "'JetBrains Mono', ui-monospace, monospace";
@@ -39,13 +41,13 @@ function useCountUp(target: number): number {
   return shown;
 }
 
-export default function Hud({ score, ringsCleared }: HudProps) {
+export default function Hud({ score, ringsCleared, compact = false }: HudProps) {
   const shownScore = useCountUp(score);
   return (
     <div className="ah-hud" aria-hidden="true">
       <div className="ah-hud-panel">
         <span className="ah-hud-stage" style={{ fontFamily: FONT_MONO }}>
-          {COPY.stageLabel}
+          {compact ? COPY.stageLabel.split(" — ")[0] : COPY.stageLabel}
         </span>
       </div>
       <div className="ah-hud-panel ah-hud-right">

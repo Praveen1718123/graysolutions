@@ -27,8 +27,12 @@ interface Sparkle {
 export interface Renderer {
   draw(world: World): void;
   setTheme(theme: ArcadeTheme): void;
-  /** Full-bleed: logical width follows the hero's aspect (height stays 240). */
-  setViewWidth(w: number): void;
+  /**
+   * Dynamic logical viewport. Wide stages grow width (height stays 240);
+   * tall stages (mobile band) grow height — the 240-row world anchors to
+   * the bottom and the sky extends above it. Pixels stay square either way.
+   */
+  setViewSize(w: number, h: number): void;
   dispose(): void;
 }
 
@@ -49,9 +53,12 @@ export function createRenderer(
 ): Renderer {
   let theme = initialTheme;
   let atlas: SpriteAtlas = createAtlas(theme);
-  // Full-bleed: the visible logical width tracks the hero region's aspect
-  // ratio (pixel rows stay 240) so nothing is cropped or stretched.
+  // The visible logical viewport tracks the stage's aspect ratio so nothing
+  // is cropped or stretched. worldDy anchors the 240-row world to the
+  // bottom when the viewport is taller than the world (mobile band).
   let viewW = LOGICAL_W;
+  let viewH = LOGICAL_H;
+  let worldDy = 0;
   // Full-bleed layout: the copy owns the left half, so centered/parked
   // elements shift into the right airspace (see also the attract line).
   const parkedRings = fullBleed ? PARKED_RINGS_FULL : PARKED_RINGS;
@@ -68,7 +75,7 @@ export function createRenderer(
   }
 
   function makeBg(): CanvasGradient {
-    const g = ctx.createLinearGradient(0, 0, 0, LOGICAL_H);
+    const g = ctx.createLinearGradient(0, 0, 0, viewH);
     g.addColorStop(0, theme.space.top);
     g.addColorStop(1, theme.space.bottom);
     return g;
@@ -77,21 +84,21 @@ export function createRenderer(
   function makeVignette(): HTMLCanvasElement {
     const c = document.createElement("canvas");
     c.width = viewW;
-    c.height = LOGICAL_H;
+    c.height = viewH;
     const vctx = c.getContext("2d");
     if (vctx) {
       const g = vctx.createRadialGradient(
         viewW / 2,
-        LOGICAL_H / 2,
-        LOGICAL_H * 0.55,
+        viewH / 2,
+        Math.min(viewW, viewH) * 0.55,
         viewW / 2,
-        LOGICAL_H / 2,
-        viewW * 0.72,
+        viewH / 2,
+        Math.max(viewW, viewH) * 0.72,
       );
       g.addColorStop(0, "transparent");
       g.addColorStop(1, theme.vignette);
       vctx.fillStyle = g;
-      vctx.fillRect(0, 0, viewW, LOGICAL_H);
+      vctx.fillRect(0, 0, viewW, viewH);
     }
     return c;
   }
@@ -222,23 +229,26 @@ export function createRenderer(
     }
   }
 
-  function drawCompleteScene(world: World): void {
-    // Rings park in a static ascending arc; the DOM hotspot layer shares the
-    // canvas geometry exactly, so both sides use the same view fractions
-    // (content.ts PARKED_RINGS* is the shared source of truth).
+  // Parked rings + labels — SCREEN space (fractions of the element), so the
+  // DOM hotspot layer, which uses the same fractions, aligns exactly.
+  // (content.ts PARKED_RINGS* is the shared source of truth.)
+  function drawParkedRings(world: World): void {
     parkedRings.forEach((p, i) => {
       // Rings park with a small stagger — world.t resets on entering
       // complete, so each ring fades in ~90ms after the previous one.
       const appear = Math.min(1, Math.max(0, (world.t - 0.15 - i * 0.09) / 0.3));
       if (appear <= 0) return;
       const flicker = 0.8 + 0.2 * Math.sin(world.t * 2.2 + i * 1.3);
-      atlas.drawRing(ctx, (i % 2) as 0 | 1, p.x * viewW, p.y * LOGICAL_H, flicker * appear);
+      atlas.drawRing(ctx, (i % 2) as 0 | 1, p.x * viewW, p.y * viewH, flicker * appear);
       // Label above the hoop, same as in-run — below collides with the panel.
       ctx.globalAlpha = appear * 0.92;
-      drawTextCentered(ctx, RING_SERVICES[i].tag, p.x * viewW, p.y * LOGICAL_H - 58, 2, theme.canvasText.bright);
+      drawTextCentered(ctx, RING_SERVICES[i].tag, p.x * viewW, p.y * viewH - 58, 2, theme.canvasText.bright);
       ctx.globalAlpha = 1;
     });
-    // Runner idles facing the scene (right of the copy in full-bleed).
+  }
+
+  // Runner idling on the ground — WORLD space (drawn inside the translate).
+  function drawCompleteIdleRunner(world: World): void {
     const idleX = fullBleed ? Math.round(viewW * 0.44) : 34;
     atlas.drawRunner(ctx, pickRunnerFrame(world), idleX, GROUND_Y - RUNNER_H);
     blinkOverlay(world, idleX, GROUND_Y);
@@ -257,10 +267,10 @@ export function createRenderer(
       // The engine owns its canvas in both layouts: theme space gradient +
       // parallax nebula plates (driftX-driven — never snaps back).
       ctx.fillStyle = bgGradient;
-      ctx.fillRect(-4, -4, viewW + 8, LOGICAL_H + 8);
-      atlas.drawPlate(ctx, 0, world.driftX * 0.15, viewW);
-      atlas.drawPlate(ctx, 1, world.driftX * 0.35, viewW);
-      atlas.drawPlate(ctx, 2, world.driftX * 0.7, viewW);
+      ctx.fillRect(-4, -4, viewW + 8, viewH + 8);
+      atlas.drawPlate(ctx, 0, world.driftX * 0.15, viewW, viewH);
+      atlas.drawPlate(ctx, 1, world.driftX * 0.35, viewW, viewH);
+      atlas.drawPlate(ctx, 2, world.driftX * 0.7, viewW, viewH);
 
       // Twinkling foreground sparkles (skipped entirely on the low tier).
       const sparkleN = Math.min(SPARKLE_COUNT[world.quality], sparkles.length);
@@ -271,16 +281,21 @@ export function createRenderer(
           const tw = 0.35 + 0.65 * (0.5 + 0.5 * Math.sin(world.t * 1.8 + s.phase));
           ctx.globalAlpha = tw;
           const x = (((s.x * viewW - world.driftX * 0.5) % viewW) + viewW) % viewW;
-          ctx.fillRect(x, s.y, 1, 1);
+          ctx.fillRect(x, (s.y / LOGICAL_H) * viewH, 1, 1);
         }
         ctx.globalAlpha = 1;
       }
 
       drawUfo(world);
+
+      // World-space drawing: the 240-row world anchors to the viewport
+      // bottom; taller stages gain sky above it.
+      ctx.save();
+      ctx.translate(0, worldDy);
       drawGroundLine();
 
       if (world.state === "complete") {
-        drawCompleteScene(world);
+        drawCompleteIdleRunner(world);
       } else {
         drawRunScene(world);
       }
@@ -301,13 +316,19 @@ export function createRenderer(
         drawText(ctx, pop.text, Math.round(pop.x), Math.round(pop.y), 2, theme.canvasText.bright);
       }
       ctx.globalAlpha = 1;
+      ctx.restore();
+
+      // Parked rings live in screen space (their DOM hotspots share the
+      // same element fractions).
+      if (world.state === "complete") drawParkedRings(world);
 
       // Attract line — blinks at ~1.2Hz (well under the 3Hz flash ceiling).
       if (world.state === "attract") {
         const on = world.t % 0.83 < 0.5;
         if (on) {
           const cx = fullBleed ? viewW * 0.66 : viewW / 2;
-          drawTextCentered(ctx, COPY.attract, cx, 64, 2, theme.canvasText.bright);
+          const line = world.mobile ? COPY.attractTouch : COPY.attract;
+          drawTextCentered(ctx, line, cx, 64, 2, theme.canvasText.bright);
         }
       }
 
@@ -318,7 +339,7 @@ export function createRenderer(
       if (world.flashT > 0) {
         ctx.globalAlpha = Math.min(1, world.flashT / FLASH_TIME) * (fullBleed ? 0.45 : 0.85);
         ctx.fillStyle = theme.flash;
-        ctx.fillRect(0, 0, viewW, LOGICAL_H);
+        ctx.fillRect(0, 0, viewW, viewH);
         ctx.globalAlpha = 1;
       }
 
@@ -334,9 +355,12 @@ export function createRenderer(
       groundStrip = makeGroundStrip();
     },
 
-    setViewWidth(w: number): void {
-      if (w === viewW) return;
+    setViewSize(w: number, h: number): void {
+      if (w === viewW && h === viewH) return;
       viewW = w;
+      viewH = h;
+      worldDy = viewH - LOGICAL_H;
+      bgGradient = makeBg();
       vignette = makeVignette();
       groundStrip = makeGroundStrip();
     },
