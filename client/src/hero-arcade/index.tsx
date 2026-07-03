@@ -455,6 +455,9 @@ function ArcadeStage({ themeName, layout = "card" }: ArcadeStageProps) {
       onPointerCancel={handlePlayfieldUp}
       onKeyDown={handlePlayfieldKeyDown}
       onKeyUp={handlePlayfieldKeyUp}
+      // Long-press must fly, not open a context menu (Android long-press,
+      // desktop right-click while playing).
+      onContextMenu={(e) => e.preventDefault()}
       aria-label={COPY.playfieldAria}
       data-testid="arcade-playfield"
     />
@@ -620,8 +623,16 @@ const ARCADE_CSS = `
   background: var(--ah-stage-bg);
   border: 1px solid var(--ah-stage-border);
   box-shadow: var(--ah-stage-shadow);
-  user-select: none; -webkit-user-select: none;
   touch-action: manipulation;
+}
+/* Hold-to-fly means multi-second stationary touches: suppress iOS text
+   selection + the long-press callout sheet on the ENTIRE stage subtree
+   (user-select does not inherit reliably on iOS), in every layout mode. */
+.ah-stage, .ah-stage *,
+.ah-full, .ah-full * {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 /* Mobile band: the game gets its own full-width, taller, chrome-less stage
    instead of a shrunken desktop card. Breaks out of the content column to
