@@ -11,4 +11,7 @@ export default defineConfig({
   dbCredentials: {
     url: process.env.DATABASE_URL,
   },
+  // The sessions table belongs to connect-pg-simple (see server/storage.ts),
+  // not to shared/schema.ts — without this filter, `db:push` tries to DROP it.
+  tablesFilter: ["!sessions"],
 });
